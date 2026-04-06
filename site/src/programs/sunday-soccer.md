@@ -11,7 +11,7 @@ description: "Sunday Soccer offers weekly skills training and a goalkeeper acade
 
 Sunday Soccer offers skills training and goalkeeper instruction for players ages 6 and up during the fall season.
 
-[IMAGE: Sunday Soccer session]
+![Sunday Soccer session at Region 13](/images/game-04.jpg)
 
 ---
 

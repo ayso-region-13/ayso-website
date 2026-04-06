@@ -15,7 +15,7 @@ Region 13 uses 23 soccer fields throughout Pasadena, Altadena, La Cañada, and s
 
 ## Field Map
 
-[IMAGE: Regional field map showing all locations]
+![Regional field map — all Region 13 locations](/images/fields/map-overview.jpg)
 
 [INLEAGUE: Interactive field map link]
 
@@ -42,6 +42,8 @@ Region 13 uses 23 soccer fields throughout Pasadena, Altadena, La Cañada, and s
 - [McDonald Park](/fields/mcdonald) — Practice field
 - [Allendale Park](/fields/allendale) — Practice field
 - [Brookside Park](/fields/brookside) — Near Rose Bowl
+- [FIS Upper](/fields/fis-upper/) — Foothill Intermediate School, La Cañada
+- [FIS Lower](/fields/fis-lower/) — Foothill Intermediate School, La Cañada
 
 ### Altadena
 

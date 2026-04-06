@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: Search
+description: Search all pages on the AYSO Region 13 website.
+permalink: /search/
+---
+
+<div class="bg-brand-red text-white">
+  <div class="max-w-screen-xl mx-auto px-4 py-8 md:py-10">
+    <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight">Search</h1>
+    <p class="mt-2 text-red-100 text-lg leading-relaxed max-w-2xl">Search all pages on the AYSO Region 13 website.</p>
+  </div>
+</div>
+
+<div class="max-w-screen-xl mx-auto px-4 py-10">
+  <div id="search"></div>
+</div>
+
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    new PagefindUI({ element: '#search', showSubResults: true });
+  });
+</script>

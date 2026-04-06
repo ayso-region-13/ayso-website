@@ -20,6 +20,8 @@ The park is the grassy space between Kidspace and the Rose Bowl Aquatic Center.
 
 [Get directions](https://maps.google.com/?q=360+N+Arroyo+Blvd,+Pasadena,+CA+91103)
 
+![Brookside Park / Rose Bowl Area field map](/images/fields/brookside-area-h-map.png)
+
 ---
 
 ## Availability

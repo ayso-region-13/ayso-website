@@ -177,7 +177,7 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <!--  MAIN CONTENT                                                  -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <main id="main-content" class="flex-1">
+  <main id="main-content" class="flex-1" data-pagefind-body>
     {{ content | safe }}
   </main>
 
@@ -259,6 +259,7 @@
             <li><a href="/about/"            class="hover:text-white transition-colors">About Region 13</a></li>
             <li><a href="/about/leadership/" class="hover:text-white transition-colors">Leadership & Board</a></li>
             <li><a href="/about/policies/"   class="hover:text-white transition-colors">Policies</a></li>
+            <li><a href="/search/" class="hover:text-white transition-colors">Search</a></li>
             <li>
               <a href="{{ site.inleagueUrl }}" class="hover:text-white transition-colors" rel="noopener" target="_blank">
                 InLeague Login ↗
@@ -267,6 +268,18 @@
           </ul>
           <a href="/register/" class="btn-gold text-center justify-center text-sm py-2.5 w-full">Register Now</a>
         </div>
+      </div>
+
+      <!-- Search -->
+      <div class="border-t border-gray-700 pt-8 pb-6">
+        <form action="/search/" method="get" role="search" class="flex gap-2 max-w-sm">
+          <label for="footer-search" class="sr-only">Search the site</label>
+          <input type="search" id="footer-search" name="q" placeholder="Search the site…"
+                 class="flex-1 bg-gray-800 text-white placeholder-gray-500 border border-gray-600 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-brand-red">
+          <button type="submit" class="bg-brand-red text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors whitespace-nowrap">
+            Search
+          </button>
+        </form>
       </div>
 
       <div class="border-t border-gray-700 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-gray-600">

@@ -22,9 +22,9 @@ McKinley has practice and game fields.
 
 ## Fields
 
-[IMAGE: McKinley practice field map]
+![McKinley practice field map](/images/fields/mckinley-practice-map.jpg)
 
-[IMAGE: McKinley game field map]
+![McKinley game field map](/images/fields/mckinley-game-map.jpg)
 
 ---
 

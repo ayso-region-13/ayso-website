@@ -1,0 +1,109 @@
+media:
+  input: site/src/images
+  output: /images
+
+content:
+
+  # ── Single pages ─────────────────────────────────────────────────────────
+
+  - name: home
+    label: Home Page
+    type: file
+    path: site/src/index.md
+    fields:
+      - { name: title,       label: "Page Title",        type: string }
+      - { name: description, label: "Meta Description",  type: string }
+      - { name: layout,      label: Layout,              type: string, hidden: true }
+      - { name: section,     label: Section,             type: string, hidden: true }
+      - { name: body,        label: Content,             type: rich-text }
+
+  # ── Collections ──────────────────────────────────────────────────────────
+
+  - name: about
+    label: About Region 13
+    type: collection
+    path: site/src/about
+    fields: &page-fields
+      - { name: title,        label: "Page Title",        type: string }
+      - { name: description,  label: "Meta Description",  type: string }
+      - { name: layout,       label: Layout,              type: string, hidden: true }
+      - { name: section,      label: Section,             type: string, hidden: true }
+      - { name: permalink,    label: Permalink,           type: string, hidden: true, required: false }
+      - name: heroImage
+        label: "Hero Image"
+        type: image
+        required: false
+      - { name: heroImageAlt, label: "Hero Image Alt Text", type: string, required: false }
+      - { name: body,         label: Content,               type: rich-text }
+
+  - name: programs
+    label: Programs
+    type: collection
+    path: site/src/programs
+    fields: *page-fields
+
+  - name: tournaments
+    label: "Programs — Tournaments"
+    type: collection
+    path: site/src/programs/tournaments
+    fields: *page-fields
+
+  - name: register
+    label: Registration
+    type: collection
+    path: site/src/register
+    fields: *page-fields
+
+  - name: schedules
+    label: Schedules
+    type: collection
+    path: site/src/schedules
+    fields: *page-fields
+
+  - name: parents
+    label: Parents
+    type: collection
+    path: site/src/parents
+    fields: *page-fields
+
+  - name: coaches
+    label: Coaches
+    type: collection
+    path: site/src/coaches
+    fields: *page-fields
+
+  - name: referees
+    label: Referees
+    type: collection
+    path: site/src/referees
+    fields: *page-fields
+
+  - name: managers
+    label: "Team Managers"
+    type: collection
+    path: site/src/managers
+    fields: *page-fields
+
+  - name: volunteers
+    label: Volunteers
+    type: collection
+    path: site/src/volunteers
+    fields: *page-fields
+
+  - name: fields
+    label: "Field Locations"
+    type: collection
+    path: site/src/fields
+    fields: *page-fields
+
+  - name: resources
+    label: Resources
+    type: collection
+    path: site/src/resources
+    fields: *page-fields
+
+  - name: contact
+    label: Contact
+    type: collection
+    path: site/src/contact
+    fields: *page-fields

@@ -19,11 +19,16 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Build base layout, page layout, home layout
 - [x] Add photos and logo to `site/src/images/`
 - [x] Set up scripts: migrate, photo processing, link checking, file dates
-- [ ] Review and refine site locally ← **IN PROGRESS**
+- [x] Add site search (Pagefind) — `/search/` page + footer search box
+- [x] Build photo gallery — `/resources/gallery/` with GLightbox, 62 photos, category filter
+- [x] Download and place field maps from ayso13.org — all field pages updated
+- [x] Add FIS Upper and FIS Lower field pages
+- [x] Build volunteer training matrix — `/volunteers/training-matrix/`
+- [ ] Review and refine site ← **IN PROGRESS at https://new.ayso13.org**
 - [ ] Content review edits from Slab ← **IN PROGRESS**
-- [ ] Create redirect mapping
-- [ ] Deploy to Cloudflare Pages
-- [ ] Launch
+- [x] Create redirect mapping (159 old URLs → `site/src/_redirects`)
+- [x] Deploy to Cloudflare Pages ← **LIVE at https://new.ayso13.org**
+- [ ] Launch (cut over ayso13.org)
 
 ## Platform Decision
 **Switched from Squarespace to Eleventy (11ty) + Tailwind CSS.**
@@ -33,7 +38,7 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 | Generator | [Eleventy 3.0](https://www.11ty.dev/) |
 | CSS | Tailwind CSS 3.4 |
 | Templates | Nunjucks (.njk) |
-| Hosting target | Cloudflare Pages |
+| Hosting | Cloudflare Pages — https://ayso13.pages.dev (staging) |
 | Dev server | `npm start` → http://localhost:8080 |
 | Build output | `site/_site/` |
 
@@ -57,8 +62,9 @@ site/
 │   ├── assets/css/
 │   │   ├── tailwind.css  ← Input CSS
 │   │   └── style.css     ← Compiled output (gitignored, rebuilt on start/build)
-│   ├── images/           ← 65 photos (action, game, fall-game, all-stars, wca,
-│   │                        grad-series, victory) + logo.svg + 5 sponsor logos
+│   ├── images/           ← 62 photos (action, game, fall-game, all-stars, wca,
+│   │                        grad-series, victory) + logo.svg + sponsor logos
+│   │   └── fields/       ← Field maps downloaded from ayso13.org
 │   └── [content pages]   ← .md files for all sections (see below)
 └── scripts/
     ├── migrate-content.js    ← Copies /content/ → site/src/ with front matter
@@ -81,9 +87,10 @@ site/
 | Coaches | `/coaches/` | 13 |
 | Referees | `/referees/` | 8 |
 | Managers | `/managers/` | 4 |
-| Volunteers | `/volunteers/` | 7 |
-| Fields | `/fields/` | 18 locations + index + goals |
+| Volunteers | `/volunteers/` | 8 (includes training matrix) |
+| Fields | `/fields/` | 20 locations + index + goals (includes FIS Upper/Lower) |
 | Resources | `/resources/` | 5 |
+| Search | `/search/` | 1 (Pagefind) |
 | Contact | `/contact/` | 2 |
 
 ## Navigation Structure
@@ -109,15 +116,17 @@ Font: Inter (system fallback)
 ```bash
 cd site/
 npm start          # Dev server with live reload at localhost:8080
-npm run build      # Production build to _site/
+npm run build      # Production build to _site/ (includes Pagefind indexing)
 node scripts/migrate-content.js  # Re-sync /content/ → site/src/
 bash scripts/process-photos.sh   # Optimize new photos
 node scripts/check-links.js      # Check internal links
 ```
 
+Note: Search (`/search/`) only works after a full `npm run build` — not in dev server.
+
 ## Content Placeholders (still in some pages)
-- `[INLEAGUE: description]` — replace with InLeague URL
-- `[IMAGE: description]` — replace with actual image reference
+- `[INLEAGUE: description]` — 36 remaining, documented in `links-to-resolve.md`
+- `[IMAGE: description]` — 4 remaining, need original photos (equipment, historical, parents/pledge, parents/support)
 - `[DATE]` — auto-replaced at build time with file's last-modified date
 
 ## Key Decisions
@@ -145,9 +154,20 @@ node scripts/check-links.js      # Check internal links
 - Excessive bolding or emphasis
 - Overly casual language ("That's it!" "Perfect!")
 
+## CMS
+Pages CMS is configured for non-technical editors at https://app.pagescms.org.
+
+- Config file: `.pages.yml` in the repo root
+- Editors log in at app.pagescms.org — no GitHub account required
+- Edits commit directly to `main` and trigger a Cloudflare Pages rebuild
+- Layout, section, and permalink fields are hidden from editors
+- To add/remove editors: manage via the Pages CMS web interface
+- To add a new content field: update `.pages.yml` and commit
+
 ## Files
 - `CLAUDE.md` — This file
 - `todo.md` — Active task list
+- `.pages.yml` — Pages CMS configuration
 - `links-to-resolve.md` — 36 `[INLEAGUE: ...]` placeholders still needing real URLs (forms, Google Drive links, external services)
 - `proposed-site-structure.md` — Original IA proposal with old→new URL mapping
 - `website-builder-comparison.md` — Platform research (now superseded by Eleventy decision)
@@ -156,4 +176,4 @@ node scripts/check-links.js      # Check internal links
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-05*
+*Last updated: 2026-04-06*

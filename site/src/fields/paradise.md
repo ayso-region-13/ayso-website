@@ -18,7 +18,7 @@ Paradise Canyon is a practice field in La Cañada.
 
 [Get directions](https://maps.google.com/?q=471+Knight+Way,+La+Canada,+CA+91011)
 
-[IMAGE: Paradise Canyon practice field]
+![Paradise Canyon practice field map](/images/fields/paradise-practice-map.jpg)
 
 ---
 

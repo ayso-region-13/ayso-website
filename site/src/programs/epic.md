@@ -10,7 +10,7 @@ description: "EPIC (Everyone Plays in the Community) pairs players who need fiel
 
 EPIC is an inclusive soccer program for players of all ages who benefit from assistance on the field.
 
-[IMAGE: EPIC players and buddies]
+![EPIC players at Region 13](/images/action-03.jpg)
 
 ---
 

@@ -11,7 +11,7 @@ description: "Upper Division soccer for players ages 15–19 (16U and 19U) in th
 
 Upper Division serves high school age players (15-19) with a schedule designed to avoid conflicts with high school soccer seasons.
 
-[IMAGE: Upper Division players in action]
+![Upper Division players in action](/images/action-01.jpg)
 
 ---
 

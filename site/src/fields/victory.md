@@ -16,9 +16,11 @@ Victory Park is the primary game location for 6U-12U divisions.
 
 Victory Park, Pasadena
 
-[IMAGE: Victory Park field map]
-
 [Get directions](https://maps.google.com/?q=Victory+Park,+Pasadena,+CA)
+
+![Victory Park practice field map](/images/fields/victory-practice-map.jpg)
+
+![Victory Park game field map](/images/fields/victory-game-map.jpg)
 
 ---
 

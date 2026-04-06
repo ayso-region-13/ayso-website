@@ -31,7 +31,9 @@ Restrooms are located in the building at the south end of the football field.
 - Fields for 6U through 14U
 - Upper division fields for 16U-19U
 
-[IMAGE: LCHS practice field map]
+![LCHS practice field map — early season](/images/fields/lchs-practice-map-early.png)
+
+![LCHS practice field map — later season](/images/fields/lchs-practice-map-later.png)
 
 ---
 
@@ -40,7 +42,9 @@ Restrooms are located in the building at the south end of the football field.
 - 10U division field
 - 12U division field
 
-[IMAGE: LCHS game field map]
+![LCHS 10U game field map](/images/fields/lchs-game-map-10u.jpg)
+
+![LCHS 12U game field map](/images/fields/lchs-game-map-12u.jpg)
 
 ---
 

@@ -10,7 +10,7 @@ description: "The Rose City Cup is an annual AYSO soccer tournament hosted by Re
 
 The Rose City Cup is a single-elimination tournament for Region 13 fall teams, held at the end of the core season.
 
-[IMAGE: Rose City Cup action]
+![Rose City Cup tournament action](/images/game-01.jpg)
 
 ---
 

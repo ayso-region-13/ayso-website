@@ -11,7 +11,7 @@ description: "Learn about AYSO Region 13's mission and six core philosophies: Ev
 
 AYSO's mission is to develop and deliver quality youth soccer programs that promote a fun, family environment based on six core philosophies.
 
-[IMAGE: Kids playing soccer, having fun]
+![Kids playing soccer at AYSO Region 13](/images/action-07.jpg)
 
 ---
 

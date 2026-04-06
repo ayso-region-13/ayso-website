@@ -18,7 +18,9 @@ Marshall Fundamental is a practice field in Pasadena.
 
 [Get directions](https://maps.google.com/?q=990+Allen+Ave,+Pasadena,+CA+91104)
 
-[IMAGE: Marshall Fundamental field]
+![Marshall Fundamental field map](/images/fields/marshall-map-1.png)
+
+![Marshall Fundamental field map (detail)](/images/fields/marshall-map-2.jpg)
 
 ---
 

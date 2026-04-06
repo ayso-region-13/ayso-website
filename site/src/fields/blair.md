@@ -31,9 +31,9 @@ Park on Marengo Avenue or at Allendale Park/library and walk to the fields. Do n
 - Blair Upper: Practice and game field
 - Blair Lower: Practice and game field
 
-[IMAGE: Blair practice field map]
+![Blair Upper game field map](/images/fields/blair-upper-game-map.jpg)
 
-[IMAGE: Blair game field map]
+![Blair Lower game field map](/images/fields/blair-games-lower-map.jpg)
 
 ---
 

@@ -11,7 +11,7 @@ description: "All-Stars is Region 13's competitive tournament program. Selected 
 
 All-Stars is a competitive winter program for advanced players in 10U, 12U, and 14U. Teams represent Region 13 in tournaments against other AYSO regions.
 
-[IMAGE: All-Stars team]
+![All-Stars players at Region 13](/images/all-stars-02.jpg)
 
 ---
 

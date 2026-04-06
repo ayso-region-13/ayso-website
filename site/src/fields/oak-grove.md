@@ -18,6 +18,8 @@ Oak Grove is a practice field in La Cañada.
 
 [Get directions](https://maps.google.com/?q=4463+Oak+Grove+Dr,+La+Canada,+CA+91011)
 
+![Oak Grove field](/images/fields/oak-grove-map.png)
+
 ---
 
 ## Parking

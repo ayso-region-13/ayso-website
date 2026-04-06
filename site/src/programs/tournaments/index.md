@@ -11,7 +11,7 @@ description: "AYSO Region 13 hosts the annual Thanksgiving Tournament and Rose C
 
 Region 13 hosts two competitive tournaments each year for 10U-14U teams.
 
-[IMAGE: Tournament action]
+![Tournament game action at Region 13](/images/game-03.jpg)
 
 ---
 

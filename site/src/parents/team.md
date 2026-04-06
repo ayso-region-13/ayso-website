@@ -10,7 +10,7 @@ description: "Information for Region 13 parents about your child's team — rost
 
 Once your child is assigned to a team, here's what to expect and how to stay connected.
 
-[IMAGE: Team photo - kids in jerseys with coach]
+![Region 13 team with coach](/images/game-06.jpg)
 
 ---
 

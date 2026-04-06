@@ -11,7 +11,7 @@ description: "New to AYSO? Learn how to get started with Region 13 soccer — re
 
 Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization serving Pasadena, La Cañada, Altadena, and surrounding communities.
 
-[IMAGE: Kids of various ages playing soccer - diverse group]
+![Players of various ages at Region 13](/images/action-08.jpg)
 
 ## Quick Facts
 

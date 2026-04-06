@@ -11,7 +11,7 @@ description: "AYSO Region 13 offers youth soccer programs for players ages 4–1
 
 AYSO Region 13 offers soccer programs throughout the year for players ages 4 through 19.
 
-[IMAGE: Kids playing soccer across different age groups]
+![Players across age groups at Region 13](/images/action-06.jpg)
 
 ---
 

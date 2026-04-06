@@ -74,6 +74,7 @@ For questions about coach training, contact the Regional Coach Administrator.
 
 ## Related Pages
 
+- [Training Requirements](/volunteers/training-matrix/) — Full matrix of what each role requires
 - [Coaching Overview](/coaches) — Getting started as a coach
 - [Training Classes](/volunteers/classes) — Class schedule
 - [Practice Resources](/coaches/practice) — Planning practices

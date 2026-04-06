@@ -1,0 +1,187 @@
+---
+layout: base.njk
+title: Photo Gallery
+description: "Photos from AYSO Region 13 games, events, and programs in the Pasadena area."
+permalink: /resources/gallery/
+---
+
+<!-- GLightbox -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3/dist/css/glightbox.min.css">
+
+<!-- Page header -->
+<div class="bg-brand-red text-white">
+  <div class="max-w-screen-xl mx-auto px-4 py-8 md:py-10">
+    <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight">Photo Gallery</h1>
+    <p class="mt-2 text-red-100 text-lg leading-relaxed max-w-2xl">Photos from Region 13 games, programs, and events.</p>
+  </div>
+</div>
+
+<!-- Gallery -->
+<div class="max-w-screen-xl mx-auto px-4 py-10">
+
+  <!-- Filter buttons -->
+  <div class="flex flex-wrap gap-2 mb-8" role="group" aria-label="Filter photos by category">
+    <button class="filter-btn active" data-filter="all">All (62)</button>
+    <button class="filter-btn" data-filter="action">Action (20)</button>
+    <button class="filter-btn" data-filter="games">Games (10)</button>
+    <button class="filter-btn" data-filter="all-stars">All-Stars (8)</button>
+    <button class="filter-btn" data-filter="wca">Women's Coaching Alliance (8)</button>
+    <button class="filter-btn" data-filter="fall">Fall Games (6)</button>
+    <button class="filter-btn" data-filter="grad">Grad Series (5)</button>
+    <button class="filter-btn" data-filter="victory">Victory Park (5)</button>
+  </div>
+
+  <!-- Grid -->
+  <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+
+    {% set photos = [
+      { src: "action-01.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-02.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-03.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-04.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-05.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-06.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-07.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-08.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-09.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-10.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-11.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-12.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-13.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-14.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-15.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-16.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-17.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-18.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-19.jpg",    cat: "action",    alt: "Action" },
+      { src: "action-20.jpg",    cat: "action",    alt: "Action" },
+      { src: "game-01.jpg",      cat: "games",     alt: "Game" },
+      { src: "game-02.jpg",      cat: "games",     alt: "Game" },
+      { src: "game-03.jpg",      cat: "games",     alt: "Game" },
+      { src: "game-04.jpg",      cat: "games",     alt: "Game" },
+      { src: "game-05.jpg",      cat: "games",     alt: "Game" },
+      { src: "game-06.jpg",      cat: "games",     alt: "Game" },
+      { src: "game-07.jpg",      cat: "games",     alt: "Game" },
+      { src: "game-08.jpg",      cat: "games",     alt: "Game" },
+      { src: "game-09.jpg",      cat: "games",     alt: "Game" },
+      { src: "game-10.jpg",      cat: "games",     alt: "Game" },
+      { src: "all-stars-01.jpg", cat: "all-stars", alt: "All-Stars" },
+      { src: "all-stars-02.jpg", cat: "all-stars", alt: "All-Stars" },
+      { src: "all-stars-03.jpg", cat: "all-stars", alt: "All-Stars" },
+      { src: "all-stars-04.jpg", cat: "all-stars", alt: "All-Stars" },
+      { src: "all-stars-05.jpg", cat: "all-stars", alt: "All-Stars" },
+      { src: "all-stars-06.jpg", cat: "all-stars", alt: "All-Stars" },
+      { src: "all-stars-07.jpg", cat: "all-stars", alt: "All-Stars" },
+      { src: "all-stars-08.jpg", cat: "all-stars", alt: "All-Stars" },
+      { src: "wca-01.jpg",       cat: "wca",       alt: "Women's Coaching Alliance" },
+      { src: "wca-02.jpg",       cat: "wca",       alt: "Women's Coaching Alliance" },
+      { src: "wca-03.jpg",       cat: "wca",       alt: "Women's Coaching Alliance" },
+      { src: "wca-04.jpg",       cat: "wca",       alt: "Women's Coaching Alliance" },
+      { src: "wca-05.jpg",       cat: "wca",       alt: "Women's Coaching Alliance" },
+      { src: "wca-06.jpg",       cat: "wca",       alt: "Women's Coaching Alliance" },
+      { src: "wca-07.jpg",       cat: "wca",       alt: "Women's Coaching Alliance" },
+      { src: "wca-08.jpg",       cat: "wca",       alt: "Women's Coaching Alliance" },
+      { src: "fall-game-01.jpg", cat: "fall",      alt: "Fall Game" },
+      { src: "fall-game-02.jpg", cat: "fall",      alt: "Fall Game" },
+      { src: "fall-game-03.jpg", cat: "fall",      alt: "Fall Game" },
+      { src: "fall-game-04.jpg", cat: "fall",      alt: "Fall Game" },
+      { src: "fall-game-05.jpg", cat: "fall",      alt: "Fall Game" },
+      { src: "fall-game-06.jpg", cat: "fall",      alt: "Fall Game" },
+      { src: "grad-series-01.jpg", cat: "grad",    alt: "Grad Series" },
+      { src: "grad-series-02.jpg", cat: "grad",    alt: "Grad Series" },
+      { src: "grad-series-03.jpg", cat: "grad",    alt: "Grad Series" },
+      { src: "grad-series-04.jpg", cat: "grad",    alt: "Grad Series" },
+      { src: "grad-series-05.jpg", cat: "grad",    alt: "Grad Series" },
+      { src: "victory-01.jpg",   cat: "victory",   alt: "Victory Park" },
+      { src: "victory-02.jpg",   cat: "victory",   alt: "Victory Park" },
+      { src: "victory-03.jpg",   cat: "victory",   alt: "Victory Park" },
+      { src: "victory-04.jpg",   cat: "victory",   alt: "Victory Park" },
+      { src: "victory-05.jpg",   cat: "victory",   alt: "Victory Park" }
+    ] %}
+
+    {% for photo in photos %}
+    <div class="gallery-item" data-category="{{ photo.cat }}">
+      <a href="/images/{{ photo.src }}"
+         class="glightbox block w-full aspect-square overflow-hidden rounded-sm group"
+         data-gallery="region13"
+         data-description="AYSO Region 13 — {{ photo.alt }}">
+        <img src="/images/{{ photo.src }}"
+             alt="AYSO Region 13 — {{ photo.alt }}"
+             loading="lazy"
+             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+      </a>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <!-- Share callout -->
+  <div class="mt-12 border-t border-gray-200 pt-10">
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">Share Your Photos</h2>
+    <p class="text-gray-600">Have photos from Region 13 games or events? Email them to <a href="mailto:info@ayso13.org" class="text-brand-red hover:underline">info@ayso13.org</a> to be included in the gallery.</p>
+    <p class="text-gray-600 mt-2">For team photos from picture day, see <a href="/resources/pictures/" class="text-brand-red hover:underline">Picture Day</a>.</p>
+  </div>
+
+</div>
+
+<style>
+  .filter-btn {
+    padding: 0.375rem 0.875rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid #d1d5db;
+    background: white;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover {
+    border-color: #ce0e2d;
+    color: #ce0e2d;
+  }
+  .filter-btn.active {
+    background: #ce0e2d;
+    border-color: #ce0e2d;
+    color: white;
+  }
+  .gallery-item.hidden {
+    display: none;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/glightbox@3/dist/js/glightbox.min.js"></script>
+<script>
+  (function () {
+    var lb = initLightbox();
+
+    function initLightbox() {
+      if (window._galleryLb) window._galleryLb.destroy();
+      var els = Array.from(document.querySelectorAll('.gallery-item:not(.hidden) .glightbox'));
+      window._galleryLb = GLightbox({ elements: els, loop: true, touchNavigation: true, zoomable: false });
+      return window._galleryLb;
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = this.dataset.filter;
+
+        // Update active button
+        document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+        this.classList.add('active');
+
+        // Show/hide items
+        document.querySelectorAll('.gallery-item').forEach(function (item) {
+          if (filter === 'all' || item.dataset.category === filter) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+
+        // Rebuild lightbox from visible items only
+        initLightbox();
+      });
+    });
+  })();
+</script>
