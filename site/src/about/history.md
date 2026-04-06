@@ -10,7 +10,7 @@ description: "AYSO Region 13 has served the Pasadena area since 1969. Learn the 
 
 AYSO Region 13 has served the Pasadena, Altadena, and La Cañada communities since 1972.
 
-[IMAGE: Historical photo of Region 13 soccer]
+<img src="/images/about-history.jpeg" alt="AYSO Region 13 community gathering" class="max-w-full rounded my-4">
 
 ---
 

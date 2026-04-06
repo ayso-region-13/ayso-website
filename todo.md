@@ -12,7 +12,7 @@
 - [x] robots.txt — created, points to sitemap
 - [x] Audit `[INLEAGUE: ...]` placeholders — 44 files updated, 36 remaining
 - [ ] Resolve 36 remaining INLEAGUE placeholders — URLs documented in `links-to-resolve.md`
-- [x] Audit `[IMAGE: ...]` placeholders — all field maps placed; 4 remaining need original assets (equipment, historical photo, parents/pledge, parents/support)
+- [x] Audit `[IMAGE: ...]` placeholders — wilson, allendale, history filled; 3 still need originals (equipment, parents/pledge, parents/support); winter-stars also missing
 - [x] Photo gallery — `/resources/gallery/` with GLightbox, 62 photos, category filter
 - [x] Add search (Pagefind) — `/search/`, footer search box, footer link
 - [x] Field maps — downloaded from ayso13.org, placed on all field pages; FIS Upper/Lower pages created
@@ -20,6 +20,7 @@
 - [ ] Test mobile nav on real devices
 - [x] Test all section sidebar links — 0 broken
 - [ ] Confirm `[DATE]` placeholder resolves correctly on all pages
+- [x] Fix search page header alignment — max-w-2xl to match search box width
 
 ## Content
 - [x] Home page — `site/src/index.md` updated to match `home.njk` layout expectations
@@ -27,11 +28,13 @@
 - [ ] Review field pages for accuracy (hours, address, parking)
 - [x] Confirm sponsor logos/data in `site/src/_data/sponsors.js` are current
 - [x] Volunteer matrix — `/volunteers/training-matrix/`
+- [x] Age chart — updated for Fall 2026 cutoff change (Dec 31 → Aug 1), new official chart image, 8U/Grad Series play-up exception
 - [x] Visual polish — dark page headers (red nav → dark content header hierarchy), green sidebar strip + hover/active states, green checkmarks in training matrix
 - [x] Photo gallery GLightbox fix — filter-aware lightbox using `.lb-active` selector; clicking photos now opens modal with prev/next navigation
 
 ## Assets
-- [ ] Export/collect remaining photos from current WordPress site
+- [x] Export/collect photos from WordPress — wilson-field.jpg, allendale-field.jpg, about-history.jpeg downloaded and placed; IMAGE placeholders replaced on those pages
+- [ ] Source photos for parents/pledge, parents/support, programs/winter-stars — no usable photos found on WordPress site; need originals
 - [ ] Organize documents in Google Drive for embedded links
 - [ ] Confirm logo.svg is final version
 
