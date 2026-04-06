@@ -1,0 +1,88 @@
+# Spring Soccer
+
+Spring Soccer offers league play from March through May for players who want more soccer after the fall and winter seasons.
+
+[IMAGE: Spring soccer game]
+
+---
+
+## Quick Facts
+
+- Ages: 6U through 19U
+- Season: March through May
+- Games: Saturdays or Sundays
+- Cost: $180
+- Registration: Waitlist first, then confirmed when teams form
+
+---
+
+## How Registration Works
+
+Spring Soccer registration works differently than fall:
+
+1. Join the waitlist through InLeague
+2. Region assesses player interest and volunteer availability
+3. Teams form once sufficient registrations are received
+4. You're only charged after team placement is confirmed
+
+This approach ensures teams only form when there are enough players and coaches.
+
+[INLEAGUE: Registration link]
+
+---
+
+## Program Options
+
+### Spring Cup (16U-19U)
+- Competitive play for high school age players
+- Practice once or twice weekly
+- Games primarily on Sundays
+- Open to new and returning players
+- Fee: $180
+
+### Spring League (6U-14U)
+- Balanced team league similar to fall program
+- May partner with neighboring AYSO regions
+- Games on Saturdays or Sundays (excluding Mother's Day and Easter)
+- Locations: Pasadena, Arcadia, South Pasadena, or nearby
+- Teams assigned by blind draft
+- Practice once or twice weekly
+- Fee: $180
+
+### Spring Team (6U-8U)
+- Weekly sessions combining training and scrimmages
+- Requires volunteer coaches
+
+### NEXT (10U-14U)
+- For players who participated in fall NEXT
+- Tournament-focused
+- Practice up to twice weekly
+- Tournament fees vary by event
+- Can participate in both Spring League and NEXT, though most choose one
+
+---
+
+## Schedule
+
+- Games exclude Mother's Day and Easter weekends
+- Practices typically once or twice per week
+- Exact schedules depend on field availability
+
+---
+
+## Contact
+
+- 6U-8U questions: [neil@ayso13.org](mailto:neil@ayso13.org)
+- 10U-19U questions: [samir@ayso13.org](mailto:samir@ayso13.org)
+
+---
+
+## Related Pages
+
+- [Fall Soccer](/programs/fall-soccer) — Main fall program
+- [NEXT](/programs/next) — Advanced training program
+- [Programs Overview](/programs) — All Region 13 programs
+
+---
+
+*Last updated: [DATE]*

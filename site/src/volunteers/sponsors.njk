@@ -1,0 +1,87 @@
+---
+title: "Sponsors & Sponsorship"
+layout: page.njk
+section: volunteers
+description: "Meet our sponsors and learn how your business can support youth soccer in the Pasadena area."
+---
+
+{# ── Current sponsors ─────────────────────────────────────────────── #}
+<div class="mb-12">
+  <h2 class="text-xl font-semibold text-brand-red border-b border-gray-200 pb-2 mb-6">Our Sponsors</h2>
+  <div class="flex flex-wrap items-center gap-10">
+    {% for s in sponsors.current %}
+    <a href="{{ s.url }}" target="_blank" rel="noopener"
+       class="opacity-80 hover:opacity-100 transition-opacity"
+       title="{{ s.name }}">
+      <img src="/images/{{ s.logo }}"
+           alt="{{ s.name }}"
+           class="h-12 w-auto max-w-[160px] object-contain">
+    </a>
+    {% endfor %}
+  </div>
+
+  {% if sponsors.inKind.length %}
+  <div class="mt-8 pt-6 border-t border-gray-200">
+    <p class="text-sm font-medium text-gray-700 mb-4">In-kind partners</p>
+    <div class="flex flex-wrap items-center gap-8">
+      {% for s in sponsors.inKind %}
+      <a href="{{ s.url }}" target="_blank" rel="noopener"
+         class="opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+         title="{{ s.name }}">
+        <img src="/images/{{ s.logo }}"
+             alt="{{ s.name }}"
+             class="h-7 w-auto max-w-[110px] object-contain">
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{# ── Become a sponsor ─────────────────────────────────────────────── #}
+<h2 class="text-xl font-semibold text-brand-red border-b border-gray-200 pb-2 mb-6">Become a Sponsor</h2>
+
+<p class="mb-6 text-gray-700">
+  AYSO Region 13 serves over 1,500 players ages 4–19 in Pasadena, Altadena, La Cañada, and surrounding communities.
+  Sponsorship helps keep registration affordable and funds equipment, field maintenance, and programs.
+  All donations are tax-deductible — we are a 501(c)(3) nonprofit.
+</p>
+
+{# Tier cards #}
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+  {% for tier in sponsors.tiers %}
+  <div class="border border-gray-200 rounded-xl p-5">
+    <div class="flex items-baseline justify-between mb-2">
+      <h3 class="font-semibold text-gray-900">{{ tier.name }}</h3>
+      <span class="text-brand-red font-bold text-sm">{{ tier.amount }}</span>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">{{ tier.description }}</p>
+  </div>
+  {% endfor %}
+</div>
+
+{# How to sponsor #}
+<h2 class="text-xl font-semibold text-brand-red border-b border-gray-200 pb-2 mb-6">How to Contribute</h2>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-2">Online</h3>
+    <p class="text-sm text-gray-600 mb-3">Donate securely via InLeague.</p>
+    <a href="https://ayso13.inleague.com/" target="_blank" rel="noopener"
+       class="btn-primary text-sm py-2 px-4">Donate Online</a>
+  </div>
+  <div>
+    <h3 class="font-semibold text-gray-900 mb-2">By Mail</h3>
+    <p class="text-sm text-gray-600">
+      AYSO Region 13<br>
+      711 W Woodbury Rd Unit E<br>
+      Altadena, CA 91001
+    </p>
+  </div>
+</div>
+
+<p class="text-sm text-gray-600">
+  Questions?
+  <a href="mailto:info@ayso13.org" class="text-brand-red hover:underline">info@ayso13.org</a>
+  &nbsp;·&nbsp; 626-316-6900
+</p>

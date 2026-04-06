@@ -1,0 +1,145 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts: Inter ──────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ── Base prose styles for rendered Markdown content ─────────────── */
+@layer base {
+  body {
+    @apply font-sans text-gray-800 antialiased;
+  }
+}
+
+@layer components {
+
+  /* Prose: styled article content */
+  .prose {
+    @apply text-gray-800 leading-relaxed;
+  }
+  .prose h1 {
+    @apply text-3xl font-bold text-brand-dark mt-0 mb-4 leading-tight;
+  }
+  .prose h2 {
+    @apply text-2xl font-semibold text-brand-red mt-10 mb-3 pb-2 border-b border-gray-200;
+  }
+  .prose h3 {
+    @apply text-xl font-semibold text-gray-900 mt-7 mb-2;
+  }
+  .prose h4 {
+    @apply text-base font-semibold text-gray-900 mt-5 mb-1;
+  }
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+  .prose ul {
+    @apply list-disc pl-6 mb-4 space-y-1;
+  }
+  .prose ol {
+    @apply list-decimal pl-6 mb-4 space-y-1;
+  }
+  .prose li > ul, .prose li > ol {
+    @apply mt-1 mb-0;
+  }
+  .prose a:not([class*="btn-"]) {
+    @apply text-brand-red underline underline-offset-2 hover:text-red-700 transition-colors;
+  }
+  .prose strong {
+    @apply font-semibold text-gray-900;
+  }
+  .prose em {
+    @apply italic;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-brand-red pl-4 italic text-gray-600 my-6;
+  }
+  .prose hr {
+    @apply border-gray-200 my-8;
+  }
+  .prose table {
+    @apply w-full border-collapse text-sm mb-6;
+  }
+  .prose thead th {
+    @apply bg-gray-100 font-semibold text-left px-4 py-2 border border-gray-200 text-gray-700;
+  }
+  .prose tbody td {
+    @apply px-4 py-2 border border-gray-200 align-top;
+  }
+  .prose tbody tr:nth-child(even) td {
+    @apply bg-gray-50;
+  }
+  .prose code {
+    @apply bg-gray-100 text-sm px-1.5 py-0.5 rounded font-mono;
+  }
+  .prose pre {
+    @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4 text-sm;
+  }
+  .prose pre code {
+    @apply bg-transparent p-0;
+  }
+  .prose img {
+    @apply rounded-lg shadow-sm max-w-full;
+  }
+
+  /* Placeholder callouts — rendered from [IMAGE: ...] and [INLEAGUE: ...] */
+  .prose p:has-text('[IMAGE:'),
+  .image-placeholder {
+    @apply hidden;
+  }
+
+  /* Nav dropdown */
+  .nav-dropdown {
+    @apply absolute top-full left-0 min-w-56 bg-white shadow-2xl border-t-2 border-brand-red z-50
+           opacity-0 invisible translate-y-1
+           transition-all duration-150 ease-out;
+  }
+  .nav-item:hover .nav-dropdown,
+  .nav-item:focus-within .nav-dropdown {
+    @apply opacity-100 visible translate-y-0;
+  }
+
+  /* Section page header */
+  .page-header {
+    @apply bg-brand-red text-white py-10 px-4;
+  }
+  .page-header h1 {
+    @apply text-3xl md:text-4xl font-bold text-white leading-tight mb-2;
+  }
+  .page-header .breadcrumb {
+    @apply text-red-200 text-sm;
+  }
+  .page-header .breadcrumb a {
+    @apply text-red-200 hover:text-white;
+  }
+
+  /* Card component */
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow;
+  }
+  .card-red {
+    @apply bg-brand-red text-white rounded-xl overflow-hidden hover:bg-red-700 transition-colors;
+  }
+
+  /* CTA buttons */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-brand-red text-white font-semibold px-6 py-3 rounded-lg
+           hover:bg-red-700 active:bg-red-800 transition-colors shadow-sm;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 bg-white text-brand-red font-semibold px-6 py-3 rounded-lg
+           border-2 border-brand-red hover:bg-red-50 transition-colors;
+  }
+  .btn-gold {
+    @apply inline-flex items-center gap-2 bg-brand-gold text-brand-dark font-semibold px-6 py-3 rounded-lg
+           hover:bg-yellow-400 transition-colors shadow-sm;
+  }
+}
+
+/* ── Utility overrides ────────────────────────────────────────────── */
+@layer utilities {
+  /* Image placeholder text — show inline as styled badge */
+  .prose .image-note {
+    @apply inline-block bg-gray-100 text-gray-500 text-xs px-2 py-1 rounded border border-dashed border-gray-300 font-mono;
+  }
+}

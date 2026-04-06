@@ -1,0 +1,94 @@
+---
+layout: base.njk
+---
+{# ── Page layout — used for all standard content pages ─────────────── #}
+
+{# Build breadcrumb from section nav data #}
+{% set sectionNav = null %}
+{% for navItem in navigation %}
+  {% if page.url | isActiveSection(navItem.url) %}
+    {% set sectionNav = navItem %}
+  {% endif %}
+{% endfor %}
+
+{# ── Page header ─────────────────────────────────────────────────── #}
+<div class="bg-brand-red text-white">
+  <div class="max-w-screen-xl mx-auto px-4 py-8 md:py-10">
+
+    {# Breadcrumb #}
+    {% if sectionNav and sectionNav.url != page.url %}
+    <nav class="text-sm text-red-200 mb-3" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-white transition-colors">Home</a>
+      <span class="mx-2 opacity-50">/</span>
+      <a href="{{ sectionNav.url }}" class="hover:text-white transition-colors">{{ sectionNav.label }}</a>
+      {% if page.url != sectionNav.url %}
+      <span class="mx-2 opacity-50">/</span>
+      <span class="text-red-100">{{ title }}</span>
+      {% endif %}
+    </nav>
+    {% endif %}
+
+    <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight">{{ title }}</h1>
+
+    {% if description %}
+    <p class="mt-2 text-red-100 text-lg leading-relaxed max-w-2xl">{{ description }}</p>
+    {% endif %}
+
+  </div>
+</div>
+
+{# ── Optional hero image ─────────────────────────────────────────── #}
+{% if heroImage %}
+<div class="w-full h-56 md:h-72 overflow-hidden">
+  <img src="/images/{{ heroImage }}" alt="{{ heroImageAlt or title }}"
+       class="w-full h-full object-cover object-center">
+</div>
+{% endif %}
+
+{# ── Content area ────────────────────────────────────────────────── #}
+<div class="max-w-screen-xl mx-auto px-4 py-10">
+  <div class="flex flex-col lg:flex-row gap-10">
+
+    {# Main content #}
+    <article class="flex-1 min-w-0">
+      <div class="prose max-w-3xl">
+        {# Hide the H1 in markdown since we display it in the page header above #}
+        <style>
+          article .prose > h1:first-child { display: none; }
+        </style>
+        {{ content | safe }}
+      </div>
+    </article>
+
+    {# Sidebar: section links #}
+    {% if sectionNav and sectionNav.children %}
+    <aside class="lg:w-64 shrink-0">
+      <nav class="sticky top-20" aria-label="Section navigation">
+        <div class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
+          <div class="bg-brand-red text-white px-4 py-3">
+            <p class="text-sm font-semibold">{{ sectionNav.label }}</p>
+          </div>
+          <ul>
+            {% for child in sectionNav.children %}
+            {% if not child.divider %}
+            <li>
+              <a href="{{ child.url }}"
+                 class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-brand-red transition-colors border-b border-gray-100 last:border-0
+                        {% if page.url == child.url %}bg-red-50 text-brand-red font-medium{% endif %}">
+                {{ child.label }}
+              </a>
+            </li>
+            {% else %}
+            <li class="px-4 pt-3 pb-1">
+              <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider">{{ child.dividerLabel }}</span>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </nav>
+    </aside>
+    {% endif %}
+
+  </div>
+</div>

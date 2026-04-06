@@ -1,0 +1,27 @@
+{
+  "name": "ayso-region-13",
+  "version": "1.0.0",
+  "description": "AYSO Region 13 website",
+  "scripts": {
+    "prestart": "node scripts/generate-file-dates.js",
+    "start": "concurrently \"npx tailwindcss -i ./src/assets/css/tailwind.css -o ./src/assets/css/style.css --watch\" \"npx @11ty/eleventy --serve --incremental\"",
+    "prebuild": "node scripts/generate-file-dates.js",
+    "build": "npx tailwindcss -i ./src/assets/css/tailwind.css -o ./src/assets/css/style.css && npx @11ty/eleventy",
+    "build:css": "npx tailwindcss -i ./src/assets/css/tailwind.css -o ./src/assets/css/style.css",
+    "build:11ty": "npx @11ty/eleventy",
+    "migrate": "node scripts/migrate-content.js",
+    "photos": "bash scripts/process-photos.sh",
+    "check-links": "node scripts/check-links.js"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "concurrently": "^9.1.2",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  }
+}
