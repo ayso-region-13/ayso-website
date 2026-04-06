@@ -111,6 +111,8 @@ site/
 
 Font: Inter (system fallback)
 
+**Color hierarchy:** Top nav = red → Page content header = dark (`bg-brand-dark`) → Content area = white. Green is used in section sidebars (header strip, hover/active states) and as a semantic positive indicator (checkmarks). Never place red and green adjacent.
+
 ## Key Scripts
 
 ```bash
@@ -176,4 +178,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-06*
+*Last updated: 2026-04-06 (session 2)*

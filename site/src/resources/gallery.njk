@@ -9,10 +9,10 @@ permalink: /resources/gallery/
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3/dist/css/glightbox.min.css">
 
 <!-- Page header -->
-<div class="bg-brand-red text-white">
+<div class="bg-brand-dark text-white">
   <div class="max-w-screen-xl mx-auto px-4 py-8 md:py-10">
     <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight">Photo Gallery</h1>
-    <p class="mt-2 text-red-100 text-lg leading-relaxed max-w-2xl">Photos from Region 13 games, programs, and events.</p>
+    <p class="mt-2 text-gray-300 text-lg leading-relaxed max-w-2xl">Photos from Region 13 games, programs, and events.</p>
   </div>
 </div>
 
@@ -153,34 +153,27 @@ permalink: /resources/gallery/
 <script src="https://cdn.jsdelivr.net/npm/glightbox@3/dist/js/glightbox.min.js"></script>
 <script>
   (function () {
-    var lb = initLightbox();
+    function applyFilter(filter) {
+      // Update visible items and the lb-active class (used as GLightbox selector)
+      document.querySelectorAll('.gallery-item').forEach(function (item) {
+        var visible = filter === 'all' || item.dataset.category === filter;
+        item.classList.toggle('hidden', !visible);
+        item.querySelector('a').classList.toggle('lb-active', visible);
+      });
 
-    function initLightbox() {
+      // Destroy and recreate lightbox targeting only visible items
       if (window._galleryLb) window._galleryLb.destroy();
-      var els = Array.from(document.querySelectorAll('.gallery-item:not(.hidden) .glightbox'));
-      window._galleryLb = GLightbox({ elements: els, loop: true, touchNavigation: true, zoomable: false });
-      return window._galleryLb;
+      window._galleryLb = GLightbox({ selector: '.lb-active', loop: true, touchNavigation: true, zoomable: false });
     }
+
+    // Initialise with all photos visible
+    applyFilter('all');
 
     document.querySelectorAll('.filter-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var filter = this.dataset.filter;
-
-        // Update active button
         document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
         this.classList.add('active');
-
-        // Show/hide items
-        document.querySelectorAll('.gallery-item').forEach(function (item) {
-          if (filter === 'all' || item.dataset.category === filter) {
-            item.classList.remove('hidden');
-          } else {
-            item.classList.add('hidden');
-          }
-        });
-
-        // Rebuild lightbox from visible items only
-        initLightbox();
+        applyFilter(this.dataset.filter);
       });
     });
   })();

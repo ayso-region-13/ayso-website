@@ -17,13 +17,13 @@ Complete annual items each season through InLeague. Complete one-time items thro
 
 | Requirement | How Often | Coaches & Referees | Team Managers | Board Members & Field Hosts |
 |---|---|:---:|:---:|:---:|
-| Volunteer Application | Every year | ✓ | ✓ | ✓ |
-| Background Check | Every year | ✓ | ✓ | ✓ |
-| SafeSport | Every year | ✓ | ✓ | ✓ |
-| Livescan/Fingerprinting | Once* | ✓ | ✓ | ✓ |
-| CDC Concussion Awareness | Once | ✓ | ✓ | — |
-| Sudden Cardiac Arrest Awareness | Once | ✓ | ✓ | — |
-| AYSO Safe Haven | Once | ✓ | ✓ | — |
+| Volunteer Application | Every year | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> |
+| Background Check | Every year | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> |
+| SafeSport | Every year | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> |
+| Livescan/Fingerprinting | Once* | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> |
+| CDC Concussion Awareness | Once | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | — |
+| Sudden Cardiac Arrest Awareness | Once | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | — |
+| AYSO Safe Haven | Once | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | — |
 
 *Livescan is required once. You do not need to repeat it if there has been no gap in your volunteering longer than five years.
 

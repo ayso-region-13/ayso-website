@@ -27,6 +27,8 @@
 - [ ] Review field pages for accuracy (hours, address, parking)
 - [x] Confirm sponsor logos/data in `site/src/_data/sponsors.js` are current
 - [x] Volunteer matrix — `/volunteers/training-matrix/`
+- [x] Visual polish — dark page headers (red nav → dark content header hierarchy), green sidebar strip + hover/active states, green checkmarks in training matrix
+- [x] Photo gallery GLightbox fix — filter-aware lightbox using `.lb-active` selector; clicking photos now opens modal with prev/next navigation
 
 ## Assets
 - [ ] Export/collect remaining photos from current WordPress site
