@@ -17,13 +17,13 @@ Complete annual items each season through InLeague. Complete one-time items thro
 
 | Requirement | How Often | Coaches & Referees | Team Managers | Board Members & Field Hosts |
 |---|---|:---:|:---:|:---:|
-| Volunteer Application | Every year | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> |
-| Background Check | Every year | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> |
-| SafeSport | Every year | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> |
-| Livescan/Fingerprinting | Once* | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> |
-| CDC Concussion Awareness | Once | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | — |
-| Sudden Cardiac Arrest Awareness | Once | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | — |
-| AYSO Safe Haven | Once | <span class="text-brand-green font-bold">✓</span> | <span class="text-brand-green font-bold">✓</span> | — |
+| Volunteer Application | Every year | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> |
+| Background Check | Every year | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> |
+| SafeSport | Every year | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> |
+| Livescan/Fingerprinting | Once* | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> |
+| CDC Concussion Awareness | Once | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> | — |
+| Sudden Cardiac Arrest Awareness | Once | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> | — |
+| AYSO Safe Haven | Once | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> | — |
 
 *Livescan is required once. You do not need to repeat it if there has been no gap in your volunteering longer than five years.
 

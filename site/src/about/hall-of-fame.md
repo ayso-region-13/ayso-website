@@ -81,7 +81,7 @@ Region 13 recognizes outstanding volunteers, coaches, and referees who contribut
 ## Team Name of the Year
 | Year | Names |
 |------|-------|
-| 2025 | Soccersuaruses, 12 Random Guys |
+| 2025 | Soccersauruses, 12 Random Guys |
 | 2024 | Mermaids Drinking Boba in Pajamas, Radioactive Banana Fries |
 | 2023 | Golden Glittery Merkitties, Purple Reign |
 | 2022 | Pink Unicorn Fuchsia Fairies, High Voltage Slurpees |

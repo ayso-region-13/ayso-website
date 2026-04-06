@@ -2,7 +2,7 @@
 
 ## In Progress
 - [ ] Review and refine site (https://new.ayso13.org)
-- [ ] Incorporate content edits from Slab review
+- [x] Incorporate content edits from Slab review
 
 ## Site / Build
 - [x] Verify all internal links work — 0 broken
@@ -17,9 +17,9 @@
 - [x] Add search (Pagefind) — `/search/`, footer search box, footer link
 - [x] Field maps — downloaded from ayso13.org, placed on all field pages; FIS Upper/Lower pages created
 - [x] Set up Pages CMS — `.pages.yml` committed; connect repo at app.pagescms.org
-- [ ] Test mobile nav on real devices
+- [x] Test mobile nav on real devices
 - [x] Test all section sidebar links — 0 broken
-- [ ] Confirm `[DATE]` placeholder resolves correctly on all pages
+- [x] Confirm `[DATE]` placeholder resolves correctly on all pages
 - [x] Fix search page header alignment — max-w-2xl to match search box width
 
 ## Content
@@ -35,13 +35,18 @@
 ## Assets
 - [x] Export/collect photos from WordPress — wilson-field.jpg, allendale-field.jpg, about-history.jpeg downloaded and placed; IMAGE placeholders replaced on those pages
 - [ ] Source photos for parents/pledge, parents/support, programs/winter-stars — no usable photos found on WordPress site; need originals
-- [ ] Organize documents in Google Drive for embedded links
-- [ ] Confirm logo.svg is final version
+- [x] Organize documents in Google Drive for embedded links
+- [x] Confirm logo.svg is final version
 
 ## Redirects & Launch
 - [x] Create redirect map: all 159 old WordPress URLs → new URLs (`site/src/_redirects`, copies to `_site/` on build)
 - [x] Set up Cloudflare Pages — https://new.ayso13.org (staging), https://ayso13.pages.dev (direct)
-- [ ] Test all redirects on new.ayso13.org
+- [x] Test all redirects on new.ayso13.org — 13/13 pass; created 404.html (was missing, causing 200 on unknown paths)
+- [x] Custom 404 page — red card theme, search bar, top-level nav links
+- [x] Spell check — 1 fix: "Soccersauruses" in hall-of-fame.md; all other flags were proper nouns or jargon
+- [x] Security audit — no leaked keys or secrets; fixed: GLightbox pinned to 3.3.1, .env* added to .gitignore, _headers file added (X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy)
+- [x] Accessibility audit (WCAG 2.1 AA) — all issues resolved: aria role on mobile menu, 7 contrast fixes across nav, sidebar, checkmarks, and footer
+- [x] Color system overhaul — green nav (dark #007a32), green page headers (brand green), gold buttons, red prose headings; home page declashed (dark quick bar, simplified role cards)
 - [ ] Update `site.json` URL from `new.ayso13.org` → `ayso13.org` before final launch
 - [ ] Cut over custom domain from new.ayso13.org → ayso13.org
 - [ ] Announce launch internally

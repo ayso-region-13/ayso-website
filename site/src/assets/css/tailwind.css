@@ -19,13 +19,13 @@
     @apply text-gray-800 leading-relaxed;
   }
   .prose h1 {
-    @apply text-3xl font-bold text-brand-dark mt-0 mb-4 leading-tight;
+    @apply text-3xl font-bold text-brand-red mt-0 mb-4 leading-tight;
   }
   .prose h2 {
     @apply text-2xl font-semibold text-brand-red mt-10 mb-3 pb-2 border-b border-gray-200;
   }
   .prose h3 {
-    @apply text-xl font-semibold text-gray-900 mt-7 mb-2;
+    @apply text-xl font-semibold text-brand-red mt-7 mb-2;
   }
   .prose h4 {
     @apply text-base font-semibold text-gray-900 mt-5 mb-1;
@@ -90,7 +90,7 @@
 
   /* Nav dropdown */
   .nav-dropdown {
-    @apply absolute top-full left-0 min-w-56 bg-white shadow-2xl border-t-2 border-brand-red z-50
+    @apply absolute top-full left-0 min-w-56 bg-white shadow-2xl border-t-2 border-brand-green z-50
            opacity-0 invisible translate-y-1
            transition-all duration-150 ease-out;
   }
@@ -123,16 +123,16 @@
 
   /* CTA buttons */
   .btn-primary {
-    @apply inline-flex items-center gap-2 bg-brand-red text-white font-semibold px-6 py-3 rounded-lg
-           hover:bg-red-700 active:bg-red-800 transition-colors shadow-sm;
+    @apply inline-flex items-center gap-2 bg-brand-gold text-brand-dark font-semibold px-6 py-3 rounded-lg
+           hover:bg-yellow-300 active:bg-yellow-400 transition-colors shadow-sm;
   }
   .btn-secondary {
-    @apply inline-flex items-center gap-2 bg-white text-brand-red font-semibold px-6 py-3 rounded-lg
-           border-2 border-brand-red hover:bg-red-50 transition-colors;
+    @apply inline-flex items-center gap-2 bg-white text-brand-green font-semibold px-6 py-3 rounded-lg
+           border-2 border-brand-green hover:bg-green-50 transition-colors;
   }
   .btn-gold {
     @apply inline-flex items-center gap-2 bg-brand-gold text-brand-dark font-semibold px-6 py-3 rounded-lg
-           hover:bg-yellow-400 transition-colors shadow-sm;
+           hover:bg-yellow-300 transition-colors shadow-sm;
   }
 }
 
