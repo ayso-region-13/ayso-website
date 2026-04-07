@@ -63,6 +63,12 @@ module.exports = function (eleventyConfig) {
     return pageUrl.startsWith(sectionUrl);
   });
 
+  // Render a markdown string to HTML (for data files like announcements.json)
+  eleventyConfig.addFilter("markdownify", (str) => {
+    if (!str) return "";
+    return md.renderInline(str);
+  });
+
   // Slugify a string for use in URLs
   eleventyConfig.addFilter("slug", (str) => {
     return str

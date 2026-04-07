@@ -4,6 +4,21 @@ media:
 
 content:
 
+  # ── Site-wide settings ────────────────────────────────────────────────────
+
+  - name: announcements
+    label: Announcement Bar
+    type: file
+    path: site/src/_data/announcements.json
+    fields:
+      - name: enabled
+        label: "Show announcement bar on home page"
+        type: boolean
+      - name: body
+        label: "Announcement text"
+        type: rich-text
+        description: "Supports bold, links, and multiple sentences. Links open inline — no separate URL field needed."
+
   # ── Single pages ─────────────────────────────────────────────────────────
 
   - name: home
