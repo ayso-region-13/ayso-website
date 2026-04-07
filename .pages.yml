@@ -19,6 +19,27 @@ content:
         type: rich-text
         description: "Supports bold, links, and multiple sentences. Links open inline — no separate URL field needed."
 
+  - name: navigation
+    label: Site Navigation
+    type: file
+    path: site/src/_data/navigation.json
+    fields:
+      - name: sections
+        label: Navigation Sections
+        type: list
+        fields:
+          - { name: label,  label: "Section Label",          type: string }
+          - { name: url,    label: "Section URL",            type: string }
+          - { name: topNav, label: "Show in top navigation", type: boolean }
+          - name: children
+            label: "Menu Items"
+            type: list
+            fields:
+              - { name: label,        label: "Label",                      type: string }
+              - { name: url,          label: "URL",                        type: string }
+              - { name: divider,      label: "Show divider before item",   type: boolean,  required: false }
+              - { name: dividerLabel, label: "Divider heading text",       type: string,   required: false }
+
   # ── Single pages ─────────────────────────────────────────────────────────
 
   - name: home
