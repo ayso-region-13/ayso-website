@@ -18,9 +18,9 @@ content:
         label: "Status"
         type: select
         options:
-          - { label: "Open",       value: "Open" }
-          - { label: "Closed",     value: "Closed" }
-          - { label: "Monitoring", value: "Monitoring" }
+          - "Open"
+          - "Closed"
+          - "Monitoring"
       - name: message
         label: "Message"
         type: string
