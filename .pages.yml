@@ -17,7 +17,7 @@ content:
       - name: status
         label: "Status"
         type: select
-        options:
+        values:
           - "Open"
           - "Closed"
           - "Monitoring"
