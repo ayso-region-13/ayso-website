@@ -16,11 +16,8 @@ content:
         type: boolean
       - name: status
         label: "Status"
-        type: select
-        values:
-          - "Open"
-          - "Closed"
-          - "Monitoring"
+        type: string
+        description: "Enter exactly: Open, Closed, or Monitoring"
       - name: message
         label: "Message"
         type: string
