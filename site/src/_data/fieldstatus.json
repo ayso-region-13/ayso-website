@@ -1,5 +1,5 @@
 {
   "enabled": true,
-  "status": "Closed",
-  "message": "All fields closed because I said so"
+  "status": "Monitoring",
+  "message": "Trying this out"
 }
