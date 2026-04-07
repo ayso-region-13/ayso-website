@@ -1,5 +1,5 @@
 {
   "enabled": true,
-  "status": "Open",
-  "message": "All fields are open for play."
+  "status": "Closed",
+  "message": "All fields closed because I said so"
 }
