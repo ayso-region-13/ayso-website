@@ -13,6 +13,7 @@
 - [x] Audit `[INLEAGUE: ...]` placeholders — 44 files updated, 36 remaining
 - [ ] Resolve 36 remaining INLEAGUE placeholders — URLs documented in `links-to-resolve.md`
 - [x] Audit `[IMAGE: ...]` placeholders — wilson, allendale, history filled; 3 still need originals (equipment, parents/pledge, parents/support); winter-stars also missing
+- [x] Validate all image ALT tags — 100% coverage confirmed across all .njk and .md files
 - [x] Photo gallery — `/resources/gallery/` with GLightbox, 62 photos, category filter
 - [x] Add search (Pagefind) — `/search/`, footer search box, footer link
 - [x] Field maps — downloaded from ayso13.org, placed on all field pages; FIS Upper/Lower pages created

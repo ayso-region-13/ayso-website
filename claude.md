@@ -111,7 +111,7 @@ site/
 
 Font: Inter (system fallback)
 
-**Color hierarchy:** Top nav = red → Page content header = dark (`bg-brand-dark`) → Content area = white. Green is used in section sidebars (header strip, hover/active states) and as a semantic positive indicator (checkmarks). Never place red and green adjacent.
+**Color hierarchy:** Top nav = dark green (`bg-brand-green-dark` / `#007a32`) → Page header = brand green (`bg-brand-green`) with dark text → Content area = white. Gold buttons (`bg-brand-gold text-brand-dark`). Red prose headings (H1–H3 in `.prose`). Green for sidebar strips, hover states, and checkmarks (use `text-green-800` for text on white — `#00ae42` fails WCAG contrast). Never place red and green adjacent.
 
 ## Key Scripts
 
@@ -128,7 +128,7 @@ Note: Search (`/search/`) only works after a full `npm run build` — not in dev
 
 ## Content Placeholders (still in some pages)
 - `[INLEAGUE: description]` — 36 remaining, documented in `links-to-resolve.md`
-- `[IMAGE: description]` — 4 remaining, need original photos (equipment, historical, parents/pledge, parents/support)
+- `[IMAGE: description]` — 3 remaining, need original photos (parents/pledge, parents/support, programs/winter-stars)
 - `[DATE]` — auto-replaced at build time with file's last-modified date
 
 ## Key Decisions
@@ -178,4 +178,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-06 (session 3)*
+*Last updated: 2026-04-06 (session 4)*
