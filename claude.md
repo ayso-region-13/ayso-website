@@ -174,12 +174,15 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - To add/remove editors: manage via the Pages CMS web interface
 - To add a new content field: update `.pages.yml` and commit
 - Announcement bar is a site-wide setting at the top of the Pages CMS sidebar — editors can toggle it on/off and edit the text without touching code
+- Field status is editable in Pages CMS — `status` is a `type: string` field (Pages CMS `select` with static options is broken; use string + description instead); template uses `| lower` for case-insensitive matching
+- Navigation is code-only in `navigation.js` — Pages CMS cannot handle nested list-of-objects structures; do not attempt to add it to `.pages.yml`
 
 ## Site-wide Data Files (`site/src/_data/`)
 - `site.json` — phone, email, address, InLeague URL
 - `navigation.js` — full nav structure (top nav + section sidebars)
 - `fileDates.json` — auto-generated per-file last-modified dates
 - `announcements.json` — home page announcement bar (`enabled` boolean + `body` markdown); rendered via `markdownify` filter in `home.njk`
+- `fieldstatus.json` — home page field status widget (`enabled` boolean + `status` string + `message` string); color-coded Open/Monitoring/Closed; last-updated timestamp from `git log` at build time (Pacific time)
 - `sponsors.js` — sponsor logos, URLs, and tier definitions
 
 ## Files
@@ -194,4 +197,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-06 (session 5)*
+*Last updated: 2026-04-07 (session 6)*

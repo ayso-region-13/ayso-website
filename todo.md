@@ -19,6 +19,7 @@
 - [x] Field maps — downloaded from ayso13.org, placed on all field pages; FIS Upper/Lower pages created
 - [x] Set up Pages CMS — `.pages.yml` committed; connect repo at app.pagescms.org
 - [x] Announcement bar — editable via Pages CMS (`_data/announcements.json`); toggle + rich-text body; show/hide without deleting content
+- [x] Field status widget — home page banner (`_data/fieldstatus.json`); color-coded Open/Monitoring/Closed; Pacific-time last-updated from git log; editable via Pages CMS
 - [x] Test mobile nav on real devices
 - [x] Test all section sidebar links — 0 broken
 - [x] Confirm `[DATE]` placeholder resolves correctly on all pages
@@ -30,6 +31,7 @@
 - [ ] Review field pages for accuracy (hours, address, parking)
 - [x] Confirm sponsor logos/data in `site/src/_data/sponsors.js` are current
 - [x] Volunteer matrix — `/volunteers/training-matrix/`
+- [x] Ask the Referee — reinstated as standalone page `/referees/ask-the-referee/`; 30 verbatim Q&As from old site, grouped into 7 sections, styled with bold questions + italic dates; linked from referees sidebar and faqs.md
 - [x] Age chart — updated for Fall 2026 cutoff change (Dec 31 → Aug 1), new official chart image, 8U/Grad Series play-up exception
 - [x] Visual polish — dark page headers (red nav → dark content header hierarchy), green sidebar strip + hover/active states, green checkmarks in training matrix
 - [x] Photo gallery GLightbox fix — filter-aware lightbox using `.lb-active` selector; clicking photos now opens modal with prev/next navigation
@@ -47,6 +49,7 @@
 
 ## Redirects & Launch
 - [x] Create redirect map: all 159 old WordPress URLs → new URLs (`site/src/_redirects`, copies to `_site/` on build)
+- [x] Ingest WordPress Redirection plugin CSV — 76 additional rules added to `_redirects`; splat `/r/*` approximates regex for InLeague shortlinks
 - [x] Set up Cloudflare Pages — https://new.ayso13.org (staging), https://ayso13.pages.dev (direct)
 - [x] Test all redirects on new.ayso13.org — 13/13 pass; created 404.html (was missing, causing 200 on unknown paths)
 - [x] Custom 404 page — red card theme, search bar, top-level nav links
