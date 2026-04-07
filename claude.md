@@ -165,6 +165,14 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - Layout, section, and permalink fields are hidden from editors
 - To add/remove editors: manage via the Pages CMS web interface
 - To add a new content field: update `.pages.yml` and commit
+- Announcement bar is a site-wide setting at the top of the Pages CMS sidebar — editors can toggle it on/off and edit the text without touching code
+
+## Site-wide Data Files (`site/src/_data/`)
+- `site.json` — phone, email, address, InLeague URL
+- `navigation.js` — full nav structure (top nav + section sidebars)
+- `fileDates.json` — auto-generated per-file last-modified dates
+- `announcements.json` — home page announcement bar (`enabled` boolean + `body` markdown); rendered via `markdownify` filter in `home.njk`
+- `sponsors.js` — sponsor logos, URLs, and tier definitions
 
 ## Files
 - `CLAUDE.md` — This file
@@ -178,4 +186,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-06 (session 4)*
+*Last updated: 2026-04-06 (session 5)*

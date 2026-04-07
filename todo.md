@@ -18,6 +18,7 @@
 - [x] Add search (Pagefind) — `/search/`, footer search box, footer link
 - [x] Field maps — downloaded from ayso13.org, placed on all field pages; FIS Upper/Lower pages created
 - [x] Set up Pages CMS — `.pages.yml` committed; connect repo at app.pagescms.org
+- [x] Announcement bar — editable via Pages CMS (`_data/announcements.json`); toggle + rich-text body; show/hide without deleting content
 - [x] Test mobile nav on real devices
 - [x] Test all section sidebar links — 0 broken
 - [x] Confirm `[DATE]` placeholder resolves correctly on all pages
