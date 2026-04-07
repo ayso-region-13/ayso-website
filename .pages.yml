@@ -22,7 +22,7 @@ content:
   - name: navigation
     label: Site Navigation
     type: file
-    path: site/src/_data/navigation.json
+    path: site/src/_data/nav-data.json
     fields:
       - name: sections
         label: Navigation Sections
