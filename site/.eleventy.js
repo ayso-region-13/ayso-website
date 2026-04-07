@@ -63,6 +63,30 @@ module.exports = function (eleventyConfig) {
     return pageUrl.startsWith(sectionUrl);
   });
 
+  // Field status last-updated timestamp — reads git log date of fieldstatus.json
+  // formatted to Pacific time. Falls back to null if git is unavailable.
+  eleventyConfig.addGlobalData("fieldStatusDate", () => {
+    try {
+      const { execSync } = require("child_process");
+      const raw = execSync(
+        'git log -1 --format="%ai" -- site/src/_data/fieldstatus.json',
+        { cwd: path.join(__dirname, "..") }
+      ).toString().trim();
+      if (!raw) return null;
+      return new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/Los_Angeles",
+        month:    "long",
+        day:      "numeric",
+        year:     "numeric",
+        hour:     "numeric",
+        minute:   "2-digit",
+        timeZoneName: "short",
+      }).format(new Date(raw));
+    } catch (_) {
+      return null;
+    }
+  });
+
   // Render a markdown string to HTML (for data files like announcements.json)
   eleventyConfig.addFilter("markdownify", (str) => {
     if (!str) return "";

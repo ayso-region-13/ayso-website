@@ -6,6 +6,26 @@ content:
 
   # ── Site-wide settings ────────────────────────────────────────────────────
 
+  - name: fieldstatus
+    label: Field Status
+    type: file
+    path: site/src/_data/fieldstatus.json
+    fields:
+      - name: enabled
+        label: "Show field status widget on home page"
+        type: boolean
+      - name: status
+        label: "Status"
+        type: select
+        options:
+          - { label: "Open",       value: "Open" }
+          - { label: "Closed",     value: "Closed" }
+          - { label: "Monitoring", value: "Monitoring" }
+      - name: message
+        label: "Message"
+        type: string
+        description: "Details shown after the status. E.g. 'All fields open' or 'Upper fields closed due to rain.'"
+
   - name: announcements
     label: Announcement Bar
     type: file

@@ -72,6 +72,43 @@ layout: base.njk
 </div>
 {% endif %}
 
+{# ── Field status widget ─────────────────────────────────────────── #}
+{% if fieldstatus.enabled %}
+<div class="{% if fieldstatus.status == 'Closed' %}bg-brand-red border-b border-red-700{% elif fieldstatus.status == 'Monitoring' %}bg-amber-500 border-b border-amber-600{% else %}bg-brand-green-dark border-b border-green-900{% endif %}">
+  <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center gap-3">
+
+    {# Status icon #}
+    {% if fieldstatus.status == 'Closed' %}
+    <svg class="w-5 h-5 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+    </svg>
+    {% elif fieldstatus.status == 'Monitoring' %}
+    <svg class="w-5 h-5 text-brand-dark shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+    </svg>
+    {% else %}
+    <svg class="w-5 h-5 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+    </svg>
+    {% endif %}
+
+    {# Status text #}
+    <p class="{% if fieldstatus.status == 'Monitoring' %}text-brand-dark{% else %}text-white{% endif %} text-sm font-medium flex-1">
+      <strong>Field Status: {{ fieldstatus.status }}</strong>
+      {% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
+    </p>
+
+    {# Last updated timestamp #}
+    {% if fieldStatusDate %}
+    <span class="{% if fieldstatus.status == 'Monitoring' %}text-brand-dark{% else %}text-white{% endif %} text-xs opacity-70 shrink-0 hidden sm:block">
+      Updated {{ fieldStatusDate }}
+    </span>
+    {% endif %}
+
+  </div>
+</div>
+{% endif %}
+
 {# ── Main home page content ──────────────────────────────────────── #}
 <div class="max-w-screen-xl mx-auto px-4 py-12">
 
