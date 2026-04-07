@@ -19,7 +19,7 @@ Allendale Park is a practice field and parking location for Blair High School.
 
 [Get directions](https://maps.google.com/?q=1130+S+Marengo+Ave,+Pasadena,+CA+91106)
 
-<img src="/images/allendale-field.jpg" alt="Allendale Park soccer field" class="max-w-full rounded my-4">
+<img src="/images/fields/allendale-field.jpg" alt="Allendale Park soccer field" class="max-w-full rounded my-4">
 
 ---
 
