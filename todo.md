@@ -40,6 +40,11 @@
 - [x] Organize documents in Google Drive for embedded links
 - [x] Confirm logo.svg is final version
 
+## Staging
+- [ ] Create `staging` branch — Cloudflare auto-deploys to `staging.ayso13.pages.dev`
+- [ ] (Optional) Add `staging.ayso13.org` as a branch domain in Cloudflare Pages → Settings → Custom Domains
+- [ ] (Optional) Configure Pages CMS to commit to `staging` instead of `main` for editor review workflow
+
 ## Redirects & Launch
 - [x] Create redirect map: all 159 old WordPress URLs → new URLs (`site/src/_redirects`, copies to `_site/` on build)
 - [x] Set up Cloudflare Pages — https://new.ayso13.org (staging), https://ayso13.pages.dev (direct)

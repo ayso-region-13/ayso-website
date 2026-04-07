@@ -30,31 +30,6 @@ Players can become certified referees at age 10. Youth referees work games for a
 
 ---
 
-## Rules Questions
-
-### Can goalkeepers use their hands anywhere in the penalty area?
-Yes. The goalkeeper may use their hands anywhere within the penalty area. The position of the ball determines legality, not the position of the goalkeeper's feet. Exceptions: the keeper cannot handle a ball deliberately kicked to them by a teammate, thrown directly from a throw-in, or a ball they have already released.
-
-### How strictly should I enforce the 6-second rule?
-Apply judgment rather than strict counting. Warn the goalkeeper about delays before calling an infraction.
-
-### When can attackers cross the buildout line at 10U?
-Attackers may cross once the ball is clearly kicked on a goal kick, or when the goalkeeper releases the ball from their hands.
-
-### Are toe cleats allowed?
-Toe cleats are not blanket-prohibited. Referees should inspect all cleats for dangerous burrs or sharp edges. Soccer-specific cleats are preferred.
-
-### Can players wear medical alert bracelets?
-Yes, if taped down with only the alert portion visible to prevent finger entanglement. This exception applies only to medical alert bracelets.
-
-### What is the difference between throw-ins and kick-ins?
-6U uses kick-ins. 7U and 8U require throw-ins.
-
-### When are yellow and red cards used?
-Cards are typically introduced at 12U. Younger age groups handle misconduct through verbal communication with coaches.
-
----
-
 ## Game Day
 
 ### What if I cannot make my assigned game?
@@ -97,10 +72,11 @@ No. Refresher courses are offered but not mandatory.
 
 ## Related Pages
 
-- [Refereeing Overview](/referees) — Getting started
-- [Referee Training](/referees/training) — Certification
-- [Laws of the Game](/referees/laws) — Official rules
-- [Referee Scheduling](/referees/scheduling) — Game assignments
+- [Ask the Referee](/referees/ask-the-referee/) — Submit rules questions, browse past answers
+- [Refereeing Overview](/referees/) — Getting started
+- [Referee Training](/referees/training/) — Certification
+- [Laws of the Game](/referees/laws/) — Official rules
+- [Referee Scheduling](/referees/scheduling/) — Game assignments
 
 ---
 
