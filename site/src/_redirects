@@ -348,3 +348,79 @@
 /trophies                       /                                               301
 /extra/                         /programs/                                      301
 /extra                          /programs/                                      301
+
+# ── Short links — InLeague ────────────────────────────────────────────────
+# Migrated from WordPress Redirection plugin (April 7 2026)
+/etrainu                        https://ayso13.inleague.com/app/eTrainU         301
+/etrainu/                       https://ayso13.inleague.com/app/eTrainU         301
+/eTrainU                        https://ayso13.inleague.com/app/eTrainU         301
+/eTrainU/                       https://ayso13.inleague.com/app/eTrainU         301
+/aysou                          https://ayso13.inleague.com/app/eTrainU         301
+/safesport                      https://ayso13.inleague.com/app/eTrainU         301
+/safesport/                     https://ayso13.inleague.com/app/eTrainU         301
+/start                          https://ayso13.inleague.com/app/welcome         301
+/start/                         https://ayso13.inleague.com/app/welcome         301
+/pay                            https://ayso13.inleague.com/app/invoices/current 301
+/pay/                           https://ayso13.inleague.com/app/invoices/current 301
+/profile                        https://ayso13.inleague.com/app/family-profile  301
+/profile/                       https://ayso13.inleague.com/app/family-profile  301
+/donate                         https://ayso13.inleague.com/invoices/donations  301
+/donate/                        https://ayso13.inleague.com/invoices/donations  301
+/dashboard                      https://ayso13.inleague.com/app/                301
+/dashboard/                     https://ayso13.inleague.com/app/                301
+/apply                          https://ayso13.inleague.com/app/volunteer       301
+/admin                          https://ayso13.inleague.com/app/                301
+/admin/                         https://ayso13.inleague.com/app/                301
+
+# ── Short links — external ────────────────────────────────────────────────
+/pizza                          https://www.vyblee.com/corner-kick-cafe         301
+/pizza/                         https://www.vyblee.com/corner-kick-cafe         301
+/signup                         https://www.wejoinin.com/AYSORegion13           301
+/signup/                        https://www.wejoinin.com/AYSORegion13           301
+/mentor                         https://ayso13.typeform.com/mentor              301
+/mentor/                        https://ayso13.typeform.com/mentor              301
+/gcud                           https://ayso13.typeform.com/1CSPUD2025          301
+/gc16                           https://form.typeform.com/to/vf4lZIRo           301
+/gc16/                          https://form.typeform.com/to/vf4lZIRo           301
+/pog                            https://ayso13.typeform.com/SSreg               301
+/gctt                           https://form.typeform.com/to/VIFJoyJ4           301
+# /r — regex ^\/r(?:\/|\?.*)?$ approximated (Cloudflare _redirects has no regex support)
+/r                              https://ayso13.typeform.com/to/Ah0JFeOp         301
+/r/                             https://ayso13.typeform.com/to/Ah0JFeOp         301
+/r/*                            https://ayso13.typeform.com/to/Ah0JFeOp         301
+
+# ── Short links — new site pages ──────────────────────────────────────────
+/t                              /programs/tournaments/                          301
+/g                              /schedules/games/                               301
+/f                              /programs/fall-soccer/                          301
+/f/                             /programs/fall-soccer/                          301
+/ref                            /referees/                                      301
+/maps                           /fields/                                        301
+/maps/                          /fields/                                        301
+/teams                          /schedules/                                     301
+/teams/                         /schedules/                                     301
+/brackets                       /schedules/                                     301
+/brackets/                      /schedules/                                     301
+/4u                             /programs/preschool/                            301
+/5u                             /programs/preschool/                            301
+/4u5u                           /programs/preschool/                            301
+/gradseries                     /programs/grad-series/                          301
+/gradseries/                    /programs/grad-series/                          301
+/sisterhood                     /about/sisterhood/                              301
+/sisterhood/                    /about/sisterhood/                              301
+/respect                        /referees/faqs/                                 301
+/respect/                       /referees/faqs/                                 301
+/refund                         /register/                                      301
+/refund/                        /register/                                      301
+/registration                   /register/                                      301
+/registration/                  /register/                                      301
+/archive                        /                                               301
+/archive/                       /                                               301
+/thanksgiving-tournament-new    /programs/tournaments/thanksgiving/             301
+/thanksgiving-tournament-new/   /programs/tournaments/thanksgiving/             301
+/fall-core-2025-standings       /schedules/standings/                           301
+/fall-core-2025-standings/      /schedules/standings/                           301
+/faqs/how-are-standings-determined /schedules/standings/                        301
+/faqs/how-are-standings-determined/ /schedules/standings/                       301
+/faqs/how-long-are-the-games    /register/age-chart/                            301
+/faqs/how-long-are-the-games/   /register/age-chart/                            301
