@@ -1,19 +1,18 @@
 ---
-
-title: "All-Stars"
+title: All-Stars
+description: All-Stars is Region 13's competitive tournament program. Selected
+  players represent Region 13 at AYSO sectional and national tournaments.
 layout: page.njk
 section: programs
-heroImage: "all-stars-01.jpg"
-description: "All-Stars is Region 13's competitive tournament program. Selected players represent Region 13 at AYSO sectional and national tournaments."
+heroImage: all-stars-01.jpg
 ---
-
 # All-Stars
 
 All-Stars is a competitive winter program for advanced players in 10U, 12U, and 14U. Teams represent Region 13 in tournaments against other AYSO regions.
 
-![All-Stars players at Region 13](/images/all-stars-02.jpg)
-
 ---
+
+![](/images/fall-game-05.jpg)
 
 ## Quick Facts
 
@@ -24,6 +23,8 @@ All-Stars is a competitive winter program for advanced players in 10U, 12U, and 
 - Cost: $150 (plus tournament fees)
 - Selection: By tryout
 
+
+
 ---
 
 ## How It Works
@@ -31,6 +32,7 @@ All-Stars is a competitive winter program for advanced players in 10U, 12U, and 
 All-Stars teams compete at Section, Area, and Region levels against teams from Area 1-C regions including Alhambra, Arcadia, and Temple City.
 
 The program requires a significant time commitment:
+
 - Two practices per week
 - Games on Saturdays and Sundays
 - Attendance at all practices and games expected
@@ -40,17 +42,21 @@ The program requires a significant time commitment:
 ## Tryout Schedule (2025)
 
 ### First Tryout — October 26
+
 Location: Rose Bowl Area H
 
+
 | Division | Time |
-|----------|------|
+| -------------- | ------------ |
 | Girls 10U | 9-10:30am |
 | Boys 10U | 10:30am-12pm |
 | Girls 12U | 12-1:30pm |
 | Boys 12U | 1:30-3pm |
 | Girls/Boys 14U | 3-4:30pm |
 
+
 ### Second Tryout — November 2-16
+
 Multiple locations with staggered times by age group.
 
 ---
