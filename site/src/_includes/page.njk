@@ -12,18 +12,18 @@ layout: base.njk
 {% endfor %}
 
 {# ── Page header ─────────────────────────────────────────────────── #}
-<div class="bg-brand-green">
+<div class="bg-red-50">
   <div class="max-w-screen-xl mx-auto px-4 py-8 md:py-10">
 
     {# Breadcrumb #}
     {% if sectionNav and sectionNav.url != page.url %}
-    <nav class="text-sm text-green-900 mb-3" aria-label="Breadcrumb">
+    <nav class="text-sm text-red-900 mb-3" aria-label="Breadcrumb">
       <a href="/" class="hover:text-brand-dark transition-colors">Home</a>
       <span class="mx-2 opacity-40">/</span>
       <a href="{{ sectionNav.url }}" class="hover:text-brand-dark transition-colors">{{ sectionNav.label }}</a>
       {% if page.url != sectionNav.url %}
       <span class="mx-2 opacity-40">/</span>
-      <span class="text-green-950">{{ title }}</span>
+      <span class="text-brand-dark font-medium">{{ title }}</span>
       {% endif %}
     </nav>
     {% endif %}
@@ -31,7 +31,7 @@ layout: base.njk
     <h1 class="text-3xl md:text-4xl font-bold text-brand-dark leading-tight">{{ title }}</h1>
 
     {% if description %}
-    <p class="mt-2 text-green-900 text-lg leading-relaxed max-w-2xl">{{ description }}</p>
+    <p class="mt-2 text-red-900 text-lg leading-relaxed max-w-2xl">{{ description }}</p>
     {% endif %}
 
   </div>
@@ -65,7 +65,7 @@ layout: base.njk
     <aside class="lg:w-64 shrink-0">
       <nav class="sticky top-20" aria-label="Section navigation">
         <div class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
-          <div class="bg-brand-green-dark text-white px-4 py-3">
+          <div class="bg-brand-red text-white px-4 py-3">
             <p class="text-sm font-semibold">{{ sectionNav.label }}</p>
           </div>
           <ul>
@@ -73,8 +73,8 @@ layout: base.njk
             {% if not child.divider %}
             <li>
               <a href="{{ child.url }}"
-                 class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-green-50 hover:text-green-800 transition-colors border-b border-gray-100 last:border-0
-                        {% if page.url == child.url %}bg-green-50 text-green-800 font-medium{% endif %}">
+                 class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-brand-red transition-colors border-b border-gray-100 last:border-0
+                        {% if page.url == child.url %}bg-red-50 text-brand-red font-medium{% endif %}">
                 {{ child.label }}
               </a>
             </li>

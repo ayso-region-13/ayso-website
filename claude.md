@@ -111,7 +111,7 @@ site/
 
 Font: Inter (system fallback)
 
-**Color hierarchy:** Top nav = dark green (`bg-brand-green-dark` / `#007a32`) → Page header = brand green (`bg-brand-green`) with dark text → Content area = white. Gold buttons (`bg-brand-gold text-brand-dark`). Red prose headings (H1–H3 in `.prose`). Green for sidebar strips, hover states, and checkmarks (use `text-green-800` for text on white — `#00ae42` fails WCAG contrast). Never place red and green adjacent.
+**Color hierarchy:** Top nav = brand red (`bg-brand-red` / `#ce0e2d`), hover = dark red (`bg-brand-red-dark` / `#a00b22`) → Page header = light red (`bg-red-50`) with dark text → Content area = white. Gold buttons (`bg-brand-gold text-brand-dark`). Red prose headings (H1–H3 in `.prose`). Green is an accent: sidebar header strip, field status "Open", `btn-secondary`, and volunteer training checkmarks.
 
 ## Key Scripts
 
