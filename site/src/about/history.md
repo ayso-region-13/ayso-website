@@ -3,7 +3,7 @@
 title: "History"
 layout: page.njk
 section: about
-description: "AYSO Region 13 has served the Pasadena area since 1969. Learn the history of youth soccer in Pasadena, Altadena, and La Cañada."
+description: "AYSO Region 13 has served the Pasadena area since 1972. Learn the history of youth soccer in Pasadena, Altadena, and La Cañada."
 ---
 
 # History
@@ -16,13 +16,13 @@ AYSO Region 13 has served the Pasadena, Altadena, and La Cañada communities sin
 
 ## AYSO National
 
-AYSO was founded in 1964 in Los Angeles with 9 teams. Today it serves over 600,000 players across 50,000+ teams nationwide.
+AYSO was founded in 1964 in Los Angeles with 9 teams. Today it serves more than 600,000 players across 50,000+ teams nationwide.
 
 ---
 
 ## Region 13
 
-Region 13 was formed in 1972 when Pasadena, Altadena, and La Cañada separated from Arcadia (Region 2) to create their own region. Today we serve over 2,000 children ages 4-18, making us one of AYSO's largest regions.
+Region 13 was formed in 1972 when Pasadena, Altadena, and La Cañada separated from Arcadia (Region 2) to create their own region. Today we serve more than 2,000 children ages 4-18, making us one of AYSO's largest regions.
 
 ---
 

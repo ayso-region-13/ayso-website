@@ -53,8 +53,8 @@ Members interested in DEI initiatives can contact [info@ayso13.org](mailto:info@
 
 ## Resources
 
-- Pay What You Can Whitepaper — Removing financial obstacles
-- Keep Girls In Sport — Best practices for coaches
+- [Pay What You Can Whitepaper](https://docs.google.com/document/d/191yupiG0lFw4UoaShrSr0WuKFNaOoGT8Ww9PawoZ12U/edit?tab=t.0): Removing financial obstacles
+- [Keep Girls In Sport](https://www.keepgirlsinsport.com/) — Best practices for coaches
 
 ---
 
