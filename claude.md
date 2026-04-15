@@ -157,12 +157,16 @@ Note: Search (`/search/`) only works after a full `npm run build` — not in dev
 - Overly casual language ("That's it!" "Perfect!")
 
 ## Staging Environment
-Cloudflare Pages auto-deploys every non-`main` branch to `<branch>.ayso13.pages.dev`. No extra Cloudflare config needed.
 
-- Create a `staging` branch → previews at `staging.ayso13.pages.dev`
-- Optional: add `staging.ayso13.org` as a branch domain in Cloudflare Pages → Settings → Custom Domains
-- Optional: configure Pages CMS to commit to `staging` so editor changes are reviewed before merging to `main`
-- Merge `staging` → `main` to promote to production
+**Workflow:** CMS edits → `staging` branch → staging.ayso13.org → promote → `main` → www.ayso13.org
+
+- `staging` branch exists and is live at **staging.ayso13.org** (Cloudflare Pages branch deployment)
+- Pages CMS is configured with `branch: staging` in `.pages.yml` — all CMS edits go to staging
+- **Promote to production:** GitHub Actions workflow `promote-to-production.yml` merges `staging` → `main`
+  - From GitHub UI: Actions tab → "Promote Staging to Production" → Run workflow → type "promote"
+  - From Slack (requires GitHub Slack app): `/github workflow run promote-to-production.yml --repo magoldman/ayso-website`
+- `main` branch deploys to **www.ayso13.org** (custom domain in Cloudflare Pages)
+- Do NOT commit directly to `main` for content changes — always go through staging
 
 ## CMS
 Pages CMS is configured for non-technical editors at https://app.pagescms.org.

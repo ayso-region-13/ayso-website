@@ -1,3 +1,5 @@
+branch: staging
+
 media:
   input: site/src/images
   output: /images
