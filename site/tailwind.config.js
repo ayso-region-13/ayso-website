@@ -4,12 +4,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'brand-red':         '#ce0e2d',
-        'brand-red-dark':    '#a00b22',
+        'brand-red':         '#ff3c3c',
+        'brand-red-dark':    '#e02020',
+        'brand-header':      '#230612',
+        'brand-maroon':      '#8e2929',
         'brand-green':       '#00ae42',
         'brand-green-dark':  '#007a32',
         'brand-green-light': '#00d050',
-        'brand-gold':        '#f1d516',
+        'brand-gold':        '#f5bd4c',
         'brand-dark':        '#231f20',
       },
       fontFamily: {

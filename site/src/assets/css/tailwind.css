@@ -90,7 +90,7 @@
 
   /* Nav dropdown */
   .nav-dropdown {
-    @apply absolute top-full left-0 min-w-56 bg-white shadow-2xl border-t-2 border-brand-red z-50
+    @apply absolute top-full left-0 min-w-56 bg-white shadow-2xl border-t-2 border-black z-50
            opacity-0 invisible translate-y-1
            transition-all duration-150 ease-out;
   }
@@ -127,8 +127,8 @@
            hover:bg-yellow-300 active:bg-yellow-400 transition-colors shadow-sm;
   }
   .btn-secondary {
-    @apply inline-flex items-center gap-2 bg-white text-brand-green font-semibold px-6 py-3 rounded-lg
-           border-2 border-brand-green hover:bg-green-50 transition-colors;
+    @apply inline-flex items-center gap-2 bg-white text-brand-red font-semibold px-6 py-3 rounded-lg
+           border-2 border-brand-red hover:bg-red-50 transition-colors;
   }
   .btn-gold {
     @apply inline-flex items-center gap-2 bg-brand-gold text-brand-dark font-semibold px-6 py-3 rounded-lg

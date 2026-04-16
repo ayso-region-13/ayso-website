@@ -1,10 +1,8 @@
-# AYSO Slack Bot — Setup Instructions
+# AYSO Slack Bot — Setup & Deployment
 
-The bot lets anyone with Slack access update field status or the announcement bar directly from Slack. Changes commit immediately to both `staging` and `main` branches and auto-post to #general.
+Lets any authorized Slack user update field status or the announcement bar directly from Slack. Changes commit to both `staging` and `main` simultaneously and post to #general.
 
-## Usage
-
-Once deployed, type in any Slack channel:
+## Commands
 
 | Command | Opens |
 |---|---|
@@ -14,33 +12,51 @@ Once deployed, type in any Slack channel:
 
 ---
 
-## One-Time Setup
+## Setup Steps
 
-### Step 1 — Create Slack App
+### Step 1 — Create the Slack App
 
-1. Go to https://api.slack.com/apps → **Create New App** → From scratch
-2. Name: `AYSO Bot`, select your workspace
-3. **Slash Commands** → Create New Command:
+1. Go to https://api.slack.com/apps → **Create New App** → **From scratch**
+2. Name: `AYSO Bot`, select your workspace → **Create App**
+
+**Slash command:**
+
+3. Left sidebar → **Slash Commands** → **Create New Command**
    - Command: `/ayso`
-   - Request URL: `https://ayso-slack-bot.<account>.workers.dev/slack/command`
+   - Request URL: `https://placeholder.workers.dev/slack/command` *(update after Step 3)*
    - Description: `Update field status or announcement`
-4. **Interactivity & Shortcuts** → toggle on:
-   - Request URL: `https://ayso-slack-bot.<account>.workers.dev/slack/interactions`
-5. **OAuth & Permissions** → Bot Token Scopes → Add: `chat:write`, `commands`
-6. **Install App** → Install to Workspace → authorize
-7. Copy the **Bot Token** (`xoxb-...`) from OAuth & Permissions
-8. Copy the **Signing Secret** from Basic Information
+   - Save
 
-> Update the Request URLs in steps 3 and 4 after deploying the Worker (Step 3 below).
+**Interactivity:**
+
+4. Left sidebar → **Interactivity & Shortcuts** → toggle **On**
+   - Request URL: `https://placeholder.workers.dev/slack/interactions` *(update after Step 3)*
+   - Save Changes
+
+**Permissions:**
+
+5. Left sidebar → **OAuth & Permissions** → scroll to **Bot Token Scopes** → **Add an OAuth Scope**
+   - Add `chat:write`
+   - Add `commands`
+
+**Install:**
+
+6. Scroll up → **Install to Workspace** → **Allow**
+7. Copy the **Bot OAuth Token** (starts with `xoxb-`) — you'll need it in Step 4
+8. Left sidebar → **Basic Information** → **App Credentials** → copy **Signing Secret** — you'll need it in Step 4
 
 ---
 
 ### Step 2 — Create GitHub Personal Access Token
 
-1. GitHub → Settings → Developer Settings → **Personal Access Tokens** → Fine-grained tokens → Generate new token
-2. Repository access: `magoldman/ayso-website` only
-3. Permissions → Repository permissions → **Contents: Read and write**
-4. Copy the token
+1. GitHub → avatar (top right) → **Settings**
+2. Left sidebar → **Developer settings** (bottom) → **Personal access tokens** → **Fine-grained tokens**
+3. **Generate new token**
+   - Name: `AYSO Slack Bot`
+   - Expiration: 1 year
+   - Repository access: **Only select repositories** → select `ayso-website`
+   - Permissions → **Repository permissions** → **Contents** → **Read and write**
+4. **Generate token** → copy immediately (shown once)
 
 ---
 
@@ -51,7 +67,7 @@ cd slack-bot
 npx wrangler deploy
 ```
 
-Log in with your Cloudflare account if prompted. The command prints the deployed URL, e.g.:
+The command prints the deployed URL, e.g.:
 ```
 https://ayso-slack-bot.<account>.workers.dev
 ```
@@ -62,27 +78,29 @@ Go back to your Slack app settings and update both Request URLs (Slash Command a
 
 ### Step 4 — Set Worker Secrets
 
+Run each command and paste the value when prompted:
+
 ```bash
 cd slack-bot
-npx wrangler secret put SLACK_SIGNING_SECRET   # from Slack app → Basic Information
-npx wrangler secret put SLACK_BOT_TOKEN        # xoxb-... from Slack app → OAuth & Permissions
-npx wrangler secret put GITHUB_TOKEN           # fine-grained PAT from Step 2
+npx wrangler secret put SLACK_SIGNING_SECRET   # from Step 1 → Basic Information → Signing Secret
+npx wrangler secret put SLACK_BOT_TOKEN        # from Step 1 → OAuth & Permissions → Bot Token (xoxb-...)
+npx wrangler secret put GITHUB_TOKEN           # from Step 2
 npx wrangler secret put SLACK_CHANNEL_ID       # see below
 ```
 
 **Finding the #general channel ID:**
-In Slack, right-click **#general** → View channel details → scroll to the bottom → copy the Channel ID (starts with `C`).
+In Slack, right-click **#general** → **View channel details** → scroll to the bottom → copy the Channel ID (starts with `C`).
 
 ---
 
 ### Step 5 — Test
 
-1. Type `/ayso` in any Slack channel
-2. A modal should open with Field Status / Announcement options
-3. Submit a change and verify:
-   - GitHub: `site/src/_data/fieldstatus.json` updated on both `staging` and `main` branches
-   - Cloudflare Pages builds both branches (check deployments dashboard)
+1. Type `/ayso` in any Slack channel — a modal should open
+2. Submit a Field Status change → verify:
+   - GitHub: `site/src/_data/fieldstatus.json` updated on both `staging` and `main`
+   - Cloudflare Pages builds both branches
    - #general receives a formatted bot message
+3. Repeat for announcement
 
 ---
 
@@ -93,7 +111,7 @@ cd slack-bot
 npx wrangler deploy
 ```
 
-Secrets are stored separately and persist across deploys.
+Secrets persist across deploys — no need to re-set them.
 
 ---
 
@@ -114,5 +132,3 @@ Cloudflare Worker (ayso-slack-bot)
 **Data files written:**
 - Field status → `site/src/_data/fieldstatus.json`
 - Announcement → `site/src/_data/announcements.json`
-
-Both commits trigger Cloudflare Pages builds on the respective branches.

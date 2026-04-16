@@ -15,7 +15,7 @@
  *   GITHUB_TOKEN           — fine-grained PAT with Contents: read+write on this repo
  */
 
-const GITHUB_REPO    = 'magoldman/ayso-website';
+const GITHUB_REPO    = 'ayso-region-13/ayso-website';
 const BRANCHES       = ['staging', 'main'];
 const FIELDSTATUS_PATH   = 'site/src/_data/fieldstatus.json';
 const ANNOUNCEMENT_PATH  = 'site/src/_data/announcements.json';
