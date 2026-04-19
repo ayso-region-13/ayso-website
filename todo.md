@@ -6,7 +6,7 @@
 ## Workflow
 ```
 Edit in CMS or GitHub → commits to staging → staging.ayso13.org
-  → review → /github workflow run promote-to-production → www.ayso13.org
+  → review → /ayso promote (Slack) → www.ayso13.org
 ```
 
 ---
@@ -15,9 +15,6 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ### Infrastructure
 - [ ] **Update NODE_VERSION** from 18 → 22 in Cloudflare Pages dashboard (Settings → Environment variables)
-- [ ] **Test promote workflow** — trigger from GitHub Actions UI (Actions tab → Run workflow → type "promote"), verify staging merges to main cleanly
-- [ ] **Install GitHub Slack app** — https://slack.github.com → `/github signin` → `/github subscribe ayso-region-13/ayso-website`
-  - To promote from Slack: `/github workflow run promote-to-production.yml --repo ayso-region-13/ayso-website`
 
 ### Content
 - [ ] **2 unresolved INLEAGUE placeholders** (newsletter signup URLs not found on old site — ask the team):
@@ -30,11 +27,6 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [ ] Review field pages for accuracy: hours, addresses, parking notes
 - [ ] Full content review pass on staging.ayso13.org
 
-### Slack Bot (field status / announcements from Slack)
-- [ ] Complete Slack app setup (Steps 1–5 in `slack-bot/SETUP.md`)
-- [ ] Deploy Cloudflare Worker: `cd slack-bot && wrangler deploy`
-- [ ] Set 4 secrets: `SLACK_SIGNING_SECRET`, `SLACK_BOT_TOKEN`, `SLACK_CHANNEL_ID`, `GITHUB_TOKEN`
-- [ ] Test: `/ayso` in Slack → modal opens → submit → check staging and main both update
 
 ### Pre-Launch
 - [ ] Run link checker: `cd site && node scripts/check-links.js`
@@ -53,6 +45,14 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ---
 
 ## Completed ✓
+
+### Session 8 (2026-04-19)
+- [x] Slack bot (`/ayso`) — field status, announcements, and promote (staging → main) all working
+- [x] `/ayso promote` — triggers GitHub Actions workflow; posts result to #notify-website-status
+- [x] User allowlist — `slack-bot/allowed-users.json` (editable without secrets)
+- [x] Google Analytics — GA4 tag (G-9YM9ZDW1J9) in base.njk, conditioned on `site.gaId`
+- [x] robots.txt — fixed sitemap URL to `https://www.ayso13.org/sitemap.xml`
+- [x] FIS Upper/Lower — address corrected to 4320 Cornishon Ave, La Cañada Flintridge
 
 ### Session 7 (2026-04-19)
 - [x] Board minutes archive — 79 PDFs self-hosted at `/assets/docs/minutes/`, page updated with all links (2014–2022)
