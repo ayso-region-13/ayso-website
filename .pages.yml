@@ -112,6 +112,19 @@ content:
     path: site/src/referees
     fields: *page-fields
 
+  - name: qa-answers
+    label: "Ask the Referee — Q&As"
+    type: collection
+    path: site/src/referees/qa
+    fields:
+      - { name: question,      label: "Question",     type: string,
+          description: "The full question as submitted." }
+      - { name: category,      label: "Category",     type: string,
+          description: "Enter one of: Goalkeeper Rules | Offside | Fouls & Misconduct | Restarts | Equipment & Player Safety | Age Group Rules (AYSO-Specific) | Officiating & Mechanics" }
+      - { name: date,          label: "Date Answered", type: string,
+          description: "Enter as YYYY-MM-DD, e.g. 2024-09-14. Used to sort answers newest-first." }
+      - { name: body,          label: "Answer",       type: rich-text }
+
   - name: managers
     label: "Team Managers"
     type: collection
