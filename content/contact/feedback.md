@@ -8,7 +8,7 @@ Submit feedback about coaches, referees, or general concerns. Region 13 welcomes
 
 Provide feedback about coaching staff.
 
-[INLEAGUE: Coach feedback form]
+<a href="https://form.jotform.com/82564401768159" class="btn-gold">Coach Feedback Form</a>
 
 Or email: [coach@ayso13.org](mailto:coach@ayso13.org)
 
@@ -18,7 +18,12 @@ Or email: [coach@ayso13.org](mailto:coach@ayso13.org)
 
 Provide feedback about referee performance.
 
-[INLEAGUE: Referee feedback form]
+<a href="https://ayso13.typeform.com/referee-fb" class="btn-gold">Referee Feedback Form</a>
+
+Referees, provide incident reports here (e.g., injuries, misconduct, etc.)
+
+<a href="https://ayso13.typeform.com/to/GjC4Pyed" class="btn-gold">Referee Incident Form</a>
+
 
 Or email: [referee@ayso13.org](mailto:referee@ayso13.org)
 
@@ -28,7 +33,15 @@ Or email: [referee@ayso13.org](mailto:referee@ayso13.org)
 
 Report injuries, near misses, misconduct, and other incidents.
 
-[INLEAGUE: Incident report form]
+Injuries, risks, stray dogs, etc., please report it!
+
+1. Coach, [fill out this form](https://aysovolunteers.org/wp-content/uploads/2021/10/Incident_Report_Form_with_Instr_rev09102021.pdf).
+2. [Upload it here](https://docs.google.com/forms/d/e/1FAIpQLScMSiIVlcBH9MkLgaFOLKbGYP-4bn2uli-DO0x0bnWZ1Hiq2w/viewform) or email to safety@ayso13.org
+
+Feedback
+Provide [feedback to coach staff](https://form.jotform.com/82564401768159) or write to coach@ayso13.org
+
+Provide [feedback to the referee staff](https://ayso13.typeform.com/to/DpPtKysI) or write to referee@ayso13.org
 
 Or email: [safety@ayso13.org](mailto:safety@ayso13.org)
 

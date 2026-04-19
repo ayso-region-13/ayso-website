@@ -42,7 +42,7 @@ Every coach receives a bag with:
 Many coaches add their own supplies over time.
 
 ### Can I coach multiple teams?
-Yes. Game scheduling can be adjusted to accommodate coaches with multiple teams.
+Yes. Game scheduling can be adjusted to accommodate coaches with multiple teams. Coaches of multiple teams may, at times, have game conflicts (especially for assistant coaches).
 
 ---
 

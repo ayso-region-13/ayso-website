@@ -41,7 +41,7 @@ In-person or online course for your specific division.
 ### Online Courses
 Register through AYSOU/eTrainU. Complete at your own pace before the season.
 
-[INLEAGUE: Link to eTrainU]
+**[eTrainU](https://ayso13.inleague.com/app/eTrainU)**
 
 ### In-Person Classes
 In-person coaching classes are offered August through September at various Southern California locations.

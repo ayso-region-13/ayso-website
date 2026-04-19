@@ -15,7 +15,7 @@ We work to:
 
 ## Background
 
-The Sisterhood of Soccer was founded on October 27, 2019 by Taj Chiu (Regional Coach Administrator) and Caroline Amicone (Regional Coach Mentor).
+The Sisterhood of Soccer was founded on October 27, 2019 by Taj Chiu and Caroline Amicone.
 
 Research shows that 94% of female C-suite executives played competitive sports, with over half competing in college. Youth athletic participation provides long-term benefits for girls and women.
 
