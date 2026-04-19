@@ -9,47 +9,30 @@ description: "FIS Upper field — AYSO Region 13 practice and game location in L
 
 FIS Upper is a practice and game field in La Cañada.
 
----
-
 ## Location
 
-4400 Block of Cornishon Ave, La Cañada CA 91011
+[4400 Block of Cornishon Ave, La Cañada CA 91011](https://maps.google.com/?q=Foothill+Intermediate+School,+La+Canada,+CA+91011)
 
-[Get directions](https://maps.google.com/?q=Foothill+Intermediate+School,+La+Canada,+CA+91011)
+[GOOGLE MAPS EMBED]
 
 ![FIS Upper field map](/images/fields/fis-upper-map.png)
-
----
 
 ## Parking
 
 Park on Chevy Chase Drive. Do not use the Community Center parking lot — violators will be cited and towed.
 
----
-
 ## Restrooms
 
 Restrooms are in the Community Center and are available during games and practices.
-
----
 
 ## Goal Setup
 
 The lock for the goals is located at the south side fence near the end of the field. The combination will be sent to the head coaches of the first and last games of the day.
 
----
-
 ## Contact
 
 - Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
 - Game-day emergencies: 626-702-AYSO
-
----
-
-## Related Pages
-
-- [Field Locations](/fields/) — All fields
-- [FIS Lower](/fields/fis-lower/) — Lower field at the same campus
 
 ---
 

@@ -10,15 +10,11 @@ description: "Muir High School fields — AYSO Region 13 game location in Pasade
 
 Muir High School has multiple field areas for practices.
 
----
-
 ## Location
 
-Near 711 W. Woodbury Rd., Altadena
+[Near 711 W. Woodbury Rd., Altadena](https://maps.google.com/?q=711+W+Woodbury+Rd,+Altadena,+CA)
 
-[Get directions](https://maps.google.com/?q=711+W+Woodbury+Rd,+Altadena,+CA)
-
----
+[GOOGLE MAPS EMBED]
 
 ## Field Areas
 
@@ -26,13 +22,9 @@ Near 711 W. Woodbury Rd., Altadena
 - Muir Central: Large turf field (check current availability)
 - Muir South: Softball field (see [Muir South](/fields/muir-south))
 
----
-
 ## Parking
 
 Exercise caution on Montana Street's west end. There are subtle "No Parking" signs near the school bus lot, and local enforcement actively tickets this zone, including on Sunday evenings.
-
----
 
 ## Portable Lighting (Muir North)
 
@@ -53,20 +45,11 @@ If your practice ends at 9:00 PM, shut down all portable lights before leaving t
 ### Light Maintenance
 Report equipment problems to Marco: 818-468-3693
 
----
-
 ## Contact
 
 - Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
 - Light maintenance: Marco at 818-468-3693
 - Game-day emergencies: 626-702-AYSO
-
----
-
-## Related Pages
-
-- [Field Locations](/fields) — All fields
-- [Muir South](/fields/muir-south) — Softball field
 
 ---
 

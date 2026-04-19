@@ -10,32 +10,24 @@ description: "Blair High School fields — AYSO Region 13 game location in Pasad
 
 Blair High School has two field areas used for practices and games.
 
----
-
 ## Location
 
-1301 S. Marengo Ave., Pasadena CA
+[1301 S. Marengo Ave., Pasadena CA](https://maps.google.com/?q=1301+S+Marengo+Ave,+Pasadena,+CA)
 
-[Get directions](https://maps.google.com/?q=1301+S+Marengo+Ave,+Pasadena,+CA)
-
----
-
-## Parking
-
-Park on Marengo Avenue or at Allendale Park/library and walk to the fields. Do not park in residential areas.
-
----
-
-## Fields
-
-- Blair Upper: Practice and game field
-- Blair Lower: Practice and game field
+[GOOGLE MAPS EMBED]
 
 ![Blair Upper game field map](/images/fields/blair-upper-game-map.jpg)
 
 ![Blair Lower game field map](/images/fields/blair-games-lower-map.jpg)
 
----
+## Parking
+
+Park on Marengo Avenue or at Allendale Park/library and walk to the fields. Do not park in residential areas.
+
+## Fields
+
+- Blair Upper: Practice and game field
+- Blair Lower: Practice and game field
 
 ## Goal Setup
 
@@ -43,19 +35,10 @@ At Blair Upper, goals are stored in silver storage bins, color-coded "10U."
 
 At Blair Lower, goals are pre-assembled. Lift goals when moving them. Do not drag across the grass.
 
----
-
 ## Contact
 
 - Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
 - Game-day emergencies: 626-702-AYSO
-
----
-
-## Related Pages
-
-- [Field Locations](/fields) — All fields
-- [Allendale Park](/fields/allendale) — Nearby parking
 
 ---
 
