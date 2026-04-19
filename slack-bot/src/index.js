@@ -89,6 +89,14 @@ async function handleCommand(rawBody, env, ctx) {
     );
   }
 
+  if (text === 'promote') {
+    ctx.waitUntil(triggerPromotion(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, env.SLACK_CHANNEL_ID, userId, params.get('user_name')));
+    return new Response(
+      JSON.stringify({ response_type: 'ephemeral', text: '🚀 Promotion triggered — staging → production. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
   let view;
   if (text === 'field' || text === 'field status') {
     view = buildFieldStatusModal();
@@ -218,6 +226,38 @@ async function putFile(token, path, branch, content, message, sha) {
       body: JSON.stringify({ message, content: encoded, sha, branch })
     }
   );
+}
+
+async function triggerPromotion(githubToken, slackToken, channelId, userId, userName) {
+  const res = await fetch(
+    `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/promote-to-production.yml/dispatches`,
+    {
+      method: 'POST',
+      headers: { ...githubHeaders(githubToken), 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: 'main', inputs: { confirm: 'promote' } })
+    }
+  );
+
+  const user = userName || userId;
+  if (res.status === 204) {
+    await postMessage(slackToken, channelId, [
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: '🚀 *Staging → Production*\nPromotion workflow started. Changes will be live on www.ayso13.org in ~2 minutes.' }
+      },
+      {
+        type: 'context',
+        elements: [{ type: 'mrkdwn', text: `_Triggered by @${user} — ${pacificTimestamp()}_ · <https://github.com/${GITHUB_REPO}/actions|View Actions>` }]
+      }
+    ], `Staging promoted to production by @${user}`);
+  } else {
+    await postMessage(slackToken, channelId, [
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `⚠️ *Promotion failed* — GitHub API returned ${res.status}. <https://github.com/${GITHUB_REPO}/actions|Check Actions>.` }
+      }
+    ], 'Promotion failed');
+  }
 }
 
 function githubHeaders(token) {
