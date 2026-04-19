@@ -31,9 +31,10 @@ When you are the last team to leave, remove the magnetic washers and make sure t
 
 The last team leaving at 9:00 PM (8:00 PM on Fridays) is responsible for securing the Marengo gate after confirming everyone has left.
 
-## Contact
+## Problems & Contact
 
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
 
 *Last updated: [DATE]*

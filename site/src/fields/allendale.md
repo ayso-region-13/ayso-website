@@ -23,9 +23,10 @@ Allendale Park is a practice field and parking location for Blair High School.
 
 Allendale Park and the library provide parking for families attending practices and games at Blair High School.
 
-## Contact
+## Problems & Contact
 
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
 
 *Last updated: [DATE]*

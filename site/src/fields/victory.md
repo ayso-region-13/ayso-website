@@ -44,9 +44,10 @@ The Region 13 tent is located near the playground. This is the meeting point for
 
 If unauthorized activities (such as softball games) are occurring during scheduled practice times, contact Pasadena Park Safety: (626) 744-4241.
 
-## Contact
+## Problems & Contact
 
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
 
 *Last updated: [DATE]*

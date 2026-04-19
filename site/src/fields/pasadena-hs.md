@@ -15,9 +15,10 @@ Pasadena High School's north field is a practice location in Pasadena.
 
 <iframe src="https://maps.google.com/maps?q=Pasadena+High+School,+Pasadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-## Contact
+## Problems & Contact
 
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
 
 *Last updated: [DATE]*

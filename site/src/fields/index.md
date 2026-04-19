@@ -61,7 +61,6 @@ Region 13 uses fields throughout Pasadena, Altadena, La Cañada, and surrounding
 ## Contacts
 
 - Field issues (locked gates, lighting): Rolf at 818-636-5395
-- Muir light maintenance: Marco at 818-468-3693
 - Field inquiries: [fields@ayso13.org](mailto:fields@ayso13.org)
 - Game-day emergencies: 626-702-AYSO
 

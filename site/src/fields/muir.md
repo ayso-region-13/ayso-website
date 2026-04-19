@@ -43,12 +43,12 @@ Nine mobile, gas-powered light units serve the practice areas. These are maintai
 If your practice ends at 9:00 PM, shut down all portable lights before leaving the field.
 
 ### Light Maintenance
-Report equipment problems to Marco: 818-468-3693
+Report equipment problems to [fields@ayso13.org](mailto:fields@ayso13.org)
 
-## Contact
+## Problems & Contact
 
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
-- Light maintenance: Marco at 818-468-3693
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
 
 *Last updated: [DATE]*

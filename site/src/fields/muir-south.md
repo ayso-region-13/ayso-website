@@ -20,9 +20,10 @@ Muir South is a softball field used for practices.
 
 This field is located in the softball area of the Muir High School campus, separate from the main practice fields at Muir North and Muir Central.
 
-## Contact
+## Problems & Contact
 
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
 
 *Last updated: [DATE]*

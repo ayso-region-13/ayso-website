@@ -23,9 +23,10 @@ The LDS Church and the YMCA have asked AYSO families not to use their parking lo
 
 The field is accessed through a locked gate. The combination will be sent to the head coaches of the first and last games of the day.
 
-## Contact
+## Problems & Contact
 
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
 
 *Last updated: [DATE]*

@@ -35,9 +35,10 @@ At Blair Upper, goals are stored in silver storage bins, color-coded "10U."
 
 At Blair Lower, goals are pre-assembled. Lift goals when moving them. Do not drag across the grass.
 
-## Contact
+## Problems & Contact
 
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
 
 *Last updated: [DATE]*

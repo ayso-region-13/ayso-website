@@ -38,9 +38,10 @@ Fields for 6U through 14U and upper division fields for 16U-19U.
 
 Goals at LCHS-JV are pre-assembled. Lift goals when moving them. Do not drag across the grass. Corner flags are in designated bins.
 
-## Contact
+## Problems & Contact
 
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
 
 *Last updated: [DATE]*
