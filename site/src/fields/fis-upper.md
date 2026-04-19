@@ -11,9 +11,9 @@ FIS Upper is a practice and game field in La Cañada.
 
 ## Location
 
-[4400 Block of Cornishon Ave, La Cañada CA 91011](https://maps.google.com/?q=Foothill+Intermediate+School,+La+Canada,+CA+91011)
+[4320 Cornishon Ave, La Cañada Flintridge, CA 91011](https://maps.google.com/?q=4320+Cornishon+Ave,+La+Canada+Flintridge,+CA+91011)
 
-<iframe src="https://maps.google.com/maps?q=Foothill+Intermediate+School,+La+Canada,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<iframe src="https://maps.google.com/maps?q=4320+Cornishon+Ave,+La+Canada+Flintridge,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ![FIS Upper field map](/images/fields/fis-upper-map.png)
 
