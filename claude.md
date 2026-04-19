@@ -22,12 +22,15 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Add site search (Pagefind) — `/search/` page + footer search box
 - [x] Build photo gallery — `/resources/gallery/` with GLightbox, 62 photos, category filter
 - [x] Download and place field maps from ayso13.org — all field pages updated
-- [x] Add FIS Upper and FIS Lower field pages
+- [x] Add FIS Upper, FIS Lower, Butler, Cornishon, LC LDS, Pasadena HS field pages
 - [x] Build volunteer training matrix — `/volunteers/training-matrix/`
-- [ ] Review and refine site ← **IN PROGRESS at https://new.ayso13.org**
-- [ ] Content review edits from Slab ← **IN PROGRESS**
+- [x] Board minutes archive — 79 PDFs self-hosted at `/assets/docs/minutes/`
+- [x] Google Maps embeds on all field pages
+- [x] Google Analytics (GA4: G-9YM9ZDW1J9)
+- [x] Slack bot (`/ayso`) — field status, announcements, promote to production
+- [ ] Review and refine site ← **IN PROGRESS at https://staging.ayso13.org**
 - [x] Create redirect mapping (159 old URLs → `site/src/_redirects`)
-- [x] Deploy to Cloudflare Pages ← **LIVE at https://new.ayso13.org**
+- [x] Deploy to Cloudflare Pages ← **staging.ayso13.org / www.ayso13.org**
 - [ ] Launch (cut over ayso13.org)
 
 ## Platform Decision
@@ -157,12 +160,16 @@ Note: Search (`/search/`) only works after a full `npm run build` — not in dev
 - Overly casual language ("That's it!" "Perfect!")
 
 ## Staging Environment
-Cloudflare Pages auto-deploys every non-`main` branch to `<branch>.ayso13.pages.dev`. No extra Cloudflare config needed.
 
-- Create a `staging` branch → previews at `staging.ayso13.pages.dev`
-- Optional: add `staging.ayso13.org` as a branch domain in Cloudflare Pages → Settings → Custom Domains
-- Optional: configure Pages CMS to commit to `staging` so editor changes are reviewed before merging to `main`
-- Merge `staging` → `main` to promote to production
+**Workflow:** CMS edits → `staging` branch → staging.ayso13.org → promote → `main` → www.ayso13.org
+
+- `staging` branch exists and is live at **staging.ayso13.org** (Cloudflare Pages branch deployment)
+- Pages CMS is configured with `branch: staging` in `.pages.yml` — all CMS edits go to staging
+- **Promote to production:** GitHub Actions workflow `promote-to-production.yml` merges `staging` → `main`
+  - From GitHub UI: Actions tab → "Promote Staging to Production" → Run workflow → type "promote"
+  - From Slack (requires GitHub Slack app): `/github workflow run promote-to-production.yml --repo magoldman/ayso-website`
+- `main` branch deploys to **www.ayso13.org** (custom domain in Cloudflare Pages)
+- Do NOT commit directly to `main` for content changes — always go through staging
 
 ## CMS
 Pages CMS is configured for non-technical editors at https://app.pagescms.org.
@@ -197,4 +204,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-07 (session 6)*
+*Last updated: 2026-04-19 (session 9)*

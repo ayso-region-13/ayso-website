@@ -16,7 +16,7 @@ Tools, documents, and guides for Region 13 referees.
 
 - [Referee Scheduler](https://ayso13.inleague.com/app/referee-scheduler) — Sign up for games
 - [eTrainU](https://ayso13.inleague.com/eTrainu/index/) — Training and certification
-- [INLEAGUE: Incident Reporting] — Document issues
+- [Incident Reporting](https://ayso13.typeform.com/to/GjC4Pyed) — Document issues
 
 ---
 

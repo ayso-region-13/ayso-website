@@ -18,11 +18,11 @@ Forms, handbooks, and reference materials for Region 13.
 - Concussion Information Sheet
 - Sudden Cardiac Arrest Information Sheet
 
-[INLEAGUE: Parent forms PDF]
+[Parent Pledge (PDF)](https://ayso13.org/wp-content/uploads/2022/07/ParentPledge.pdf) · [Concussion & SCA Forms (PDF)](https://ayso13.org/wp-content/uploads/2022/08/2021-AYSO-Concussion-SCA.pdf)
 
 Submit signed forms through the upload portal.
 
-[INLEAGUE: Form upload portal]
+[Form Upload Portal](https://ayso13.org/forms/?go=1)
 
 ---
 
@@ -61,9 +61,9 @@ See [Manager Resources](/managers) for full materials.
 - Reimbursement request form
 - Sponsorship form
 
-[INLEAGUE: Reimbursement form]
+[Reimbursement Request Form](https://docs.google.com/forms/d/e/1FAIpQLScn2XeFjLX0-e9dmWWLu6DeyRYUq7V-1KKLSkjmyqo2NFRQUw/viewform)
 
-[INLEAGUE: Sponsorship form]
+[Team Sponsor Form ($250)](https://donate.stripe.com/dR6eYg9Em9oF6icfZ5)
 
 ---
 
@@ -71,7 +71,7 @@ See [Manager Resources](/managers) for full materials.
 
 - Withdrawal/refund request form
 
-[INLEAGUE: Withdrawal form]
+[Withdrawal Form](https://docs.google.com/forms/d/e/1FAIpQLSfDm6c5f0ApchEegAIQdZTNWQImX_n6K3jBf11SVwaXoSqihg/viewform)
 
 ---
 

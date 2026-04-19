@@ -10,17 +10,13 @@ description: "Oak Grove Park fields — AYSO Region 13 game location in Pasadena
 
 Oak Grove is a practice field in La Cañada.
 
----
-
 ## Location
 
-4463 Oak Grove Dr, La Cañada CA 91011
+[4463 Oak Grove Dr, La Cañada CA 91011](https://maps.google.com/?q=4463+Oak+Grove+Dr,+La+Canada,+CA+91011)
 
-[Get directions](https://maps.google.com/?q=4463+Oak+Grove+Dr,+La+Canada,+CA+91011)
+<iframe src="https://maps.google.com/maps?q=4463+Oak+Grove+Dr,+La+Canada,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ![Oak Grove field](/images/fields/oak-grove-map.png)
-
----
 
 ## Parking
 
@@ -28,20 +24,10 @@ Park in the LCHS student lot, accessed from Foothill Boulevard (use the turn clo
 
 Do not enter the lot adjacent to St. Francis field.
 
----
+## Problems & Contact
 
-## Contact
-
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
-
----
-
-## Related Pages
-
-- [Field Locations](/fields) — All fields
-- [LCHS](/fields/lchs) — Nearby fields
-
----
 
 *Last updated: [DATE]*

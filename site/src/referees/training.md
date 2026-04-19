@@ -57,7 +57,7 @@ Training classes are held before the fall season, typically in August. The regio
 
 Refresher courses (2 hours, outdoor on soccer fields) are available but not mandatory.
 
-[INLEAGUE: Link to training calendar]
+[Training Calendar on eTrainU](https://ayso13.inleague.com/eTrainu/index/)
 
 For training before July, contact [referee@ayso13.org](mailto:referee@ayso13.org).
 

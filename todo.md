@@ -1,79 +1,108 @@
-# AYSO Region 13 — Todo
+# AYSO Region 13 — Launch Checklist
+**Staging:** https://staging.ayso13.org → **Production:** https://www.ayso13.org
 
-## In Progress
-- [ ] Review and refine site (https://new.ayso13.org)
-- [x] Incorporate content edits from Slab review
+---
 
-## Site / Build
-- [x] Verify all internal links work — 0 broken
-- [x] Check external links — 35 checked, 0 broken
-- [x] SEO & OpenGraph — canonical, og:site_name, Twitter cards, unique descriptions on all 95 pages
-- [x] sitemap.xml — auto-generated at `/sitemap.xml`
-- [x] robots.txt — created, points to sitemap
-- [x] Audit `[INLEAGUE: ...]` placeholders — 44 files updated, 36 remaining
-- [ ] Resolve 36 remaining INLEAGUE placeholders — URLs documented in `links-to-resolve.md`
-- [x] Audit `[IMAGE: ...]` placeholders — wilson, allendale, history filled; 3 still need originals (equipment, parents/pledge, parents/support); winter-stars also missing
-- [x] Validate all image ALT tags — 100% coverage confirmed across all .njk and .md files
-- [x] Photo gallery — `/resources/gallery/` with GLightbox, 62 photos, category filter
-- [x] Add search (Pagefind) — `/search/`, footer search box, footer link
-- [x] Field maps — downloaded from ayso13.org, placed on all field pages; FIS Upper/Lower pages created
-- [x] Set up Pages CMS — `.pages.yml` committed; connect repo at app.pagescms.org
-- [x] Announcement bar — editable via Pages CMS (`_data/announcements.json`); toggle + rich-text body; show/hide without deleting content
-- [x] Field status widget — home page banner (`_data/fieldstatus.json`); color-coded Open/Monitoring/Closed; Pacific-time last-updated from git log; editable via Pages CMS
-- [x] Test mobile nav on real devices
-- [x] Test all section sidebar links — 0 broken
-- [x] Confirm `[DATE]` placeholder resolves correctly on all pages
-- [x] Fix search page header alignment — max-w-2xl to match search box width
+## Workflow
+```
+Edit in CMS or GitHub → commits to staging → staging.ayso13.org
+  → review → /ayso promote (Slack) → www.ayso13.org
+```
 
-## Content
-- [x] Home page — `site/src/index.md` updated to match `home.njk` layout expectations
-- [x] Remove Summer Camps from all pages and navigation
-- [ ] Review field pages for accuracy (hours, address, parking)
-- [x] Confirm sponsor logos/data in `site/src/_data/sponsors.js` are current
-- [x] Volunteer matrix — `/volunteers/training-matrix/`
-- [x] Ask the Referee — reinstated as standalone page `/referees/ask-the-referee/`; 30 verbatim Q&As from old site, grouped into 7 sections, styled with bold questions + italic dates; linked from referees sidebar and faqs.md
-- [x] Age chart — updated for Fall 2026 cutoff change (Dec 31 → Aug 1), new official chart image, 8U/Grad Series play-up exception
-- [x] Visual polish — dark page headers (red nav → dark content header hierarchy), green sidebar strip + hover/active states, green checkmarks in training matrix
-- [x] Photo gallery GLightbox fix — filter-aware lightbox using `.lb-active` selector; clicking photos now opens modal with prev/next navigation
+---
 
-## Assets
-- [x] Export/collect photos from WordPress — wilson-field.jpg, allendale-field.jpg, about-history.jpeg downloaded and placed; IMAGE placeholders replaced on those pages
-- [ ] Source photos for parents/pledge, parents/support, programs/winter-stars — no usable photos found on WordPress site; need originals
-- [x] Organize documents in Google Drive for embedded links
-- [x] Confirm logo.svg is final version
+## Remaining Tasks
 
-## Staging
-- [ ] Create `staging` branch — Cloudflare auto-deploys to `staging.ayso13.pages.dev`
-- [ ] (Optional) Add `staging.ayso13.org` as a branch domain in Cloudflare Pages → Settings → Custom Domains
-- [ ] (Optional) Configure Pages CMS to commit to `staging` instead of `main` for editor review workflow
+### Infrastructure
+- [ ] **Update NODE_VERSION** from 18 → 22 in Cloudflare Pages dashboard (Settings → Environment variables)
 
-## Redirects & Launch
-- [x] Create redirect map: all 159 old WordPress URLs → new URLs (`site/src/_redirects`, copies to `_site/` on build)
-- [x] Ingest WordPress Redirection plugin CSV — 76 additional rules added to `_redirects`; splat `/r/*` approximates regex for InLeague shortlinks
-- [x] Set up Cloudflare Pages — https://new.ayso13.org (staging), https://ayso13.pages.dev (direct)
-- [x] Test all redirects on new.ayso13.org — 13/13 pass; created 404.html (was missing, causing 200 on unknown paths)
-- [x] Custom 404 page — red card theme, search bar, top-level nav links
-- [x] Spell check — 1 fix: "Soccersauruses" in hall-of-fame.md; all other flags were proper nouns or jargon
-- [x] Security audit — no leaked keys or secrets; fixed: GLightbox pinned to 3.3.1, .env* added to .gitignore, _headers file added (X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy)
-- [x] Accessibility audit (WCAG 2.1 AA) — all issues resolved: aria role on mobile menu, 7 contrast fixes across nav, sidebar, checkmarks, and footer
-- [x] Color system overhaul — green nav (dark #007a32), green page headers (brand green), gold buttons, red prose headings; home page declashed (dark quick bar, simplified role cards)
-- [ ] Update `site.json` URL from `new.ayso13.org` → `ayso13.org` before final launch
-- [ ] Cut over custom domain from new.ayso13.org → ayso13.org
+### Content
+- [ ] **2 unresolved INLEAGUE placeholders** (newsletter signup URLs not found on old site — ask the team):
+  - `referees/resources.md` — Newsletter subscription links
+  - `resources/newsletter.md` — WhistleStop (AYSO national referee newsletter) subscription link
+- [ ] **3 missing IMAGE placeholders** — source or remove:
+  - `parents/pledge` — no source found
+  - `parents/support` — no source found
+  - `programs/winter-stars` — no source found
+- [ ] Full content review pass on staging.ayso13.org
+
+
+### Pre-Launch
+- [ ] Run link checker: `cd site && node scripts/check-links.js`
+- [ ] Promote staging → main (clean deploy before cutover)
+
+### DNS Cutover
+- [ ] Add `www.ayso13.org` as custom domain in Cloudflare Pages → main branch deployment
+- [ ] Add apex redirect in Cloudflare: `ayso13.org` → `www.ayso13.org`
+- [ ] Verify `https://www.ayso13.org` resolves and SSL is active
+- [ ] Retire `new.ayso13.org` — redirect to `www.ayso13.org` or remove custom domain
+
+### Post-Launch
 - [ ] Announce launch internally
-- [ ] Monitor 404s post-launch
+- [ ] Monitor 404s for 48 hours — Cloudflare Pages analytics → Error rates
 
-## Completed
+---
+
+## Completed ✓
+
+### Session 9 (2026-04-19)
+- [x] Fields audit — added 4 missing field pages: Butler, Cornishon, LC LDS, Pasadena HS
+- [x] Field pages — Problems & Contact section on all 22 field pages (Rolf text + Typeform link)
+- [x] Area H — updated with specific rules (Mon–Thu until dark, Fields 1–4 only, no Fridays)
+- [x] Removed Marco's personal number from all field pages
+- [x] NODE_VERSION updated to 22 in Cloudflare Pages (done by user)
+
+### Session 8 (2026-04-19)
+- [x] Slack bot (`/ayso`) — field status, announcements, and promote (staging → main) all working
+- [x] `/ayso promote` — triggers GitHub Actions workflow; posts result to #notify-website-status
+- [x] User allowlist — `slack-bot/allowed-users.json` (editable without secrets)
+- [x] Google Analytics — GA4 tag (G-9YM9ZDW1J9) in base.njk, conditioned on `site.gaId`
+- [x] robots.txt — fixed sitemap URL to `https://www.ayso13.org/sitemap.xml`
+- [x] FIS Upper/Lower — address corrected to 4320 Cornishon Ave, La Cañada Flintridge
+
+### Session 7 (2026-04-19)
+- [x] Board minutes archive — 79 PDFs self-hosted at `/assets/docs/minutes/`, page updated with all links (2014–2022)
+- [x] Google Maps embeds — all 17 field pages (auto-generated from existing address links)
+- [x] Resolved 28 of 30 INLEAGUE link placeholders (scraped real URLs from ayso13.org)
+- [x] Deleted `/content/` folder — all content lives in `site/src/`
+
+### Session 6 (2026-04-07)
+- [x] Site color redesign — dark header (`#230612`), maroon quick action bar (`#8e2929`), updated red/gold
+- [x] Announcement bar moved below hero (field status stays at top)
+- [x] All 18 field pages standardized — consistent layout, map embeds, sidebar fix, HRs removed
+- [x] Pages CMS `branch: staging` cherry-picked to main so CMS targets correct branch
+- [x] Slack bot plan documented in `slack-bot/SETUP.md`
+
+### Earlier Sessions
 - [x] Crawl existing site (159 pages)
 - [x] Propose new IA (~75 pages)
-- [x] Write all 97 content pages in `/content/`
+- [x] Write all 97 content pages
 - [x] Upload content to Slab for review
 - [x] Choose platform (Eleventy + Tailwind CSS)
 - [x] Scaffold Eleventy site in `/site/`
 - [x] Build base/page/home layouts (Nunjucks)
 - [x] Build full navigation (desktop dropdown, mobile accordion, section sidebars)
 - [x] Migrate content from `/content/` into `site/src/`
-- [x] Add photos (65 images) and logo to `site/src/images/`
+- [x] Add photos (65 images) and logo
 - [x] Set up build scripts (migrate, file-dates, photo processing, link checking)
-- [x] Tailwind brand colors configured (red, green, gold, dark)
-- [x] Fix btn-primary/btn-gold/btn-secondary text invisible inside .prose
-- [x] Deploy to Cloudflare Pages — live at https://new.ayso13.org
+- [x] Tailwind brand colors — red, green, gold
+- [x] Verify all internal links — 0 broken
+- [x] SEO & OpenGraph — canonical, og tags, unique descriptions on all 95 pages
+- [x] sitemap.xml and robots.txt
+- [x] Photo gallery — `/resources/gallery/` with GLightbox, 62 photos, category filter
+- [x] Site search (Pagefind) — `/search/`, footer search box
+- [x] Field maps — all field pages; FIS Upper/Lower pages created
+- [x] Set up Pages CMS (`.pages.yml`)
+- [x] Announcement bar — editable via CMS, toggle + rich-text
+- [x] Field status widget — color-coded Open/Monitoring/Closed, Pacific-time last-updated
+- [x] Ask the Referee — standalone page, 30 Q&As
+- [x] Volunteer training matrix
+- [x] Age chart — updated for Fall 2026 cutoff change
+- [x] AYSO philosophies bar + affiliate logos in footer
+- [x] Custom 404 page
+- [x] Accessibility audit (WCAG 2.1 AA)
+- [x] Security audit — no secrets, headers file, GLightbox pinned
+- [x] Create redirect map (159 old URLs + 76 WordPress rules)
+- [x] Deploy to Cloudflare Pages — live at new.ayso13.org
+- [x] staging.ayso13.org custom domain configured
+- [x] Promote-to-production GitHub Actions workflow created

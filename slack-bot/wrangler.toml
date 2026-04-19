@@ -1,0 +1,4 @@
+name = "ayso-slack-bot"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+account_id = "c8b7868978b797422fdba27a744e8d43"

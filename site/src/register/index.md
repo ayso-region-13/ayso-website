@@ -93,7 +93,7 @@ Adjust pricing at checkout or contact [registrar@ayso13.org](mailto:registrar@ay
 
 To request a withdrawal, complete the withdrawal form.
 
-[INLEAGUE: Withdrawal form link]
+[Withdrawal Form](https://docs.google.com/forms/d/e/1FAIpQLSfDm6c5f0ApchEegAIQdZTNWQImX_n6K3jBf11SVwaXoSqihg/viewform)
 
 ---
 

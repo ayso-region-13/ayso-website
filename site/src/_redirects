@@ -214,8 +214,8 @@
 /referee-document-library       /referees/resources/                            301
 /referee-mentor-program/        /referees/resources/                            301
 /referee-mentor-program         /referees/resources/                            301
-/ask-the-referee/               /referees/faqs/                                 301
-/ask-the-referee                /referees/faqs/                                 301
+/ask-the-referee/               /referees/ask-the-referee/                      301
+/ask-the-referee                /referees/ask-the-referee/                      301
 /respect-the-referee-2/         /referees/faqs/                                 301
 /respect-the-referee-2          /referees/faqs/                                 301
 
@@ -384,10 +384,6 @@
 /gc16/                          https://form.typeform.com/to/vf4lZIRo           301
 /pog                            https://ayso13.typeform.com/SSreg               301
 /gctt                           https://form.typeform.com/to/VIFJoyJ4           301
-# /r — regex ^\/r(?:\/|\?.*)?$ approximated (Cloudflare _redirects has no regex support)
-/r                              https://ayso13.typeform.com/to/Ah0JFeOp         301
-/r/                             https://ayso13.typeform.com/to/Ah0JFeOp         301
-/r/*                            https://ayso13.typeform.com/to/Ah0JFeOp         301
 
 # ── Short links — new site pages ──────────────────────────────────────────
 /t                              /programs/tournaments/                          301
@@ -424,3 +420,8 @@
 /faqs/how-are-standings-determined/ /schedules/standings/                       301
 /faqs/how-long-are-the-games    /register/age-chart/                            301
 /faqs/how-long-are-the-games/   /register/age-chart/                            301
+# /r — regex ^\/r(?:\/|\?.*)?$ approximated (Cloudflare _redirects has no regex support)
+# Splat rule last — exact matches above take priority and perform better
+/r                              https://ayso13.typeform.com/to/Ah0JFeOp         301
+/r/                             https://ayso13.typeform.com/to/Ah0JFeOp         301
+/r/*                            https://ayso13.typeform.com/to/Ah0JFeOp         301

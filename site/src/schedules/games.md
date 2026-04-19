@@ -22,11 +22,11 @@ The schedule is available in multiple formats:
 
 **Unified Schedule** — Complete schedule document
 
-[INLEAGUE: Google Drive schedule link]
+[Unified Schedule (Google Drive)](https://drive.google.com/file/d/1MvE0UzSW_ugX6e0p6Q3sdQJmEnWUPdG2/view)
 
 **Field-Based Schedules** — Games organized by field location
 
-[INLEAGUE: Field schedules link]
+[Field Schedules (Google Drive)](https://drive.google.com/open?id=1Mt_5WxzIBdhzWGje0S2VJ8G5S8LudVj6)
 
 ---
 

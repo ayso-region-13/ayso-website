@@ -23,9 +23,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/images");
   eleventyConfig.addPassthroughCopy("src/assets/css/style.css");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
+  eleventyConfig.addPassthroughCopy("src/assets/docs");
   eleventyConfig.addPassthroughCopy("src/_redirects");
   eleventyConfig.addPassthroughCopy("src/_headers");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
+  eleventyConfig.addPassthroughCopy("src/favicon.ico");
+  eleventyConfig.addPassthroughCopy("src/site.webmanifest");
 
   // --- Markdown configuration ---
   const md = markdownIt({
@@ -108,7 +111,7 @@ module.exports = function (eleventyConfig) {
 
   // --- Transform: replace [DATE] placeholder with per-file last-modified date ---
   eleventyConfig.addTransform("date-placeholder", function (content) {
-    if (!this.page?.outputPath?.endsWith(".html")) return content;
+    if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;
     if (!content.includes("[DATE]")) return content;
 
     // Normalise inputPath to the same relative form used in fileDates.json
@@ -126,6 +129,19 @@ module.exports = function (eleventyConfig) {
       /\[DATE\]/g,
       `<time datetime="${iso}">${nice}</time>`
     );
+  });
+
+  // --- Collections ---
+
+  // Ask the Referee Q&As — grouped by category, newest first within each group
+  eleventyConfig.addCollection("qaAnswers", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/referees/qa/*.md")
+      .sort((a, b) => {
+        if (!a.date && !b.date) return 0;
+        if (!a.date) return 1;
+        if (!b.date) return -1;
+        return b.date - a.date; // newest first
+      });
   });
 
   // --- Watch targets ---

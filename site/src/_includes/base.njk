@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title and title != site.title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{{ description or site.description }}">
-  <meta name="theme-color" content="#ce0e2d">
+  <meta name="theme-color" content="#230612">
 
   <!-- Canonical -->
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
@@ -36,13 +36,27 @@
   {% endif %}
 
   <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 
   <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/assets/css/style.css">
+
+  {% if site.gaId %}
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.gaId }}');
+  </script>
+  {% endif %}
 </head>
 <body class="font-sans text-gray-800 bg-white min-h-screen flex flex-col">
 
@@ -55,7 +69,7 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <!--  HEADER / NAVIGATION                                           -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <header class="sticky top-0 z-40 bg-brand-red shadow-lg">
+  <header class="sticky top-0 z-40 bg-brand-header shadow-lg">
     <div class="max-w-screen-2xl mx-auto px-4">
       <div class="flex items-stretch justify-between">
 
@@ -64,7 +78,7 @@
           <img src="/images/logo.svg" alt="" class="h-12 w-12" aria-hidden="true">
           <div class="text-white leading-tight">
             <div class="font-bold text-base tracking-tight">AYSO Region 13</div>
-            <div class="text-xs text-red-200">Pasadena Area Youth Soccer</div>
+            <div class="text-xs text-gray-400">Pasadena Area Youth Soccer</div>
           </div>
         </a>
 
@@ -73,8 +87,8 @@
           {% for item in navigation %}{% if item.topNav %}
           <div class="nav-item relative flex items-stretch group">
             <a href="{{ item.url }}"
-               class="flex items-center gap-1 px-3 py-2 my-1 text-white text-sm font-medium rounded hover:bg-brand-red-dark transition-colors whitespace-nowrap
-                      {% if page.url | isActiveSection(item.url) %}bg-brand-red-dark{% endif %}"
+               class="flex items-center gap-1 px-3 py-2 my-1 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors whitespace-nowrap
+                      {% if page.url | isActiveSection(item.url) %}bg-gray-800{% endif %}"
                {% if item.children %}aria-haspopup="true"{% endif %}>
               {{ item.label }}
               {% if item.children %}
@@ -112,7 +126,7 @@
           </a>
           <!-- Mobile menu button -->
           <button id="mobile-menu-btn"
-                  class="xl:hidden p-2 text-white hover:bg-brand-red-dark rounded-lg transition-colors"
+                  class="xl:hidden p-2 text-white hover:bg-gray-800 rounded-lg transition-colors"
                   aria-label="Open navigation menu"
                   aria-expanded="false"
                   aria-controls="mobile-menu">
@@ -131,20 +145,20 @@
     <!-- ── Mobile Navigation ──────────────────────────────────────── -->
     <div id="mobile-menu"
          role="navigation"
-         class="hidden xl:hidden bg-brand-red-dark border-t border-red-900 max-h-[80vh] overflow-y-auto"
+         class="hidden xl:hidden bg-gray-900 border-t border-gray-800 max-h-[80vh] overflow-y-auto"
          aria-label="Mobile navigation">
       <div class="py-2">
         <a href="/register/" class="flex items-center gap-2 mx-4 mb-3 mt-1 bg-brand-gold text-brand-dark font-bold text-sm px-4 py-2.5 rounded-lg justify-center">
           Register Now
         </a>
         {% for item in navigation %}{% if item.topNav %}
-        <div class="border-b border-red-900 last:border-0">
+        <div class="border-b border-gray-800 last:border-0">
           {% if item.children %}
           <div class="flex items-stretch">
-            <a href="{{ item.url }}" class="flex-1 px-4 py-3 text-white font-semibold text-sm hover:bg-red-900 transition-colors">
+            <a href="{{ item.url }}" class="flex-1 px-4 py-3 text-white font-semibold text-sm hover:bg-gray-800 transition-colors">
               {{ item.label }}
             </a>
-            <button class="mobile-expand-btn px-4 py-3 text-red-200 hover:bg-red-900 hover:text-white transition-colors"
+            <button class="mobile-expand-btn px-4 py-3 text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
                     aria-label="Expand {{ item.label }}"
                     aria-expanded="false">
               <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -152,20 +166,20 @@
               </svg>
             </button>
           </div>
-          <div class="mobile-submenu hidden bg-red-950">
+          <div class="mobile-submenu hidden bg-gray-950">
             {% for child in item.children %}
             {% if child.divider %}
             <div class="pl-6 pr-4 pt-2 pb-0.5">
-              <span class="text-xs font-semibold text-red-300 uppercase tracking-wider">{{ child.dividerLabel }}</span>
+              <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">{{ child.dividerLabel }}</span>
             </div>
             {% endif %}
-            <a href="{{ child.url }}" class="block pl-8 pr-4 py-2.5 text-sm text-red-100 hover:bg-red-900 hover:text-white transition-colors">
+            <a href="{{ child.url }}" class="block pl-8 pr-4 py-2.5 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-colors">
               {{ child.label }}
             </a>
             {% endfor %}
           </div>
           {% else %}
-          <a href="{{ item.url }}" class="block px-4 py-3 text-white font-semibold text-sm hover:bg-red-900 transition-colors">
+          <a href="{{ item.url }}" class="block px-4 py-3 text-white font-semibold text-sm hover:bg-gray-800 transition-colors">
             {{ item.label }}
           </a>
           {% endif %}

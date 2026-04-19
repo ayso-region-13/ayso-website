@@ -10,62 +10,38 @@ description: "La Cañada High School fields — AYSO Region 13 game location in 
 
 LCHS has practice and game fields for multiple divisions.
 
----
-
 ## Location
 
-4463 Oak Grove Dr., La Cañada CA 91011
+[4463 Oak Grove Dr., La Cañada CA 91011](https://maps.google.com/?q=4463+Oak+Grove+Dr,+La+Canada,+CA+91011)
 
-[Get directions](https://maps.google.com/?q=4463+Oak+Grove+Dr,+La+Canada,+CA+91011)
-
----
+<iframe src="https://maps.google.com/maps?q=4463+Oak+Grove+Dr,+La+Canada,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ## Facilities
 
 Restrooms are located in the building at the south end of the football field.
 
----
-
 ## Practice Fields
 
-- Fields for 6U through 14U
-- Upper division fields for 16U-19U
+Fields for 6U through 14U and upper division fields for 16U-19U.
 
 ![LCHS practice field map — early season](/images/fields/lchs-practice-map-early.png)
 
 ![LCHS practice field map — later season](/images/fields/lchs-practice-map-later.png)
 
----
-
 ## Game Fields
-
-- 10U division field
-- 12U division field
 
 ![LCHS 10U game field map](/images/fields/lchs-game-map-10u.jpg)
 
 ![LCHS 12U game field map](/images/fields/lchs-game-map-12u.jpg)
 
----
-
 ## Goal Setup
 
 Goals at LCHS-JV are pre-assembled. Lift goals when moving them. Do not drag across the grass. Corner flags are in designated bins.
 
----
+## Problems & Contact
 
-## Contact
-
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
-
----
-
-## Related Pages
-
-- [Field Locations](/fields) — All fields
-- [Oak Grove](/fields/oak-grove) — Nearby field
-
----
 
 *Last updated: [DATE]*

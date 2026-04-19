@@ -10,15 +10,11 @@ description: "Muir High School fields — AYSO Region 13 game location in Pasade
 
 Muir High School has multiple field areas for practices.
 
----
-
 ## Location
 
-Near 711 W. Woodbury Rd., Altadena
+[Near 711 W. Woodbury Rd., Altadena](https://maps.google.com/?q=711+W+Woodbury+Rd,+Altadena,+CA)
 
-[Get directions](https://maps.google.com/?q=711+W+Woodbury+Rd,+Altadena,+CA)
-
----
+<iframe src="https://maps.google.com/maps?q=711+W+Woodbury+Rd,+Altadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ## Field Areas
 
@@ -26,13 +22,9 @@ Near 711 W. Woodbury Rd., Altadena
 - Muir Central: Large turf field (check current availability)
 - Muir South: Softball field (see [Muir South](/fields/muir-south))
 
----
-
 ## Parking
 
 Exercise caution on Montana Street's west end. There are subtle "No Parking" signs near the school bus lot, and local enforcement actively tickets this zone, including on Sunday evenings.
-
----
 
 ## Portable Lighting (Muir North)
 
@@ -51,23 +43,12 @@ Nine mobile, gas-powered light units serve the practice areas. These are maintai
 If your practice ends at 9:00 PM, shut down all portable lights before leaving the field.
 
 ### Light Maintenance
-Report equipment problems to Marco: 818-468-3693
+Report equipment problems to [fields@ayso13.org](mailto:fields@ayso13.org)
 
----
+## Problems & Contact
 
-## Contact
-
-- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
-- Light maintenance: Marco at 818-468-3693
+- Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
+- Non-immediate issues: [report the problem](https://ayso13.typeform.com/fieldissues)
 - Game-day emergencies: 626-702-AYSO
-
----
-
-## Related Pages
-
-- [Field Locations](/fields) — All fields
-- [Muir South](/fields/muir-south) — Softball field
-
----
 
 *Last updated: [DATE]*

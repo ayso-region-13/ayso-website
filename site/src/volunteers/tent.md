@@ -23,7 +23,7 @@ Field hosts staff the AYSO information tent on game days.
 
 Volunteer through WeJoinIn.
 
-[INLEAGUE: WeJoinIn signup link]
+[Sign Up on WeJoinIn](https://www.wejoinin.com/AYSORegion13)
 
 ---
 

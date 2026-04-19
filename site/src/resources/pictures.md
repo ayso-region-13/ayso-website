@@ -16,7 +16,7 @@ Team and individual photos are taken during the fall season.
 
 Picture days are held at Victory Park on scheduled Saturdays in October and November. Check your team's assigned time slot.
 
-[INLEAGUE: Picture day schedule spreadsheet]
+[Picture Day Schedule (Google Sheet)](https://docs.google.com/spreadsheets/d/1MWG6dAN0mZoCLSybk4XOcEsOuYQesZjwaIbf3n4FP5A/edit)
 
 ---
 
