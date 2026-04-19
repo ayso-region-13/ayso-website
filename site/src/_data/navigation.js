@@ -61,6 +61,7 @@ module.exports = [
       { label: "Blair High School",     url: "/fields/blair/" },
       { label: "Brookside Park",        url: "/fields/brookside/" },
       { label: "Butler Middle School",  url: "/fields/butler/" },
+      { label: "Cornishon",             url: "/fields/cornishon/" },
       { label: "FIS Upper",             url: "/fields/fis-upper/" },
       { label: "FIS Lower",             url: "/fields/fis-lower/" },
       { label: "Jefferson Center",      url: "/fields/jefferson/" },

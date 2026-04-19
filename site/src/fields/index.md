@@ -36,6 +36,7 @@ Region 13 uses fields throughout Pasadena, Altadena, La Cañada, and surrounding
 - [Allendale Park](/fields/allendale) — Practice field
 - [Brookside Park](/fields/brookside) — Near Rose Bowl
 - [Butler Middle School](/fields/butler) — Practice field
+- [Cornishon](/fields/cornishon) — Smaller practice field, La Cañada
 - [FIS Upper](/fields/fis-upper/) — Foothill Intermediate School, La Cañada
 - [FIS Lower](/fields/fis-lower/) — Foothill Intermediate School, La Cañada
 
