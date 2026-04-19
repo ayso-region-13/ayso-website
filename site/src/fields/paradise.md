@@ -23,6 +23,4 @@ Paradise Canyon is a practice field in La Cañada.
 - Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
 - Game-day emergencies: 626-702-AYSO
 
----
-
 *Last updated: [DATE]*

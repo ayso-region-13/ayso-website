@@ -29,6 +29,4 @@ Do not enter the lot adjacent to St. Francis field.
 - Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
 - Game-day emergencies: 626-702-AYSO
 
----
-
 *Last updated: [DATE]*

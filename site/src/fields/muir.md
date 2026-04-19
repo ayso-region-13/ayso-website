@@ -51,6 +51,4 @@ Report equipment problems to Marco: 818-468-3693
 - Light maintenance: Marco at 818-468-3693
 - Game-day emergencies: 626-702-AYSO
 
----
-
 *Last updated: [DATE]*

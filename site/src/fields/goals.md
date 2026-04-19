@@ -10,8 +10,6 @@ description: "Goal assembly and disassembly instructions for AYSO Region 13 volu
 
 Teams with first games of the day provide volunteers to set up goals. Arrive 30 minutes before game time.
 
----
-
 ## Victory Park
 
 ### Equipment Location
@@ -36,13 +34,9 @@ Bownets for younger divisions are delivered by the field setup team.
 
 Sign up for setup duty through WeJoinIn.
 
----
-
 ## Blair Upper
 
 Goals are stored in silver storage bins, color-coded "10U."
-
----
 
 ## Pre-Assembled Goal Fields
 
@@ -54,21 +48,9 @@ At these fields, goals are pre-assembled and do not require setup:
 
 **Important:** Lift goals when moving them. Do not drag goals across the grass. Corner flags are stored in designated bins.
 
----
-
 ## Contact
 
 - Field setup questions: [fields@ayso13.org](mailto:fields@ayso13.org)
 - Game-day emergencies: 626-702-AYSO
-
----
-
-## Related Pages
-
-- [Field Locations](/fields) — All field information
-- [Victory Park](/fields/victory) — Primary game fields
-- [Game Day](/coaches/game-day) — What to expect
-
----
 
 *Last updated: [DATE]*

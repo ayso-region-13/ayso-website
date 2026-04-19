@@ -43,6 +43,4 @@ Goals at LCHS-JV are pre-assembled. Lift goals when moving them. Do not drag acr
 - Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
 - Game-day emergencies: 626-702-AYSO
 
----
-
 *Last updated: [DATE]*
