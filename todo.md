@@ -24,7 +24,6 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
   - `parents/pledge` — no source found
   - `parents/support` — no source found
   - `programs/winter-stars` — no source found
-- [ ] Review field pages for accuracy: hours, addresses, parking notes
 - [ ] Full content review pass on staging.ayso13.org
 
 
@@ -45,6 +44,13 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ---
 
 ## Completed ✓
+
+### Session 9 (2026-04-19)
+- [x] Fields audit — added 4 missing field pages: Butler, Cornishon, LC LDS, Pasadena HS
+- [x] Field pages — Problems & Contact section on all 22 field pages (Rolf text + Typeform link)
+- [x] Area H — updated with specific rules (Mon–Thu until dark, Fields 1–4 only, no Fridays)
+- [x] Removed Marco's personal number from all field pages
+- [x] NODE_VERSION updated to 22 in Cloudflare Pages (done by user)
 
 ### Session 8 (2026-04-19)
 - [x] Slack bot (`/ayso`) — field status, announcements, and promote (staging → main) all working
