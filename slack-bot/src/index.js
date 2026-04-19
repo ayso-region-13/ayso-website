@@ -15,11 +15,12 @@
  *   GITHUB_TOKEN           — fine-grained PAT with Contents: read+write on this repo
  */
 
-const GITHUB_REPO    = 'ayso-region-13/ayso-website';
-const BRANCHES       = ['staging', 'main'];
+const GITHUB_REPO        = 'ayso-region-13/ayso-website';
+const BRANCHES           = ['staging', 'main'];
 const FIELDSTATUS_PATH   = 'site/src/_data/fieldstatus.json';
 const ANNOUNCEMENT_PATH  = 'site/src/_data/announcements.json';
-const STATUS_EMOJI   = { Open: '🟢', Closed: '🔴', Monitoring: '🟡' };
+const STATUS_EMOJI       = { Open: '🟢', Closed: '🔴', Monitoring: '🟡' };
+const NOTIFY_CHANNEL_ID  = 'C0A024YGR9C'; // #notify-website-status
 
 // ── Entry point ───────────────────────────────────────────────────────────
 
@@ -90,7 +91,7 @@ async function handleCommand(rawBody, env, ctx) {
   }
 
   if (text === 'promote') {
-    ctx.waitUntil(triggerPromotion(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, env.SLACK_CHANNEL_ID, userId, params.get('user_name')));
+    ctx.waitUntil(triggerPromotion(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
     return new Response(
       JSON.stringify({ response_type: 'ephemeral', text: '🚀 Promotion triggered — staging → production. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
@@ -228,7 +229,7 @@ async function putFile(token, path, branch, content, message, sha) {
   );
 }
 
-async function triggerPromotion(githubToken, slackToken, channelId, userId, userName) {
+async function triggerPromotion(githubToken, slackToken, userId, userName) {
   const res = await fetch(
     `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/promote-to-production.yml/dispatches`,
     {
@@ -240,7 +241,7 @@ async function triggerPromotion(githubToken, slackToken, channelId, userId, user
 
   const user = userName || userId;
   if (res.status === 204) {
-    await postMessage(slackToken, channelId, [
+    await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
       {
         type: 'section',
         text: { type: 'mrkdwn', text: '🚀 *Staging → Production*\nPromotion workflow started. Changes will be live on www.ayso13.org in ~2 minutes.' }
@@ -251,7 +252,7 @@ async function triggerPromotion(githubToken, slackToken, channelId, userId, user
       }
     ], `Staging promoted to production by @${user}`);
   } else {
-    await postMessage(slackToken, channelId, [
+    await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
       {
         type: 'section',
         text: { type: 'mrkdwn', text: `⚠️ *Promotion failed* — GitHub API returned ${res.status}. <https://github.com/${GITHUB_REPO}/actions|Check Actions>.` }
@@ -279,11 +280,25 @@ async function openModal(token, triggerId, view) {
 }
 
 async function postMessage(token, channel, blocks, text) {
-  await fetch('https://slack.com/api/chat.postMessage', {
+  const res = await fetch('https://slack.com/api/chat.postMessage', {
     method: 'POST',
     headers: slackHeaders(token),
     body: JSON.stringify({ channel, blocks, text })
   });
+  const data = await res.json();
+  if (!data.ok) {
+    // If target channel failed, report the error to the notify channel so it's visible
+    if (channel !== NOTIFY_CHANNEL_ID) {
+      await fetch('https://slack.com/api/chat.postMessage', {
+        method: 'POST',
+        headers: slackHeaders(token),
+        body: JSON.stringify({
+          channel: NOTIFY_CHANNEL_ID,
+          text: `⚠️ Bot failed to post to <#${channel}>: \`${data.error}\`\n\nMessage was: ${text}`
+        })
+      });
+    }
+  }
 }
 
 function slackHeaders(token) {
