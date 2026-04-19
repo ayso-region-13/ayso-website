@@ -14,7 +14,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ## Remaining Tasks
 
 ### Infrastructure
-- [ ] **Update NODE_VERSION** from 18 → 22 in Cloudflare Pages dashboard (Settings → Environment variables)
+- [ ] Update Node version in Cloudflare Pages to suppress LTS maintenance warning (currently 22, upgrade to 24)
 
 ### Content
 - [ ] **2 unresolved INLEAGUE placeholders** (newsletter signup URLs not found on old site — ask the team):
@@ -44,6 +44,14 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ---
 
 ## Completed ✓
+
+### Session 10 (2026-04-19)
+- [x] Ask the Referee — rebuilt as accordion FAQ with 30 Q&As in 7 categories (ask-the-referee.njk layout)
+- [x] Pages CMS qa-answers collection — Steve can add Q&As via form UI (question, category, answer); date auto-set from git commit
+- [x] Fixed redirect `/ask-the-referee` → `/referees/ask-the-referee/` (was pointing to `/referees/faqs/`)
+- [x] Fixed `TemplateContentUnrenderedTemplateError` — use `layout: false` + `noindex: true` instead of `permalink: false` for Q&A files
+- [x] Fix `/ayso promote` merge conflict — workflow now uses `-X theirs` so staging always wins; synced workflow file on both branches
+- [x] Promoted staging → production (www.ayso13.org)
 
 ### Session 9 (2026-04-19)
 - [x] Fields audit — added 4 missing field pages: Butler, Cornishon, LC LDS, Pasadena HS
