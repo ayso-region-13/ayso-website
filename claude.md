@@ -22,12 +22,15 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Add site search (Pagefind) — `/search/` page + footer search box
 - [x] Build photo gallery — `/resources/gallery/` with GLightbox, 62 photos, category filter
 - [x] Download and place field maps from ayso13.org — all field pages updated
-- [x] Add FIS Upper and FIS Lower field pages
+- [x] Add FIS Upper, FIS Lower, Butler, Cornishon, LC LDS, Pasadena HS field pages
 - [x] Build volunteer training matrix — `/volunteers/training-matrix/`
-- [ ] Review and refine site ← **IN PROGRESS at https://new.ayso13.org**
-- [ ] Content review edits from Slab ← **IN PROGRESS**
+- [x] Board minutes archive — 79 PDFs self-hosted at `/assets/docs/minutes/`
+- [x] Google Maps embeds on all field pages
+- [x] Google Analytics (GA4: G-9YM9ZDW1J9)
+- [x] Slack bot (`/ayso`) — field status, announcements, promote to production
+- [ ] Review and refine site ← **IN PROGRESS at https://staging.ayso13.org**
 - [x] Create redirect mapping (159 old URLs → `site/src/_redirects`)
-- [x] Deploy to Cloudflare Pages ← **LIVE at https://new.ayso13.org**
+- [x] Deploy to Cloudflare Pages ← **staging.ayso13.org / www.ayso13.org**
 - [ ] Launch (cut over ayso13.org)
 
 ## Platform Decision
@@ -201,4 +204,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-07 (session 6)*
+*Last updated: 2026-04-19 (session 9)*
