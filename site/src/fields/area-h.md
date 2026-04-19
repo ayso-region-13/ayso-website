@@ -18,7 +18,7 @@ The AYSO tent at Area H is located near the blockhouse.
 
 [Get directions](https://maps.google.com/?q=Rose+Bowl,+Pasadena,+CA)
 
-[GOOGLE MAPS EMBED]
+<iframe src="https://maps.google.com/maps?q=Rose+Bowl,+Pasadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ## Fields
 

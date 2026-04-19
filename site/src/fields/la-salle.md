@@ -15,7 +15,7 @@ La Salle High School is a practice field.
 [3880 E Sierra Madre Blvd, Pasadena, CA 91107](https://maps.google.com/?q=3880+E+Sierra+Madre+Blvd,+Pasadena,+CA+91107)
 (At Sierra Madre Blvd and N Michillinda Ave)
 
-[GOOGLE MAPS EMBED]
+<iframe src="https://maps.google.com/maps?q=3880+E+Sierra+Madre+Blvd,+Pasadena,+CA+91107&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ![La Salle High School location map](/images/fields/lasalle-location-map.png)
 

@@ -14,7 +14,7 @@ Jefferson Park is a practice field in Pasadena.
 
 [1501 E Villa St., Pasadena CA 91106](https://maps.google.com/?q=1501+E+Villa+St,+Pasadena,+CA+91106)
 
-[GOOGLE MAPS EMBED]
+<iframe src="https://maps.google.com/maps?q=1501+E+Villa+St,+Pasadena,+CA+91106&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ## Contact
 

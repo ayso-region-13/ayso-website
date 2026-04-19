@@ -14,7 +14,7 @@ Blair High School has two field areas used for practices and games.
 
 [1301 S. Marengo Ave., Pasadena CA](https://maps.google.com/?q=1301+S+Marengo+Ave,+Pasadena,+CA)
 
-[GOOGLE MAPS EMBED]
+<iframe src="https://maps.google.com/maps?q=1301+S+Marengo+Ave,+Pasadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ![Blair Upper game field map](/images/fields/blair-upper-game-map.jpg)
 

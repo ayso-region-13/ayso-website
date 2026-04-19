@@ -14,7 +14,7 @@ Muir High School has multiple field areas for practices.
 
 [Near 711 W. Woodbury Rd., Altadena](https://maps.google.com/?q=711+W+Woodbury+Rd,+Altadena,+CA)
 
-[GOOGLE MAPS EMBED]
+<iframe src="https://maps.google.com/maps?q=711+W+Woodbury+Rd,+Altadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ## Field Areas
 

@@ -14,7 +14,7 @@ Wilson Middle School is a practice field in Pasadena.
 
 [300 S Madre St, Pasadena CA 91107](https://maps.google.com/?q=300+S+Madre+St,+Pasadena,+CA+91107)
 
-[GOOGLE MAPS EMBED]
+<iframe src="https://maps.google.com/maps?q=300+S+Madre+St,+Pasadena,+CA+91107&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ![Wilson Middle School soccer field](/images/fields/wilson-field.jpg)
 
