@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ayso13.org/sitemap.xml
+Sitemap: https://www.ayso13.org/sitemap.xml

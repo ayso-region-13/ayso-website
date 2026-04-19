@@ -46,6 +46,17 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/assets/css/style.css">
+
+  {% if site.gaId %}
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ site.gaId }}');
+  </script>
+  {% endif %}
 </head>
 <body class="font-sans text-gray-800 bg-white min-h-screen flex flex-col">
 
