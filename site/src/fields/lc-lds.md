@@ -1,0 +1,31 @@
+---
+title: "LC LDS Field"
+layout: page.njk
+section: fields
+description: "LC LDS field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
+---
+
+# LC LDS Field
+
+The LDS field is a practice location in La Cañada.
+
+## Location
+
+[1830 Foothill Blvd, La Cañada CA 91011](https://maps.google.com/?q=1830+Foothill+Blvd,+La+Canada,+CA+91011)
+
+<iframe src="https://maps.google.com/maps?q=1830+Foothill+Blvd,+La+Canada,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+## Parking
+
+The LDS Church and the YMCA have asked AYSO families not to use their parking lots. Street parking is available on Foothill Boulevard (uphill from the field) or on side streets (downhill). Plan extra time for parking and walking.
+
+## Gate
+
+The field is accessed through a locked gate. The combination will be sent to the head coaches of the first and last games of the day.
+
+## Contact
+
+- Field issues: [fields@ayso13.org](mailto:fields@ayso13.org)
+- Game-day emergencies: 626-702-AYSO
+
+*Last updated: [DATE]*

@@ -9,7 +9,7 @@ description: "All AYSO Region 13 soccer field locations in Pasadena, Altadena, a
 
 # Field Locations
 
-Region 13 uses 23 soccer fields throughout Pasadena, Altadena, La Cañada, and surrounding areas.
+Region 13 uses fields throughout Pasadena, Altadena, La Cañada, and surrounding areas.
 
 ## Field Map
 
@@ -35,6 +35,7 @@ Region 13 uses 23 soccer fields throughout Pasadena, Altadena, La Cañada, and s
 - [McDonald Park](/fields/mcdonald) — Practice field
 - [Allendale Park](/fields/allendale) — Practice field
 - [Brookside Park](/fields/brookside) — Near Rose Bowl
+- [Butler Middle School](/fields/butler) — Practice field
 - [FIS Upper](/fields/fis-upper/) — Foothill Intermediate School, La Cañada
 - [FIS Lower](/fields/fis-lower/) — Foothill Intermediate School, La Cañada
 
@@ -46,13 +47,15 @@ Region 13 uses 23 soccer fields throughout Pasadena, Altadena, La Cañada, and s
 ### La Cañada
 
 - [La Cañada High School (LCHS)](/fields/lchs) — Practice and game fields
+- [LC LDS](/fields/lc-lds) — Practice field
 - [Oak Grove](/fields/oak-grove) — Practice field
 - [Paradise Canyon](/fields/paradise) — Practice field
 
 ### Other Locations
 
 - [La Salle High School](/fields/la-salle) — Practice field
-- [Rose Bowl Area H](/fields/area-h) — Practice fields
+- [Pasadena High School](/fields/pasadena-hs) — North field, practice
+- [Rose Bowl Area H](/fields/area-h) — Practice fields (Mon–Thu, fall season)
 
 ## Contacts
 
