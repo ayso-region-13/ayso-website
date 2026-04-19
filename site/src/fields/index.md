@@ -15,7 +15,6 @@ Region 13 uses 23 soccer fields throughout Pasadena, Altadena, La Cañada, and s
 
 ![Regional field map — all Region 13 locations](/images/fields/map-overview.jpg)
 
-[INLEAGUE: Interactive field map link]
 
 ## Game Day Basics
 

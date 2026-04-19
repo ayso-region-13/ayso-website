@@ -16,7 +16,7 @@ Stay informed about Region 13 news, events, and announcements.
 
 Sign up to receive the Region 13 newsletter.
 
-[INLEAGUE: Newsletter subscription link]
+[Subscribe at ayso13.org/news](https://ayso13.org/news/)
 
 ---
 

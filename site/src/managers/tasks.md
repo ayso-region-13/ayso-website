@@ -51,7 +51,7 @@ Coordinate team banner production if desired. Banners may include player first n
 ### Team Sponsorship (Optional)
 Facilitate optional team sponsorship at $250 per team using the sponsor form. Sponsors receive recognition on the team banner.
 
-[INLEAGUE: Sponsor form link]
+[Team Sponsor Form ($250)](https://donate.stripe.com/dR6eYg9Em9oF6icfZ5)
 
 ### Goal Setup
 Coordinate volunteers to arrive 30 minutes early for the first game of the day to set up goals. Manage goal takedown after the final game. See [Goal Setup](/fields/goals) for instructions.

@@ -25,9 +25,9 @@ Acknowledges concussion risks and removal protocols. Required by California law.
 ### Sudden Cardiac Arrest Information Sheet
 Acknowledges SCA risks and warning signs. Required by California law.
 
-Download the combined PDF:
+Download the forms:
 
-[INLEAGUE: Parent forms PDF download]
+[Parent Pledge (PDF)](https://ayso13.org/wp-content/uploads/2022/07/ParentPledge.pdf) · [Concussion & SCA Forms (PDF)](https://ayso13.org/wp-content/uploads/2022/08/2021-AYSO-Concussion-SCA.pdf)
 
 ---
 
@@ -35,7 +35,7 @@ Download the combined PDF:
 
 Sign the forms and upload through the digital form submission portal.
 
-[INLEAGUE: Form upload portal]
+[Form Upload Portal](https://ayso13.org/forms/?go=1)
 
 ---
 
@@ -43,7 +43,7 @@ Sign the forms and upload through the digital form submission portal.
 
 Volunteers can request reimbursement for approved expenses using the reimbursement form.
 
-[INLEAGUE: Reimbursement form]
+[Reimbursement Request Form](https://docs.google.com/forms/d/e/1FAIpQLScn2XeFjLX0-e9dmWWLu6DeyRYUq7V-1KKLSkjmyqo2NFRQUw/viewform)
 
 ---
 
@@ -51,7 +51,7 @@ Volunteers can request reimbursement for approved expenses using the reimburseme
 
 To withdraw from a program and request a refund (if eligible), complete the withdrawal form.
 
-[INLEAGUE: Withdrawal form]
+[Withdrawal Form](https://docs.google.com/forms/d/e/1FAIpQLSfDm6c5f0ApchEegAIQdZTNWQImX_n6K3jBf11SVwaXoSqihg/viewform)
 
 See [Registration](/register) for the refund policy.
 

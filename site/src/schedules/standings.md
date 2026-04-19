@@ -41,12 +41,12 @@ When teams have equal points, ties are broken in this order:
 **Referee Points**
 Tracks team referee participation.
 
-[INLEAGUE: Referee points spreadsheet]
+[Referee Points (Google Sheet)](https://docs.google.com/spreadsheets/d/1en8Ncby7MmUxdZqdIWaci9daomTKCzoAypn7GBwbvY0/edit)
 
 **Sportsmanship Points**
 Tracks team sportsmanship ratings from referees.
 
-[INLEAGUE: Sportsmanship points spreadsheet]
+[Sportsmanship Points (Google Sheet)](https://docs.google.com/spreadsheets/d/1UTdB9jetXHW0-rPFnuQzkzJk1cz9jtqynlRG4Al09kk/edit)
 
 ---
 
@@ -64,7 +64,7 @@ Standings determine tournament flights for the Rose City Cup, a single-eliminati
 
 Previous season standings are archived and available through InLeague.
 
-[INLEAGUE: Historical standings link]
+[Historical Standings on InLeague](https://ayso13.inleague.com/app/standings)
 
 ---
 

@@ -32,7 +32,7 @@ If you observe these signs, remove the player from the game or practice immediat
 ### Return to Play
 A player who has been removed for a suspected concussion must provide written clearance from a licensed healthcare provider before returning to play.
 
-[INLEAGUE: Return to play form]
+[Return to Play Release Form](https://aysovolunteers.org/ayso-participation-return-to-play-release-form/)
 
 ---
 
@@ -74,7 +74,7 @@ Notifications are sent by 7 AM on game days or 4 PM on practice days when heat a
 
 Report injuries, near misses, and other incidents using the incident report form.
 
-[INLEAGUE: Incident report form]
+[Incident Report Form (PDF)](https://aysovolunteers.org/wp-content/uploads/2021/10/Incident_Report_Form_with_Instr_rev09102021.pdf)
 
 Referees use a separate misconduct form.
 
@@ -84,7 +84,7 @@ Referees use a separate misconduct form.
 
 Region 13 recommends the FIFA 11+ warmup program to help prevent injuries.
 
-[INLEAGUE: FIFA 11+ materials]
+[FIFA 11+ Warmup Program (PDF)](https://ayso13.org/wp-content/uploads/2023/09/fifa_11plus.pdf)
 
 ---
 

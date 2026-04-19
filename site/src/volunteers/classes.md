@@ -91,7 +91,7 @@ You only need to repeat LiveScan if you move to a new region.
 
 In-person classes are scheduled nearly every weekend in August, with weeknight options available. The full schedule is posted in July.
 
-[INLEAGUE: Training calendar link]
+[Training Calendar on eTrainU](https://ayso13.inleague.com/eTrainu/index/)
 
 ---
 
