@@ -66,9 +66,7 @@ A typical practice includes:
 
 ## Online Resources
 
-AYSOU provides video tutorials and additional practice plans.
-
-[eTrainU (AYSOU)](https://ayso13.inleague.com/eTrainu/index/)
+AYSOU provides [coaching tools](https://wiki.ayso.org/wiki/Category:Coach).
 
 ---
 

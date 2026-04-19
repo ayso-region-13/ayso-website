@@ -38,12 +38,6 @@ These documents are provided during registration.
 
 ---
 
-## COVID-19 and Infectious Disease Waiver
-
-Participants acknowledge the risk of exposure to COVID-19 and other infectious diseases. AYSO and Region 13 cannot guarantee health or safety. The waiver covers potential transmission to family members and releases AYSO from liability for illness exposure.
-
----
-
 ## Privacy Policy
 
 ### Information Collected

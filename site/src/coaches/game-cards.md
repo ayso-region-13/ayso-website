@@ -48,7 +48,7 @@ Game cards are available in two formats:
 - PDF (print and fill by hand)
 - Google Sheets (editable, can print)
 
-[INLEAGUE: Link to game card downloads]
+*(2026 Game Cards will be posted by August)*
 
 ---
 
