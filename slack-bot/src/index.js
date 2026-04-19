@@ -79,6 +79,15 @@ async function handleCommand(rawBody, env, ctx) {
   const params = new URLSearchParams(rawBody);
   const text      = (params.get('text') || '').trim().toLowerCase();
   const triggerId = params.get('trigger_id');
+  const userId    = params.get('user_id');
+
+  const allowedIds = await getAllowedUsers(env.GITHUB_TOKEN);
+  if (allowedIds.length > 0 && !allowedIds.includes(userId)) {
+    return new Response(
+      JSON.stringify({ response_type: 'ephemeral', text: "Sorry, you're not authorized to use this command." }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
 
   let view;
   if (text === 'field' || text === 'field status') {
@@ -117,13 +126,13 @@ async function handleInteraction(rawBody, env, ctx) {
   // Step 2a: field status submitted
   if (callbackId === 'ayso_field_status') {
     ctx.waitUntil(processFieldStatus(values, user, env));
-    return new Response('', { status: 200 });
+    return jsonResponse({ response_action: 'clear' });
   }
 
   // Step 2b: announcement submitted
   if (callbackId === 'ayso_announcement') {
     ctx.waitUntil(processAnnouncement(values, user, env));
-    return new Response('', { status: 200 });
+    return jsonResponse({ response_action: 'clear' });
   }
 
   return new Response('', { status: 200 });
@@ -369,6 +378,23 @@ function buildAnnouncementModal() {
 }
 
 // ── Utilities ─────────────────────────────────────────────────────────────
+
+async function getAllowedUsers(token) {
+  try {
+    const file = await getFile(token, 'slack-bot/allowed-users.json', 'main');
+    const json = JSON.parse(atob(file.content.replace(/\n/g, '')));
+    return json.allowed_user_ids || [];
+  } catch {
+    return []; // if file missing or unreadable, allow all
+  }
+}
+
+function jsonResponse(body) {
+  return new Response(JSON.stringify(body), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' }
+  });
+}
 
 function pacificTimestamp() {
   return new Intl.DateTimeFormat('en-US', {
