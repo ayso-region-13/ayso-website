@@ -1,4 +1,8 @@
 {
   "note": "Slack member IDs allowed to run /ayso. Find yours: click your name in Slack → View profile → ⋮ → Copy member ID",
-  "allowed_user_ids": []
+  "allowed_user_ids": [
+    "U03QVNWHS6R",
+    "U04S0F45SNQ",
+    "U026U2TEWJ3"
+  ]
 }
