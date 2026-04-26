@@ -72,7 +72,7 @@
 
   <!-- Skip to main content -->
   <a href="#main-content"
-     class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:text-brand-red focus:font-semibold focus:px-4 focus:py-2 focus:rounded focus:shadow-lg">
+     class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:text-brand-red-dark focus:font-semibold focus:px-4 focus:py-2 focus:rounded focus:shadow-lg">
     Skip to main content
   </a>
 
@@ -97,8 +97,8 @@
           {% for item in navigation %}{% if item.topNav %}
           <div class="nav-item relative flex items-stretch group">
             <a href="{{ item.url }}"
-               class="flex items-center gap-1 px-4 py-2 my-2 text-brand-dark text-sm font-semibold rounded hover:bg-gray-100 hover:text-brand-red transition-colors whitespace-nowrap
-                      {% if page.url | isActiveSection(item.url) %}text-brand-red{% endif %}"
+               class="flex items-center gap-1 px-4 py-2 my-2 text-brand-dark text-sm font-semibold rounded hover:bg-gray-100 hover:text-brand-red-dark transition-colors whitespace-nowrap
+                      {% if page.url | isActiveSection(item.url) %}text-brand-red-dark{% endif %}"
                {% if item.children %}aria-haspopup="true"{% endif %}>
               {{ item.label }}
               {% if item.children %}
@@ -117,8 +117,8 @@
               </div>
               {% endif %}
               <a href="{{ child.url }}"
-                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-800 transition-colors
-                        {% if page.url == child.url %}bg-red-50 text-red-800 font-medium{% endif %}"
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-cream hover:text-brand-red-dark transition-colors
+                        {% if page.url == child.url %}bg-brand-cream text-brand-red-dark font-medium{% endif %}"
                  role="menuitem">
                 {{ child.label }}
               </a>
