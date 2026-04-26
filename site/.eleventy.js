@@ -1,5 +1,6 @@
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
+const { eleventyImageTransformPlugin } = require("@11ty/eleventy-img");
 const path = require("path");
 const fs   = require("fs");
 
@@ -142,6 +143,22 @@ module.exports = function (eleventyConfig) {
         if (!b.date) return -1;
         return b.date - a.date; // newest first
       });
+  });
+
+  // --- Image optimization ---
+  // Auto-transforms every <img> tag in HTML output into a <picture> element with
+  // AVIF + WebP sources and the original format as fallback. SVGs are passed
+  // through unchanged. Generated variants live under /img/. Existing attributes
+  // on <img> tags (e.g. loading="eager", fetchpriority) override the defaults.
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    extensions: "html",
+    formats: ["avif", "webp", "auto"],
+    widths: [600, 1200, "auto"],
+    defaultAttributes: {
+      loading: "lazy",
+      decoding: "async",
+      sizes: "100vw",
+    },
   });
 
   // --- Watch targets ---
