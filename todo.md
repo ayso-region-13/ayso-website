@@ -45,6 +45,20 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ## Completed ✓
 
+### Session 11 (2026-04-26)
+- [x] Home page redesign — huge SOCCER FOR EVERYONE hero, two-tone alternating buttons, Let's Play tiles with semi-transparent inset labels (alternating dark red / maroon bodies)
+- [x] Header redesign — light/white background, dark nav text, inLeague pill button replacing the gold Register CTA
+- [x] New logo SVG (recolored) — replaced existing; viewBox made square (`0 -13.7295 264.817 264.817`) so square containers don't distort it
+- [x] Brand palette refresh — `brand-red` #ff3c3c (bright accent), `brand-red-dark` #ce0e2d (logo red, primary), added `brand-cream` #ede5d3, `brand-maroon-dark` #3a0d12; `brand-green` to #a7ce57; `brand-gold` to #f5bd4e
+- [x] Site-wide font swap: Inter → Raleway (Google Fonts, weights 300–900)
+- [x] Image optimization pipeline — `@11ty/eleventy-img` plugin auto-converts every `<img>` to `<picture>` with AVIF + WebP + JPEG variants at 600/1200/1920w
+- [x] Interior page redesign — `bg-red-50` → `bg-brand-cream` for page header, `text-red-900` → `text-brand-maroon` for breadcrumb/description, `bg-brand-red` → `bg-brand-maroon` for sidebar header bar, two-tone signature strip below page header
+- [x] Site-wide WCAG AA contrast pass — prose H1/H2/H3 + body links to `brand-red-dark`, sidebar hover/active states, desktop nav hover/active, skip-to-main focus, Ask the Referee category headings + TOC links
+- [x] Favicon transparency fixed — regenerated via `rsvg-convert` (ImageMagick was rasterizing with opaque white in padded areas)
+- [x] `.impeccable.md` design context document — locks in personality, brand principles, locked-in colors/font/logo
+- [x] `brand-colors.md` — full palette with hex, RGB, usage notes, contrast cheat-sheet
+- [x] `site-overview.md` — Slab-friendly site summary for the team wiki
+
 ### Session 10 (2026-04-19)
 - [x] Ask the Referee — rebuilt as accordion FAQ with 30 Q&As in 7 categories (ask-the-referee.njk layout)
 - [x] Pages CMS qa-answers collection — Steve can add Q&As via form UI (question, category, answer); date auto-set from git commit
