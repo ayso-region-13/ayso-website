@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title and title != site.title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
   <meta name="description" content="{{ description or site.description }}">
-  <meta name="theme-color" content="#230612">
+  <meta name="theme-color" content="#ffffff">
 
   <!-- Canonical -->
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
@@ -44,6 +44,11 @@
   <!-- Sitemap -->
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap">
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/assets/css/style.css">
 
@@ -69,16 +74,16 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <!--  HEADER / NAVIGATION                                           -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <header class="sticky top-0 z-40 bg-brand-header shadow-lg">
+  <header class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-100">
     <div class="max-w-screen-2xl mx-auto px-4">
       <div class="flex items-stretch justify-between">
 
         <!-- Logo -->
         <a href="/" class="flex items-center gap-3 py-2 shrink-0 hover:opacity-90 transition-opacity" aria-label="AYSO Region 13 Home">
-          <img src="/images/logo.svg" alt="" class="h-12 w-12" aria-hidden="true">
-          <div class="text-white leading-tight">
+          <img src="/images/logo.svg" alt="" class="h-14 w-14" aria-hidden="true">
+          <div class="text-brand-dark leading-tight hidden sm:block">
             <div class="font-bold text-base tracking-tight">AYSO Region 13</div>
-            <div class="text-xs text-gray-400">Pasadena Area Youth Soccer</div>
+            <div class="text-xs text-gray-500">Pasadena Area Youth Soccer</div>
           </div>
         </a>
 
@@ -87,8 +92,8 @@
           {% for item in navigation %}{% if item.topNav %}
           <div class="nav-item relative flex items-stretch group">
             <a href="{{ item.url }}"
-               class="flex items-center gap-1 px-3 py-2 my-1 text-white text-sm font-medium rounded hover:bg-gray-800 transition-colors whitespace-nowrap
-                      {% if page.url | isActiveSection(item.url) %}bg-gray-800{% endif %}"
+               class="flex items-center gap-1 px-4 py-2 my-2 text-brand-dark text-sm font-semibold rounded hover:bg-gray-100 hover:text-brand-red transition-colors whitespace-nowrap
+                      {% if page.url | isActiveSection(item.url) %}text-brand-red{% endif %}"
                {% if item.children %}aria-haspopup="true"{% endif %}>
               {{ item.label }}
               {% if item.children %}
@@ -119,14 +124,20 @@
           {% endif %}{% endfor %}
         </nav>
 
-        <!-- Register CTA + Mobile toggle -->
-        <div class="flex items-center gap-2">
-          <a href="/register/" class="hidden lg:inline-flex items-center gap-1.5 bg-brand-gold text-brand-dark font-bold text-sm px-4 py-2 rounded-lg hover:bg-yellow-300 transition-colors whitespace-nowrap">
-            Register
+        <!-- inLeague login + Mobile toggle -->
+        <div class="flex items-center gap-2 py-2">
+          <a href="{{ site.inleagueUrl }}" rel="noopener" target="_blank"
+             class="inline-flex items-center gap-2 bg-brand-header text-white font-semibold text-sm pl-4 pr-2 py-2 rounded-full hover:bg-brand-maroon transition-colors whitespace-nowrap">
+            inLeague
+            <span class="inline-flex items-center justify-center w-7 h-7 bg-white text-brand-header rounded-full">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </span>
           </a>
           <!-- Mobile menu button -->
           <button id="mobile-menu-btn"
-                  class="xl:hidden p-2 text-white hover:bg-gray-800 rounded-lg transition-colors"
+                  class="xl:hidden p-2 text-brand-dark hover:bg-gray-100 rounded-lg transition-colors"
                   aria-label="Open navigation menu"
                   aria-expanded="false"
                   aria-controls="mobile-menu">

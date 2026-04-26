@@ -5,17 +5,19 @@ module.exports = {
     extend: {
       colors: {
         'brand-red':         '#ff3c3c',
-        'brand-red-dark':    '#e02020',
+        'brand-red-dark':    '#ce0e2d',
         'brand-header':      '#230612',
         'brand-maroon':      '#8e2929',
-        'brand-green':       '#00ae42',
+        'brand-maroon-dark': '#3a0d12',
+        'brand-cream':       '#ede5d3',
+        'brand-green':       '#a7ce57',
         'brand-green-dark':  '#007a32',
         'brand-green-light': '#00d050',
-        'brand-gold':        '#f5bd4c',
+        'brand-gold':        '#f5bd4e',
         'brand-dark':        '#231f20',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+        sans: ['Raleway', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
       },
       typography: {
         DEFAULT: {
