@@ -22,10 +22,10 @@ layout: base.njk
 ] %}
 
 {# ── Page header ─────────────────────────────────────────────────────── #}
-<div class="bg-red-50">
+<div class="bg-brand-cream">
   <div class="max-w-screen-xl mx-auto px-4 py-8 md:py-10">
     {% if sectionNav and sectionNav.url != page.url %}
-    <nav class="text-sm text-red-900 mb-3" aria-label="Breadcrumb">
+    <nav class="text-sm text-brand-maroon mb-3" aria-label="Breadcrumb">
       <a href="/" class="hover:text-brand-dark transition-colors">Home</a>
       <span class="mx-2 opacity-40">/</span>
       <a href="{{ sectionNav.url }}" class="hover:text-brand-dark transition-colors">{{ sectionNav.label }}</a>
@@ -35,10 +35,14 @@ layout: base.njk
     {% endif %}
     <h1 class="text-3xl md:text-4xl font-bold text-brand-dark leading-tight">{{ title }}</h1>
     {% if description %}
-    <p class="mt-2 text-red-900 text-lg leading-relaxed max-w-2xl">{{ description }}</p>
+    <p class="mt-2 text-brand-maroon text-lg leading-relaxed max-w-2xl">{{ description }}</p>
     {% endif %}
   </div>
 </div>
+
+{# ── Two-tone signature strip ────────────────────────────────────────── #}
+<div class="h-1.5 bg-brand-maroon"></div>
+<div class="h-1 bg-brand-red"></div>
 
 {# ── Content area ────────────────────────────────────────────────────── #}
 <div class="max-w-screen-xl mx-auto px-4 py-10">
@@ -131,7 +135,7 @@ layout: base.njk
     <aside class="lg:w-64 shrink-0">
       <nav class="sticky top-20" aria-label="Section navigation">
         <div class="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
-          <div class="bg-brand-red text-white px-4 py-3">
+          <div class="bg-brand-maroon text-white px-4 py-3">
             <p class="text-sm font-semibold">{{ sectionNav.label }}</p>
           </div>
           <ul>
@@ -143,8 +147,8 @@ layout: base.njk
             {% endif %}
             <li>
               <a href="{{ child.url }}"
-                 class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-red-50 hover:text-brand-red transition-colors border-b border-gray-100 last:border-0
-                        {% if page.url == child.url %}bg-red-50 text-brand-red font-medium{% endif %}">
+                 class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-brand-cream hover:text-brand-red-dark transition-colors border-b border-gray-100 last:border-0
+                        {% if page.url == child.url %}bg-brand-cream text-brand-red-dark font-medium{% endif %}">
                 {{ child.label }}
               </a>
             </li>
