@@ -52,6 +52,11 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="/assets/css/style.css">
 
+  {# Hero image LCP optimization is handled by fetchpriority="high" + loading="eager"
+     on the img tag itself (see home.njk). The eleventy-img plugin generates
+     hash-named AVIF/WebP/JPEG variants, so a static preload link can't match the
+     URL the browser actually fetches. #}
+
   {% if site.gaId %}
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
@@ -137,7 +142,7 @@
           </a>
           <!-- Mobile menu button -->
           <button id="mobile-menu-btn"
-                  class="xl:hidden p-2 text-brand-dark hover:bg-gray-100 rounded-lg transition-colors"
+                  class="xl:hidden p-3 text-brand-dark hover:bg-gray-100 rounded-lg transition-colors"
                   aria-label="Open navigation menu"
                   aria-expanded="false"
                   aria-controls="mobile-menu">
@@ -221,13 +226,13 @@
       <!-- Affiliate logos -->
       <div class="flex items-center justify-center gap-8 flex-wrap">
         <a href="https://www.ayso.org" rel="noopener" target="_blank" aria-label="AYSO National">
-          <img src="/images/ayso-logo.png" alt="AYSO" class="h-14 w-auto object-contain">
+          <img src="/images/ayso-logo.png" alt="AYSO" class="h-14 w-auto object-contain" loading="lazy">
         </a>
         <a href="https://www.ayso1s.org" rel="noopener" target="_blank" aria-label="AYSO Section 1">
-          <img src="/images/ayso-section1-logo.png" alt="AYSO Section 1" class="h-14 w-auto object-contain">
+          <img src="/images/ayso-section1-logo.png" alt="AYSO Section 1" class="h-14 w-auto object-contain" loading="lazy">
         </a>
         <a href="https://ayso1c.org" rel="noopener" target="_blank" aria-label="AYSO Area 1C">
-          <img src="/images/ayso-area1c-logo.png" alt="AYSO Area 1C" class="h-14 w-auto object-contain">
+          <img src="/images/ayso-area1c-logo.png" alt="AYSO Area 1C" class="h-14 w-auto object-contain" loading="lazy">
         </a>
       </div>
 
@@ -244,7 +249,7 @@
         <!-- Brand -->
         <div class="col-span-2 md:col-span-1">
           <div class="flex items-center gap-3 mb-4">
-            <img src="/images/logo.svg" alt="AYSO Region 13" class="h-14 w-14">
+            <img src="/images/logo.svg" alt="AYSO Region 13" class="h-14 w-14" loading="lazy">
             <div>
               <div class="text-white font-bold">AYSO Region 13</div>
               <div class="text-xs text-gray-400">Est. {{ site.founded }}</div>
