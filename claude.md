@@ -28,6 +28,7 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Google Maps embeds on all field pages
 - [x] Google Analytics (GA4: G-9YM9ZDW1J9)
 - [x] Slack bot (`/ayso`) — field status, announcements, promote to production
+- [x] Ask the Referee — accordion FAQ, 30 Q&As in 7 categories, Pages CMS collection for Steve
 - [ ] Review and refine site ← **IN PROGRESS at https://staging.ayso13.org**
 - [x] Create redirect mapping (159 old URLs → `site/src/_redirects`)
 - [x] Deploy to Cloudflare Pages ← **staging.ayso13.org / www.ayso13.org**
@@ -204,4 +205,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-19 (session 9)*
+*Last updated: 2026-04-19 (session 10)*

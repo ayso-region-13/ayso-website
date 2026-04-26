@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Google Fonts: Inter ──────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* Raleway loaded via <link> in base.njk */
 
 /* ── Base prose styles for rendered Markdown content ─────────────── */
 @layer base {

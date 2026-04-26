@@ -9,19 +9,19 @@ layout: base.njk
     <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
       <a href="/schedules/games/" class="flex flex-col items-center gap-1 py-4 px-3 text-white hover:bg-black/20 transition-colors text-center">
         <svg class="w-6 h-6 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-        <span class="text-sm font-semibold">Game Schedule</span>
+        <span class="text-xs font-bold uppercase tracking-wider">Game Schedule</span>
       </a>
       <a href="/fields/" class="flex flex-col items-center gap-1 py-4 px-3 text-white hover:bg-black/20 transition-colors text-center">
         <svg class="w-6 h-6 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        <span class="text-sm font-semibold">Field Locations</span>
+        <span class="text-xs font-bold uppercase tracking-wider">Field Locations</span>
       </a>
       <a href="/parents/" class="flex flex-col items-center gap-1 py-4 px-3 text-white hover:bg-black/20 transition-colors text-center">
         <svg class="w-6 h-6 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-        <span class="text-sm font-semibold">New Families</span>
+        <span class="text-xs font-bold uppercase tracking-wider">New Families</span>
       </a>
       <a href="/volunteers/" class="flex flex-col items-center gap-1 py-4 px-3 text-white hover:bg-black/20 transition-colors text-center">
         <svg class="w-6 h-6 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-        <span class="text-sm font-semibold">Volunteer</span>
+        <span class="text-xs font-bold uppercase tracking-wider">Volunteer</span>
       </a>
     </div>
   </div>
@@ -29,182 +29,174 @@ layout: base.njk
 
 {# ── Field status widget ─────────────────────────────────────────── #}
 {% if fieldstatus.enabled %}
-<div class="{% if fieldstatus.status | lower == 'closed' %}bg-brand-red border-b border-red-700{% elif fieldstatus.status | lower == 'monitoring' %}bg-amber-500 border-b border-amber-600{% else %}bg-brand-green-dark border-b border-green-900{% endif %}">
-  <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center gap-3">
-
-    {# Status icon #}
-    {% if fieldstatus.status | lower == 'closed' %}
-    <svg class="w-5 h-5 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-    </svg>
-    {% elif fieldstatus.status | lower == 'monitoring' %}
-    <svg class="w-5 h-5 text-brand-dark shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-    </svg>
-    {% else %}
-    <svg class="w-5 h-5 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-    </svg>
-    {% endif %}
-
-    {# Status text #}
-    <p class="{% if fieldstatus.status | lower == 'monitoring' %}text-brand-dark{% else %}text-white{% endif %} text-sm font-medium flex-1">
-      <strong>Field Status: {{ fieldstatus.status }}</strong>
-      {% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
+<div class="{% if fieldstatus.status | lower == 'closed' %}bg-brand-red{% elif fieldstatus.status | lower == 'monitoring' %}bg-brand-gold{% else %}bg-brand-green{% endif %}">
+  <div class="max-w-screen-xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3">
+    <span class="text-xl" aria-hidden="true">⚽</span>
+    <p class="{% if fieldstatus.status | lower == 'closed' %}text-white{% else %}text-brand-dark{% endif %} text-sm font-bold uppercase tracking-wider">
+      Fields are {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
     </p>
-
-    {# Last updated timestamp #}
-    {% if fieldStatusDate %}
-    <span class="{% if fieldstatus.status | lower == 'monitoring' %}text-brand-dark{% else %}text-white{% endif %} text-xs opacity-70 shrink-0 hidden sm:block">
-      Updated {{ fieldStatusDate }}
-    </span>
-    {% endif %}
-
+    <span class="text-xl" aria-hidden="true">⚽</span>
   </div>
 </div>
 {% endif %}
 
 {# ── Hero ────────────────────────────────────────────────────────── #}
-<section class="relative overflow-hidden" style="min-height: 520px;">
+<section class="relative overflow-hidden bg-brand-dark" style="min-height: 560px;">
 
   {# Background image #}
   <div class="absolute inset-0">
     <img src="/images/fall-game-03.jpg"
-         alt="Region 13 players in action"
-         class="w-full h-full object-cover object-top">
-    <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/80 via-brand-dark/50 to-transparent"></div>
+         alt="Region 13 players celebrating"
+         class="w-full h-full object-cover object-center">
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/40 via-brand-dark/10 to-transparent"></div>
   </div>
 
   {# Hero content #}
-  <div class="relative max-w-screen-xl mx-auto px-4 py-20 md:py-28 flex flex-col justify-end" style="min-height: 520px;">
-    <div class="max-w-xl">
-      <div class="inline-flex items-center gap-2 bg-brand-gold text-brand-dark text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4">
-        Pasadena Area Youth Soccer
-      </div>
-      <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4 drop-shadow-lg">
-        Welcome to<br>AYSO Region 13
-      </h1>
-      <p class="text-lg text-gray-200 mb-8 leading-relaxed">
-        Youth soccer for players ages 4–19 in Pasadena, Altadena, La Cañada, and surrounding communities.
-      </p>
-      <div class="flex flex-wrap gap-3">
-        <a href="/register/" class="btn-gold text-base px-8 py-3 shadow-lg">Register for Soccer</a>
-        <a href="/programs/" class="btn-secondary text-base px-8 py-3 bg-white/10 border-white text-white hover:bg-white/20">View Programs</a>
-      </div>
+  <div class="relative max-w-screen-xl mx-auto px-4 py-16 md:py-20 flex flex-col justify-center" style="min-height: 560px;">
+    <h1 class="font-extrabold leading-[0.9] tracking-tight mb-8">
+      <span class="block text-[clamp(3.5rem,11vw,9rem)] text-brand-red/80" style="text-shadow: 0 2px 20px rgba(0,0,0,0.3);">SOCCER</span>
+      <span class="block text-[clamp(3.5rem,11vw,9rem)] text-white" style="text-shadow: 0 2px 20px rgba(0,0,0,0.4);">FOR EVERYONE</span>
+    </h1>
+    <div class="flex flex-wrap gap-3">
+      {# Button 1: lighter red body, darker line #}
+      <a href="/register/" class="group inline-block">
+        <div class="bg-brand-red text-white font-bold uppercase tracking-wider text-sm md:text-base px-6 py-3 group-hover:opacity-90 transition-opacity">
+          Register for Soccer
+        </div>
+        <div class="h-1.5 bg-brand-red-dark"></div>
+      </a>
+      {# Button 2: darker red body, lighter line #}
+      <a href="/programs/" class="group inline-block">
+        <div class="bg-brand-red-dark text-white font-bold uppercase tracking-wider text-sm md:text-base px-6 py-3 group-hover:opacity-90 transition-opacity">
+          View Programs
+        </div>
+        <div class="h-1.5 bg-brand-red"></div>
+      </a>
     </div>
   </div>
 </section>
 
 {# ── Announcements banner ─────────────────────────────────────────── #}
 {% if announcements.enabled %}
-<div class="bg-brand-gold border-b border-yellow-300">
-  <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center gap-3">
-    <svg class="w-5 h-5 text-brand-dark shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/>
-    </svg>
-    <p class="text-brand-dark text-sm font-medium [&_a]:underline [&_a]:hover:no-underline [&_a]:ml-1">
+<div class="bg-brand-gold">
+  <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-center gap-3">
+    <p class="text-brand-dark text-sm font-bold uppercase tracking-wider text-center [&_a]:underline [&_a]:hover:no-underline">
       {{ announcements.body | markdownify | safe }}
     </p>
   </div>
 </div>
 {% endif %}
 
-{# ── Main home page content ──────────────────────────────────────── #}
-<div class="max-w-screen-xl mx-auto px-4 py-12">
+{# ── Cream-background sections ────────────────────────────────────── #}
+<div class="bg-brand-cream">
 
-  {# Programs grid #}
-  <section class="mb-16">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-2xl font-bold text-brand-dark">Our Programs</h2>
-      <a href="/programs/" class="text-brand-red text-sm font-semibold hover:underline">All programs →</a>
+  {# ── Programs grid ──────────────────────────────────────────────── #}
+  <section class="max-w-screen-xl mx-auto px-4 pt-14 pb-12">
+    <div class="flex items-end justify-between mb-6 flex-wrap gap-2">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-brand-red uppercase tracking-tight">Let's Play</h2>
+      <a href="/programs/" class="text-brand-red text-sm md:text-base font-bold hover:underline">all soccer programs →</a>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-      {% set programs = [
-        { name: "Fall Soccer", sub: "6U – 14U · Core program", url: "/programs/fall-soccer/", img: "action-02.jpg" },
-        { name: "Upper Division", sub: "16U / 19U", url: "/programs/upper-division/", img: "action-03.jpg" },
-        { name: "Preschool", sub: "4U / 5U · Ages 3–5", url: "/programs/preschool/", img: "action-04.jpg" },
-        { name: "All-Stars", sub: "Select competitive play", url: "/programs/all-stars/", img: "all-stars-01.jpg" },
-        { name: "NEXT", sub: "Advanced play · 10U–14U", url: "/programs/next/", img: "action-05.jpg" },
-        { name: "Grad Series", sub: "8U → 10U transition", url: "/programs/grad-series/", img: "grad-series-01.jpg" },
-        { name: "EPIC", sub: "Inclusion program", url: "/programs/epic/", img: "action-06.jpg" }
-      ] %}
+
+    {% set programs = [
+      { name: "Fall Soccer",     sub: "6U–14U · Core Program",     url: "/programs/fall-soccer/",    img: "action-02.jpg" },
+      { name: "Pre-School",      sub: "4U/5U",                     url: "/programs/preschool/",      img: "action-04.jpg" },
+      { name: "Upper Division",  sub: "16U–19U",                   url: "/programs/upper-division/", img: "action-03.jpg" },
+      { name: "All-Stars",       sub: "Select Competitive Play",   url: "/programs/all-stars/",      img: "all-stars-01.jpg" },
+      { name: "Grad Series",     sub: "8u Transitional",           url: "/programs/grad-series/",    img: "grad-series-01.jpg" },
+      { name: "EPIC",            sub: "Inclusion Program",         url: "/programs/epic/",           img: "action-06.jpg" }
+    ] %}
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {% for p in programs %}
-      <a href="{{ p.url }}" class="card group">
-        <div class="h-36 overflow-hidden bg-gray-200">
-          <img src="/images/{{ p.img }}" alt="{{ p.name }}"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-               onerror="this.style.display='none'">
-        </div>
-        <div class="p-4">
-          <h3 class="font-bold text-gray-900 group-hover:text-brand-red transition-colors">{{ p.name }}</h3>
-          <p class="text-sm text-gray-500 mt-0.5">{{ p.sub }}</p>
+      {# Alternate body/underline colors: odd = lighter body + darker underline, even = darker body + lighter underline #}
+      {% set bodyColor = "bg-brand-red/85" if loop.index0 % 2 == 0 else "bg-brand-red-dark/85" %}
+      {% set lineColor = "bg-brand-red-dark/85" if loop.index0 % 2 == 0 else "bg-brand-red/85" %}
+      <a href="{{ p.url }}" class="relative block aspect-[4/3] group shadow-md hover:shadow-xl transition-shadow rounded-md overflow-hidden">
+        <img src="/images/{{ p.img }}" alt="{{ p.name }}"
+             class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        {# Semi-transparent label anchored bottom-left, 60% width for consistency #}
+        <div class="absolute bottom-0 left-0 w-3/5">
+          <div class="{{ bodyColor }} text-white px-4 py-2.5">
+            <h3 class="text-lg md:text-xl font-extrabold leading-tight">{{ p.name }}</h3>
+            <p class="text-xs md:text-sm font-medium opacity-95 mt-0.5">{{ p.sub }}</p>
+          </div>
+          <div class="h-1.5 {{ lineColor }}"></div>
         </div>
       </a>
       {% endfor %}
     </div>
   </section>
 
-  {# Two-column: About + Role links #}
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-16">
+</div>{# /bg-brand-cream #}
 
-    {# About blurb #}
-    <div class="lg:col-span-2">
-      <h2 class="text-2xl font-bold text-brand-dark mb-4">About Region 13</h2>
-      <div class="prose">
-        {{ content | safe }}
-      </div>
-    </div>
+{# ── About + Roles ──────────────────────────────────────────────── #}
+<section class="bg-white border-y-[6px] border-brand-maroon">
+  <div class="max-w-screen-xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-    {# Role-based quick links #}
-    <div>
-      <h2 class="text-2xl font-bold text-brand-dark mb-4">I'm a…</h2>
-      <div class="flex flex-col gap-3">
-        {% set roles = [
-          { label: "Parent",       url: "/parents/"    },
-          { label: "Coach",        url: "/coaches/"    },
-          { label: "Referee",      url: "/referees/"   },
-          { label: "Team Manager", url: "/managers/"   },
-          { label: "Volunteer",    url: "/volunteers/" }
-        ] %}
-        {% for role in roles %}
-        <a href="{{ role.url }}"
-           class="flex items-center justify-between px-5 py-4 rounded-xl border-2 border-gray-200 text-gray-800 font-semibold hover:border-brand-red hover:text-brand-red hover:bg-red-50 transition-colors">
-          {{ role.label }}
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </a>
-        {% endfor %}
+      {# About blurb #}
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-5 mb-5">
+          <img src="/images/logo.svg" alt="" class="h-20 w-20 shrink-0" aria-hidden="true">
+          <h2 class="text-2xl md:text-3xl font-extrabold text-brand-dark uppercase tracking-tight">About AYSO Region 13</h2>
+        </div>
+        <div class="prose max-w-none">
+          {{ content | safe }}
+        </div>
       </div>
+
+      {# Role-based quick links #}
+      <div class="bg-brand-maroon rounded-lg p-6 self-start">
+        <h2 class="text-xl font-bold text-white mb-4">I'm a soccer…</h2>
+        <div class="flex flex-col gap-2">
+          {% set roles = [
+            { label: "Parent",       url: "/parents/"    },
+            { label: "Coach",        url: "/coaches/"    },
+            { label: "Referee",      url: "/referees/"   },
+            { label: "Team Manager", url: "/managers/"   },
+            { label: "Volunteer",    url: "/volunteers/" }
+          ] %}
+          {% for role in roles %}
+          <a href="{{ role.url }}"
+             class="block px-5 py-3 bg-transparent border border-white/40 text-white font-semibold rounded hover:bg-white hover:text-brand-maroon transition-colors text-center">
+            {{ role.label }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
 
-  {# Photo strip #}
-  <section class="mb-16">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 rounded-2xl overflow-hidden">
-      <div class="h-48 md:h-64 overflow-hidden col-span-2">
-        <img src="/images/action-07.jpg" alt="Region 13 players" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-      </div>
-      <div class="h-48 md:h-64 overflow-hidden">
-        <img src="/images/action-08.jpg" alt="Region 13 players" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-      </div>
-      <div class="h-48 md:h-64 overflow-hidden">
-        <img src="/images/wca-01.jpg" alt="Women's Coaching Alliance" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-      </div>
-    </div>
-    <p class="text-center mt-3">
-      <a href="/resources/gallery/" class="text-brand-red text-sm font-semibold hover:underline">View photo gallery →</a>
-    </p>
-  </section>
-
-</div>
+{# ── Photo gallery strip ──────────────────────────────────────────── #}
+<section class="bg-brand-maroon-dark">
+  <div class="grid grid-cols-1 md:grid-cols-3">
+    {% set galleryPhotos = [
+      { img: "action-07.jpg", alt: "Players on the field" },
+      { img: "action-08.jpg", alt: "Players in action" },
+      { img: "wca-01.jpg",    alt: "Region 13 players celebrating" }
+    ] %}
+    {% for photo in galleryPhotos %}
+    <a href="/resources/gallery/" class="block aspect-[4/3] overflow-hidden">
+      <img src="/images/{{ photo.img }}" alt="{{ photo.alt }}"
+           class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+    </a>
+    {% endfor %}
+  </div>
+  <div class="py-6 text-center">
+    <a href="/resources/gallery/" class="inline-block text-white text-lg md:text-xl font-bold hover:underline">
+      View Photo Gallery →
+    </a>
+  </div>
+</section>
 
 {% include "sponsors-strip.njk" %}
 
 <style>
-  /* Home page: hide the H1 and first HR from markdown content since the hero handles those */
+  /* Home page: hide the H1 and first HR from markdown content since the about heading handles those */
   .prose > h1:first-child,
   .prose > p:first-of-type:has(+ hr) { display: none; }
-  /* Home page prose headings stay dark — red headings are for content pages only */
+  /* Home page prose headings stay dark */
   .prose h2, .prose h3 { color: #231f20; border-color: #e5e7eb; }
 </style>
