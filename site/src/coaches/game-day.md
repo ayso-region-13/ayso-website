@@ -6,8 +6,6 @@ section: coaches
 description: "Game day guide for AYSO Region 13 coaches. What to bring, how to set up, and how to run a game for 6U through 14U."
 ---
 
-# Game Day Guide
-
 This guide covers what coaches need to know for game days, with specific information for 6U-8U divisions.
 
 ---

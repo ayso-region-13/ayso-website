@@ -6,12 +6,6 @@ section: register
 description: "AYSO Region 13 age divisions and birth date cutoffs for Fall 2026. Find which division your child plays in under the new August 1 cutoff rule."
 ---
 
-# Age Chart
-
-Use this chart to find your child's division based on their birth date.
-
----
-
 ## What's New for Fall 2026
 
 The division cutoff date has moved from **December 31 to August 1**. This change was made by AYSO, US Youth Soccer, and US Club Soccer in 2025.

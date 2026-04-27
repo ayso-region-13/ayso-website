@@ -6,10 +6,6 @@ section: fields
 description: "Wilson Middle School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# Wilson MS
-
-Wilson Middle School is a practice field in Pasadena.
-
 ## Location
 
 [300 S Madre St, Pasadena CA 91107](https://maps.google.com/?q=300+S+Madre+St,+Pasadena,+CA+91107)

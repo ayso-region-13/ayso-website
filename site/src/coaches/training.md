@@ -6,8 +6,6 @@ section: coaches
 description: "AYSO coach training and certification requirements for Region 13. Online courses, in-person clinics, and SafeSport."
 ---
 
-# Coach Training
-
 All coaches must complete training before the season begins. Training covers both safety requirements and soccer-specific skills for your age division.
 
 ---

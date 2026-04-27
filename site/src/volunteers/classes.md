@@ -6,8 +6,6 @@ section: volunteers
 description: "Volunteer training classes and clinics for AYSO Region 13. Coach certification, referee training, SafeSport, and LiveScan."
 ---
 
-# Training Classes
-
 Volunteer training is available through eTrainU, with in-person classes scheduled before each season.
 
 ---

@@ -6,8 +6,6 @@ section: schedules
 description: "View AYSO Region 13 game schedules for all divisions. Current schedules are available through InLeague."
 ---
 
-# Game Schedule
-
 Games are held on Saturdays during the fall and spring seasons.
 
 ---

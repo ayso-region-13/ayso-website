@@ -6,8 +6,6 @@ section: about
 description: "AYSO Region 13 policies covering player conduct, refund policy, and program guidelines."
 ---
 
-# Policies
-
 Region 13 follows AYSO national policies along with local rules specific to our region.
 
 ---

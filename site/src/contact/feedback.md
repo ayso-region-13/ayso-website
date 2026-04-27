@@ -6,8 +6,6 @@ section: contact
 description: "Send feedback to AYSO Region 13. We welcome questions, suggestions, and comments about our programs and events."
 ---
 
-# Feedback
-
 Submit feedback about coaches, referees, or general concerns. Region 13 welcomes input from families and volunteers.
 
 ---

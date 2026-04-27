@@ -6,12 +6,6 @@ section: volunteers
 description: "Frequently asked questions for AYSO Region 13 volunteers."
 ---
 
-# Volunteer FAQs
-
-Common questions about volunteering with Region 13.
-
----
-
 ## Getting Started
 
 ### What do I need to do to volunteer?

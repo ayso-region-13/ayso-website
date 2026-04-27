@@ -6,8 +6,6 @@ section: resources
 description: "AYSO Region 13 safety and heat policy. Guidelines for safe play in hot weather, lightning, and emergency procedures."
 ---
 
-# Safety
-
 Region 13 follows AYSO safety protocols and California state requirements for youth sports.
 
 ---

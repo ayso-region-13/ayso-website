@@ -6,8 +6,6 @@ section: fields
 description: "Blair High School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# Blair High School
-
 Blair High School has two field areas used for practices and games.
 
 ## Location

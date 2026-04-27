@@ -7,12 +7,6 @@ permalink: "/register/"
 description: "Register your child for AYSO Region 13 youth soccer in Pasadena. Player registration opens each season through InLeague."
 ---
 
-# Registration
-
-Register for AYSO Region 13 soccer programs through InLeague.
-
----
-
 ## How to Register
 
 1. Visit InLeague

@@ -6,8 +6,6 @@ section: fields
 description: "Muir South practice fields — AYSO Region 13 location in Pasadena. Address, parking, and directions."
 ---
 
-# Muir South
-
 Muir South is a softball field used for practices.
 
 ## Location

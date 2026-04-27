@@ -6,8 +6,6 @@ section: coaches
 description: "Guide for Region 13 coaches of All-Stars and tournament teams. Preparation, rules, and logistics for AYSO tournament play."
 ---
 
-# Tournament Teams
-
 Coaches can take teams to AYSO tournaments. Each tournament has unique rules and application processes.
 
 ---

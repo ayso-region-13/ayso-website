@@ -6,12 +6,6 @@ section: schedules
 description: "AYSO Region 13 season calendar — key dates for registration, season start, playoffs, tournaments, and special events."
 ---
 
-# Season Calendar
-
-Key dates for the current AYSO season.
-
----
-
 ## View Calendar
 
 [InLeague](https://ayso13.inleague.com/app)

@@ -6,12 +6,6 @@ section: resources
 description: "AYSO Region 13 document library — forms, handbooks, training materials, and official documents."
 ---
 
-# Documents
-
-Forms, handbooks, and reference materials for Region 13.
-
----
-
 ## Parent Forms
 
 - Parent Pledge (Kids Zone)

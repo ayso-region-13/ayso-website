@@ -6,12 +6,6 @@ section: about
 description: "The AYSO Region 13 Hall of Fame honors volunteers and players who have made outstanding contributions to youth soccer in the Pasadena area."
 ---
 
-# Hall of Fame
-
-Region 13 recognizes outstanding volunteers, coaches, and referees who contribute to our community.
-
----
-
 ## Annual Awards
 
 ### Golden Ball Award (Coach of the Year)

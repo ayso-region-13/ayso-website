@@ -7,8 +7,6 @@ heroImage: "action-06.jpg"
 description: "Spring Soccer is Region 13's recreational spring program. Open registration for all players ages 6–14."
 ---
 
-# Spring Soccer
-
 Spring Soccer offers league play from March through May for players who want more soccer after the fall and winter seasons.
 
 ![Spring soccer game at Region 13](/images/game-05.jpg)

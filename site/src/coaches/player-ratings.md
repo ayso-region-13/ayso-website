@@ -6,8 +6,6 @@ section: coaches
 description: "Player rating guidelines for AYSO Region 13 coaches. How to evaluate players for balanced team formation."
 ---
 
-# Player Ratings
-
 Coaches in 10U-14U divisions rate every player on their roster at the end of each season. These ratings support balanced team creation and All-Stars selection.
 
 ---

@@ -7,8 +7,6 @@ permalink: "/volunteers/"
 description: "Volunteer with AYSO Region 13. Coaching, refereeing, team managing, and board roles available. No prior experience necessary."
 ---
 
-# Volunteering with Region 13
-
 AYSO is an all-volunteer organization. Every team needs five key volunteers: two coaches, two referees, and one team manager.
 
 ---

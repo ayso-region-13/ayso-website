@@ -6,8 +6,6 @@ section: referees
 description: "Laws of the Game for AYSO referees in Region 13. AYSO modifications to FIFA rules for youth soccer."
 ---
 
-# Laws of the Game
-
 The Laws of the Game are the official rules for soccer, established by the International Football Association Board (IFAB). These laws apply worldwide across professional, collegiate, and youth soccer, with modifications for younger age groups.
 
 ---

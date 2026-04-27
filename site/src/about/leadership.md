@@ -6,8 +6,6 @@ section: about
 description: "Meet the volunteer board and leadership team that runs AYSO Region 13 youth soccer in the Pasadena area."
 ---
 
-# Leadership
-
 AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of the program.
 
 ---

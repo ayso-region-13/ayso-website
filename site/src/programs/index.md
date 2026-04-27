@@ -7,10 +7,6 @@ permalink: "/programs/"
 description: "AYSO Region 13 offers youth soccer programs for players ages 4–19 in Pasadena. Fall Soccer, All-Stars, EPIC, Grad Series, Sunday Soccer, and more."
 ---
 
-# Programs
-
-AYSO Region 13 offers soccer programs throughout the year for players ages 4 through 19.
-
 ![Players across age groups at Region 13](/images/action-06.jpg)
 
 ---

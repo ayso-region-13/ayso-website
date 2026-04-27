@@ -6,12 +6,6 @@ section: volunteers
 description: "Field host (tent duty) guide for AYSO Region 13. Responsibilities and procedures for game-day field hosts at Victory Park."
 ---
 
-# Field Host / Tent Volunteer
-
-Field hosts staff the AYSO information tent on game days.
-
----
-
 ## Locations
 
 - Victory Park: Near the playground

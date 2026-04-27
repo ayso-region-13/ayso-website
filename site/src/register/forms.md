@@ -6,8 +6,6 @@ section: register
 description: "Volunteer registration requirements for AYSO Region 13 coaches, referees, and team managers."
 ---
 
-# Required Forms
-
 Parents complete required forms during registration and at the start of each season.
 
 ---

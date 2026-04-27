@@ -115,15 +115,15 @@ Full palette + usage notes are in `brand-colors.md` (palette doc) and `.impeccab
 
 | Tailwind name | Hex | Role |
 |---|---|---|
-| `brand-red` | `#ff3c3c` | Bright accent — hero "SOCCER", tile underline strips, decorative only (fails AA on white) |
-| `brand-red-dark` | `#ce0e2d` | Logo red — primary text emphasis (headings, links, nav active), tile bodies, hero buttons |
+| `brand-red` | `#f74b4b` | Coral accent — hero "SOCCER", tile underline strips, decorative only (fails AA on white) |
+| `brand-red-dark` | `#83312d` | Burgundy — primary text emphasis (headings, links, nav active), tile bodies, hero buttons |
 | `brand-maroon` | `#8e2929` | Structural frames — quick-action bar, sidebar header, role panel, link hover |
 | `brand-maroon-dark` | `#3a0d12` | Photo gallery strip background |
-| `brand-header` | `#230612` | inLeague pill button, very dark accents |
-| `brand-cream` | `#ede5d3` | Warm tan surface — Let's Play section, interior page header, sidebar hover/active |
-| `brand-green` | `#a7ce57` | Field status "Open" |
-| `brand-gold` | `#f5bd4e` | Announcement bar, field status "Monitoring" |
-| `brand-dark` | `#231f20` | Body text, footer bg |
+| `brand-header` | `#230511` | inLeague pill button, very dark accents |
+| `brand-cream` | `#ede8e2` | Warm off-white surface — Let's Play section, interior page header, sidebar hover/active |
+| `brand-green` | `#a6ce57` | Field status "Open" |
+| `brand-gold` | `#f4bd4d` | Announcement bar, field status "Monitoring" |
+| `brand-dark` | `#221f1f` | Body text, footer bg |
 
 Font: **Raleway** (300–900) loaded from Google Fonts in `base.njk` head.
 

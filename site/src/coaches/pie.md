@@ -6,8 +6,6 @@ section: coaches
 description: "The PIE philosophy — Positive, Inspiring, and Enthusiastic coaching. AYSO's approach to youth soccer coaching in Region 13."
 ---
 
-# PIE Philosophy
-
 PIE stands for Positive, Instructional, and Encouraging. This framework represents AYSO's core coaching philosophy.
 
 ---

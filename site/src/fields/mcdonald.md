@@ -6,10 +6,6 @@ section: fields
 description: "McDonald Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# McDonald Park
-
-McDonald Park is a practice field in Pasadena.
-
 ## Location
 
 [1000 E Mountain St, Pasadena CA 91104](https://maps.google.com/?q=1000+E+Mountain+St,+Pasadena,+CA+91104)

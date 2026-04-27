@@ -6,8 +6,6 @@ section: coaches
 description: "Shootout (penalty kick) rules and procedures for AYSO Region 13 games."
 ---
 
-# Shootout Guide
-
 Penalty shootouts determine match outcomes when games end in ties during playoffs and tournaments.
 
 ---

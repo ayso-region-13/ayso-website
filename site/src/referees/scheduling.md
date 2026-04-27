@@ -6,8 +6,6 @@ section: referees
 description: "How referee scheduling works in AYSO Region 13. Self-scheduling through the online referee scheduling system."
 ---
 
-# Referee Scheduling
-
 Referees sign up for game assignments each week through InLeague.
 
 ---

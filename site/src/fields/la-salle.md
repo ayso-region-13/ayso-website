@@ -6,10 +6,6 @@ section: fields
 description: "La Salle High School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# La Salle High School
-
-La Salle High School is a practice field.
-
 ## Location
 
 [3880 E Sierra Madre Blvd, Pasadena, CA 91107](https://maps.google.com/?q=3880+E+Sierra+Madre+Blvd,+Pasadena,+CA+91107)

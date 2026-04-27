@@ -6,8 +6,6 @@ section: fields
 description: "Goal assembly and disassembly instructions for AYSO Region 13 volunteer coaches and field hosts."
 ---
 
-# Goal Setup Instructions
-
 Teams with first games of the day provide volunteers to set up goals. Arrive 30 minutes before game time.
 
 ## Victory Park

@@ -5,8 +5,6 @@ section: volunteers
 description: "Required training and certifications for all AYSO Region 13 volunteers — coaches, referees, team managers, and other volunteers."
 ---
 
-# Training Requirements
-
 Every adult volunteer at AYSO Region 13 must complete background screening and safety training before working with players. Coaches and referees also complete role-specific certification.
 
 ---

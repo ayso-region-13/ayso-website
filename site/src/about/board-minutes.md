@@ -6,8 +6,6 @@ section: about
 description: "AYSO Region 13 board meeting minutes and official records."
 ---
 
-# Board Minutes
-
 Meeting minutes from Region 13 board meetings are available for review. Board meetings are held on the first Thursday of every month at 7:15pm. Everyone is welcome to attend.
 
 ## Minutes Archive

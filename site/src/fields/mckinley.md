@@ -6,10 +6,6 @@ section: fields
 description: "McKinley School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# McKinley
-
-McKinley has practice and game fields.
-
 ## Location
 
 [325 S. Oak Knoll Ave., Pasadena CA 91101](https://maps.google.com/?q=325+S+Oak+Knoll+Ave,+Pasadena,+CA+91101)

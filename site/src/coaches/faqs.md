@@ -6,12 +6,6 @@ section: coaches
 description: "Frequently asked questions for AYSO Region 13 coaches — training requirements, game cards, substitutions, and more."
 ---
 
-# Coach FAQs
-
-Common questions from coaches.
-
----
-
 ## Getting Started
 
 ### Do I need soccer experience to coach?

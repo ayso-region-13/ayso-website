@@ -6,8 +6,6 @@ section: referees
 description: "The Youth Referee Program (PRO) trains young referees ages 12–18 in AYSO Region 13. Learn to referee while earning community service hours."
 ---
 
-# PRO Youth Referee Program
-
 The PRO (Player Referee Organization) program trains young players to become certified referees.
 
 ---

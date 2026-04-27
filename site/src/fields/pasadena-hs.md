@@ -5,10 +5,6 @@ section: fields
 description: "Pasadena High School north field — AYSO Region 13 practice location in Pasadena. Address and directions."
 ---
 
-# Pasadena High School
-
-Pasadena High School's north field is a practice location in Pasadena.
-
 ## Location
 
 [Washington Blvd & Sierra Madre, Pasadena, CA](https://maps.google.com/?q=Pasadena+High+School,+Pasadena,+CA)

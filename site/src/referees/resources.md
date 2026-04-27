@@ -6,12 +6,6 @@ section: referees
 description: "Resources for AYSO Region 13 referees — documents, forms, training materials, and referee handbook."
 ---
 
-# Referee Resources
-
-Tools, documents, and guides for Region 13 referees.
-
----
-
 ## Quick Links
 
 - [Referee Scheduler](https://ayso13.inleague.com/app/referee-scheduler) — Sign up for games

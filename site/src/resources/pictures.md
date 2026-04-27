@@ -6,8 +6,6 @@ section: resources
 description: "AYSO Region 13 photos and images from games, tournaments, and events."
 ---
 
-# Picture Day
-
 Team and individual photos are taken during the fall season.
 
 ---

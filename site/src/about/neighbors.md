@@ -6,8 +6,6 @@ section: about
 description: "AYSO regions neighboring Region 13 in the greater Los Angeles area. Find the right region for your community."
 ---
 
-# Neighboring Regions
-
 Region 13 is one of several AYSO regions in the San Gabriel Valley. We collaborate with our neighbors for tournaments and competitive play. Our Area is [AYSO Area 1 - C](https://www.ayso1c.org/)
 
 ---
