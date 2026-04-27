@@ -312,8 +312,11 @@
 /practice/portable-lights       /fields/                                        301
 
 # ── Resources ─────────────────────────────────────────────────────────────
-/forms/                         /resources/documents/                           301
-/forms                          /resources/documents/                           301
+# Note: /forms/ now serves a real page (the Google Apps Script upload tool).
+# Old query-string variants like /forms/?go=1 flow through to the new page,
+# where its inline JS detects the query string and triggers the iframe.
+/resources/newsletter/          /resources/newsletters/                         301
+/resources/newsletter           /resources/newsletters/                         301
 /report/                        /resources/documents/                           301
 /report                         /resources/documents/                           301
 /pictures/                      /resources/gallery/                             301
@@ -328,8 +331,8 @@
 /incident                       /resources/safety/                              301
 /tickets/                       /resources/                                     301
 /tickets                        /resources/                                     301
-/news/                          /                                               301
-/news                           /                                               301
+/news/                          /resources/newsletters/                         301
+/news                           /resources/newsletters/                         301
 
 # ── Contact ───────────────────────────────────────────────────────────────
 /contact-us/                    /contact/                                       301

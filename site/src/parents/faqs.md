@@ -76,7 +76,7 @@ Check the [field status page](/schedules) and your email Saturday morning.
 Yes. Let your coach know in advance.
 
 ### Does my child have to play goalkeeper?
-In older divisions (10U+), coaches ask for goalkeeper volunteers. No one is forced to play goalkeeper.
+In older divisions (10U+), coaches ask for goalkeeper volunteers. Goalkeeping is voluntary — players choose whether to take a turn.
 
 ---
 
@@ -102,7 +102,7 @@ Yes. Email [equipment@ayso13.org](mailto:equipment@ayso13.org).
 Yes. AYSO's "Everyone Plays" philosophy means every player participates in at least half of every game.
 
 ### Do you keep score?
-In younger divisions (6U-8U), we don't emphasize score. In older divisions, score and standings are tracked, but there's no elimination — every team plays a full season.
+In younger divisions (6U-8U), the focus is on play and skill development rather than the scoreboard. In older divisions, score and standings are tracked, and every team plays a full season — no elimination.
 
 ### What if my child is much better (or not as good) as the others?
 Our blind-draw team formation process helps create balanced teams.

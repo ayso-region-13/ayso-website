@@ -90,7 +90,7 @@ module.exports = [
       { label: "Getting Started",           url: "/parents/" },
       { label: "Team Info",                 url: "/parents/team/" },
       { label: "Equipment & Uniforms",      url: "/parents/equipment/" },
-      { label: "Parent Pledge",             url: "/parents/pledge/" },
+      { label: "Kids Zone",                 url: "/parents/pledge/" },
       { label: "Parent FAQs",               url: "/parents/faqs/" },
       { label: "Being a Supportive Parent", url: "/parents/support/" },
       // Role sections — most parents are also coaches, refs, or managers
@@ -203,7 +203,7 @@ module.exports = [
       { label: "Resources Overview",  url: "/resources/" },
       { label: "Document Library",    url: "/resources/documents/" },
       { label: "Photo Gallery",       url: "/resources/gallery/" },
-      { label: "Newsletter",          url: "/resources/newsletter/" },
+      { label: "Newsletters",         url: "/resources/newsletters/" },
       { label: "Safety & Heat Policy",url: "/resources/safety/" },
     ],
   },

@@ -166,7 +166,7 @@ Questions? Contact us at [registrar@ayso13.org](mailto:registrar@ayso13.org) or 
 - [Age Divisions](/register/age-chart/) — Exact birth date cutoffs
 - [Field Map](/fields) — Where we play
 - [Volunteer Training](/volunteers/classes) — Coach and referee certification
-- [Parent Pledge](/parents/pledge) — Our commitment to positive sidelines
+- [Kids Zone](/parents/pledge/) — How families show up at Region 13 games
 
 ---
 

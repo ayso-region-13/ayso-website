@@ -1,0 +1,9 @@
+---
+question: Can a goalkeeper be inside the box and handle the ball outside of the box?
+category: Goalkeeper Rules
+---
+The simple answer is "no." But let's get into a bit more detail. The goalkeeper is entitled to handle the ball ***when the ball is inside the penalty area***. So the goalkeepers feet and body could be outside the penalty area, so long as the ball is inside. But if the goalkeeper reaches out of the penalty area and touches the ball, it would be a handball offense.
+
+This can get complicated along the edges. If the ball is partly in and partly outside the penalty area, the goalkeeper may touch the part of the ball that is within the penalty area, but not the part outside the penalty area. (Keep in mind that the part of the ball on or above ***the line marking the penalty area is part of the penalty area***.) On those very close calls, especially when part or most of the ball is on or inside the penalty area line, referees want to be very sure the goalkeeper is touching the ball outside before whistling for an offense. As the offense occurs outside the penalty area, the restart would be a direct free kick, not a penalty kick. ***There can ++never++ be a penalty kick for a goalkeeper handball offense.*** 
+
+*(An aside for those who have been around the Game a while and might question part of the answer. It **used to be** that we were taught that if any part of the ball was in the penalty area, then the goalkeeper could touch any part of the ball. You may have been taught that in a referee class or coaching class. That interpretation changed recently, and the goalkeeper is only entitled to touch the part of the ball in the penalty area (including the part that is on or above the line).)*

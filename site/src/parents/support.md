@@ -68,8 +68,8 @@ Reasons to resist:
 
 Referees — especially at younger levels — are often teens learning the job. They will miss calls.
 
-- Don't yell at referees (your child is watching)
-- Don't loudly complain about calls to other parents
+- Stay quiet when calls go against you (your child is watching)
+- Save concerns about calls for after the game, away from other parents
 - If there's a real concern, let your coach handle it
 
 ---
@@ -160,14 +160,14 @@ Car ride: Talk about anything but the game (unless they bring it up).
 ## More Resources
 
 - [The Sideline Project](https://thesidelineproject.com/take-pledge/) — Research-based guidance for sports parents
-- [Parent Pledge](/parents/pledge) — Our commitment to positive sidelines
+- [Kids Zone](/parents/pledge/) — How families show up at Region 13 games
 - [Feedback Form](/contact/feedback/) — Share feedback on the parent experience
 
 ---
 
 ## Related Pages
 
-- [Parent Pledge](/parents/pledge) — The six commitments we ask parents to make
+- [Kids Zone](/parents/pledge/) — Ten standards for behavior at games and events
 - [Getting Started](/parents/) — Overview for new families
 - [Parent FAQs](/parents/faqs) — Common questions answered
 

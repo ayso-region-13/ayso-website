@@ -17,14 +17,10 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [ ] Update Node version in Cloudflare Pages to suppress LTS maintenance warning (currently 22, upgrade to 24)
 
 ### Content
-- [ ] **2 unresolved INLEAGUE placeholders** (newsletter signup URLs not found on old site — ask the team):
-  - `referees/resources.md` — Newsletter subscription links
-  - `resources/newsletter.md` — WhistleStop (AYSO national referee newsletter) subscription link
-- [ ] **3 missing IMAGE placeholders** — source or remove:
+- [ ] **2 missing IMAGE placeholders** — source or remove:
   - `parents/pledge` — no source found
   - `parents/support` — no source found
-  - `programs/winter-stars` — no source found
-- [ ] Full content review pass on staging.ayso13.org
+- [ ] Full content review pass on staging.ayso13.org (board members)
 
 
 ### Pre-Launch
@@ -44,6 +40,29 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ---
 
 ## Completed ✓
+
+### Session 12 (2026-04-26)
+- [x] Sponsor strip removed from home page (commented out in home.njk for easy re-enable)
+- [x] Sponsor logos removed from /volunteers/sponsors/ page; page now leads with "Become a Sponsor" tier cards + how-to-contribute info
+- [x] Wide hero strip removed from interior page template (page.njk); body imagery only
+- [x] Hero image moved into body markdown for the 2 pages that had hero only (wca, winter-stars)
+- [x] Page H1 weight bumped to font-extrabold for stronger headline
+- [x] 100 markdown files swept: duplicate `# Title` and description-rephrase intro paragraphs removed; substantive intros (definitions, dates, tips) kept
+- [x] /volunteers/roles/ enhanced — combined with authoritative content from old ayso13.org/roles; added 12 missing roles; existing role descriptions enriched; reorganized General Board into 6 subgroups
+- [x] Lighter red strip added below maroon quick-action bar (above field status bar)
+- [x] "I'm a soccer..." panel given brand-red border-4
+- [x] New logo SVG (red/pink design) — squared viewBox, regenerated favicons via rsvg-convert (true transparency)
+- [x] Brand palette refresh:
+  - brand-red: #ff3c3c → #f74b4b (coral)
+  - brand-red-dark: #ce0e2d → #83312d (burgundy; contrast improves: white-on-dark goes 5.83→8.6:1)
+  - brand-cream: #ede5d3 → #ede8e2 (cooler off-white)
+  - brand-header, brand-dark, brand-green, brand-gold: small palette-matching tweaks
+- [x] Random hero on page load — 5 candidate images at site/src/images/home/region13_home_*.jpg; JS picks one each load; image 1 is no-JS fallback (loading=eager + fetchpriority=high), 2-5 hidden + lazy
+- [x] Highlighter-bar text overlay for hero (white-on-red bar + red-on-white bar, semi-transparent)
+- [x] OG image fallback set to /images/home/region13_home_5.jpg
+- [x] New branded home imagery installed: 6 program tiles (tile_core, tile_preschool, tile_upper, tile_allstars, tile_grad, tile_epic) + 3 gallery photos (gallery_1/2/3)
+- [x] Audit pass (19/20 → resolved 3 items): Ask the Referee Related Pages links, sponsor strip hover, tile subtitle weight bumped to large-text qualifying
+- [x] Documentation updated: claude.md (palette + last-updated), brand-colors.md (full palette refresh), site-overview.md (Slab-friendly summary)
 
 ### Session 11 (2026-04-26)
 - [x] Home page redesign — huge SOCCER FOR EVERYONE hero, two-tone alternating buttons, Let's Play tiles with semi-transparent inset labels (alternating dark red / maroon bodies)

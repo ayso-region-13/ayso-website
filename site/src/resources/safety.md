@@ -82,7 +82,7 @@ Referees use a separate misconduct form.
 
 Region 13 recommends the FIFA 11+ warmup program to help prevent injuries.
 
-[FIFA 11+ Warmup Program (PDF)](https://ayso13.org/wp-content/uploads/2023/09/fifa_11plus.pdf)
+[FIFA 11+ Warmup Program (PDF)](/assets/docs/fifa-11plus.pdf)
 
 ---
 

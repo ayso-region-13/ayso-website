@@ -10,22 +10,22 @@ Parents complete required forms during registration and at the start of each sea
 
 ---
 
-## Forms to Sign
+## Required Acknowledgments
 
-These forms are required for each player:
+The following are required for each player at registration:
 
-### Parent Pledge (Kids Zone)
-Commits to supporting positive sideline behavior.
+### Kids Zone
+Region 13 follows AYSO's Kids Zone — ten standards for behavior at games and events. See [/parents/pledge/](/parents/pledge/).
 
 ### Concussion Information Sheet
-Acknowledges concussion risks and removal protocols. Required by California law.
+Concussion risks and removal protocols. Required by California law.
 
 ### Sudden Cardiac Arrest Information Sheet
-Acknowledges SCA risks and warning signs. Required by California law.
+SCA risks and warning signs. Required by California law.
 
-Download the forms:
+Download the state-required forms:
 
-[Parent Pledge (PDF)](https://ayso13.org/wp-content/uploads/2022/07/ParentPledge.pdf) · [Concussion & SCA Forms (PDF)](https://ayso13.org/wp-content/uploads/2022/08/2021-AYSO-Concussion-SCA.pdf)
+[Concussion & SCA Forms (PDF)](/assets/docs/concussion-sca-forms.pdf)
 
 ---
 
@@ -33,7 +33,7 @@ Download the forms:
 
 Sign the forms and upload through the digital form submission portal.
 
-[Form Upload Portal](https://ayso13.org/forms/?go=1)
+[Form Upload Portal](/forms/?go=1)
 
 ---
 

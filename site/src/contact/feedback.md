@@ -38,7 +38,7 @@ Or email: [referee@ayso13.org](mailto:referee@ayso13.org)
 
 Report injuries, near misses, misconduct, and other incidents.
 
-Injuries, risks, stray dogs, etc., please report it!
+Injuries, risks, stray dogs, and other concerns can be reported here.
 
 1. Coach, [fill out this form](https://aysovolunteers.org/wp-content/uploads/2021/10/Incident_Report_Form_with_Instr_rev09102021.pdf).
 2. [Upload it here](https://docs.google.com/forms/d/e/1FAIpQLScMSiIVlcBH9MkLgaFOLKbGYP-4bn2uli-DO0x0bnWZ1Hiq2w/viewform) or email to safety@ayso13.org

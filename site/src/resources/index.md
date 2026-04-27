@@ -51,7 +51,7 @@ Forms, handbooks, and reference materials.
 
 Stay informed with the Region 13 newsletter.
 
-[Newsletter](/resources/newsletter)
+[Newsletters](/resources/newsletters/)
 
 ---
 

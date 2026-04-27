@@ -8,15 +8,15 @@ description: "AYSO Region 13 document library — forms, handbooks, training mat
 
 ## Parent Forms
 
-- Parent Pledge (Kids Zone)
+- Kids Zone — see [/parents/pledge/](/parents/pledge/)
 - Concussion Information Sheet
 - Sudden Cardiac Arrest Information Sheet
 
-[Parent Pledge (PDF)](https://ayso13.org/wp-content/uploads/2022/07/ParentPledge.pdf) · [Concussion & SCA Forms (PDF)](https://ayso13.org/wp-content/uploads/2022/08/2021-AYSO-Concussion-SCA.pdf)
+[Concussion & SCA Forms (PDF)](/assets/docs/concussion-sca-forms.pdf)
 
 Submit signed forms through the upload portal.
 
-[Form Upload Portal](https://ayso13.org/forms/?go=1)
+[Form Upload Portal](/forms/?go=1)
 
 ---
 
