@@ -160,14 +160,14 @@ Car ride: Talk about anything but the game (unless they bring it up).
 ## More Resources
 
 - [The Sideline Project](https://thesidelineproject.com/take-pledge/) — Research-based guidance for sports parents
-- [Parent Pledge](/parents/pledge) — Our commitment to positive sidelines
+- [Kids Zone](/parents/pledge/) — How families show up at Region 13 games
 - [Feedback Form](/contact/feedback/) — Share feedback on the parent experience
 
 ---
 
 ## Related Pages
 
-- [Parent Pledge](/parents/pledge) — The six commitments we ask parents to make
+- [Kids Zone](/parents/pledge/) — Ten standards for behavior at games and events
 - [Getting Started](/parents/) — Overview for new families
 - [Parent FAQs](/parents/faqs) — Common questions answered
 

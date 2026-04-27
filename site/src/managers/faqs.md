@@ -54,10 +54,10 @@ Makeup photo sessions are scheduled. The Picture Day Coordinator will provide da
 
 ## Forms and Paperwork
 
-### What forms do families need to sign?
+### What does each family acknowledge at registration?
 - Concussion Information Sheet
 - Sudden Cardiac Arrest Information Sheet
-- Kids Zone Parent Pledge
+- The AYSO [Kids Zone](/parents/pledge/) — ten standards for behavior at games and events
 
 ### How do I upload team photos?
 Use the team-specific link provided by the organization.

@@ -86,7 +86,7 @@ Personal data is handled according to AYSO National Board-approved privacy polic
 
 - [Safety](/resources/safety) — Safety policies and incident reporting
 - [Fine Print](/about/fine-print) — Legal disclosures and waivers
-- [Parent Pledge](/parents/pledge) — Sideline conduct expectations
+- [Kids Zone](/parents/pledge/) — Sideline conduct expectations
 
 ---
 

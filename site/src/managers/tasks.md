@@ -19,10 +19,10 @@ Sign up for the AYSO Region 13 Newsletter and encourage families to subscribe.
 Work with the coach to identify and designate team volunteers (manager and referees) using the provided spreadsheet.
 
 ### Parent Forms
-Collect signed forms from each family:
+Confirm each family has acknowledged the required items at registration:
 - Concussion Information Sheet
 - Sudden Cardiac Arrest Information Sheet
-- Kids Zone Parent Pledge
+- AYSO [Kids Zone](/parents/pledge/)
 
 Upload team photos via the team-specific link.
 

@@ -6,18 +6,20 @@ section: about
 description: "Terms, conditions, and fine print for AYSO Region 13 programs and player registration."
 ---
 
-## Parent Pledge
+## Kids Zone
 
-When you register, you agree to the Kids Zone Parent Pledge, which covers:
-- Punctuality
-- Prioritizing fun
-- Redefining success
-- Sportsmanship
-- Appropriate sideline behavior
-- Positive language
-- No substances or weapons at events
+Region 13 follows the AYSO Kids Zone — a national program that sets ten standards for behavior at every game and event:
 
-See the full [Parent Pledge](/parents/pledge).
+- Kids come first
+- Fun matters more than winning
+- Players play, fans cheer, coaches coach
+- Respect for the volunteer referees
+- Positive language at all times
+- No weapons, alcohol, tobacco, or drugs at AYSO events
+- Leave no trash behind
+- Celebrate the player — win or lose
+
+See the full [Kids Zone](/parents/pledge/).
 
 ---
 
@@ -78,7 +80,7 @@ Participants and guardians release AYSO, facilities, sponsors, and volunteers fr
 ## Related Pages
 
 - [Policies](/about/policies) — Safety and conduct policies
-- [Parent Pledge](/parents/pledge) — Sideline conduct expectations
+- [Kids Zone](/parents/pledge/) — Sideline conduct expectations
 - [Safety](/resources/safety) — Safety information and incident reporting
 
 ---
