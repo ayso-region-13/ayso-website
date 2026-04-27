@@ -46,7 +46,7 @@ Most teams use one of these methods:
 
 Your coach or team manager will let you know which method your team uses.
 
-Add your coach and team manager to your phone contacts so their messages don't get filtered.
+Add your coach and team manager to your phone contacts so their messages reach you reliably.
 
 ---
 

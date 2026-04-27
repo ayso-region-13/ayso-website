@@ -68,8 +68,8 @@ Reasons to resist:
 
 Referees — especially at younger levels — are often teens learning the job. They will miss calls.
 
-- Don't yell at referees (your child is watching)
-- Don't loudly complain about calls to other parents
+- Stay quiet when calls go against you (your child is watching)
+- Save concerns about calls for after the game, away from other parents
 - If there's a real concern, let your coach handle it
 
 ---

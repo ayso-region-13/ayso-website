@@ -30,7 +30,7 @@ I will show respect for coaches, referees, opponents, and other parents at all t
 During games, I will cheer encouragement rather than shout instructions. Coaching from the sidelines is confusing for children.
 
 ### 6. Protect the Car Ride Home
-I will not criticize my child's play, their teammates, their coach, or the referees on the way home. If my child wants to talk about the game, I will focus on what they enjoyed.
+I will keep the car ride supportive — focusing on what my child enjoyed rather than critiquing their play, their teammates, their coach, or the referees. If my child wants to talk about the game, I will follow their lead.
 
 ---
 

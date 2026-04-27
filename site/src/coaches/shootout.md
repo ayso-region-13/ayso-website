@@ -42,9 +42,9 @@ Have a predetermined kicking order list ready. Know who your top 5 kickers are a
 - Keep players in the center circle — wandering counts as a missed kick
 
 ### Managing the Team
-- Hand players the written kicking order to prevent confusion
+- Hand players the written kicking order so everyone knows when they kick
 - Keep remaining players focused and in the circle
-- Avoid talking to referees during the shootout
+- Let the referees run the shootout — stay quiet on the sideline
 
 ---
 

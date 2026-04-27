@@ -44,7 +44,7 @@ Firm ground (FG) cleats work on all our fields.
 
 #### Sizing Tips
 
-- Kids' feet grow fast — don't buy too far ahead
+- Kids' feet grow fast — buy close to when shoes are needed
 - Soccer shoes should fit snugly (tighter than regular shoes)
 - Women's/girls' sizes: Add 1.5 to convert to men's sizing (Women's 8 = Men's 6.5)
 - IDA brand makes cleats designed for wider feet
@@ -57,14 +57,14 @@ For beginners, look for shin guards with an ankle strap or sleeve — these stay
 
 What to look for:
 - Should cover from just below the knee to above the ankle
-- Snug fit that doesn't slide around
+- Snug fit that stays in place
 - Comfortable enough to wear for an hour
 
 Shin guards are available at most sporting goods stores for $10-20.
 
 ### Soccer Ball (Optional)
 
-Teams share balls at practice and games, so you don't need one. If your child wants to practice at home:
+Teams share balls at practice and games, so a personal ball is optional. If your child wants to practice at home:
 
 | Division | Ball Size |
 |----------|-----------|

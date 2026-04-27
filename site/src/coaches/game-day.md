@@ -38,7 +38,7 @@ In 6U-8U, each team splits in half and plays on two fields simultaneously:
 ### 10U-14U Format
 - Manage substitutions to ensure equal playing time (minimum 50%, aim for 75%)
 - Complete game cards
-- Support referees — don't argue calls
+- Support referees — accept their calls
 
 ---
 
@@ -55,7 +55,7 @@ In 6U-8U, each team splits in half and plays on two fields simultaneously:
 ## Sideline Behavior
 
 - Model good sportsmanship
-- Don't yell at referees
+- Speak respectfully to referees
 - Keep parents informed but focused on cheering, not coaching
 - Remember: Referees ref, Coaches coach, Parents cheer
 
