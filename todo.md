@@ -54,6 +54,9 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [x] Gallery page palette fix — green header → cream + maroon, two-tone signature strip added, filter buttons updated to new burgundy `#83312d`, AA contrast on Share callout links
 - [x] Link checker hardened — `scripts/check-links.js` now auto-runs `npm run build` before checking; pass `--no-build` to skip; eliminates false positives from dev-server transform-on-request URLs
 - [x] Redirect map updates — `/news/` → `/resources/newsletters/`, `/resources/newsletter/` → plural URL; `/forms/` no longer redirects (now serves the upload page directly)
+- [x] Leadership table fixed — Operations table was rendering only 2 of 3 columns (header declared `Role | Name`, rows had Role/Name/Email); now full 3 columns visible with all email addresses
+- [x] Horizontal rules stripped — 536 standalone `---` body separators removed across 77 markdown files
+- [x] Prose H2 underline removed — `border-b border-gray-200` on every `.prose h2` was the source of the gray line under "Quick Facts", "How Registration Works", etc.
 
 ### Session 12 (2026-04-26)
 - [x] Sponsor strip removed from home page (commented out in home.njk for easy re-enable)
