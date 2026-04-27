@@ -15,11 +15,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ### Infrastructure
 - [x] Cloudflare Pages Node version updated to 24 (LTS maintenance warning resolved)
-- [ ] **Build time optimization** — verify Cloudflare Pages build cache is delivering
-  - [x] Cloudflare Pages build cache toggled ON (Settings → Builds & deployments)
-  - [ ] Next deploy populates the cache (will still be slow ~5+ min — that's expected)
-  - [ ] Deploy after that should drop to ~60-90 sec; check the timing in the deployment log
-  - **If cache doesn't deliver**: fallback is to drop AVIF from `eleventyImageTransformPlugin` formats in `.eleventy.js` (`["avif","webp","auto"]` → `["webp","auto"]`). Loses ~5-10% per-image weight on AVIF-capable browsers, gains ~60% build time. Other options if needed: pre-commit generated variants (adds ~80 MB to repo), Cloudflare Images (paid), GitHub Action pre-gen.
+- [x] **Build time optimization** — Cloudflare Pages build cache wouldn't engage despite being toggled on, framework preset set to Eleventy, V3 build system. Three deploys logged "Skipping build output cache as it's not supported for your project" / "Failed to upload dependencies to build cache." Resolved by dropping AVIF from `eleventyImageTransformPlugin` formats in `.eleventy.js` (`["avif","webp","auto"]` → `["webp","auto"]`). Image processing time drops ~60%; per-image weight up ~5-10% on AVIF-capable browsers (WebP still covers 96%+ of users). If we ever want both AVIF + fast builds: file a Cloudflare ticket about the cache, commit pre-generated variants (~80 MB repo cost), use Cloudflare Images (paid), or move generation to a scheduled GitHub Action.
 
 ### Content
 - [ ] **2 missing IMAGE placeholders** — source or remove:

@@ -146,13 +146,19 @@ module.exports = function (eleventyConfig) {
   });
 
   // --- Image optimization ---
-  // Auto-transforms every <img> tag in HTML output into a <picture> element with
-  // AVIF + WebP sources and the original format as fallback. SVGs are passed
+  // Auto-transforms every <img> tag in HTML output into a <picture> element
+  // with WebP sources and the original format as fallback. SVGs are passed
   // through unchanged. Generated variants live under /img/. Existing attributes
   // on <img> tags (e.g. loading="eager", fetchpriority) override the defaults.
+  //
+  // AVIF is intentionally excluded: encoding is disproportionately slow (60%+
+  // of total image processing time) and Cloudflare Pages build cache doesn't
+  // engage for this project, so every deploy regenerates from scratch. WebP
+  // covers 96%+ of users globally and gives most of the size benefit. See
+  // todo.md "Build time optimization" for the history.
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     extensions: "html",
-    formats: ["avif", "webp", "auto"],
+    formats: ["webp", "auto"],
     widths: [600, 1200, "auto"],
     defaultAttributes: {
       loading: "lazy",
