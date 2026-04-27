@@ -21,8 +21,6 @@ Region 13 follows the AYSO Kids Zone — a national program that sets ten standa
 
 See the full [Kids Zone](/parents/pledge/).
 
----
-
 ## Health and Safety Disclosures
 
 California state law requires that parents receive information on:
@@ -31,8 +29,6 @@ California state law requires that parents receive information on:
 - Prescription opioids
 
 These documents are provided during registration.
-
----
 
 ## Privacy Policy
 
@@ -53,8 +49,6 @@ Photo and video permissions are requested during registration. Player identities
 ### Sponsor Access
 Sponsors do not have access to membership data.
 
----
-
 ## Disclaimer and Assumption of Risk
 
 Participants acknowledge that soccer involves physical activity with inherent risks including but not limited to:
@@ -67,22 +61,16 @@ Participants acknowledge that soccer involves physical activity with inherent ri
 
 Participants and guardians release AYSO, facilities, sponsors, and volunteers from liability claims.
 
----
-
 ## Refund Policy
 
 - AYSO National player fees are non-refundable
 - Regional fees may be refundable until the first scheduled event, per regional specifications
 - See [Getting Started](/parents/) for Region 13's specific refund schedule
 
----
-
 ## Related Pages
 
 - [Policies](/about/policies) — Safety and conduct policies
 - [Kids Zone](/parents/pledge/) — Sideline conduct expectations
 - [Safety](/resources/safety) — Safety information and incident reporting
-
----
 
 *Last updated: [DATE]*

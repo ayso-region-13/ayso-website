@@ -8,8 +8,6 @@ description: "Laws of the Game for AYSO referees in Region 13. AYSO modification
 
 The Laws of the Game are the official rules for soccer, established by the International Football Association Board (IFAB). These laws apply worldwide across professional, collegiate, and youth soccer, with modifications for younger age groups.
 
----
-
 ## Official Resources
 
 The Laws of the Game are available in multiple formats:
@@ -18,8 +16,6 @@ The Laws of the Game are available in multiple formats:
 - LOTG mobile app
 
 [IFAB Laws of the Game](https://www.theifab.com/laws-of-the-game/)
-
----
 
 ## AYSO Age-Group Modifications
 
@@ -43,8 +39,6 @@ AYSO modifies certain rules for youth development. Region 13 provides division-s
 
 PDF guidelines for each age group are available in the [Referee Document Library](/referees/resources).
 
----
-
 ## Common Rule Clarifications
 
 **Goal Kicks**
@@ -62,22 +56,16 @@ Allowed if taped down with only the alert portion visible. This exception applie
 **Cleats**
 Toe cleats are not prohibited by default. Referees inspect for dangerous burrs or sharp edges on any cleat type. Soccer-specific cleats are recommended.
 
----
-
 ## Penalty Kicks
 
 Region 13 provides specific guidelines for penalty kick procedures, including shootouts for tournaments.
 
 [Region 13 Penalty Kick Guidelines (PDF)](/assets/docs/penalty-kick-guidelines-2023.pdf)
 
----
-
 ## Related Pages
 
 - [Refereeing Overview](/referees) — Getting started
 - [Referee Resources](/referees/resources) — Document library
 - [Referee FAQs](/referees/faqs) — Common questions
-
----
 
 *Last updated: [DATE]*

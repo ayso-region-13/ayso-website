@@ -10,8 +10,6 @@ All AYSO regions are entirely run by volunteers. The roles below outline the way
 
 To express interest in any of these roles, email the Regional Commissioner at [rc@ayso13.org](mailto:rc@ayso13.org).
 
----
-
 ## Team Volunteers
 
 These four roles run the day-to-day of every team. See the [Volunteers Overview](/volunteers/) for getting started.
@@ -28,15 +26,11 @@ Officiates games. Requires 8U Official or Regional Referee certification dependi
 ### Team Manager
 Handles team communication and logistics — schedule reminders, snack rotation, picture day coordination, and end-of-season events. Requires team manager orientation and Safe Haven training. See the [Team Managers section](/managers/).
 
----
-
 ## AYSO Region 13 Board
 
 The Regional Board coordinates the work of every other volunteer. The board meets once a month, usually on the first Thursday at 7:15 PM, at the Region 13 Clubhouse in Altadena (occasionally on Zoom — see the regional calendar). Anyone is welcome to attend.
 
 The board uses email, Slack, and text messaging to communicate. Slack access is open to all Region 13 volunteers and parents.
-
----
 
 ## Executive Board
 
@@ -71,8 +65,6 @@ Oversees safety for players, coaches, referees, and other volunteers. Assists wi
 
 ### Auditor
 Assists the Regional Commissioner with fiduciary responsibilities.
-
----
 
 ## General Board
 
@@ -165,8 +157,6 @@ Records scores and referee comments from game cards. Analyzes data for patterns.
 #### Rose City Cup Director
 Plans the December playoff tournament. Designs brackets, orders medals and trophies, assigns teams, and publishes the schedule and results. Approximately 20–30 hours during December. Coordinates with field permits and division coaches on bracket structure.
 
----
-
 ## How to Volunteer
 
 To express interest in any role, contact the Regional Commissioner:
@@ -177,15 +167,11 @@ To express interest in any role, contact the Regional Commissioner:
 
 Most board roles begin with a conversation about your interests, time, and skills. New volunteers often start in a smaller role and grow into larger ones over time.
 
----
-
 ## Related Pages
 
 - [Volunteering Overview](/volunteers/) — Getting started
 - [Training Classes](/volunteers/classes/) — Certification requirements
 - [Training Matrix](/volunteers/training-matrix/) — Required training by role
 - [Board Meetings](/about/board-minutes/) — Meeting notes archive
-
----
 
 *Last updated: [DATE]*

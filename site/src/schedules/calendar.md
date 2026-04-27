@@ -10,8 +10,6 @@ description: "AYSO Region 13 season calendar — key dates for registration, sea
 
 [InLeague](https://ayso13.inleague.com/app)
 
----
-
 ## Fall Season Overview
 
 | Event | Typical Timing |
@@ -28,16 +26,12 @@ description: "AYSO Region 13 season calendar — key dates for registration, sea
 | Rose City Cup | December |
 | Awards Dinner | December |
 
----
-
 ## Spring Season Overview
 
 | Event | Typical Timing |
 |-------|----------------|
 | Registration Opens | January |
 | Season Runs | March-May |
-
----
 
 ## Other Programs
 
@@ -46,20 +40,14 @@ description: "AYSO Region 13 season calendar — key dates for registration, sea
 
 See [Programs](/programs) for details on each program.
 
----
-
 ## Contact
 
 - Calendar questions: [info@ayso13.org](mailto:info@ayso13.org)
 - Phone: 626-316-6900
 
----
-
 ## Related Pages
 
 - [Schedules Overview](/schedules) — All schedule information
 - [Programs](/programs) — Program descriptions
-
----
 
 *Last updated: [DATE]*

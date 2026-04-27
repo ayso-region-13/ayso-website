@@ -8,8 +8,6 @@ description: "Shootout (penalty kick) rules and procedures for AYSO Region 13 ga
 
 Penalty shootouts determine match outcomes when games end in ties during playoffs and tournaments.
 
----
-
 ## Basic Rules
 
 - Only players on the field at the end of regulation or overtime may participate
@@ -19,8 +17,6 @@ Penalty shootouts determine match outcomes when games end in ties during playoff
 - The kicking sequence can change between rounds
 - Any player on the field can serve as goalkeeper
 - Goalkeeper changes are allowed at any time
-
----
 
 ## Coach Preparation
 
@@ -33,8 +29,6 @@ Penalty shootouts determine match outcomes when games end in ties during playoff
 ### Before a Potential Shootout
 Have a predetermined kicking order list ready. Know who your top 5 kickers are and who will follow.
 
----
-
 ## During the Shootout
 
 ### Immediately After the Whistle
@@ -46,8 +40,6 @@ Have a predetermined kicking order list ready. Know who your top 5 kickers are a
 - Keep remaining players focused and in the circle
 - Let the referees run the shootout — stay quiet on the sideline
 
----
-
 ## Special Rules
 
 ### Substitutions
@@ -56,13 +48,9 @@ No substitutions are allowed except for injured goalkeepers.
 ### Unequal Teams
 If one team has fewer players, the opposing team must remove players to equalize numbers.
 
----
-
 ## Related Pages
 
 - [Game Day Guide](/coaches/game-day) — Running games
 - [Tournament Teams](/coaches/tournament-teams) — Tournament information
-
----
 
 *Last updated: [DATE]*

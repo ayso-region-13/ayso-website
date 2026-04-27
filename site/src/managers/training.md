@@ -34,21 +34,15 @@ description: "Required training for AYSO Region 13 team managers — SafeSport, 
 - Volunteer Slack channel guidelines
 - [Team Manager Tasks](/managers/tasks) documentation
 
----
-
 ## Recommended Training
 
 ### Concussion and Sudden Cardiac Arrest Training
 Team managers are frequently the first to observe signs of a head injury. California law requires this training for certain youth sports roles. Complete through eTrainU.
-
----
 
 ## Related Pages
 
 - [Manager Overview](/managers) — Getting started
 - [Manager Tasks](/managers/tasks) — Full checklist
 - [Training Classes](/volunteers/classes) — All volunteer training
-
----
 
 *Last updated: [DATE]*

@@ -11,15 +11,11 @@ description: "Field host (tent duty) guide for AYSO Region 13. Responsibilities 
 - Victory Park: Near the playground
 - Rose Bowl Area H: Near the blockhouse
 
----
-
 ## Sign Up
 
 Volunteer through WeJoinIn.
 
 [Sign Up on WeJoinIn](https://www.wejoinin.com/AYSORegion13)
-
----
 
 ## Responsibilities
 
@@ -39,8 +35,6 @@ Volunteer through WeJoinIn.
 ### Lost Children
 The tent serves as a meeting point for lost children and their parents.
 
----
-
 ## Donut Reimbursement
 
 Field hosts may purchase donuts and coffee for volunteers:
@@ -49,21 +43,15 @@ Field hosts may purchase donuts and coffee for volunteers:
 
 Scan your receipt for monthly reimbursement.
 
----
-
 ## Contact
 
 - General questions: [info@ayso13.org](mailto:info@ayso13.org)
 - Game-day emergencies: 626-702-AYSO
-
----
 
 ## Related Pages
 
 - [Volunteering Overview](/volunteers) — Getting started
 - [Volunteer Roles](/volunteers/roles) — Other positions
 - [Field Locations](/fields) — Map and directions
-
----
 
 *Last updated: [DATE]*

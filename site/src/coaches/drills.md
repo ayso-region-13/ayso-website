@@ -10,8 +10,6 @@ description: "Soccer drills and skills exercises for AYSO Region 13 coaches. Age
 
 AYSO provides age-specific coaching manuals with practice activities appropriate for each division. You'll receive your manual during coach training.
 
----
-
 ## Practice Structure
 
 A typical practice includes:
@@ -36,8 +34,6 @@ A typical practice includes:
    - Team circle
    - Preview of next practice/game
 
----
-
 ## Age-Appropriate Focus
 
 ### 6U-8U
@@ -56,26 +52,18 @@ A typical practice includes:
 - Team tactics
 - Advanced techniques
 
----
-
 ## Online Resources
 
 AYSOU provides [coaching tools](https://wiki.ayso.org/wiki/Category:Coach).
 
----
-
 ## Professional Training Programs
 
 The region occasionally offers skills training led by professional coaches, such as Launch Sports. These are separate programs with their own registration and fees.
-
----
 
 ## Related Pages
 
 - [Practice Resources](/coaches/practice) — Field assignments and logistics
 - [PIE Philosophy](/coaches/pie) — Positive coaching approach
 - [Coach Training](/coaches/training) — Certification requirements
-
----
 
 *Last updated: [DATE]*

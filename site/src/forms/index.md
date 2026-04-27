@@ -14,8 +14,6 @@ The forms supported here are:
 - Sudden Cardiac Arrest (SCA) Information Sheet
 - AYSO Kids Zone (legacy parent pledge submissions)
 
----
-
 ## Upload
 
 <p><a href="?go=1"><button class="btn btn-primary">Open the upload form</button></a></p>
@@ -37,14 +35,10 @@ if (window.location.search.indexOf('key=') !== -1) showApp();
 if (window.location.search.indexOf('ID=') !== -1) showApp();
 </script>
 
----
-
 ## If You Have Trouble
 
 - **Players in 4U and 5U:** bring the paper forms with you on the first day. There will be a box at the field to drop them in.
 - **Everyone else:** bring the forms to your coach or team manager, who can scan and upload them for you.
-
----
 
 ## Print the Forms
 
@@ -53,13 +47,9 @@ If you still need the printable versions:
 - [Concussion & SCA Forms (PDF)](/assets/docs/concussion-sca-forms.pdf)
 - [Kids Zone (no signature required — community standards)](/parents/pledge/)
 
----
-
 ## Related Pages
 
 - [Registration Forms](/register/forms/) — All required forms at registration
 - [Document Library](/resources/documents/) — All Region 13 documents
-
----
 
 *Last updated: [DATE]*

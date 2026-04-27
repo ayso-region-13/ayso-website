@@ -12,8 +12,6 @@ Kids Zone isn't something you sign. It's how we show up at every game.
 
 [IMAGE: Parents watching from sideline]
 
----
-
 ## The Ten Guidelines
 
 The AYSO National Kids Zone Pledge sets ten standards for behavior on and around the field:
@@ -48,8 +46,6 @@ Bring out what you bring in. Trash bins are at every field; if they're full, tak
 ### 10. Celebrate the player — win or lose
 Cheer effort, growth, and good plays from both teams. Final scores fade quickly; how kids feel about the game stays with them.
 
----
-
 ## What "Players Play, Fans Cheer" Looks Like in Practice
 
 ### Helpful Sideline Comments
@@ -66,8 +62,6 @@ Cheer effort, growth, and good plays from both teams. Final scores fade quickly;
 
 When parents shout instructions, kids often look toward the sideline instead of focusing on the game. They become confused when sideline directions conflict with what their coach taught them.
 
----
-
 ## The Car Ride Home
 
 After the game, follow your child's lead.
@@ -76,20 +70,14 @@ If they want to talk about the game, listen. If they want to talk about somethin
 
 The car ride home is one of the strongest predictors of whether a child will want to come back next season.
 
----
-
 ## Source
 
 The Kids Zone Pledge is an [AYSO National program](https://ayso.org/the-kids-zone-pledge/). Region 13 follows the national pledge as written.
-
----
 
 ## Related Pages
 
 - [Being a Supportive Parent](/parents/support) — Tips for before, during, and after games
 - [Getting Started](/parents/) — Overview for new families
 - [Your Child's Team](/parents/team) — Game day basics
-
----
 
 *Last updated: [DATE]*

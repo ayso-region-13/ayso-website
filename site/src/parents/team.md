@@ -8,8 +8,6 @@ description: "Information for Region 13 parents about your child's team — rost
 
 ![Region 13 team with coach](/images/game-06.jpg)
 
----
-
 ## How You'll Find Out Your Team
 
 About 1-2 weeks before the season starts, you'll receive an email with:
@@ -20,8 +18,6 @@ About 1-2 weeks before the season starts, you'll receive an email with:
 - First game date and field
 
 If you haven't received team information within a week of the season starting, check your spam folder first, then contact [team@ayso13.org](mailto:team@ayso13.org).
-
----
 
 ## Team Communication
 
@@ -47,8 +43,6 @@ Most teams use one of these methods:
 Your coach or team manager will let you know which method your team uses.
 
 Add your coach and team manager to your phone contacts so their messages reach you reliably.
-
----
 
 ## Game Day Basics
 
@@ -86,8 +80,6 @@ Plan to arrive 15-20 minutes before game time. This gives your child time to:
 | 12U | 60 minutes | Two 30-minute halves |
 | 14U | 70 minutes | Two 35-minute halves |
 
----
-
 ## Practice
 
 ### When and Where
@@ -110,8 +102,6 @@ Parents are welcome to watch but are asked to stay on the sidelines and let the 
 
 Let your coach know in advance if your child will miss practice.
 
----
-
 ## Weather Cancellations
 
 ### Checking Field Status
@@ -129,8 +119,6 @@ You can also check our [homepage](/) for weather alerts.
 
 If conditions look bad, check the website before leaving home.
 
----
-
 ## Standings and Schedules
 
 ### Game Schedule
@@ -143,8 +131,6 @@ If conditions look bad, check the website before leaving home.
 
 AYSO emphasizes development over winning. Standings are available, but there's no elimination — every team plays a full season, and every player receives equal playing time.
 
----
-
 ## End of Season
 
 ### Final Games
@@ -154,8 +140,6 @@ The last regular-season games are typically in mid-November. Some divisions have
 ### Team Party
 
 Most teams organize an end-of-season party to celebrate the season and receive participation awards. Your team manager will coordinate details.
-
----
 
 ## Questions and Contacts
 
@@ -167,15 +151,11 @@ Most teams organize an end-of-season party to celebrate the season and receive p
 | Game schedule questions | [schedule@ayso13.org](mailto:schedule@ayso13.org) |
 | General questions | [Contact us](/contact) |
 
----
-
 ## Related Pages
 
 - [Game Schedules](/schedules) — Full season schedule
 - [Field Map](/fields) — All practice and game field locations
 - [Getting Started](/parents/) — Overview for new families
 - [Being a Supportive Parent](/parents/support) — Tips for game day
-
----
 
 *Last updated: [DATE]*

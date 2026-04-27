@@ -11,8 +11,6 @@ Winter Stars is an 8-week program offering skills training and small-sided games
 
 ![Winter Stars practice session](/images/grad-series-01.jpg)
 
----
-
 ## Quick Facts
 
 - Ages: 6U and older
@@ -20,8 +18,6 @@ Winter Stars is an 8-week program offering skills training and small-sided games
 - Season: January through early March (8 weeks)
 - Cost: $125
 - Location: Marshall Fundamental School, Pasadena
-
----
 
 ## Program Format
 
@@ -35,15 +31,11 @@ Winter Stars is designed to be casual and low-commitment:
 
 This program welcomes players of all skill levels.
 
----
-
 ## Schedule (2026)
 
 - Season: January 11 through March 1, 2026
 - Day/Time: Every Sunday, 3:30-5pm
 - Location: Marshall Fundamental School (990 Allen Ave., Pasadena, CA 91104)
-
----
 
 ## Registration
 
@@ -66,8 +58,6 @@ If you register for Winter Stars and are later selected for All-Stars, your regi
 
 [Register on InLeague](https://ayso13.inleague.com/app)
 
----
-
 ## What to Bring
 
 - Shin guards (required)
@@ -77,14 +67,10 @@ If you register for Winter Stars and are later selected for All-Stars, your regi
 
 No jewelry or earrings permitted.
 
----
-
 ## Related Pages
 
 - [All-Stars](/programs/all-stars) — Competitive winter program
 - [Grad Series](/programs/grad-series) — Transition program for 8U graduates
 - [Programs Overview](/programs) — All Region 13 programs
-
----
 
 *Last updated: [DATE]*

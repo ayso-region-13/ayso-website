@@ -17,8 +17,6 @@ description: "Register your child for AYSO Region 13 youth soccer in Pasadena. P
 
 [Register on InLeague](https://ayso13.inleague.com/app)
 
----
-
 ## Current Registration
 
 Check InLeague for current registration status. Fall registration typically opens May 1 for the upcoming season.
@@ -30,8 +28,6 @@ Programs available:
 - Spring Soccer
 - Winter Stars
 - EPIC (inclusion program)
-
----
 
 ## Registration Fees
 
@@ -46,8 +42,6 @@ Fall Soccer registration is $210-$240 depending on registration date. Early regi
 EPIC program: $60
 
 Sibling discount: $20 off through May 31
-
----
 
 ## What is Included
 
@@ -64,15 +58,11 @@ You provide:
 
 A free used shoe exchange is held in August.
 
----
-
 ## Pay What You Can
 
 Region 13 offers registration on the honor system. Families who need assistance can pay what they can afford. Families who can contribute more help make this possible.
 
 Adjust pricing at checkout or contact [registrar@ayso13.org](mailto:registrar@ayso13.org) for assistance.
-
----
 
 ## Refund Policy
 
@@ -89,22 +79,16 @@ To request a withdrawal, complete the withdrawal form.
 
 [Withdrawal Form](https://docs.google.com/forms/d/e/1FAIpQLSfDm6c5f0ApchEegAIQdZTNWQImX_n6K3jBf11SVwaXoSqihg/viewform)
 
----
-
 ## Contact
 
 - Registration questions: [registrar@ayso13.org](mailto:registrar@ayso13.org)
 - General questions: [info@ayso13.org](mailto:info@ayso13.org)
 - Phone: 626-316-6900
 
----
-
 ## Related Pages
 
 - [Age Chart](/register/age-chart) — Divisions by birth year
 - [Programs](/programs) — Program descriptions
 - [Getting Started](/parents/) — New family guide
-
----
 
 *Last updated: [DATE]*

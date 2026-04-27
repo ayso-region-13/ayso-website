@@ -8,8 +8,6 @@ description: "Team manager tasks and checklists for AYSO Region 13. Pre-season, 
 
 Team managers oversee 13 tasks during the season. Many can be delegated to other parents.
 
----
-
 ## Administrative Tasks
 
 ### Newsletter Registration
@@ -26,8 +24,6 @@ Confirm each family has acknowledged the required items at registration:
 
 Upload team photos via the team-specific link.
 
----
-
 ## Team Communication
 
 ### Communication Platform
@@ -38,8 +34,6 @@ Create a rotation for halftime and post-game snacks. Account for food allergies.
 
 ### Field Inspection
 Coordinate parent volunteers to check the field for trash and hazards before each game.
-
----
 
 ## Events and Logistics
 
@@ -66,22 +60,16 @@ Recruit parent volunteers to staff the AYSO Region 13 tent at Victory Park. Sign
 ### Trophy Distribution (4U-8U and VIP Teams)
 Designate someone to collect personalized trophies, verify accuracy, and distribute to players.
 
----
-
 ## Tools
 
 - WeJoinIn for volunteer signups
 - Spond for team communication
 - InLeague for schedules and forms
 
----
-
 ## Related Pages
 
 - [Manager Overview](/managers) — Getting started
 - [Manager Training](/managers/training) — Requirements
 - [Goal Setup](/fields/goals) — Equipment instructions
-
----
 
 *Last updated: [DATE]*

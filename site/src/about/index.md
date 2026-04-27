@@ -11,8 +11,6 @@ AYSO's mission is to develop and deliver quality youth soccer programs that prom
 
 ![Kids playing soccer at AYSO Region 13](/images/action-07.jpg)
 
----
-
 ## The Six Philosophies
 
 ### 1. Everyone Plays
@@ -33,8 +31,6 @@ We maintain a safe, fair, fun, and positive environment based on mutual respect 
 ### 6. Player Development
 We focus on developing individual and team skills progressively, helping players improve throughout their soccer experience.
 
----
-
 ## Children's Rights in Sport
 
 AYSO supports Project Play's 8 Children's Rights in Sport:
@@ -47,14 +43,10 @@ AYSO supports Project Play's 8 Children's Rights in Sport:
 6. Dignity
 7. Enjoyment
 
----
-
 ## Related Pages
 
 - [History](/about/history) — Region 13's story
 - [Leadership](/about/leadership) — Our volunteer board
 - [Inclusion](/about/inclusion) — Our commitment to all players
-
----
 
 *Last updated: [DATE]*

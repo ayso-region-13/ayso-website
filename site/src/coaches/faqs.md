@@ -27,8 +27,6 @@ All coaches must complete:
 
 See [Coach Training](/coaches/training) for details.
 
----
-
 ## Equipment and Support
 
 ### What equipment does AYSO provide?
@@ -46,8 +44,6 @@ Many coaches add their own supplies over time.
 ### Can I coach multiple teams?
 Yes. Game scheduling can be adjusted to accommodate coaches with multiple teams. Coaches of multiple teams may, at times, have game conflicts (especially for assistant coaches).
 
----
-
 ## Practices
 
 ### How long are practices?
@@ -60,8 +56,6 @@ Arrange for another certified coach to cover. A fully certified coach must be pr
 ### Where do I find practice plans?
 Age-specific coaching manuals include practice activities. Additional resources are available through AYSOU.
 
----
-
 ## Games
 
 ### What if I can't make a game?
@@ -69,8 +63,6 @@ Contact your Division Coach Administrator. The organization will help find a rep
 
 ### Do all teams have assistant coaches?
 Teams typically have both head and assistant coaches, but assistant coaches are required only for 6U-8U.
-
----
 
 ## Players
 
@@ -80,8 +72,6 @@ Coaches in 10U-14U rate players at the end of the season to help create balanced
 ### What if a player is struggling?
 Talk privately with parents about concerns. Focus on the child's experience and development rather than performance. Contact your Division Coach Administrator for guidance on specific situations.
 
----
-
 ## Contact
 
 For coaching questions, contact:
@@ -89,14 +79,10 @@ For coaching questions, contact:
 - Your Division Coach Administrator
 - [coach@ayso13.org](mailto:coach@ayso13.org)
 
----
-
 ## Related Pages
 
 - [Coaching Overview](/coaches) — Getting started
 - [Coach Training](/coaches/training) — Requirements
 - [Practice Resources](/coaches/practice) — Planning practices
-
----
 
 *Last updated: [DATE]*

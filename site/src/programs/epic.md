@@ -8,8 +8,6 @@ description: "EPIC (Everyone Plays in the Community) pairs players who need fiel
 
 ![EPIC players at Region 13](/images/action-03.jpg)
 
----
-
 ## Quick Facts
 
 - Ages: All ages
@@ -17,15 +15,11 @@ description: "EPIC (Everyone Plays in the Community) pairs players who need fiel
 - Cost: $60
 - Registration: Open throughout the season
 
----
-
 ## How It Works
 
 EPIC pairs players with volunteer buddies who provide one-on-one support during sessions. Coaches work with each participant to create a customized experience based on individual needs.
 
 The program adapts rules and activities as needed to accommodate mobility or comprehension differences. The goal is for every participant to experience the joy of playing soccer.
-
----
 
 ## Buddy System
 
@@ -37,8 +31,6 @@ Buddies:
 - Provide encouragement and support
 - Adapt activities as needed
 
----
-
 ## What's Included
 
 - Uniform
@@ -46,13 +38,9 @@ Buddies:
 - End-of-season trophy
 - Insurance coverage
 
----
-
 ## Program History
 
 Originally called VIP (Very Important Player), this program was established in 1990 by Region 84 in Mission Viejo to serve people with physical and mental challenges. Region 13 offers this program in partnership with other San Gabriel Valley AYSO regions.
-
----
 
 ## Registration
 
@@ -60,21 +48,15 @@ Registration remains open throughout the season. Anyone can register at any time
 
 To join, contact: [tony@ayso13.org](mailto:tony@ayso13.org)
 
----
-
 ## Contact
 
 Program Manager: Tony D'Angelo
 Email: [vip@ayso13.org](mailto:vip@ayso13.org)
-
----
 
 ## Related Pages
 
 - [Programs Overview](/programs) — All Region 13 programs
 - [Getting Started](/parents/) — Overview for new families
 - [Inclusion](/about/inclusion) — Our commitment to inclusion
-
----
 
 *Last updated: [DATE]*

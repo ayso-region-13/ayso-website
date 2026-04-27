@@ -8,8 +8,6 @@ description: "AYSO regions neighboring Region 13 in the greater Los Angeles area
 
 Region 13 is one of several AYSO regions in the San Gabriel Valley. We collaborate with our neighbors for tournaments and competitive play. Our Area is [AYSO Area 1 - C](https://www.ayso1c.org/)
 
----
-
 ## San Gabriel Valley Regions
 
 | Region | Area | Website | Uniform Colors |
@@ -24,8 +22,6 @@ Region 13 is one of several AYSO regions in the San Gabriel Valley. We collabora
 | Region 908 | South El Monte | [ayso908.org](https://ayso908.org) | |
 | Region 1304 | Boyle Heights | [ayso1304.org](https://ayso1304.org) | |
 
----
-
 ## Collaboration
 
 Regions in Area 1-C collaborate for:
@@ -33,19 +29,13 @@ Regions in Area 1-C collaborate for:
 - Spring Cup tournaments
 - Area playoffs
 
----
-
 ## National Directory
 
 For a complete list of AYSO regions nationwide, visit the [AYSO national website](https://ayso.org).
-
----
 
 ## Related Pages
 
 - [All-Stars](/programs/all-stars) — Competitive play against neighboring regions
 - [Tournaments](/programs/tournaments) — Tournament information
-
----
 
 *Last updated: [DATE]*

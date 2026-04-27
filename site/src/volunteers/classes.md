@@ -8,8 +8,6 @@ description: "Volunteer training classes and clinics for AYSO Region 13. Coach c
 
 Volunteer training is available through eTrainU, with in-person classes scheduled before each season.
 
----
-
 ## Required Online Training (All Volunteers)
 
 These one-time courses are completed through eTrainU:
@@ -21,8 +19,6 @@ These one-time courses are completed through eTrainU:
 - Sudden Cardiac Arrest Awareness
 
 [eTrainU](https://ayso13.inleague.com/eTrainu/index/)
-
----
 
 ## Coach Training
 
@@ -44,8 +40,6 @@ Recommended: "Keep Girls In Sport" course
 
 See [Coach Training](/coaches/training) for details.
 
----
-
 ## Referee Training
 
 Referees complete certification courses based on the divisions they will officiate:
@@ -61,8 +55,6 @@ Courses are available online, in-person, or as a hybrid. Multiple classes are sc
 
 See [Referee Training](/referees/training) for details.
 
----
-
 ## Team Manager Training
 
 Team managers complete:
@@ -71,8 +63,6 @@ Team managers complete:
 - Safe Haven training (20 minutes online)
 
 See [Manager Training](/managers/training) for details.
-
----
 
 ## LiveScan Fingerprinting
 
@@ -83,29 +73,21 @@ Woodbury Road, Altadena
 
 You only need to repeat LiveScan if you move to a new region.
 
----
-
 ## Training Schedule
 
 In-person classes are scheduled nearly every weekend in August, with weeknight options available. The full schedule is posted in July.
 
 [Training Calendar on eTrainU](https://ayso13.inleague.com/eTrainu/index/)
 
----
-
 ## Contact
 
 - Training questions: [info@ayso13.org](mailto:info@ayso13.org)
 - Phone: 626-316-6900
-
----
 
 ## Related Pages
 
 - [Volunteering Overview](/volunteers) — Getting started
 - [Coach Training](/coaches/training) — Coaching certification
 - [Referee Training](/referees/training) — Referee certification
-
----
 
 *Last updated: [DATE]*

@@ -9,8 +9,6 @@ description: "Volunteer with AYSO Region 13. Coaching, refereeing, team managing
 
 AYSO is an all-volunteer organization. Every team needs five key volunteers: two coaches, two referees, and one team manager.
 
----
-
 ## Why Volunteer
 
 Volunteers make youth soccer possible. AYSO has only 18 paid staff members nationwide; everything else is done by parent volunteers like you.
@@ -20,8 +18,6 @@ When you volunteer, you:
 - Join a community of families working toward a common goal
 - Develop new skills
 - Shape how kids learn sportsmanship and teamwork
-
----
 
 ## Volunteer Requirements
 
@@ -34,8 +30,6 @@ All volunteers must complete:
 5. **SafeSport Training** — Annual renewal required
 
 [Register as a volunteer on InLeague](https://ayso13.inleague.com/app/volunteer)
-
----
 
 ## Role-Specific Training
 
@@ -53,15 +47,11 @@ Orientation video, Safe Haven training, and background check. See [Manager Train
 ### 4U/5U Volunteers
 No additional training required. The league hires professional coaches for these youngest divisions.
 
----
-
 ## Training Schedule
 
 Classes are scheduled nearly every weekend in August before the fall season, with weeknight options available. Registration is through eTrainU.
 
 [Training Calendar on eTrainU](https://ayso13.inleague.com/eTrainu/index/)
-
----
 
 ## Contact
 
@@ -69,14 +59,10 @@ Classes are scheduled nearly every weekend in August before the fall season, wit
 - Phone: 626-316-6900
 - Address: 711 W. Woodbury Rd., Unit E, Altadena, CA 91001
 
----
-
 ## Related Pages
 
 - [Volunteer Roles](/volunteers/roles) — Position descriptions
 - [Training Classes](/volunteers/classes) — Class schedule
 - [Volunteer FAQs](/volunteers/faqs) — Common questions
-
----
 
 *Last updated: [DATE]*

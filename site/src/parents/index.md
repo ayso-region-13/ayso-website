@@ -18,8 +18,6 @@ Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization servi
 - Cost: $210-$240 depending on registration date (scholarships available)
 - Location: Various fields across Pasadena and La Cañada — [see our field map](/fields)
 
----
-
 ## How Registration Works
 
 Registration typically opens May 1 each year. Earlier registration costs less:
@@ -47,8 +45,6 @@ Scholarships: No child is turned away for financial reasons. Contact [registrar@
 
 You provide: Soccer shoes (sneakers are fine) and shin guards. See our [equipment guide](/parents/equipment) for recommendations.
 
----
-
 ## Age Groups and Divisions
 
 Children are placed in divisions based on their age as of July 31 of the current year:
@@ -65,8 +61,6 @@ Children are placed in divisions based on their age as of July 31 of the current
 
 Check the [age chart](/register/age-chart/) for exact birth date cutoffs.
 
----
-
 ## The Volunteer Requirement
 
 AYSO runs entirely on parent volunteers. When you register your child, you'll be asked to volunteer as either a:
@@ -78,8 +72,6 @@ No soccer experience is required. Our training classes cover everything you need
 
 Other volunteer opportunities include team manager, field host, and snack coordinator. Learn more at [Volunteer Roles](/volunteers/roles).
 
----
-
 ## How Teams Are Formed
 
 ### Younger Divisions (6U-8U)
@@ -89,8 +81,6 @@ Teams are organized by school or neighborhood when possible. This helps kids pla
 Teams are formed through a blind draw process based on player skill ratings to create balanced teams.
 
 You can request that your child be placed with a specific friend or carpool partner during registration. We accommodate requests when possible but cannot guarantee them.
-
----
 
 ## What to Expect
 
@@ -112,8 +102,6 @@ Your team manager and coach will communicate via email and often a team app. Wat
 - Weather cancellations
 - Team events
 
----
-
 ## Programs Beyond Fall Soccer
 
 Fall soccer is our main program, but we offer others throughout the year:
@@ -127,8 +115,6 @@ Fall soccer is our main program, but we offer others throughout the year:
 | [EPIC](/programs/epic) | Fall | Children with special needs |
 
 See all [programs](/programs) for details.
-
----
 
 ## Common Questions
 
@@ -150,15 +136,11 @@ Yes. No child is turned away. Contact [registrar@ayso13.org](mailto:registrar@ay
 **What's the difference between AYSO and club soccer?**
 AYSO is recreational and inclusive — everyone plays, teams are balanced. Club soccer is more competitive with tryouts and travel.
 
----
-
 ## Ready to Register?
 
 <a href="https://ayso13.inleague.com/app" class="btn-primary" target="_blank" rel="noopener">Register on InLeague</a>
 
 Questions? Contact us at [registrar@ayso13.org](mailto:registrar@ayso13.org) or visit our [contact page](/contact).
-
----
 
 ## Related Pages
 
@@ -167,7 +149,5 @@ Questions? Contact us at [registrar@ayso13.org](mailto:registrar@ayso13.org) or 
 - [Field Map](/fields) — Where we play
 - [Volunteer Training](/volunteers/classes) — Coach and referee certification
 - [Kids Zone](/parents/pledge/) — How families show up at Region 13 games
-
----
 
 *Last updated: [DATE]*

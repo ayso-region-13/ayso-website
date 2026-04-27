@@ -43,8 +43,6 @@ description: "The AYSO Region 13 Hall of Fame honors volunteers and players who 
 | 2022 | Oscar Alvarez-Salazar, Matthew Goldman |
 | 2021 | Terry Takahashi, Patrick Shopbell, Stas Petropoulos |
 
----
-
 ## Lifetime Achievement Awards
 
 ### Vic Gutierrez Award (Lifetime Service as Coach)
@@ -70,8 +68,6 @@ description: "The AYSO Region 13 Hall of Fame honors volunteers and players who 
 | 2024 | Taj Chiu |
 | 2022 | Al Prado, DeWayne McMullin |
 
----
-
 ## Team Name of the Year
 | Year | Names |
 |------|-------|
@@ -82,14 +78,10 @@ description: "The AYSO Region 13 Hall of Fame honors volunteers and players who 
 | 2021 | Ketchup Blasters, Fuchsia Force |
 | 2019 | Lavender Kicking Queens, Burnt Chicken Nuggets |
 
----
-
 ## Related Pages
 
 - [Leadership](/about/leadership) — Current board members
 - [Volunteer Roles](/volunteers/roles) — Ways to help
 - [History](/about/history) — Region 13's story
-
----
 
 *Last updated: [DATE]*

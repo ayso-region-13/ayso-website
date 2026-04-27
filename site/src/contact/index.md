@@ -13,15 +13,11 @@ description: "Contact AYSO Region 13. Phone, email, and mailing address for the 
 - Phone: 626-316-6900
 - Game-day emergencies: 626-702-AYSO
 
----
-
 ## Mailing Address
 
 AYSO Region 13
 711 W. Woodbury Rd., Unit E
 Altadena, CA 91001
-
----
 
 ## Department Contacts
 
@@ -38,15 +34,11 @@ Altadena, CA 91001
 | Pictures | [pictures@ayso13.org](mailto:pictures@ayso13.org) |
 | Website | [webmaster@ayso13.org](mailto:webmaster@ayso13.org) |
 
----
-
 ## Feedback
 
 Provide feedback about coaches, referees, or general concerns.
 
 [Submit Feedback](/contact/feedback)
-
----
 
 ## Leadership
 
@@ -54,14 +46,10 @@ View the current board of directors and their contact information.
 
 [Leadership](/about/leadership)
 
----
-
 ## Related Pages
 
 - [Feedback](/contact/feedback) — Submit feedback
 - [Leadership](/about/leadership) — Board contacts
 - [About Region 13](/about) — Our organization
-
----
 
 *Last updated: [DATE]*
