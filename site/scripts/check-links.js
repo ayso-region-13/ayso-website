@@ -1,10 +1,30 @@
 #!/usr/bin/env node
-// check-links.js — finds broken internal links in the built _site/ directory
+// check-links.js — finds broken internal links in the built _site/ directory.
+//
+// Always runs `npm run build` first so we're checking against the production
+// output (with hashed eleventy-img URLs and Pagefind assets). Pass --no-build
+// to skip the rebuild and check the existing _site/ as-is.
 
-const fs   = require("fs");
-const path = require("path");
+const fs            = require("fs");
+const path          = require("path");
+const { spawnSync } = require("child_process");
 
-const SITE = path.join(__dirname, "../_site");
+const SITE       = path.join(__dirname, "../_site");
+const SITE_ROOT  = path.join(__dirname, "..");
+const SKIP_BUILD = process.argv.includes("--no-build");
+
+if (!SKIP_BUILD) {
+  console.log("→ Running production build (npm run build) before checking links…");
+  const result = spawnSync("npm", ["run", "build"], {
+    cwd: SITE_ROOT,
+    stdio: "inherit",
+  });
+  if (result.status !== 0) {
+    console.error("✗  Build failed; aborting link check.");
+    process.exit(1);
+  }
+  console.log("");
+}
 
 function walk(dir) {
   let files = [];
