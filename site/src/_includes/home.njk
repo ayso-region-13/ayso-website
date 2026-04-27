@@ -135,12 +135,12 @@ layout: base.njk
     </div>
 
     {% set programs = [
-      { name: "Fall Soccer",     sub: "6U–14U · Core Program",     url: "/programs/fall-soccer/",    img: "action-02.jpg" },
-      { name: "Pre-School",      sub: "4U/5U",                     url: "/programs/preschool/",      img: "action-04.jpg" },
-      { name: "Upper Division",  sub: "16U–19U",                   url: "/programs/upper-division/", img: "action-03.jpg" },
-      { name: "All-Stars",       sub: "Select Competitive Play",   url: "/programs/all-stars/",      img: "all-stars-01.jpg" },
-      { name: "Grad Series",     sub: "8u Transitional",           url: "/programs/grad-series/",    img: "grad-series-01.jpg" },
-      { name: "EPIC",            sub: "Inclusion Program",         url: "/programs/epic/",           img: "action-06.jpg" }
+      { name: "Fall Soccer",     sub: "6U–14U · Core Program",     url: "/programs/fall-soccer/",    img: "home/tile_core.jpg" },
+      { name: "Pre-School",      sub: "4U/5U",                     url: "/programs/preschool/",      img: "home/tile_preschool.jpg" },
+      { name: "Upper Division",  sub: "16U–19U",                   url: "/programs/upper-division/", img: "home/tile_upper.jpg" },
+      { name: "All-Stars",       sub: "Select Competitive Play",   url: "/programs/all-stars/",      img: "home/tile_allstars.jpg" },
+      { name: "Grad Series",     sub: "8u Transitional",           url: "/programs/grad-series/",    img: "home/tile_grad.jpg" },
+      { name: "EPIC",            sub: "Inclusion Program",         url: "/programs/epic/",           img: "home/tile_epic.jpg" }
     ] %}
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -210,9 +210,9 @@ layout: base.njk
 <section class="bg-brand-maroon-dark">
   <div class="grid grid-cols-1 md:grid-cols-3">
     {% set galleryPhotos = [
-      { img: "action-07.jpg", alt: "Players on the field" },
-      { img: "action-08.jpg", alt: "Players in action" },
-      { img: "wca-01.jpg",    alt: "Region 13 players celebrating" }
+      { img: "home/gallery_1.jpg", alt: "Region 13 players in action" },
+      { img: "home/gallery_2.jpg", alt: "Region 13 players in action" },
+      { img: "home/gallery_3.jpg", alt: "Region 13 players in action" }
     ] %}
     {% for photo in galleryPhotos %}
     <a href="/resources/gallery/" class="block aspect-[4/3] overflow-hidden">
