@@ -5,10 +5,6 @@ section: fields
 description: "FIS Upper field — AYSO Region 13 practice and game location in La Cañada. Address, parking, and field map."
 ---
 
-# Foothill Intermediate School — Upper (FIS Upper)
-
-FIS Upper is a practice and game field in La Cañada.
-
 ## Location
 
 [4320 Cornishon Ave, La Cañada Flintridge, CA 91011](https://maps.google.com/?q=4320+Cornishon+Ave,+La+Canada+Flintridge,+CA+91011)

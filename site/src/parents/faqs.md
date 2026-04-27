@@ -6,12 +6,6 @@ section: parents
 description: "Frequently asked questions for Region 13 parents — registration, schedules, refunds, uniforms, volunteering, and more."
 ---
 
-# Parent FAQs
-
-Answers to common questions.
-
----
-
 ## Registration
 
 ### When does registration open?

@@ -6,12 +6,6 @@ section: managers
 description: "Frequently asked questions for AYSO Region 13 team managers."
 ---
 
-# Team Manager FAQs
-
-Common questions from team managers.
-
----
-
 ## Getting Started
 
 ### What training do I need?

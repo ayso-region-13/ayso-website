@@ -6,8 +6,6 @@ section: parents
 description: "What your child needs to play soccer in Region 13: cleats, shin guards, uniform, and ball requirements by age group."
 ---
 
-# Equipment and Uniforms
-
 We provide the uniform. You provide shoes and shin guards.
 
 [IMAGE: Soccer equipment laid out - cleats, shin guards, jersey, shorts, socks]

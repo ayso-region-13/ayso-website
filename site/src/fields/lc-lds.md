@@ -5,10 +5,6 @@ section: fields
 description: "LC LDS field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
 ---
 
-# LC LDS Field
-
-The LDS field is a practice location in La Cañada.
-
 ## Location
 
 [1830 Foothill Blvd, La Cañada CA 91011](https://maps.google.com/?q=1830+Foothill+Blvd,+La+Canada,+CA+91011)

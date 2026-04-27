@@ -7,8 +7,6 @@ permalink: "/referees/"
 description: "Volunteer refereeing in AYSO Region 13. Help make games happen — training, certification, and scheduling support provided."
 ---
 
-# Refereeing in Region 13
-
 AYSO depends on parent volunteers to referee games. Without referees, games cannot be played.
 
 ---

@@ -6,8 +6,6 @@ section: managers
 description: "Team manager tasks and checklists for AYSO Region 13. Pre-season, in-season, and post-season responsibilities."
 ---
 
-# Team Manager Tasks
-
 Team managers oversee 13 tasks during the season. Many can be delegated to other parents.
 
 ---

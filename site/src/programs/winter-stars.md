@@ -7,11 +7,9 @@ heroImage: "grad-series-01.jpg"
 description: "Winter Stars is Region 13's winter soccer program for returning Fall Soccer players. Games run December through February."
 ---
 
-# Winter Stars
-
 Winter Stars is an 8-week program offering skills training and small-sided games for players ages 6 and up during the winter months.
 
-[IMAGE: Winter Stars session]
+![Winter Stars practice session](/images/grad-series-01.jpg)
 
 ---
 

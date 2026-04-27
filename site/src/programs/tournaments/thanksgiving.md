@@ -6,8 +6,6 @@ section: programs
 description: "The Region 13 Thanksgiving Tournament is an annual AYSO soccer tournament held over Thanksgiving weekend in Pasadena."
 ---
 
-# Thanksgiving Tournament
-
 The Thanksgiving Tournament is a three-day competition held the weekend after Thanksgiving for 10U, 12U, and 14U teams.
 
 ![Thanksgiving Tournament game action](/images/game-02.jpg)

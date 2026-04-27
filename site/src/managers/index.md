@@ -7,12 +7,6 @@ permalink: "/managers/"
 description: "Team manager roles and responsibilities in AYSO Region 13. Managers support coaches and keep teams organized throughout the season."
 ---
 
-# Team Manager Overview
-
-Team managers handle the organizational and communication work that keeps a team running smoothly.
-
----
-
 ## Role Summary
 
 The team manager works alongside the coach to:

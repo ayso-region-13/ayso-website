@@ -6,12 +6,6 @@ section: referees
 description: "AYSO referee training and certification for Region 13. Online courses, in-person clinics, and upgrade pathways for all levels."
 ---
 
-# Referee Training
-
-All referees must complete training and certification before officiating games.
-
----
-
 ## Certification Requirements
 
 ### Step 1: Referee Instruction Course

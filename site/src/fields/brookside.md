@@ -6,8 +6,6 @@ section: fields
 description: "Brookside Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# Brookside Park
-
 Brookside Park is located near the Rose Bowl in Pasadena.
 
 ## Location

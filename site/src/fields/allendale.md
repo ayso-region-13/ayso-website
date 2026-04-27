@@ -6,8 +6,6 @@ section: fields
 description: "Allendale Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# Allendale Park
-
 Allendale Park is a practice field and parking location for Blair High School.
 
 ## Location

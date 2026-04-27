@@ -6,8 +6,6 @@ section: schedules
 description: "AYSO Region 13 division standings for the current season."
 ---
 
-# Standings
-
 Standings are tracked for 10U, 12U, 14U, and 16U House League divisions.
 
 ---

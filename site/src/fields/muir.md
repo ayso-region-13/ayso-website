@@ -6,8 +6,6 @@ section: fields
 description: "Muir High School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# Muir High School
-
 Muir High School has multiple field areas for practices.
 
 ## Location

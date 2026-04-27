@@ -6,8 +6,6 @@ section: fields
 description: "Victory Park in Pasadena — AYSO Region 13's primary game location for 6U–12U divisions. Address, parking, and field map."
 ---
 
-# Victory Park
-
 Victory Park is the primary game location for 6U-12U divisions.
 
 ## Location

@@ -3,123 +3,188 @@
 title: "Volunteer Roles"
 layout: page.njk
 section: volunteers
-description: "Volunteer roles available in AYSO Region 13 — coach, referee, team manager, board member, field host, and more."
+description: "Volunteer roles available in AYSO Region 13 — coach, referee, team manager, board members, division administrators, program coordinators, and operations roles."
 ---
 
-# Volunteer Roles
+All AYSO regions are entirely run by volunteers. The roles below outline the ways community members contribute to running youth soccer in Pasadena, Altadena, La Cañada, and surrounding areas. AYSO has fewer than twenty paid employees nationwide; everyone you meet at Region 13 is a volunteer.
 
-AYSO Region 13 offers volunteer positions ranging from team-level support to regional leadership.
+To express interest in any of these roles, email the Regional Commissioner at [rc@ayso13.org](mailto:rc@ayso13.org).
 
 ---
 
-## Team Roles
+## Team Volunteers
+
+These four roles run the day-to-day of every team. See the [Volunteers Overview](/volunteers/) for getting started.
 
 ### Coach
-Leads practices and games for a team. Requires age-specific certification. See [Coaching Overview](/coaches).
+Leads practices and games for an assigned team. Requires age-specific certification (Safe Haven plus the appropriate division class). See the [Coaches section](/coaches/).
 
 ### Assistant Coach
-Supports the head coach with practices and games. Recommended for 6U-8U divisions. Same training requirements as head coach.
+Supports the head coach with practices and games. Strongly recommended for 6U–8U divisions. Same training requirements as the head coach.
 
 ### Referee
-Officiates games. Requires 8U Official or Regional Referee certification. See [Refereeing Overview](/referees).
+Officiates games. Requires 8U Official or Regional Referee certification depending on the division. See the [Referees section](/referees/).
 
 ### Team Manager
-Handles team communication and logistics. Requires orientation and Safe Haven training. See [Manager Overview](/managers).
+Handles team communication and logistics — schedule reminders, snack rotation, picture day coordination, and end-of-season events. Requires team manager orientation and Safe Haven training. See the [Team Managers section](/managers/).
 
 ---
 
-## Executive Board Positions
+## AYSO Region 13 Board
 
-All board positions require attendance at monthly meetings (first Thursday, 7:15 PM on Zoom).
+The Regional Board coordinates the work of every other volunteer. The board meets once a month, usually on the first Thursday at 7:15 PM, at the Region 13 Clubhouse in Altadena (occasionally on Zoom — see the regional calendar). Anyone is welcome to attend.
+
+The board uses email, Slack, and text messaging to communicate. Slack access is open to all Region 13 volunteers and parents.
+
+---
+
+## Executive Board
+
+The Executive Board is the voting subset of the Regional Board, with authority over appointments and key regional decisions.
 
 ### Region Commissioner (RC)
-Manages the entire region and all volunteers. Chairs monthly board meetings. Coordinates with Area 1/C.
+Final responsibility for every aspect of the region — players, parents, volunteers, and year-round programs. Chairs monthly board meetings and represents Region 13 to Area 1/C and AYSO National.
 
 ### Deputy Region Commissioner (DRC)
-Assists the RC with projects and programs. Often filled by a previous Region Commissioner.
-
-### Treasurer
-Manages accounts payable and receivable. Prepares financial reports and oversees the budget process.
-
-### Registrar
-Manages player and volunteer registrations, waivers, background checks, and player assessments. Significant ongoing administrative work.
-
-### Secretary
-Records and distributes board meeting minutes. Approximately 2 hours monthly.
+Optional role. Assists the RC with projects and programs that need experienced leadership. Often filled by a previous RC who stays involved.
 
 ### Region Coach Administrator (RCA)
-Oversees all coaching and coach training for the region. Requires previous coaching or DCA experience.
+Reports to the RC. Responsible for all coaching and coach training in the region. Typically an experienced coach or former Division Coach Administrator (DCA).
 
 ### Region Referee Administrator (RRA)
-Manages all refereeing and referee training for the region. Requires previous refereeing or DRA experience.
+Reports to the RC. Responsible for all refereeing and referee training in the region. Typically an experienced referee or former Division Referee Administrator (DRA).
+
+### Treasurer
+Manages region finances — accounts payable and receivable, financial reports, and the annual budget. Key voice on decisions affecting revenue or expenses.
+
+### Registrar
+Manages player and volunteer registrations, waivers, background checks, and player assessments. Distributes data to coaches, referees, and program coordinators. Tracks compliance and provides revenue forecasts to the Treasurer. Data-intensive — this role maintains the region's most important records.
+
+### Secretary
+Records and distributes board meeting minutes. Approximately 2 hours monthly. Minutes are publicly available.
 
 ### Child and Volunteer Protection Advocate (CVPA)
-Ensures proper training and certification for all volunteers.
+Works with the RC, RCA, and RRA to ensure all volunteers are properly trained and certified for each role and season. Often involved in dispute resolution.
 
 ### Safety Director
-Oversees safety for all participants. Assists with injury management during events.
+Oversees safety for players, coaches, referees, and other volunteers. Assists with injury reports during AYSO-sanctioned events. Keeps the board informed of regulatory or compliance changes.
+
+### Auditor
+Assists the Regional Commissioner with fiduciary responsibilities.
 
 ---
 
-## General Board Positions
+## General Board
 
-### Division Coach Administrator (DCA)
-Confirms and recruits coaches for a specific division. Manages team formation and player ratings.
+These roles are not required by AYSO but are essential to running a region of Region 13's size. General Board members advise on policy and operations at monthly meetings.
 
-### Division Referee Administrator (DRA)
-Confirms and recruits referees for a specific division. Ensures referee certification and training.
+### Division Operations
 
-### Volunteer Coordinator / Team Manager Coordinator
-Organizes general volunteers for tournaments and events. Conducts team manager orientations.
+#### Division Coach Administrator (DCA)
+Each division has a DCA. Confirms returning coach, referee, and team manager volunteers; recruits new coaches when needed; manages team formation; collects player ratings; and supports volunteers in the division throughout the season.
 
-### 4U/5U Program Coordinator
-Coordinates the preschool program, working with parent volunteers and professional trainers.
+#### Division Referee Administrator (DRA)
+Each division has a DRA. Confirms returning referees, recruits new ones, supports referee certification and training, and answers questions from referees in the division.
 
-### Director of Coach Instruction
-Organizes coach training classes. Books venues and coordinates instructors. Approximately 8-12 hours pre-season.
+#### Referee Assignor
+Assigns center referees to 14U games, balancing strong refereeing with developmental opportunity. Coordinates with Area 1/C to assign referees to Upper Division games.
 
-### Director of Referee Instruction
-Organizes referee training classes. Similar responsibilities to coach instruction director.
+#### Scheduler
+Computes the season schedule for all games. (To-do: rewrite the legacy FORTRAN scheduler in a modern language and sync with InLeague.)
 
-### Referee Assignor
-Assigns center referees to games throughout the season.
+### Program Coordinators
 
-### Communication Director
-Publishes the newsletter and manages the website.
+#### 4U/5U Program Coordinator
+Runs the preschool program. Coordinates parent volunteers and professional trainers, communicates with families, divides players into playing groups, and supervises weekly training.
 
-### Events Director
-Plans the kickoff dinner (August) and awards dinner (December). Approximately 15-20 hours annually.
+#### Upper Division (UD) Coordinator
+Coordinates the 16U and 19U program. Upper Division is run as an Area 1/C program; this role acts as DCA for those age groups, helps choose coaches with the RC and RCA, manages team drafts with Area, and answers questions from coaches and parents.
 
-### Uniform and Equipment Coordinator
-Selects uniform styles and manages orders. Coordinates distribution to teams. Approximately 20+ hours annually, primarily June through August.
+#### Upper Division Referee Coordinator
+Coordinates Region 13 referees who participate in the Area 1/C Upper Division program. These are Intermediate, Advanced, or National badge referees.
 
-### Picture Day Coordinator
-Schedules photo appointments for teams and coordinates makeup photos. Approximately 10-15 hours annually.
+#### Grad Series Director
+Defines and runs the Grad Series program, which prepares 8U players for 10U. Sets up signups with the Registrar, invites volunteers to training, builds balanced teams, schedules games, coordinates curriculum with the coach staff, manages uniforms with the Equipment Coordinator, and runs a pre-season briefing for volunteers and parents.
 
-### Rose City Cup Director
-Plans the December playoff tournament. Designs brackets and orders medals and trophies. Approximately 20-30 hours during December.
+#### Winter Stars Director
+Runs the 8-week winter program. Coordinates trainers (typically with Launch), sets up the field, sends weekly emails to parents, supervises and guides volunteer coaches, and brings equipment from the clubhouse to each session.
 
-### Awards and Trophies Team
-Prepares shopping lists and purchases end-of-season awards. Approximately 4-6 hours in October plus 8 hours at end of season.
+#### Director of Advanced Play
+Oversees All-Stars coach and player selection. Coordinates schedules and participation with Area and other regions. Manages uniform orders and field reservations. Coordinates League Championship participation.
 
-### Statistician
-Records scores and referee comments. Analyzes patterns and publishes standings.
+#### Spring Cup Program Manager
+Coordinates the Spring Cup season.
+
+#### EXTRA Program Manager
+Coordinates the EXTRA competitive program.
+
+#### EPIC Program Manager
+Coordinates the EPIC inclusion program for players with intellectual and developmental differences.
+
+#### Tournament Director
+Coordinates region participation in AYSO tournaments throughout the year.
+
+### Training
+
+#### Director of Coach Instruction
+Plans two or more coach training events before the Core season starts. Confirms certified coach instructors for Safe Haven, 6U, 8U, 10U, and 12U classes. Reserves venues, handles logistics, and works with the RCA and Communication Director to publicize.
+
+#### Director of Referee Instruction
+Organizes referee training classes, with similar responsibilities to the Director of Coach Instruction.
+
+### Operations
+
+#### Volunteer Coordinator / Team Manager Coordinator
+Organizes general volunteers for tournaments, events, and the game-day information tent. Coordinates Team Managers — runs orientations, distributes information packets, fields questions, and routes them to the right board member. Supervises the Picture Day Coordinator and the Awards and Trophies Team.
+
+#### Uniform & Equipment Coordinator
+Selects uniform styles, places orders, and arranges distribution to teams. Approximately 20+ hours annually, primarily June through August. Order cycles align to season start dates: fall in June/July, All-Stars in November, Grad Series and Winter Stars in December, Spring in February. Also purchases and distributes shared team equipment (bags, first-aid kits, balls, cones, pinnies, goalkeeper gloves).
+
+### Communications & Events
+
+#### Communication Director
+Reinforces Region 13 brand identity. Publishes the newsletter, edits the website, manages email templates, and helps program managers communicate with members. Maintains the Region 13 strategy and style guide.
+
+#### Events Director
+Plans the kickoff dinner in August and the holiday awards dinner in December. Works with the Treasurer on budget and the Registrar and Communication Director on volunteer recruitment. Approximately 15–20 hours annually.
+
+#### NWSL and MLS Liaison
+Builds relationships with group sales staffs at professional teams (Angel City, LA Galaxy, LAFC). Arranges group outings, on-field experiences (flag holders, player walkouts), and occasional free ticket distribution to volunteers.
+
+#### Picture Day Coordinator
+Coordinates picture days with teams and the photography studio. Provides team lists, confirms picture days, assigns appointment slots, and reconciles schedule changes. Approximately 10–15 hours annually.
+
+#### Awards and Trophies Team
+Prepares the shopping list and purchases end-of-season awards. Approximately 4–6 hours starting in October, plus 8 hours at the end of the season to distribute. Region provides personalized trophies for the youngest divisions (4U–8U), medals for top regular-season finishers in 10U–14U competitive divisions, and trophies and medals for playoff tournament winners.
+
+#### Statistician
+Records scores and referee comments from game cards. Analyzes data for patterns. Computes sportsmanship points. Oversees published standings.
+
+### Tournaments
+
+#### Rose City Cup Director
+Plans the December playoff tournament. Designs brackets, orders medals and trophies, assigns teams, and publishes the schedule and results. Approximately 20–30 hours during December. Coordinates with field permits and division coaches on bracket structure.
 
 ---
 
-## Contact
+## How to Volunteer
 
-To learn more about any position:
-- Email: [info@ayso13.org](mailto:info@ayso13.org)
+To express interest in any role, contact the Regional Commissioner:
+
+- Email: [rc@ayso13.org](mailto:rc@ayso13.org)
+- General questions: [info@ayso13.org](mailto:info@ayso13.org)
 - Phone: 626-316-6900
+
+Most board roles begin with a conversation about your interests, time, and skills. New volunteers often start in a smaller role and grow into larger ones over time.
 
 ---
 
 ## Related Pages
 
-- [Volunteering Overview](/volunteers) — Getting started
-- [Training Classes](/volunteers/classes) — Requirements
-- [Board Meetings](/about/board-minutes/) — Meeting notes
+- [Volunteering Overview](/volunteers/) — Getting started
+- [Training Classes](/volunteers/classes/) — Certification requirements
+- [Training Matrix](/volunteers/training-matrix/) — Required training by role
+- [Board Meetings](/about/board-minutes/) — Meeting notes archive
 
 ---
 

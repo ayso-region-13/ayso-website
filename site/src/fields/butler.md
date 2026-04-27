@@ -5,10 +5,6 @@ section: fields
 description: "Butler Middle School fields — AYSO Region 13 practice location in Pasadena. Address, parking, and field notes."
 ---
 
-# Octavia E. Butler Middle School
-
-Butler is a practice field in Pasadena.
-
 ## Location
 
 [1505 N Marengo Ave, Pasadena, CA 91103](https://maps.google.com/?q=1505+N+Marengo+Ave,+Pasadena,+CA+91103)

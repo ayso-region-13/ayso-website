@@ -7,8 +7,6 @@ heroImage: "action-05.jpg"
 description: "NEXT is an advanced training program for skilled players ages 10–14 who want more challenge alongside their regular Fall Soccer season."
 ---
 
-# NEXT
-
 NEXT provides advanced training and competitive play for players in 10U, 12U, and 14U who want more soccer alongside their regular Fall Core team.
 
 ![NEXT program players in training](/images/action-04.jpg)

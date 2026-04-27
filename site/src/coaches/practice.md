@@ -6,8 +6,6 @@ section: coaches
 description: "Practice planning resources for Region 13 coaches. Session outlines, drills, and tips for coaching all age groups."
 ---
 
-# Practice Resources
-
 Practices begin the first week of September and run once weekly for most age groups.
 
 ---

@@ -6,10 +6,6 @@ section: fields
 description: "Jefferson Center fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# Jefferson Park
-
-Jefferson Park is a practice field in Pasadena.
-
 ## Location
 
 [1501 E Villa St., Pasadena CA 91106](https://maps.google.com/?q=1501+E+Villa+St,+Pasadena,+CA+91106)

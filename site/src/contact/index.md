@@ -7,12 +7,6 @@ permalink: "/contact/"
 description: "Contact AYSO Region 13. Phone, email, and mailing address for the Pasadena area youth soccer region."
 ---
 
-# Contact Us
-
-Reach Region 13 with questions about schedules, registration, and club operations.
-
----
-
 ## General Contact
 
 - Email: [info@ayso13.org](mailto:info@ayso13.org)

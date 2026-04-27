@@ -6,10 +6,6 @@ section: fields
 description: "La Cañada High School fields — AYSO Region 13 game location in La Cañada. Address, parking, and directions."
 ---
 
-# La Cañada High School (LCHS)
-
-LCHS has practice and game fields for multiple divisions.
-
 ## Location
 
 [4463 Oak Grove Dr., La Cañada CA 91011](https://maps.google.com/?q=4463+Oak+Grove+Dr,+La+Canada,+CA+91011)

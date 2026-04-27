@@ -6,8 +6,6 @@ section: fields
 description: "Area H fields — AYSO Region 13 game and practice location. Address, parking, and directions."
 ---
 
-# Rose Bowl Area H
-
 Area H is a practice field location at the Rose Bowl complex.
 
 ## Location

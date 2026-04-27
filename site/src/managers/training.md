@@ -6,12 +6,6 @@ section: managers
 description: "Required training for AYSO Region 13 team managers — SafeSport, background check, and online certification."
 ---
 
-# Team Manager Training
-
-All team managers must complete training before the season begins.
-
----
-
 ## Required Training
 
 ### 1. Team Manager Orientation

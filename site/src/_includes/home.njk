@@ -27,6 +27,9 @@ layout: base.njk
   </div>
 </div>
 
+{# ── Two-tone signature strip — lighter red below the maroon nav ── #}
+<div class="h-1.5 bg-brand-red"></div>
+
 {# ── Field status widget ─────────────────────────────────────────── #}
 {% if fieldstatus.enabled %}
 <div class="{% if fieldstatus.status | lower == 'closed' %}bg-brand-red-dark{% elif fieldstatus.status | lower == 'monitoring' %}bg-brand-gold{% else %}bg-brand-green{% endif %}">
@@ -43,21 +46,37 @@ layout: base.njk
 {# ── Hero ────────────────────────────────────────────────────────── #}
 <section class="relative overflow-hidden bg-brand-dark min-h-[560px]">
 
-  {# Background image #}
+  {# Background images — 5 candidates, JS picks one on load. Image 1 is the
+     no-JS fallback (loading=eager + fetchpriority=high). Images 2–5 are
+     hidden + lazy so browsers don't preload them. #}
   <div class="absolute inset-0">
-    <img src="/images/fall-game-03.jpg"
-         alt="Region 13 players celebrating"
-         fetchpriority="high"
-         loading="eager"
-         class="w-full h-full object-cover object-center">
-    <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/40 via-brand-dark/10 to-transparent"></div>
+    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center"
+         src="/images/home/region13_home_1.jpg"
+         alt="Region 13 players in action"
+         loading="eager" fetchpriority="high">
+    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
+         src="/images/home/region13_home_2.jpg"
+         alt="Region 13 players in action"
+         loading="lazy">
+    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
+         src="/images/home/region13_home_3.jpg"
+         alt="Region 13 players in action"
+         loading="lazy">
+    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
+         src="/images/home/region13_home_4.jpg"
+         alt="Region 13 players in action"
+         loading="lazy">
+    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
+         src="/images/home/region13_home_5.jpg"
+         alt="Region 13 players in action"
+         loading="lazy">
   </div>
 
   {# Hero content #}
   <div class="relative max-w-screen-xl mx-auto px-4 py-16 md:py-20 flex flex-col justify-center min-h-[560px]">
-    <h1 class="font-extrabold leading-[0.9] tracking-tight mb-8">
-      <span class="block text-[clamp(2.5rem,11vw,9rem)] text-brand-red/80 [text-shadow:_0_2px_20px_rgba(0,0,0,0.3)]">SOCCER</span>
-      <span class="block text-[clamp(2.5rem,11vw,9rem)] text-white [text-shadow:_0_2px_20px_rgba(0,0,0,0.4)]">FOR EVERYONE</span>
+    <h1 class="font-extrabold leading-[1] tracking-tight mb-8 flex flex-col items-start gap-1">
+      <span class="bg-white/70 text-brand-red-dark text-[clamp(2.5rem,11vw,9rem)] px-3 pt-1 pb-2">SOCCER</span>
+      <span class="bg-brand-red-dark/75 text-white text-[clamp(2.5rem,11vw,9rem)] px-3 pt-1 pb-2">FOR EVERYONE</span>
     </h1>
     <div class="flex flex-wrap gap-3">
       {# Button 1: lighter red body, darker line #}
@@ -77,6 +96,22 @@ layout: base.njk
     </div>
   </div>
 </section>
+
+{# ── Hero randomizer — picks one of 5 background images on each page load #}
+<script>
+  (function () {
+    var pics = document.querySelectorAll('.hero-pic');
+    if (pics.length < 2) return;
+    var idx = Math.floor(Math.random() * pics.length);
+    if (idx === 0) return; // image 1 is already visible
+    pics[0].classList.add('hidden');
+    pics[0].removeAttribute('fetchpriority');
+    var pick = pics[idx];
+    pick.classList.remove('hidden');
+    pick.removeAttribute('loading');
+    pick.setAttribute('fetchpriority', 'high');
+  })();
+</script>
 
 {# ── Announcements banner ─────────────────────────────────────────── #}
 {% if announcements.enabled %}
@@ -148,7 +183,7 @@ layout: base.njk
       </div>
 
       {# Role-based quick links #}
-      <div class="bg-brand-maroon rounded-lg p-6 self-start">
+      <div class="bg-brand-maroon rounded-lg p-6 self-start border-4 border-brand-red">
         <h2 class="text-xl font-bold text-white mb-4">I'm a soccer…</h2>
         <div class="flex flex-col gap-2">
           {% set roles = [
@@ -193,12 +228,14 @@ layout: base.njk
   </div>
 </section>
 
+{# Sponsor strip temporarily removed — re-enable by uncommenting:
 {% include "sponsors-strip.njk" %}
+#}
 
 <style>
   /* Home page: hide the H1 and first HR from markdown content since the about heading handles those */
   .prose > h1:first-child,
   .prose > p:first-of-type:has(+ hr) { display: none; }
   /* Home page prose headings stay dark — values match brand-dark and Tailwind gray-200 */
-  .prose h2, .prose h3 { color: #231f20; border-color: #e5e7eb; }
+  .prose h2, .prose h3 { color: #221f1f; border-color: #e5e7eb; }
 </style>

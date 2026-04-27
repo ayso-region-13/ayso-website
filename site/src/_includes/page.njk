@@ -28,7 +28,7 @@ layout: base.njk
     </nav>
     {% endif %}
 
-    <h1 class="text-3xl md:text-4xl font-bold text-brand-dark leading-tight">{{ title }}</h1>
+    <h1 class="text-3xl md:text-4xl font-extrabold text-brand-dark leading-tight">{{ title }}</h1>
 
     {% if description %}
     <p class="mt-2 text-brand-maroon text-lg leading-relaxed max-w-2xl">{{ description }}</p>
@@ -41,13 +41,9 @@ layout: base.njk
 <div class="h-1.5 bg-brand-maroon"></div>
 <div class="h-1 bg-brand-red"></div>
 
-{# ── Optional hero image ─────────────────────────────────────────── #}
-{% if heroImage %}
-<div class="w-full h-56 md:h-72 overflow-hidden">
-  <img src="/images/{{ heroImage }}" alt="{{ heroImageAlt or title }}"
-       class="w-full h-full object-cover object-center">
-</div>
-{% endif %}
+{# Wide hero strip removed — page imagery now lives in the body markdown.
+   The `heroImage` frontmatter field is still used by base.njk for og:image
+   (social shares). #}
 
 {# ── Content area ────────────────────────────────────────────────── #}
 <div class="max-w-screen-xl mx-auto px-4 py-10">

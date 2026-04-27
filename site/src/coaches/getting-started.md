@@ -6,12 +6,6 @@ section: coaches
 description: "How to get started as a coach in AYSO Region 13. Registration, background check, SafeSport training, and coaching certification."
 ---
 
-# Getting Started as a Coach
-
-A step-by-step guide for new coaches.
-
----
-
 ## Step 1: Register as a Volunteer
 
 Register through InLeague and indicate your interest in coaching. Select your preferred age division.

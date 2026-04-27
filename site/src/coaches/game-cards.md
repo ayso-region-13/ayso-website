@@ -6,8 +6,6 @@ section: coaches
 description: "How to complete and submit AYSO game cards. Step-by-step instructions for Region 13 coaches."
 ---
 
-# Game Cards
-
 Game cards are official match records used in 10U and older divisions to document participation, volunteer assignments, and game outcomes.
 
 ---

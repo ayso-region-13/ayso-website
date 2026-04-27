@@ -29,6 +29,10 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Google Analytics (GA4: G-9YM9ZDW1J9)
 - [x] Slack bot (`/ayso`) — field status, announcements, promote to production
 - [x] Ask the Referee — accordion FAQ, 30 Q&As in 7 categories, Pages CMS collection for Steve
+- [x] Home page + brand redesign — light header, two-tone hero/buttons/tile labels, Raleway font, new logo SVG
+- [x] Image optimization pipeline — `@11ty/eleventy-img` auto-converts every `<img>` to `<picture>` with AVIF + WebP + JPEG variants at 600/1200/1920w
+- [x] Interior page design alignment — cream surface, maroon sidebar header, two-tone strip below page header
+- [x] Accessibility hardening — site-wide WCAG AA contrast pass on prose headings, links, nav, sidebar, field status bars
 - [ ] Review and refine site ← **IN PROGRESS at https://staging.ayso13.org**
 - [x] Create redirect mapping (159 old URLs → `site/src/_redirects`)
 - [x] Deploy to Cloudflare Pages ← **staging.ayso13.org / www.ayso13.org**
@@ -59,9 +63,10 @@ site/
 │   │   ├── site.json     ← Site metadata (phone, email, address, InLeague URL)
 │   │   └── fileDates.json← Auto-generated per-file last-modified dates
 │   ├── _includes/
-│   │   ├── base.njk      ← HTML shell, sticky header, footer, mobile nav
-│   │   ├── page.njk      ← Standard content page (breadcrumb, sidebar, prose)
-│   │   ├── home.njk      ← Home page layout (hero, programs grid, etc.)
+│   │   ├── base.njk           ← HTML shell, light sticky header, footer, mobile nav
+│   │   ├── page.njk           ← Standard content page (breadcrumb, sidebar, prose)
+│   │   ├── home.njk           ← Home page layout (hero, Let's Play tiles, About + Roles, gallery strip)
+│   │   ├── ask-the-referee.njk← Custom layout for /referees/ask-the-referee/ accordion FAQ
 │   │   └── sponsors-strip.njk
 │   ├── assets/css/
 │   │   ├── tailwind.css  ← Input CSS
@@ -106,16 +111,23 @@ site/
 
 ## Brand
 
-| Color | Hex |
-|-------|-----|
-| Red (primary) | `#ce0e2d` |
-| Green | `#00ae42` |
-| Gold (CTA) | `#f1d516` |
-| Dark | `#231f20` |
+Full palette + usage notes are in `brand-colors.md` (palette doc) and `.impeccable.md` (design context).
 
-Font: Inter (system fallback)
+| Tailwind name | Hex | Role |
+|---|---|---|
+| `brand-red` | `#f74b4b` | Coral accent — hero "SOCCER", tile underline strips, decorative only (fails AA on white) |
+| `brand-red-dark` | `#83312d` | Burgundy — primary text emphasis (headings, links, nav active), tile bodies, hero buttons |
+| `brand-maroon` | `#8e2929` | Structural frames — quick-action bar, sidebar header, role panel, link hover |
+| `brand-maroon-dark` | `#3a0d12` | Photo gallery strip background |
+| `brand-header` | `#230511` | inLeague pill button, very dark accents |
+| `brand-cream` | `#ede8e2` | Warm off-white surface — Let's Play section, interior page header, sidebar hover/active |
+| `brand-green` | `#a6ce57` | Field status "Open" |
+| `brand-gold` | `#f4bd4d` | Announcement bar, field status "Monitoring" |
+| `brand-dark` | `#221f1f` | Body text, footer bg |
 
-**Color hierarchy:** Top nav = brand red (`bg-brand-red` / `#ce0e2d`), hover = dark red (`bg-brand-red-dark` / `#a00b22`) → Page header = light red (`bg-red-50`) with dark text → Content area = white. Gold buttons (`bg-brand-gold text-brand-dark`). Red prose headings (H1–H3 in `.prose`). Green is an accent: sidebar header strip, field status "Open", `btn-secondary`, and volunteer training checkmarks.
+Font: **Raleway** (300–900) loaded from Google Fonts in `base.njk` head.
+
+**Color hierarchy:** Light/white header → cream + maroon for structural surfaces (quick-action bar, sidebar headers, role panel) → white for content body → dark maroon footer. Red is reserved for emphasis (`brand-red-dark` for text, `brand-red` for accent strips). The two-tone "solid body + offset underline strip" pattern is the visual signature, applied to home buttons, home tiles, and the divider below interior page headers.
 
 ## Key Scripts
 
@@ -196,6 +208,9 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 ## Files
 - `CLAUDE.md` — This file
 - `todo.md` — Active task list
+- `.impeccable.md` — Design context: users, brand personality, principles (used by /impeccable skill)
+- `brand-colors.md` — Full color palette with hex, RGB, usage notes, contrast cheat-sheet
+- `site-overview.md` — Slab-friendly summary for the team wiki
 - `.pages.yml` — Pages CMS configuration
 - `links-to-resolve.md` — 36 `[INLEAGUE: ...]` placeholders still needing real URLs (forms, Google Drive links, external services)
 - `proposed-site-structure.md` — Original IA proposal with old→new URL mapping
@@ -205,4 +220,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-19 (session 10)*
+*Last updated: 2026-04-26 (session 11)*

@@ -7,8 +7,6 @@ permalink: "/programs/tournaments/"
 description: "AYSO Region 13 hosts the annual Thanksgiving Tournament and Rose City Cup. Learn about upcoming tournaments and how to participate."
 ---
 
-# Tournaments
-
 Region 13 hosts two competitive tournaments each year for 10U-14U teams.
 
 ![Tournament game action at Region 13](/images/game-03.jpg)

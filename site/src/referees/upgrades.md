@@ -6,8 +6,6 @@ section: referees
 description: "How to upgrade your AYSO referee certification in Region 13. Requirements and pathways for Grade 9, 8, and higher."
 ---
 
-# Referee Certification Upgrades
-
 After completing Regional Referee certification, referees can advance through higher badge levels.
 
 ---

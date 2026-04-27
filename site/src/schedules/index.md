@@ -7,12 +7,6 @@ permalink: "/schedules/"
 description: "AYSO Region 13 game schedules, standings, and season calendar. Check InLeague for current game times and field assignments."
 ---
 
-# Schedules
-
-Find game schedules, practice information, and standings for Region 13.
-
----
-
 ## Quick Links
 
 - [Game Schedule](https://ayso13.inleague.com/app/schedule) — View your team's games

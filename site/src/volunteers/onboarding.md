@@ -6,12 +6,6 @@ section: volunteers
 description: "Board member onboarding for AYSO Region 13. Getting started as a new board member — roles, tools, and key contacts."
 ---
 
-# Board Member Onboarding
-
-New board members receive access to regional resources and training.
-
----
-
 ## Digital Access
 
 New board members receive:

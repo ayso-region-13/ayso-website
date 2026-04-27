@@ -7,12 +7,6 @@ permalink: "/resources/"
 description: "AYSO Region 13 resources — document library, photo gallery, newsletter archive, and safety policies."
 ---
 
-# Resources
-
-Documents, forms, and information for Region 13 families and volunteers.
-
----
-
 ## Quick Links
 
 - [Registration](https://ayso13.inleague.com/app) — Register for programs

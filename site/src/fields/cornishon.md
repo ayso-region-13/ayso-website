@@ -5,8 +5,6 @@ section: fields
 description: "Cornishon field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
 ---
 
-# Cornishon Field
-
 Cornishon is a smaller practice field in La Cañada, located near FIS Upper and FIS Lower.
 
 ## Location

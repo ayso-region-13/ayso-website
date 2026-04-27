@@ -7,8 +7,6 @@ heroImage: "grad-series-02.jpg"
 description: "Grad Series helps 8U players transition to 10U soccer with additional coaching, game experience, and skill development."
 ---
 
-# Grad Series
-
 Grad Series helps players transitioning from 8U to 10U prepare for the changes in format, including larger fields, goalkeepers, and offside rules.
 
 ![Grad Series players at Region 13](/images/grad-series-01.jpg)

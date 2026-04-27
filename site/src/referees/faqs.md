@@ -6,12 +6,6 @@ section: referees
 description: "Frequently asked questions for AYSO Region 13 referees — scheduling, compensation, uniforms, and game rules."
 ---
 
-# Referee FAQs
-
-Common questions from Region 13 referees.
-
----
-
 ## Getting Started
 
 ### Do I need experience to referee?

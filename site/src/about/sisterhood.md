@@ -6,8 +6,6 @@ section: about
 description: "The Sisterhood of Soccer celebrates women's contributions to AYSO Region 13 as coaches, referees, board members, and players."
 ---
 
-# Sisterhood of Soccer
-
 The Sisterhood of Soccer is a volunteer initiative dedicated to recruiting and mentoring women referees and coaches, and encouraging girls and women to enjoy soccer at all ages.
 
 ---

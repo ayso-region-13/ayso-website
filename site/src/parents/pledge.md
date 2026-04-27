@@ -6,8 +6,6 @@ section: parents
 description: "The AYSO Parent Pledge — a commitment to positive sideline behavior and good sportsmanship at all Region 13 games and events."
 ---
 
-# The Parent Pledge
-
 When you register your child, you'll be asked to agree to these six commitments about sideline behavior.
 
 [IMAGE: Parents watching from sideline]

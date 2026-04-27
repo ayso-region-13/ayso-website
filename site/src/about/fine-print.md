@@ -6,12 +6,6 @@ section: about
 description: "Terms, conditions, and fine print for AYSO Region 13 programs and player registration."
 ---
 
-# Fine Print
-
-Legal disclosures, waivers, and required information for all AYSO participants.
-
----
-
 ## Parent Pledge
 
 When you register, you agree to the Kids Zone Parent Pledge, which covers:

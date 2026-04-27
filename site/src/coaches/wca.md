@@ -7,9 +7,9 @@ heroImage: "wca-01.jpg"
 description: "The Women's Coaching Alliance (WCA) supports and encourages women coaches in AYSO Region 13."
 ---
 
-# Women's Coaching Alliance
-
 The Women's Coaching Alliance (WCA) partners with Region 13 to develop young women as sports coaches and leaders.
+
+![Women's Coaching Alliance at Region 13](/images/wca-01.jpg)
 
 ---
 

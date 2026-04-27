@@ -6,12 +6,6 @@ section: coaches
 description: "Soccer drills and skills exercises for AYSO Region 13 coaches. Age-appropriate activities for players 6U through 14U."
 ---
 
-# Skills and Drills
-
-Resources for planning effective practices.
-
----
-
 ## Coaching Manuals
 
 AYSO provides age-specific coaching manuals with practice activities appropriate for each division. You'll receive your manual during coach training.

@@ -7,10 +7,6 @@ permalink: "/fields/"
 description: "All AYSO Region 13 soccer field locations in Pasadena, Altadena, and La Cañada. Maps, parking information, and directions."
 ---
 
-# Field Locations
-
-Region 13 uses fields throughout Pasadena, Altadena, La Cañada, and surrounding areas.
-
 ## Field Map
 
 ![Regional field map — all Region 13 locations](/images/fields/map-overview.jpg)

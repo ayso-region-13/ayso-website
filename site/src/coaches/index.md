@@ -7,10 +7,6 @@ permalink: "/coaches/"
 description: "Volunteer coaching in AYSO Region 13. No soccer experience required — we provide full training and resources for all coaches."
 ---
 
-# Coaching
-
-Coaching is one of the most rewarding ways to contribute to AYSO. No soccer experience is required — we provide all the training you need.
-
 ![Coach working with players at Region 13](/images/action-09.jpg)
 
 ---

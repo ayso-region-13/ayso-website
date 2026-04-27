@@ -6,10 +6,6 @@ section: fields
 description: "Marshall Fundamental School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
-# Marshall Fundamental
-
-Marshall Fundamental is a practice field in Pasadena.
-
 ## Location
 
 [990 Allen Ave, Pasadena, CA 91104](https://maps.google.com/?q=990+Allen+Ave,+Pasadena,+CA+91104)
