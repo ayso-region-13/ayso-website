@@ -15,6 +15,12 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ### Infrastructure
 - [ ] Update Node version in Cloudflare Pages to suppress LTS maintenance warning (currently 22, upgrade to 24)
+- [ ] **Build time optimization** — Cloudflare Pages builds are now >5 min because `@11ty/eleventy-img` regenerates 600+ AVIF/WebP/JPEG variants every deploy (cache doesn't persist between Cloudflare builds). Goal: keep the image-optimization benefit but get builds back under ~1 min. Options to investigate:
+  - Persist `node_modules/.cache/` (or wherever eleventy-img caches) across Cloudflare Pages builds via build env config
+  - Pre-generate optimized variants and commit them to the repo (skip live transformation)
+  - Switch to Cloudflare Images service (separate paid product, but offloads transformation entirely)
+  - Move image generation to a separate periodic job (e.g., GitHub Action that commits optimized images on schedule), so the per-deploy build path skips it
+  - Reduce variant count (currently AVIF + WebP + JPEG at 3 widths each = 9 variants per source image; could drop AVIF or reduce widths)
 
 ### Content
 - [ ] **2 missing IMAGE placeholders** — source or remove:
