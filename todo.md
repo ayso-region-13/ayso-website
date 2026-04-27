@@ -24,7 +24,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 
 ### Pre-Launch
-- [ ] Run link checker: `cd site && node scripts/check-links.js`
+- [x] Run link checker — clean (`cd site && node scripts/check-links.js`)
 - [ ] Promote staging → main (clean deploy before cutover)
 
 ### DNS Cutover
@@ -40,6 +40,20 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ---
 
 ## Completed ✓
+
+### Session 13 (2026-04-26)
+- [x] INLEAGUE newsletter signup links resolved — Region 13 Referee Newsletter + WhistleStop Newsletter URLs wired up (referees/resources, resources/newsletters)
+- [x] Site-wide negative-to-positive tone sweep — 7 markdown files reframed ("Don't yell at referees" → "Speak respectfully to referees", etc.); deliberate keeps documented for safety/policy prohibitions
+- [x] Parent Pledge reframed as Kids Zone — page rewritten to follow AYSO National's authoritative 10 guidelines (kids first, fun > winning, respect referees, etc.); no longer framed as a contract parents sign; site-wide reference sweep across 9 files
+- [x] PDFs relocated from old WordPress to local `/assets/docs/`:
+  - `concussion-sca-forms.pdf` (used in 2 places)
+  - `fifa-11plus.pdf` (resources/safety)
+  - `penalty-kick-guidelines-2023.pdf` (referees/laws)
+- [x] New `/resources/newsletters/` page — replaces old `/resources/newsletter/`; EmailOctopus subscribe widget copied 1:1 from WP; full archive (97 newsletters, 2021–2025) preserved with original third-party URLs intact
+- [x] New `/forms/` page — replicates the WP `/forms/?go=1` Google Apps Script iframe upload tool; same iframe overlay behavior, same script URL, same query-string triggers (`?go=1`, `?go=2`, `?key=`, `?ID=`)
+- [x] Gallery page palette fix — green header → cream + maroon, two-tone signature strip added, filter buttons updated to new burgundy `#83312d`, AA contrast on Share callout links
+- [x] Link checker hardened — `scripts/check-links.js` now auto-runs `npm run build` before checking; pass `--no-build` to skip; eliminates false positives from dev-server transform-on-request URLs
+- [x] Redirect map updates — `/news/` → `/resources/newsletters/`, `/resources/newsletter/` → plural URL; `/forms/` no longer redirects (now serves the upload page directly)
 
 ### Session 12 (2026-04-26)
 - [x] Sponsor strip removed from home page (commented out in home.njk for easy re-enable)

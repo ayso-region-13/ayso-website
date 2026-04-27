@@ -33,6 +33,10 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Image optimization pipeline — `@11ty/eleventy-img` auto-converts every `<img>` to `<picture>` with AVIF + WebP + JPEG variants at 600/1200/1920w
 - [x] Interior page design alignment — cream surface, maroon sidebar header, two-tone strip below page header
 - [x] Accessibility hardening — site-wide WCAG AA contrast pass on prose headings, links, nav, sidebar, field status bars
+- [x] Kids Zone — replaces Parent Pledge, follows AYSO National's authoritative 10 guidelines
+- [x] Newsletter system — `/resources/newsletters/` with EmailOctopus subscribe widget + 97-link archive (2021–2025); old `/news/` URL redirects in
+- [x] Form upload tool — `/forms/` page replicates the legacy Google Apps Script upload flow
+- [x] PDFs migrated from old WordPress to local `/assets/docs/` — penalty-kick guidelines, FIFA 11+ warmup, concussion/SCA forms
 - [ ] Review and refine site ← **IN PROGRESS at https://staging.ayso13.org**
 - [x] Create redirect mapping (159 old URLs → `site/src/_redirects`)
 - [x] Deploy to Cloudflare Pages ← **staging.ayso13.org / www.ayso13.org**
@@ -220,4 +224,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-26 (session 12)*
+*Last updated: 2026-04-26 (session 13)*
