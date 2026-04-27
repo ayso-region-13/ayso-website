@@ -220,4 +220,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-26 (session 11)*
+*Last updated: 2026-04-26 (session 12)*
