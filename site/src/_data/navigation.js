@@ -203,7 +203,7 @@ module.exports = [
       { label: "Resources Overview",  url: "/resources/" },
       { label: "Document Library",    url: "/resources/documents/" },
       { label: "Photo Gallery",       url: "/resources/gallery/" },
-      { label: "Newsletter",          url: "/resources/newsletter/" },
+      { label: "Newsletters",         url: "/resources/newsletters/" },
       { label: "Safety & Heat Policy",url: "/resources/safety/" },
     ],
   },

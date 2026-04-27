@@ -25,7 +25,7 @@ SCA risks and warning signs. Required by California law.
 
 Download the state-required forms:
 
-[Concussion & SCA Forms (PDF)](https://ayso13.org/wp-content/uploads/2022/08/2021-AYSO-Concussion-SCA.pdf)
+[Concussion & SCA Forms (PDF)](/assets/docs/concussion-sca-forms.pdf)
 
 ---
 
@@ -33,7 +33,7 @@ Download the state-required forms:
 
 Sign the forms and upload through the digital form submission portal.
 
-[Form Upload Portal](https://ayso13.org/forms/?go=1)
+[Form Upload Portal](/forms/?go=1)
 
 ---
 
