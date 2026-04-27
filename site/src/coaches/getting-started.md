@@ -12,13 +12,9 @@ Register through InLeague and indicate your interest in coaching. Select your pr
 
 [Register as a volunteer on InLeague](https://ayso13.inleague.com/app/volunteer)
 
----
-
 ## Step 2: Contact Your Division Coach Administrator
 
 Let your Division Coach Administrator know you're interested in coaching. They'll help place you with a team and answer division-specific questions.
-
----
 
 ## Step 3: Complete Required Training
 
@@ -40,8 +36,6 @@ Complete through AYSOU/eTrainU:
 ### Age-Specific Coach Certification
 Attend an in-person class or complete online certification for your specific division.
 
----
-
 ## Step 4: Attend Division Meeting
 
 Division meetings are held in August before the season starts. You'll receive:
@@ -51,8 +45,6 @@ Division meetings are held in August before the season starts. You'll receive:
 - Practice field assignment
 - Important information for the season
 
----
-
 ## Step 5: Contact Your Team
 
 Once you have your roster, reach out to parents to:
@@ -60,8 +52,6 @@ Once you have your roster, reach out to parents to:
 - Confirm practice day and time
 - Schedule the team meeting
 - Answer initial questions
-
----
 
 ## Step 6: Plan Your First Practice
 
@@ -73,16 +63,12 @@ For your first practice:
 - Establish team culture
 - Keep it simple
 
----
-
 ## Resources
 
 - [Coach Training](/coaches/training) — Certification details
 - [Practice Resources](/coaches/practice) — Planning practices
 - [PIE Philosophy](/coaches/pie) — Positive coaching approach
 - [Coach FAQs](/coaches/faqs) — Common questions
-
----
 
 ## Support
 
@@ -93,14 +79,10 @@ You're not alone. Region 13 provides:
 - Training and certification
 - Fellow coaches to learn from
 
----
-
 ## Related Pages
 
 - [Coaching Overview](/coaches) — Full overview
 - [Training Classes](/volunteers/classes) — Class schedule
 - [Volunteer Roles](/volunteers/roles) — Other ways to help
-
----
 
 *Last updated: [DATE]*

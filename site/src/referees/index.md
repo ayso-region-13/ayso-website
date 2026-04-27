@@ -9,8 +9,6 @@ description: "Volunteer refereeing in AYSO Region 13. Help make games happen —
 
 AYSO depends on parent volunteers to referee games. Without referees, games cannot be played.
 
----
-
 ## Why Referee
 
 Referees make youth soccer possible. As a referee, you:
@@ -19,8 +17,6 @@ Referees make youth soccer possible. As a referee, you:
 - Stay physically active
 - Connect with your community
 - Watch your child and their teammates grow as players
-
----
 
 ## What You Need to Get Started
 
@@ -31,8 +27,6 @@ All referees must complete:
 4. Safety courses (SafeSport, Safe Haven, Concussion Awareness, Sudden Cardiac Arrest)
 
 See [Referee Training](/referees/training) for details on each requirement.
-
----
 
 ## Certification Levels
 
@@ -48,8 +42,6 @@ AYSO has five referee certification levels:
 
 Most parent referees start as 8U Officials or Regional Referees, depending on their child's division.
 
----
-
 ## Game Scheduling
 
 Referees sign up for games through InLeague each week. The process varies by division:
@@ -61,13 +53,9 @@ Referees sign up for games through InLeague each week. The process varies by div
 
 See [Referee Scheduling](/referees/scheduling) for the full process.
 
----
-
 ## Youth Referees (PRO Program)
 
 Players ages 10 and older can become certified referees through the PRO (Player Referee Organization) program. Youth referees work games for younger divisions and gain valuable experience. See [PRO Program](/referees/pro) for details.
-
----
 
 ## Contact
 
@@ -76,15 +64,11 @@ Players ages 10 and older can become certified referees through the PRO (Player 
 - Phone: 626-316-6900
 - Game-day emergencies: 626-702-AYSO
 
----
-
 ## Related Pages
 
 - [Referee Training](/referees/training) — Certification requirements
 - [Referee Scheduling](/referees/scheduling) — Signing up for games
 - [Laws of the Game](/referees/laws) — Official rules
 - [Referee FAQs](/referees/faqs) — Common questions
-
----
 
 *Last updated: [DATE]*

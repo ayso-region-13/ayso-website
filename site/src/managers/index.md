@@ -18,15 +18,11 @@ The team manager works alongside the coach to:
 
 The key to success is delegation. Many tasks can be shared with other parents on the team.
 
----
-
 ## Key Contacts
 
 - Team Manager Coordinator: Krista Copelan ([team@ayso13.org](mailto:team@ayso13.org))
 - Picture Day Coordinator: Amandeep Singh ([pictures@ayso13.org](mailto:pictures@ayso13.org))
 - Game-day emergencies: 626-702-AYSO
-
----
 
 ## Getting Started
 
@@ -36,8 +32,6 @@ The key to success is delegation. Many tasks can be shared with other parents on
 4. Join the volunteer Slack channel
 5. Connect with your coach
 
----
-
 ## Support Available
 
 - Weekly schedules and field maps online
@@ -45,15 +39,11 @@ The key to success is delegation. Many tasks can be shared with other parents on
 - Team Manager Coordinator for guidance
 - Practice FAQ for common situations
 
----
-
 ## Related Pages
 
 - [Manager Training](/managers/training) — Requirements
 - [Manager Tasks](/managers/tasks) — Full checklist
 - [Manager FAQs](/managers/faqs) — Common questions
 - [Volunteer Roles](/volunteers/roles) — Other ways to help
-
----
 
 *Last updated: [DATE]*

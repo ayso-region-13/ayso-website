@@ -25,8 +25,6 @@ Yes. SafeSport training requires annual renewal. Background checks are also comp
 ### What if my SafeSport completion doesn't show in InLeague?
 You can manually request status correction by submitting your certification documentation to the appropriate email.
 
----
-
 ## Training
 
 ### Where do I find training classes?
@@ -40,8 +38,6 @@ Register through eTrainU, accessible through your InLeague profile. In-person cl
 
 ### Do I need to complete training before every season?
 Most training is one-time. SafeSport requires annual renewal.
-
----
 
 ## Roles
 
@@ -60,22 +56,16 @@ Time varies by role:
 - Referee: Game days
 - Board positions: Varies from 2 hours monthly to 20+ hours during peak periods
 
----
-
 ## Contact
 
 - General questions: [info@ayso13.org](mailto:info@ayso13.org)
 - Phone: 626-316-6900
 - Address: 711 W. Woodbury Rd., Unit E, Altadena, CA 91001
 
----
-
 ## Related Pages
 
 - [Volunteering Overview](/volunteers) — Getting started
 - [Volunteer Roles](/volunteers/roles) — Position descriptions
 - [Training Classes](/volunteers/classes) — Requirements
-
----
 
 *Last updated: [DATE]*

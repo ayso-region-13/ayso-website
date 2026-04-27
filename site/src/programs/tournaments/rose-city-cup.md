@@ -10,8 +10,6 @@ The Rose City Cup is a single-elimination tournament for Region 13 fall teams, h
 
 ![Rose City Cup tournament action](/images/game-01.jpg)
 
----
-
 ## Quick Facts
 
 - When: First weekend of December
@@ -20,14 +18,10 @@ The Rose City Cup is a single-elimination tournament for Region 13 fall teams, h
 - Format: Single-elimination with flights
 - Eligibility: Region 13 fall teams with sufficient referee points
 
----
-
 ## Schedule (2025)
 
 - Dates: December 6-7, 2025
 - Location: Rose Bowl Area H
-
----
 
 ## Format
 
@@ -46,8 +40,6 @@ Championship and consolation finals have extended halves with overtime provision
 ### Tied Games
 All bracket games tied at the end of regulation proceed immediately to penalty kicks.
 
----
-
 ## Eligibility
 
 ### Team Eligibility
@@ -56,33 +48,23 @@ All fall 10U-14U teams with sufficient referee points receive invitations.
 ### Player Eligibility
 Players must participate in at least 5 of 10 core season games to advance to Area 1C League Playoffs.
 
----
-
 ## Playing Time
 
 Every eligible team player present plays for 3 of 4 periods.
-
----
 
 ## Advancement
 
 - A Flight champions advance to Area 1C League Playoffs as team 13B
 - Regular season champions qualify as team 13A
 
----
-
 ## Referee Requirements
 
 Teams must provide referees per the published schedule.
-
----
 
 ## Related Pages
 
 - [Thanksgiving Tournament](/programs/tournaments/thanksgiving) — November tournament
 - [Tournaments Overview](/programs/tournaments) — All Region 13 tournaments
 - [All-Stars](/programs/all-stars) — Winter competitive teams
-
----
 
 *Last updated: [DATE]*

@@ -8,8 +8,6 @@ description: "How to upgrade your AYSO referee certification in Region 13. Requi
 
 After completing Regional Referee certification, referees can advance through higher badge levels.
 
----
-
 ## Certification Levels
 
 ### 8U Official
@@ -54,8 +52,6 @@ After completing Regional Referee certification, referees can advance through hi
   - Multiple upper-division assessments
 - Can referee: All levels
 
----
-
 ## How to Upgrade
 
 1. Log your games in InLeague
@@ -63,21 +59,15 @@ After completing Regional Referee certification, referees can advance through hi
 3. Schedule field assessments as required for your target level
 4. Complete the appropriate exam through eTrainU
 
----
-
 ## Contact
 
 For questions about upgrading your certification:
 - Email: [referee@ayso13.org](mailto:referee@ayso13.org)
 - Regional Referee Administrator
 
----
-
 ## Related Pages
 
 - [Referee Training](/referees/training) — Initial certification
 - [Refereeing Overview](/referees) — Getting started
-
----
 
 *Last updated: [DATE]*

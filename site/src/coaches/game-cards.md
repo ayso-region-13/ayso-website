@@ -8,8 +8,6 @@ description: "How to complete and submit AYSO game cards. Step-by-step instructi
 
 Game cards are official match records used in 10U and older divisions to document participation, volunteer assignments, and game outcomes.
 
----
-
 ## What They Are
 
 Game cards track:
@@ -18,8 +16,6 @@ Game cards track:
 - Scores
 - Playing time
 - Sportsmanship
-
----
 
 ## Coach Responsibilities
 
@@ -38,8 +34,6 @@ The referee team uses the card to track scoring, playing time, and sportsmanship
 ### After the Game
 Cards are submitted to the region.
 
----
-
 ## Format Options
 
 Game cards are available in two formats:
@@ -48,8 +42,6 @@ Game cards are available in two formats:
 
 *(2026 Game Cards will be posted by August)*
 
----
-
 ## Tips
 
 - Pre-print or handwrite completely and legibly
@@ -57,13 +49,9 @@ Game cards are available in two formats:
 - Bring a backup copy in case of issues
 - Keep a pen with your coaching supplies
 
----
-
 ## Related Pages
 
 - [Game Day Guide](/coaches/game-day) — Running games
 - [Practice Resources](/coaches/practice) — Planning practices
-
----
 
 *Last updated: [DATE]*

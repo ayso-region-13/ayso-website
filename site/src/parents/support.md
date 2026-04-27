@@ -8,8 +8,6 @@ description: "How to be a supportive AYSO parent. Tips for positive sideline beh
 
 [IMAGE: Parent and child walking to soccer field together]
 
----
-
 ## Before the Game
 
 ### Setting the Tone
@@ -32,8 +30,6 @@ Things to avoid:
 - Make sure they've eaten something and have water
 - Let them use the restroom before the game starts
 - Arrive 15-20 minutes early so they can warm up with the team
-
----
 
 ## During the Game
 
@@ -72,8 +68,6 @@ Referees — especially at younger levels — are often teens learning the job. 
 - Save concerns about calls for after the game, away from other parents
 - If there's a real concern, let your coach handle it
 
----
-
 ## After the Game
 
 ### Right After the Whistle
@@ -95,8 +89,6 @@ Things to avoid:
 - Analysis of what went wrong
 
 Let them lead the conversation. If they want to talk about the game, follow their lead. If they want to talk about something else or say nothing, that's fine.
-
----
 
 ## The Car Ride Home
 
@@ -125,8 +117,6 @@ Questions to skip:
 - "Didn't coach tell you to [something]?"
 - "Do you think the ref made good calls?"
 
----
-
 ## When Your Child Is Struggling
 
 ### Signs They're Not Having Fun
@@ -143,8 +133,6 @@ Questions to skip:
 
 It's okay if soccer isn't their thing. The goal is for kids to enjoy being active and being part of a team.
 
----
-
 ## Quick Reference
 
 Before: "Have fun. I love watching you play."
@@ -155,22 +143,16 @@ Right after: "That looked fun." Let them lead the conversation.
 
 Car ride: Talk about anything but the game (unless they bring it up).
 
----
-
 ## More Resources
 
 - [The Sideline Project](https://thesidelineproject.com/take-pledge/) — Research-based guidance for sports parents
 - [Kids Zone](/parents/pledge/) — How families show up at Region 13 games
 - [Feedback Form](/contact/feedback/) — Share feedback on the parent experience
 
----
-
 ## Related Pages
 
 - [Kids Zone](/parents/pledge/) — Ten standards for behavior at games and events
 - [Getting Started](/parents/) — Overview for new families
 - [Parent FAQs](/parents/faqs) — Common questions answered
-
----
 
 *Last updated: [DATE]*

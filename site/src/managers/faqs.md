@@ -22,8 +22,6 @@ A few hours per week during the season for communication, coordination, and game
 ### Do I need soccer knowledge?
 No. The team manager role focuses on organization and communication rather than soccer skills.
 
----
-
 ## Tasks
 
 ### Which tasks can I delegate?
@@ -40,8 +38,6 @@ See [Goal Setup](/fields/goals) for detailed instructions. At Victory Park, arri
 ### What communication platform should I use?
 Spond is recommended if the coach does not have a preference. Other options include team email, text groups, or similar apps.
 
----
-
 ## Picture Day
 
 ### How do I coordinate picture day?
@@ -49,8 +45,6 @@ Contact [pictures@ayso13.org](mailto:pictures@ayso13.org) for the schedule and p
 
 ### What if a player misses picture day?
 Makeup photo sessions are scheduled. The Picture Day Coordinator will provide dates.
-
----
 
 ## Forms and Paperwork
 
@@ -62,8 +56,6 @@ Makeup photo sessions are scheduled. The Picture Day Coordinator will provide da
 ### How do I upload team photos?
 Use the team-specific link provided by the organization.
 
----
-
 ## Contact
 
 - Team Manager Coordinator: [team@ayso13.org](mailto:team@ayso13.org)
@@ -71,14 +63,10 @@ Use the team-specific link provided by the organization.
 - General questions: [info@ayso13.org](mailto:info@ayso13.org)
 - Game-day emergencies: 626-702-AYSO
 
----
-
 ## Related Pages
 
 - [Manager Overview](/managers) — Getting started
 - [Manager Training](/managers/training) — Requirements
 - [Manager Tasks](/managers/tasks) — Full checklist
-
----
 
 *Last updated: [DATE]*

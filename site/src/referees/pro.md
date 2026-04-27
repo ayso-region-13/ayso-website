@@ -8,13 +8,9 @@ description: "The Youth Referee Program (PRO) trains young referees ages 12–18
 
 The PRO (Player Referee Organization) program trains young players to become certified referees.
 
----
-
 ## About the Program
 
 PRO provides mentorship and leadership development for youth who want to referee. Young referees gain work experience and community service hours while helping make soccer possible for younger players.
-
----
 
 ## Eligibility
 
@@ -22,8 +18,6 @@ PRO provides mentorship and leadership development for youth who want to referee
 - Youth referees may officiate games up to two age groups below their own soccer age
 
 For example, a 12U player can referee 8U games but not 10U games. Assignments are made with attention to each referee's comfort level.
-
----
 
 ## Training Requirements
 
@@ -39,8 +33,6 @@ Training includes:
 - CDC Concussion Awareness
 - Sudden Cardiac Arrest Awareness
 
----
-
 ## Benefits
 
 Youth referees develop:
@@ -51,20 +43,14 @@ Youth referees develop:
 
 Many youth referees continue officiating as they grow, advancing through AYSO certification levels.
 
----
-
 ## How to Join
 
 Contact [referee@ayso13.org](mailto:referee@ayso13.org) to begin the PRO referee certification process.
-
----
 
 ## Related Pages
 
 - [Refereeing Overview](/referees) — Getting started
 - [Referee Training](/referees/training) — Certification requirements
 - [Volunteer Roles](/volunteers/roles) — Other ways to help
-
----
 
 *Last updated: [DATE]*

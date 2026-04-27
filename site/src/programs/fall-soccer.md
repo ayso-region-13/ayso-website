@@ -9,8 +9,6 @@ description: "Fall Soccer is Region 13's core recreational program for players a
 
 ![Fall soccer game at Region 13](/images/fall-game-01.jpg)
 
----
-
 ## Quick Facts
 
 - Season: September (after Labor Day) through mid-November
@@ -18,8 +16,6 @@ description: "Fall Soccer is Region 13's core recreational program for players a
 - Games: Saturdays
 - Practices: One weeknight per week
 - Cost: $210-$240 depending on registration date
-
----
 
 ## Divisions
 
@@ -32,8 +28,6 @@ description: "Fall Soccer is Region 13's core recreational program for players a
 | 14U | 13-14 | 11v11 (full field) | 70 min |
 
 Age is determined as of July 31. See [age chart](/register/age-chart/) for exact birth date cutoffs.
-
----
 
 ## Schedule
 
@@ -57,8 +51,6 @@ Practice day and time are set by your coach based on field availability.
 - Regular season ends: Pre-Thanksgiving
 - Playoffs (10U-14U): One to two weeks after Thanksgiving
 
----
-
 ## How It Works
 
 ### 6U-8U ("Friendly" Divisions)
@@ -71,8 +63,6 @@ Practice day and time are set by your coach based on field availability.
 - Standings tracked throughout season
 - Single-elimination playoffs after regular season
 - Division champions determined
-
----
 
 ## Registration
 
@@ -103,8 +93,6 @@ Financial assistance is available. Contact [registrar@ayso13.org](mailto:registr
 
 [Register on InLeague](https://ayso13.inleague.com/app)
 
----
-
 ## Volunteer Requirements
 
 Each team needs:
@@ -115,8 +103,6 @@ Each team needs:
 
 Coaches and referees attend training classes (typically 4 hours). See [training classes](/volunteers/classes) for the schedule.
 
----
-
 ## Related Pages
 
 - [Getting Started](/parents/) — Overview for new families
@@ -124,7 +110,5 @@ Coaches and referees attend training classes (typically 4 hours). See [training 
 - [Age Divisions](/register/age-chart/) — Birth date cutoffs
 - [Volunteer Training](/volunteers/classes) — Coach and referee certification
 - [NEXT](/programs/next) — Advanced training supplement
-
----
 
 *Last updated: [DATE]*

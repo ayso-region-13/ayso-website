@@ -12,13 +12,9 @@ Sign up to receive the Region 13 newsletter — season updates, event announceme
 
 <script async src="https://eomail6.com/form/5061a593-f313-11eb-96e5-06b4694bee2a.js" data-form="5061a593-f313-11eb-96e5-06b4694bee2a"></script>
 
----
-
 ## Other AYSO Newsletters
 
 - [AYSO WhistleStop Newsletter](https://ayso.wufoo.com/forms/m1ulp2ab0t7jte3/) — National AYSO referee newsletter
-
----
 
 ## Newsletter Archive
 
@@ -144,20 +140,14 @@ Sign up to receive the Region 13 newsletter — season updates, event announceme
 
 </div>
 
----
-
 ## Contact
 
 - Newsletter questions: [info@ayso13.org](mailto:info@ayso13.org)
 - Communication Director: [webmaster@ayso13.org](mailto:webmaster@ayso13.org)
 
----
-
 ## Related Pages
 
 - [Contact](/contact) — All contact information
 - [Resources](/resources) — All resources
-
----
 
 *Last updated: [DATE]*

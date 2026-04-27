@@ -11,8 +11,6 @@ NEXT provides advanced training and competitive play for players in 10U, 12U, an
 
 ![NEXT program players in training](/images/action-04.jpg)
 
----
-
 ## Quick Facts
 
 - Ages: 10U, 12U, 14U
@@ -20,8 +18,6 @@ NEXT provides advanced training and competitive play for players in 10U, 12U, an
 - Season: Fall (runs alongside Fall Soccer)
 - Cost: Included with Fall Soccer registration
 - Format: 75+ minutes of training, scrimmages, and friendly matches
-
----
 
 ## How It Works
 
@@ -31,8 +27,6 @@ NEXT is a supplement to Fall Soccer, not a replacement. Players must:
 - Attend NEXT sessions in addition to their regular schedule
 
 Sessions include training led by certified coaches, scrimmages, and friendly matches against teams from other Southern California regions.
-
----
 
 ## Schedule (Fall 2025)
 
@@ -45,8 +39,6 @@ Sessions include training led by certified coaches, scrimmages, and friendly mat
 | Boys 12U | Sundays, 11:45am-1pm | La Cañada HS JV Fields |
 | Boys 14U | Sundays, 1:45-3:15pm | La Cañada HS JV Fields |
 
----
-
 ## How to Join
 
 NEXT uses Spond for team communication and attendance. To join:
@@ -57,21 +49,15 @@ NEXT uses Spond for team communication and attendance. To join:
 
 There are no tryouts. Players join through open invitation.
 
----
-
 ## Contact
 
 NEXT Administrator: Bret Nicely
 Email: [bret@ayso13.org](mailto:bret@ayso13.org)
-
----
 
 ## Related Pages
 
 - [Fall Soccer](/programs/fall-soccer) — Core program (required for NEXT)
 - [All-Stars](/programs/all-stars) — Winter competitive program
 - [Programs Overview](/programs) — All Region 13 programs
-
----
 
 *Last updated: [DATE]*

@@ -8,15 +8,11 @@ description: "Practice planning resources for Region 13 coaches. Session outline
 
 Practices begin the first week of September and run once weekly for most age groups.
 
----
-
 ## Practice Schedule
 
 - Practices are assigned by the region based on field availability
 - You must use only your assigned day, field, and time slot
 - Violating field assignment policies results in coach suspension
-
----
 
 ## Field Information
 
@@ -27,16 +23,12 @@ Before your first practice:
 
 Teams may temporarily use adjacent empty spaces during practice, but those spaces may become unavailable at any time.
 
----
-
 ## Practice Length by Division
 
 | Division | Practice Length |
 |----------|-----------------|
 | 6U-8U | 60 minutes |
 | 10U-14U | 90 minutes |
-
----
 
 ## Practice Planning
 
@@ -54,8 +46,6 @@ Use the coaching manual for your division. Activities should match players' deve
 - AYSO coaching videos
 - [PIE Philosophy](/coaches/pie) for positive coaching techniques
 
----
-
 ## Problem Resolution
 
 | Issue | Contact |
@@ -64,20 +54,14 @@ Use the coaching manual for your division. Activities should match players' deve
 | Non-urgent field issues | Online reporting form |
 | Scheduling conflicts | practice@ayso13.org |
 
----
-
 ## Requirements
 
 A fully certified coach must be present for all practices. If you cannot attend, arrange for another certified coach to cover.
-
----
 
 ## Related Pages
 
 - [Fields](/fields) — Field locations and details
 - [Game Day Guide](/coaches/game-day) — Running games
 - [PIE Philosophy](/coaches/pie) — Positive coaching approach
-
----
 
 *Last updated: [DATE]*

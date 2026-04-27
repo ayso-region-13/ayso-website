@@ -7,8 +7,6 @@ description: "Required training and certifications for all AYSO Region 13 volunt
 
 Every adult volunteer at AYSO Region 13 must complete background screening and safety training before working with players. Coaches and referees also complete role-specific certification.
 
----
-
 ## General Requirements
 
 Complete annual items each season through InLeague. Complete one-time items through eTrainU or at the designated Livescan location. See [Training Classes](/volunteers/classes/) for where and how to complete each item.
@@ -24,8 +22,6 @@ Complete annual items each season through InLeague. Complete one-time items thro
 | AYSO Safe Haven | Once | <span class="text-green-800 font-bold">✓</span> | <span class="text-green-800 font-bold">✓</span> | — |
 
 *Livescan is required once. You do not need to repeat it if there has been no gap in your volunteering longer than five years.
-
----
 
 ## Coach Certification
 
@@ -54,8 +50,6 @@ All-Stars and Spring Cup coaches must hold their division's certification and th
 | 12U | 12U Coach | Intermediate Coach |
 | 14U | Intermediate Coach | Advanced Coach |
 
----
-
 ## Referee Certification
 
 Referees must hold current certification for the divisions they officiate, in addition to the general requirements above. Higher-level certifications qualify you to officiate younger age groups. See [Referee Training](/referees/training/) for enrollment details and class schedules.
@@ -71,8 +65,6 @@ Referees must hold current certification for the divisions they officiate, in ad
 
 Youth referees (ages 10–17) are not required to complete SafeSport, Livescan, or background checks. See [Youth Referee Program](/referees/pro/) for details.
 
----
-
 ## Related Pages
 
 - [Training Classes](/volunteers/classes/) — Class schedule, Livescan location, and eTrainU access
@@ -80,7 +72,5 @@ Youth referees (ages 10–17) are not required to complete SafeSport, Livescan, 
 - [Referee Training](/referees/training/) — Referee certification details
 - [Team Manager Training](/managers/training/) — Manager-specific requirements
 - [Volunteer Registration](/register/forms/) — Volunteer application
-
----
 
 *Last updated: [DATE]*

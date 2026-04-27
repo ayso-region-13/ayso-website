@@ -10,8 +10,6 @@ We provide the uniform. You provide shoes and shin guards.
 
 [IMAGE: Soccer equipment laid out - cleats, shin guards, jersey, shorts, socks]
 
----
-
 ## What We Provide
 
 When you register, your child receives:
@@ -23,8 +21,6 @@ When you register, your child receives:
 Uniforms are distributed before the season starts. Watch your email for pickup dates and locations.
 
 Need a replacement? Email [equipment@ayso13.org](mailto:equipment@ayso13.org) with a photo of the damaged item. Replacements are available on game days at the equipment tent.
-
----
 
 ## What You Provide
 
@@ -72,8 +68,6 @@ Teams share balls at practice and games, so a personal ball is optional. If your
 | 10U-12U | Size 4 |
 | 14U and up | Size 5 (adult) |
 
----
-
 ## What's Not Allowed
 
 For safety, the following are not permitted during games or practices:
@@ -83,8 +77,6 @@ For safety, the following are not permitted during games or practices:
 - Watches and fitness trackers — Must be removed or covered with a sweatband.
 
 Exception: Medical alert bracelets may be worn but should be taped down or covered.
-
----
 
 ## Uniform Rules
 
@@ -101,15 +93,11 @@ Exception: Medical alert bracelets may be worn but should be taped down or cover
 - Sweatpants or leggings: OK under shorts for practice; ask your coach about games
 - Jackets: Remove for games, OK for practice
 
----
-
 ## Uniforms for Coaches
 
 Coaches wear red AYSO shirts (provided). New coaches receive their shirt at coach training.
 
 Both women's and men's styles are available. Contact [equipment@ayso13.org](mailto:equipment@ayso13.org) if you need a different size.
-
----
 
 ## Tournament Teams
 
@@ -118,8 +106,6 @@ If your child is selected for a tournament team ([All-Stars](/programs/all-stars
 - Tournament jerseys must be returned after the event
 - $20 replacement fee for unreturned items
 - Contact [equipment@ayso13.org](mailto:equipment@ayso13.org) for checkout
-
----
 
 ## Shopping List
 
@@ -138,21 +124,15 @@ Don't need:
 - [ ] Goalkeeper gloves (provided if needed)
 - [ ] Uniform pieces (we provide these)
 
----
-
 ## Questions?
 
 - Uniform issues: [equipment@ayso13.org](mailto:equipment@ayso13.org)
 - General questions: [Contact us](/contact)
-
----
 
 ## Related Pages
 
 - [Getting Started](/parents/) — Overview for new families
 - [Age Divisions](/register/age-chart/) — Ball sizes by division
 - [Volunteer Training](/volunteers/classes) — Coach shirt pickup
-
----
 
 *Last updated: [DATE]*

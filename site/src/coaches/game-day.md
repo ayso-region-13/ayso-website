@@ -8,8 +8,6 @@ description: "Game day guide for AYSO Region 13 coaches. What to bring, how to s
 
 This guide covers what coaches need to know for game days, with specific information for 6U-8U divisions.
 
----
-
 ## Before the Game
 
 ### Preparation
@@ -23,8 +21,6 @@ In 6U-8U, each team splits in half and plays on two fields simultaneously:
 - Balance skill levels across both groups
 - Assign one coach to each field
 - After halftime, home teams switch fields
-
----
 
 ## During the Game
 
@@ -40,8 +36,6 @@ In 6U-8U, each team splits in half and plays on two fields simultaneously:
 - Complete game cards
 - Support referees — accept their calls
 
----
-
 ## Managing Young Players (6U-8U)
 
 - Establish supportive team culture through team circles
@@ -50,8 +44,6 @@ In 6U-8U, each team splits in half and plays on two fields simultaneously:
 - Focus on participation over technique
 - Celebrate effort and improvement
 
----
-
 ## Sideline Behavior
 
 - Model good sportsmanship
@@ -59,16 +51,12 @@ In 6U-8U, each team splits in half and plays on two fields simultaneously:
 - Keep parents informed but focused on cheering, not coaching
 - Remember: Referees ref, Coaches coach, Parents cheer
 
----
-
 ## After the Game
 
 - Team huddle: celebrate the game, win or lose
 - Thank referees and opposing coaches
 - Submit game cards (10U+)
 - Address any issues through proper channels
-
----
 
 ## Game Cards
 
@@ -79,14 +67,10 @@ For 10U+ divisions, bring completed game cards to each match:
 
 See [Game Cards](/coaches/game-cards) for details.
 
----
-
 ## Related Pages
 
 - [Game Cards](/coaches/game-cards) — Game card instructions
 - [Practice Resources](/coaches/practice) — Planning practices
 - [PIE Philosophy](/coaches/pie) — Positive coaching approach
-
----
 
 *Last updated: [DATE]*

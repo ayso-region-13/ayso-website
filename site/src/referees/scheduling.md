@@ -8,8 +8,6 @@ description: "How referee scheduling works in AYSO Region 13. Self-scheduling th
 
 Referees sign up for game assignments each week through InLeague.
 
----
-
 ## Weekly Sign-Up Process
 
 1. Log in to InLeague
@@ -23,8 +21,6 @@ At-large volunteers (those without team assignments) can claim open spots starti
 [Referee Scheduler](https://ayso13.inleague.com/app/referee-scheduler)
 
 A video tutorial is available to guide you through the scheduling process.
-
----
 
 ## Division Requirements
 
@@ -44,8 +40,6 @@ Region 13 assigns center referees from experienced officials. Teams provide Assi
 ### 16U-19U
 CGI-Sports handles assignments for upper divisions, managed by Area 1C.
 
----
-
 ## Confirmation Process
 
 The Referee Staff confirms pending assignments on Fridays via email notification.
@@ -55,13 +49,9 @@ If you cannot make your assigned game:
 2. Then contact the opposing team
 3. If still unresolved, contact your Division Referee Administrator
 
----
-
 ## Referee Points
 
 The region tracks referee points for accountability. Teams need minimum points to participate in postseason competitions like the Rose City Cup.
-
----
 
 ## Contact
 
@@ -69,14 +59,10 @@ The region tracks referee points for accountability. Teams need minimum points t
 - Game-day emergencies: 626-702-AYSO
 - Email: [referee@ayso13.org](mailto:referee@ayso13.org)
 
----
-
 ## Related Pages
 
 - [Refereeing Overview](/referees) — Getting started
 - [Referee Resources](/referees/resources) — Tools and guides
 - [Game Cards](/coaches/game-cards) — Recording game information
-
----
 
 *Last updated: [DATE]*

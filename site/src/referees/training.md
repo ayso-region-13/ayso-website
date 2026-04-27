@@ -43,8 +43,6 @@ Complete these courses through eTrainU:
 - CDC Concussion Awareness
 - Sudden Cardiac Arrest Awareness
 
----
-
 ## Training Schedule
 
 Training classes are held before the fall season, typically in August. The region offers 2-3 Regional Referee classes at the Altadena clubhouse or in South Pasadena during July and August.
@@ -54,8 +52,6 @@ Refresher courses (2 hours, outdoor on soccer fields) are available but not mand
 [Training Calendar on eTrainU](https://ayso13.inleague.com/eTrainu/index/)
 
 For training before July, contact [referee@ayso13.org](mailto:referee@ayso13.org).
-
----
 
 ## Badge Progression
 
@@ -71,8 +67,6 @@ Each level increases the divisions you can referee and requires additional game 
 
 See [Referee Upgrades](/referees/upgrades) for the full pathway.
 
----
-
 ## Youth Referee Requirements
 
 Youth referees (ages 10-17) complete the same courses with two exceptions:
@@ -81,15 +75,11 @@ Youth referees (ages 10-17) complete the same courses with two exceptions:
 
 Each youth referee needs their own email address to track training.
 
----
-
 ## Related Pages
 
 - [Training Requirements](/volunteers/training-matrix/) — Full matrix of what each role requires
 - [Refereeing Overview](/referees) — Getting started
 - [PRO Program](/referees/pro) — Youth referee program
 - [Training Classes](/volunteers/classes) — Class schedule
-
----
 
 *Last updated: [DATE]*

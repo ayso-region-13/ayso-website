@@ -12,8 +12,6 @@ description: "Resources for AYSO Region 13 referees — documents, forms, traini
 - [eTrainU](https://ayso13.inleague.com/eTrainu/index/) — Training and certification
 - [Incident Reporting](https://ayso13.typeform.com/to/GjC4Pyed) — Document issues
 
----
-
 ## Document Library
 
 ### Regional Guidelines (PDFs)
@@ -36,8 +34,6 @@ description: "Resources for AYSO Region 13 referees — documents, forms, traini
 
 [document library](/resources/documents/)
 
----
-
 ## Game Materials
 
 **Log Pages**
@@ -46,8 +42,6 @@ Printable log pages for documenting match records.
 **Game Cards**
 Materials for recording game information. See [Game Cards](/coaches/game-cards) for usage instructions.
 
----
-
 ## Newsletters
 
 Stay informed with these publications:
@@ -55,13 +49,9 @@ Stay informed with these publications:
 - [AYSO Region 13 Referee Newsletter](https://confirmsubscription.com/h/y/21A151C23B8C6071)
 - [AYSO WhistleStop Newsletter](https://ayso.wufoo.com/forms/m1ulp2ab0t7jte3/) — National AYSO referee newsletter
 
----
-
 ## Uniform and Equipment
 
 Referee uniforms are available through the region. For uniform issues, contact [ref-uniforms@ayso13.org](mailto:ref-uniforms@ayso13.org) (Manny Morales).
-
----
 
 ## Contact
 
@@ -69,14 +59,10 @@ Referee uniforms are available through the region. For uniform issues, contact [
 - Phone: 626-316-6900
 - Game-day emergencies: 626-702-AYSO
 
----
-
 ## Related Pages
 
 - [Refereeing Overview](/referees) — Getting started
 - [Laws of the Game](/referees/laws) — Official rules
 - [Referee Scheduling](/referees/scheduling) — Game assignments
-
----
 
 *Last updated: [DATE]*

@@ -18,8 +18,6 @@ Submit signed forms through the upload portal.
 
 [Form Upload Portal](/forms/?go=1)
 
----
-
 ## Coach Resources
 
 - Coaching manuals (provided at division meetings)
@@ -27,8 +25,6 @@ Submit signed forms through the upload portal.
 - Game card instructions
 
 See [Coach Resources](/coaches) for full materials.
-
----
 
 ## Referee Resources
 
@@ -38,8 +34,6 @@ See [Coach Resources](/coaches) for full materials.
 
 See [Referee Resources](/referees/resources) for full materials.
 
----
-
 ## Team Manager Resources
 
 - Orientation presentation
@@ -47,8 +41,6 @@ See [Referee Resources](/referees/resources) for full materials.
 - Picture day information
 
 See [Manager Resources](/managers) for full materials.
-
----
 
 ## Financial Forms
 
@@ -59,27 +51,19 @@ See [Manager Resources](/managers) for full materials.
 
 [Team Sponsor Form ($250)](https://donate.stripe.com/dR6eYg9Em9oF6icfZ5)
 
----
-
 ## Registration
 
 - Withdrawal/refund request form
 
 [Withdrawal Form](https://docs.google.com/forms/d/e/1FAIpQLSfDm6c5f0ApchEegAIQdZTNWQImX_n6K3jBf11SVwaXoSqihg/viewform)
 
----
-
 ## Contact
 
 - General questions: [info@ayso13.org](mailto:info@ayso13.org)
-
----
 
 ## Related Pages
 
 - [Required Forms](/register/forms) — Registration forms
 - [Resources Overview](/resources) — All resources
-
----
 
 *Last updated: [DATE]*

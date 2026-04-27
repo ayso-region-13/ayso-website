@@ -8,8 +8,6 @@ description: "AYSO Region 13 policies covering player conduct, refund policy, an
 
 Region 13 follows AYSO national policies along with local rules specific to our region.
 
----
-
 ## Governing Documents
 
 Our policies follow this hierarchy:
@@ -20,8 +18,6 @@ Our policies follow this hierarchy:
 4. Region 13 Policies and Procedures
 5. AYSO Section 1 Rules of Competition
 6. AYSO Area 1-C Combined Rules
-
----
 
 ## Player Safety
 
@@ -36,8 +32,6 @@ Our policies follow this hierarchy:
 - Volunteers complete Simon's Heart SCA training
 - Players showing symptoms are removed from play immediately and must receive professional medical evaluation
 
----
-
 ## Field Rules
 
 ### Turf Fields
@@ -46,16 +40,12 @@ Only water is permitted on turf fields. No sports drinks, food, or gum. Only pla
 ### No Pets
 Pets are not allowed at any AYSO events in the region. Service animals are exempt.
 
----
-
 ## Equipment
 
 ### Jewelry
 Earrings and other jewelry must be removed to play soccer. This is a Law of the Game and applies to all practices and games. Earrings cannot be taped over.
 
 Medical alert bracelets may be worn but should be taped down or covered.
-
----
 
 ## Sideline Conduct
 
@@ -68,26 +58,18 @@ Coaches and parents must model good sportsmanship and avoid disparaging voluntee
 
 Coaches initial game cards confirming they understand this policy.
 
----
-
 ## Disputes and Concerns
 
 For concerns about conduct or policy violations, use the incident reporting process. See [Safety](/resources/safety) for details.
 
----
-
 ## Privacy
 
 Personal data is handled according to AYSO National Board-approved privacy policies. Credit and debit card information is not stored. Background check data is encrypted and restricted to Risk Management personnel.
-
----
 
 ## Related Pages
 
 - [Safety](/resources/safety) — Safety policies and incident reporting
 - [Fine Print](/about/fine-print) — Legal disclosures and waivers
 - [Kids Zone](/parents/pledge/) — Sideline conduct expectations
-
----
 
 *Last updated: [DATE]*

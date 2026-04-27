@@ -8,8 +8,6 @@ description: "AYSO Region 13 safety and heat policy. Guidelines for safe play in
 
 Region 13 follows AYSO safety protocols and California state requirements for youth sports.
 
----
-
 ## Concussion Protocol
 
 California law requires that any player suspected of having a concussion be removed from play immediately. The player may not return until cleared by a licensed healthcare provider.
@@ -32,8 +30,6 @@ A player who has been removed for a suspected concussion must provide written cl
 
 [Return to Play Release Form](https://aysovolunteers.org/ayso-participation-return-to-play-release-form/)
 
----
-
 ## Sudden Cardiac Arrest (SCA)
 
 California law requires youth sports organizations to provide information about sudden cardiac arrest.
@@ -48,13 +44,9 @@ California law requires youth sports organizations to provide information about 
 
 If a player shows these signs, stop activity and seek medical attention.
 
----
-
 ## Required Training
 
 Coaches and team managers must complete concussion and SCA awareness training through eTrainU. This is required by California law.
-
----
 
 ## Heat Policy
 
@@ -66,8 +58,6 @@ Use the Zelus app to check current conditions: [zelusports.com](https://zeluspor
 
 Notifications are sent by 7 AM on game days or 4 PM on practice days when heat alerts are in effect.
 
----
-
 ## Incident Reporting
 
 Report injuries, near misses, and other incidents using the incident report form.
@@ -76,15 +66,11 @@ Report injuries, near misses, and other incidents using the incident report form
 
 Referees use a separate misconduct form.
 
----
-
 ## Injury Prevention
 
 Region 13 recommends the FIFA 11+ warmup program to help prevent injuries.
 
 [FIFA 11+ Warmup Program (PDF)](/assets/docs/fifa-11plus.pdf)
-
----
 
 ## Contact
 
@@ -92,13 +78,9 @@ Region 13 recommends the FIFA 11+ warmup program to help prevent injuries.
 - Region Commissioner: [rc@ayso13.org](mailto:rc@ayso13.org)
 - AYSO Insurance: [insurance@ayso.org](mailto:insurance@ayso.org)
 
----
-
 ## Related Pages
 
 - [Required Forms](/register/forms) — Safety acknowledgment forms
 - [Incident Reporting](/contact/feedback) — Report issues
-
----
 
 *Last updated: [DATE]*

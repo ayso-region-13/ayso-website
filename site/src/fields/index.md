@@ -11,7 +11,6 @@ description: "All AYSO Region 13 soccer field locations in Pasadena, Altadena, a
 
 ![Regional field map — all Region 13 locations](/images/fields/map-overview.jpg)
 
-
 ## Game Day Basics
 
 - Home team (listed first on the schedule) sits on the north or west side of the field

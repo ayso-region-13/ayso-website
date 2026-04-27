@@ -11,8 +11,6 @@ Spring Soccer offers league play from March through May for players who want mor
 
 ![Spring soccer game at Region 13](/images/game-05.jpg)
 
----
-
 ## Quick Facts
 
 - Ages: 6U through 19U
@@ -20,8 +18,6 @@ Spring Soccer offers league play from March through May for players who want mor
 - Games: Saturdays or Sundays
 - Cost: $180
 - Registration: Waitlist first, then confirmed when teams form
-
----
 
 ## How Registration Works
 
@@ -35,8 +31,6 @@ Spring Soccer registration works differently than fall:
 This approach ensures teams only form when there are enough players and coaches.
 
 [Register on InLeague](https://ayso13.inleague.com/app)
-
----
 
 ## Program Options
 
@@ -67,29 +61,21 @@ This approach ensures teams only form when there are enough players and coaches.
 - Tournament fees vary by event
 - Can participate in both Spring League and NEXT, though most choose one
 
----
-
 ## Schedule
 
 - Games exclude Mother's Day and Easter weekends
 - Practices typically once or twice per week
 - Exact schedules depend on field availability
 
----
-
 ## Contact
 
 - 6U-8U questions: [neil@ayso13.org](mailto:neil@ayso13.org)
 - 10U-19U questions: [samir@ayso13.org](mailto:samir@ayso13.org)
-
----
 
 ## Related Pages
 
 - [Fall Soccer](/programs/fall-soccer) — Main fall program
 - [NEXT](/programs/next) — Advanced training program
 - [Programs Overview](/programs) — All Region 13 programs
-
----
 
 *Last updated: [DATE]*

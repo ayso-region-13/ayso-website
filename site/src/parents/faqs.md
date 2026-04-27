@@ -23,8 +23,6 @@ Sometimes, if space is available. Contact [registrar@ayso13.org](mailto:registra
 ### My child turns 5 (or 7, or 9) mid-season. What division do they play in?
 Age is determined as of July 31 of the current year. If your child turns 7 on August 15, they play in 6U (for 6-year-olds) for that season.
 
----
-
 ## Teams and Placement
 
 ### Can my child play with their friend?
@@ -38,8 +36,6 @@ Buddy requests can only be honored when both families request each other and whe
 
 ### Can my child switch teams after the season starts?
 Only in unusual circumstances. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) to discuss.
-
----
 
 ## Volunteering
 
@@ -55,8 +51,6 @@ Other roles include team manager, field host, and snack coordinator. See [Volunt
 ### How much time does coaching or refereeing take?
 - Coaches: 2-3 hours per week (one practice + one game)
 - Referees: 1-2 games on Saturday mornings (1-2 hours)
-
----
 
 ## Games and Practices
 
@@ -78,8 +72,6 @@ Yes. Let your coach know in advance.
 ### Does my child have to play goalkeeper?
 In older divisions (10U+), coaches ask for goalkeeper volunteers. Goalkeeping is voluntary — players choose whether to take a turn.
 
----
-
 ## Equipment and Uniforms
 
 ### What equipment do I need to buy?
@@ -94,8 +86,6 @@ Dates are announced by email, usually 1-2 weeks before the season.
 ### The uniform doesn't fit. Can we exchange it?
 Yes. Email [equipment@ayso13.org](mailto:equipment@ayso13.org).
 
----
-
 ## Playing Time and Competition
 
 ### Will my child play in every game?
@@ -109,8 +99,6 @@ Our blind-draw team formation process helps create balanced teams.
 
 ### Is there a competitive option for advanced players?
 [NEXT](/programs/next) offers advanced training and tournament play for 10U-14U. [All-Stars](/programs/all-stars) is another option.
-
----
 
 ## Safety and Health
 
@@ -128,8 +116,6 @@ Any player who shows signs of a concussion is removed from play immediately and 
 
 ### What if it's really hot?
 We have a [heat policy](/resources/safety/) that may modify or cancel activities when temperatures are extreme.
-
----
 
 ## Communication
 
@@ -151,8 +137,6 @@ Your coach's contact info is in your team assignment email and in [InLeague](htt
 | Equipment, uniforms | [equipment@ayso13.org](mailto:equipment@ayso13.org) |
 | General questions | [Contact us](/contact) |
 
----
-
 ## AYSO Basics
 
 ### What does AYSO stand for?
@@ -164,15 +148,11 @@ AYSO is recreational and inclusive — everyone plays, teams are balanced, and t
 ### Can my child do both AYSO and club soccer?
 Yes. Be aware of potential schedule conflicts.
 
----
-
 ## Still Have Questions?
 
 - Email: [registrar@ayso13.org](mailto:registrar@ayso13.org)
 - Contact page: [Contact Us](/contact)
 - Feedback: [Share your feedback](/contact/feedback/)
-
----
 
 ## Related Pages
 
@@ -180,7 +160,5 @@ Yes. Be aware of potential schedule conflicts.
 - [Equipment Guide](/parents/equipment) — What to buy, what's provided
 - [Your Child's Team](/parents/team) — Game day info and schedules
 - [Volunteer FAQs](/volunteers/faqs) — Questions about coaching and refereeing
-
----
 
 *Last updated: [DATE]*
