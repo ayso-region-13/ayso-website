@@ -51,10 +51,9 @@ Materials for recording game information. See [Game Cards](/coaches/game-cards) 
 ## Newsletters
 
 Stay informed with these publications:
-- AYSO Region 13 Referee Newsletter
-- AYSO WhistleStop Newsletter
 
-[INLEAGUE: Newsletter subscription links]
+- [AYSO Region 13 Referee Newsletter](https://confirmsubscription.com/h/y/21A151C23B8C6071)
+- [AYSO WhistleStop Newsletter](https://ayso.wufoo.com/forms/m1ulp2ab0t7jte3/) — National AYSO referee newsletter
 
 ---
 

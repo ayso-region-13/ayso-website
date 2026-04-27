@@ -29,9 +29,7 @@ The newsletter includes:
 ## Additional Publications
 
 **AYSO WhistleStop Newsletter**
-National AYSO referee newsletter.
-
-[INLEAGUE: WhistleStop subscription link]
+National AYSO referee newsletter. [Subscribe to WhistleStop](https://ayso.wufoo.com/forms/m1ulp2ab0t7jte3/).
 
 ---
 

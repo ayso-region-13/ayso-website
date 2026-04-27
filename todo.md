@@ -17,9 +17,6 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [ ] Update Node version in Cloudflare Pages to suppress LTS maintenance warning (currently 22, upgrade to 24)
 
 ### Content
-- [ ] **2 unresolved INLEAGUE placeholders** (newsletter signup URLs not found on old site — ask the team):
-  - `referees/resources.md` — Newsletter subscription links
-  - `resources/newsletter.md` — WhistleStop (AYSO national referee newsletter) subscription link
 - [ ] **2 missing IMAGE placeholders** — source or remove:
   - `parents/pledge` — no source found
   - `parents/support` — no source found
