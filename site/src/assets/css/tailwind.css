@@ -27,7 +27,7 @@
     @apply text-xl font-semibold text-brand-red-dark mt-7 mb-2;
   }
   .prose h4 {
-    @apply text-base font-semibold text-gray-900 mt-5 mb-1;
+    @apply text-lg font-bold text-brand-maroon mt-6 mb-1;
   }
   .prose p {
     @apply mb-4 leading-relaxed;
