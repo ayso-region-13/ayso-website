@@ -30,7 +30,7 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Slack bot (`/ayso`) — field status, announcements, promote to production
 - [x] Ask the Referee — accordion FAQ, 30 Q&As in 7 categories, Pages CMS collection for Steve
 - [x] Home page + brand redesign — light header, two-tone hero/buttons/tile labels, Raleway font, new logo SVG
-- [x] Image optimization pipeline — `@11ty/eleventy-img` auto-converts every `<img>` to `<picture>` with AVIF + WebP + JPEG variants at 600/1200/1920w
+- [x] Image optimization pipeline — `@11ty/eleventy-img` auto-converts every `<img>` to `<picture>` with **WebP + original-format** variants at 600/1200/auto widths. **AVIF intentionally excluded** — Cloudflare Pages build cache won't engage for this project (logs "Skipping build output cache as it's not supported for your project" despite framework preset = Eleventy, V3 build, cache toggle on). AVIF encoding is 60%+ of image processing time. Without cache, every deploy regenerates from scratch. WebP covers 96%+ of users and gives most of the size win. Build dropped from ~4:14 (with AVIF) to ~1:30 (without). DO NOT add AVIF back unless Cloudflare cache is fixed first.
 - [x] Interior page design alignment — cream surface, maroon sidebar header, two-tone strip below page header
 - [x] Accessibility hardening — site-wide WCAG AA contrast pass on prose headings, links, nav, sidebar, field status bars
 - [x] Kids Zone — replaces Parent Pledge, follows AYSO National's authoritative 10 guidelines
