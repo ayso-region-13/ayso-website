@@ -138,7 +138,7 @@ The Director of Referee Instruction oversees the scheduling, planning, and execu
 
 #### Volunteer Coordinator / Team Manager Coordinator
 
-Organizes general volunteers for tournaments, events, and the game-day information tent. Coordinates Team Managers — runs orientations, distributes information packets, fields questions, and routes them to the right board member. Supervises the Picture Day Coordinator and the Awards and Trophies Team.
+The Volunteer Coordinator is responsible for organizing the general volunteers in the Region for events like our annual tournament and for staffing the information tent on game days. They also coordinate the Team Managers. Team Managers play an important administrative role on most AYSO teams. The Team Manager Coordinator conducts the Team Manager orientation meeting and interfaces with the Team Managers throughout the season. They are invited to attend monthly board meetings and and often contribute messages to the Communication Director for the newsletter. They also usually supervise the Picture Day Coordinator and the Awards and Trophies Team. 
 
 Auditor
 
