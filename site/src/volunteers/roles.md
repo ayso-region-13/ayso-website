@@ -76,10 +76,6 @@ The CVPA works with the RC, RCA and RRA and is responsible for ensuring that all
 
 The Safety Director has broad responsibility for the safety of players, coaches, referees and all other volunteers in the region. They assist and report any players, coaches or referees who experience an injury during an AYSO sanctioned event. The Safety Director also keeps the Board apprised of upcoming safety issues and possible regulation and compliance changes.
 
-### Auditor
-
-Assists the Regional Commissioner with fiduciary responsibilities.
-
 ## General Board
 
 These roles are not required by AYSO but are essential to running a region of Region 13's size. General Board members advise on policy and operations at monthly meetings.
@@ -147,6 +143,10 @@ The Director of Referee Instruction oversees the scheduling, planning, and execu
 #### Volunteer Coordinator / Team Manager Coordinator
 
 Organizes general volunteers for tournaments, events, and the game-day information tent. Coordinates Team Managers — runs orientations, distributes information packets, fields questions, and routes them to the right board member. Supervises the Picture Day Coordinator and the Awards and Trophies Team.
+
+Auditor
+
+The Auditor is responsible for ensuring that the Region’s finances are accurate, transparent, and well-managed. You’ll review financial records and confirm that income and expenses are properly documented. Audits are normally performed every six months, in collaboration with the Treasurer.
 
 #### Uniform & Equipment Coordinator
 
