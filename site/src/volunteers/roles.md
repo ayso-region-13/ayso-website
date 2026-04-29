@@ -140,7 +140,7 @@ The Director of Referee Instruction oversees the scheduling, planning, and execu
 
 The Volunteer Coordinator is responsible for organizing the general volunteers in the Region for events like our annual tournament and for staffing the information tent on game days. They also coordinate the Team Managers. Team Managers play an important administrative role on most AYSO teams. The Team Manager Coordinator conducts the Team Manager orientation meeting and interfaces with the Team Managers throughout the season. They are invited to attend monthly board meetings and and often contribute messages to the Communication Director for the newsletter. They also usually supervise the Picture Day Coordinator and the Awards and Trophies Team. 
 
-Auditor
+#### Auditor
 
 The Auditor is responsible for ensuring that the Region’s finances are accurate, transparent, and well-managed. You’ll review financial records and confirm that income and expenses are properly documented. Audits are normally performed every six months, in collaboration with the Treasurer.
 
@@ -150,11 +150,11 @@ The Uniform and Equipment Coordinator handles selection, ordering, and distribut
 
 The Equipment Coordinator (who is often also the Uniform Coordinator, but doesn’t need to be) orders equipment for our coaches. This equipment includes ball pumps, cones, first aid kits, ice packs, etc., as well a a bag for all of these items. Usually this person orders enough stock to equip coaches for the large fall season, with extras supplying coaches throughout the rest of the year. Volunteers are recruited to assemble and distribute the coach equipment bags.
 
-Scheduler
+#### Scheduler
 
 The Scheduler computes the schedule of games, including creating the matchups and assigning fields for each game. There are various software solutions for this effort, with the better solutions being able to deal with the complexities of our many coaches who coach more than one team. The Scheduler also loads the game schedules into InLeague so that they are available to everyone in the Region.
 
-Statistician
+#### Statistician
 
 The Statistician records scores, injuries, sportsmanship reports, and referee information from the game cards, which are submitted for the competitive divisions (10U-14U). Game scores are published to InLeague, and the Statistician ensures that the resulting published team standings are correct. Sportsmanship Points and Referee Points are calculated and published as well.
 
@@ -182,7 +182,7 @@ Region 13 awards trophies and/or medals for most of our seasons and activities. 
 
 ### Tournaments
 
-Tournament Director
+#### Tournament Director
 
 The Tournament Director oversees our Region’s two annual tournaments: The Thanksgiving Tournament, which takes place the weekend after Thanksgiving and the Bill Owen Spring Classic, which normally takes place in the late spring. The Tournament Director manages all aspects of the tournaments and works with many other Region staff, including especially the RRA and the Fields Coordinator. Our Tournaments are managed via an online portal, which handles registration, referee and player roster submission, and payments. Our tournaments are a significant income source for our Region.
 
