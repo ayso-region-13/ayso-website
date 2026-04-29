@@ -116,10 +116,6 @@ The Winter Stars Coordinator organizes and puts on our low-stress winter program
 
 The Director of Advanced Play is essentially the All Stars Coordinator. Like Upper Division, All Stars is a program run at the Area level. The Director of Advanced Play will supervise signups of coach and referee volunteers, execute tryouts for All Stars players, and assemble teams, which will be submitted to the Area for incorporation into the All Stars program. The Director of Advanced Play is primarily an organizational role. The All Stars season is January and February each year. Often this volunteer will also assist with the coordination of Spring Soccer, which takes place in the March-May timeframe. Again, Spring Soccer is often an Area-wide program. This role benefits from experience with All Stars and other Area programs.
 
-#### Spring Cup Program Manager
-
-Coordinates the Spring Cup season.
-
 #### EXTRA Coordinator
 
 EXTRA is a tryout-based AYSO program for players in search of a more competitive play environment. EXTRA involves more practices, a wider geographic area for games, and a more serious commitment from players. As such, Region 13 has not always had an EXTRA program. In 2026, we are bringing back this program with a pair of 10U teams. The EXTRA Coordinator is a significant volunteer role, as this person will be responsible for everything involving the EXTRA teams: from coach and player recruitment and tryouts, to overseeing finances, to communication with families throughout the season. EXTRA is run as an independent program, so the EXTRA Coordinator has additional responsibilities, but also the associated freedom to guide the program. This person will work with the RC, RCA, and RRA, as well as the Field and Uniform Coordinators.
