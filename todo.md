@@ -1,5 +1,7 @@
-# AYSO Region 13 — Launch Checklist
-**Staging:** https://staging.ayso13.org → **Production:** https://www.ayso13.org
+# AYSO Region 13 — Post-Launch Backlog
+**Live:** https://www.ayso13.org → **Staging:** https://staging.ayso13.org
+
+🚀 **Site launched 2026-05-01** — DNS cutover complete, SSL active, GA recording, schema validated.
 
 ---
 
@@ -9,35 +11,24 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
   → review → /ayso promote (Slack) → www.ayso13.org
 ```
 
+⚠️ **Promote sweeps everything currently on staging into main.** Before clicking promote, check `git log origin/main..origin/staging --oneline` to see what's about to ship.
+
 ---
 
 ## Remaining Tasks
 
-### Infrastructure
-- [x] Cloudflare Pages Node version updated to 24 (LTS maintenance warning resolved)
-- [x] **Build time optimization** — Cloudflare Pages build cache wouldn't engage despite being toggled on, framework preset set to Eleventy, V3 build system. Three deploys logged "Skipping build output cache as it's not supported for your project" / "Failed to upload dependencies to build cache." Resolved by dropping AVIF from `eleventyImageTransformPlugin` formats in `.eleventy.js` (`["avif","webp","auto"]` → `["webp","auto"]`). Image processing time drops ~60%; per-image weight up ~5-10% on AVIF-capable browsers (WebP still covers 96%+ of users). If we ever want both AVIF + fast builds: file a Cloudflare ticket about the cache, commit pre-generated variants (~80 MB repo cost), use Cloudflare Images (paid), or move generation to a scheduled GitHub Action.
-
 ### Content
-- [x] IMAGE placeholders on `parents/pledge` and `parents/support` — removed (no source photos available)
-- [x] Full content review pass on staging.ayso13.org (board members)
 - [ ] **Each season, update season-specific schedules** — `/programs/next/` (per-division day/time/field once Spond groups are set) and `/programs/preschool/` (exact start date and location before August). Generalized for now to avoid stale 2025 data.
 - [ ] **Fill in field facility info** — Pages CMS now exposes `parking`, `restrooms`, `surface`, `lighting`, and `snackBar` fields on every field page. When populated, they render as a "Field Info" callout at the top of the page. Priority pages (most visited on game days): Victory Park, Blair, McKinley, LCHS, Muir, La Salle. Fields coordinator (Jessica Ferree, fields@ayso13.org) and practice fields coordinator (Rolf Mauermann, rolf@ayso13.org) have the operational knowledge.
 
-
-### Pre-Launch
-- [x] Run link checker — clean (`cd site && node scripts/check-links.js`)
-- [ ] Promote staging → main (clean deploy before cutover)
-
-### DNS Cutover
-- [ ] Add `www.ayso13.org` as custom domain in Cloudflare Pages → main branch deployment
-- [ ] Add apex redirect in Cloudflare: `ayso13.org` → `www.ayso13.org`
-- [ ] Verify `https://www.ayso13.org` resolves and SSL is active
-- [ ] Retire `new.ayso13.org` — redirect to `www.ayso13.org` or remove custom domain
-
-### Post-Launch
+### Post-Launch (this week)
 - [ ] Announce launch internally
 - [ ] Monitor 404s for 48 hours — Cloudflare Pages analytics → Error rates
 - [ ] **Verify or create Google Business Profile** — search "AYSO Region 13 Altadena" on Google Maps; if listing exists, claim it at business.google.com; if not, create one. Primary category: "Soccer Club" (fallback: "Youth Organization"). Service area: Pasadena, Altadena, La Cañada Flintridge. Highest-leverage local SEO action per /seo audit.
+- [ ] **Submit sitemap to Google Search Console** — add `https://www.ayso13.org` as a property, verify, submit `/sitemap.xml`
+- [ ] **Retire `new.ayso13.org`** — old staging-era domain; redirect or remove from Cloudflare Pages
+
+### Post-Launch (later)
 - [ ] **Add Steve Hawkins bio** to `/referees/ask-the-referee/` — short attribution block (1-2 sentences) noting his role as Region 13's Advisor on the Laws of the Game and the Michael Walizer Award (Lifetime Service as Referee, 2016 — see `/about/hall-of-fame/`). Strengthens E-E-A-T on the page that's most likely to be cited by AI search tools for AYSO rules questions. Coordinate with Steve on phrasing.
 - [ ] **Add Content-Security-Policy header** — Defense-in-depth XSS mitigation. Recommended approach: ship as `Content-Security-Policy-Report-Only` first (logs violations without blocking) for ~1 week, then promote to enforcing. Sources to allow: GTM/GA, fonts.googleapis.com + fonts.gstatic.com (Google Fonts), maps.google.com + www.google.com (Maps embeds), calendar.google.com (calendar embed), scheduler.leaguelobster.com (Spring schedule), typeform.com (feedback + field issues), eepurl.com / EmailOctopus (newsletter), script.google.com (forms upload tool). Inline scripts/styles will need 'unsafe-inline' or hashes/nonces.
 - [ ] **Audit `<img>` `sizes` per-element** — Default + high-impact overrides (hero, program tiles, gallery, affiliate logos) shipped before launch. Body-content images, field map images, sponsor strip, and other non-hero use the default `(min-width: 800px) 800px, 100vw`. A full per-image audit would tighten image bandwidth further on field map images and any other images that render at non-standard sizes.
@@ -48,6 +39,43 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ---
 
 ## Completed ✓
+
+### Session 14 (2026-04-30 → 2026-05-01) — LAUNCH NIGHT
+- [x] **Site launched** — DNS cut over to www.ayso13.org with active SSL; apex `ayso13.org` redirects 301 to www
+- [x] **Repo went public** — `gh repo edit ayso-region-13/ayso-website --visibility public`
+- [x] **Branch ruleset on `main`** — requires PRs; `Repository admin` bypasses; promote workflow uses classic PAT (`PROMOTE_TOKEN` repo secret) for the bypass
+- [x] **Slack notifications on promote** — workflow posts ✅/❌ to `#notify-website-status` on completion (uses `SLACK_BOT_TOKEN` repo secret)
+- [x] **Slack bot icon** at `slack-bot/icon.png` (512×512 logo render); google workspace logo source files at `/logo/`
+- [x] **Spring Soccer added** to home tile lineup (replacing Grad Series in lead position) + dedicated tile photo
+- [x] **17 interior page hero images refreshed** from brand-team batch; canonical filename pattern `{slug}-interior.jpg`
+- [x] **Spring Soccer schedule callout** at top of `/programs/spring-soccer/` with League Lobster links for 10U/12U/14U; cream-box pattern (approved exception to /impeccable side-stripe rule)
+- [x] **EXTRA stub page** at `/programs/extra/` — noindex, not linked, awaiting tryout details
+- [x] **Per-page noindex mechanism** — frontmatter `noindex: true` emits robots meta + drops `data-pagefind-body`
+- [x] **Region 13 Calendar page** at `/about/calendar/` — embeds public Google Calendar; About menu reorganized
+- [x] **Leadership directory** rewritten from `Board directory 2026.csv`
+- [x] **Field status text** ("All fields open") + announcement bar ("Fall Registration is Now Open") updated
+- [x] **/parents polish** — em-dashes → colons, Grad Series row added to programs table, big yellow Register CTA via auto-style transform
+- [x] **Fall Soccer fees bumped** $210/$225/$240 → $220/$235/$250
+- [x] **Pre-launch /seo audit (22 of 28 items resolved):**
+  - Staging crawl block via `CF_PAGES_BRANCH` detection in `_headers.njk` + `robots.njk`
+  - Cloudflare Rocket Loader fix on GA (`data-cfasync="false"`)
+  - Three different fee schedules reconciled in `_data/fees.json`
+  - **JSON-LD schema site-wide** via `_includes/schema-org.njk`: SportsOrganization + WebSite (homepage), BreadcrumbList (inner pages), Place on 22 field pages (added `placeAddress` / `placeLocality` / `placePostalCode` frontmatter), FAQPage on Ask the Referee
+  - Sitemap lastmod + `[DATE]` placeholder both fixed (script + key format alignment)
+  - `/llms.txt` for AI search via `llms.njk` template
+  - Image `sizes` per-element overrides (hero, program tiles, gallery, affiliate logos)
+  - HTML age chart (12×17 table) replacing PNG-only on `/register/age-chart/`
+  - Hero LCP swap fix — wrappers hidden until JS picks one (no wasted high-priority preload)
+  - 8th Children's Right restored on `/about/` from Project Play canonical list, with link
+  - 501(c)(3) statement on `/about/` (EIN 95-6205398, AYSO national parent)
+  - `/fields/` page renamed "Field Maps"
+  - `/contact/` ZIP codes added + tel: links on phone numbers
+  - Per-section OG image defaults via `_data/og.js`
+  - Distinct alt text on all 8 home hero/gallery photos
+  - **InLeague Register button auto-style** transform — `[Register on InLeague](url)` markdown becomes `<a class="btn-primary text-lg px-8 py-4">` at build time. CMS-safe pattern: editors keep plain markdown links
+  - **Field Info callout** — frontmatter-driven (parking, restrooms, surface, lighting, snackBar); renders only when populated
+  - External link checker tightened — skips preconnect, falls back to GET on HEAD failure
+- [x] Documentation updated: CLAUDE.md (this section), todo.md (this file), several memory entries (cream-box exception, no-auto-push, CMS template-tag mangling)
 
 ### Session 13 (2026-04-26)
 - [x] INLEAGUE newsletter signup links resolved — Region 13 Referee Newsletter + WhistleStop Newsletter URLs wired up (referees/resources, resources/newsletters)
