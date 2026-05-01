@@ -46,36 +46,54 @@ layout: base.njk
 {# ── Hero ────────────────────────────────────────────────────────── #}
 <section class="relative overflow-hidden bg-brand-dark min-h-[560px]">
 
-  {# Background images — 5 candidates, JS picks one on load. Image 1 is the
-     no-JS fallback (loading=eager + fetchpriority=high). Images 2–5 are
-     hidden + lazy so browsers don't preload them. #}
+  {# Background images — 5 candidates wrapped in display:none divs so no
+     image fetch starts until JS picks one (avoids wasted high-priority
+     fetch on image 1 when JS swaps to a different image). The picked
+     wrapper is unhidden and its inner <img> is promoted to fetchpriority
+     high. NoScript fallback below restores image 1 if JS is disabled. #}
   <div class="absolute inset-0">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center"
-         src="/images/home/region13_home_1.jpg"
-         alt="Region 13 players in action"
-         sizes="100vw"
-         loading="eager" fetchpriority="high">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
-         src="/images/home/region13_home_2.jpg"
-         alt="Region 13 players in action"
-         sizes="100vw"
-         loading="lazy">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
-         src="/images/home/region13_home_3.jpg"
-         alt="Region 13 players in action"
-         sizes="100vw"
-         loading="lazy">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
-         src="/images/home/region13_home_4.jpg"
-         alt="Region 13 players in action"
-         sizes="100vw"
-         loading="lazy">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
-         src="/images/home/region13_home_5.jpg"
-         alt="Region 13 players in action"
-         sizes="100vw"
-         loading="lazy">
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_1.jpg"
+           alt="Region 13 players in action"
+           sizes="100vw"
+           loading="lazy">
+    </div>
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_2.jpg"
+           alt="Region 13 players in action"
+           sizes="100vw"
+           loading="lazy">
+    </div>
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_3.jpg"
+           alt="Region 13 players in action"
+           sizes="100vw"
+           loading="lazy">
+    </div>
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_4.jpg"
+           alt="Region 13 players in action"
+           sizes="100vw"
+           loading="lazy">
+    </div>
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_5.jpg"
+           alt="Region 13 players in action"
+           sizes="100vw"
+           loading="lazy">
+    </div>
   </div>
+
+  {# No-JS fallback: show image 1 if JS is disabled. Inline style overrides
+     the .hidden class on the first wrapper. #}
+  <noscript>
+    <style>.hero-pic-wrapper:first-child { display: block !important; }</style>
+  </noscript>
 
   {# Dark gradient overlay — darkens the left side where the headline sits so
      contrast against the white/70 and red-dark/75 text blocks stays above
@@ -107,19 +125,21 @@ layout: base.njk
   </div>
 </section>
 
-{# ── Hero randomizer — picks one of 5 background images on each page load #}
+{# ── Hero randomizer — picks one of 5 background images on each page load.
+     Runs synchronously to keep the LCP fetch starting as early as possible
+     (no DOMContentLoaded wait). All wrappers start hidden, so no image
+     loads until this script picks one. #}
 <script>
   (function () {
-    var pics = document.querySelectorAll('.hero-pic');
-    if (pics.length < 2) return;
-    var idx = Math.floor(Math.random() * pics.length);
-    if (idx === 0) return; // image 1 is already visible
-    pics[0].classList.add('hidden');
-    pics[0].removeAttribute('fetchpriority');
-    var pick = pics[idx];
+    var wrappers = document.querySelectorAll('.hero-pic-wrapper');
+    if (!wrappers.length) return;
+    var pick = wrappers[Math.floor(Math.random() * wrappers.length)];
     pick.classList.remove('hidden');
-    pick.removeAttribute('loading');
-    pick.setAttribute('fetchpriority', 'high');
+    var img = pick.querySelector('img');
+    if (img) {
+      img.setAttribute('loading', 'eager');
+      img.setAttribute('fetchpriority', 'high');
+    }
   })();
 </script>
 
