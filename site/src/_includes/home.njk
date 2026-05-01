@@ -53,22 +53,27 @@ layout: base.njk
     <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center"
          src="/images/home/region13_home_1.jpg"
          alt="Region 13 players in action"
+         sizes="100vw"
          loading="eager" fetchpriority="high">
     <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
          src="/images/home/region13_home_2.jpg"
          alt="Region 13 players in action"
+         sizes="100vw"
          loading="lazy">
     <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
          src="/images/home/region13_home_3.jpg"
          alt="Region 13 players in action"
+         sizes="100vw"
          loading="lazy">
     <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
          src="/images/home/region13_home_4.jpg"
          alt="Region 13 players in action"
+         sizes="100vw"
          loading="lazy">
     <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
          src="/images/home/region13_home_5.jpg"
          alt="Region 13 players in action"
+         sizes="100vw"
          loading="lazy">
   </div>
 
@@ -155,6 +160,7 @@ layout: base.njk
       {% set lineColor = "bg-brand-red-dark/85" if loop.index0 % 2 == 0 else "bg-brand-red/85" %}
       <a href="{{ p.url }}" class="relative block aspect-[4/3] group shadow-md hover:shadow-xl transition-shadow rounded-md overflow-hidden">
         <img src="/images/{{ p.img }}" alt="{{ p.name }}" loading="lazy"
+             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
              class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         {# Semi-transparent label anchored bottom-left, 60% width for consistency #}
         <div class="absolute bottom-0 left-0 w-3/5">
@@ -222,6 +228,7 @@ layout: base.njk
     {% for photo in galleryPhotos %}
     <a href="/resources/gallery/" class="block aspect-[4/3] overflow-hidden">
       <img src="/images/{{ photo.img }}" alt="{{ photo.alt }}" loading="lazy"
+           sizes="(min-width: 768px) 33vw, 100vw"
            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
     </a>
     {% endfor %}

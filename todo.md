@@ -24,6 +24,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ### Pre-Launch
 - [x] Run link checker — clean (`cd site && node scripts/check-links.js`)
+- [ ] **Verify or create Google Business Profile** — search "AYSO Region 13 Altadena" on Google Maps; if listing exists, claim it at business.google.com; if not, create one. Primary category: "Soccer Club" (fallback: "Youth Organization"). Service area: Pasadena, Altadena, La Cañada Flintridge. Highest-leverage local SEO action per /seo audit.
 - [ ] Promote staging → main (clean deploy before cutover)
 
 ### DNS Cutover
@@ -35,6 +36,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ### Post-Launch
 - [ ] Announce launch internally
 - [ ] Monitor 404s for 48 hours — Cloudflare Pages analytics → Error rates
+- [ ] **Audit `<img>` `sizes` per-element** — Default + high-impact overrides (hero, program tiles, gallery, affiliate logos) shipped before launch. Body-content images, field map images, sponsor strip, and other non-hero use the default `(min-width: 800px) 800px, 100vw`. A full per-image audit would tighten image bandwidth further on field map images and any other images that render at non-standard sizes.
 
 ---
 

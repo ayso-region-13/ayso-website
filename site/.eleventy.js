@@ -179,7 +179,10 @@ module.exports = function (eleventyConfig) {
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",
-      sizes: "100vw",
+      // Most body images render inside prose container (max-w-3xl ~768px).
+      // Templates with wider/narrower images (hero, tiles, logos) override
+      // sizes inline. See /seo audit "images" finding.
+      sizes: "(min-width: 800px) 800px, 100vw",
     },
   });
 
