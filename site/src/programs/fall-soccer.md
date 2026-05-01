@@ -1,12 +1,12 @@
 ---
-
-title: "Fall Soccer"
+title: Fall Soccer
+description: Fall Soccer is Region 13's core recreational program for players
+  ages 6–14. Teams practice weekly and play games on Saturdays, September
+  through mid-November.
 layout: page.njk
 section: programs
-heroImage: "action-02.jpg"
-description: "Fall Soccer is Region 13's core recreational program for players ages 6–14. Teams practice weekly and play games on Saturdays, September through mid-November."
+heroImage: action-02.jpg
 ---
-
 ![Fall soccer game at Region 13](/images/fall-soccer-interior.jpg)
 
 ## Quick Facts
@@ -19,19 +19,22 @@ description: "Fall Soccer is Region 13's core recreational program for players a
 
 ## Divisions
 
+
 | Division | Ages | Format | Game Duration |
-|----------|------|--------|---------------|
+| -------- | ----- | -------------------- | ------------- |
 | 6U | 6 | 4v4, no goalkeepers | 40 min |
 | 8U | 7-8 | 4v4, no goalkeepers | 40 min |
 | 10U | 9-10 | 7v7 with goalkeepers | 50 min |
 | 12U | 11-12 | 9v9 | 60 min |
 | 14U | 13-14 | 11v11 (full field) | 70 min |
 
+
 Age is determined as of July 31. See [age chart](/register/age-chart/) for exact birth date cutoffs.
 
 ## Schedule
 
 ### Practices
+
 - 6U-8U: Once per week, typically 5-6pm
 - 10U-12U: Once per week, typically 6-7:30pm
 - 14U: Once per week, typically 7-8:30pm
@@ -39,11 +42,13 @@ Age is determined as of July 31. See [age chart](/register/age-chart/) for exact
 Practice day and time are set by your coach based on field availability.
 
 ### Games
+
 - All divisions play on Saturdays
 - Game times vary by division and field availability
 - Season includes 8-10 games
 
 ### Season Timeline
+
 - Registration opens: May 1
 - Team rosters announced: Early August
 - Practices begin: Day after Labor Day
@@ -54,11 +59,13 @@ Practice day and time are set by your coach based on field availability.
 ## How It Works
 
 ### 6U-8U ("Friendly" Divisions)
+
 - Focus on learning and fun
 - No standings or score emphasis
 - Teams organized by school or neighborhood when possible
 
 ### 10U-14U (Competitive Divisions)
+
 - Balanced teams created through blind draw
 - Standings tracked throughout season
 - Single-elimination playoffs after regular season
@@ -68,15 +75,18 @@ Practice day and time are set by your coach based on field availability.
 
 ### Fees (2025)
 
+
 | Timeframe | Cost |
-|-----------|------|
-{%- for tier in fees.fall.tiers %}
+| ---------------------------------- | ----------------- |
+| {%- for tier in fees.fall.tiers %} |  |
 | {{ tier.label }} | {{ tier.amount }} |
-{%- endfor %}
+| {%- endfor %} |  |
+
 
 Sibling discount: {{ fees.fall.siblingDiscount }}.
 
 ### What's Included
+
 - Team jersey, shorts, and socks
 - Weekly practices
 - Saturday games
@@ -84,9 +94,11 @@ Sibling discount: {{ fees.fall.siblingDiscount }}.
 - Insurance coverage
 
 ### Scholarships
-Financial assistance is available. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) — all requests are confidential.
+
+Financial assistance is available. It's pay-what-you-can on the honor system. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) — all requests are confidential.
 
 ### Refund Policy
+
 - Through July 15: All but $40 refundable
 - Through Labor Day: All but $60 refundable
 - After Labor Day: Non-refundable
@@ -96,6 +108,7 @@ Financial assistance is available. Contact [registrar@ayso13.org](mailto:registr
 ## Volunteer Requirements
 
 Each team needs:
+
 - Head Coach
 - Assistant Coach
 - Two Referees
