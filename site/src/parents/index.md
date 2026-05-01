@@ -13,9 +13,9 @@ Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization servi
 
 ## Quick Facts
 
-- Season: September through mid-November (after Labor Day)
+- Primary Season: September through mid-November (after Labor Day)
 - Ages: 4 years old through high school (19U)
-- Cost: $210-$240 depending on registration date (scholarships available)
+- Cost: $220-$250 depending on registration date (pay-what-you-can scholarships available)
 - Location: Various fields across Pasadena and La Cañada: [see our field map](/fields)
 
 ## How Registration Works
@@ -24,15 +24,15 @@ Registration typically opens May 1 each year. Earlier registration costs less:
 
 
 | Timeframe | Cost |
-|-----------|------|
-| Through May 31 | $210 |
-| Through June 30 | $225 |
-| After June 30 | $240 |
+| --------------- | ---- |
+| Through May 31 | $220 |
+| Through June 30 | $235 |
+| After June 30 | $250 |
 
 
 Sibling discount: $20 off per additional child through May 31.
 
-Scholarships: No child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) confidentially.
+Scholarships: Region 13 uses a "pay what you can" model - no child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) confidentially.
 
 [Register on InLeague](https://ayso13.inleague.com/app)
 
@@ -120,6 +120,7 @@ Fall soccer is our main program, but we offer others throughout the year:
 | ---------------------------------------- | ------ | --------------------------------- |
 | [Preschool](/programs/preschool) | Fall | Ages 4-5 |
 | [NEXT](/programs/next) | Fall | Advanced players, 10U-14U |
+| [All-Stars](/programs/all-stars) | Winter | Advanced players, 10U-14U |
 | [Grad Series](/programs/grad-series) | Winter | 8U graduates transitioning to 10U |
 | [Winter Stars](/programs/winter-stars) | Winter | All returning players |
 | [Spring Soccer](/programs/spring-soccer) | Spring | Open registration |
