@@ -15,7 +15,7 @@ The Laws of the Game are available in multiple formats:
 - Print copies (can be ordered)
 - LOTG mobile app
 
-[IFAB Laws of the Game](https://www.theifab.com/laws-of-the-game/)
+[IFAB Laws of the Game](https://www.theifab.com/laws/)
 
 ## AYSO Age-Group Modifications
 
