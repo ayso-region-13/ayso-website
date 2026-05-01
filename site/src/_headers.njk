@@ -1,8 +1,13 @@
+---
+permalink: /_headers
+eleventyExcludeFromCollections: true
+---
 /*
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-
+{% if isStaging %}  X-Robots-Tag: noindex, nofollow
+{% endif %}
 /pagefind/*
   Cache-Control: public, max-age=86400

@@ -1,0 +1,14 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+---
+{% if isStaging -%}
+# Staging environment — block all crawlers
+User-agent: *
+Disallow: /
+{%- else -%}
+User-agent: *
+Allow: /
+
+Sitemap: https://www.ayso13.org/sitemap.xml
+{%- endif %}
