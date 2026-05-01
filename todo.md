@@ -25,8 +25,8 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [ ] Announce launch internally
 - [ ] Monitor 404s for 48 hours — Cloudflare Pages analytics → Error rates
 - [ ] **Verify or create Google Business Profile** — search "AYSO Region 13 Altadena" on Google Maps; if listing exists, claim it at business.google.com; if not, create one. Primary category: "Soccer Club" (fallback: "Youth Organization"). Service area: Pasadena, Altadena, La Cañada Flintridge. Highest-leverage local SEO action per /seo audit.
-- [ ] **Submit sitemap to Google Search Console** — add `https://www.ayso13.org` as a property, verify, submit `/sitemap.xml`
-- [ ] **Retire `new.ayso13.org`** — old staging-era domain; redirect or remove from Cloudflare Pages
+- [x] **Submit sitemap to Google Search Console** — submitted 2026-05-01
+- [x] **Retire `new.ayso13.org`** — retired 2026-05-01
 
 ### Post-Launch (later)
 - [ ] **Set up GA4 API access for Claude** — for in-conversation analytics queries. Service account path was blocked (GA4 Workspace config rejects non-Google-account emails: "This email doesn't match a Google Account"). OAuth path is the fallback: create an OAuth Client (Application type: Desktop app) in GCP project `ayso13-seo`, configure the OAuth consent screen as External + add yourself as test user, download the client_secret JSON, then run `python ~/.claude/plugins/cache/agricidaniel-seo/claude-seo/1.9.6/scripts/google_auth.py --auth --creds /path/to/client_secret.json` and grant scopes in the browser. Save GA4 Property ID (9-digit number from GA4 Admin → Property Settings) for the config file at `~/.config/claude-seo/google-api.json`. CF Web Analytics is doing the day-to-day reporting in the meantime.
