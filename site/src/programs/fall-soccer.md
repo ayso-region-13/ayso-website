@@ -15,7 +15,7 @@ heroImage: action-02.jpg
 - Ages: 6U through 14U
 - Games: Saturdays
 - Practices: One weeknight per week
-- Cost: {{ fees.fall.rangeShort }} depending on registration date
+- Cost: $220-$250 depending on registration date
 
 ## Divisions
 
@@ -73,17 +73,15 @@ Practice day and time are set by your coach based on field availability.
 
 ## Registration
 
-### Fees (2025)
-
+### Fees
 
 | Timeframe | Cost |
-| ---------------------------------- | ----------------- |
-| {%- for tier in fees.fall.tiers %} |  |
-| {{ tier.label }} | {{ tier.amount }} |
-| {%- endfor %} |  |
+|-----------|------|
+| Through May 31 | $220 |
+| Through June 30 | $235 |
+| After June 30 | $250 |
 
-
-Sibling discount: {{ fees.fall.siblingDiscount }}.
+Sibling discount: $20 off per additional child through May 31.
 
 ### What's Included
 
