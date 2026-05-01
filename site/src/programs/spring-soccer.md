@@ -13,9 +13,9 @@ Spring Soccer offers league play from March through May for players who want mor
   <p class="font-bold text-brand-red-dark text-lg mt-0 mb-2">Spring 2026 Game Schedules</p>
   <p class="text-sm text-gray-700 mb-4">Current Interlock season schedules:</p>
   <div class="flex flex-wrap gap-2">
-    <a href="https://scheduler.leaguelobster.com/2593813/spring-2026-interlock-season/10u/" target="_blank" rel="noopener" class="btn-primary text-sm py-2 px-4">10U Schedule</a>
-    <a href="https://scheduler.leaguelobster.com/2596384/spring-2026-interlock-season/12u/" target="_blank" rel="noopener" class="btn-primary text-sm py-2 px-4">12U Schedule</a>
-    <a href="https://scheduler.leaguelobster.com/2596400/spring-2026-interlock-season/14ug/" target="_blank" rel="noopener" class="btn-primary text-sm py-2 px-4">14U Schedule</a>
+    <a href="https://scheduler.leaguelobster.com/2593813/spring-2026-interlock-season/10u/" target="_blank" rel="noopener" class="btn-primary">10U Schedule</a>
+    <a href="https://scheduler.leaguelobster.com/2596384/spring-2026-interlock-season/12u/" target="_blank" rel="noopener" class="btn-primary">12U Schedule</a>
+    <a href="https://scheduler.leaguelobster.com/2596400/spring-2026-interlock-season/14ug/" target="_blank" rel="noopener" class="btn-primary">14U Schedule</a>
   </div>
 </div>
 
