@@ -7,6 +7,8 @@ permalink: "/about/"
 description: "Learn about AYSO Region 13's mission and six core philosophies: Everyone Plays, Balanced Teams, Open Registration, Positive Coaching, and Good Sportsmanship."
 ---
 
+AYSO Region 13 is part of the American Youth Soccer Organization, a 501(c)(3) nonprofit (EIN 95-6205398). We have provided youth soccer programs for players ages 4–19 in Pasadena, Altadena, La Cañada Flintridge, and surrounding communities since 1972.
+
 AYSO's mission is to develop and deliver quality youth soccer programs that promote a fun, family environment based on six core philosophies.
 
 ![Kids playing soccer at AYSO Region 13](/images/about-interior.jpg)
