@@ -31,17 +31,18 @@ We maintain a safe, fair, fun, and positive environment based on mutual respect 
 ### 6. Player Development
 We focus on developing individual and team skills progressively, helping players improve throughout their soccer experience.
 
-## Children's Rights in Sport
+## Children's Rights in Sports
 
-AYSO supports Project Play's 8 Children's Rights in Sport:
+AYSO supports [Project Play's 8 Children's Rights in Sports](https://projectplay.org/childrens-rights-and-sports):
 
-1. Safety
-2. Qualified leadership
-3. Developmentally appropriate activities
-4. Participation in planning
-5. Equal opportunity
-6. Dignity
-7. Enjoyment
+1. To play sports
+2. To safe and healthy environments
+3. To qualified program leaders
+4. To developmentally appropriate play
+5. To share in the planning and delivery of their activities
+6. To an equal opportunity for personal growth
+7. To be treated with dignity
+8. To enjoy themselves
 
 ## Related Pages
 
