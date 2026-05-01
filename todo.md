@@ -37,6 +37,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ### Post-Launch
 - [ ] Announce launch internally
 - [ ] Monitor 404s for 48 hours — Cloudflare Pages analytics → Error rates
+- [ ] **Add Content-Security-Policy header** — Defense-in-depth XSS mitigation. Recommended approach: ship as `Content-Security-Policy-Report-Only` first (logs violations without blocking) for ~1 week, then promote to enforcing. Sources to allow: GTM/GA, fonts.googleapis.com + fonts.gstatic.com (Google Fonts), maps.google.com + www.google.com (Maps embeds), calendar.google.com (calendar embed), scheduler.leaguelobster.com (Spring schedule), typeform.com (feedback + field issues), eepurl.com / EmailOctopus (newsletter), script.google.com (forms upload tool). Inline scripts/styles will need 'unsafe-inline' or hashes/nonces.
 - [ ] **Audit `<img>` `sizes` per-element** — Default + high-impact overrides (hero, program tiles, gallery, affiliate logos) shipped before launch. Body-content images, field map images, sponsor strip, and other non-hero use the default `(min-width: 800px) 800px, 100vw`. A full per-image audit would tighten image bandwidth further on field map images and any other images that render at non-standard sizes.
 
 ---
