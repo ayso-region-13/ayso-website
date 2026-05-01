@@ -71,7 +71,6 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 
 | Position | Name | Email |
 |----------|------|-------|
-| Assistant Regional Referee Administrator | Open | matthew@ayso13.org |
 | Director of Referee Instruction | Mark Windsor | dri@ayso13.org |
 | Uniforms | Manny Morales | ref-uniforms@ayso13.org |
 | Director of Referee Assessment | Bruce Hancock | ref-assessor@ayso13.org |
