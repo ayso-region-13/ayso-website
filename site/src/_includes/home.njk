@@ -72,6 +72,11 @@ layout: base.njk
          loading="lazy">
   </div>
 
+  {# Dark gradient overlay — darkens the left side where the headline sits so
+     contrast against the white/70 and red-dark/75 text blocks stays above
+     WCAG AA regardless of which of the 5 random hero photos loads. #}
+  <div class="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent pointer-events-none" aria-hidden="true"></div>
+
   {# Hero content #}
   <div class="relative max-w-screen-xl mx-auto px-4 py-16 md:py-20 flex flex-col justify-center min-h-[560px]">
     <h1 class="font-extrabold leading-[1] tracking-tight mb-8 flex flex-col items-start gap-1">
