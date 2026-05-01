@@ -15,7 +15,7 @@ Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization servi
 
 - Season: September through mid-November (after Labor Day)
 - Ages: 4 years old through high school (19U)
-- Cost: {{ fees.fall.rangeShort }} depending on registration date (scholarships available)
+- Cost: $210-$240 depending on registration date (scholarships available)
 - Location: Various fields across Pasadena and La Cañada: [see our field map](/fields)
 
 ## How Registration Works
@@ -24,17 +24,17 @@ Registration typically opens May 1 each year. Earlier registration costs less:
 
 
 | Timeframe | Cost |
-| ---------------------------------- | ----------------- |
-| {%- for tier in fees.fall.tiers %} |  |
-| {{ tier.label }} | {{ tier.amount }} |
-| {%- endfor %} |  |
+|-----------|------|
+| Through May 31 | $210 |
+| Through June 30 | $225 |
+| After June 30 | $240 |
 
 
-Sibling discount: {{ fees.fall.siblingDiscount }}.
+Sibling discount: $20 off per additional child through May 31.
 
 Scholarships: No child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) confidentially.
 
-[Register on InLeague](https://ayso13.inleague.com/app)
+<a href="https://ayso13.inleague.com/app" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">Register on InLeague</a>
 
 ### What's Included in Registration
 
@@ -150,7 +150,7 @@ AYSO is recreational and inclusive: everyone plays, teams are balanced. Club soc
 
 ## Ready to Register?
 
-[Register on InLeague](https://ayso13.inleague.com/app)
+<a href="https://ayso13.inleague.com/app" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">Register on InLeague</a>
 
 Questions? Contact us at [registrar@ayso13.org](mailto:registrar@ayso13.org) or visit our [contact page](/contact).
 
