@@ -31,17 +31,17 @@ Programs available:
 
 ## Registration Fees
 
-Fall Soccer registration is $210-$240 depending on registration date. Early registration offers the lowest price.
+Fall Soccer registration is {{ fees.fall.rangeShort }} depending on registration date. Early registration offers the lowest price.
 
 | Timeframe | Fee |
 |-----------|-----|
-| Through May 31 | $210 |
-| Through June 30 | $225 |
-| After June 30 | $240 |
+{%- for tier in fees.fall.tiers %}
+| {{ tier.label }} | {{ tier.amount }} |
+{%- endfor %}
 
-EPIC program: $60
+EPIC program: {{ fees.epic }}
 
-Sibling discount: $20 off through May 31
+Sibling discount: {{ fees.fall.siblingDiscount }}
 
 ## What is Included
 

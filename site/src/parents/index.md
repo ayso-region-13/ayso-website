@@ -15,21 +15,20 @@ Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization servi
 
 - Season: September through mid-November (after Labor Day)
 - Ages: 4 years old through high school (19U)
-- Cost: $210-$240 depending on registration date (scholarships available)
+- Cost: {{ fees.fall.rangeShort }} depending on registration date (scholarships available)
 - Location: Various fields across Pasadena and La Cañada: [see our field map](/fields)
 
 ## How Registration Works
 
 Registration typically opens May 1 each year. Earlier registration costs less:
 
-| Registration Period | Cost |
-|---------------------|------|
-| May 1 - May 31 | $210 |
-| June 1 - July 15 | $220 |
-| July 16 - August 15 | $230 |
-| After August 15 | $240 |
+| Timeframe | Cost |
+|-----------|------|
+{%- for tier in fees.fall.tiers %}
+| {{ tier.label }} | {{ tier.amount }} |
+{%- endfor %}
 
-Sibling discount: $20 off per additional child (through May 31)
+Sibling discount: {{ fees.fall.siblingDiscount }}.
 
 Scholarships: No child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) confidentially.
 
