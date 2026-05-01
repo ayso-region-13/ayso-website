@@ -33,7 +33,7 @@ Volunteer through WeJoinIn.
 - Put away all items by 3:30 PM after the final game
 
 ### Lost Children
-The tent serves as a meeting point for lost children and their parents.
+The tent serves as a meeting point for lost children and their families.
 
 ## Donut Reimbursement
 

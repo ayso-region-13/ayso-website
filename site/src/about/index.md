@@ -28,7 +28,7 @@ All children ages 4-18 are welcome to register. No tryouts, no cuts.
 Coaches are trained to create supportive experiences through encouragement rather than criticism. We use the PIE approach: Positive, Instructional, and Encouraging.
 
 ### 5. Good Sportsmanship
-We maintain a safe, fair, fun, and positive environment based on mutual respect — for teammates, opponents, coaches, referees, and parents.
+We maintain a safe, fair, fun, and positive environment based on mutual respect — for teammates, opponents, coaches, referees, and families.
 
 ### 6. Player Development
 We focus on developing individual and team skills progressively, helping players improve throughout their soccer experience.

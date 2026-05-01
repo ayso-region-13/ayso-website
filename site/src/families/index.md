@@ -66,7 +66,7 @@ Check the [age chart](/register/age-chart/) for exact birth date cutoffs.
 
 ## The Volunteer Requirement
 
-AYSO runs entirely on parent volunteers. When you register your child, you'll be asked to volunteer as either a:
+AYSO runs entirely on family volunteers. When you register your child, you'll be asked to volunteer as either a:
 
 - **Coach**: Lead practices and games (training provided, no experience needed)
 - **Referee**: Officiate games (training provided, no experience needed)

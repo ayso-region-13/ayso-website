@@ -17,7 +17,7 @@ description: "Frequently asked questions for AYSO Region 13 team managers."
 See [Manager Training](/managers/training) for the full process.
 
 ### What is the time commitment?
-A few hours per week during the season for communication, coordination, and game-day logistics. The workload varies based on how much you delegate to other parents.
+A few hours per week during the season for communication, coordination, and game-day logistics. The workload varies based on how much you delegate to other families.
 
 ### Do I need soccer knowledge?
 No. The team manager role focuses on organization and communication rather than soccer skills.

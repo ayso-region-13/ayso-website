@@ -6,7 +6,7 @@ section: managers
 description: "Team manager tasks and checklists for AYSO Region 13. Pre-season, in-season, and post-season responsibilities."
 ---
 
-Team managers oversee 13 tasks during the season. Many can be delegated to other parents.
+Team managers oversee 13 tasks during the season. Many can be delegated to other families.
 
 ## Administrative Tasks
 
@@ -16,7 +16,7 @@ Sign up for the AYSO Region 13 Newsletter and encourage families to subscribe.
 ### Volunteer Identification
 Work with the coach to identify and designate team volunteers (manager and referees) using the provided spreadsheet.
 
-### Parent Forms
+### Family Forms
 Confirm each family has acknowledged the required items at registration:
 - Concussion Information Sheet
 - Sudden Cardiac Arrest Information Sheet
@@ -33,7 +33,7 @@ Establish a communication method for the team. If the coach does not have a pref
 Create a rotation for halftime and post-game snacks. Account for food allergies. Keep snacks simple.
 
 ### Field Inspection
-Coordinate parent volunteers to check the field for trash and hazards before each game.
+Coordinate family volunteers to check the field for trash and hazards before each game.
 
 ## Events and Logistics
 
@@ -55,7 +55,7 @@ Communicate timing, costs, and logistics at least two weeks in advance. Assist w
 Organize a celebration with awards distribution, coach and referee gifts, and volunteer-coordinated food.
 
 ### Field Host Recruitment
-Recruit parent volunteers to staff the AYSO Region 13 tent at Victory Park. Sign up through WeJoinIn.
+Recruit family volunteers to staff the AYSO Region 13 tent at Victory Park. Sign up through WeJoinIn.
 
 ### Trophy Distribution (4U-8U and VIP Teams)
 Designate someone to collect personalized trophies, verify accuracy, and distribute to players.

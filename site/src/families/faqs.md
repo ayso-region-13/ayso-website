@@ -40,7 +40,7 @@ Only in unusual circumstances. Contact [registrar@ayso13.org](mailto:registrar@a
 ## Volunteering
 
 ### Do I have to volunteer?
-Yes. AYSO is volunteer-run. Without parent coaches and referees, there's no program. We ask each family to provide one volunteer.
+Yes. AYSO is volunteer-run. Without volunteer coaches and referees, there's no program. We ask each family to provide one volunteer.
 
 ### I've never played soccer. Can I still coach?
 Yes. Our training classes teach you everything you need.

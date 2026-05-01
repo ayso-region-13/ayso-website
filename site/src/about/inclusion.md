@@ -13,7 +13,7 @@ AYSO Region 13 welcomes all participants regardless of race, ethnicity, national
 We believe everyone belongs in soccer. Our practices reflect this:
 
 ### Training
-Equity principles are incorporated into coach and referee training and parent communications.
+Equity principles are incorporated into coach and referee training and family communications.
 
 ### Financial Accessibility
 Everyone plays in Region 13, regardless of a family's financial circumstances. Scholarships are available for any family that needs assistance.

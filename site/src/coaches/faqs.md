@@ -70,7 +70,7 @@ Teams typically have both head and assistant coaches, but assistant coaches are 
 Coaches in 10U-14U rate players at the end of the season to help create balanced teams the following year. See [Player Ratings](/coaches/player-ratings).
 
 ### What if a player is struggling?
-Talk privately with parents about concerns. Focus on the child's experience and development rather than performance. Contact your Division Coach Administrator for guidance on specific situations.
+Talk privately with families about concerns. Focus on the child's experience and development rather than performance. Contact your Division Coach Administrator for guidance on specific situations.
 
 ## Contact
 

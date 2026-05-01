@@ -35,7 +35,7 @@ Things to avoid:
 
 Find a spot where:
 - You can see the game
-- You're with other parents from your team
+- You're with other families from your team
 - You're not directly behind the goal or near the coach's area
 
 ### What to Cheer
@@ -55,7 +55,7 @@ When your child has the ball and you can see what they should do, it's hard not 
 
 Reasons to resist:
 - By the time they hear you, the moment has passed
-- Parent instructions may conflict with what the coach taught
+- Sideline instructions may conflict with what the coach taught
 - Kids become dependent on sideline direction instead of learning to read the game
 
 ### When Calls Don't Go Your Way
@@ -63,7 +63,7 @@ Reasons to resist:
 Referees — especially at younger levels — are often teens learning the job. They will miss calls.
 
 - Stay quiet when calls go against you (your child is watching)
-- Save concerns about calls for after the game, away from other parents
+- Save concerns about calls for after the game, away from other families
 - If there's a real concern, let your coach handle it
 
 ## After the Game

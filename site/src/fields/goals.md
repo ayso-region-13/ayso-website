@@ -22,7 +22,7 @@ Goals and equipment are stored in the container with the Region 13 logo in the p
 ### Setup Process
 1. Goals are color-coded by age group (10U or 12U) with matching parts
 2. Each kit includes hammer and stakes
-3. 2-4 parents per team should assist with setup
+3. 2-4 family members per team should assist with setup
 
 ### Teardown
 Do not remove the net from the goal frame. Wrap the goal around the crossbar for disassembly.

@@ -30,7 +30,7 @@ Children watch how adults at the field behave. The example we set shapes how the
 The clearest line in youth soccer: each role has its job. Coaching from the sideline conflicts with what the actual coach has taught the team — and it confuses the players.
 
 ### 6. Respect the volunteer referees
-Region 13 referees are parents and teenagers who give their time so games can happen. They will get calls wrong sometimes. Trust them, support them, and save concerns for after the game.
+Region 13 referees are family members and teenagers who give their time so games can happen. They will get calls wrong sometimes. Trust them, support them, and save concerns for after the game.
 
 ### 7. Use positive language
 Cheering is welcome. Yelling, swearing, and abusive language are not part of Kids Zone.
@@ -58,7 +58,7 @@ Cheer effort, growth, and good plays from both teams. Final scores fade quickly;
 - "What are you doing?"
 - Anything about the referee's calls
 
-When parents shout instructions, kids often look toward the sideline instead of focusing on the game. They become confused when sideline directions conflict with what their coach taught them.
+When family members shout instructions, kids often look toward the sideline instead of focusing on the game. They become confused when sideline directions conflict with what their coach taught them.
 
 ## The Car Ride Home
 

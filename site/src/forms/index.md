@@ -12,7 +12,7 @@ The forms supported here are:
 
 - Concussion Information Sheet
 - Sudden Cardiac Arrest (SCA) Information Sheet
-- AYSO Kids Zone (legacy parent pledge submissions)
+- AYSO Kids Zone (legacy family pledge submissions)
 
 ## Upload
 
