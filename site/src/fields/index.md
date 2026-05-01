@@ -1,10 +1,10 @@
 ---
 
-title: "Field Locations"
+title: "Field Maps"
 layout: page.njk
 section: fields
 permalink: "/fields/"
-description: "All AYSO Region 13 soccer field locations in Pasadena, Altadena, and La Cañada. Maps, parking information, and directions."
+description: "Field maps and locations for AYSO Region 13 youth soccer in Pasadena, Altadena, and La Cañada Flintridge. Addresses, parking, and directions."
 ---
 
 ## Field Map
