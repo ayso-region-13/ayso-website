@@ -4,6 +4,7 @@ description: "Region 13 EXTRA is a tryout-based select soccer program for player
 layout: page.njk
 section: programs
 eleventyExcludeFromCollections: true
+noindex: true
 ---
 
 EXTRA™ is an exciting new program offered by Region 13 for players who are looking for a more competitive soccer experience while still enjoying the positive, player-centered environment that AYSO is known for. It's a great fit for kids who love soccer, want to develop their skills further, and are ready to take on a higher level of commitment.
