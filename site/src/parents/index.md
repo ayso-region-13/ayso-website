@@ -120,6 +120,7 @@ Fall soccer is our main program, but we offer others throughout the year:
 | ---------------------------------------- | ------ | --------------------------------- |
 | [Preschool](/programs/preschool) | Fall | Ages 4-5 |
 | [NEXT](/programs/next) | Fall | Advanced players, 10U-14U |
+| [All-Stars](/programs/all-stars) | Winter | Advanced players, 10U-14U |
 | [Grad Series](/programs/grad-series) | Winter | 8U graduates transitioning to 10U |
 | [Winter Stars](/programs/winter-stars) | Winter | All returning players |
 | [Spring Soccer](/programs/spring-soccer) | Spring | Open registration |
