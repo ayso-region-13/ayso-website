@@ -9,6 +9,16 @@
   body {
     @apply font-sans text-gray-800 antialiased;
   }
+
+  /* Keyboard focus ring — visible only when navigating with Tab/keyboard,
+     not on mouse clicks. Brand-aware ring for consistency across the site.
+     Elements that set their own focus styles (e.g. focus:outline-none on
+     the footer search input) keep their custom behavior. */
+  :focus-visible {
+    outline: 2px solid theme(colors.brand.red-dark);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
 @layer components {
