@@ -1,0 +1,69 @@
+name: IndexNow URL submission
+
+# Pings api.indexnow.org with every URL in the production sitemap whenever
+# main is updated. IndexNow is a free protocol supported by Bing, Yandex,
+# Naver, and Seznam — search engines pull the URLs and crawl them
+# (typically within minutes) instead of waiting for their own crawl cycle.
+#
+# Ownership of the key is verified via /61d4461c23b7dcda89290711860408d3.txt
+# served at the apex (Eleventy passthrough copy in .eleventy.js).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: indexnow-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    name: Submit sitemap URLs to IndexNow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Cloudflare Pages deploy
+        # CF Pages deploys ~90-120s after a push. Sleep so the URLs we submit
+        # are guaranteed to be reachable when search engines fetch them.
+        run: sleep 150
+
+      - name: Submit URLs to IndexNow
+        env:
+          KEY: 61d4461c23b7dcda89290711860408d3
+          HOST: www.ayso13.org
+        run: |
+          set -euo pipefail
+          URLS_JSON=$(
+            curl -sSL "https://${HOST}/sitemap.xml" |
+            grep -oE '<loc>[^<]+' |
+            sed 's|<loc>||' |
+            jq -R . | jq -s .
+          )
+          COUNT=$(echo "$URLS_JSON" | jq 'length')
+          echo "Submitting $COUNT URLs to IndexNow"
+          PAYLOAD=$(jq -n \
+            --arg host "$HOST" \
+            --arg key "$KEY" \
+            --arg keyLocation "https://${HOST}/${KEY}.txt" \
+            --argjson urls "$URLS_JSON" \
+            '{host: $host, key: $key, keyLocation: $keyLocation, urlList: $urls}')
+          HTTP_CODE=$(curl -sS -o /tmp/indexnow.body -w '%{http_code}' \
+            -X POST \
+            -H 'Content-Type: application/json' \
+            -d "$PAYLOAD" \
+            https://api.indexnow.org/IndexNow)
+          echo "IndexNow response: $HTTP_CODE"
+          cat /tmp/indexnow.body
+          # Per IndexNow docs:
+          #   200 OK = accepted
+          #   202 Accepted = queued
+          #   400 = bad request (malformed payload)
+          #   403 = key invalid (verification failed — check the key file is reachable)
+          #   422 = URLs not all valid
+          #   429 = too many requests (rate limited)
+          if [ "$HTTP_CODE" != "200" ] && [ "$HTTP_CODE" != "202" ]; then
+            exit 1
+          fi

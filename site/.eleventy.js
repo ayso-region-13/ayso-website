@@ -28,6 +28,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/_redirects");
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
   eleventyConfig.addPassthroughCopy("src/site.webmanifest");
+  // IndexNow ownership-verification key. Served at /<key>.txt.
+  eleventyConfig.addPassthroughCopy("src/61d4461c23b7dcda89290711860408d3.txt");
 
   // --- Markdown configuration ---
   const md = markdownIt({
