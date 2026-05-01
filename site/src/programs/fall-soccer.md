@@ -15,7 +15,7 @@ description: "Fall Soccer is Region 13's core recreational program for players a
 - Ages: 6U through 14U
 - Games: Saturdays
 - Practices: One weeknight per week
-- Cost: $210-$240 depending on registration date
+- Cost: {{ fees.fall.rangeShort }} depending on registration date
 
 ## Divisions
 
@@ -68,13 +68,13 @@ Practice day and time are set by your coach based on field availability.
 
 ### Fees (2025)
 
-| Registration Period | Cost |
-|---------------------|------|
-| May 1 - May 31 | $210 |
-| Before July 1 | $225 |
-| After July 1 | $240 |
+| Timeframe | Cost |
+|-----------|------|
+{%- for tier in fees.fall.tiers %}
+| {{ tier.label }} | {{ tier.amount }} |
+{%- endfor %}
 
-Sibling discount: $20 off additional children (May only)
+Sibling discount: {{ fees.fall.siblingDiscount }}.
 
 ### What's Included
 - Team jersey, shorts, and socks

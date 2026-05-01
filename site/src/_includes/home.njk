@@ -46,31 +46,54 @@ layout: base.njk
 {# ── Hero ────────────────────────────────────────────────────────── #}
 <section class="relative overflow-hidden bg-brand-dark min-h-[560px]">
 
-  {# Background images — 5 candidates, JS picks one on load. Image 1 is the
-     no-JS fallback (loading=eager + fetchpriority=high). Images 2–5 are
-     hidden + lazy so browsers don't preload them. #}
+  {# Background images — 5 candidates wrapped in display:none divs so no
+     image fetch starts until JS picks one (avoids wasted high-priority
+     fetch on image 1 when JS swaps to a different image). The picked
+     wrapper is unhidden and its inner <img> is promoted to fetchpriority
+     high. NoScript fallback below restores image 1 if JS is disabled. #}
   <div class="absolute inset-0">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center"
-         src="/images/home/region13_home_1.jpg"
-         alt="Region 13 players in action"
-         loading="eager" fetchpriority="high">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
-         src="/images/home/region13_home_2.jpg"
-         alt="Region 13 players in action"
-         loading="lazy">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
-         src="/images/home/region13_home_3.jpg"
-         alt="Region 13 players in action"
-         loading="lazy">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
-         src="/images/home/region13_home_4.jpg"
-         alt="Region 13 players in action"
-         loading="lazy">
-    <img class="hero-pic absolute inset-0 w-full h-full object-cover object-center hidden"
-         src="/images/home/region13_home_5.jpg"
-         alt="Region 13 players in action"
-         loading="lazy">
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_1.jpg"
+           alt="Region 13 girls in green and black uniforms celebrate together on the field"
+           sizes="100vw"
+           loading="lazy">
+    </div>
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_2.jpg"
+           alt="Two Region 13 teammates in lime green uniforms hug after a play"
+           sizes="100vw"
+           loading="lazy">
+    </div>
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_3.jpg"
+           alt="Region 13 boys in red and black uniforms walk off the field with a referee"
+           sizes="100vw"
+           loading="lazy">
+    </div>
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_4.jpg"
+           alt="A Region 13 player in a red and black uniform chases the ball during a game"
+           sizes="100vw"
+           loading="lazy">
+    </div>
+    <div class="hero-pic-wrapper hidden absolute inset-0">
+      <img class="absolute inset-0 w-full h-full object-cover object-center"
+           src="/images/home/region13_home_5.jpg"
+           alt="Region 13 teammates in navy uniforms celebrate after a goal"
+           sizes="100vw"
+           loading="lazy">
+    </div>
   </div>
+
+  {# No-JS fallback: show image 1 if JS is disabled. Inline style overrides
+     the .hidden class on the first wrapper. #}
+  <noscript>
+    <style>.hero-pic-wrapper:first-child { display: block !important; }</style>
+  </noscript>
 
   {# Dark gradient overlay — darkens the left side where the headline sits so
      contrast against the white/70 and red-dark/75 text blocks stays above
@@ -102,19 +125,21 @@ layout: base.njk
   </div>
 </section>
 
-{# ── Hero randomizer — picks one of 5 background images on each page load #}
+{# ── Hero randomizer — picks one of 5 background images on each page load.
+     Runs synchronously to keep the LCP fetch starting as early as possible
+     (no DOMContentLoaded wait). All wrappers start hidden, so no image
+     loads until this script picks one. #}
 <script>
   (function () {
-    var pics = document.querySelectorAll('.hero-pic');
-    if (pics.length < 2) return;
-    var idx = Math.floor(Math.random() * pics.length);
-    if (idx === 0) return; // image 1 is already visible
-    pics[0].classList.add('hidden');
-    pics[0].removeAttribute('fetchpriority');
-    var pick = pics[idx];
+    var wrappers = document.querySelectorAll('.hero-pic-wrapper');
+    if (!wrappers.length) return;
+    var pick = wrappers[Math.floor(Math.random() * wrappers.length)];
     pick.classList.remove('hidden');
-    pick.removeAttribute('loading');
-    pick.setAttribute('fetchpriority', 'high');
+    var img = pick.querySelector('img');
+    if (img) {
+      img.setAttribute('loading', 'eager');
+      img.setAttribute('fetchpriority', 'high');
+    }
   })();
 </script>
 
@@ -155,6 +180,7 @@ layout: base.njk
       {% set lineColor = "bg-brand-red-dark/85" if loop.index0 % 2 == 0 else "bg-brand-red/85" %}
       <a href="{{ p.url }}" class="relative block aspect-[4/3] group shadow-md hover:shadow-xl transition-shadow rounded-md overflow-hidden">
         <img src="/images/{{ p.img }}" alt="{{ p.name }}" loading="lazy"
+             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
              class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
         {# Semi-transparent label anchored bottom-left, 60% width for consistency #}
         <div class="absolute bottom-0 left-0 w-3/5">
@@ -215,13 +241,14 @@ layout: base.njk
 <section class="bg-brand-maroon-dark">
   <div class="grid grid-cols-1 md:grid-cols-3">
     {% set galleryPhotos = [
-      { img: "home/gallery_1.jpg", alt: "Region 13 players in action" },
-      { img: "home/gallery_2.jpg", alt: "Region 13 players in action" },
-      { img: "home/gallery_3.jpg", alt: "Region 13 players in action" }
+      { img: "home/gallery_1.jpg", alt: "Two Region 13 boys compete for the ball on a Saturday game" },
+      { img: "home/gallery_2.jpg", alt: "Young Region 13 players in pink uniforms high-five after a play" },
+      { img: "home/gallery_3.jpg", alt: "Region 13 girls chase the ball at a practice session" }
     ] %}
     {% for photo in galleryPhotos %}
     <a href="/resources/gallery/" class="block aspect-[4/3] overflow-hidden">
       <img src="/images/{{ photo.img }}" alt="{{ photo.alt }}" loading="lazy"
+           sizes="(min-width: 768px) 33vw, 100vw"
            class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
     </a>
     {% endfor %}

@@ -3,6 +3,9 @@
 title: "Brookside Park"
 layout: page.njk
 section: fields
+placeAddress: "360 N Arroyo Blvd"
+placeLocality: "Pasadena"
+placePostalCode: "91103"
 description: "Brookside Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 

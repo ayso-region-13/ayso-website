@@ -28,16 +28,9 @@ NEXT is a supplement to Fall Soccer, not a replacement. Players must:
 
 Sessions include training led by certified coaches, scrimmages, and friendly matches against teams from other Southern California regions.
 
-## Schedule (Fall 2025)
+## Schedule
 
-| Division | Day/Time | Location |
-|----------|----------|----------|
-| Girls 10U | Sundays, 9:45-11am | La Cañada HS JV Fields |
-| Girls 12U | Sundays, 10:45am-12pm | La Cañada HS JV Fields |
-| Girls 14U | Mondays, 7:30-9pm | Victory Park Lower Fields |
-| Boys 10U | Sundays, 9-10:15am | La Cañada HS JV Fields |
-| Boys 12U | Sundays, 11:45am-1pm | La Cañada HS JV Fields |
-| Boys 14U | Sundays, 1:45-3:15pm | La Cañada HS JV Fields |
+Sessions run on Sundays or Mondays depending on division. Specific times and field assignments are set before each season starts and shared with registered families through Spond. Contact the NEXT Administrator below for current-season details.
 
 ## How to Join
 

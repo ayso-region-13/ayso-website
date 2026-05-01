@@ -6,11 +6,10 @@ eleventyExcludeFromCollections: true
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {%- for page in collections.all | sort(false, false, "url") %}
   {%- if not page.data.noindex and page.url %}
+  {%- set lastmod = page.inputPath | lastModDate %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
-    {% if page.date %}<lastmod>{{ page.date | date('yyyy-MM-dd') }}</lastmod>{% endif %}
-    <changefreq>{% if page.url == "/" %}weekly{% elif page.url.startsWith("/programs/") or page.url.startsWith("/fields/") %}monthly{% else %}monthly{% endif %}</changefreq>
-    <priority>{% if page.url == "/" %}1.0{% elif page.url.endsWith("/index.html") or (page.url.split("/").length == 2) %}0.8{% else %}0.6{% endif %}</priority>
+    {% if lastmod %}<lastmod>{{ lastmod | date('yyyy-MM-dd') }}</lastmod>{% endif %}
   </url>
   {%- endif %}
   {%- endfor %}

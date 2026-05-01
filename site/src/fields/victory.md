@@ -3,6 +3,9 @@
 title: "Victory Park"
 layout: page.njk
 section: fields
+placeAddress: "2575 Paloma St"
+placeLocality: "Pasadena"
+placePostalCode: "91107"
 description: "Victory Park in Pasadena — AYSO Region 13's primary game location for 6U–12U divisions. Address, parking, and field map."
 ---
 

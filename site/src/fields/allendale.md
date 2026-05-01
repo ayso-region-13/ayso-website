@@ -3,6 +3,9 @@
 title: "Allendale Park"
 layout: page.njk
 section: fields
+placeAddress: "1130 S Marengo Ave"
+placeLocality: "Pasadena"
+placePostalCode: "91106"
 description: "Allendale Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 

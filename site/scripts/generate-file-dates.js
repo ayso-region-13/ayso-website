@@ -38,9 +38,17 @@ function generateFromGit() {
     if (trimmed.startsWith("COMMIT ")) {
       currentDate = trimmed.slice(7);
     } else if (trimmed && currentDate) {
+      // git emits paths from the repo root (e.g. "site/src/foo.md"); strip the
+      // "site/" prefix so keys match `path.relative(site, file)` output that
+      // .eleventy.js uses to look up dates.
+      const key = trimmed.startsWith("site/") ? trimmed.slice(5) : trimmed;
+      // Skip files that no longer exist on disk (renamed/deleted but still in
+      // git history — e.g. resources/newsletter.md → resources/newsletters.md).
+      const abs = path.join(ROOT, key);
+      if (!fs.existsSync(abs)) continue;
       // Record only the first (most-recent) commit date per file
-      if (!fileDates[trimmed]) {
-        fileDates[trimmed] = currentDate;
+      if (!fileDates[key]) {
+        fileDates[key] = currentDate;
       }
     }
   }

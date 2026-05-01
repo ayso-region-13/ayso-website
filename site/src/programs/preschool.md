@@ -32,11 +32,11 @@ Sessions typically run at:
 
 You'll be assigned to a session when you register.
 
-## Schedule (Fall 2025)
+## Schedule
 
-- Season: September 6 through October 18
-- Makeup dates: October 25 and November 8 (if needed for rain)
-- Location: Announced before season starts
+- Season: 8 Saturdays, early September through mid-October
+- Makeup dates set per season for weather cancellations
+- Location and exact start date announced in August before each season starts
 
 ## Registration
 

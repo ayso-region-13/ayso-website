@@ -26,8 +26,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy("src/assets/docs");
   eleventyConfig.addPassthroughCopy("src/_redirects");
-  eleventyConfig.addPassthroughCopy("src/_headers");
-  eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
   eleventyConfig.addPassthroughCopy("src/site.webmanifest");
 
@@ -97,6 +95,20 @@ module.exports = function (eleventyConfig) {
     return md.renderInline(str);
   });
 
+  // Resolve a page's last-modified date from fileDates.json by inputPath.
+  // Returns ISO string (e.g. "2026-04-30T20:53:32-07:00") or null.
+  eleventyConfig.addFilter("lastModDate", function (inputPath) {
+    if (!inputPath) return null;
+    const rel = path.relative(__dirname, inputPath).replace(/\\/g, "/");
+    return fileDates[rel] || null;
+  });
+
+  // Strip HTML tags from a string (for JSON-LD answer text)
+  eleventyConfig.addFilter("striptags", (str) => {
+    if (!str) return "";
+    return str.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  });
+
   // Slugify a string for use in URLs
   eleventyConfig.addFilter("slug", (str) => {
     return str
@@ -109,6 +121,25 @@ module.exports = function (eleventyConfig) {
 
   // --- Global data ---
   eleventyConfig.addGlobalData("currentYear", () => new Date().getFullYear());
+
+  // True when this build is for the staging branch on Cloudflare Pages.
+  // Used by _headers.njk and robots.njk to block crawlers on staging only.
+  eleventyConfig.addGlobalData("isStaging", () => process.env.CF_PAGES_BRANCH === "staging");
+
+  // --- Transform: auto-style InLeague Register links as big yellow buttons ---
+  // Editors save plain markdown via Pages CMS (which mangles raw HTML) — this
+  // post-processes the built HTML so any anchor pointing at the InLeague
+  // register URL with text starting with "Register" renders as a btn-primary.
+  eleventyConfig.addTransform("inleague-register-button", function (content) {
+    if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;
+    return content.replace(
+      /<a\s+href="(https?:\/\/ayso13\.inleague\.com\/app\/?)"[^>]*>([^<]*)<\/a>/g,
+      (match, url, text) => {
+        if (!/^Register/i.test(text.trim())) return match;
+        return `<a href="${url}" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">${text}</a>`;
+      }
+    );
+  });
 
   // --- Transform: replace [DATE] placeholder with per-file last-modified date ---
   eleventyConfig.addTransform("date-placeholder", function (content) {
@@ -163,7 +194,10 @@ module.exports = function (eleventyConfig) {
     defaultAttributes: {
       loading: "lazy",
       decoding: "async",
-      sizes: "100vw",
+      // Most body images render inside prose container (max-w-3xl ~768px).
+      // Templates with wider/narrower images (hero, tiles, logos) override
+      // sizes inline. See /seo audit "images" finding.
+      sizes: "(min-width: 800px) 800px, 100vw",
     },
   });
 
