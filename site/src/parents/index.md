@@ -4,7 +4,7 @@ title: "Getting Started with AYSO Region 13"
 layout: page.njk
 section: parents
 permalink: "/parents/"
-description: "New to AYSO? Learn how to get started with Region 13 soccer — registration, equipment, game days, and what to expect as a first-time soccer family."
+description: "New to AYSO? Learn how to get started with Region 13 soccer: registration, equipment, game days, and what to expect as a first-time soccer family."
 ---
 
 Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization serving Pasadena, La Cañada, Altadena, and surrounding communities.
@@ -16,7 +16,7 @@ Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization servi
 - Season: September through mid-November (after Labor Day)
 - Ages: 4 years old through high school (19U)
 - Cost: $210-$240 depending on registration date (scholarships available)
-- Location: Various fields across Pasadena and La Cañada — [see our field map](/fields)
+- Location: Various fields across Pasadena and La Cañada: [see our field map](/fields)
 
 ## How Registration Works
 
@@ -33,7 +33,7 @@ Sibling discount: $20 off per additional child (through May 31)
 
 Scholarships: No child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) confidentially.
 
-[Register on InLeague](https://ayso13.inleague.com/app)
+<a href="https://ayso13.inleague.com/app" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">Register on InLeague</a>
 
 ### What's Included in Registration
 
@@ -65,8 +65,8 @@ Check the [age chart](/register/age-chart/) for exact birth date cutoffs.
 
 AYSO runs entirely on parent volunteers. When you register your child, you'll be asked to volunteer as either a:
 
-- Coach — Lead practices and games (training provided, no experience needed)
-- Referee — Officiate games (training provided, no experience needed)
+- Coach: Lead practices and games (training provided, no experience needed)
+- Referee: Officiate games (training provided, no experience needed)
 
 No soccer experience is required. Our training classes cover everything you need to know.
 
@@ -86,9 +86,9 @@ You can request that your child be placed with a specific friend or carpool part
 
 ### Before the Season
 1. Register (May-August)
-2. Complete volunteer training (July-August) — [see training classes](/volunteers/classes)
-3. Attend team meeting — Your coach will reach out with details
-4. Pick up uniforms — Dates announced via email
+2. Complete volunteer training (July-August): [see training classes](/volunteers/classes)
+3. Attend team meeting: Your coach will reach out with details
+4. Pick up uniforms: Dates announced via email
 
 ### During the Season
 - Practices: One weeknight per week (day/time set by your coach)
@@ -110,6 +110,7 @@ Fall soccer is our main program, but we offer others throughout the year:
 |---------|------|--------------|
 | [Preschool](/programs/preschool) | Fall | Ages 4-5 |
 | [NEXT](/programs/next) | Fall | Advanced players, 10U-14U |
+| [Grad Series](/programs/grad-series) | Winter | 8U graduates transitioning to 10U |
 | [Winter Stars](/programs/winter-stars) | Winter | All returning players |
 | [Spring Soccer](/programs/spring-soccer) | Spring | Open registration |
 | [EPIC](/programs/epic) | Fall | Children with special needs |
@@ -131,23 +132,23 @@ You can request placement with one friend during registration. We do our best to
 Occasional absences are fine. Let your coach know in advance.
 
 **Are scholarships available?**
-Yes. No child is turned away. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) — all requests are confidential.
+Yes. No child is turned away. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org): all requests are confidential.
 
 **What's the difference between AYSO and club soccer?**
-AYSO is recreational and inclusive — everyone plays, teams are balanced. Club soccer is more competitive with tryouts and travel.
+AYSO is recreational and inclusive: everyone plays, teams are balanced. Club soccer is more competitive with tryouts and travel.
 
 ## Ready to Register?
 
-<a href="https://ayso13.inleague.com/app" class="btn-primary" target="_blank" rel="noopener">Register on InLeague</a>
+<a href="https://ayso13.inleague.com/app" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">Register on InLeague</a>
 
 Questions? Contact us at [registrar@ayso13.org](mailto:registrar@ayso13.org) or visit our [contact page](/contact).
 
 ## Related Pages
 
-- [Equipment Guide](/parents/equipment) — What to buy and what's provided
-- [Age Divisions](/register/age-chart/) — Exact birth date cutoffs
-- [Field Map](/fields) — Where we play
-- [Volunteer Training](/volunteers/classes) — Coach and referee certification
-- [Kids Zone](/parents/pledge/) — How families show up at Region 13 games
+- [Equipment Guide](/parents/equipment): What to buy and what's provided
+- [Age Divisions](/register/age-chart/): Exact birth date cutoffs
+- [Field Map](/fields): Where we play
+- [Volunteer Training](/volunteers/classes): Coach and referee certification
+- [Kids Zone](/parents/pledge/): How families show up at Region 13 games
 
 *Last updated: [DATE]*
