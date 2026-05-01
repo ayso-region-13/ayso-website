@@ -126,6 +126,21 @@ module.exports = function (eleventyConfig) {
   // Used by _headers.njk and robots.njk to block crawlers on staging only.
   eleventyConfig.addGlobalData("isStaging", () => process.env.CF_PAGES_BRANCH === "staging");
 
+  // --- Transform: auto-style InLeague Register links as big yellow buttons ---
+  // Editors save plain markdown via Pages CMS (which mangles raw HTML) — this
+  // post-processes the built HTML so any anchor pointing at the InLeague
+  // register URL with text starting with "Register" renders as a btn-primary.
+  eleventyConfig.addTransform("inleague-register-button", function (content) {
+    if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;
+    return content.replace(
+      /<a\s+href="(https?:\/\/ayso13\.inleague\.com\/app\/?)"[^>]*>([^<]*)<\/a>/g,
+      (match, url, text) => {
+        if (!/^Register/i.test(text.trim())) return match;
+        return `<a href="${url}" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">${text}</a>`;
+      }
+    );
+  });
+
   // --- Transform: replace [DATE] placeholder with per-file last-modified date ---
   eleventyConfig.addTransform("date-placeholder", function (content) {
     if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;

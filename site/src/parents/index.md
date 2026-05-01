@@ -34,7 +34,7 @@ Sibling discount: $20 off per additional child through May 31.
 
 Scholarships: No child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) confidentially.
 
-<a href="https://ayso13.inleague.com/app" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">Register on InLeague</a>
+[Register on InLeague](https://ayso13.inleague.com/app)
 
 ### What's Included in Registration
 
@@ -150,7 +150,7 @@ AYSO is recreational and inclusive: everyone plays, teams are balanced. Club soc
 
 ## Ready to Register?
 
-<a href="https://ayso13.inleague.com/app" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">Register on InLeague</a>
+[Register on InLeague](https://ayso13.inleague.com/app)
 
 Questions? Contact us at [registrar@ayso13.org](mailto:registrar@ayso13.org) or visit our [contact page](/contact).
 
