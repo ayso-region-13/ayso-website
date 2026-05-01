@@ -1,93 +1,102 @@
 ---
-
-title: "Leadership"
+title: Leadership
+description: Meet the volunteer board and leadership team that runs AYSO Region
+  13 youth soccer in the Pasadena area.
 layout: page.njk
 section: about
-description: "Meet the volunteer board and leadership team that runs AYSO Region 13 youth soccer in the Pasadena area."
 ---
-
 AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of the program.
 
 ## Executive Board
 
+
 | Position | Name | Email |
-|----------|------|-------|
-| Regional Commissioner | Patrick Shopbell | rc@ayso13.org |
-| Assistant RC and RC Emeritus | Terry Takahashi | terry@ayso13.org |
-| Regional Coach Administrator | Luke Powers | coach@ayso13.org |
-| Regional Referee Administrator | Harry Plotkin | referee@ayso13.org |
-| Treasurer | Shant Kamanjian | treasurer@ayso13.org |
-| Assistant RC and Registrar | Shanti Rao | registrar@ayso13.org |
-| Safety Director | Dan Jeffries | safety@ayso13.org |
-| Child & Volunteer Protection Advocate | Nan Sampath | cvpa@ayso13.org |
-| Secretary | Christina Scott | secretary@ayso13.org |
-| Auditor | Open | auditor@ayso13.org |
+| ------------------------------------- | ---------------- | --------------------------------------------------- |
+| Regional Commissioner | Patrick Shopbell | [rc@ayso13.org](mailto:rc@ayso13.org) |
+| Assistant RC and RC Emeritus | Terry Takahashi | [terry@ayso13.org](mailto:terry@ayso13.org) |
+| Regional Coach Administrator | Luke Powers | [coach@ayso13.org](mailto:coach@ayso13.org) |
+| Regional Referee Administrator | Harry Plotkin | [referee@ayso13.org](mailto:referee@ayso13.org) |
+| Treasurer | Shant Kamanjian | [treasurer@ayso13.org](mailto:treasurer@ayso13.org) |
+| Assistant RC and Registrar | Shanti Rao | [registrar@ayso13.org](mailto:registrar@ayso13.org) |
+| Safety Director | Dan Jeffries | [safety@ayso13.org](mailto:safety@ayso13.org) |
+| Child & Volunteer Protection Advocate | Nan Sampath | [cvpa@ayso13.org](mailto:cvpa@ayso13.org) |
+| Secretary | Christina Scott | [secretary@ayso13.org](mailto:secretary@ayso13.org) |
+| Auditor | Open | [auditor@ayso13.org](mailto:auditor@ayso13.org) |
 | At-Large Board Member (3 seats) | Open | — |
+
 
 ## Club Operations
 
+
 | Position | Name | Email |
-|----------|------|-------|
-| Communications | Bret Nicely | communications@ayso13.org |
-| Web site | Matthew Goldman | webmaster@ayso13.org |
-| Fields | Jessica Ferree | fields@ayso13.org |
-| Practice Field Coordinator | Rolf Mauermann | rolf@ayso13.org |
-| Uniforms & Equipment | Ron Johnson | — |
-| Special Events | Bicky Law | bicky@ayso13.org |
-| Sisterhood of Soccer | Open | sisterhood@ayso13.org |
-| LAFC Liaison | Open | pam@ayso13.org |
-| VIP Coordinator | Tony D'Angelo | vip@ayso13.org |
-| Tournament Director | Patrick Shopbell | td@ayso13.org |
-| Picture Day Coordinator | Amandeep Singh | pictures@ayso13.org |
-| Volunteer & Team Manager Coordinator | Jonelle Kelly | teams@ayso13.org |
-| Winter Stars Coordinator | Albert Estepa | winterstars@ayso13.org |
-| Grad Series Coordinator | Jonathan Gardner | gradseries@ayso13.org |
+| ------------------------------------ | --------------------- | ------------------------------------------------------------- |
+| Communications | Bret Nicely | [communications@ayso13.org](mailto:communications@ayso13.org) |
+| Web site | Matthew Goldman | [webmaster@ayso13.org](mailto:webmaster@ayso13.org) |
+| Fields | Jessica Ferree | [fields@ayso13.org](mailto:fields@ayso13.org) |
+| Practice Field Coordinator | Rolf Mauermann | [rolf@ayso13.org](mailto:rolf@ayso13.org) |
+| Uniforms & Equipment | Ron Johnson | [equipment@ayso13.org](mailto:equipment@ayso13.org) |
+| Special Events | Bicky Law | [bicky@ayso13.org](mailto:bicky@ayso13.org) |
+| Sisterhood of Soccer | Open | [sisterhood@ayso13.org](mailto:sisterhood@ayso13.org) |
+| USWL/MLS Liaison | Open | — |
+| VIP Coordinator | Tony D'Angelo | [vip@ayso13.org](mailto:vip@ayso13.org) |
+| Tournament Director | Patrick Shopbell | [td@ayso13.org](mailto:td@ayso13.org) |
+| Picture Day Coordinator | Amandeep Singh | [pictures@ayso13.org](mailto:pictures@ayso13.org) |
+| Volunteer & Team Manager Coordinator | Jonelle Kelly | [teams@ayso13.org](mailto:teams@ayso13.org) |
+| Winter Stars Coordinator | Albert Estepa | [winterstars@ayso13.org](mailto:winterstars@ayso13.org) |
+| Grad Series Coordinator | Jonathan Gardner | [gradseries@ayso13.org](mailto:gradseries@ayso13.org) |
 | 6U–8U Spring Soccer Coordinator | Open | — |
-| Advanced Play Coordinator | Samir Singh | samir@ayso13.org |
-| 4U/5U Program Coordinator | Melissa Amonoo-Neizer | melissa@ayso13.org |
-| Director of Coach Instruction | Brandi Lane | training@ayso13.org |
-| Game Scheduler | Matthew Goldman | scheduler@ayso13.org |
+| Advanced Play Coordinator | Samir Singh | [samir@ayso13.org](mailto:samir@ayso13.org) |
+| 4U/5U Program Coordinator | Melissa Amonoo-Neizer | [melissa@ayso13.org](mailto:melissa@ayso13.org) |
+| Director of Coach Instruction | Brandi Lane | [training@ayso13.org](mailto:training@ayso13.org) |
+| Game Scheduler | Matthew Goldman | [scheduler@ayso13.org](mailto:scheduler@ayso13.org) |
+
 
 ## Division Coach Administrators
 
+
 | Position | Name | Email |
-|----------|------|-------|
-| Deputy Coach Administrator | Brandi Lane | brandi@ayso13.org |
-| B6U Division Coach Administrator | Open | coachb6u@ayso13.org |
-| G6U Division Coach Administrator | Open | coachg6u@ayso13.org |
-| B7U Division Coach Administrator | Mary Cholko & Lauren Stevenson | coachb7u@ayso13.org |
-| G7U Division Coach Administrator | Jonathan Lui | coachg7u@ayso13.org |
-| B8U Division Coach Administrator | Open | coachb8u@ayso13.org |
-| G8U Division Coach Administrator | Open | coachg8u@ayso13.org |
-| B10U Division Coach Administrator | Tona Rodriguez | coachb10u@ayso13.org |
-| G10U Division Coach Administrator | Open | coachg10u@ayso13.org |
-| B12U Division Coach Administrator | Samir Singh | coachb12u@ayso13.org |
-| G12U Division Coach Administrator | Andy Thompson | coachg12u@ayso13.org |
-| B14U Division Coach Administrator | Azeem Khaja | coachb14u@ayso13.org |
-| G14U Division Coach Administrator | Open | coachg14u@ayso13.org |
-| Upper Division (16U/19U) Coordinator | Open | ud@ayso13.org |
+| ------------------------------------ | ------------------------------ | --------------------------------------------------- |
+| Deputy Coach Administrator | Brandi Lane | [brandi@ayso13.org](mailto:brandi@ayso13.org) |
+| B6U Division Coach Administrator | Open | [coachb6u@ayso13.org](mailto:coachb6u@ayso13.org) |
+| G6U Division Coach Administrator | Open | [coachg6u@ayso13.org](mailto:coachg6u@ayso13.org) |
+| B7U Division Coach Administrator | Mary Cholko & Lauren Stevenson | [coachb7u@ayso13.org](mailto:coachb7u@ayso13.org) |
+| G7U Division Coach Administrator | Jonathan Lui | [coachg7u@ayso13.org](mailto:coachg7u@ayso13.org) |
+| B8U Division Coach Administrator | Open | [coachb8u@ayso13.org](mailto:coachb8u@ayso13.org) |
+| G8U Division Coach Administrator | Open | [coachg8u@ayso13.org](mailto:coachg8u@ayso13.org) |
+| B10U Division Coach Administrator | Tona Rodriguez | [coachb10u@ayso13.org](mailto:coachb10u@ayso13.org) |
+| G10U Division Coach Administrator | Open | [coachg10u@ayso13.org](mailto:coachg10u@ayso13.org) |
+| B12U Division Coach Administrator | Samir Singh | [coachb12u@ayso13.org](mailto:coachb12u@ayso13.org) |
+| G12U Division Coach Administrator | Andy Thompson | [coachg12u@ayso13.org](mailto:coachg12u@ayso13.org) |
+| B14U Division Coach Administrator | Azeem Khaja | [coachb14u@ayso13.org](mailto:coachb14u@ayso13.org) |
+| G14U Division Coach Administrator | Open | [coachg14u@ayso13.org](mailto:coachg14u@ayso13.org) |
+| Upper Division (16U/19U) Coordinator | Open | [ud@ayso13.org](mailto:ud@ayso13.org) |
+
 
 ## Regional Referee Administration
 
+
 | Position | Name | Email |
-|----------|------|-------|
-| Director of Referee Instruction | Mark Windsor | dri@ayso13.org |
-| Uniforms | Manny Morales | ref-uniforms@ayso13.org |
-| Director of Referee Assessment | Bruce Hancock | ref-assessor@ayso13.org |
-| PRO Referee Administrators (Youth Referee Program) | Open | proref@ayso13.org |
-| Tournament Referee Director | Brian Bonham | tra@ayso13.org |
-| Advisor on the Laws of the Game | Steve Hawkins | refsteve@eyry.org |
+| -------------------------------------------------- | ------------- | --------------------------------------------------------- |
+| Director of Referee Instruction | Mark Windsor | [dri@ayso13.org](mailto:dri@ayso13.org) |
+| Uniforms | Manny Morales | [ref-uniforms@ayso13.org](mailto:ref-uniforms@ayso13.org) |
+| Director of Referee Assessment | Bruce Hancock | [ref-assessor@ayso13.org](mailto:ref-assessor@ayso13.org) |
+| PRO Referee Administrators (Youth Referee Program) | Open | [proref@ayso13.org](mailto:proref@ayso13.org) |
+| Tournament Referee Director | Brian Bonham | [tra@ayso13.org](mailto:tra@ayso13.org) |
+| Advisor on the Laws of the Game | Steve Hawkins | [refsteve@eyry.org](mailto:refsteve@eyry.org) |
+
 
 ## Divisional Referee Administrators
 
+
 | Position | Name | Email |
-|----------|------|-------|
-| 6U–8U Referee Administrator | Kirtan Tom | ref8u@ayso13.org |
-| B10U Referee Administrator | Stephen Raynor | ref10u@ayso13.org |
-| G10U Referee Administrator | Micah Orliss | micah@ayso13.org |
-| 12U Referee Administrator | Sonya Wierman | ref12u@ayso13.org |
-| 14U Referee Administrator | Jeff Lawler | ref14u@ayso13.org |
-| Upper Division Referee Administrator | Open | ref16u@ayso13.org |
+| ------------------------------------ | -------------- | --------------------------------------------- |
+| 6U–8U Referee Administrator | Kirtan Tom | [ref8u@ayso13.org](mailto:ref8u@ayso13.org) |
+| B10U Referee Administrator | Stephen Raynor | [ref10u@ayso13.org](mailto:ref10u@ayso13.org) |
+| G10U Referee Administrator | Micah Orliss | [micah@ayso13.org](mailto:micah@ayso13.org) |
+| 12U Referee Administrator | Sonya Wierman | [ref12u@ayso13.org](mailto:ref12u@ayso13.org) |
+| 14U Referee Administrator | Jeff Lawler | [ref14u@ayso13.org](mailto:ref14u@ayso13.org) |
+| Upper Division Referee Administrator | Open | [ref16u@ayso13.org](mailto:ref16u@ayso13.org) |
+
 
 ## Board Meetings
 

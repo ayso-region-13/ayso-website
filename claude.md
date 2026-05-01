@@ -37,10 +37,13 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Newsletter system — `/resources/newsletters/` with EmailOctopus subscribe widget + 97-link archive (2021–2025); old `/news/` URL redirects in
 - [x] Form upload tool — `/forms/` page replicates the legacy Google Apps Script upload flow
 - [x] PDFs migrated from old WordPress to local `/assets/docs/` — penalty-kick guidelines, FIFA 11+ warmup, concussion/SCA forms
-- [ ] Review and refine site ← **IN PROGRESS at https://staging.ayso13.org**
+- [x] Review and refine site
 - [x] Create redirect mapping (159 old URLs → `site/src/_redirects`)
 - [x] Deploy to Cloudflare Pages ← **staging.ayso13.org / www.ayso13.org**
-- [ ] Launch (cut over ayso13.org)
+- [x] **Pre-launch /seo audit (22 of 28 items resolved)** — schema markup site-wide (SportsOrganization + WebSite + BreadcrumbList + Place on 22 field pages + FAQPage on Ask the Referee), llms.txt, sitemap lastmod fix, image sizes per-element, hero LCP fix, /contact ZIPs + tel links, 501(c)(3) statement on /about/, Project Play 8 Children's Rights, "Field Maps" page title, distinct alt text, per-section OG image defaults, HTML age chart replacing PNG, /parents big yellow Register button via build-time transform, fees centralized in `_data/fees.json`. Remaining items in `todo.md`.
+- [x] **Repo made public** + branch ruleset on `main` requires PRs (PROMOTE_TOKEN PAT bypass for the workflow)
+- [x] **Slack notifications on promote** — `/ayso promote` and the workflow now post success/failure to `#notify-website-status`
+- [x] **Launched** — DNS cut over to www.ayso13.org on 2026-05-01
 
 ## Platform Decision
 **Switched from Squarespace to Eleventy (11ty) + Tailwind CSS.**
@@ -148,8 +151,8 @@ Note: Search (`/search/`) only works after a full `npm run build` — not in dev
 
 ## Content Placeholders (still in some pages)
 - `[INLEAGUE: description]` — 36 remaining, documented in `links-to-resolve.md`
-- `[IMAGE: description]` — 3 remaining, need original photos (parents/pledge, parents/support, programs/winter-stars)
-- `[DATE]` — auto-replaced at build time with file's last-modified date
+- `[IMAGE: description]` — 0 remaining (all removed/sourced)
+- `[DATE]` — auto-replaced at build time with file's per-file last-modified date from `_data/fileDates.json` (script generates from `git log --name-only`, keys are `src/...` paths)
 
 ## Key Decisions
 1. **Platform:** Eleventy + Tailwind CSS (static, no CMS needed for now)
@@ -180,12 +183,17 @@ Note: Search (`/search/`) only works after a full `npm run build` — not in dev
 
 **Workflow:** CMS edits → `staging` branch → staging.ayso13.org → promote → `main` → www.ayso13.org
 
-- `staging` branch exists and is live at **staging.ayso13.org** (Cloudflare Pages branch deployment)
+- `staging` branch is live at **staging.ayso13.org** (separate Cloudflare Pages project, `ayso-website-staging`)
+- `main` branch deploys to **www.ayso13.org** (production CF Pages project, `ayso-website-prod`)
 - Pages CMS is configured with `branch: staging` in `.pages.yml` — all CMS edits go to staging
-- **Promote to production:** GitHub Actions workflow `promote-to-production.yml` merges `staging` → `main`
+- **Branch ruleset on `main`** requires PRs; `magoldman` (Repository admin) bypasses via the workflow's `PROMOTE_TOKEN` PAT
+- **Promote to production:** GitHub Actions workflow `.github/workflows/promote-to-production.yml` merges `staging` → `main`
+  - From Slack: `/ayso promote` (slack-bot dispatches workflow_dispatch)
   - From GitHub UI: Actions tab → "Promote Staging to Production" → Run workflow → type "promote"
-  - From Slack (requires GitHub Slack app): `/github workflow run promote-to-production.yml --repo magoldman/ayso-website`
-- `main` branch deploys to **www.ayso13.org** (custom domain in Cloudflare Pages)
+  - The workflow uses `PROMOTE_TOKEN` (classic PAT, repo scope) for git push so it can bypass the branch ruleset
+  - **Promote sweeps everything currently on staging into main** — review staging before clicking promote, or any pending CMS edits will ship too
+  - On success/failure, the workflow posts to `#notify-website-status` (uses `SLACK_BOT_TOKEN` repo secret)
+- **Staging crawl block:** `_headers.njk` and `robots.njk` read `CF_PAGES_BRANCH` env var at build time. On the `staging` branch the build emits `Disallow: /` + `X-Robots-Tag: noindex,nofollow`; on `main` the build emits the normal allow-all + sitemap. Local dev (`npm start`) builds in production mode (no env var)
 - Do NOT commit directly to `main` for content changes — always go through staging
 
 ## CMS
@@ -202,12 +210,22 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - Navigation is code-only in `navigation.js` — Pages CMS cannot handle nested list-of-objects structures; do not attempt to add it to `.pages.yml`
 
 ## Site-wide Data Files (`site/src/_data/`)
-- `site.json` — phone, email, address, InLeague URL
+- `site.json` — phone, email, address, InLeague URL, GA4 ID, founded year
 - `navigation.js` — full nav structure (top nav + section sidebars)
-- `fileDates.json` — auto-generated per-file last-modified dates
+- `fileDates.json` — auto-generated per-file last-modified dates (keys are `src/...` paths)
 - `announcements.json` — home page announcement bar (`enabled` boolean + `body` markdown); rendered via `markdownify` filter in `home.njk`
 - `fieldstatus.json` — home page field status widget (`enabled` boolean + `status` string + `message` string); color-coded Open/Monitoring/Closed; last-updated timestamp from `git log` at build time (Pacific time)
 - `sponsors.js` — sponsor logos, URLs, and tier definitions
+- `fees.json` — Fall Soccer registration fee schedule (rangeShort + per-tier amounts + sibling discount). Used by `/register/`, `/programs/fall-soccer/`, and `/llms.txt`. Note: `/parents/index.md` is hardcoded because Pages CMS round-trips break Nunjucks template syntax in CMS-edited markdown bodies — when fees change, edit both
+- `og.js` — Per-section default OG image fallbacks. When a page has no `heroImage` frontmatter, `base.njk` picks the section default; otherwise the global fallback
+
+## Site-wide Templates / Patterns
+- `_includes/schema-org.njk` — emits JSON-LD on every page based on URL/section/frontmatter: SportsOrganization + WebSite (homepage), BreadcrumbList (page.njk inner pages + ask-the-referee), Place (field pages with `placeAddress` frontmatter), FAQPage (`/referees/ask-the-referee/` from `collections.qaAnswers`)
+- `_includes/_headers.njk` and `robots.njk` — Cloudflare Pages config; branch-aware via `CF_PAGES_BRANCH` env var to block crawlers on staging
+- `llms.njk` → `/llms.txt` — AI/LLM crawler summary, pulls live values from `site.json` and `fees.json`
+- **InLeague Register button auto-style** — a build-time transform in `.eleventy.js` finds `<a href="https://ayso13.inleague.com/app">Register…</a>` and adds `class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener"`. Editors keep plain markdown links (CMS-safe); buttons render at build time
+- **Field Info callout** — frontmatter fields (`parking`, `restrooms`, `surface`, `lighting`, `snackBar`) on field pages render as a "Field Info" cream callout at the top of the article when populated. Empty by default; CMS exposes the fields for fields-coordinator to fill in
+- **Per-page noindex** — frontmatter `noindex: true` emits `<meta name="robots" content="noindex,nofollow">` AND drops the `data-pagefind-body` attribute on the main element so Pagefind site search excludes the page
 
 ## Files
 - `CLAUDE.md` — This file
@@ -224,4 +242,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-04-26 (session 13)*
+*Last updated: 2026-05-01 (session 14 — site launched)*

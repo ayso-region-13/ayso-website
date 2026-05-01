@@ -1,19 +1,19 @@
 ---
-
-title: "Season Calendar"
+title: Season Calendar
+description: AYSO Region 13 season calendar — key dates for registration, season
+  start, playoffs, tournaments, and special events.
 layout: page.njk
 section: schedules
-description: "AYSO Region 13 season calendar — key dates for registration, season start, playoffs, tournaments, and special events."
 ---
-
 ## View Calendar
 
 [InLeague](https://ayso13.inleague.com/app)
 
 ## Fall Season Overview
 
+
 | Event | Typical Timing |
-|-------|----------------|
+| --------------------------- | -------------------- |
 | Registration Opens | May 1 |
 | Early Registration Deadline | May 31 |
 | Coach and Referee Training | August weekends |
@@ -26,16 +26,20 @@ description: "AYSO Region 13 season calendar — key dates for registration, sea
 | Rose City Cup | December |
 | Awards Dinner | December |
 
+
 ## Spring Season Overview
 
+
 | Event | Typical Timing |
-|-------|----------------|
+| ------------------ | -------------- |
 | Registration Opens | January |
 | Season Runs | March-May |
 
+
 ## Other Programs
 
-- Winter Stars: December-February
+- Winter Stars: January-February
+- Grad Series: January-February
 - All-Stars: January-March
 
 See [Programs](/programs) for details on each program.
