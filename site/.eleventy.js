@@ -95,6 +95,14 @@ module.exports = function (eleventyConfig) {
     return md.renderInline(str);
   });
 
+  // Resolve a page's last-modified date from fileDates.json by inputPath.
+  // Returns ISO string (e.g. "2026-04-30T20:53:32-07:00") or null.
+  eleventyConfig.addFilter("lastModDate", function (inputPath) {
+    if (!inputPath) return null;
+    const rel = path.relative(__dirname, inputPath).replace(/\\/g, "/");
+    return fileDates[rel] || null;
+  });
+
   // Strip HTML tags from a string (for JSON-LD answer text)
   eleventyConfig.addFilter("striptags", (str) => {
     if (!str) return "";
