@@ -60,9 +60,10 @@
      URL the browser actually fetches. #}
 
   {% if site.gaId %}
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
-  <script>
+  <!-- Google Analytics — data-cfasync="false" opts out of Cloudflare Rocket Loader,
+       which was rewriting type="text/javascript" and breaking pageview reporting. -->
+  <script async data-cfasync="false" src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+  <script data-cfasync="false">
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
