@@ -34,7 +34,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Web site | Matthew Goldman | [webmaster@ayso13.org](mailto:webmaster@ayso13.org) |
 | Fields | Jessica Ferree | [fields@ayso13.org](mailto:fields@ayso13.org) |
 | Practice Field Coordinator | Rolf Mauermann | [rolf@ayso13.org](mailto:rolf@ayso13.org) |
-| Uniforms & Equipment | Ron Johnson | — |
+| Uniforms & Equipment | Ron Johnson | [equipment@ayso13.org](mailto:equipment@ayso13.org) |
 | Special Events | Bicky Law | [bicky@ayso13.org](mailto:bicky@ayso13.org) |
 | Sisterhood of Soccer | Open | [sisterhood@ayso13.org](mailto:sisterhood@ayso13.org) |
 | USWL/MLS Liaison | Open | — |
