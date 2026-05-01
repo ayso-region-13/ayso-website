@@ -22,15 +22,6 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.PROMOTE_TOKEN }}
 
-      - name: Verify token identity
-        env:
-          GH_TOKEN: ${{ secrets.PROMOTE_TOKEN }}
-        run: |
-          echo "Token authenticates as:"
-          gh api user --jq '.login'
-          echo "Token can bypass ruleset?"
-          gh api repos/${{ github.repository }}/rulesets --jq '.[].current_user_can_bypass'
-
       - name: Configure git
         run: |
           git config user.name "github-actions[bot]"
