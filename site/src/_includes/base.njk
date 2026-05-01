@@ -22,23 +22,16 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ site.url }}{{ page.url }}">
   <meta property="og:locale" content="en_US">
-  {% if heroImage %}
-  <meta property="og:image" content="{{ site.url }}/images/{{ heroImage }}">
-  <meta property="og:image:alt" content="{{ heroImageAlt or title }}">
-  {% else %}
-  <meta property="og:image" content="{{ site.url }}/images/home/region13_home_5.jpg">
-  <meta property="og:image:alt" content="AYSO Region 13 players in action">
-  {% endif %}
+  {%- set ogImagePath = heroImage or og.sectionDefaults[section] or og.fallback -%}
+  {%- set ogImageAlt  = heroImageAlt or (title + " — AYSO Region 13") -%}
+  <meta property="og:image" content="{{ site.url }}/images/{{ ogImagePath }}">
+  <meta property="og:image:alt" content="{{ ogImageAlt }}">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% if title and title != site.title %}{{ title }} | {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}">
   <meta name="twitter:description" content="{{ description or site.description }}">
-  {% if heroImage %}
-  <meta name="twitter:image" content="{{ site.url }}/images/{{ heroImage }}">
-  {% else %}
-  <meta name="twitter:image" content="{{ site.url }}/images/home/region13_home_5.jpg">
-  {% endif %}
+  <meta name="twitter:image" content="{{ site.url }}/images/{{ ogImagePath }}">
 
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="any">
