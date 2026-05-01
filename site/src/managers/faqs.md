@@ -17,7 +17,7 @@ description: "Frequently asked questions for AYSO Region 13 team managers."
 See [Manager Training](/managers/training) for the full process.
 
 ### What is the time commitment?
-A few hours per week during the season for communication, coordination, and game-day logistics. The workload varies based on how much you delegate to other parents.
+A few hours per week during the season for communication, coordination, and game-day logistics. The workload varies based on how much you delegate to other families.
 
 ### Do I need soccer knowledge?
 No. The team manager role focuses on organization and communication rather than soccer skills.
@@ -51,7 +51,7 @@ Makeup photo sessions are scheduled. The Picture Day Coordinator will provide da
 ### What does each family acknowledge at registration?
 - Concussion Information Sheet
 - Sudden Cardiac Arrest Information Sheet
-- The AYSO [Kids Zone](/parents/pledge/) — ten standards for behavior at games and events
+- The AYSO [Kids Zone](/families/pledge/) — ten standards for behavior at games and events
 
 ### How do I upload team photos?
 Use the team-specific link provided by the organization.

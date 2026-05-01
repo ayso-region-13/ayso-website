@@ -94,10 +94,10 @@ content:
     path: site/src/schedules
     fields: *page-fields
 
-  - name: parents
-    label: Parents
+  - name: families
+    label: Families
     type: collection
-    path: site/src/parents
+    path: site/src/families
     fields: *page-fields
 
   - name: coaches

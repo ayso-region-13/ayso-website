@@ -34,7 +34,7 @@ Handles team communication and logistics — schedule reminders, snack rotation,
 
 The Regional Board coordinates the work of every other volunteer. The board meets once a month, usually on the first Thursday at 7:15 PM, at the Region 13 Clubhouse in Altadena (occasionally on Zoom — see the regional calendar). Anyone is welcome to attend.
 
-The board uses email, Slack, and text messaging to communicate. Slack access is open to all Region 13 volunteers and parents.
+The board uses email, Slack, and text messaging to communicate. Slack access is open to all Region 13 volunteers and families.
 
 ## Executive Board
 
@@ -42,7 +42,7 @@ The Executive Board is the voting subset of the Regional Board, with authority o
 
 ### Region Commissioner (RC)
 
-Final responsibility for every aspect of the region — players, parents, volunteers, and year-round programs. Chairs monthly board meetings and represents Region 13 to Area 1/C and AYSO National.
+Final responsibility for every aspect of the region — players, families, volunteers, and year-round programs. Chairs monthly board meetings and represents Region 13 to Area 1/C and AYSO National.
 
 ### Deputy Region Commissioner (DRC)
 
@@ -94,11 +94,11 @@ Division Referee Administrators are are the referee contact point for their AYSO
 
 #### 4U/5U Program Coordinator
 
-The 4U/5U Program Coordinator is responsible for running the [preschool program](https://ayso13.org/preschool/). The program coordinator is responsible for coordinating the parent volunteers and the professional trainers that work with the players. The program coordinator communicates directly with the families of the players, divides the players into playing groups and monitors the training each week. This program normally takes place on Saturday mornings at Victory Park.
+The 4U/5U Program Coordinator is responsible for running the [preschool program](https://ayso13.org/preschool/). The program coordinator is responsible for coordinating the family volunteers and the professional trainers that work with the players. The program coordinator communicates directly with the families of the players, divides the players into playing groups and monitors the training each week. This program normally takes place on Saturday mornings at Victory Park.
 
 #### Upper Division (UD) Coordinator
 
-The Upper Division (aka UD) Coordinator is for players in the 16U and 19U divisions. This program is an Area program which means that the rules and decisions about how the program runs are determined by Area 1/C. The Upper Division Coordinator acts as the DCA for these age groups and represents the Region to the Area program. The Upper Division Coordinator is responsible for coordinating with the RC and RCA to choose coaches, coordinate the team drafts with Area and answer questions from coaches and parents about the program. They also work with the UD Referee Coordinator to coordinate the referees from Region 13 that participate in the Upper Division program.
+The Upper Division (aka UD) Coordinator is for players in the 16U and 19U divisions. This program is an Area program which means that the rules and decisions about how the program runs are determined by Area 1/C. The Upper Division Coordinator acts as the DCA for these age groups and represents the Region to the Area program. The Upper Division Coordinator is responsible for coordinating with the RC and RCA to choose coaches, coordinate the team drafts with Area and answer questions from coaches and families about the program. They also work with the UD Referee Coordinator to coordinate the referees from Region 13 that participate in the Upper Division program.
 
 #### Upper Division Referee Coordinator
 

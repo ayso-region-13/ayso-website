@@ -11,7 +11,7 @@ description: "AYSO Region 13 resources — document library, photo gallery, news
 
 - [Registration](https://ayso13.inleague.com/app) — Register for programs
 - [InLeague Portal](https://ayso13.inleague.com/) — Schedules and team information
-- [Required Forms](/register/forms) — Parent pledge and safety forms
+- [Required Forms](/register/forms) — Family pledge and safety forms
 
 ## Safety
 

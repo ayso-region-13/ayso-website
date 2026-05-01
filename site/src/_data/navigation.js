@@ -82,18 +82,18 @@ module.exports = [
   },
 
   {
-    label: "Parents",
-    url: "/parents/",
-    section: "parents",
+    label: "Families",
+    url: "/families/",
+    section: "families",
     topNav: true,
     children: [
-      { label: "Getting Started",           url: "/parents/" },
-      { label: "Team Info",                 url: "/parents/team/" },
-      { label: "Equipment & Uniforms",      url: "/parents/equipment/" },
-      { label: "Kids Zone",                 url: "/parents/pledge/" },
-      { label: "Parent FAQs",               url: "/parents/faqs/" },
-      { label: "Being a Supportive Parent", url: "/parents/support/" },
-      // Role sections — most parents are also coaches, refs, or managers
+      { label: "Getting Started",             url: "/families/" },
+      { label: "Team Info",                   url: "/families/team/" },
+      { label: "Equipment & Uniforms",        url: "/families/equipment/" },
+      { label: "Kids Zone",                   url: "/families/pledge/" },
+      { label: "Frequently Asked Questions",  url: "/families/faqs/" },
+      { label: "Sideline Behavior",           url: "/families/support/" },
+      // Role sections — most families have someone who's also a coach, ref, or manager
       { label: "Coach",         url: "/coaches/",   divider: true, dividerLabel: "I'm also a…" },
       { label: "Referee",       url: "/referees/" },
       { label: "Team Manager",  url: "/managers/" },

@@ -10,13 +10,13 @@ description: "Team manager roles and responsibilities in AYSO Region 13. Manager
 ## Role Summary
 
 The team manager works alongside the coach to:
-- Communicate with parents about schedules and logistics
-- Coordinate parent volunteers
+- Communicate with families about schedules and logistics
+- Coordinate family volunteers
 - Manage snack schedules and team events
 - Handle picture day and trophy distribution
 - Ensure required forms are collected
 
-The key to success is delegation. Many tasks can be shared with other parents on the team.
+The key to success is delegation. Many tasks can be shared with other families on the team.
 
 ## Key Contacts
 

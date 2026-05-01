@@ -7,7 +7,7 @@ permalink: "/referees/"
 description: "Volunteer refereeing in AYSO Region 13. Help make games happen — training, certification, and scheduling support provided."
 ---
 
-AYSO depends on parent volunteers to referee games. Without referees, games cannot be played.
+AYSO depends on family volunteers to referee games. Without referees, games cannot be played.
 
 ![Referee at Region 13](/images/referees-interior.jpg)
 
@@ -42,7 +42,7 @@ AYSO has five referee certification levels:
 | Advanced | 16 | Through 16U (assistant in 19U) |
 | National | 18 | All levels |
 
-Most parent referees start as 8U Officials or Regional Referees, depending on their child's division.
+Most volunteer referees start as 8U Officials or Regional Referees, depending on their child's division.
 
 ## Game Scheduling
 

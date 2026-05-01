@@ -1,9 +1,9 @@
 ---
 
-title: "Parent FAQs"
+title: "Frequently Asked Questions"
 layout: page.njk
-section: parents
-description: "Frequently asked questions for Region 13 parents — registration, schedules, refunds, uniforms, volunteering, and more."
+section: families
+description: "Frequently asked questions for Region 13 families — registration, schedules, refunds, uniforms, volunteering, and more."
 ---
 
 ## Registration
@@ -12,7 +12,7 @@ description: "Frequently asked questions for Region 13 parents — registration,
 Registration typically opens May 1 each year for the fall season. Early registration costs less.
 
 ### How much does it cost?
-$220-$250 depending on when you register. See [Getting Started](/parents/) for the full pricing schedule.
+$220-$250 depending on when you register. See [Getting Started](/families/) for the full pricing schedule.
 
 ### Are scholarships available?
 Yes. No child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) — all requests are confidential.
@@ -40,7 +40,7 @@ Only in unusual circumstances. Contact [registrar@ayso13.org](mailto:registrar@a
 ## Volunteering
 
 ### Do I have to volunteer?
-Yes. AYSO is volunteer-run. Without parent coaches and referees, there's no program. We ask each family to provide one volunteer.
+Yes. AYSO is volunteer-run. Without volunteer coaches and referees, there's no program. We ask each family to provide one volunteer.
 
 ### I've never played soccer. Can I still coach?
 Yes. Our training classes teach you everything you need.
@@ -61,7 +61,7 @@ Games are on Saturdays. Times vary by division.
 Your coach sets the practice day — usually one weeknight (Monday-Thursday), once per week.
 
 ### How long are games?
-40-70 minutes depending on age group. See [Your Child's Team](/parents/team) for game lengths by division.
+40-70 minutes depending on age group. See [Your Child's Team](/families/team) for game lengths by division.
 
 ### What happens if it rains?
 Check the [field status page](/schedules) and your email Saturday morning.
@@ -75,7 +75,7 @@ In older divisions (10U+), coaches ask for goalkeeper volunteers. Goalkeeping is
 ## Equipment and Uniforms
 
 ### What equipment do I need to buy?
-Shoes and shin guards. We provide the uniform. See our [Equipment Guide](/parents/equipment).
+Shoes and shin guards. We provide the uniform. See our [Equipment Guide](/families/equipment).
 
 ### Do I need to buy cleats?
 No. Sneakers work fine, especially for younger players.
@@ -156,9 +156,9 @@ Yes. Be aware of potential schedule conflicts.
 
 ## Related Pages
 
-- [Getting Started](/parents/) — Guide for new families
-- [Equipment Guide](/parents/equipment) — What to buy, what's provided
-- [Your Child's Team](/parents/team) — Game day info and schedules
+- [Getting Started](/families/) — Guide for new families
+- [Equipment Guide](/families/equipment) — What to buy, what's provided
+- [Your Child's Team](/families/team) — Game day info and schedules
 - [Volunteer FAQs](/volunteers/faqs) — Questions about coaching and refereeing
 
 *Last updated: [DATE]*

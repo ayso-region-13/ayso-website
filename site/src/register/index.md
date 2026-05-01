@@ -89,6 +89,6 @@ To request a withdrawal, complete the withdrawal form.
 
 - [Age Chart](/register/age-chart) — Divisions by birth year
 - [Programs](/programs) — Program descriptions
-- [Getting Started](/parents/) — New family guide
+- [Getting Started](/families/) — New family guide
 
 *Last updated: [DATE]*

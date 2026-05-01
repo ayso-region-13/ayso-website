@@ -52,7 +52,7 @@ Coaches and team managers must complete concussion and SCA awareness training th
 
 Region 13 monitors heat conditions using Wet Bulb Globe Temperature (WBGT) measurements. When conditions reach Alert Level 3, games may be shortened. Either coach may elect not to play without forfeit penalty.
 
-Parents and players have final say on participation in hot conditions.
+Families and players have final say on participation in hot conditions.
 
 Use the Zelus app to check current conditions: [zelusports.com](https://zelusports.com)
 

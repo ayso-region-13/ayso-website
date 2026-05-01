@@ -48,7 +48,7 @@ In 6U-8U, each team splits in half and plays on two fields simultaneously:
 
 - Model good sportsmanship
 - Speak respectfully to referees
-- Keep parents informed but focused on cheering, not coaching
+- Keep families informed but focused on cheering, not coaching
 - Remember: Referees ref, Coaches coach, Parents cheer
 
 ## After the Game

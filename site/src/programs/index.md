@@ -68,7 +68,7 @@ For questions about which program is right for your child, contact [registrar@ay
 
 ## Related Pages
 
-- [Getting Started](/parents/) — Overview for new families
+- [Getting Started](/families/) — Overview for new families
 - [Age Divisions](/register/age-chart/) — Birth date cutoffs
 - [Volunteer Training](/volunteers/classes) — Coach and referee certification
 

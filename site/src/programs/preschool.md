@@ -62,7 +62,7 @@ For questions about the Preschool program: [4u5u@ayso13.org](mailto:4u5u@ayso13.
 ## Related Pages
 
 - [Programs Overview](/programs) — All Region 13 programs
-- [Equipment Guide](/parents/equipment) — What to buy
-- [Getting Started](/parents/) — Overview for new families
+- [Equipment Guide](/families/equipment) — What to buy
+- [Getting Started](/families/) — Overview for new families
 
 *Last updated: [DATE]*

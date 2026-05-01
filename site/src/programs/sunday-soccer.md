@@ -34,7 +34,7 @@ Small-sided games throughout the 3:30-5pm session. Players can arrive and leave 
 
 ## Who Leads Sessions
 
-Professional coaches from Launch Sports provide instruction. Parent volunteers help with check-in and logistics.
+Professional coaches from Launch Sports provide instruction. Family volunteers help with check-in and logistics.
 
 ## How to Participate
 

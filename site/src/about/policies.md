@@ -22,7 +22,7 @@ Our policies follow this hierarchy:
 ## Player Safety
 
 ### Concussion Protocol
-- All players and parents receive CDC concussion information (available in English and Spanish)
+- All players and families receive CDC concussion information (available in English and Spanish)
 - Volunteers complete CDC Concussion Awareness training
 - Any player suspected of having a concussion must be removed from play for the remainder of the day
 - Medical evaluation and written clearance required before returning to play
@@ -50,7 +50,7 @@ Medical alert bracelets may be worn but should be taped down or covered.
 ## Sideline Conduct
 
 ### Respect the Referee
-Coaches and parents must model good sportsmanship and avoid disparaging volunteer referees.
+Coaches and families must model good sportsmanship and avoid disparaging volunteer referees.
 
 - Referees ref
 - Coaches coach
@@ -70,6 +70,6 @@ Personal data is handled according to AYSO National Board-approved privacy polic
 
 - [Safety](/resources/safety) — Safety policies and incident reporting
 - [Fine Print](/about/fine-print) — Legal disclosures and waivers
-- [Kids Zone](/parents/pledge/) — Sideline conduct expectations
+- [Kids Zone](/families/pledge/) — Sideline conduct expectations
 
 *Last updated: [DATE]*

@@ -56,7 +56,7 @@ Email: [vip@ayso13.org](mailto:vip@ayso13.org)
 ## Related Pages
 
 - [Programs Overview](/programs) — All Region 13 programs
-- [Getting Started](/parents/) — Overview for new families
+- [Getting Started](/families/) — Overview for new families
 - [Inclusion](/about/inclusion) — Our commitment to inclusion
 
 *Last updated: [DATE]*

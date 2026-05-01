@@ -47,7 +47,7 @@ Division meetings are held in August before the season starts. You'll receive:
 
 ## Step 5: Contact Your Team
 
-Once you have your roster, reach out to parents to:
+Once you have your roster, reach out to families to:
 - Introduce yourself
 - Confirm practice day and time
 - Schedule the team meeting

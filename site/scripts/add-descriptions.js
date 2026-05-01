@@ -17,7 +17,7 @@ const DESCRIPTIONS = {
 
   // ── About ──────────────────────────────────────────────────────────────
   "about/index.md":
-    "Learn about AYSO Region 13's mission and six core philosophies: Everyone Plays, Balanced Teams, Open Registration, Positive Coaching, and Good Sportsmanship.",
+    "Learn about AYSO Region 13's mission and six core philosophies: Everyone Plays, Balanced Teams, Open Registration, Positive Coaching, Good Sportsmanship, and Player Development.",
   "about/history.md":
     "AYSO Region 13 has served the Pasadena area since 1969. Learn the history of youth soccer in Pasadena, Altadena, and La Cañada.",
   "about/leadership.md":

@@ -1,9 +1,9 @@
 ---
 
-title: "Being a Supportive Soccer Parent"
+title: "Sideline Behavior"
 layout: page.njk
-section: parents
-description: "How to be a supportive AYSO parent. Tips for positive sideline behavior and helping your child enjoy and develop through soccer."
+section: families
+description: "Sideline behavior tips for AYSO Region 13 families — how to stay positive, support your child, and help them enjoy and develop through soccer."
 ---
 
 ## Before the Game
@@ -35,7 +35,7 @@ Things to avoid:
 
 Find a spot where:
 - You can see the game
-- You're with other parents from your team
+- You're with other families from your team
 - You're not directly behind the goal or near the coach's area
 
 ### What to Cheer
@@ -55,7 +55,7 @@ When your child has the ball and you can see what they should do, it's hard not 
 
 Reasons to resist:
 - By the time they hear you, the moment has passed
-- Parent instructions may conflict with what the coach taught
+- Sideline instructions may conflict with what the coach taught
 - Kids become dependent on sideline direction instead of learning to read the game
 
 ### When Calls Don't Go Your Way
@@ -63,7 +63,7 @@ Reasons to resist:
 Referees — especially at younger levels — are often teens learning the job. They will miss calls.
 
 - Stay quiet when calls go against you (your child is watching)
-- Save concerns about calls for after the game, away from other parents
+- Save concerns about calls for after the game, away from other families
 - If there's a real concern, let your coach handle it
 
 ## After the Game
@@ -144,13 +144,13 @@ Car ride: Talk about anything but the game (unless they bring it up).
 ## More Resources
 
 - [The Sideline Project](https://thesidelineproject.com/take-pledge/) — Research-based guidance for sports parents
-- [Kids Zone](/parents/pledge/) — How families show up at Region 13 games
-- [Feedback Form](/contact/feedback/) — Share feedback on the parent experience
+- [Kids Zone](/families/pledge/) — How families show up at Region 13 games
+- [Feedback Form](/contact/feedback/) — Share feedback on the family experience
 
 ## Related Pages
 
-- [Kids Zone](/parents/pledge/) — Ten standards for behavior at games and events
-- [Getting Started](/parents/) — Overview for new families
-- [Parent FAQs](/parents/faqs) — Common questions answered
+- [Kids Zone](/families/pledge/) — Ten standards for behavior at games and events
+- [Getting Started](/families/) — Overview for new families
+- [Frequently Asked Questions](/families/faqs) — Common questions answered
 
 *Last updated: [DATE]*

@@ -11,7 +11,7 @@ AYSO is an all-volunteer organization. Every team needs five key volunteers: two
 
 ## Why Volunteer
 
-Volunteers make youth soccer possible. AYSO has only 18 paid staff members nationwide; everything else is done by parent volunteers like you.
+Volunteers make youth soccer possible. AYSO has only 18 paid staff members nationwide; everything else is done by family volunteers like you.
 
 When you volunteer, you:
 - Support your child's soccer experience directly
