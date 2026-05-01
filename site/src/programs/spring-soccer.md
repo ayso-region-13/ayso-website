@@ -10,19 +10,13 @@ description: "Spring Soccer is Region 13's recreational spring program. Open reg
 Spring Soccer offers league play from March through May for players who want more soccer after the fall and winter seasons.
 
 <div class="my-8 not-prose">
-  <div class="h-1.5 bg-brand-maroon"></div>
-  <div class="h-1 bg-brand-red"></div>
-  <div class="py-6">
-    <p class="text-base font-extrabold uppercase tracking-wider text-brand-red-dark mt-0 mb-2">Spring 2026 Game Schedules</p>
-    <p class="text-sm text-brand-dark/80 mb-4">Current Interlock season schedules.</p>
-    <div class="flex flex-wrap gap-3">
-      <a href="https://scheduler.leaguelobster.com/2593813/spring-2026-interlock-season/10u/" target="_blank" rel="noopener" class="btn-primary">10U Schedule</a>
-      <a href="https://scheduler.leaguelobster.com/2596384/spring-2026-interlock-season/12u/" target="_blank" rel="noopener" class="btn-primary">12U Schedule</a>
-      <a href="https://scheduler.leaguelobster.com/2596400/spring-2026-interlock-season/14ug/" target="_blank" rel="noopener" class="btn-primary">14U Schedule</a>
-    </div>
+  <p class="text-base font-extrabold uppercase tracking-wider text-brand-red-dark mt-0 mb-2">Spring 2026 Game Schedules</p>
+  <p class="text-sm text-brand-dark/80 mb-4">Current Interlock season schedules.</p>
+  <div class="flex flex-wrap gap-3">
+    <a href="https://scheduler.leaguelobster.com/2593813/spring-2026-interlock-season/10u/" target="_blank" rel="noopener" class="btn-primary">10U Schedule</a>
+    <a href="https://scheduler.leaguelobster.com/2596384/spring-2026-interlock-season/12u/" target="_blank" rel="noopener" class="btn-primary">12U Schedule</a>
+    <a href="https://scheduler.leaguelobster.com/2596400/spring-2026-interlock-season/14ug/" target="_blank" rel="noopener" class="btn-primary">14U Schedule</a>
   </div>
-  <div class="h-1 bg-brand-red"></div>
-  <div class="h-1.5 bg-brand-maroon"></div>
 </div>
 
 ![Spring soccer game at Region 13](/images/spring-soccer-interior.jpg)
