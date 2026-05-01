@@ -12,7 +12,7 @@ description: "Frequently asked questions for Region 13 parents — registration,
 Registration typically opens May 1 each year for the fall season. Early registration costs less.
 
 ### How much does it cost?
-$210-$240 depending on when you register. See [Getting Started](/parents/) for the full pricing schedule.
+$220-$250 depending on when you register. See [Getting Started](/parents/) for the full pricing schedule.
 
 ### Are scholarships available?
 Yes. No child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) — all requests are confidential.
