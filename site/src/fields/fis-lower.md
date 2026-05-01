@@ -2,6 +2,9 @@
 title: "Foothill Intermediate School — Lower (FIS Lower)"
 layout: page.njk
 section: fields
+placeAddress: "4320 Cornishon Ave"
+placeLocality: "La Cañada Flintridge"
+placePostalCode: "91011"
 description: "FIS Lower field — AYSO Region 13 practice and game location in La Cañada. Address, parking, and field map."
 ---
 

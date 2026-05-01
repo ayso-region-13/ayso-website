@@ -3,6 +3,9 @@
 title: "Muir South"
 layout: page.njk
 section: fields
+placeAddress: "1905 Lincoln Ave"
+placeLocality: "Pasadena"
+placePostalCode: "91103"
 description: "Muir South practice fields — AYSO Region 13 location in Pasadena. Address, parking, and directions."
 ---
 

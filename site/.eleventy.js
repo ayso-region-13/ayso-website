@@ -95,6 +95,12 @@ module.exports = function (eleventyConfig) {
     return md.renderInline(str);
   });
 
+  // Strip HTML tags from a string (for JSON-LD answer text)
+  eleventyConfig.addFilter("striptags", (str) => {
+    if (!str) return "";
+    return str.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  });
+
   // Slugify a string for use in URLs
   eleventyConfig.addFilter("slug", (str) => {
     return str

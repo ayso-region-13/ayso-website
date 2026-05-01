@@ -2,6 +2,9 @@
 title: "Pasadena High School"
 layout: page.njk
 section: fields
+placeAddress: "2925 E Sierra Madre Blvd"
+placeLocality: "Pasadena"
+placePostalCode: "91107"
 description: "Pasadena High School north field — AYSO Region 13 practice location in Pasadena. Address and directions."
 ---
 

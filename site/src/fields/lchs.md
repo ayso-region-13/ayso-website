@@ -3,6 +3,9 @@
 title: "La Cañada High School (LCHS)"
 layout: page.njk
 section: fields
+placeAddress: "4463 Oak Grove Dr"
+placeLocality: "La Cañada Flintridge"
+placePostalCode: "91011"
 description: "La Cañada High School fields — AYSO Region 13 game location in La Cañada. Address, parking, and directions."
 ---
 

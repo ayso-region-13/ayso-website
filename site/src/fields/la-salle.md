@@ -3,6 +3,9 @@
 title: "La Salle High School"
 layout: page.njk
 section: fields
+placeAddress: "3880 E Sierra Madre Blvd"
+placeLocality: "Pasadena"
+placePostalCode: "91107"
 description: "La Salle High School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 

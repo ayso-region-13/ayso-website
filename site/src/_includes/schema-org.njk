@@ -1,0 +1,137 @@
+{# ── Schema.org JSON-LD ──────────────────────────────────────────────
+   Site-wide structured data. Emits whichever schema blocks apply to
+   the current page based on URL, layout, and front matter:
+
+   - Homepage: SportsOrganization + WebSite
+   - Field pages (section: fields, with placeAddress front matter): Place
+   - Ask the Referee: FAQPage (built from collections.qaAnswers)
+   - Every other page rendered via page.njk: BreadcrumbList
+─────────────────────────────────────────────────────────────────── #}
+
+{# Pre-compute sectionNav for breadcrumbs (mirrors page.njk logic). #}
+{% set sectionNav = null %}
+{% for navItem in navigation %}
+  {% if page.url | isActiveSection(navItem.url) %}
+    {% set sectionNav = navItem %}
+  {% endif %}
+{% endfor %}
+
+{% if page.url == "/" %}
+{# ── Homepage: SportsOrganization + WebSite ──────────────────────── #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SportsOrganization",
+      "@id": "{{ site.url }}/#org",
+      "name": "AYSO Region 13",
+      "alternateName": "American Youth Soccer Organization Region 13",
+      "url": "{{ site.url }}",
+      "logo": "{{ site.url }}/images/logo.svg",
+      "email": "{{ site.email }}",
+      "telephone": "+1-{{ site.phone }}",
+      "foundingDate": "{{ site.founded }}",
+      "description": {{ site.description | dump | safe }},
+      "sport": "Soccer",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "711 W. Woodbury Rd., Unit E",
+        "addressLocality": "Altadena",
+        "addressRegion": "CA",
+        "postalCode": "91001",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        { "@type": "City", "name": "Pasadena" },
+        { "@type": "City", "name": "Altadena" },
+        { "@type": "City", "name": "La Cañada Flintridge" }
+      ],
+      "memberOf": {
+        "@type": "SportsOrganization",
+        "name": "American Youth Soccer Organization",
+        "url": "https://www.ayso.org"
+      },
+      "sameAs": [
+        "https://www.ayso.org"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "name": "AYSO Region 13",
+      "url": "{{ site.url }}",
+      "publisher": { "@id": "{{ site.url }}/#org" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ site.url }}/search/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+{% endif %}
+
+{% if sectionNav and page.url != "/" %}
+{# ── Inner pages: BreadcrumbList ─────────────────────────────────── #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+    { "@type": "ListItem", "position": 2, "name": {{ sectionNav.label | dump | safe }}, "item": "{{ site.url }}{{ sectionNav.url }}" }{% if page.url != sectionNav.url %},
+    { "@type": "ListItem", "position": 3, "name": {{ title | dump | safe }}, "item": "{{ site.url }}{{ page.url }}" }{% endif %}
+  ]
+}
+</script>
+{% endif %}
+
+{% if section == "fields" and placeAddress %}
+{# ── Field pages: Place schema (requires placeAddress / placeLocality / placePostalCode in front matter) ─ #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Place",
+  "name": {{ title | dump | safe }},
+  "url": "{{ site.url }}{{ page.url }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": {{ placeAddress | dump | safe }},
+    "addressLocality": {{ placeLocality | default("Pasadena") | dump | safe }},
+    "addressRegion": "CA",
+    "postalCode": {{ placePostalCode | default("") | dump | safe }},
+    "addressCountry": "US"
+  }
+}
+</script>
+{% endif %}
+
+{% if page.url == "/referees/ask-the-referee/" and collections.qaAnswers %}
+{# ── Ask the Referee: FAQPage ────────────────────────────────────── #}
+{# Note: Google removed FAQ rich results for non-government/health sites
+   in Aug 2023, but FAQPage is still parsed by AI/LLM citation systems
+   (Perplexity, ChatGPT search, Google AI Overviews). #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {%- for item in collections.qaAnswers %}
+    {
+      "@type": "Question",
+      "name": {{ item.data.question | dump | safe }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ item.templateContent | striptags | dump | safe }}
+      }
+    }{% if not loop.last %},{% endif -%}
+    {%- endfor %}
+  ]
+}
+</script>
+{% endif %}

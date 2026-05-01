@@ -2,6 +2,9 @@
 title: "Cornishon Field"
 layout: page.njk
 section: fields
+placeAddress: "4400 Cornishon Ave"
+placeLocality: "La Cañada Flintridge"
+placePostalCode: "91011"
 description: "Cornishon field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
 ---
 

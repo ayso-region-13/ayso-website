@@ -3,6 +3,9 @@
 title: "Muir High School"
 layout: page.njk
 section: fields
+placeAddress: "1905 Lincoln Ave"
+placeLocality: "Pasadena"
+placePostalCode: "91103"
 description: "Muir High School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 

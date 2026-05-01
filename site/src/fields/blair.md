@@ -3,6 +3,9 @@
 title: "Blair High School"
 layout: page.njk
 section: fields
+placeAddress: "1301 S Marengo Ave"
+placeLocality: "Pasadena"
+placePostalCode: "91106"
 description: "Blair High School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 ---
 
