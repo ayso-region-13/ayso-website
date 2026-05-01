@@ -87,6 +87,20 @@
     @apply hidden;
   }
 
+  /* Home-page prose variant: dark headings (the about section sits next to
+     a dark "About AYSO Region 13" heading rendered by the layout, so the
+     markdown body's h2/h3 inherit that voice instead of the brand-red-dark
+     used elsewhere). Also strips the H1 and intro paragraph from the
+     markdown body since the layout handles those. */
+  .prose-home > h1:first-child,
+  .prose-home > p:first-of-type:has(+ hr) {
+    @apply hidden;
+  }
+  .prose-home h2,
+  .prose-home h3 {
+    @apply text-brand-dark;
+  }
+
   /* Nav dropdown */
   .nav-dropdown {
     @apply absolute top-full left-0 min-w-56 bg-white shadow-2xl border-t-2 border-black z-50
