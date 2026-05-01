@@ -7,7 +7,7 @@ heroImage: "game-01.jpg"
 description: "Sunday Soccer offers weekly skills training and a goalkeeper academy for Region 13 players. Open to all skill levels."
 ---
 
-![Sunday Soccer session at Region 13](/images/game-04.jpg)
+![Sunday Soccer session at Region 13](/images/sunday-soccer-interior.jpg)
 
 ## Quick Facts
 

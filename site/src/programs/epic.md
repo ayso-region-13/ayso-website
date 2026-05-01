@@ -6,7 +6,7 @@ section: programs
 description: "EPIC (Everyone Plays in the Community) pairs players who need field assistance with volunteer buddies for a fully inclusive soccer experience."
 ---
 
-![EPIC players at Region 13](/images/action-03.jpg)
+![EPIC players at Region 13](/images/epic-interior.jpg)
 
 ## Quick Facts
 

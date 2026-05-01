@@ -6,8 +6,6 @@ section: parents
 description: "How to be a supportive AYSO parent. Tips for positive sideline behavior and helping your child enjoy and develop through soccer."
 ---
 
-[IMAGE: Parent and child walking to soccer field together]
-
 ## Before the Game
 
 ### Setting the Tone

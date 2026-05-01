@@ -72,6 +72,11 @@ layout: base.njk
          loading="lazy">
   </div>
 
+  {# Dark gradient overlay — darkens the left side where the headline sits so
+     contrast against the white/70 and red-dark/75 text blocks stays above
+     WCAG AA regardless of which of the 5 random hero photos loads. #}
+  <div class="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent pointer-events-none" aria-hidden="true"></div>
+
   {# Hero content #}
   <div class="relative max-w-screen-xl mx-auto px-4 py-16 md:py-20 flex flex-col justify-center min-h-[560px]">
     <h1 class="font-extrabold leading-[1] tracking-tight mb-8 flex flex-col items-start gap-1">
@@ -135,11 +140,11 @@ layout: base.njk
     </div>
 
     {% set programs = [
+      { name: "Spring Soccer",   sub: "6U–19U",                    url: "/programs/spring-soccer/",  img: "home/tile_spring.jpg" },
       { name: "Fall Soccer",     sub: "6U–14U · Core Program",     url: "/programs/fall-soccer/",    img: "home/tile_core.jpg" },
       { name: "Pre-School",      sub: "4U/5U",                     url: "/programs/preschool/",      img: "home/tile_preschool.jpg" },
       { name: "Upper Division",  sub: "16U–19U",                   url: "/programs/upper-division/", img: "home/tile_upper.jpg" },
       { name: "All-Stars",       sub: "Select Competitive Play",   url: "/programs/all-stars/",      img: "home/tile_allstars.jpg" },
-      { name: "Grad Series",     sub: "8u Transitional",           url: "/programs/grad-series/",    img: "home/tile_grad.jpg" },
       { name: "EPIC",            sub: "Inclusion Program",         url: "/programs/epic/",           img: "home/tile_epic.jpg" }
     ] %}
 
@@ -177,7 +182,7 @@ layout: base.njk
           <img src="/images/logo.svg" alt="" class="h-20 w-20 shrink-0" aria-hidden="true" loading="lazy">
           <h2 class="text-2xl md:text-3xl font-extrabold text-brand-dark uppercase tracking-tight">About AYSO Region 13</h2>
         </div>
-        <div class="prose max-w-none">
+        <div class="prose prose-home max-w-none">
           {{ content | safe }}
         </div>
       </div>
@@ -232,10 +237,3 @@ layout: base.njk
 {% include "sponsors-strip.njk" %}
 #}
 
-<style>
-  /* Home page: hide the H1 and first HR from markdown content since the about heading handles those */
-  .prose > h1:first-child,
-  .prose > p:first-of-type:has(+ hr) { display: none; }
-  /* Home page prose headings stay dark — values match brand-dark and Tailwind gray-200 */
-  .prose h2, .prose h3 { color: #221f1f; border-color: #e5e7eb; }
-</style>

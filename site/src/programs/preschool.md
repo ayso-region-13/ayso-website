@@ -9,7 +9,7 @@ description: "Preschool soccer for children ages 3–5 (4U and 5U). A fun, age-a
 
 The Preschool program introduces children ages 4-5 to soccer through play and motor skill development.
 
-![Young players in the preschool program](/images/action-05.jpg)
+![Young players in the preschool program](/images/preschool-interior.jpg)
 
 ## Quick Facts
 

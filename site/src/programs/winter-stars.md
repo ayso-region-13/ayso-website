@@ -9,7 +9,7 @@ description: "Winter Stars is Region 13's winter soccer program for returning Fa
 
 Winter Stars is an 8-week program offering skills training and small-sided games for players ages 6 and up during the winter months.
 
-![Winter Stars practice session](/images/grad-series-01.jpg)
+![Winter Stars practice session](/images/winter-stars-interior.jpg)
 
 ## Quick Facts
 
