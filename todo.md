@@ -21,6 +21,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [x] IMAGE placeholders on `parents/pledge` and `parents/support` — removed (no source photos available)
 - [ ] Full content review pass on staging.ayso13.org (board members)
 - [ ] **Each season, update season-specific schedules** — `/programs/next/` (per-division day/time/field once Spond groups are set) and `/programs/preschool/` (exact start date and location before August). Generalized for now to avoid stale 2025 data.
+- [ ] **Fill in field facility info** — Pages CMS now exposes `parking`, `restrooms`, `surface`, `lighting`, and `snackBar` fields on every field page. When populated, they render as a "Field Info" callout at the top of the page. Priority pages (most visited on game days): Victory Park, Blair, McKinley, LCHS, Muir, La Salle. Fields coordinator (Jessica Ferree, fields@ayso13.org) and practice fields coordinator (Rolf Mauermann, rolf@ayso13.org) have the operational knowledge.
 
 
 ### Pre-Launch
