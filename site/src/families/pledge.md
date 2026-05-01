@@ -2,7 +2,7 @@
 
 title: "Kids Zone"
 layout: page.njk
-section: parents
+section: families
 description: "The AYSO Kids Zone — how families, coaches, and spectators behave at Region 13 games. Adapted from AYSO National's Kids Zone Pledge."
 ---
 
@@ -74,8 +74,8 @@ The Kids Zone Pledge is an [AYSO National program](https://ayso.org/the-kids-zon
 
 ## Related Pages
 
-- [Being a Supportive Parent](/parents/support) — Tips for before, during, and after games
-- [Getting Started](/parents/) — Overview for new families
-- [Your Child's Team](/parents/team) — Game day basics
+- [Sideline Behavior](/families/support) — Tips for before, during, and after games
+- [Getting Started](/families/) — Overview for new families
+- [Your Child's Team](/families/team) — Game day basics
 
 *Last updated: [DATE]*

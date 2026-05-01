@@ -8,7 +8,7 @@ description: "AYSO Region 13 document library — forms, handbooks, training mat
 
 ## Parent Forms
 
-- Kids Zone — see [/parents/pledge/](/parents/pledge/)
+- Kids Zone — see [/families/pledge/](/families/pledge/)
 - Concussion Information Sheet
 - Sudden Cardiac Arrest Information Sheet
 

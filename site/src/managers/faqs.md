@@ -51,7 +51,7 @@ Makeup photo sessions are scheduled. The Picture Day Coordinator will provide da
 ### What does each family acknowledge at registration?
 - Concussion Information Sheet
 - Sudden Cardiac Arrest Information Sheet
-- The AYSO [Kids Zone](/parents/pledge/) — ten standards for behavior at games and events
+- The AYSO [Kids Zone](/families/pledge/) — ten standards for behavior at games and events
 
 ### How do I upload team photos?
 Use the team-specific link provided by the organization.

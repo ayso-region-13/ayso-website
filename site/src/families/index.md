@@ -4,12 +4,12 @@ description: "New to AYSO? Learn how to get started with Region 13 soccer:
   registration, equipment, game days, and what to expect as a first-time soccer
   family."
 layout: page.njk
-section: parents
-permalink: /parents/
+section: families
+permalink: /families/
 ---
 Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization serving Pasadena, La Cañada, Altadena, and surrounding communities.
 
-![Players of various ages at Region 13](/images/parents-interior.jpg)
+![Players of various ages at Region 13](/images/families-interior.jpg)
 
 ## Quick Facts
 
@@ -44,7 +44,7 @@ Scholarships: Region 13 uses a "pay what you can" model - no child is turned awa
 - End-of-season participation award
 - Insurance coverage during AYSO activities
 
-You provide: Soccer shoes (sneakers are fine) and shin guards. See our [equipment guide](/parents/equipment) for recommendations.
+You provide: Soccer shoes (sneakers are fine) and shin guards. See our [equipment guide](/families/equipment) for recommendations.
 
 ## Age Groups and Divisions
 
@@ -157,10 +157,10 @@ Questions? Contact us at [registrar@ayso13.org](mailto:registrar@ayso13.org) or 
 
 ## Related Pages
 
-- [Equipment Guide](/parents/equipment): What to buy and what's provided
+- [Equipment Guide](/families/equipment): What to buy and what's provided
 - [Age Divisions](/register/age-chart/): Exact birth date cutoffs
 - [Field Map](/fields): Where we play
 - [Volunteer Training](/volunteers/classes): Coach and referee certification
-- [Kids Zone](/parents/pledge/): How families show up at Region 13 games
+- [Kids Zone](/families/pledge/): How families show up at Region 13 games
 
 *Last updated: [DATE]*

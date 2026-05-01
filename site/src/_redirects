@@ -4,12 +4,12 @@
 # Each old URL is listed with and without trailing slash for safety.
 
 # ── Home & registration ───────────────────────────────────────────────────
-/play/                          /parents/                                       301
-/play                           /parents/                                       301
+/play/                          /families/                                       301
+/play                           /families/                                       301
 /pen/                           /register/                                      301
 /pen                            /register/                                      301
-/fb/                            /parents/                                       301
-/fb                             /parents/                                       301
+/fb/                            /families/                                       301
+/fb                             /families/                                       301
 /lc/                            /register/                                      301
 /lc                             /register/                                      301
 /age/                           /register/age-chart/                            301
@@ -141,17 +141,31 @@
 /rain-cancellation-plan-november-15-16-2025/    /schedules/                     301
 /rain-cancellation-plan-november-15-16-2025     /schedules/                     301
 
-# ── Parents ───────────────────────────────────────────────────────────────
-/team/                          /parents/team/                                  301
-/team                           /parents/team/                                  301
-/uniform/                       /parents/equipment/                             301
-/uniform                        /parents/equipment/                             301
-/equipment-guide/               /parents/equipment/                             301
-/equipment-guide                /parents/equipment/                             301
-/pledge/                        /parents/pledge/                                301
-/pledge                         /parents/pledge/                                301
-/ideas-for-being-a-supportive-ayso-parent/      /parents/support/               301
-/ideas-for-being-a-supportive-ayso-parent       /parents/support/               301
+# ── Families (was Parents) ────────────────────────────────────────────────
+# Old WP shortcuts
+/team/                          /families/team/                                  301
+/team                           /families/team/                                  301
+/uniform/                       /families/equipment/                             301
+/uniform                        /families/equipment/                             301
+/equipment-guide/               /families/equipment/                             301
+/equipment-guide                /families/equipment/                             301
+/pledge/                        /families/pledge/                                301
+/pledge                         /families/pledge/                                301
+/ideas-for-being-a-supportive-ayso-parent/      /families/support/               301
+/ideas-for-being-a-supportive-ayso-parent       /families/support/               301
+# Section rename Parents → Families (May 2026)
+/parents/                       /families/                                       301
+/parents                        /families/                                       301
+/parents/team/                  /families/team/                                  301
+/parents/team                   /families/team/                                  301
+/parents/equipment/             /families/equipment/                             301
+/parents/equipment              /families/equipment/                             301
+/parents/pledge/                /families/pledge/                                301
+/parents/pledge                 /families/pledge/                                301
+/parents/faqs/                  /families/faqs/                                  301
+/parents/faqs                   /families/faqs/                                  301
+/parents/support/               /families/support/                               301
+/parents/support                /families/support/                               301
 
 # ── Coaches ───────────────────────────────────────────────────────────────
 /coach/                         /coaches/                                       301

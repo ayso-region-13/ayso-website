@@ -116,8 +116,8 @@ Coaches and referees attend training classes (typically 4 hours). See [training 
 
 ## Related Pages
 
-- [Getting Started](/parents/) — Overview for new families
-- [Equipment Guide](/parents/equipment) — What to buy
+- [Getting Started](/families/) — Overview for new families
+- [Equipment Guide](/families/equipment) — What to buy
 - [Age Divisions](/register/age-chart/) — Birth date cutoffs
 - [Volunteer Training](/volunteers/classes) — Coach and referee certification
 - [NEXT](/programs/next) — Advanced training supplement

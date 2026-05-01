@@ -2,7 +2,7 @@
 
 title: "Equipment and Uniforms"
 layout: page.njk
-section: parents
+section: families
 description: "What your child needs to play soccer in Region 13: cleats, shin guards, uniform, and ball requirements by age group."
 ---
 
@@ -131,7 +131,7 @@ Don't need:
 
 ## Related Pages
 
-- [Getting Started](/parents/) — Overview for new families
+- [Getting Started](/families/) — Overview for new families
 - [Age Divisions](/register/age-chart/) — Ball sizes by division
 - [Volunteer Training](/volunteers/classes) — Coach shirt pickup
 

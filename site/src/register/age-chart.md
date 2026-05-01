@@ -80,6 +80,6 @@ Requests to play up in the next higher division are considered on a case-by-case
 
 - [Registration](/register/) — How to register
 - [Programs](/programs/) — Program descriptions
-- [Equipment](/parents/equipment/) — What to bring
+- [Equipment](/families/equipment/) — What to bring
 
 *Last updated: [DATE]*

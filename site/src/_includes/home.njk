@@ -15,7 +15,7 @@ layout: base.njk
         <svg class="w-6 h-6 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         <span class="text-xs font-bold uppercase tracking-wider">Field Locations</span>
       </a>
-      <a href="/parents/" class="flex flex-col items-center gap-1 py-4 px-3 text-white hover:bg-black/20 transition-colors text-center">
+      <a href="/families/" class="flex flex-col items-center gap-1 py-4 px-3 text-white hover:bg-black/20 transition-colors text-center">
         <svg class="w-6 h-6 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         <span class="text-xs font-bold uppercase tracking-wider">New Families</span>
       </a>
@@ -218,7 +218,7 @@ layout: base.njk
         <h2 class="text-xl font-bold text-white mb-4">I'm a soccer…</h2>
         <div class="flex flex-col gap-2">
           {% set roles = [
-            { label: "Parent",       url: "/parents/"    },
+            { label: "Parent/Guardian", url: "/families/" },
             { label: "Coach",        url: "/coaches/"    },
             { label: "Referee",      url: "/referees/"   },
             { label: "Team Manager", url: "/managers/"   },

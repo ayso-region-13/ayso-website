@@ -14,7 +14,7 @@ module.exports = {
     resources:  "about-interior.jpg",
     coaches:    "coaches-interior.jpg",
     referees:   "referees-interior.jpg",
-    parents:    "parents-interior.jpg",
+    families:   "families-interior.jpg",
     managers:   "team-interior.jpg",
     volunteers: "team-interior.jpg",
   },

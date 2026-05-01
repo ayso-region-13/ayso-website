@@ -19,11 +19,11 @@ Region 13 follows the AYSO Kids Zone — a national program that sets ten standa
 - Leave no trash behind
 - Celebrate the player — win or lose
 
-See the full [Kids Zone](/parents/pledge/).
+See the full [Kids Zone](/families/pledge/).
 
 ## Health and Safety Disclosures
 
-California state law requires that parents receive information on:
+California state law requires that parents and guardians receive information on:
 - Sudden cardiac arrest
 - Concussions
 - Prescription opioids
@@ -65,12 +65,12 @@ Participants and guardians release AYSO, facilities, sponsors, and volunteers fr
 
 - AYSO National player fees are non-refundable
 - Regional fees may be refundable until the first scheduled event, per regional specifications
-- See [Getting Started](/parents/) for Region 13's specific refund schedule
+- See [Getting Started](/families/) for Region 13's specific refund schedule
 
 ## Related Pages
 
 - [Policies](/about/policies) — Safety and conduct policies
-- [Kids Zone](/parents/pledge/) — Sideline conduct expectations
+- [Kids Zone](/families/pledge/) — Sideline conduct expectations
 - [Safety](/resources/safety) — Safety information and incident reporting
 
 *Last updated: [DATE]*

@@ -20,7 +20,7 @@ Work with the coach to identify and designate team volunteers (manager and refer
 Confirm each family has acknowledged the required items at registration:
 - Concussion Information Sheet
 - Sudden Cardiac Arrest Information Sheet
-- AYSO [Kids Zone](/parents/pledge/)
+- AYSO [Kids Zone](/families/pledge/)
 
 Upload team photos via the team-specific link.
 

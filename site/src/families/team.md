@@ -2,8 +2,8 @@
 
 title: "Your Child's Team"
 layout: page.njk
-section: parents
-description: "Information for Region 13 parents about your child's team — rosters, practice schedules, and communicating with your coach and team manager."
+section: families
+description: "Information for Region 13 families about your child's team — rosters, practice schedules, and communicating with your coach and team manager."
 ---
 
 ![Region 13 team with coach](/images/team-interior.jpg)
@@ -61,7 +61,7 @@ Game times are typically Saturday mornings. Exact times vary by division:
 - [ ] Your child in their full uniform
 - [ ] Water bottle
 - [ ] Snacks for after the game
-- [ ] Folding chair or blanket for parents
+- [ ] Folding chair or blanket for family members
 - [ ] Weather gear (sunscreen, hat, jacket depending on conditions)
 
 ### Arrival Time
@@ -96,7 +96,7 @@ Practices usually run 60-75 minutes and include:
 - Scrimmages (practice games)
 - Cool-down
 
-Parents are welcome to watch but are asked to stay on the sidelines and let the coach run practice.
+Family members are welcome to watch but are asked to stay on the sidelines and let the coach run practice.
 
 ### Missing Practice
 
@@ -155,7 +155,7 @@ Most teams organize an end-of-season party to celebrate the season and receive p
 
 - [Game Schedules](/schedules) — Full season schedule
 - [Field Map](/fields) — All practice and game field locations
-- [Getting Started](/parents/) — Overview for new families
-- [Being a Supportive Parent](/parents/support) — Tips for game day
+- [Getting Started](/families/) — Overview for new families
+- [Sideline Behavior](/families/support) — Tips for game day
 
 *Last updated: [DATE]*

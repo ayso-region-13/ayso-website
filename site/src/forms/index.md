@@ -45,7 +45,7 @@ if (window.location.search.indexOf('ID=') !== -1) showApp();
 If you still need the printable versions:
 
 - [Concussion & SCA Forms (PDF)](/assets/docs/concussion-sca-forms.pdf)
-- [Kids Zone (no signature required — community standards)](/parents/pledge/)
+- [Kids Zone (no signature required — community standards)](/families/pledge/)
 
 ## Related Pages
 

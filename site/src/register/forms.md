@@ -13,7 +13,7 @@ Parents complete required forms during registration and at the start of each sea
 The following are required for each player at registration:
 
 ### Kids Zone
-Region 13 follows AYSO's Kids Zone — ten standards for behavior at games and events. See [/parents/pledge/](/parents/pledge/).
+Region 13 follows AYSO's Kids Zone — ten standards for behavior at games and events. See [/families/pledge/](/families/pledge/).
 
 ### Concussion Information Sheet
 Concussion risks and removal protocols. Required by California law.
