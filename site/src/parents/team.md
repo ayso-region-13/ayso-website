@@ -6,7 +6,7 @@ section: parents
 description: "Information for Region 13 parents about your child's team — rosters, practice schedules, and communicating with your coach and team manager."
 ---
 
-![Region 13 team with coach](/images/game-06.jpg)
+![Region 13 team with coach](/images/team-interior.jpg)
 
 ## How You'll Find Out Your Team
 

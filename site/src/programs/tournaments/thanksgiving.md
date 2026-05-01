@@ -8,7 +8,7 @@ description: "The Region 13 Thanksgiving Tournament is an annual AYSO soccer tou
 
 The Thanksgiving Tournament is a three-day competition held the weekend after Thanksgiving for 10U, 12U, and 14U teams.
 
-![Thanksgiving Tournament game action](/images/game-02.jpg)
+![Thanksgiving Tournament game action](/images/thanksgiving-interior.jpg)
 
 ## Quick Facts
 

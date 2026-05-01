@@ -9,7 +9,7 @@ description: "Spring Soccer is Region 13's recreational spring program. Open reg
 
 Spring Soccer offers league play from March through May for players who want more soccer after the fall and winter seasons.
 
-![Spring soccer game at Region 13](/images/game-05.jpg)
+![Spring soccer game at Region 13](/images/spring-soccer-interior.jpg)
 
 ## Quick Facts
 

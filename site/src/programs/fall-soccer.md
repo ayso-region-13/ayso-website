@@ -7,7 +7,7 @@ heroImage: "action-02.jpg"
 description: "Fall Soccer is Region 13's core recreational program for players ages 6–14. Teams practice weekly and play games on Saturdays, September through mid-November."
 ---
 
-![Fall soccer game at Region 13](/images/fall-game-01.jpg)
+![Fall soccer game at Region 13](/images/fall-soccer-interior.jpg)
 
 ## Quick Facts
 

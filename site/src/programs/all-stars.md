@@ -9,7 +9,7 @@ heroImage: all-stars-01.jpg
 
 All-Stars is a competitive winter program for advanced players in 10U, 12U, and 14U. Teams represent Region 13 in tournaments against other AYSO regions.
 
-![](/images/fall-game-05.jpg)
+![](/images/all-stars-interior.jpg)
 
 ## Quick Facts
 

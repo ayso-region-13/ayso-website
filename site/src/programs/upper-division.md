@@ -7,7 +7,7 @@ heroImage: "action-03.jpg"
 description: "Upper Division soccer for players ages 15–19 (16U and 19U) in the Pasadena area. Schedules designed to avoid conflicts with high school soccer."
 ---
 
-![Upper Division players in action](/images/action-01.jpg)
+![Upper Division players in action](/images/upper-division-interior.jpg)
 
 ## Quick Facts
 

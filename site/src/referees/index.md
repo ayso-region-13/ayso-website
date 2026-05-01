@@ -9,6 +9,8 @@ description: "Volunteer refereeing in AYSO Region 13. Help make games happen —
 
 AYSO depends on parent volunteers to referee games. Without referees, games cannot be played.
 
+![Referee at Region 13](/images/referees-interior.jpg)
+
 ## Why Referee
 
 Referees make youth soccer possible. As a referee, you:
