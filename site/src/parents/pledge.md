@@ -10,8 +10,6 @@ AYSO Kids Zone is a national program that asks everyone at the field — players
 
 Kids Zone isn't something you sign. It's how we show up at every game.
 
-[IMAGE: Parents watching from sideline]
-
 ## The Ten Guidelines
 
 The AYSO National Kids Zone Pledge sets ten standards for behavior on and around the field:
