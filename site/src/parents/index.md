@@ -1,12 +1,12 @@
 ---
-
-title: "Getting Started with AYSO Region 13"
+title: Getting Started with AYSO Region 13
+description: "New to AYSO? Learn how to get started with Region 13 soccer:
+  registration, equipment, game days, and what to expect as a first-time soccer
+  family."
 layout: page.njk
 section: parents
-permalink: "/parents/"
-description: "New to AYSO? Learn how to get started with Region 13 soccer: registration, equipment, game days, and what to expect as a first-time soccer family."
+permalink: /parents/
 ---
-
 Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization serving Pasadena, La Cañada, Altadena, and surrounding communities.
 
 ![Players of various ages at Region 13](/images/parents-interior.jpg)
@@ -22,17 +22,19 @@ Welcome to AYSO Region 13. We're a volunteer-run youth soccer organization servi
 
 Registration typically opens May 1 each year. Earlier registration costs less:
 
+
 | Timeframe | Cost |
-|-----------|------|
-{%- for tier in fees.fall.tiers %}
+| ---------------------------------- | ----------------- |
+| {%- for tier in fees.fall.tiers %} |  |
 | {{ tier.label }} | {{ tier.amount }} |
-{%- endfor %}
+| {%- endfor %} |  |
+
 
 Sibling discount: {{ fees.fall.siblingDiscount }}.
 
 Scholarships: No child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) confidentially.
 
-<a href="https://ayso13.inleague.com/app" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">Register on InLeague</a>
+[Register on InLeague](https://ayso13.inleague.com/app)
 
 ### What's Included in Registration
 
@@ -48,8 +50,9 @@ You provide: Soccer shoes (sneakers are fine) and shin guards. See our [equipmen
 
 Children are placed in divisions based on their age as of July 31 of the current year:
 
+
 | Division | Ages | Format |
-|----------|------|--------|
+| ----------------- | ----- | --------------------------------------------------------- |
 | 4U/5U (Preschool) | 4-5 | Small-sided games, learning basics |
 | 6U | 6 | 4v4, no goalkeepers |
 | 8U | 7-8 | 4v4, no goalkeepers |
@@ -58,14 +61,15 @@ Children are placed in divisions based on their age as of July 31 of the current
 | 14U | 13-14 | 11v11 (full field) |
 | 16U/19U | 15-19 | 11v11, [Upper Division program](/programs/upper-division) |
 
+
 Check the [age chart](/register/age-chart/) for exact birth date cutoffs.
 
 ## The Volunteer Requirement
 
 AYSO runs entirely on parent volunteers. When you register your child, you'll be asked to volunteer as either a:
 
-- Coach: Lead practices and games (training provided, no experience needed)
-- Referee: Officiate games (training provided, no experience needed)
+- **Coach**: Lead practices and games (training provided, no experience needed)
+- **Referee**: Officiate games (training provided, no experience needed)
 
 No soccer experience is required. Our training classes cover everything you need to know.
 
@@ -74,28 +78,34 @@ Other volunteer opportunities include team manager, field host, and snack coordi
 ## How Teams Are Formed
 
 ### Younger Divisions (6U-8U)
+
 Teams are organized by school or neighborhood when possible. This helps kids play with friends and makes carpooling easier.
 
 ### Older Divisions (10U and up)
+
 Teams are formed through a blind draw process based on player skill ratings to create balanced teams.
 
-You can request that your child be placed with a specific friend or carpool partner during registration. We accommodate requests when possible but cannot guarantee them.
+You can request that your child be placed with a specific friend or carpool partner during registration. We accommodate requests when possible, but cannot guarantee them.
 
 ## What to Expect
 
 ### Before the Season
+
 1. Register (May-August)
-2. Complete volunteer training (July-August): [see training classes](/volunteers/classes)
+2. Complete volunteer training (July-August): **[see training classes](/volunteers/classes)**
 3. Attend team meeting: Your coach will reach out with details
 4. Pick up uniforms: Dates announced via email
 
 ### During the Season
+
 - Practices: One weeknight per week (day/time set by your coach)
 - Games: Saturday mornings at one of our [local fields](/fields)
 - Season length: 8-10 weeks
 
 ### Communication
-Your team manager and coach will communicate via email and often a team app. Watch for:
+
+Your team manager and coach will communicate via email and often via a team app. Watch for:
+
 - Practice schedule and location
 - Game times and field assignments
 - Weather cancellations
@@ -105,14 +115,16 @@ Your team manager and coach will communicate via email and often a team app. Wat
 
 Fall soccer is our main program, but we offer others throughout the year:
 
+
 | Program | When | Who It's For |
-|---------|------|--------------|
+| ---------------------------------------- | ------ | --------------------------------- |
 | [Preschool](/programs/preschool) | Fall | Ages 4-5 |
 | [NEXT](/programs/next) | Fall | Advanced players, 10U-14U |
 | [Grad Series](/programs/grad-series) | Winter | 8U graduates transitioning to 10U |
 | [Winter Stars](/programs/winter-stars) | Winter | All returning players |
 | [Spring Soccer](/programs/spring-soccer) | Spring | Open registration |
 | [EPIC](/programs/epic) | Fall | Children with special needs |
+
 
 See all [programs](/programs) for details.
 
@@ -138,7 +150,7 @@ AYSO is recreational and inclusive: everyone plays, teams are balanced. Club soc
 
 ## Ready to Register?
 
-<a href="https://ayso13.inleague.com/app" class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener">Register on InLeague</a>
+[Register on InLeague](https://ayso13.inleague.com/app)
 
 Questions? Contact us at [registrar@ayso13.org](mailto:registrar@ayso13.org) or visit our [contact page](/contact).
 
