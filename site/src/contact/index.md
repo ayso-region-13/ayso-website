@@ -10,14 +10,18 @@ description: "Contact AYSO Region 13. Phone, email, and mailing address for the 
 ## General Contact
 
 - Email: [info@ayso13.org](mailto:info@ayso13.org)
-- Phone: 626-316-6900
-- Game-day emergencies: 626-702-AYSO
+- Phone: [626-316-6900](tel:6263166900)
+- Game-day emergencies: [626-702-AYSO](tel:6267022976)
 
 ## Mailing Address
 
 AYSO Region 13
 711 W. Woodbury Rd., Unit E
 Altadena, CA 91001
+
+## Service Area
+
+We serve players in Pasadena, Altadena, La Cañada Flintridge, and surrounding communities — ZIP codes 91001, 91011, 91101, 91103, 91104, 91105, 91106, 91107, and 91108.
 
 ## Department Contacts
 
