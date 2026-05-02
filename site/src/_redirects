@@ -431,6 +431,8 @@
 /refund/                        /register/                                      301
 /registration                   /register/                                      301
 /registration/                  /register/                                      301
+/status                         https://status.ayso13.org/                      301
+/status/                        https://status.ayso13.org/                      301
 /archive                        /                                               301
 /archive/                       /                                               301
 /thanksgiving-tournament-new    /programs/tournaments/thanksgiving/             301
