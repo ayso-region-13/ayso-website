@@ -8,7 +8,7 @@ description: "Register your child for AYSO Region 13 fall soccer in Pasadena. Op
 ---
 
 <div class="not-prose my-6 bg-brand-cream border-l-4 border-brand-red-dark p-5 rounded-r-lg">
-  <p class="font-semibold text-brand-red-dark text-lg mb-1">Fall 2026 registration is open</p>
+  <h2 class="font-semibold text-brand-red-dark text-lg mb-1">Fall 2026 registration is open</h2>
   <p class="text-brand-dark mb-3">Register by <strong>May 31</strong> to pay <strong>$220</strong>. The price goes up to $235 in June and $250 in July.</p>
   <a href="https://ayso13.inleague.com/app" target="_blank" rel="noopener" class="inline-block bg-brand-red-dark hover:bg-brand-maroon text-white font-semibold px-6 py-3 rounded-lg transition-colors">Register on InLeague</a>
 </div>
