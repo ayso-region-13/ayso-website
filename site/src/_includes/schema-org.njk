@@ -23,7 +23,7 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "SportsOrganization",
+      "@type": ["SportsOrganization", "NonprofitOrganization"],
       "@id": "{{ site.url }}/#org",
       "name": "AYSO Region 13",
       "alternateName": "American Youth Soccer Organization Region 13",
@@ -34,6 +34,8 @@
       "foundingDate": "{{ site.founded }}",
       "description": {{ site.description | dump | safe }},
       "sport": "Soccer",
+      "nonprofitStatus": "https://schema.org/Nonprofit501c3",
+      "taxID": "95-6205398",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "711 W. Woodbury Rd., Unit E",
