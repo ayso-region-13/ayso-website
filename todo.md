@@ -24,7 +24,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [ ] **Expand 13 short Q&As + rebalance Offside category** — 13 of 34 Q&As are under 100 words (below citation threshold for AI engines). Goalkeeper has 15 questions; Offside (most-searched topic) has only 5. Coordinate with Steve to expand short answers to 134+ words and add 5–8 more Offside questions covering AYSO age-group modifications. Skipped in 2026-05-02 audit — Steve's call.
 
 ### Post-Launch (this week)
-- [ ] Announce launch internally
+- [x] Announce launch internally — completed 2026-05-02
 - [x] **Monitor 404s** — Cloudflare zone analytics → Traffic. Free plan blocks the status-code panel in the dashboard, so use `site/scripts/check-404s.sh` (GraphQL Analytics API; ~24h retention). First-day sweep on 2026-05-02 caught and redirected the actionable 404s (apple-touch-icon, /author/brandi/, WP-uploads images/PDFs, /new/* pre-WP paths, /victory-park-with-4u5u-2024-2/). Email Address Obfuscation enabled in zone Scrape Shield.
 - [ ] **Verify or create Google Business Profile** — copy/paste sheet at `gbp-setup.md` (gitignored, root). Includes business name, categories, service area, hours options, 720-char description, services list, photo upload list, verification options, and 3 seed Google Posts. Manual action — must be done from business.google.com with verified ownership.
 - [x] **Submit sitemap to Google Search Console** — submitted 2026-05-01
