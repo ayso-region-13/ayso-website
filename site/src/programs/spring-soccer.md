@@ -5,9 +5,6 @@ layout: page.njk
 section: programs
 heroImage: "action-06.jpg"
 description: "Spring Soccer is Region 13's recreational spring program. Open registration for all players ages 6–14."
-eventName: "AYSO Region 13 Spring Soccer 2026"
-eventStartDate: "2026-03-07"
-eventEndDate: "2026-05-30"
 ---
 
 Spring Soccer offers league play from March through May for players who want more soccer after the fall and winter seasons.
