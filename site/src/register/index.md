@@ -4,7 +4,7 @@ title: "Registration"
 layout: page.njk
 section: register
 permalink: "/register/"
-description: "Register your child for AYSO Region 13 youth soccer in Pasadena. Player registration opens each season through InLeague."
+description: "Register your child for AYSO Region 13 fall soccer in Pasadena. Open to ages 6–14. No tryouts. Takes about 10 minutes online."
 ---
 
 <div class="not-prose my-6 bg-brand-cream border-l-4 border-brand-red-dark p-5 rounded-r-lg">
