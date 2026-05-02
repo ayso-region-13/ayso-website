@@ -65,6 +65,12 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [x] **llms.txt expanded** — added `## Identity` (region disambiguation), `## Contact` (parseable NAP + EIN + founded year inline), and `## License` (citation/attribution policy).
 - [x] **Ask the Referee title** — hybrid: "Ask the Referee — Youth Soccer Rules Q&A" (preserves brand for nav, adds search keywords for SERP). Nav menu still says just "Ask the Referee" (separate `label` field in navigation.js).
 - [x] **GBP setup doc** at `gbp-setup.md` (gitignored, repo root) — copy/paste sheet for claiming/creating Google Business Profile: business name, categories, service area, hours options, 720-char description, services, photo list, verification, 3 seed Google Posts.
+- [x] **HSTS header** added in `_headers.njk` — `Strict-Transport-Security: max-age=31536000; includeSubDomains`. One year, covers all subdomains (www, staging, status). Preload intentionally skipped (irreversible).
+- [x] **Disable markdown-it (c)/(r)/(tm) auto-replacement** — typographer rule was converting `501(c)(3)` to `501©(3)` on /about/. Site uses ®/™/em-dashes as direct Unicode already, so disabling the rule loses nothing. Smart quotes stay on (separate rule).
+- [x] **Cream-callout pseudo-headings → real H2** — three callouts (Steve Hawkins bio, Become a Referee CTA, Fall 2026 registration callout) were styled `<p class="font-semibold">` elements that screen-reader users navigating by headings would skip. Tailwind preflight resets heading sizes to inherit so the visual is identical. WCAG 1.3.1 / 2.4.6.
+- [x] **Footer Status link target** — dropped `target="_blank"` so status pages take focus when visited (users hitting /status/ usually want it to be the foreground tab). InLeague Login on the same row keeps target=_blank.
+- [x] **fees.json _editorNote** — documents the fee-duplication contract (which pages hardcode the numbers and why) so future editors know to update /register/, /programs/fall-soccer/, and /families/index.md when fees change.
+- [x] **check-404s.sh friendlier auth errors** — surfaces a hint pointing at the API tokens page when CF returns auth-shaped errors, instead of dumping raw JSON.
 
 ### Session 14 (2026-04-30 → 2026-05-01) — LAUNCH NIGHT
 - [x] **Site launched** — DNS cut over to www.ayso13.org with active SSL; apex `ayso13.org` redirects 301 to www
