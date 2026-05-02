@@ -441,6 +441,39 @@
 /faqs/how-are-standings-determined/ /schedules/standings/                       301
 /faqs/how-long-are-the-games    /register/age-chart/                            301
 /faqs/how-long-are-the-games/   /register/age-chart/                            301
+# ── 404 sweep (from CF Analytics, 2026-05-02) ─────────────────────────────
+# Cleanup of inbound dead links from old WP/legacy URLs identified in the
+# first 24h of zone analytics. Stable WP-vintage URLs that still pull
+# real traffic; fold each to its closest current page rather than the home.
+
+# Apple touch icon variants — root file served via passthrough; precomposed
+# is a deprecated alias browsers still occasionally probe.
+/apple-touch-icon-precomposed.png  /apple-touch-icon.png                        301
+
+# Old WP author archive
+/author/brandi/                 /about/leadership/                              301
+/author/brandi                  /about/leadership/                              301
+
+# Hotlinked WP-uploads images
+/wp-content/uploads/2025/12/AYSO-BirthChart.png                       /register/age-chart/  301
+/wp-content/uploads/2025/08/AYSO-Age-Determination-Chart-MY26-MY27.png /register/age-chart/  301
+/wp-content/uploads/AYSO-R13-Logo-266.png                             /images/logo.svg      301
+
+# Hotlinked WP-uploads PDFs (best-fit destinations)
+/wp-content/uploads/2022/07/Intermediate-Coach.pdf                    /coaches/training/    301
+/wp-content/uploads/2022/03/July_2014.pdf                             /about/board-minutes/ 301
+/wp-content/uploads/2024/09/Region-13-Modifications-for-8U-7U-6U-2024.pdf /referees/laws/   301
+
+# Old WP scheduling post for 4U/5U at Victory Park
+/victory-park-with-4u5u-2024-2/ /programs/preschool/                            301
+/victory-park-with-4u5u-2024-2  /programs/preschool/                            301
+
+# Pre-WP `/new/...` paths from the original ayso13.org rebuild
+/new/standings/scores.php       /schedules/                                     301
+/new/includes/about/history.php /about/                                         301
+/new/includes/programs/allstar.php /programs/all-stars/                         301
+/new/*                          /                                               301
+
 # /r — regex ^\/r(?:\/|\?.*)?$ approximated (Cloudflare _redirects has no regex support)
 # Splat rule last — exact matches above take priority and perform better
 /r                              https://ayso13.typeform.com/to/Ah0JFeOp         301

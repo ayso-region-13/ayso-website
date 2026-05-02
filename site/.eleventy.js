@@ -27,6 +27,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/docs");
   eleventyConfig.addPassthroughCopy("src/_redirects");
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
+  // Browsers (esp. iOS Safari) probe /apple-touch-icon.png at the root.
+  eleventyConfig.addPassthroughCopy({ "src/images/apple-touch-icon.png": "apple-touch-icon.png" });
   eleventyConfig.addPassthroughCopy("src/site.webmanifest");
   // IndexNow ownership-verification key. Served at /<key>.txt.
   eleventyConfig.addPassthroughCopy("src/61d4461c23b7dcda89290711860408d3.txt");
