@@ -112,25 +112,40 @@
 {% endif %}
 
 {% if page.url == "/referees/ask-the-referee/" and collections.qaAnswers %}
-{# ── Ask the Referee: FAQPage ────────────────────────────────────── #}
+{# ── Ask the Referee: FAQPage + Person (Steve Hawkins) ───────────── #}
 {# Note: Google removed FAQ rich results for non-government/health sites
    in Aug 2023, but FAQPage is still parsed by AI/LLM citation systems
-   (Perplexity, ChatGPT search, Google AI Overviews). #}
+   (Perplexity, ChatGPT search, Google AI Overviews). The Person entity
+   gives them a named-author signal to anchor citations against. #}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {%- for item in collections.qaAnswers %}
+  "@graph": [
     {
-      "@type": "Question",
-      "name": {{ item.data.question | dump | safe }},
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": {{ item.templateContent | striptags | dump | safe }}
-      }
-    }{% if not loop.last %},{% endif -%}
-    {%- endfor %}
+      "@type": "Person",
+      "@id": "{{ site.url }}/#steve-hawkins",
+      "name": "Steve Hawkins",
+      "jobTitle": "Advisor on the Laws of the Game",
+      "worksFor": { "@id": "{{ site.url }}/#org" },
+      "award": "Michael Walizer Award (Lifetime Service as Referee, 2016)",
+      "url": "{{ site.url }}/referees/ask-the-referee/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for item in collections.qaAnswers %}
+        {
+          "@type": "Question",
+          "name": {{ item.data.question | dump | safe }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ item.templateContent | striptags | dump | safe }},
+            "author": { "@id": "{{ site.url }}/#steve-hawkins" }
+          }
+        }{% if not loop.last %},{% endif -%}
+        {%- endfor %}
+      ]
+    }
   ]
 }
 </script>
