@@ -1,6 +1,7 @@
 {
-  "src/_data/fileDates.json": "2026-05-02T11:57:11-07:00",
-  "src/_redirects": "2026-05-02T11:57:11-07:00",
+  "src/_data/fileDates.json": "2026-05-02T11:59:33-07:00",
+  "src/_includes/base.njk": "2026-05-02T11:59:33-07:00",
+  "src/_redirects": "2026-05-02T11:59:33-07:00",
   "src/referees/qa/2026-05-02-can-a-goalkeeper-score-a-goal.md": "2026-05-02T11:22:16-07:00",
   "src/_includes/sponsors-strip.njk": "2026-05-01T15:17:50-07:00",
   "src/resources/gallery.njk": "2026-05-01T15:17:50-07:00",
@@ -33,7 +34,6 @@
   "src/volunteers/tent.md": "2026-05-01T10:45:59-07:00",
   "src/_data/navigation.js": "2026-05-01T10:39:04-07:00",
   "src/_data/og.js": "2026-05-01T10:39:04-07:00",
-  "src/_includes/base.njk": "2026-05-01T10:39:04-07:00",
   "src/_includes/home.njk": "2026-05-01T10:39:04-07:00",
   "src/about/fine-print.md": "2026-05-01T10:39:04-07:00",
   "src/families/equipment.md": "2026-05-01T10:39:04-07:00",
