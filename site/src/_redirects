@@ -12,6 +12,8 @@
 /fb                             /families/                                       301
 /lc/                            /register/                                      301
 /lc                             /register/                                      301
+/Register/                      /register/                                      301
+/Register                       /register/                                      301
 /age/                           /register/age-chart/                            301
 /age                            /register/age-chart/                            301
 /age-chart-2023/                /register/age-chart/                            301
@@ -145,6 +147,8 @@
 # Old WP shortcuts
 /team/                          /families/team/                                  301
 /team                           /families/team/                                  301
+/Team/                          /families/team/                                  301
+/Team                           /families/team/                                  301
 /uniform/                       /families/equipment/                             301
 /uniform                        /families/equipment/                             301
 /equipment-guide/               /families/equipment/                             301
