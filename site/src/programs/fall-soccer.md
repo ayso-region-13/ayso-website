@@ -6,8 +6,13 @@ description: Fall Soccer is Region 13's core recreational program for players
 layout: page.njk
 section: programs
 heroImage: action-02.jpg
+eventName: "AYSO Region 13 Fall Soccer 2026"
+eventStartDate: "2026-09-12"
+eventEndDate: "2026-11-14"
 ---
 ![Fall soccer game at Region 13](/images/fall-soccer-interior.jpg)
+
+Fall Soccer is AYSO Region 13's core recreational program, serving players ages 6 through 14 in Pasadena, Altadena, and La Cañada Flintridge. Teams practice once a week and play games on Saturdays from September through mid-November. Registration is open to all — no tryouts.
 
 ## Quick Facts
 

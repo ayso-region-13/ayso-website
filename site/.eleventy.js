@@ -34,13 +34,20 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/61d4461c23b7dcda89290711860408d3.txt");
 
   // --- Markdown configuration ---
+  // typographer: true enables both `replacements` (which converts
+  // (c)/(r)/(tm)/--/--/... into ©/®/™/–/—/…) and `smartquotes`. We disable
+  // `replacements` because the (c) → © conversion mangles "501(c)(3)" into
+  // "501©(3)" — and we already type ®/™/em-dashes as Unicode in the source.
+  // Smart quotes stay on.
   const md = markdownIt({
     html: true,
     linkify: true,
     typographer: true,
-  }).use(markdownItAnchor, {
-    permalink: false,
-  });
+  })
+    .disable("replacements")
+    .use(markdownItAnchor, {
+      permalink: false,
+    });
   eleventyConfig.setLibrary("md", md);
 
   // --- Filters ---

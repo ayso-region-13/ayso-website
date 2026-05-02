@@ -84,7 +84,19 @@ RESPONSE=$(curl -sS https://api.cloudflare.com/client/v4/graphql \
   --data "$QUERY")
 
 if echo "$RESPONSE" | jq -e '.errors' >/dev/null 2>&1; then
-  echo "Cloudflare API returned errors:" >&2
+  err=$(echo "$RESPONSE" | jq -r '.errors[0].message // "Unknown error"')
+  echo "error: Cloudflare API call failed: $err" >&2
+  case "$err" in
+    *Authentication*|*authentication*|*Invalid*|*invalid*|*[Tt]oken*|*[Uu]nauthorized*)
+      echo "" >&2
+      echo "Check your CF_API_TOKEN — common fixes:" >&2
+      echo "  - Confirm token is in site/.env (no quotes around the value)" >&2
+      echo "  - Verify token still exists at https://dash.cloudflare.com/profile/api-tokens" >&2
+      echo "  - Confirm token has 'Read analytics and logs' template scoped to ayso13.org zone" >&2
+      ;;
+  esac
+  echo "" >&2
+  echo "Full response:" >&2
   echo "$RESPONSE" | jq '.errors' >&2
   exit 1
 fi

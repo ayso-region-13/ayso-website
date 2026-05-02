@@ -74,13 +74,27 @@ content:
     label: Programs
     type: collection
     path: site/src/programs
-    fields: *page-fields
+    fields: &program-fields
+      - { name: title,        label: "Page Title",        type: string }
+      - { name: description,  label: "Meta Description",  type: string }
+      - { name: layout,       label: Layout,              type: string, hidden: true }
+      - { name: section,      label: Section,             type: string, hidden: true }
+      - { name: permalink,    label: Permalink,           type: string, hidden: true, required: false }
+      - name: heroImage
+        label: "Hero Image"
+        type: image
+        required: false
+      - { name: heroImageAlt, label: "Hero Image Alt Text", type: string, required: false }
+      - { name: eventName,      label: "Event name (for schema)",      type: string, required: false, description: "Optional. Used in JSON-LD SportsEvent schema. Falls back to page title if blank." }
+      - { name: eventStartDate, label: "Event start date (YYYY-MM-DD)", type: string, required: false, description: "Optional. Emit SportsEvent schema with this start date." }
+      - { name: eventEndDate,   label: "Event end date (YYYY-MM-DD)",   type: string, required: false, description: "Optional. Emit SportsEvent schema with this end date. Both start and end must be set for schema to emit." }
+      - { name: body,         label: Content,               type: rich-text }
 
   - name: tournaments
     label: "Programs — Tournaments"
     type: collection
     path: site/src/programs/tournaments
-    fields: *page-fields
+    fields: *program-fields
 
   - name: register
     label: Registration

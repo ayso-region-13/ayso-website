@@ -4,8 +4,34 @@ title: "Registration"
 layout: page.njk
 section: register
 permalink: "/register/"
-description: "Register your child for AYSO Region 13 youth soccer in Pasadena. Player registration opens each season through InLeague."
+description: "Register your child for AYSO Region 13 fall soccer in Pasadena. Open to ages 6–14. No tryouts. Takes about 10 minutes online."
 ---
+
+<div class="not-prose my-6 bg-brand-cream border-l-4 border-brand-red-dark p-5 rounded-r-lg">
+  <h2 class="font-semibold text-brand-red-dark text-lg mb-1">Fall 2026 registration is open</h2>
+  <p class="text-brand-dark mb-3">Register by <strong>May 31</strong> to pay <strong>$220</strong>. The price goes up to $235 in June and $250 in July.</p>
+  <a href="https://ayso13.inleague.com/app" target="_blank" rel="noopener" class="inline-block bg-brand-red-dark hover:bg-brand-maroon text-white font-semibold px-6 py-3 rounded-lg transition-colors">Register on InLeague</a>
+</div>
+
+## Registration Fees
+
+Fall Soccer registration is {{ fees.fall.rangeShort }} depending on registration date. Early registration offers the lowest price.
+
+| Timeframe | Fee |
+|-----------|-----|
+{%- for tier in fees.fall.tiers %}
+| {{ tier.label }} | {{ tier.amount }} |
+{%- endfor %}
+
+EPIC program: {{ fees.epic }}
+
+Sibling discount: {{ fees.fall.siblingDiscount }}
+
+## Pay What You Can
+
+Region 13 offers registration on the honor system. Families who need assistance can pay what they can afford. Families who can contribute more help make this possible.
+
+Adjust pricing at checkout or contact [registrar@ayso13.org](mailto:registrar@ayso13.org) for assistance.
 
 ## How to Register
 
@@ -29,20 +55,6 @@ Programs available:
 - Winter Stars
 - EPIC (inclusion program)
 
-## Registration Fees
-
-Fall Soccer registration is {{ fees.fall.rangeShort }} depending on registration date. Early registration offers the lowest price.
-
-| Timeframe | Fee |
-|-----------|-----|
-{%- for tier in fees.fall.tiers %}
-| {{ tier.label }} | {{ tier.amount }} |
-{%- endfor %}
-
-EPIC program: {{ fees.epic }}
-
-Sibling discount: {{ fees.fall.siblingDiscount }}
-
 ## What is Included
 
 Registration fee covers:
@@ -57,12 +69,6 @@ You provide:
 - Cleats (optional but recommended)
 
 A free used shoe exchange is held in August.
-
-## Pay What You Can
-
-Region 13 offers registration on the honor system. Families who need assistance can pay what they can afford. Families who can contribute more help make this possible.
-
-Adjust pricing at checkout or contact [registrar@ayso13.org](mailto:registrar@ayso13.org) for assistance.
 
 ## Refund Policy
 

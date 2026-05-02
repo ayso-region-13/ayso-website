@@ -23,7 +23,7 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "SportsOrganization",
+      "@type": ["SportsOrganization", "NonprofitOrganization"],
       "@id": "{{ site.url }}/#org",
       "name": "AYSO Region 13",
       "alternateName": "American Youth Soccer Organization Region 13",
@@ -34,6 +34,8 @@
       "foundingDate": "{{ site.founded }}",
       "description": {{ site.description | dump | safe }},
       "sport": "Soccer",
+      "nonprofitStatus": "https://schema.org/Nonprofit501c3",
+      "taxID": "95-6205398",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "711 W. Woodbury Rd., Unit E",
@@ -91,6 +93,40 @@
 </script>
 {% endif %}
 
+{% if section == "programs" and eventStartDate and eventEndDate %}
+{# ── Program pages: SportsEvent (requires eventStartDate + eventEndDate
+   in front matter; eventName optional, falls back to page title) ─── #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  "name": {{ (eventName or title) | dump | safe }},
+  "url": "{{ site.url }}{{ page.url }}",
+  "startDate": {{ eventStartDate | dump | safe }},
+  "endDate": {{ eventEndDate | dump | safe }},
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "sport": "Soccer",
+  "organizer": { "@id": "{{ site.url }}/#org" },
+  "location": {
+    "@type": "Place",
+    "name": "AYSO Region 13 fields",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pasadena",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ site.url }}/register/",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+{% endif %}
+
 {% if section == "fields" and placeAddress %}
 {# ── Field pages: Place schema (requires placeAddress / placeLocality / placePostalCode in front matter) ─ #}
 <script type="application/ld+json">
@@ -112,25 +148,40 @@
 {% endif %}
 
 {% if page.url == "/referees/ask-the-referee/" and collections.qaAnswers %}
-{# ── Ask the Referee: FAQPage ────────────────────────────────────── #}
+{# ── Ask the Referee: FAQPage + Person (Steve Hawkins) ───────────── #}
 {# Note: Google removed FAQ rich results for non-government/health sites
    in Aug 2023, but FAQPage is still parsed by AI/LLM citation systems
-   (Perplexity, ChatGPT search, Google AI Overviews). #}
+   (Perplexity, ChatGPT search, Google AI Overviews). The Person entity
+   gives them a named-author signal to anchor citations against. #}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {%- for item in collections.qaAnswers %}
+  "@graph": [
     {
-      "@type": "Question",
-      "name": {{ item.data.question | dump | safe }},
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": {{ item.templateContent | striptags | dump | safe }}
-      }
-    }{% if not loop.last %},{% endif -%}
-    {%- endfor %}
+      "@type": "Person",
+      "@id": "{{ site.url }}/#steve-hawkins",
+      "name": "Steve Hawkins",
+      "jobTitle": "Advisor on the Laws of the Game",
+      "worksFor": { "@id": "{{ site.url }}/#org" },
+      "award": "Michael Walizer Award (Lifetime Service as Referee, 2016)",
+      "url": "{{ site.url }}/referees/ask-the-referee/"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {%- for item in collections.qaAnswers %}
+        {
+          "@type": "Question",
+          "name": {{ item.data.question | dump | safe }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ item.templateContent | striptags | dump | safe }},
+            "author": { "@id": "{{ site.url }}/#steve-hawkins" }
+          }
+        }{% if not loop.last %},{% endif -%}
+        {%- endfor %}
+      ]
+    }
   ]
 }
 </script>

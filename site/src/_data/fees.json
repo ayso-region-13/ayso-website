@@ -1,4 +1,5 @@
 {
+  "_editorNote": "When fees change here, also update hardcoded fee values in: /register/ (cream-box callout body), /programs/fall-soccer/ (Quick Facts list), and /families/index.md (registration paragraph). Those pages duplicate the numbers because Pages CMS round-trips break Nunjucks template tags in CMS-edited markdown bodies. /register/ and /programs/fall-soccer/ also have {{ fees.* }} template tags below the hardcoded callout — those still work today but become a risk the moment any board editor saves the page through Pages CMS.",
   "fall": {
     "rangeShort": "$220-$250",
     "tiers": [
