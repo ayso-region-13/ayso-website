@@ -167,15 +167,33 @@ module.exports = function (eleventyConfig) {
 
   // --- Collections ---
 
-  // Ask the Referee Q&As — grouped by category, newest first within each group
+  // Ask the Referee Q&As — grouped by category. Sort: explicit-dated items
+  // first (newest first, alpha tiebreaker), then undated items alpha by
+  // question. Eleventy auto-assigns a fallback date to every file, so the
+  // raw frontmatter / filename is the only reliable signal for "intentional"
+  // date.
+  const matter = require("gray-matter");
   eleventyConfig.addCollection("qaAnswers", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/referees/qa/*.md")
-      .sort((a, b) => {
-        if (!a.date && !b.date) return 0;
-        if (!a.date) return 1;
-        if (!b.date) return -1;
-        return b.date - a.date; // newest first
+    const items = collectionApi.getFilteredByGlob("src/referees/qa/*.md")
+      .map(item => {
+        const fmDate = matter.read(item.inputPath).data.date;
+        const filenameMatch = path.basename(item.inputPath).match(/^(\d{4}-\d{2}-\d{2})/);
+        const explicit = fmDate || (filenameMatch ? filenameMatch[1] : null);
+        item._explicitDate = explicit ? new Date(explicit) : null;
+        return item;
       });
+    const qLower = item => (item.data.question || "").toLowerCase();
+    return items.sort((a, b) => {
+      if (a._explicitDate && b._explicitDate) {
+        const diff = b._explicitDate - a._explicitDate;
+        if (diff !== 0) return diff;
+      } else if (a._explicitDate) {
+        return -1;
+      } else if (b._explicitDate) {
+        return 1;
+      }
+      return qLower(a).localeCompare(qLower(b));
+    });
   });
 
   // --- Image optimization ---
