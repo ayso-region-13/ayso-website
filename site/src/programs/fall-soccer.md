@@ -6,6 +6,9 @@ description: Fall Soccer is Region 13's core recreational program for players
 layout: page.njk
 section: programs
 heroImage: action-02.jpg
+eventName: "AYSO Region 13 Fall Soccer 2026"
+eventStartDate: "2026-09-12"
+eventEndDate: "2026-11-14"
 ---
 ![Fall soccer game at Region 13](/images/fall-soccer-interior.jpg)
 

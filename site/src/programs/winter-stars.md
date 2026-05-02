@@ -5,6 +5,9 @@ layout: page.njk
 section: programs
 heroImage: "grad-series-01.jpg"
 description: "Winter Stars is Region 13's winter soccer program for returning Fall Soccer players. Games run December through February."
+eventName: "AYSO Region 13 Winter Stars 2027"
+eventStartDate: "2027-01-09"
+eventEndDate: "2027-02-27"
 ---
 
 Winter Stars is an 8-week program offering skills training and small-sided games for players ages 6 and up during the winter months.

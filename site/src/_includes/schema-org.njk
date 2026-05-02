@@ -91,6 +91,40 @@
 </script>
 {% endif %}
 
+{% if section == "programs" and eventStartDate and eventEndDate %}
+{# ── Program pages: SportsEvent (requires eventStartDate + eventEndDate
+   in front matter; eventName optional, falls back to page title) ─── #}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SportsEvent",
+  "name": {{ (eventName or title) | dump | safe }},
+  "url": "{{ site.url }}{{ page.url }}",
+  "startDate": {{ eventStartDate | dump | safe }},
+  "endDate": {{ eventEndDate | dump | safe }},
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "sport": "Soccer",
+  "organizer": { "@id": "{{ site.url }}/#org" },
+  "location": {
+    "@type": "Place",
+    "name": "AYSO Region 13 fields",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Pasadena",
+      "addressRegion": "CA",
+      "addressCountry": "US"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "{{ site.url }}/register/",
+    "availability": "https://schema.org/InStock"
+  }
+}
+</script>
+{% endif %}
+
 {% if section == "fields" and placeAddress %}
 {# ── Field pages: Place schema (requires placeAddress / placeLocality / placePostalCode in front matter) ─ #}
 <script type="application/ld+json">
