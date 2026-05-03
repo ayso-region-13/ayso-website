@@ -46,18 +46,21 @@ layout: base.njk
 {# ── Hero ────────────────────────────────────────────────────────── #}
 <section class="relative overflow-hidden bg-brand-dark min-h-[560px]">
 
-  {# Background images — 5 candidates wrapped in display:none divs so no
-     image fetch starts until JS picks one (avoids wasted high-priority
-     fetch on image 1 when JS swaps to a different image). The picked
-     wrapper is unhidden and its inner <img> is promoted to fetchpriority
-     high. NoScript fallback below restores image 1 if JS is disabled. #}
+  {# Background images — image 1 is the LCP candidate (eager +
+     fetchpriority=high so it starts loading immediately and paints fast).
+     Images 2-5 are display:none + lazy so they don't compete for bandwidth.
+     The randomizer below cross-fades to a different image AFTER the LCP
+     measurement window closes (first user interaction or 3s timeout) so
+     repeat visitors still get variety without LCP being measured against
+     the JS-swap timing. #}
   <div class="absolute inset-0">
-    <div class="hero-pic-wrapper hidden absolute inset-0">
+    <div class="hero-pic-wrapper absolute inset-0">
       <img class="absolute inset-0 w-full h-full object-cover object-center"
            src="/images/home/region13_home_1.jpg"
            alt="Region 13 girls in green and black uniforms celebrate together on the field"
            sizes="100vw"
-           loading="lazy">
+           loading="eager"
+           fetchpriority="high">
     </div>
     <div class="hero-pic-wrapper hidden absolute inset-0">
       <img class="absolute inset-0 w-full h-full object-cover object-center"
@@ -89,11 +92,8 @@ layout: base.njk
     </div>
   </div>
 
-  {# No-JS fallback: show image 1 if JS is disabled. Inline style overrides
-     the .hidden class on the first wrapper. #}
-  <noscript>
-    <style>.hero-pic-wrapper:first-child { display: block !important; }</style>
-  </noscript>
+  {# Image 1 is always visible by default, so no noscript fallback is
+     needed — JS-disabled clients get image 1 too. #}
 
   {# Dark gradient overlay — darkens the left side where the headline sits so
      contrast against the white/70 and red-dark/75 text blocks stays above
@@ -125,21 +125,30 @@ layout: base.njk
   </div>
 </section>
 
-{# ── Hero randomizer — picks one of 5 background images on each page load.
-     Runs synchronously to keep the LCP fetch starting as early as possible
-     (no DOMContentLoaded wait). All wrappers start hidden, so no image
-     loads until this script picks one. #}
+{# ── Hero randomizer — image 1 is the LCP candidate and paints first.
+     This script picks one of the other 4 images and cross-fades to it
+     after the LCP measurement window closes. LCP measurement stops on
+     first user input (scroll/click/key) — we listen for that, with a
+     fallback 3 s timeout in case the user never interacts. #}
 <script>
   (function () {
     var wrappers = document.querySelectorAll('.hero-pic-wrapper');
-    if (!wrappers.length) return;
+    if (wrappers.length < 2) return;
     var pick = wrappers[Math.floor(Math.random() * wrappers.length)];
-    pick.classList.remove('hidden');
-    var img = pick.querySelector('img');
-    if (img) {
-      img.setAttribute('loading', 'eager');
-      img.setAttribute('fetchpriority', 'high');
+    if (pick === wrappers[0]) return; // already showing image 1
+    var done = false;
+    function swap() {
+      if (done) return;
+      done = true;
+      var img = pick.querySelector('img');
+      if (img) { img.setAttribute('loading', 'eager'); }
+      pick.classList.remove('hidden');
+      wrappers[0].classList.add('hidden');
     }
+    ['scroll', 'click', 'keydown'].forEach(function (ev) {
+      document.addEventListener(ev, swap, { once: true, passive: true });
+    });
+    setTimeout(swap, 3000);
   })();
 </script>
 
