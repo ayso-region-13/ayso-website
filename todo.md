@@ -49,6 +49,11 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ## Completed ✓
 
+### Session 16 (2026-05-03) — hero LCP overhaul
+- [x] **PageSpeed Insights review on prod** — mobile Performance 79, Accessibility 96, Best Practices 100, SEO 100. Lab LCP 5.1 s flagged as the bottleneck; CrUX field data not yet available (CrUX needs ~28 days post-launch).
+- [x] **Hero LCP fix + cross-fade rotation** — root cause was the prior pattern (all 5 hero candidates `display:none + loading="lazy"`, JS un-hides one). The LCP image only started fetching after JS ran. Replaced with: first wrapper renders immediately as the LCP element (`loading="eager" fetchpriority="high"`); after the LCP measurement window closes (first user input or 3 s timeout) the rotation script cycles through the remaining wrappers using `img.decode()` + opacity cross-fade. Cycle ends after one full pass with a random "final" image. 700 ms fade + 5 s dwell ≈ 26 s of motion before the page goes static.
+- [x] **`_data/heroes.js`** — moved hero list (5 entries with src + alt) into a data file with Fisher-Yates shuffle at module load, so each Eleventy build emits a different first/LCP image. Per-build variety stacks with the per-page-load JS rotation for effectively unique sequences.
+
 ### Session 15 (2026-05-02) — first day post-launch
 - [x] **Ask the Referee sort fix** — Q&As now sort by explicit-date desc (frontmatter or YYYY-MM-DD filename prefix), then alpha by question for undated. Eleventy auto-assigns a fallback date to every file, which made the previous sort effectively alphabetical for the 9 undated entries.
 - [x] **Capitalization redirects** added: `/Register` → `/register/` and `/Team` → `/families/team/` (single hop, no double-redirect through `/team/`).

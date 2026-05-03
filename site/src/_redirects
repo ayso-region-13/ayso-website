@@ -460,11 +460,28 @@
 /wp-content/uploads/2025/12/AYSO-BirthChart.png                       /register/age-chart/  301
 /wp-content/uploads/2025/08/AYSO-Age-Determination-Chart-MY26-MY27.png /register/age-chart/  301
 /wp-content/uploads/AYSO-R13-Logo-266.png                             /images/logo.svg      301
+/wp-content/uploads/cropped-AYSO-R13-Logo-266-192x192.png             /images/logo.svg      301
+/wp-content/uploads/2023/08/logo-gold.png                             /images/logo.svg      301
 
 # Hotlinked WP-uploads PDFs (best-fit destinations)
 /wp-content/uploads/2022/07/Intermediate-Coach.pdf                    /coaches/training/    301
+/wp-content/uploads/2022/07/8U-Coach.pdf                              /coaches/training/    301
+/wp-content/uploads/2022/07/10U-Coach.pdf                             /coaches/training/    301
+/wp-content/uploads/2022/07/12U-Coach.pdf                             /coaches/training/    301
 /wp-content/uploads/2022/03/July_2014.pdf                             /about/board-minutes/ 301
 /wp-content/uploads/2024/09/Region-13-Modifications-for-8U-7U-6U-2024.pdf /referees/laws/   301
+/wp-content/uploads/2025/11/TT25_RefSched_B.pdf                       /referees/scheduling/ 301
+
+# Common typo for Victory Park field — actual URL is /fields/victory/
+/fields/victory-park/           /fields/victory/                                301
+/fields/victory-park            /fields/victory/                                301
+
+# Old WP map sub-paths — /maps and /maps/ already redirect above (line 415-416);
+# this catches /maps/region-13-map2/ and any future sub-paths
+/maps/*                         /fields/                                        301
+
+# Malformed tel: links scraped as paths
+/tel:6263166900                 /contact/                                       301
 
 # Old WP scheduling post for 4U/5U at Victory Park
 /victory-park-with-4u5u-2024-2/ /programs/preschool/                            301
