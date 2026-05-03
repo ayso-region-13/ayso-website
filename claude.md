@@ -41,6 +41,7 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Create redirect mapping (159 old URLs → `site/src/_redirects`)
 - [x] Deploy to Cloudflare Pages ← **staging.ayso13.org / www.ayso13.org**
 - [x] **Pre-launch /seo audit (22 of 28 items resolved)** — schema markup site-wide (SportsOrganization + WebSite + BreadcrumbList + Place on 22 field pages + FAQPage on Ask the Referee), llms.txt, sitemap lastmod fix, image sizes per-element, hero LCP fix, /contact ZIPs + tel links, 501(c)(3) statement on /about/, Project Play 8 Children's Rights, "Field Maps" page title, distinct alt text, per-section OG image defaults, HTML age chart replacing PNG, /parents big yellow Register button via build-time transform, fees centralized in `_data/fees.json`. Remaining items in `todo.md`.
+- [x] **Post-launch /seo audit sweep (2026-05-02)** — Steve Hawkins author bio + Person schema + author refs on every FAQPage Answer node, /register/ section reorder with deadline callout, multi-typed `SportsOrganization` + `NonprofitOrganization` org entity (taxID + nonprofitStatus), SportsEvent schema infrastructure (Fall Soccer 2026 wired up), Become-a-Referee CTA, IFAB edition note, llms.txt expansion (Identity, Contact, License sections), Ask the Referee hybrid title, citable lead paragraph on /programs/fall-soccer/, meta description rewrites (home, /register/, /about/), markdown-it `replacements` rule disabled (was mangling 501(c)(3) → 501©(3)), cream-callout pseudo-headings promoted to real `<h2>`, Footer Status link target, **HSTS header** (`max-age=31536000; includeSubDomains`), 17 commits total promoted to prod.
 - [x] **Repo made public** + branch ruleset on `main` requires PRs (PROMOTE_TOKEN PAT bypass for the workflow)
 - [x] **Slack notifications on promote** — `/ayso promote` and the workflow now post success/failure to `#notify-website-status`
 - [x] **Launched** — DNS cut over to www.ayso13.org on 2026-05-01
@@ -145,6 +146,7 @@ npm run build      # Production build to _site/ (includes Pagefind indexing)
 node scripts/migrate-content.js  # Re-sync /content/ → site/src/
 bash scripts/process-photos.sh   # Optimize new photos
 node scripts/check-links.js      # Check internal links
+./scripts/check-404s.sh          # Pull last-24h 404s from CF GraphQL Analytics (needs CF_ZONE_ID + CF_API_TOKEN in site/.env)
 ```
 
 Note: Search (`/search/`) only works after a full `npm run build` — not in dev server.
@@ -220,8 +222,8 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `og.js` — Per-section default OG image fallbacks. When a page has no `heroImage` frontmatter, `base.njk` picks the section default; otherwise the global fallback
 
 ## Site-wide Templates / Patterns
-- `_includes/schema-org.njk` — emits JSON-LD on every page based on URL/section/frontmatter: SportsOrganization + WebSite (homepage), BreadcrumbList (page.njk inner pages + ask-the-referee), Place (field pages with `placeAddress` frontmatter), FAQPage (`/referees/ask-the-referee/` from `collections.qaAnswers`)
-- `_includes/_headers.njk` and `robots.njk` — Cloudflare Pages config; branch-aware via `CF_PAGES_BRANCH` env var to block crawlers on staging
+- `_includes/schema-org.njk` — emits JSON-LD on every page based on URL/section/frontmatter: multi-typed `SportsOrganization` + `NonprofitOrganization` + WebSite (homepage; `#org` carries `taxID` 95-6205398 and `nonprofitStatus`), BreadcrumbList (inner pages + ask-the-referee), Place (field pages with `placeAddress` frontmatter), FAQPage + Person for Steve Hawkins (`/referees/ask-the-referee/`, in a single `@graph` so each Answer's `author` references the Person `@id`), SportsEvent (programs pages with both `eventStartDate` + `eventEndDate` frontmatter set; gates emission on both fields).
+- `_includes/_headers.njk` and `robots.njk` — Cloudflare Pages config; branch-aware via `CF_PAGES_BRANCH` env var to block crawlers on staging. Production headers include HSTS (`Strict-Transport-Security: max-age=31536000; includeSubDomains`), CSP-Report-Only, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy.
 - `llms.njk` → `/llms.txt` — AI/LLM crawler summary, pulls live values from `site.json` and `fees.json`
 - **InLeague Register button auto-style** — a build-time transform in `.eleventy.js` finds `<a href="https://ayso13.inleague.com/app">Register…</a>` and adds `class="btn-primary text-lg px-8 py-4" target="_blank" rel="noopener"`. Editors keep plain markdown links (CMS-safe); buttons render at build time
 - **Field Info callout** — frontmatter fields (`parking`, `restrooms`, `surface`, `lighting`, `snackBar`) on field pages render as a "Field Info" cream callout at the top of the article when populated. Empty by default; CMS exposes the fields for fields-coordinator to fill in
@@ -242,4 +244,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/logo/` — Logo assets
 
 ---
-*Last updated: 2026-05-01 (session 14 — site launched)*
+*Last updated: 2026-05-02 (session 15 — first day post-launch SEO sweep + HSTS)*

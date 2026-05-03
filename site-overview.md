@@ -1,6 +1,6 @@
 # How the AYSO Region 13 Website Works
 
-A short reference for board members and volunteers. Last updated April 2026.
+A short reference for board members and volunteers. Last updated May 2026 (post-launch).
 
 ---
 
@@ -46,7 +46,7 @@ URL: https://app.pagescms.org
 Editors log in with email — no GitHub account needed. The CMS shows a friendly form-based interface for editing specific things:
 - **Field Status** — the colored bar at the top of the homepage (Open / Monitoring / Closed)
 - **Announcement Bar** — toggleable banner under the hero on the homepage
-- **About / Programs / Fields / etc.** — body content of every page on the site
+- **About / Programs / Fields / Families / etc.** — body content of every page on the site
 - **Ask the Referee Q&As** — Steve's collection (one form per question)
 
 Saving in the CMS automatically commits to the staging branch on GitHub, which triggers Cloudflare to rebuild staging.ayso13.org within ~1 minute. Production stays unchanged until someone "promotes" staging to production.
@@ -98,11 +98,13 @@ Only people on the allowlist (`slack-bot/allowed-users.json` in the repo) can ru
 
 ### Editable in Pages CMS (no developer needed)
 
-- Body text and headings of every page (programs, fields, parents, coaches, referees, FAQs, etc.)
+- Body text and headings of every page (programs, fields, families, coaches, referees, FAQs, etc.)
 - Hero images on individual pages
 - Field status widget (Open / Closed / Monitoring + message)
 - Announcement bar (on/off + text)
 - Ask the Referee Q&As (add new entries; date is auto-set from the commit date)
+- Field facility info (parking, restrooms, surface, lighting, snack bar) on each field page
+- Program season dates (event start/end on Fall Soccer, Spring Soccer, etc.) — drives the SportsEvent schema for search engines
 
 ### Requires a developer to change
 
@@ -121,10 +123,11 @@ Only people on the allowlist (`slack-bot/allowed-users.json` in the repo) can ru
 | Domain | Status |
 |---|---|
 | `www.ayso13.org` | Production — Cloudflare Pages custom domain on the `main` branch |
-| `staging.ayso13.org` | Staging — Cloudflare Pages branch deployment on `staging` |
-| `ayso13.org` (apex) | Currently the legacy WordPress site (cutover pending) |
+| `ayso13.org` (apex) | 301 redirect to `www.ayso13.org` |
+| `staging.ayso13.org` | Staging — Cloudflare Pages branch deployment on `staging` (blocked from search engines) |
+| `status.ayso13.org` | Public status page (separate service); linked from the footer |
 
-Once the legacy site is retired, `ayso13.org` will redirect to `www.ayso13.org`.
+DNS cutover from the legacy WordPress site happened on 2026-05-01.
 
 ---
 
