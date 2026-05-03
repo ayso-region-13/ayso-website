@@ -54,7 +54,7 @@ Yes. Game scheduling can be adjusted to accommodate coaches with multiple teams.
 Arrange for another certified coach to cover. A fully certified coach must be present at all practices.
 
 ### Where do I find practice plans?
-Age-specific coaching manuals include practice activities. Additional resources are available through AYSOU.
+Age-specific coaching manuals include practice activities — see [Coach Training](/coaches/training/) for the full set, or download directly: [6U](/assets/docs/6u-coach.pdf), [8U](/assets/docs/8u-coach.pdf), [10U](/assets/docs/10u-coach.pdf), [12U](/assets/docs/12u-coach.pdf), [Intermediate](/assets/docs/intermediate-coach.pdf). Additional resources are available through AYSOU.
 
 ## Games
 

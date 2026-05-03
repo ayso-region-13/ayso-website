@@ -9,7 +9,7 @@ description: "Frequently asked questions for AYSO Region 13 team managers."
 ## Getting Started
 
 ### What training do I need?
-- Watch the orientation video and presentation
+- Attend the team-manager orientation each season
 - Complete background check
 - Complete Safe Haven training (20 minutes online)
 - Review team manager task documentation

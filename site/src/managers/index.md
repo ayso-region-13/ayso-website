@@ -27,10 +27,9 @@ The key to success is delegation. Many tasks can be shared with other families o
 ## Getting Started
 
 1. Complete [Required Training](/managers/training)
-2. Watch the orientation video
-3. Review the [Task Checklist](/managers/tasks)
-4. Join the volunteer Slack channel
-5. Connect with your coach
+2. Review the [Task Checklist](/managers/tasks)
+3. Join the volunteer Slack channel
+4. Connect with your coach
 
 ## Support Available
 

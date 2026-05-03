@@ -46,7 +46,7 @@ Every coach receives:
 - First aid kit
 - Laws of the Game booklet
 - Duffel bag
-- Age-specific coaching manual
+- Age-specific coaching manual ([6U](/assets/docs/6u-coach.pdf), [8U](/assets/docs/8u-coach.pdf), [10U](/assets/docs/10u-coach.pdf), [12U](/assets/docs/12u-coach.pdf), [Intermediate](/assets/docs/intermediate-coach.pdf))
 - Training and certification
 
 ## Key Contacts
@@ -65,6 +65,17 @@ Division Coach Administrators oversee specific age groups and can answer divisio
 - [Practice Resources](/coaches/practice) — Planning practices
 - [Game Day Guide](/coaches/game-day) — Running games
 - [PIE Philosophy](/coaches/pie) — Positive coaching approach
+
+## Inclusive Coaching Reference
+
+Materials we share with coaches each season — practical guidance for coaching every kid on the team well, including kids with disabilities, neurodiverse kids, and kids whose home life or identity might shape how they show up on the field.
+
+- [Creating Inclusive Sport Environments](/assets/docs/creating-inclusive-sport-environments.pdf)
+- [Tips for Creating a Positive Team Environment](/assets/docs/positive-team-environment.pdf)
+- [Understanding Team Climate](/assets/docs/understanding-team-climate.pdf)
+- [Empowering Athletes with Hidden Disabilities](/assets/docs/empowering-athletes-with-hidden-disabilities.pdf)
+- [Coach on the Spectrum](/assets/docs/coach-on-the-spectrum.pdf)
+- [Gender Diversity Toolkit (2024)](/assets/docs/gender-diversity-toolkit.pdf)
 
 ## Related Pages
 

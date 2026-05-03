@@ -34,12 +34,9 @@ The referee team uses the card to track scoring, playing time, and sportsmanship
 ### After the Game
 Cards are submitted to the region.
 
-## Format Options
+## Where to Get Current Cards
 
-- [Game Card (2023, PDF)](/assets/docs/game-card-2023.pdf) — print and fill by hand. Used in 10U and older divisions.
-- [6U/8U Game Report (2023, PDF)](/assets/docs/6u-8u-game-report-2023.pdf) — younger-division match record.
-
-The 2026 versions will be posted by August.
+2026 Fall Season Game cards will be available in late Summer.
 
 ## Tips
 

@@ -58,7 +58,7 @@ See [Referee Training](/referees/training) for details.
 ## Team Manager Training
 
 Team managers complete:
-- Orientation video and presentation
+- In-season orientation
 - Background check
 - Safe Haven training (20 minutes online)
 
