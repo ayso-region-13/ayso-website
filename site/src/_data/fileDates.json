@@ -1,5 +1,6 @@
 {
-  "src/_data/fileDates.json": "2026-05-02T13:46:57-07:00",
+  "src/_data/fileDates.json": "2026-05-02T21:05:35-07:00",
+  "src/_includes/home.njk": "2026-05-02T21:05:35-07:00",
   "src/_headers.njk": "2026-05-02T13:46:57-07:00",
   "src/_includes/base.njk": "2026-05-02T13:27:11-07:00",
   "src/_data/fees.json": "2026-05-02T13:26:46-07:00",
@@ -44,7 +45,6 @@
   "src/volunteers/tent.md": "2026-05-01T10:45:59-07:00",
   "src/_data/navigation.js": "2026-05-01T10:39:04-07:00",
   "src/_data/og.js": "2026-05-01T10:39:04-07:00",
-  "src/_includes/home.njk": "2026-05-01T10:39:04-07:00",
   "src/about/fine-print.md": "2026-05-01T10:39:04-07:00",
   "src/families/equipment.md": "2026-05-01T10:39:04-07:00",
   "src/families/team.md": "2026-05-01T10:39:04-07:00",

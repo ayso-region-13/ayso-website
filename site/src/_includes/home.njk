@@ -46,50 +46,21 @@ layout: base.njk
 {# ── Hero ────────────────────────────────────────────────────────── #}
 <section class="relative overflow-hidden bg-brand-dark min-h-[560px]">
 
-  {# Background images — image 1 is the LCP candidate (eager +
-     fetchpriority=high so it starts loading immediately and paints fast).
-     Images 2-5 are display:none + lazy so they don't compete for bandwidth.
-     The randomizer below cross-fades to a different image AFTER the LCP
-     measurement window closes (first user interaction or 3s timeout) so
-     repeat visitors still get variety without LCP being measured against
-     the JS-swap timing. #}
+  {# Background images — `heroes` is shuffled at build time in
+     _data/heroes.js so each deploy ships a different first/LCP image.
+     The first wrapper is eager + fetchpriority=high. Wrappers 2-5 are
+     display:none + lazy. After the LCP measurement window closes, the
+     rotation script below cycles through them (decode → cross-fade). #}
   <div class="absolute inset-0">
-    <div class="hero-pic-wrapper absolute inset-0">
+    {% for hero in heroes %}
+    <div class="hero-pic-wrapper {% if not loop.first %}hidden {% endif %}absolute inset-0 transition-opacity duration-700">
       <img class="absolute inset-0 w-full h-full object-cover object-center"
-           src="/images/home/region13_home_1.jpg"
-           alt="Region 13 girls in green and black uniforms celebrate together on the field"
+           src="{{ hero.src }}"
+           alt="{{ hero.alt }}"
            sizes="100vw"
-           loading="eager"
-           fetchpriority="high">
+           {% if loop.first %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}>
     </div>
-    <div class="hero-pic-wrapper hidden absolute inset-0">
-      <img class="absolute inset-0 w-full h-full object-cover object-center"
-           src="/images/home/region13_home_2.jpg"
-           alt="Two Region 13 teammates in lime green uniforms hug after a play"
-           sizes="100vw"
-           loading="lazy">
-    </div>
-    <div class="hero-pic-wrapper hidden absolute inset-0">
-      <img class="absolute inset-0 w-full h-full object-cover object-center"
-           src="/images/home/region13_home_3.jpg"
-           alt="Region 13 boys in red and black uniforms walk off the field with a referee"
-           sizes="100vw"
-           loading="lazy">
-    </div>
-    <div class="hero-pic-wrapper hidden absolute inset-0">
-      <img class="absolute inset-0 w-full h-full object-cover object-center"
-           src="/images/home/region13_home_4.jpg"
-           alt="A Region 13 player in a red and black uniform chases the ball during a game"
-           sizes="100vw"
-           loading="lazy">
-    </div>
-    <div class="hero-pic-wrapper hidden absolute inset-0">
-      <img class="absolute inset-0 w-full h-full object-cover object-center"
-           src="/images/home/region13_home_5.jpg"
-           alt="Region 13 teammates in navy uniforms celebrate after a goal"
-           sizes="100vw"
-           loading="lazy">
-    </div>
+    {% endfor %}
   </div>
 
   {# Image 1 is always visible by default, so no noscript fallback is
@@ -125,30 +96,93 @@ layout: base.njk
   </div>
 </section>
 
-{# ── Hero randomizer — image 1 is the LCP candidate and paints first.
-     This script picks one of the other 4 images and cross-fades to it
-     after the LCP measurement window closes. LCP measurement stops on
-     first user input (scroll/click/key) — we listen for that, with a
-     fallback 3 s timeout in case the user never interacts. #}
+{# ── Hero rotation — the first wrapper is the LCP candidate and paints
+     first. After LCP measurement closes (first interaction or 3 s
+     fallback), this cycles through the rest sequentially (2 → 3 → 4 → 5),
+     then lands on a random "final" image and stops. Total run: 4 fades
+     for the cycle + 1 random fade ≈ 25 s of motion, then static.
+
+     Decode-before-show prevents the network-load flash. The dwell + fade
+     happens entirely AFTER LCP measurement closes, so the rotation never
+     affects the score. #}
 <script>
   (function () {
     var wrappers = document.querySelectorAll('.hero-pic-wrapper');
     if (wrappers.length < 2) return;
-    var pick = wrappers[Math.floor(Math.random() * wrappers.length)];
-    if (pick === wrappers[0]) return; // already showing image 1
-    var done = false;
-    function swap() {
-      if (done) return;
-      done = true;
-      var img = pick.querySelector('img');
-      if (img) { img.setAttribute('loading', 'eager'); }
-      pick.classList.remove('hidden');
-      wrappers[0].classList.add('hidden');
+
+    var FADE_MS = 700;
+    var DWELL_MS = 5000;
+    var current = 0;        // currently visible wrapper index
+    var fadesDone = 0;      // how many transitions we've performed
+    var stopped = false;
+
+    function fadeTo(nextIdx, isFinal) {
+      if (stopped) return;
+      if (nextIdx === current) {
+        if (isFinal) stopped = true;
+        return;
+      }
+      var prev = wrappers[current];
+      var next = wrappers[nextIdx];
+      var img = next.querySelector('img');
+      if (!img) return;
+
+      // Force the network fetch — image is still display:none, no render.
+      img.loading = 'eager';
+
+      // decode() resolves only after the bytes are downloaded AND the
+      // pixel buffer is ready to render. This is what kills the flash.
+      var ready = img.decode ? img.decode() : Promise.resolve();
+      ready.then(function () {
+        // Ready state: display:block + opacity:0. Two rAFs ensure the
+        // browser commits this before we transition to opacity:1.
+        next.style.opacity = '0';
+        next.classList.remove('hidden');
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            next.style.opacity = '1';
+            prev.style.opacity = '0';
+          });
+        });
+        setTimeout(function () {
+          prev.classList.add('hidden');
+          current = nextIdx;
+          fadesDone++;
+          if (isFinal) {
+            stopped = true;
+            return;
+          }
+          setTimeout(advance, DWELL_MS);
+        }, FADE_MS + 100);
+      }).catch(function () {
+        // Decode failed — skip this image, try the next on schedule.
+        setTimeout(advance, DWELL_MS);
+      });
+    }
+
+    function advance() {
+      if (stopped) return;
+      // We've done (wrappers.length - 1) fades = shown every wrapper once.
+      // The next fade lands on a random image and stops the rotation.
+      var willBeFinal = fadesDone >= wrappers.length - 1;
+      if (willBeFinal) {
+        var finalIdx = Math.floor(Math.random() * wrappers.length);
+        fadeTo(finalIdx, true);
+      } else {
+        fadeTo((current + 1) % wrappers.length, false);
+      }
+    }
+
+    var started = false;
+    function start() {
+      if (started) return;
+      started = true;
+      advance();
     }
     ['scroll', 'click', 'keydown'].forEach(function (ev) {
-      document.addEventListener(ev, swap, { once: true, passive: true });
+      document.addEventListener(ev, start, { once: true, passive: true });
     });
-    setTimeout(swap, 3000);
+    setTimeout(start, 3000);
   })();
 </script>
 
