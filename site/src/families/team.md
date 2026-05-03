@@ -50,7 +50,7 @@ Add your coach and team manager to your phone contacts so their messages reach y
 
 [InLeague schedule](https://ayso13.inleague.com/app/schedule)
 
-You can also check the [weekly schedule PDF](/schedules) posted each week.
+You can also check the [weekly schedule](/schedules/) posted each week.
 
 Game times are typically Saturday mornings. Exact times vary by division:
 - Younger divisions (6U-8U): Usually earlier morning slots
