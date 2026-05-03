@@ -36,11 +36,10 @@ Cards are submitted to the region.
 
 ## Format Options
 
-Game cards are available in two formats:
-- PDF (print and fill by hand)
-- Google Sheets (editable, can print)
+- [Game Card (2023, PDF)](/assets/docs/game-card-2023.pdf) — print and fill by hand. Used in 10U and older divisions.
+- [6U/8U Game Report (2023, PDF)](/assets/docs/6u-8u-game-report-2023.pdf) — younger-division match record.
 
-*(2026 Game Cards will be posted by August)*
+The 2026 versions will be posted by August.
 
 ## Tips
 

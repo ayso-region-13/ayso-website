@@ -8,39 +8,37 @@ description: "AYSO Region 13 document library — forms, handbooks, training mat
 
 ## Family Forms
 
-- Kids Zone — see [/families/pledge/](/families/pledge/)
-- Concussion Information Sheet
-- Sudden Cardiac Arrest Information Sheet
+- [Concussion & SCA Forms (PDF)](/assets/docs/concussion-sca-forms.pdf) — required reading for parents and players each season
+- [Kids Zone](/families/pledge/) — AYSO's 10 guidelines for the youth-soccer experience
 
-[Concussion & SCA Forms (PDF)](/assets/docs/concussion-sca-forms.pdf)
-
-Submit signed forms through the upload portal.
-
-[Form Upload Portal](/forms/?go=1)
+Submit signed forms through the [form upload portal](/forms/?go=1).
 
 ## Coach Resources
 
-- Coaching manuals (provided at division meetings)
-- Practice plans
-- Game card instructions
+Age-group coaching manuals (provided at division meetings, also available here for reference):
 
-See [Coach Resources](/coaches) for full materials.
+- [6U Coach Manual](/assets/docs/6u-coach.pdf)
+- [8U Coach Manual](/assets/docs/8u-coach.pdf)
+- [10U Coach Manual](/assets/docs/10u-coach.pdf)
+- [12U Coach Manual](/assets/docs/12u-coach.pdf)
+- [Intermediate (14U) Coach Manual](/assets/docs/intermediate-coach.pdf)
+
+See [Coach Training](/coaches/training/) for the full certification path and [Game Cards](/coaches/game-cards/) for game-day record materials.
 
 ## Referee Resources
 
-- Laws of the Game
-- Age-specific modification guidelines
-- Referee quick reference card
+- [Laws of the Game (IFAB)](https://www.theifab.com/laws/) — official rulebook
+- [Region 13 6U/7U/8U Modifications](/assets/docs/region13-6u-7u-8u-modifications-2024.pdf)
+- [Region 13 10U Referee Guidelines](/assets/docs/region13-10u-referee-guidelines-2023.pdf)
+- [Region 13 12U Referee Guidelines](/assets/docs/region13-12u-referee-guidelines-2023.pdf)
+- [Region 13 Penalty Kick Guidelines](/assets/docs/penalty-kick-guidelines-2023.pdf)
+- [Game Card](/assets/docs/game-card-2023.pdf) and [6U/8U Game Report](/assets/docs/6u-8u-game-report-2023.pdf)
 
-See [Referee Resources](/referees/resources) for full materials.
+See [Referee Resources](/referees/resources/) for the full document library.
 
 ## Team Manager Resources
 
-- Orientation presentation
-- Task checklist
-- Picture day information
-
-See [Manager Resources](/managers) for full materials.
+See [Team Manager Resources](/managers/) — orientation, task checklist, and picture day information are maintained on the manager pages.
 
 ## Financial Forms
 

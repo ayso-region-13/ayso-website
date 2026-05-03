@@ -14,33 +14,31 @@ description: "Resources for AYSO Region 13 referees — documents, forms, traini
 
 ## Document Library
 
-### Regional Guidelines (PDFs)
-- Region 13 Guidelines for 6U/7U/8U Referees
-- Region 13 Guidelines for 10U Referees
-- Region 13 Guidelines for 12U Referees
-- Region 13 Guidelines for Penalty Kicks
+### Region 13 Referee Guidelines
 
-### National and International Resources (PDFs)
-- IFAB Laws of the Game (current year)
-- Changes to the Laws of the Game (current year)
-- AYSO National Rules and Regulation Book
-- AYSO Section 1 Rules and Regulations
-- AYSO Addendum to the IFAB Laws of the Game
-- Section 1 Player Development Initiative (PDI) Implementation
-- Referee Quick Reference Card
+Age-group specific rules and modifications:
 
-### Training Materials
-- Pre-Season Meeting Presentation (PDF and video)
+- [6U / 7U / 8U Modifications (2024)](/assets/docs/region13-6u-7u-8u-modifications-2024.pdf) — kick-ins, build-out lines, no goalkeeper, etc.
+- [10U Referee Guidelines (2023)](/assets/docs/region13-10u-referee-guidelines-2023.pdf)
+- [12U Referee Guidelines (2023)](/assets/docs/region13-12u-referee-guidelines-2023.pdf)
+- [Penalty Kick Guidelines (2023)](/assets/docs/penalty-kick-guidelines-2023.pdf)
 
-[document library](/resources/documents/)
+### National and International Rules
+
+For canonical rules, refer to the official sources:
+
+- [IFAB Laws of the Game](https://www.theifab.com/laws/) — Official rulebook (updated each June)
+- [AYSO National](https://www.ayso.org) — National rules, regulations, and the AYSO addendum to IFAB Laws
+- [AYSO Section 1](https://www.ayso1s.org) — Section-level rules and player-development materials
+
+For the Region 13 referee quick-reference card or current pre-season meeting materials, contact [referee@ayso13.org](mailto:referee@ayso13.org).
 
 ## Game Materials
 
-**Log Pages**
-Printable log pages for documenting match records.
+- [Game Card (2023)](/assets/docs/game-card-2023.pdf) — Used in 10U and older divisions
+- [6U/8U Game Report (2023)](/assets/docs/6u-8u-game-report-2023.pdf) — Younger-division match record
 
-**Game Cards**
-Materials for recording game information. See [Game Cards](/coaches/game-cards) for usage instructions.
+See [Game Cards](/coaches/game-cards) for usage instructions.
 
 ## Newsletters
 

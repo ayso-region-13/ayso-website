@@ -463,13 +463,20 @@
 /wp-content/uploads/cropped-AYSO-R13-Logo-266-192x192.png             /images/logo.svg      301
 /wp-content/uploads/2023/08/logo-gold.png                             /images/logo.svg      301
 
-# Hotlinked WP-uploads PDFs (best-fit destinations)
-/wp-content/uploads/2022/07/Intermediate-Coach.pdf                    /coaches/training/    301
-/wp-content/uploads/2022/07/8U-Coach.pdf                              /coaches/training/    301
-/wp-content/uploads/2022/07/10U-Coach.pdf                             /coaches/training/    301
-/wp-content/uploads/2022/07/12U-Coach.pdf                             /coaches/training/    301
+# Hotlinked WP-uploads PDFs — recovered originals, served from /assets/docs/
+/wp-content/uploads/2022/07/Intermediate-Coach.pdf                    /assets/docs/intermediate-coach.pdf       301
+/wp-content/uploads/2022/07/6U-Coach.pdf                              /assets/docs/6u-coach.pdf                 301
+/wp-content/uploads/2022/07/8U-Coach.pdf                              /assets/docs/8u-coach.pdf                 301
+/wp-content/uploads/2022/07/10U-Coach.pdf                             /assets/docs/10u-coach.pdf                301
+/wp-content/uploads/2022/07/12U-Coach.pdf                             /assets/docs/12u-coach.pdf                301
+/wp-content/uploads/2024/09/Region-13-Modifications-for-8U-7U-6U-2024.pdf /assets/docs/region13-6u-7u-8u-modifications-2024.pdf  301
+/wp-content/uploads/2023/08/Region-13-Guidelines-for-10U-Referees-2023.pdf /assets/docs/region13-10u-referee-guidelines-2023.pdf 301
+/wp-content/uploads/2023/08/Region-13-Guidelines-for-12U-Referees-2023.pdf /assets/docs/region13-12u-referee-guidelines-2023.pdf 301
+/wp-content/uploads/2023/08/Game-Card-2023.pdf                        /assets/docs/game-card-2023.pdf           301
+/wp-content/uploads/2023/08/6-8U-Game-Report-2023.pdf                 /assets/docs/6u-8u-game-report-2023.pdf   301
+
+# Other WP PDFs that point to closest current page (no recovered file)
 /wp-content/uploads/2022/03/July_2014.pdf                             /about/board-minutes/ 301
-/wp-content/uploads/2024/09/Region-13-Modifications-for-8U-7U-6U-2024.pdf /referees/laws/   301
 /wp-content/uploads/2025/11/TT25_RefSched_B.pdf                       /referees/scheduling/ 301
 
 # Common typo for Victory Park field — actual URL is /fields/victory/

@@ -4,3 +4,4 @@
 .env.*
 .wrangler/
 gbp-setup.md
+.claude/

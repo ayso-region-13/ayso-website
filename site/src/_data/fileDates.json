@@ -1,5 +1,6 @@
 {
-  "src/_data/fileDates.json": "2026-05-03T11:09:53-07:00",
+  "src/_data/fileDates.json": "2026-05-03T11:22:47-07:00",
+  "src/_redirects": "2026-05-03T11:22:47-07:00",
   "src/_data/heroes.js": "2026-05-03T11:09:53-07:00",
   "src/_includes/home.njk": "2026-05-03T11:09:53-07:00",
   "src/_headers.njk": "2026-05-02T13:46:57-07:00",
@@ -16,7 +17,6 @@
   "src/programs/fall-soccer.md": "2026-05-02T12:32:20-07:00",
   "src/about/index.md": "2026-05-02T12:18:17-07:00",
   "src/index.md": "2026-05-02T12:18:17-07:00",
-  "src/_redirects": "2026-05-02T11:59:33-07:00",
   "src/referees/qa/2026-05-02-can-a-goalkeeper-score-a-goal.md": "2026-05-02T11:22:16-07:00",
   "src/_includes/sponsors-strip.njk": "2026-05-01T15:17:50-07:00",
   "src/resources/gallery.njk": "2026-05-01T15:17:50-07:00",

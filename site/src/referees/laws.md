@@ -10,12 +10,11 @@ The Laws of the Game are the official rules for soccer, established by the Inter
 
 ## Official Resources
 
-The Laws of the Game are available in multiple formats:
-- PDF download
-- Print copies (can be ordered)
-- LOTG mobile app
+The Laws of the Game are published by the International Football Association Board:
 
-[IFAB Laws of the Game](https://www.theifab.com/laws/)
+- [IFAB Laws of the Game](https://www.theifab.com/laws/) — read online or download PDF
+- IFAB also publishes a free mobile app ("Laws of the Game") on iOS and Android
+- Print copies can be ordered through AYSO national or your local sporting-goods retailer
 
 ## AYSO Age-Group Modifications
 

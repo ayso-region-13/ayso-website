@@ -36,6 +36,16 @@ In-person or online course for your specific division.
 | 14U (Intermediate) | Tactical development | One season as 12U coach |
 | 16U-19U (Advanced) | Advanced coaching | One season as Intermediate coach |
 
+## Coach Manuals
+
+Reference materials for each division — the same manuals used in AYSO coaching classes:
+
+- [6U Coach Manual](/assets/docs/6u-coach.pdf)
+- [8U Coach Manual](/assets/docs/8u-coach.pdf)
+- [10U Coach Manual](/assets/docs/10u-coach.pdf)
+- [12U Coach Manual](/assets/docs/12u-coach.pdf)
+- [Intermediate (14U) Coach Manual](/assets/docs/intermediate-coach.pdf)
+
 ## How to Enroll
 
 ### Online Courses
