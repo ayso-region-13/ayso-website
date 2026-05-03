@@ -487,6 +487,11 @@
 /wp-content/uploads/2022/03/July_2014.pdf                             /about/board-minutes/ 301
 /wp-content/uploads/2025/11/TT25_RefSched_B.pdf                       /referees/scheduling/ 301
 
+# Board minutes 2014–2022 moved out of served path (now in archive/board-minutes/
+# in the repo, available on request). Anyone with a direct link to a specific
+# minutes PDF lands on the archive page instead of a 404.
+/assets/docs/minutes/*                                                /about/board-minutes/ 301
+
 # Common typo for Victory Park field — actual URL is /fields/victory/
 /fields/victory-park/           /fields/victory/                                301
 /fields/victory-park            /fields/victory/                                301
