@@ -36,7 +36,7 @@ Cards are submitted to the region.
 
 ## Where to Get Current Cards
 
-Game cards are distributed at division meetings each season — they change year to year, so we don't host a static copy here. If you need a digital copy, contact your division coordinator or [referee@ayso13.org](mailto:referee@ayso13.org).
+2026 Fall Season Game cards will be available in late Summer.
 
 ## Tips
 
