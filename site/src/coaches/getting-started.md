@@ -39,7 +39,7 @@ Attend an in-person class or complete online certification for your specific div
 ## Step 4: Attend Division Meeting
 
 Division meetings are held in August before the season starts. You'll receive:
-- Your coaching manual
+- Your coaching manual ([6U](/assets/docs/6u-coach.pdf), [8U](/assets/docs/8u-coach.pdf), [10U](/assets/docs/10u-coach.pdf), [12U](/assets/docs/12u-coach.pdf), or [Intermediate](/assets/docs/intermediate-coach.pdf))
 - Equipment bag
 - Team roster
 - Practice field assignment

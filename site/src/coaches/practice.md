@@ -35,6 +35,12 @@ Teams may temporarily use adjacent empty spaces during practice, but those space
 ### Age-Appropriate Activities
 Use the coaching manual for your division. Activities should match players' developmental stage.
 
+- [6U Coach Manual](/assets/docs/6u-coach.pdf)
+- [8U Coach Manual](/assets/docs/8u-coach.pdf)
+- [10U Coach Manual](/assets/docs/10u-coach.pdf)
+- [12U Coach Manual](/assets/docs/12u-coach.pdf)
+- [Intermediate (14U) Coach Manual](/assets/docs/intermediate-coach.pdf)
+
 ### Sample Practice Structure
 1. Warm-up (10 min)
 2. Skill focus (20-30 min)
@@ -42,7 +48,6 @@ Use the coaching manual for your division. Activities should match players' deve
 4. Cool-down and water break
 
 ### Resources
-- Age-specific coaching manuals
 - AYSO coaching videos
 - [PIE Philosophy](/coaches/pie) for positive coaching techniques
 

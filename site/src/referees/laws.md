@@ -59,7 +59,7 @@ Toe cleats are not prohibited by default. Referees inspect for dangerous burrs o
 
 Region 13 provides specific guidelines for penalty kick procedures, including shootouts for tournaments.
 
-[Region 13 Penalty Kick Guidelines (PDF)](/assets/docs/penalty-kick-guidelines-2023.pdf)
+[Region 13 Penalty Kick Guidelines (PDF)](/assets/docs/penalty-kick-guidelines.pdf)
 
 ## Related Pages
 

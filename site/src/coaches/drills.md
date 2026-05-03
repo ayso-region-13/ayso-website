@@ -8,7 +8,13 @@ description: "Soccer drills and skills exercises for AYSO Region 13 coaches. Age
 
 ## Coaching Manuals
 
-AYSO provides age-specific coaching manuals with practice activities appropriate for each division. You'll receive your manual during coach training.
+AYSO provides age-specific coaching manuals with practice activities appropriate for each division. You'll receive your manual during coach training, and they're also available here:
+
+- [6U Coach Manual](/assets/docs/6u-coach.pdf)
+- [8U Coach Manual](/assets/docs/8u-coach.pdf)
+- [10U Coach Manual](/assets/docs/10u-coach.pdf)
+- [12U Coach Manual](/assets/docs/12u-coach.pdf)
+- [Intermediate (14U) Coach Manual](/assets/docs/intermediate-coach.pdf)
 
 ## Practice Structure
 

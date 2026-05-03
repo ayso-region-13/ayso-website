@@ -28,11 +28,10 @@ See [Coach Training](/coaches/training/) for the full certification path and [Ga
 ## Referee Resources
 
 - [Laws of the Game (IFAB)](https://www.theifab.com/laws/) — official rulebook
-- [Region 13 6U/7U/8U Modifications](/assets/docs/region13-6u-7u-8u-modifications-2024.pdf)
-- [Region 13 10U Referee Guidelines](/assets/docs/region13-10u-referee-guidelines-2023.pdf)
-- [Region 13 12U Referee Guidelines](/assets/docs/region13-12u-referee-guidelines-2023.pdf)
-- [Region 13 Penalty Kick Guidelines](/assets/docs/penalty-kick-guidelines-2023.pdf)
-- [Game Card](/assets/docs/game-card-2023.pdf) and [6U/8U Game Report](/assets/docs/6u-8u-game-report-2023.pdf)
+- [Region 13 6U/7U/8U Modifications](/assets/docs/6u-7u-8u-modifications.pdf)
+- [Region 13 10U Referee Guidelines](/assets/docs/10u-referee-guidelines.pdf)
+- [Region 13 12U Referee Guidelines](/assets/docs/12u-referee-guidelines.pdf)
+- [Region 13 Penalty Kick Guidelines](/assets/docs/penalty-kick-guidelines.pdf)
 
 See [Referee Resources](/referees/resources/) for the full document library.
 

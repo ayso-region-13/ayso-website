@@ -9,8 +9,7 @@ description: "Required training for AYSO Region 13 team managers — SafeSport, 
 ## Required Training
 
 ### 1. Team Manager Orientation
-- Watch the orientation video
-- Review the orientation presentation
+- Attend the team-manager orientation each season — see [Training Classes](/volunteers/classes) for the schedule
 - Complete the task list at the [Manager Overview](/managers) page
 - Contact [team@ayso13.org](mailto:team@ayso13.org) with questions
 
@@ -30,7 +29,6 @@ description: "Required training for AYSO Region 13 team managers — SafeSport, 
 [eTrainU](https://ayso13.inleague.com/eTrainu/index/)
 
 ### 4. Required Reading
-- Team manager orientation materials
 - Volunteer Slack channel guidelines
 - [Team Manager Tasks](/managers/tasks) documentation
 
