@@ -12,10 +12,15 @@ crons = ["*/5 * * * *"]
 binding = "WEATHER_KV"
 id = "3a591305dddf4644903b97201292a989"
 
-# Mount the Worker on the prod domain at /api/weather. Same-origin so the
-# browser fetch from /resources/weather/ doesn't need CORS.
+# Mount the Worker on the prod + staging domains at /api/weather.
+# Same-origin so the browser fetch from /resources/weather/ doesn't
+# need CORS on either environment.
 [[routes]]
 pattern = "www.ayso13.org/api/weather"
+zone_name = "ayso13.org"
+
+[[routes]]
+pattern = "staging.ayso13.org/api/weather"
 zone_name = "ayso13.org"
 
 # Environment defaults — Pasadena City Hall as the NWS forecast point.
