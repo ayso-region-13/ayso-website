@@ -49,6 +49,14 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ## Completed ✓
 
+### Session 18 (2026-05-04) — live weather page + heat policy
+- [x] **`/resources/weather/`** — live current conditions, WBGT + CIF alert level, 7-day forecast. Server-rendered field-status reference (read from `_data/fieldstatus.json`). Inline JS uses safe DOM construction (no innerHTML) to render forecast cards; same-origin fetch to `/api/weather`.
+- [x] **`/resources/heat-policy/`** — standalone CIF reference: alert-level table (5 rows with WBGT thresholds + required actions), "How we make the call," "What you can do," CIF source citation. Linked from `/resources/safety/`, `/resources/weather/`, footer, and Resources sidebar.
+- [x] **Cloudflare Worker `ayso13-weather-api`** — at `workers/weather-api/`, mounted on `www.ayso13.org/api/weather`. Cron `*/5 * * * *` polls Tempest station 33318 + NWS forecast for Pasadena City Hall, computes WBGT (Stull wet-bulb + Bernard simplified outdoor approx), caches normalized envelope in KV namespace `WEATHER_KV` (id `3a591305dddf4644903b97201292a989`). `TEMPEST_TOKEN` set as wrangler secret. Live JSON response verified.
+- [x] **Closure recommendation is advisory only** — page banner shows when WBGT level ≥ 5; does NOT auto-update `fieldstatus.json`. Board still makes the official close call via the Slack bot.
+- [x] **Safety page rewritten** — heat-policy section replaced with links to the new `/resources/heat-policy/` and `/resources/weather/` pages instead of the third-party Zelus app reference.
+- [x] **Footer + sidebar nav** — "Safety & Heat Policy" combo link broken into three: Safety / Heat Policy / Weather & Field Status.
+
 ### Session 17 (2026-05-03) — PDF recovery, archive structure, content cleanup
 - [x] **Lost-WP PDF recovery from Wayback Machine** — Wayback CDX inventory found 155 unique WP-era PDFs. Validated each download by checking for `%%EOF` marker (Wayback's "most recent" snapshot was often a 5 MB junk-padded placeholder; real content came from earlier 2023-06-27 / 2025-05-03 snapshots). Recovered ~95 valid PDFs to `archive/wp-uploads/` (preserving WP path structure, outside `site/` so not deployed). About 50 weren't recoverable (placeholders only or rate-limited).
 - [x] **`archive/` directory established at repo root** — outside `site/`, never built or served by Cloudflare Pages, but tracked in git for institutional record. Has `wp-uploads/` (Wayback recoveries), `from-drive/` (originals from Drive), `board-minutes/` (older minutes moved off served path). Documented in `archive/README.md`.

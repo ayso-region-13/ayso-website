@@ -347,8 +347,10 @@
 /photos-u10                     /resources/gallery/                             301
 /safety/                        /resources/safety/                              301
 /safety                         /resources/safety/                              301
-/heat/                          /resources/safety/                              301
-/heat                           /resources/safety/                              301
+/heat/                          /resources/heat-policy/                         301
+/heat                           /resources/heat-policy/                         301
+/weather/                       /resources/weather/                             301
+/weather                        /resources/weather/                             301
 /incident/                      /resources/safety/                              301
 /incident                       /resources/safety/                              301
 /tickets/                       /resources/                                     301
@@ -489,6 +491,7 @@
 
 # Other WP PDFs that point to closest current page (no recovered file)
 /wp-content/uploads/2022/03/July_2014.pdf                             /about/board-minutes/ 301
+/wp-content/uploads/2022/03/phsnorth.jpg                              /fields/pasadena-hs/  301
 /wp-content/uploads/2025/11/TT25_RefSched_B.pdf                       /referees/scheduling/ 301
 
 # Old WP-style board-minutes filenames (2014–2022) — those PDFs are no longer

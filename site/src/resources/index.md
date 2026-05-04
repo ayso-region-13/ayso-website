@@ -17,7 +17,25 @@ description: "AYSO Region 13 resources — document library, photo gallery, news
 
 Concussion protocols, cardiac arrest awareness, and safety policies.
 
-[Safety Information](/resources/safety)
+[Safety Information](/resources/safety/)
+
+## Heat Policy
+
+California CIF Wet Bulb Globe Temperature alert levels and what each means for Region 13 practice and games.
+
+[Heat Policy](/resources/heat-policy/)
+
+## Rain Policy
+
+Wet-field closure thresholds. Region 13 closes fields when recent rainfall has saturated the playing surfaces.
+
+[Rain Policy](/resources/rain-policy/)
+
+## Weather and Field Conditions
+
+Live readings from Region 13's on-site weather station, current WBGT, and a 7-day Pasadena forecast.
+
+[Weather and Field Conditions](/resources/weather/)
 
 ## Picture Day
 

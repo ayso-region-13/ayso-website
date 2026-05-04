@@ -1,0 +1,14 @@
+{
+  "name": "ayso13-weather-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cloudflare Worker that fetches Tempest + NWS data, computes WBGT, and serves /api/weather for the AYSO Region 13 weather page.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.87.0"
+  }
+}

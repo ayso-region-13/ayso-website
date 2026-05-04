@@ -13,9 +13,10 @@ permissions:
 
 jobs:
   promote:
-    name: Merge staging → main
+    name: Merge staging → main, wait for Cloudflare deploy
     runs-on: ubuntu-latest
     if: github.event.inputs.confirm == 'promote'
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,13 +35,16 @@ jobs:
           git pull origin main
           git merge origin/staging --no-edit --no-ff -X theirs
           git push origin main
-          echo "sha=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+          {
+            echo "sha_short=$(git rev-parse --short HEAD)"
+            echo "sha_full=$(git rev-parse HEAD)"
+          } >> "$GITHUB_OUTPUT"
 
-      - name: Notify Slack on success
+      - name: Notify Slack — promotion merged, awaiting Cloudflare deploy
         if: success()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-          SHA: ${{ steps.merge.outputs.sha }}
+          SHA: ${{ steps.merge.outputs.sha_short }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           curl -sS -X POST https://slack.com/api/chat.postMessage \
@@ -48,27 +52,68 @@ jobs:
             -H "Content-Type: application/json; charset=utf-8" \
             --data "$(jq -nc --arg sha "$SHA" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
-              text: "Production deploy succeeded — \($sha)",
+              text: "Promotion merged — Cloudflare deploying \($sha)…",
               blocks: [
-                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Production deploy succeeded* — `\($sha)` is now live on www.ayso13.org." } },
+                { type: "section", text: { type: "mrkdwn", text: ":hourglass_flowing_sand: *Promotion merged* — Cloudflare is now building `\($sha)`. Slack will update when it's live (~2 min)." } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
               ]
             }')"
 
-      - name: Notify Slack on failure
-        if: failure()
+      - name: Wait for Cloudflare Pages deploy
+        id: cf_wait
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          PROJECT: ayso-website-prod
+          SHA: ${{ steps.merge.outputs.sha_full }}
+        run: bash .github/scripts/wait-for-cf-deploy.sh
+
+      - name: Notify Slack — deploy live
+        if: success()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ steps.merge.outputs.sha_short }}
+          BUILD_SECONDS: ${{ steps.cf_wait.outputs.build_seconds }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg run "$RUN_URL" '{
+            --data "$(jq -nc --arg sha "$SHA" --arg secs "$BUILD_SECONDS" --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Production deploy live — \($sha)",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Production deploy live* — `\($sha)` is now serving on www.ayso13.org. Build took \($secs)s." } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+              ]
+            }')"
+
+      - name: Notify Slack — failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ steps.merge.outputs.sha_short }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          MERGE_OUTCOME: ${{ steps.merge.outcome }}
+          CF_OUTCOME: ${{ steps.cf_wait.outcome }}
+        run: |
+          # Distinguish merge failure from Cloudflare-build failure so the
+          # Slack message is actionable.
+          if [ "$MERGE_OUTCOME" != "success" ]; then
+            REASON="Merge from staging to main failed. Staging was not promoted."
+          elif [ "$CF_OUTCOME" != "success" ]; then
+            REASON="Merge succeeded but Cloudflare Pages build failed for \`$SHA\`. Site is still serving the previous version."
+          else
+            REASON="Workflow failed. See run logs."
+          fi
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg reason "$REASON" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
               text: "Production deploy failed",
               blocks: [
-                { type: "section", text: { type: "mrkdwn", text: ":x: *Production deploy failed* — staging was not promoted to production." } },
+                { type: "section", text: { type: "mrkdwn", text: ":x: *Production deploy failed* — \($reason)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run for details>" } ] }
               ]
             }')"

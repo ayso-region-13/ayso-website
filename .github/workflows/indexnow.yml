@@ -24,11 +24,21 @@ jobs:
   submit:
     name: Submit sitemap URLs to IndexNow
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v4
+
       - name: Wait for Cloudflare Pages deploy
-        # CF Pages deploys ~90-120s after a push. Sleep so the URLs we submit
-        # are guaranteed to be reachable when search engines fetch them.
-        run: sleep 150
+        # Polls the CF Pages API for a deployment matching the SHA we just
+        # pushed and waits until it reaches a terminal state. Replaces the
+        # earlier `sleep 150` guess so the URLs we submit are guaranteed to
+        # resolve when search engines fetch them.
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          PROJECT: ayso-website-prod
+          SHA: ${{ github.sha }}
+        run: bash .github/scripts/wait-for-cf-deploy.sh
 
       - name: Submit URLs to IndexNow
         env:

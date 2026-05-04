@@ -1,0 +1,33 @@
+name = "ayso13-weather-api"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+# Cron triggers refresh every 5 min so the cached payload stays fresh
+# regardless of page traffic.
+[triggers]
+crons = ["*/5 * * * *"]
+
+# KV holds the most recent normalized JSON envelope under key "current".
+[[kv_namespaces]]
+binding = "WEATHER_KV"
+id = "3a591305dddf4644903b97201292a989"
+
+# Mount the Worker on the prod + staging domains at /api/weather.
+# Same-origin so the browser fetch from /resources/weather/ doesn't
+# need CORS on either environment.
+[[routes]]
+pattern = "www.ayso13.org/api/weather"
+zone_name = "ayso13.org"
+
+[[routes]]
+pattern = "staging.ayso13.org/api/weather"
+zone_name = "ayso13.org"
+
+# Environment defaults — Pasadena City Hall as the NWS forecast point.
+# Override with `wrangler deploy --var FORECAST_LAT=... FORECAST_LON=...`
+# if Region 13 wants a primary-field-specific forecast.
+[vars]
+FORECAST_LAT = "34.1478"
+FORECAST_LON = "-118.1445"
+USER_AGENT = "(ayso13.org weather page, info@ayso13.org)"
+TEMPEST_STATION_ID = "33318"
