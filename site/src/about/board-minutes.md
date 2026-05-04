@@ -19,14 +19,13 @@ Board meetings are held on the first Thursday of every month at 7:15pm. Everyone
 - [July 7, 2025](/assets/docs/minutes/ayso-executive-board-meeting-2025-07-07.pdf)
 - [May 1, 2025](/assets/docs/minutes/ayso-executive-board-meeting-2025-05-01.pdf)
 - [April 14, 2025](/assets/docs/minutes/ayso-executive-board-meeting-2025-04-14.pdf)
-- [April 13, 2025](/assets/docs/minutes/ayso-executive-board-meeting-2025-04-13.pdf)
 - [April 3, 2025](/assets/docs/minutes/ayso-executive-board-meeting-2025-04-03.pdf)
 - [March 20, 2025](/assets/docs/minutes/ayso-executive-board-meeting-2025-03-20.pdf)
 - [February 6, 2025](/assets/docs/minutes/ayso-executive-board-meeting-2025-02-06.pdf)
 - [November 10, 2024](/assets/docs/minutes/ayso-executive-board-meeting-2024-11-10.pdf)
 - [November 7, 2024](/assets/docs/minutes/ayso-executive-board-meeting-2024-11-07.pdf)
 
-## Older minutes (2014–2022)
+## Older minutes
 
 Minutes from earlier seasons are preserved in the project archive. Request a specific year by emailing [rc@ayso13.org](mailto:rc@ayso13.org).
 
