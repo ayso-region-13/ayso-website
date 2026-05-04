@@ -9,6 +9,8 @@ heroImage: action-04.jpg
 
 Live conditions from Region 13's on-site Tempest weather station, plus the current Wet Bulb Globe Temperature (WBGT) and the corresponding California CIF heat-policy alert level. For what each level means, see the [Heat Policy](/resources/heat-policy/) page.
 
+<div id="simulate-banner" class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-6" hidden></div>
+
 <div id="closure-banner" class="bg-brand-cream border-l-4 border-brand-red-dark p-4 mb-6" hidden>
   <p class="font-semibold text-brand-red-dark mb-1">Outdoor activity suspended (CIF Level 5)</p>
   <p class="text-brand-dark text-sm m-0">WBGT has crossed the closure threshold. Fields are closed pending board confirmation. Watch the home page banner for the official call.</p>
@@ -86,6 +88,20 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
     5: { border: "border-brand-red-dark", action: "No outdoor activity. Suspend until conditions cool. Region 13 closes fields." }
   };
 
+  // Synthetic WBGT values + labels for ?simulate=N preview mode (visual QA only).
+  var SIMULATE_FIXTURES = {
+    1: { valueF: 75.0, level: 1, levelLabel: "Normal activities" },
+    2: { valueF: 82.0, level: 2, levelLabel: "Frequent water breaks" },
+    3: { valueF: 86.0, level: 3, levelLabel: "Activity reduced" },
+    4: { valueF: 88.5, level: 4, levelLabel: "Strict activity limits" },
+    5: { valueF: 91.0, level: 5, levelLabel: "Outdoor activity suspended" }
+  };
+
+  function getSimulateLevel() {
+    var m = (window.location.search || "").match(/[?&]simulate=([1-5])\b/);
+    return m ? Number(m[1]) : null;
+  }
+
   function setText(id, value) {
     var el = document.getElementById(id);
     if (el) el.textContent = value == null ? "—" : String(value);
@@ -147,6 +163,40 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
     show("forecast-section");
   }
 
+  function showSimulateBanner(currentLevel) {
+    var host = document.getElementById("simulate-banner");
+    if (!host) return;
+    while (host.firstChild) host.removeChild(host.firstChild);
+
+    var label = document.createElement("p");
+    label.className = "font-semibold text-brand-red-dark text-sm mb-2";
+    label.textContent = "Preview mode — showing CIF Level " + currentLevel + " (synthetic data, not live)";
+    host.appendChild(label);
+
+    var links = document.createElement("p");
+    links.className = "text-xs text-brand-dark m-0";
+    links.appendChild(document.createTextNode("Switch: "));
+    [1, 2, 3, 4, 5].forEach(function (n, i) {
+      if (i > 0) links.appendChild(document.createTextNode(" · "));
+      var a = document.createElement("a");
+      a.href = "?simulate=" + n;
+      a.textContent = "Level " + n;
+      a.className = (n === currentLevel)
+        ? "font-bold text-brand-red-dark underline"
+        : "text-brand-red-dark underline";
+      links.appendChild(a);
+    });
+    links.appendChild(document.createTextNode(" · "));
+    var live = document.createElement("a");
+    live.href = location.pathname;
+    live.textContent = "Live data";
+    live.className = "text-brand-red-dark underline";
+    links.appendChild(live);
+
+    host.appendChild(links);
+    host.removeAttribute("hidden");
+  }
+
   function applyWbgtPalette(level) {
     var card = document.getElementById("wbgt-card");
     if (!card) return;
@@ -158,6 +208,13 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
   }
 
   function render(data) {
+    var simLevel = getSimulateLevel();
+    if (simLevel) {
+      data = JSON.parse(JSON.stringify(data || {}));
+      data.wbgt = SIMULATE_FIXTURES[simLevel];
+      data.closureRecommended = simLevel >= 5;
+      showSimulateBanner(simLevel);
+    }
     var c = data.current || {};
     var w = data.wbgt || {};
     setText("temp",       c.tempF != null ? c.tempF : "—");
