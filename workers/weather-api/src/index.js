@@ -60,14 +60,18 @@ export default {
 };
 
 async function refresh(env) {
-  const [tempestObs, nwsForecast] = await Promise.all([
+  const [tempestObs, nwsForecast, prevRainState] = await Promise.all([
     fetchTempest(env),
     fetchNwsForecast(env),
+    env.WEATHER_KV.get("rain:state", { type: "json" }),
   ]);
 
   const wbgt = computeWbgt(tempestObs);
   const wbgtF = celsiusToFahrenheit(wbgt);
   const cif = cifLevel(wbgtF);
+
+  const rainState = await updateRainState(env, tempestObs, prevRainState);
+  const rain = rainAdvisory(rainState);
 
   const payload = {
     fetchedAt: new Date().toISOString(),
@@ -87,7 +91,8 @@ async function refresh(env) {
       level: cif.level,
       levelLabel: cif.label,
     },
-    closureRecommended: cif.level >= 5,
+    rain: rain,
+    closureRecommended: cif.level >= 5 || rain.closureRecommended,
     forecast: nwsForecast,
   };
 
@@ -95,6 +100,101 @@ async function refresh(env) {
     expirationTtl: 60 * 60 * 24, // 24 h safety net if the cron stalls
   });
   return payload;
+}
+
+// ── Rain tracking ──────────────────────────────────────────────────────
+//
+// Tempest's current obs gives us today (precip_accum_local_day) and
+// yesterday (precip_accum_local_yesterday) but nothing further back. We
+// keep a 7-day rolling history of daily totals in KV so we can compute
+// 48 h and 72 h sums independently of the cron's lookback.
+//
+// Each refresh:
+//   1. Stamp today's running total (overwrites — Tempest's value is
+//      authoritative for the current day).
+//   2. If we don't yet have yesterday's archived total, capture it
+//      from precip_accum_local_yesterday (which is final once the day
+//      rolls over).
+//   3. Prune anything older than 7 days.
+
+const RAIN_THRESHOLDS_IN = { last48h: 0.25, last72h: 1.0 };
+const MM_TO_INCHES = 0.0393701;
+
+async function updateRainState(env, obs, prev) {
+  const today = pacificDate(obs.timestampIso || new Date().toISOString());
+  const yesterday = addDays(today, -1);
+
+  const dailyTotals = (prev && prev.dailyTotals) ? { ...prev.dailyTotals } : {};
+
+  dailyTotals[today] = round(obs.precipDayMm * MM_TO_INCHES, 3);
+
+  // Capture yesterday's final total if we don't have one yet (e.g. first
+  // run after deploy, or the cron didn't tick at end-of-day).
+  if (dailyTotals[yesterday] == null && obs.precipYesterdayMm != null) {
+    dailyTotals[yesterday] = round(obs.precipYesterdayMm * MM_TO_INCHES, 3);
+  }
+
+  // Prune anything older than 7 days so KV doesn't grow unbounded.
+  const cutoff = addDays(today, -7);
+  for (const date of Object.keys(dailyTotals)) {
+    if (date < cutoff) delete dailyTotals[date];
+  }
+
+  const state = { dailyTotals, asOfPacificDate: today };
+  await env.WEATHER_KV.put("rain:state", JSON.stringify(state), {
+    expirationTtl: 60 * 60 * 24 * 14, // 14 d safety net
+  });
+  return state;
+}
+
+function rainAdvisory(state) {
+  const today = state.asOfPacificDate;
+  const get = (offset) => state.dailyTotals[addDays(today, offset)] || 0;
+
+  // 48 h ≈ today + yesterday (approximation, drifts up to 24 h either way
+  // depending on time of day; conservative for closure decisions).
+  // 72 h ≈ today + yesterday + day before.
+  const last48h = round(get(0) + get(-1), 2);
+  const last72h = round(get(0) + get(-1) + get(-2), 2);
+
+  let closureRecommended = false;
+  let reason = null;
+  if (last48h > RAIN_THRESHOLDS_IN.last48h) {
+    closureRecommended = true;
+    reason = `Heavy rain in past 48 hours (${last48h}\")`;
+  } else if (last72h > RAIN_THRESHOLDS_IN.last72h) {
+    closureRecommended = true;
+    reason = `Heavy rain over past 72 hours (${last72h}\")`;
+  }
+
+  return {
+    last48hInches: last48h,
+    last72hInches: last72h,
+    thresholds: RAIN_THRESHOLDS_IN,
+    closureRecommended,
+    reason,
+  };
+}
+
+// YYYY-MM-DD in America/Los_Angeles for a given ISO timestamp.
+function pacificDate(iso) {
+  const d = new Date(iso);
+  const fmt = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric", month: "2-digit", day: "2-digit",
+  });
+  return fmt.format(d); // en-CA → "2026-05-04"
+}
+
+// Add days (positive or negative) to a YYYY-MM-DD string, returning YYYY-MM-DD.
+function addDays(ymd, days) {
+  const [y, m, d] = ymd.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  dt.setUTCDate(dt.getUTCDate() + days);
+  const yy = dt.getUTCFullYear();
+  const mm = String(dt.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(dt.getUTCDate()).padStart(2, "0");
+  return `${yy}-${mm}-${dd}`;
 }
 
 // ── Tempest ────────────────────────────────────────────────────────────
@@ -115,7 +215,9 @@ async function fetchTempest(env) {
 
   // Tempest payload shape (selected fields, all SI units due to query):
   //   air_temperature, relative_humidity, wind_avg, wind_gust,
-  //   solar_radiation, feels_like, conditions, timestamp (epoch s)
+  //   solar_radiation, feels_like, conditions, timestamp (epoch s),
+  //   precip_accum_local_day (mm since local midnight),
+  //   precip_accum_local_yesterday (mm, yesterday's full-day total).
   return {
     temperatureC: obs.air_temperature,
     feelsLikeC: obs.feels_like ?? obs.air_temperature,
@@ -126,6 +228,8 @@ async function fetchTempest(env) {
     conditions: obs.conditions,
     stationName: json.station_name,
     timestampIso: obs.timestamp ? new Date(obs.timestamp * 1000).toISOString() : null,
+    precipDayMm: obs.precip_accum_local_day ?? 0,
+    precipYesterdayMm: obs.precip_accum_local_yesterday ?? 0,
   };
 }
 

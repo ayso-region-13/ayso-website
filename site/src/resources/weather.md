@@ -12,6 +12,8 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
 
 <div id="simulate-banner" class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-6 not-prose" hidden></div>
 
+<div id="rain-banner" class="not-prose mb-6" role="alert" hidden></div>
+
 <div id="heat-banner" class="not-prose mb-6" role="alert" hidden></div>
 
 <div id="weather-loading" class="bg-brand-cream p-4 mb-6 text-brand-dark text-sm not-prose">
@@ -128,9 +130,22 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
     5: { valueF: 91.0, level: 5, levelLabel: "Outdoor activity suspended" }
   };
 
+  // Synthetic rain values for ?simulate-rain=48h | 72h preview mode.
+  var SIMULATE_RAIN = {
+    "48h": { last48hInches: 0.40, last72hInches: 0.40, closureRecommended: true,
+             reason: "Heavy rain in past 48 hours (0.40\")" },
+    "72h": { last48hInches: 0.20, last72hInches: 1.20, closureRecommended: true,
+             reason: "Heavy rain over past 72 hours (1.20\")" }
+  };
+
   function getSimulateLevel() {
     var m = (window.location.search || "").match(/[?&]simulate=([1-5])\b/);
     return m ? Number(m[1]) : null;
+  }
+
+  function getSimulateRain() {
+    var m = (window.location.search || "").match(/[?&]simulate-rain=(48h|72h)\b/);
+    return m ? m[1] : null;
   }
 
   function setText(id, value) {
@@ -194,37 +209,89 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
     show("forecast-section");
   }
 
-  function showSimulateBanner(currentLevel) {
+  function showSimulateBanner(state) {
     var host = document.getElementById("simulate-banner");
     if (!host) return;
     while (host.firstChild) host.removeChild(host.firstChild);
 
+    var pieces = [];
+    if (state.level) pieces.push("CIF Level " + state.level);
+    if (state.rain)  pieces.push("rain past " + state.rain);
+
     var label = document.createElement("p");
     label.className = "font-semibold text-brand-red-dark text-sm mb-2";
-    label.textContent = "Preview mode: showing CIF Level " + currentLevel + " (synthetic data, not live)";
+    label.textContent = "Preview mode: showing " + pieces.join(" + ") + " (synthetic data, not live)";
     host.appendChild(label);
 
-    var links = document.createElement("p");
-    links.className = "text-xs text-brand-dark m-0";
-    links.appendChild(document.createTextNode("Switch: "));
-    [1, 2, 3, 4, 5].forEach(function (n, i) {
-      if (i > 0) links.appendChild(document.createTextNode(" · "));
+    function makeLink(text, href, isCurrent) {
       var a = document.createElement("a");
-      a.href = "?simulate=" + n;
-      a.textContent = "Level " + n;
-      a.className = (n === currentLevel)
+      a.href = href;
+      a.textContent = text;
+      a.className = isCurrent
         ? "font-bold text-brand-red-dark underline"
         : "text-brand-red-dark underline";
-      links.appendChild(a);
-    });
-    links.appendChild(document.createTextNode(" · "));
-    var live = document.createElement("a");
-    live.href = location.pathname;
-    live.textContent = "Live data";
-    live.className = "text-brand-red-dark underline";
-    links.appendChild(live);
+      return a;
+    }
 
-    host.appendChild(links);
+    var heatRow = document.createElement("p");
+    heatRow.className = "text-xs text-brand-dark m-0";
+    heatRow.appendChild(document.createTextNode("Heat: "));
+    [1, 2, 3, 4, 5].forEach(function (n, i) {
+      if (i > 0) heatRow.appendChild(document.createTextNode(" · "));
+      heatRow.appendChild(makeLink("Level " + n, "?simulate=" + n, n === state.level));
+    });
+    host.appendChild(heatRow);
+
+    var rainRow = document.createElement("p");
+    rainRow.className = "text-xs text-brand-dark m-0 mt-1";
+    rainRow.appendChild(document.createTextNode("Rain: "));
+    rainRow.appendChild(makeLink("48h heavy",  "?simulate-rain=48h", state.rain === "48h"));
+    rainRow.appendChild(document.createTextNode(" · "));
+    rainRow.appendChild(makeLink("72h heavy",  "?simulate-rain=72h", state.rain === "72h"));
+    host.appendChild(rainRow);
+
+    var liveRow = document.createElement("p");
+    liveRow.className = "text-xs text-brand-dark m-0 mt-1";
+    liveRow.appendChild(makeLink("Back to live data", location.pathname, false));
+    host.appendChild(liveRow);
+
+    host.removeAttribute("hidden");
+  }
+
+  function renderRainBanner(rain) {
+    var host = document.getElementById("rain-banner");
+    if (!host) return;
+    while (host.firstChild) host.removeChild(host.firstChild);
+    host.setAttribute("hidden", "");
+    if (!rain || !rain.closureRecommended) return;
+
+    var box = document.createElement("div");
+    box.className = "bg-brand-red-dark text-white p-5";
+
+    var title = document.createElement("p");
+    title.className = "text-base font-bold uppercase tracking-wider mb-2 m-0";
+    title.textContent = "Field Closure: Wet Field Conditions";
+    box.appendChild(title);
+
+    var lead = document.createElement("p");
+    lead.className = "text-sm font-semibold mb-3 m-0";
+    lead.textContent = rain.reason || "Recent heavy rain has saturated the fields.";
+    box.appendChild(lead);
+
+    var list = document.createElement("ul");
+    list.className = "text-sm list-disc pl-5 m-0 space-y-1";
+    [
+      "Games: canceled",
+      "Practices: canceled",
+      "Region 13 closes fields until conditions improve"
+    ].forEach(function (text) {
+      var li = document.createElement("li");
+      li.textContent = text;
+      list.appendChild(li);
+    });
+    box.appendChild(list);
+
+    host.appendChild(box);
     host.removeAttribute("hidden");
   }
 
@@ -265,11 +332,17 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
 
   function render(data) {
     var simLevel = getSimulateLevel();
-    if (simLevel) {
+    var simRain  = getSimulateRain();
+    if (simLevel || simRain) {
       data = JSON.parse(JSON.stringify(data || {}));
-      data.wbgt = SIMULATE_FIXTURES[simLevel];
-      data.closureRecommended = simLevel >= 5;
-      showSimulateBanner(simLevel);
+      if (simLevel) {
+        data.wbgt = SIMULATE_FIXTURES[simLevel];
+      }
+      if (simRain) {
+        data.rain = SIMULATE_RAIN[simRain];
+      }
+      data.closureRecommended = (simLevel >= 5) || (data.rain && data.rain.closureRecommended);
+      showSimulateBanner({ level: simLevel, rain: simRain });
     }
     var c = data.current || {};
     var w = data.wbgt || {};
@@ -282,6 +355,7 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
     setText("cif-level",  w.level != null ? w.level : "—");
     setText("cif-label",  w.levelLabel || "—");
 
+    renderRainBanner(data.rain);
     renderHeatBanner(w.level);
     renderForecast(data.forecast || []);
 
