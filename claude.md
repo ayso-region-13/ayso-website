@@ -45,7 +45,8 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] **Repo made public** + branch ruleset on `main` requires PRs (PROMOTE_TOKEN PAT bypass for the workflow)
 - [x] **Slack notifications on promote** — `/ayso promote` and the workflow now post success/failure to `#notify-website-status`
 - [x] **Launched** — DNS cut over to www.ayso13.org on 2026-05-01
-- [x] **Live weather page + heat policy (2026-05-04)** — `/resources/weather/` shows current conditions from Region 13's Tempest station, computed WBGT + CIF alert level, and a 7-day NWS Pasadena forecast. `/resources/heat-policy/` documents the 5 CIF alert tiers and required actions. Powered by Cloudflare Worker at `workers/weather-api/` (cron every 5 min, KV-cached, mounted on `www.ayso13.org/api/weather`). Closure banner at WBGT level 5 is advisory only — board still makes the official call via Slack bot.
+- [x] **Live weather + heat + rain policy (2026-05-04)** — `/resources/weather/` shows current conditions from Region 13's Tempest station, computed WBGT + CIF alert level, 48h/72h rainfall totals, and a 7-day NWS Pasadena forecast. `/resources/heat-policy/` documents the 5 CIF alert tiers + required actions; `/resources/rain-policy/` documents the wet-field closure thresholds (>0.25" in 48h or >1" in 72h). Powered by Cloudflare Worker at `workers/weather-api/` (cron every 5 min, KV-cached, mounted on `www.ayso13.org/api/weather` and `staging.ayso13.org/api/weather`). Heat + rain banners are advisory only ("Advisory:" prefix in title); board still makes the official call via Slack bot. Page supports `?simulate=N` (heat 1–5) and `?simulate-rain=48h|72h` for visual QA. Field-status bar at top of page is opt-in via frontmatter `showFieldStatus: true` (handled in `page.njk`).
+- [x] **CF Pages deploy gate on promote workflow** — `.github/workflows/promote-to-production.yml` and `.github/workflows/indexnow.yml` now wait for the matching Cloudflare Pages deployment to reach a terminal state via the CF API (replaced earlier `sleep 150` guess). Requires `CF_API_TOKEN` (Pages:Read) + `CF_ACCOUNT_ID` repo secrets. Helper script at `.github/scripts/wait-for-cf-deploy.sh`.
 
 ## Platform Decision
 **Switched from Squarespace to Eleventy (11ty) + Tailwind CSS.**
@@ -244,7 +245,7 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/content/` — Source Markdown files (migrated into `site/src/` via migrate-content.js)
 - `/site/` — The actual Eleventy site (active development)
 - `/logo/` — Logo assets
-- `/workers/weather-api/` — Cloudflare Worker that powers `/resources/weather/`. Cron-polls Tempest station 33318 + NWS forecast every 5 min, computes WBGT, caches the envelope in KV, serves at `www.ayso13.org/api/weather`. Deploy with `cd workers/weather-api && npx wrangler deploy`. `TEMPEST_TOKEN` is a wrangler secret (not in git); station ID, lat/lon, and KV id are in `wrangler.toml`. See `workers/weather-api/README.md` for setup details.
+- `/workers/weather-api/` — Cloudflare Worker that powers `/resources/weather/`. Cron-polls Tempest station 33318 + NWS forecast every 5 min, computes WBGT, tracks rolling rainfall in KV, serves at `www.ayso13.org/api/weather` (also bound on `staging.ayso13.org/api/weather`). Deploy with `cd workers/weather-api && npx wrangler deploy`. `TEMPEST_TOKEN` is a wrangler secret (not in git); station ID, lat/lon, and KV id are in `wrangler.toml`. See `workers/weather-api/README.md` for setup details.
 
 ---
-*Last updated: 2026-05-04 (session 18 — live weather page + heat policy + Cloudflare Worker)*
+*Last updated: 2026-05-04 (session 18 — weather + heat + rain pages, code-review fixes, promote workflow Slack-bug fix)*
