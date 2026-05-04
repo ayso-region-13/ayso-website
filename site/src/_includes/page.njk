@@ -41,6 +41,21 @@ layout: base.njk
 <div class="h-1.5 bg-brand-maroon"></div>
 <div class="h-1 bg-brand-red"></div>
 
+{# ── Field status bar (opt-in via frontmatter `showFieldStatus: true`) ──
+   Mirrors the home-page widget exactly so the bar reads identically on
+   any page that opts in. Same colors, same icons, same role="status". #}
+{% if showFieldStatus and fieldstatus.enabled %}
+<div class="{% if fieldstatus.status | lower == 'closed' %}bg-brand-red-dark{% elif fieldstatus.status | lower == 'monitoring' %}bg-brand-gold{% else %}bg-brand-green{% endif %}" role="status">
+  <div class="max-w-screen-xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3">
+    <span class="text-xl" aria-hidden="true">⚽</span>
+    <p class="{% if fieldstatus.status | lower == 'closed' %}text-white{% else %}text-brand-dark{% endif %} text-sm font-bold uppercase tracking-wider">
+      Fields are {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
+    </p>
+    <span class="text-xl" aria-hidden="true">⚽</span>
+  </div>
+</div>
+{% endif %}
+
 {# Wide hero strip removed — page imagery now lives in the body markdown.
    The `heroImage` frontmatter field is still used by base.njk for og:image
    (social shares). #}

@@ -5,21 +5,10 @@ layout: page.njk
 section: resources
 description: "Current conditions, Wet Bulb Globe Temperature (WBGT), and 7-day forecast for AYSO Region 13 fields in Pasadena. Live data from our on-site weather station."
 heroImage: action-04.jpg
+showFieldStatus: true
 ---
 
 Live conditions from Region 13's on-site Tempest weather station, plus the current Wet Bulb Globe Temperature (WBGT) and the corresponding California CIF heat-policy alert level. For what each level means, see the [Heat Policy](/resources/heat-policy/) page.
-
-{% if fieldstatus.enabled %}
-<div class="not-prose mb-6 {% if fieldstatus.status | lower == 'closed' %}bg-brand-red-dark{% elif fieldstatus.status | lower == 'monitoring' %}bg-brand-gold{% else %}bg-brand-green{% endif %}" role="status">
-  <div class="px-4 py-2.5 flex items-center justify-center gap-3 text-center">
-    <span class="text-xl" aria-hidden="true">⚽</span>
-    <p class="{% if fieldstatus.status | lower == 'closed' %}text-white{% else %}text-brand-dark{% endif %} text-sm font-bold uppercase tracking-wider m-0">
-      Fields are {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
-    </p>
-    <span class="text-xl" aria-hidden="true">⚽</span>
-  </div>
-</div>
-{% endif %}
 
 <div id="simulate-banner" class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-6 not-prose" hidden></div>
 
@@ -48,7 +37,7 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
     <p class="text-xs text-gray-500 mt-2 m-0">Updated <span id="updated">—</span></p>
   </div>
   <div class="bg-brand-cream p-4">
-    <p class="text-sm uppercase tracking-wider text-brand-dark mb-1">WBGT — CIF Level <span id="cif-level">—</span></p>
+    <p class="text-sm uppercase tracking-wider text-brand-dark mb-1">WBGT, CIF Level <span id="cif-level">—</span></p>
     <p class="text-4xl font-bold text-brand-dark leading-none mb-2"><span id="wbgt">—</span>°F</p>
     <p class="text-sm font-semibold text-brand-dark mb-1" id="cif-label">—</p>
     <p class="text-xs text-gray-500 mt-2 m-0"><a href="/resources/heat-policy/" class="text-brand-red-dark underline">All alert levels →</a></p>
@@ -71,12 +60,12 @@ Current conditions come from Region 13's on-site [Tempest WeatherFlow](https://w
 
 WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind speed, and solar irradiance using the Bernard 1999 simplified outdoor approximation. Variance versus the ISO 7243 reference is roughly ±1°F under typical Pasadena conditions, well within the ~5°F width of each CIF alert tier.
 
-The field-status bar at the top of this page is human-controlled — it reflects what Region 13 board members have set via Slack, and is the same status shown on the [home page](/). A high WBGT reading above does not automatically close fields; a board member still makes that call.
+The field-status bar at the top of this page is human-controlled. It reflects what Region 13 board members have set via Slack, and is the same status shown on the [home page](/). A high WBGT reading above does not automatically close fields; a board member still makes that call.
 
 ## Related
 
-- [Heat Policy](/resources/heat-policy/) — CIF alert levels and required actions
-- [Safety](/resources/safety/) — concussion, sudden cardiac arrest, incident reporting
+- [Heat Policy](/resources/heat-policy/): CIF alert levels and required actions
+- [Safety](/resources/safety/): concussion, sudden cardiac arrest, incident reporting
 
 <script>
 (function () {
@@ -89,7 +78,7 @@ The field-status bar at the top of this page is human-controlled — it reflects
     2: {
       bg:    "bg-brand-gold",
       text:  "text-brand-dark",
-      title: "Heat Alert — CIF Level 2",
+      title: "Heat Alert: CIF Level 2",
       lead:  "Frequent water breaks. Watch for heat illness.",
       limits: [
         "Water breaks every 30 minutes minimum",
@@ -99,7 +88,7 @@ The field-status bar at the top of this page is human-controlled — it reflects
     3: {
       bg:    "bg-brand-gold",
       text:  "text-brand-dark",
-      title: "Heat Alert — CIF Level 3",
+      title: "Heat Alert: CIF Level 3",
       lead:  "Activity reduced. Practice limited to two hours.",
       limits: [
         "Maximum 2 hours of practice",
@@ -110,7 +99,7 @@ The field-status bar at the top of this page is human-controlled — it reflects
     4: {
       bg:    "bg-brand-red-dark",
       text:  "text-white",
-      title: "Heat Alert — CIF Level 4",
+      title: "Heat Alert: CIF Level 4",
       lead:  "Strict limits. Practice and equipment restricted.",
       limits: [
         "Maximum 1 hour of practice",
@@ -121,7 +110,7 @@ The field-status bar at the top of this page is human-controlled — it reflects
     5: {
       bg:    "bg-brand-red-dark",
       text:  "text-white",
-      title: "Outdoor Activity Suspended — CIF Level 5",
+      title: "Outdoor Activity Suspended: CIF Level 5",
       lead:  "WBGT has crossed the closure threshold. Watch the home-page status bar for the official call.",
       limits: [
         "No outdoor activity",
@@ -213,7 +202,7 @@ The field-status bar at the top of this page is human-controlled — it reflects
 
     var label = document.createElement("p");
     label.className = "font-semibold text-brand-red-dark text-sm mb-2";
-    label.textContent = "Preview mode — showing CIF Level " + currentLevel + " (synthetic data, not live)";
+    label.textContent = "Preview mode: showing CIF Level " + currentLevel + " (synthetic data, not live)";
     host.appendChild(label);
 
     var links = document.createElement("p");

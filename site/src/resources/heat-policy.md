@@ -12,7 +12,7 @@ AYSO Region 13 follows California Interscholastic Federation (CIF) heat acclimat
 
 Wet Bulb Globe Temperature is a heat-stress measure that combines air temperature, humidity, wind, and solar radiation. It reflects how the human body actually experiences heat during outdoor exertion, which is why CIF and most major youth-sports organizations use it instead of plain air temperature.
 
-WBGT is always lower than air temperature in dry conditions and approaches air temperature in humid conditions. A WBGT of 85°F is roughly equivalent to a hot, sunny, humid afternoon — meaningfully more dangerous than a 90°F dry, breezy one.
+WBGT is always lower than air temperature in dry conditions and approaches air temperature in humid conditions. A WBGT of 85°F is roughly equivalent to a hot, sunny, humid afternoon, meaningfully more dangerous than a 90°F dry, breezy one.
 
 ## Alert levels
 
@@ -44,7 +44,7 @@ These thresholds and required actions follow the California Interscholastic Fede
 
 ## Related
 
-- [Weather and Field Conditions](/resources/weather/) — live WBGT, current conditions, 7-day forecast
-- [Safety](/resources/safety/) — concussion, sudden cardiac arrest, incident reporting
+- [Weather and Field Conditions](/resources/weather/): live WBGT, current conditions, 7-day forecast
+- [Safety](/resources/safety/): concussion, sudden cardiac arrest, incident reporting
 
 *Last updated: [DATE]*

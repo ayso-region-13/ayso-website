@@ -52,8 +52,8 @@ Coaches and team managers must complete concussion and SCA awareness training th
 
 Region 13 follows California CIF heat acclimatization guidelines and monitors Wet Bulb Globe Temperature (WBGT) at our fields. Activities are modified or canceled based on the alert level (1–5).
 
-- [Heat Policy and alert levels](/resources/heat-policy/) — full CIF thresholds and required actions
-- [Weather and Field Conditions](/resources/weather/) — live WBGT from our weather station
+- [Heat Policy and alert levels](/resources/heat-policy/): full CIF thresholds and required actions
+- [Weather and Field Conditions](/resources/weather/): live WBGT from our weather station
 
 Either coach in a game may elect not to play in hot conditions without forfeit penalty. Families and players have final say on individual participation.
 
