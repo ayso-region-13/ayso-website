@@ -6,7 +6,7 @@ section: volunteers
 description: "Step-by-step volunteer FAQ for AYSO Region 13 — background check, LiveScan, SafeSport, AYSOU courses, coach training, referee training, reimbursements."
 ---
 
-Step-by-step instructions for completing the requirements every Region 13 volunteer needs each season.
+Step-by-step instructions for completing the requirements every Region 13 volunteer needs each season. Tap any question to expand the answer.
 
 ## Table of contents
 
@@ -24,9 +24,12 @@ Step-by-step instructions for completing the requirements every Region 13 volunt
 - [What if I am charged for a course by another Region or Area?](#what-if-i-am-charged-for-a-course-by-another-region-or-area)
 - [What if I am charged for a LiveScan?](#what-if-i-am-charged-for-a-livescan)
 
----
-
-## What is the mandatory safety training?
+<details id="what-is-the-mandatory-safety-training" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What is the mandatory safety training?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 - Annual Volunteer Application (everyone)
 - Annual background check (adults only, California law)
@@ -36,51 +39,69 @@ Step-by-step instructions for completing the requirements every Region 13 volunt
 - Sudden Cardiac Arrest awareness (California law)
 - Safe Haven (adults only, Federal law)
 
----
+</div>
+</details>
 
-## What is the Volunteer Application and how do I complete it?
+<details id="what-is-the-volunteer-application-and-how-do-i-complete-it" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What is the Volunteer Application and how do I complete it?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 1. Start at [the InLeague registration system](https://ayso13.inleague.com/app/family-profile).
 2. Log into your account or create a new one. If a family member already has an account, go to the Family Profile and click **Add User**. Each volunteer, including youth referees, needs a unique email address.
 3. Click on the **Volunteer Registration** button. Sign the forms and waivers until you get to the end.
 
----
+</div>
+</details>
 
-## What is LiveScan and how do I complete it?
+<details id="what-is-livescan-and-how-do-i-complete-it" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What is LiveScan and how do I complete it?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
-See the [LiveScan Fingerprinting](/volunteers/livescan/) page for the full step-by-step process — what to download, where to go, and hours.
+See the [LiveScan Fingerprinting](/volunteers/livescan/) page for the full step-by-step process: what to download, where to go, and hours.
 
-### Upcoming events
+#### Upcoming events
 
 Check the [Region 13 Calendar](/about/calendar/) for upcoming LiveScan events in the local area. The links to register are included in the calendar.
 
-### When you register
+#### When you register
 
 - Be sure to **enter your name EXACTLY** as it appears on your California driver's license. Don't use a nickname or a different last name.
   - *e.g. don't use Mal instead of Malcolm or Tiff instead of Tiffany*
 
-### Do I need to get a LiveScan if I already did one for my job or another volunteer organization?
+#### Do I need to get a LiveScan if I already did one for my job or another volunteer organization?
 
-**Yes** — you need to get a LiveScan for AYSO. LiveScans do not transfer between organizations.
+**Yes.** You need to get a LiveScan for AYSO. LiveScans do not transfer between organizations.
 
-### Will I have to do this every year?
+#### Will I have to do this every year?
 
-**No** — you only need a LiveScan for AYSO once (unless you have a gap in volunteering of 5 years or more).
+**No.** You only need a LiveScan for AYSO once (unless you have a gap in volunteering of 5 years or more).
 
-### Additional information
+#### Additional information
 
-Additional FAQs are at the AYSO National page: [California AB 506 — Background Check / LiveScan Policy for CA Volunteers](https://aysovolunteers.org/california-ab-506-background-check-livescan-policy-for-ca-volunteers/) (opens in a new window).
+Additional FAQs are at the AYSO National page: [California AB 506: Background Check / LiveScan Policy for CA Volunteers](https://aysovolunteers.org/california-ab-506-background-check-livescan-policy-for-ca-volunteers/) (opens in a new window).
 
 If you still have questions, [email the Region 13 CVPA](mailto:cvpa@ayso13.org?subject=LiveScan%20Questions) (Child & Volunteer Protection Advocate).
 
----
+</div>
+</details>
 
-## What is the Sterling Background Check and how do I complete it?
+<details id="what-is-the-sterling-background-check-and-how-do-i-complete-it" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What is the Sterling Background Check and how do I complete it?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 - Only adult volunteers complete a background check.
 - Sterling Volunteers performs the background check, and the results are delivered to AYSO National Headquarters and Region 13.
 - Background checks are completed each year.
-- After you complete your Volunteer Application in InLeague you will receive an email from Sterling Volunteers. Click the link inside that email to initiate your background check. You do not need to pay — it's included in the registration fee for all players.
+- After you complete your Volunteer Application in InLeague you will receive an email from Sterling Volunteers. Click the link inside that email to initiate your background check. You do not need to pay; it's included in the registration fee for all players.
 
 If you cannot find an email from Sterling, you can begin your background check from inside InLeague:
 
@@ -95,9 +116,15 @@ If you cannot find an email from Sterling, you can begin your background check f
 
 If you have issues completing your background check, [email the Region 13 CVPA](mailto:cvpa@ayso13.org?subject=Background%20Check%20Questions).
 
----
+</div>
+</details>
 
-## What is SafeSport and how do I complete it?
+<details id="what-is-safesport-and-how-do-i-complete-it" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What is SafeSport and how do I complete it?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 - SafeSport training is offered separately via the U.S. Center for SafeSport.
 - It is **not** offered on AYSOU.
@@ -108,23 +135,35 @@ If you have issues completing your background check, [email the Region 13 CVPA](
 
 ![SafeSport link inside InLeague](/images/volunteer-faq/AYSOU-login.png)
 
----
+</div>
+</details>
 
-# Online Courses (through AYSOU)
+## Online Courses (through AYSOU)
 
-## How do I access AYSOU?
+<details id="how-do-i-access-aysou" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">How do I access AYSOU?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 - AYSOU (also known as eTrainU) is accessible from inside the [InLeague](https://ayso13.inleague.com/app/family-profile) registration system.
 - Once logged into InLeague, click the **graduation cap** icon in the upper right-hand corner. Use a computer if possible.
-- Do not bookmark AYSOU (eTrainU) directly — you can only access it from inside InLeague.
+- Do not bookmark AYSOU (eTrainU) directly. You can only access it from inside InLeague.
 
 ![Graduation cap icon in InLeague header](/images/volunteer-faq/AYSOU-grad-cap.png)
 
 ![AYSOU login link inside InLeague](/images/volunteer-faq/SafeSport-link.png)
 
----
+</div>
+</details>
 
-## What is Safe Haven and how do I complete it?
+<details id="what-is-safe-haven-and-how-do-i-complete-it" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What is Safe Haven and how do I complete it?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 - Safe Haven is an AYSO-developed course that helps volunteers understand their duties and responsibilities while working with our soccer players.
 - Safe Haven can be completed through AYSOU.
@@ -137,9 +176,15 @@ If you have issues completing your background check, [email the Region 13 CVPA](
 
 ![AYSOU's Safe Haven 2022 course detail](/images/volunteer-faq/AYSOU-Safe-Haven-1024x686.png)
 
----
+</div>
+</details>
 
-## What is CDC Concussion Awareness and how do I complete it?
+<details id="what-is-cdc-concussion-awareness-and-how-do-i-complete-it" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What is CDC Concussion Awareness and how do I complete it?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 - CDC Concussion Awareness is a CDC-developed online training that helps volunteers recognize concussion signs.
 - Available through AYSOU.
@@ -152,9 +197,15 @@ If you have issues completing your background check, [email the Region 13 CVPA](
 
 ![AYSOU CDC Concussion Awareness course detail](/images/volunteer-faq/AYSOU-CDC-1024x666.png)
 
----
+</div>
+</details>
 
-## What is Sudden Cardiac Arrest training and how do I complete it?
+<details id="what-is-sudden-cardiac-arrest-training-and-how-do-i-complete-it" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What is Sudden Cardiac Arrest training and how do I complete it?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 - Simon's Heart Sudden Cardiac Arrest training helps volunteers understand how sudden cardiac arrest can affect our players.
 - Available through AYSOU.
@@ -167,13 +218,19 @@ If you have issues completing your background check, [email the Region 13 CVPA](
 
 ![AYSOU Sudden Cardiac Arrest course detail](/images/volunteer-faq/AYSOU-SCA-1024x667.png)
 
----
+</div>
+</details>
 
-# Role-Specific Training
+## Role-Specific Training
 
 Coaches and referees take role-specific training. The training depends on the division you are volunteering in. Register through AYSOU.
 
-## How do I access Coach-specific training?
+<details id="how-do-i-access-coach-specific-training" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">How do I access Coach-specific training?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 - For coaching courses click **Training Library → Coaching**.
 - For 6U–10U you can choose between an Online course and a Full In-Person course.
@@ -197,9 +254,15 @@ To find In-Person courses in AYSOU (including courses from other regions and 6U�
 
 ![AYSOU Find Training Event search filters](/images/volunteer-faq/Find-Training-Event-1024x700.png)
 
----
+</div>
+</details>
 
-## How do I access Referee-specific training?
+<details id="how-do-i-access-referee-specific-training" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">How do I access Referee-specific training?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 - For referee courses click **Training Library → Refereeing**.
 - For 6U–8U: take the **8U In-Person Referee Course**.
@@ -220,17 +283,32 @@ To find In-Person courses in AYSOU:
 
 More about referee training: [Referee Training](/referees/training/).
 
----
+</div>
+</details>
 
-## What if I am charged for a course by another Region or Area?
+<details id="what-if-i-am-charged-for-a-course-by-another-region-or-area" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What if I am charged for a course by another Region or Area?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 When you travel to training in other regions outside Area 1/C, they may charge you to cover their costs. Region 13 will reimburse you for any AYSO training charges. Submit a [reimbursement request](https://docs.google.com/forms/d/e/1FAIpQLScn2XeFjLX0-e9dmWWLu6DeyRYUq7V-1KKLSkjmyqo2NFRQUw/viewform).
 
-## What if I am charged for a LiveScan?
+</div>
+</details>
+
+<details id="what-if-i-am-charged-for-a-livescan" class="group mb-3 border border-gray-200 rounded-xl overflow-hidden">
+<summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
+<span class="font-semibold text-brand-dark group-open:text-brand-red-dark transition-colors">What if I am charged for a LiveScan?</span>
+<span class="shrink-0 mt-1 text-gray-400 group-open:text-brand-red-dark transition-colors" aria-hidden="true"><svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg></span>
+</summary>
+<div class="px-5 py-4 bg-white border-t border-gray-100">
 
 LiveScan in Region 13 is free. If you attend a LiveScan event in another region you may be charged. Region 13 will reimburse you. Submit a [reimbursement request](https://docs.google.com/forms/d/e/1FAIpQLScn2XeFjLX0-e9dmWWLu6DeyRYUq7V-1KKLSkjmyqo2NFRQUw/viewform).
 
----
+</div>
+</details>
 
 ## Contact
 
@@ -244,7 +322,41 @@ LiveScan in Region 13 is free. If you attend a LiveScan event in another region 
 - [Volunteering Overview](/volunteers/) — Getting started
 - [Volunteer Roles](/volunteers/roles/) — Position descriptions
 - [Training Classes](/volunteers/classes/) — Calendar and registration
+- [LiveScan Fingerprinting](/volunteers/livescan/) — Step-by-step LiveScan instructions
 - [Coach Training](/coaches/training/) — Coach certification details
 - [Referee Training](/referees/training/) — Referee certification details
+
+<script>
+  (function () {
+    function openHash() {
+      if (!location.hash) return;
+      var el = document.getElementById(location.hash.slice(1));
+      if (el && el.tagName === 'DETAILS') {
+        el.open = true;
+        el.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
+    }
+    openHash();
+    window.addEventListener('hashchange', openHash);
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href').slice(1);
+      var el = document.getElementById(id);
+      if (el && el.tagName === 'DETAILS') el.open = true;
+    });
+    window.addEventListener('beforeprint', function () {
+      document.querySelectorAll('details').forEach(function (d) {
+        d.dataset.wasOpen = d.open ? '1' : '0';
+        d.open = true;
+      });
+    });
+    window.addEventListener('afterprint', function () {
+      document.querySelectorAll('details').forEach(function (d) {
+        if (d.dataset.wasOpen === '0') d.open = false;
+      });
+    });
+  })();
+</script>
 
 *Last updated: [DATE]*
