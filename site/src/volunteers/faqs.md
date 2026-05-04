@@ -39,6 +39,8 @@ Step-by-step instructions for completing the requirements every Region 13 volunt
 - Sudden Cardiac Arrest awareness (California law)
 - Safe Haven (adults only, Federal law)
 
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
+
 </div>
 </details>
 
@@ -53,6 +55,8 @@ Step-by-step instructions for completing the requirements every Region 13 volunt
 2. Log into your account or create a new one. If a family member already has an account, go to the Family Profile and click **Add User**. Each volunteer, including youth referees, needs a unique email address.
 3. Click on the **Volunteer Registration** button. Sign the forms and waivers until you get to the end.
 
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
+
 </div>
 </details>
 
@@ -65,28 +69,7 @@ Step-by-step instructions for completing the requirements every Region 13 volunt
 
 See the [LiveScan Fingerprinting](/volunteers/livescan/) page for the full step-by-step process: what to download, where to go, and hours.
 
-#### Upcoming events
-
-Check the [Region 13 Calendar](/about/calendar/) for upcoming LiveScan events in the local area. The links to register are included in the calendar.
-
-#### When you register
-
-- Be sure to **enter your name EXACTLY** as it appears on your California driver's license. Don't use a nickname or a different last name.
-  - *e.g. don't use Mal instead of Malcolm or Tiff instead of Tiffany*
-
-#### Do I need to get a LiveScan if I already did one for my job or another volunteer organization?
-
-**Yes.** You need to get a LiveScan for AYSO. LiveScans do not transfer between organizations.
-
-#### Will I have to do this every year?
-
-**No.** You only need a LiveScan for AYSO once (unless you have a gap in volunteering of 5 years or more).
-
-#### Additional information
-
-Additional FAQs are at the AYSO National page: [California AB 506: Background Check / LiveScan Policy for CA Volunteers](https://aysovolunteers.org/california-ab-506-background-check-livescan-policy-for-ca-volunteers/) (opens in a new window).
-
-If you still have questions, [email the Region 13 CVPA](mailto:cvpa@ayso13.org?subject=LiveScan%20Questions) (Child & Volunteer Protection Advocate).
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
 
 </div>
 </details>
@@ -116,6 +99,8 @@ If you cannot find an email from Sterling, you can begin your background check f
 
 If you have issues completing your background check, [email the Region 13 CVPA](mailto:cvpa@ayso13.org?subject=Background%20Check%20Questions).
 
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
+
 </div>
 </details>
 
@@ -134,6 +119,8 @@ If you have issues completing your background check, [email the Region 13 CVPA](
 ![How to access AYSOU by clicking the graduation cap icon in the upper right of InLeague](/images/volunteer-faq/AYSOU-grad-cap.png)
 
 ![SafeSport link inside InLeague](/images/volunteer-faq/AYSOU-login.png)
+
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
 
 </div>
 </details>
@@ -154,6 +141,8 @@ If you have issues completing your background check, [email the Region 13 CVPA](
 ![Graduation cap icon in InLeague header](/images/volunteer-faq/AYSOU-grad-cap.png)
 
 ![AYSOU login link inside InLeague](/images/volunteer-faq/SafeSport-link.png)
+
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
 
 </div>
 </details>
@@ -176,6 +165,8 @@ If you have issues completing your background check, [email the Region 13 CVPA](
 
 ![AYSOU's Safe Haven 2022 course detail](/images/volunteer-faq/AYSOU-Safe-Haven-1024x686.png)
 
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
+
 </div>
 </details>
 
@@ -197,6 +188,8 @@ If you have issues completing your background check, [email the Region 13 CVPA](
 
 ![AYSOU CDC Concussion Awareness course detail](/images/volunteer-faq/AYSOU-CDC-1024x666.png)
 
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
+
 </div>
 </details>
 
@@ -217,6 +210,8 @@ If you have issues completing your background check, [email the Region 13 CVPA](
 ![AYSOU Safe Haven category page](/images/volunteer-faq/AYSOU-Top-Level-Safe-Haven-1024x533.png)
 
 ![AYSOU Sudden Cardiac Arrest course detail](/images/volunteer-faq/AYSOU-SCA-1024x667.png)
+
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
 
 </div>
 </details>
@@ -254,6 +249,8 @@ To find In-Person courses in AYSOU (including courses from other regions and 6U�
 
 ![AYSOU Find Training Event search filters](/images/volunteer-faq/Find-Training-Event-1024x700.png)
 
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
+
 </div>
 </details>
 
@@ -283,6 +280,8 @@ To find In-Person courses in AYSOU:
 
 More about referee training: [Referee Training](/referees/training/).
 
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
+
 </div>
 </details>
 
@@ -295,6 +294,8 @@ More about referee training: [Referee Training](/referees/training/).
 
 When you travel to training in other regions outside Area 1/C, they may charge you to cover their costs. Region 13 will reimburse you for any AYSO training charges. Submit a [reimbursement request](https://docs.google.com/forms/d/e/1FAIpQLScn2XeFjLX0-e9dmWWLu6DeyRYUq7V-1KKLSkjmyqo2NFRQUw/viewform).
 
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
+
 </div>
 </details>
 
@@ -306,6 +307,8 @@ When you travel to training in other regions outside Area 1/C, they may charge y
 <div class="px-5 py-4 bg-white border-t border-gray-100">
 
 LiveScan in Region 13 is free. If you attend a LiveScan event in another region you may be charged. Region 13 will reimburse you. Submit a [reimbursement request](https://docs.google.com/forms/d/e/1FAIpQLScn2XeFjLX0-e9dmWWLu6DeyRYUq7V-1KKLSkjmyqo2NFRQUw/viewform).
+
+<a href="#table-of-contents" class="inline-block mt-4 text-xs text-gray-400 hover:text-brand-red-dark transition-colors">↑ Back to top</a>
 
 </div>
 </details>
