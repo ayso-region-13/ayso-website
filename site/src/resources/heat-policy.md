@@ -21,8 +21,8 @@ WBGT is always lower than air temperature in dry conditions and approaches air t
 | **1** | ≤ 79.7    | Normal activities. Provide ample water and unrestricted breaks. |
 | **2** | 79.8 – 84.6 | Frequent water breaks, every 30 minutes minimum. Watch carefully for heat illness. |
 | **3** | 84.7 – 87.5 | Maximum 2 hours of practice. Four 4-minute water breaks per hour. Lighter clothing. |
-| **4** | 87.6 – 89.7 | Maximum 1 hour of practice. Four 4-minute water breaks per hour. No equipment. |
-| **5** | > 89.7    | **No outdoor activity.** Suspend until conditions cool. Region 13 closes fields. |
+| **4** | 87.6 – 89.7 | **Practice:** maximum 1 hour, four 4-minute water breaks per hour, no equipment.<br>**Games:** length reduced by one-third, with additional water breaks at the 1/8 marks. |
+| **5** | > 89.7    | **All outdoor activity suspended.** Practices and games are canceled. Region 13 closes fields until conditions cool. |
 
 ## How we make the call
 

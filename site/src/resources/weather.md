@@ -100,11 +100,10 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
       bg:    "bg-brand-red-dark",
       text:  "text-white",
       title: "Heat Alert: CIF Level 4",
-      lead:  "Strict limits. Practice and equipment restricted.",
+      lead:  "Strict limits on practice. Games are shortened with extra water breaks.",
       limits: [
-        "Maximum 1 hour of practice",
-        "Four 4-minute water breaks per hour",
-        "No equipment"
+        "Practice: maximum 1 hour, four 4-minute water breaks per hour, no equipment",
+        "Games: length reduced by one-third, with additional water breaks at the 1/8 marks"
       ]
     },
     5: {
@@ -113,9 +112,9 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
       title: "Outdoor Activity Suspended: CIF Level 5",
       lead:  "WBGT has crossed the closure threshold. Watch the home-page status bar for the official call.",
       limits: [
-        "No outdoor activity",
-        "Suspend practices and games until conditions cool",
-        "Region 13 closes fields"
+        "Games: canceled",
+        "Practices: canceled",
+        "Region 13 closes fields until conditions cool"
       ]
     }
   };
