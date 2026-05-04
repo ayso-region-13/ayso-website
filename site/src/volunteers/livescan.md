@@ -25,15 +25,13 @@ To get your LiveScan, visit [**Only Stop**](#address-and-hours) on Woodbury Road
 
 ![Only Stop storefront at 461 Woodbury Road, Altadena. Gray block building with white awning and "Only Stop" sign listing services: Mail boxes, Live Scan, Notary, Passport Photo, Breathalyzer, Registration Service. Phone 626-790-3010.](/images/livescan/only-stop.png)
 
-<nav class="not-prose my-8 p-4 bg-gray-50 rounded-xl border border-gray-200" aria-label="On this page">
-  <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">On this page</p>
-  <ul class="flex flex-wrap gap-x-4 gap-y-1">
-    <li><a href="#how-to-complete-your-livescan" class="text-sm text-brand-red-dark hover:text-brand-maroon hover:underline transition-colors">Steps</a></li>
-    <li><a href="#address-and-hours" class="text-sm text-brand-red-dark hover:text-brand-maroon hover:underline transition-colors">Address and Hours</a></li>
-    <li><a href="#frequently-asked-questions" class="text-sm text-brand-red-dark hover:text-brand-maroon hover:underline transition-colors">FAQ</a></li>
-    <li><a href="#more-information" class="text-sm text-brand-red-dark hover:text-brand-maroon hover:underline transition-colors">More info</a></li>
-  </ul>
-</nav>
+## On this page
+
+- [Step-by-step instructions for getting your LiveScan](#how-to-complete-your-livescan)
+- [Only Stop address, hours, and map](#address-and-hours)
+- [Frequently asked questions](#frequently-asked-questions)
+- [More information and contact](#more-information)
+
 
 ## How to complete your LiveScan
 
