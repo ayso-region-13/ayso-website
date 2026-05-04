@@ -66,12 +66,7 @@ See [Manager Training](/managers/training) for details.
 
 ## LiveScan Fingerprinting
 
-LiveScan is a one-time requirement for all adult volunteers. Complete this at:
-
-Only Stop Travel
-Woodbury Road, Altadena
-
-You only need to repeat LiveScan if you move to a new region.
+LiveScan is a one-time requirement for all adult volunteers. See the [LiveScan page](/volunteers/livescan/) for the full step-by-step process, including the form to download, where to go, and hours.
 
 ## Training Schedule
 
