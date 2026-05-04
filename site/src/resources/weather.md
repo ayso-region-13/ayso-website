@@ -11,10 +11,7 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
 
 <div id="simulate-banner" class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-6" hidden></div>
 
-<div id="closure-banner" class="bg-brand-cream border-l-4 border-brand-red-dark p-4 mb-6" hidden>
-  <p class="font-semibold text-brand-red-dark mb-1">Outdoor activity suspended (CIF Level 5)</p>
-  <p class="text-brand-dark text-sm m-0">WBGT has crossed the closure threshold. Fields are closed pending board confirmation. Watch the home page banner for the official call.</p>
-</div>
+<div id="heat-banner" class="not-prose mb-6" hidden></div>
 
 <div id="weather-loading" class="bg-brand-cream p-4 mb-6 text-brand-dark text-sm">
   Loading current conditions…
@@ -42,7 +39,6 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
     <p class="text-sm uppercase tracking-wider text-brand-dark mb-1">WBGT — CIF Level <span id="cif-level">—</span></p>
     <p class="text-4xl font-bold text-brand-dark leading-none mb-2"><span id="wbgt">—</span>°F</p>
     <p class="text-sm font-semibold text-brand-dark mb-1" id="cif-label">—</p>
-    <p class="text-sm text-gray-700 m-0" id="cif-action">—</p>
     <p class="text-xs text-gray-500 mt-2 m-0"><a href="/resources/heat-policy/" class="text-brand-red-dark underline">All alert levels →</a></p>
   </div>
 </div>
@@ -80,12 +76,68 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
 
 <script>
 (function () {
+  // Per-level palette + banner content. WCAG-checked: every (bg, text)
+  // combo passes AA at the displayed weights (see brand-colors.md).
   var WBGT_PALETTE = {
-    1: { border: "border-brand-green",    action: "Normal activities. Provide ample water and unrestricted breaks." },
-    2: { border: "border-brand-gold",     action: "Frequent water breaks every 30 minutes minimum. Watch carefully for heat illness." },
-    3: { border: "border-orange-500",     action: "Maximum 2 hours of practice. Four 4-minute water breaks per hour. Lighter clothing." },
-    4: { border: "border-brand-red",      action: "Maximum 1 hour of practice. Four 4-minute water breaks per hour. No equipment." },
-    5: { border: "border-brand-red-dark", action: "No outdoor activity. Suspend until conditions cool. Region 13 closes fields." }
+    1: {
+      border:   "border-brand-green",
+      banner:   null  // Level 1 = no banner, conditions are normal
+    },
+    2: {
+      border:   "border-brand-gold",
+      banner: {
+        bg:     "bg-brand-gold",
+        text:   "text-brand-dark",
+        title:  "Heat Alert — CIF Level 2",
+        lead:   "Frequent water breaks. Watch for heat illness.",
+        limits: [
+          "Water breaks every 30 minutes minimum",
+          "Watch carefully for heat-illness signs"
+        ]
+      }
+    },
+    3: {
+      border:   "border-orange-500",
+      banner: {
+        bg:     "bg-orange-500",
+        text:   "text-brand-dark",
+        title:  "Heat Alert — CIF Level 3",
+        lead:   "Activity reduced. Practice limited to two hours.",
+        limits: [
+          "Maximum 2 hours of practice",
+          "Four 4-minute water breaks per hour",
+          "Lighter clothing"
+        ]
+      }
+    },
+    4: {
+      border:   "border-brand-red",
+      banner: {
+        bg:     "bg-brand-red",
+        text:   "text-brand-dark",
+        title:  "Heat Alert — CIF Level 4",
+        lead:   "Strict limits. Practice and equipment restricted.",
+        limits: [
+          "Maximum 1 hour of practice",
+          "Four 4-minute water breaks per hour",
+          "No equipment (no shin guards, ball touches only)"
+        ]
+      }
+    },
+    5: {
+      border:   "border-brand-red-dark",
+      banner: {
+        bg:     "bg-brand-red-dark",
+        text:   "text-white",
+        title:  "Outdoor Activity Suspended — CIF Level 5",
+        lead:   "WBGT has crossed the closure threshold. Watch the home-page banner for the official call.",
+        limits: [
+          "No outdoor activity",
+          "Suspend practices and games until conditions cool",
+          "Region 13 closes fields"
+        ]
+      }
+    }
   };
 
   // Synthetic WBGT values + labels for ?simulate=N preview mode (visual QA only).
@@ -197,6 +249,50 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
     host.removeAttribute("hidden");
   }
 
+  function renderHeatBanner(level) {
+    var host = document.getElementById("heat-banner");
+    if (!host) return;
+    while (host.firstChild) host.removeChild(host.firstChild);
+    host.setAttribute("hidden", "");
+
+    var palette = WBGT_PALETTE[level];
+    if (!palette || !palette.banner) return;
+    var b = palette.banner;
+
+    var box = document.createElement("div");
+    box.className = b.bg + " " + b.text + " p-5";
+
+    var head = document.createElement("div");
+    head.className = "flex items-center gap-3 mb-2";
+    var icon = document.createElement("span");
+    icon.className = "text-2xl";
+    icon.setAttribute("aria-hidden", "true");
+    icon.textContent = level >= 5 ? "🚫" : "🌡️";
+    var title = document.createElement("p");
+    title.className = "text-base font-bold uppercase tracking-wider m-0";
+    title.textContent = b.title;
+    head.appendChild(icon);
+    head.appendChild(title);
+    box.appendChild(head);
+
+    var lead = document.createElement("p");
+    lead.className = "text-sm font-semibold mb-3 m-0";
+    lead.textContent = b.lead;
+    box.appendChild(lead);
+
+    var list = document.createElement("ul");
+    list.className = "text-sm list-disc pl-5 m-0 space-y-1";
+    b.limits.forEach(function (limit) {
+      var li = document.createElement("li");
+      li.textContent = limit;
+      list.appendChild(li);
+    });
+    box.appendChild(list);
+
+    host.appendChild(box);
+    host.removeAttribute("hidden");
+  }
+
   function applyWbgtPalette(level) {
     var card = document.getElementById("wbgt-card");
     if (!card) return;
@@ -226,11 +322,8 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
     setText("cif-level",  w.level != null ? w.level : "—");
     setText("cif-label",  w.levelLabel || "—");
 
-    var palette = WBGT_PALETTE[w.level];
-    setText("cif-action", palette ? palette.action : "—");
     applyWbgtPalette(w.level);
-
-    if (data.closureRecommended) show("closure-banner");
+    renderHeatBanner(w.level);
     renderForecast(data.forecast || []);
 
     hide("weather-loading");

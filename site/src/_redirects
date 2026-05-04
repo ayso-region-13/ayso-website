@@ -347,8 +347,10 @@
 /photos-u10                     /resources/gallery/                             301
 /safety/                        /resources/safety/                              301
 /safety                         /resources/safety/                              301
-/heat/                          /resources/safety/                              301
-/heat                           /resources/safety/                              301
+/heat/                          /resources/heat-policy/                         301
+/heat                           /resources/heat-policy/                         301
+/weather/                       /resources/weather/                             301
+/weather                        /resources/weather/                             301
 /incident/                      /resources/safety/                              301
 /incident                       /resources/safety/                              301
 /tickets/                       /resources/                                     301
