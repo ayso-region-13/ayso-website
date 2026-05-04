@@ -8,10 +8,9 @@ compatibility_date = "2025-01-01"
 crons = ["*/5 * * * *"]
 
 # KV holds the most recent normalized JSON envelope under key "current".
-# Run once: wrangler kv:namespace create WEATHER_KV → paste the id below.
 [[kv_namespaces]]
 binding = "WEATHER_KV"
-id = ""
+id = "3a591305dddf4644903b97201292a989"
 
 # Mount the Worker on the prod domain at /api/weather. Same-origin so the
 # browser fetch from /resources/weather/ doesn't need CORS.
@@ -26,3 +25,4 @@ zone_name = "ayso13.org"
 FORECAST_LAT = "34.1478"
 FORECAST_LON = "-118.1445"
 USER_AGENT = "(ayso13.org weather page, info@ayso13.org)"
+TEMPEST_STATION_ID = "33318"
