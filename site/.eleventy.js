@@ -47,6 +47,10 @@ module.exports = function (eleventyConfig) {
     .disable("replacements")
     .use(markdownItAnchor, {
       permalink: false,
+      // Cleaner ID slugify — lowercase, strip punctuation, hyphenate spaces.
+      // Default markdown-it-anchor preserves "?", "/", "(", ")" and URL-encodes them
+      // (e.g. "section?" → id="section%3F"), making in-page links ugly.
+      slugify: (s) => s.toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-"),
     });
   eleventyConfig.setLibrary("md", md);
 
