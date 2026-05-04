@@ -10,11 +10,11 @@ showFieldStatus: true
 
 Live conditions from Region 13's on-site Tempest weather station, plus the current Wet Bulb Globe Temperature (WBGT) and the corresponding California CIF heat-policy alert level. For what each level means, see the [Heat Policy](/resources/heat-policy/) page.
 
-<div id="simulate-banner" class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-6 not-prose" hidden></div>
+<div id="simulate-banner" class="bg-brand-cream border-l-4 border-brand-red-dark p-3 mb-6 not-prose" hidden></div>
 
-<div id="rain-banner" class="not-prose mb-6" role="alert" hidden></div>
+<div id="rain-banner" class="not-prose mb-6" aria-live="assertive" hidden></div>
 
-<div id="heat-banner" class="not-prose mb-6" role="alert" hidden></div>
+<div id="heat-banner" class="not-prose mb-6" aria-live="assertive" hidden></div>
 
 <div id="weather-loading" class="bg-brand-cream p-4 mb-6 text-brand-dark text-sm not-prose">
   Loading current conditions…
@@ -112,12 +112,12 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
     5: {
       bg:    "bg-brand-red-dark",
       text:  "text-white",
-      title: "Outdoor Activity Suspended: CIF Level 5",
-      lead:  "WBGT has crossed the closure threshold. Watch the home-page status bar for the official call.",
+      title: "Advisory: Outdoor Activity Should Be Suspended (Level 5)",
+      lead:  "WBGT has crossed the CIF closure threshold. Watch the home-page status bar for the official call by Region 13 staff.",
       limits: [
-        "Games: canceled",
-        "Practices: canceled",
-        "Region 13 closes fields until conditions cool"
+        "Games and practices should be canceled",
+        "Fields should close until conditions cool",
+        "Final closure call comes from Region 13 staff via the home-page status bar"
       ]
     }
   };
@@ -140,12 +140,12 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
   };
 
   function getSimulateLevel() {
-    var m = (window.location.search || "").match(/[?&]simulate=([1-5])\b/);
+    var m = (window.location.search || "").match(/[?&]simulate=([1-5])(?:&|$)/);
     return m ? Number(m[1]) : null;
   }
 
   function getSimulateRain() {
-    var m = (window.location.search || "").match(/[?&]simulate-rain=(48h|72h)\b/);
+    var m = (window.location.search || "").match(/[?&]simulate-rain=(48h|72h)(?:&|$)/);
     return m ? m[1] : null;
   }
 
@@ -168,8 +168,11 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
   function renderForecast(periods) {
     var grid = document.getElementById("forecast-grid");
     if (!grid || !periods || !periods.length) return;
+    // NWS returns 14 periods (day + night for 7 days). Show daytime only
+    // so a 7-card grid lines up with the "7-day forecast" heading.
+    var days = periods.filter(function (p) { return p.isDaytime; }).slice(0, 7);
     while (grid.firstChild) grid.removeChild(grid.firstChild);
-    periods.forEach(function (p) {
+    days.forEach(function (p) {
       var card = document.createElement("div");
       card.className = "bg-white border border-gray-200 rounded-lg p-3 text-sm flex flex-col items-start";
 
@@ -266,25 +269,30 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
     host.setAttribute("hidden", "");
     if (!rain || !rain.closureRecommended) return;
 
+    // role="alert" goes on the inner box, not the host. An alert role on
+    // an empty hidden container won't re-announce when content arrives.
     var box = document.createElement("div");
     box.className = "bg-brand-red-dark text-white p-5";
+    box.setAttribute("role", "alert");
 
     var title = document.createElement("p");
     title.className = "text-base font-bold uppercase tracking-wider mb-2 m-0";
-    title.textContent = "Field Closure: Wet Field Conditions";
+    title.textContent = "Advisory: Wet Field Conditions";
     box.appendChild(title);
 
     var lead = document.createElement("p");
     lead.className = "text-sm font-semibold mb-3 m-0";
-    lead.textContent = rain.reason || "Recent heavy rain has saturated the fields.";
+    lead.textContent = rain.reason
+      ? rain.reason + " — fields likely unsafe for play."
+      : "Recent heavy rain has saturated the fields.";
     box.appendChild(lead);
 
     var list = document.createElement("ul");
     list.className = "text-sm list-disc pl-5 m-0 space-y-1";
     [
-      "Games: canceled",
-      "Practices: canceled",
-      "Region 13 closes fields until conditions improve"
+      "Games and practices should be canceled",
+      "Fields should close until conditions improve",
+      "Final closure call comes from Region 13 staff via the home-page status bar"
     ].forEach(function (text) {
       var li = document.createElement("li");
       li.textContent = text;
@@ -305,8 +313,11 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
     var b = WBGT_BANNERS[level];
     if (!b) return;
 
+    // role="alert" goes on the inner box, not the host. An alert role on
+    // an empty hidden container won't re-announce when content arrives.
     var box = document.createElement("div");
     box.className = b.bg + " " + b.text + " p-5";
+    box.setAttribute("role", "alert");
 
     var title = document.createElement("p");
     title.className = "text-base font-bold uppercase tracking-wider mb-2 m-0";
@@ -365,6 +376,13 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
   }
 
   function fail() {
+    // If we're in simulate mode, render synthetic data even when the live
+    // fetch fails. Lets local dev (no Worker bound) iterate on banner
+    // styling without deploying.
+    if (getSimulateLevel() || getSimulateRain()) {
+      render({});
+      return;
+    }
     hide("weather-loading");
     show("weather-error");
   }

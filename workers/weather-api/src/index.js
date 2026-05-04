@@ -18,7 +18,10 @@ const CACHE_TTL_SECONDS = 300; // 5 min — matches cron cadence
 
 // CIF heat-policy WBGT thresholds (°F). See /resources/heat-policy/ for
 // the policy itself; numbers here drive the level + closureRecommended
-// flag the page renders.
+// flag the page renders. The `label` field is a fallback string only —
+// the weather page owns the canonical alert copy (title, lead, limits)
+// in WBGT_BANNERS so the displayed wording can be edited without redeploying
+// the Worker.
 const CIF_LEVELS = [
   { level: 1, max: 79.7, label: "Normal activities" },
   { level: 2, max: 84.6, label: "Frequent water breaks" },
@@ -27,8 +30,13 @@ const CIF_LEVELS = [
   { level: 5, max: Infinity, label: "Outdoor activity suspended" },
 ];
 
+const ALLOWED_ORIGINS = new Set([
+  "https://www.ayso13.org",
+  "https://staging.ayso13.org",
+]);
+
 export default {
-  async fetch(_request, env, ctx) {
+  async fetch(request, env, ctx) {
     let payload = await env.WEATHER_KV.get(KV_KEY, { type: "json" });
     if (!payload) {
       // Cold start. Build the cache before serving so the first visitor
@@ -39,13 +47,20 @@ export default {
         return jsonError(503, `weather data unavailable: ${err.message}`);
       }
     }
-    return new Response(JSON.stringify(payload), {
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": `public, max-age=${CACHE_TTL_SECONDS}`,
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
+    // Page consumes this same-origin via the Worker route on
+    // www.ayso13.org and staging.ayso13.org, so CORS isn't strictly
+    // needed. Echo the Origin only when it matches one of ours; drop it
+    // otherwise. Hygiene in case someone pulls the endpoint from elsewhere.
+    const origin = request.headers.get("Origin");
+    const headers = {
+      "Content-Type": "application/json",
+      "Cache-Control": `public, max-age=${CACHE_TTL_SECONDS}`,
+      "Vary": "Origin",
+    };
+    if (origin && ALLOWED_ORIGINS.has(origin)) {
+      headers["Access-Control-Allow-Origin"] = origin;
+    }
+    return new Response(JSON.stringify(payload), { headers });
   },
 
   async scheduled(_event, env, _ctx) {
@@ -121,6 +136,12 @@ const RAIN_THRESHOLDS_IN = { last48h: 0.25, last72h: 1.0 };
 const MM_TO_INCHES = 0.0393701;
 
 async function updateRainState(env, obs, prev) {
+  // KV has no compare-and-swap. Concurrent invocations (cron + cold-start
+  // fetch firing within the same window) can both read the same `prev` and
+  // race on the put. The writes are mostly idempotent — today's value gets
+  // overwritten anyway, and yesterday's capture is also idempotent — so the
+  // last-write-wins behavior is safe. Worth knowing if other day-state is
+  // ever added here.
   const today = pacificDate(obs.timestampIso || new Date().toISOString());
   const yesterday = addDays(today, -1);
 
@@ -211,7 +232,13 @@ async function fetchTempest(env) {
     throw new Error(`Tempest ${r.status}`);
   }
   const json = await r.json();
-  const obs = (json.obs && json.obs[0]) || {};
+  const obs = json.obs && json.obs[0];
+  if (!obs || obs.timestamp == null) {
+    // Without a real obs we'd compute a phantom rain entry under a
+    // 1969-12-31 key (because pacificDate(null) → epoch). Fail loudly
+    // instead — caller leaves the last-good payload in KV.
+    throw new Error("Tempest: no current observation in response");
+  }
 
   // Tempest payload shape (selected fields, all SI units due to query):
   //   air_temperature, relative_humidity, wind_avg, wind_gust,
