@@ -250,8 +250,12 @@
 /roles                          /volunteers/roles/                              301
 /classes/                       /volunteers/classes/                            301
 /classes                        /volunteers/classes/                            301
-/livescan/                      /volunteers/classes/                            301
-/livescan                       /volunteers/classes/                            301
+/livescan/                      /volunteers/livescan/                           301
+/livescan                       /volunteers/livescan/                           301
+/Livescan/                      /volunteers/livescan/                           301
+/Livescan                       /volunteers/livescan/                           301
+/LiveScan/                      /volunteers/livescan/                           301
+/LiveScan                       /volunteers/livescan/                           301
 /tent/                          /volunteers/tent/                               301
 /tent                           /volunteers/tent/                               301
 /onboarding/                    /volunteers/onboarding/                         301

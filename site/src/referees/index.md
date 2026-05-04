@@ -24,7 +24,7 @@ Referees make youth soccer possible. As a referee, you:
 
 All referees must complete:
 1. Referee training course (8U Official or Regional Referee)
-2. LiveScan fingerprinting (one-time requirement)
+2. [LiveScan fingerprinting](/volunteers/livescan/) (one-time requirement)
 3. Background check (annual, free)
 4. Safety courses (SafeSport, Safe Haven, Concussion Awareness, Sudden Cardiac Arrest)
 

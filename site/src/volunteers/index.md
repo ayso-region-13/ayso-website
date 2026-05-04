@@ -25,7 +25,7 @@ All volunteers must complete:
 
 1. **Volunteer Application** — Through InLeague
 2. **Background Check** — Free, through Sterling Volunteers
-3. **LiveScan Fingerprinting** — One-time, at Only Stop Travel on Woodbury Road (first-time volunteers only)
+3. **[LiveScan Fingerprinting](/volunteers/livescan/)** — One-time, at Only Stop on Woodbury Road (first-time volunteers only)
 4. **Safety Training** — CDC Concussion Awareness, Sudden Cardiac Arrest Awareness, AYSO Safe Haven
 5. **SafeSport Training** — Annual renewal required
 

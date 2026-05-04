@@ -13,7 +13,7 @@ All coaches must complete training before the season begins. Training covers bot
 ### Administrative Requirements
 1. Annual volunteer application (through InLeague)
 2. Annual background check (through InLeague)
-3. Livescan fingerprinting (once, unless you move to a new region)
+3. [Livescan fingerprinting](/volunteers/livescan/) (once, unless you move to a new region)
 
 ### Online Safety Courses
 Complete these through AYSOU/eTrainU:

@@ -24,7 +24,7 @@ All coaches must complete these requirements before the season:
 Complete through InLeague.
 
 ### Livescan Fingerprinting
-Required once (unless you move to a new region). See [Training Classes](/volunteers/classes) for locations.
+Required once (unless you move to a new region). See [LiveScan Fingerprinting](/volunteers/livescan/) for the form, address, and hours.
 
 ### Online Safety Courses
 Complete through AYSOU/eTrainU:

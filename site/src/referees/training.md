@@ -29,7 +29,7 @@ Register through eTrainU.
 
 ### Step 2: LiveScan Fingerprinting
 
-One-time requirement for all adult volunteers. Complete this at the designated location (Only Stop Travel on Woodbury Road). You only need to repeat this if you move to a new region.
+One-time requirement for all adult volunteers. See [LiveScan Fingerprinting](/volunteers/livescan/) for the full step-by-step process — form, address, and hours.
 
 ### Step 3: Background Check
 

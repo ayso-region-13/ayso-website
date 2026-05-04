@@ -48,6 +48,8 @@ Step-by-step instructions for completing the requirements every Region 13 volunt
 
 ## What is LiveScan and how do I complete it?
 
+See the [LiveScan Fingerprinting](/volunteers/livescan/) page for the full step-by-step process — what to download, where to go, and hours.
+
 ### Upcoming events
 
 Check the [Region 13 Calendar](/about/calendar/) for upcoming LiveScan events in the local area. The links to register are included in the calendar.

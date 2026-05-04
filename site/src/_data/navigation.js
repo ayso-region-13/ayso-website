@@ -188,6 +188,7 @@ module.exports = [
       { label: "Volunteer Roles",         url: "/volunteers/roles/" },
       { label: "Training Classes",        url: "/volunteers/classes/" },
       { label: "Training Requirements",   url: "/volunteers/training-matrix/" },
+      { label: "LiveScan Fingerprinting", url: "/volunteers/livescan/" },
       { label: "Field Host (Tent)",  url: "/volunteers/tent/" },
       { label: "Board Onboarding",   url: "/volunteers/onboarding/" },
       { label: "Sponsors",           url: "/volunteers/sponsors/" },
