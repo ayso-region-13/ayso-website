@@ -9,15 +9,27 @@ heroImage: action-04.jpg
 
 Live conditions from Region 13's on-site Tempest weather station, plus the current Wet Bulb Globe Temperature (WBGT) and the corresponding California CIF heat-policy alert level. For what each level means, see the [Heat Policy](/resources/heat-policy/) page.
 
-<div id="simulate-banner" class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-6" hidden></div>
+{% if fieldstatus.enabled %}
+<div class="not-prose mb-6 {% if fieldstatus.status | lower == 'closed' %}bg-brand-red-dark{% elif fieldstatus.status | lower == 'monitoring' %}bg-brand-gold{% else %}bg-brand-green{% endif %}" role="status">
+  <div class="px-4 py-2.5 flex items-center justify-center gap-3 text-center">
+    <span class="text-xl" aria-hidden="true">⚽</span>
+    <p class="{% if fieldstatus.status | lower == 'closed' %}text-white{% else %}text-brand-dark{% endif %} text-sm font-bold uppercase tracking-wider m-0">
+      Fields are {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
+    </p>
+    <span class="text-xl" aria-hidden="true">⚽</span>
+  </div>
+</div>
+{% endif %}
 
-<div id="heat-banner" class="not-prose mb-6" hidden></div>
+<div id="simulate-banner" class="bg-yellow-50 border-l-4 border-yellow-400 p-3 mb-6 not-prose" hidden></div>
 
-<div id="weather-loading" class="bg-brand-cream p-4 mb-6 text-brand-dark text-sm">
+<div id="heat-banner" class="not-prose mb-6" role="alert" hidden></div>
+
+<div id="weather-loading" class="bg-brand-cream p-4 mb-6 text-brand-dark text-sm not-prose">
   Loading current conditions…
 </div>
 
-<div id="weather-error" class="bg-brand-cream border-l-4 border-brand-red-dark p-4 mb-6" hidden>
+<div id="weather-error" class="bg-brand-cream border-l-4 border-brand-red-dark p-4 mb-6 not-prose" hidden>
   <p class="font-semibold text-brand-red-dark mb-1">Live data temporarily unavailable</p>
   <p class="text-brand-dark text-sm m-0">We couldn't reach the weather station. Try refreshing in a minute. For the official heat-alert call, check the home page banner.</p>
 </div>
@@ -35,7 +47,7 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
     <p class="text-sm text-gray-700 m-0">Wind <span id="wind">—</span> mph</p>
     <p class="text-xs text-gray-500 mt-2 m-0">Updated <span id="updated">—</span></p>
   </div>
-  <div id="wbgt-card" class="border-l-4 p-4 bg-white border-gray-300">
+  <div class="bg-brand-cream p-4">
     <p class="text-sm uppercase tracking-wider text-brand-dark mb-1">WBGT — CIF Level <span id="cif-level">—</span></p>
     <p class="text-4xl font-bold text-brand-dark leading-none mb-2"><span id="wbgt">—</span>°F</p>
     <p class="text-sm font-semibold text-brand-dark mb-1" id="cif-label">—</p>
@@ -44,16 +56,6 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
 </div>
 
 </div>
-
-## Field status
-
-{% if fieldstatus.enabled %}
-Region 13 staff have currently set fields to: **{{ fieldstatus.status }}** — {{ fieldstatus.message }}
-{% else %}
-Region 13 staff have not posted a current field-status update.
-{% endif %}
-
-This is the human-controlled status that appears on the [home page](/). It is set by Region 13 board members via Slack and is separate from the auto-derived WBGT level above. A WBGT closure recommendation does not automatically close fields — a board member must make the call.
 
 <div id="forecast-section" hidden>
 
@@ -69,6 +71,8 @@ Current conditions come from Region 13's on-site [Tempest WeatherFlow](https://w
 
 WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind speed, and solar irradiance using the Bernard 1999 simplified outdoor approximation. Variance versus the ISO 7243 reference is roughly ±1°F under typical Pasadena conditions, well within the ~5°F width of each CIF alert tier.
 
+The field-status bar at the top of this page is human-controlled — it reflects what Region 13 board members have set via Slack, and is the same status shown on the [home page](/). A high WBGT reading above does not automatically close fields; a board member still makes that call.
+
 ## Related
 
 - [Heat Policy](/resources/heat-policy/) — CIF alert levels and required actions
@@ -76,67 +80,54 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
 
 <script>
 (function () {
-  // Per-level palette + banner content. WCAG-checked: every (bg, text)
-  // combo passes AA at the displayed weights (see brand-colors.md).
-  var WBGT_PALETTE = {
-    1: {
-      border:   "border-brand-green",
-      banner:   null  // Level 1 = no banner, conditions are normal
-    },
+  // Two-tier alert palette mirroring the site's field-status semantics:
+  //   Levels 2–3 → "Monitoring" (gold + dark text)
+  //   Levels 4–5 → "Closed"     (red-dark + white text)
+  // Both color combos are validated AA elsewhere on the site (home-page
+  // field status widget). Level 1 = silent/no banner.
+  var WBGT_BANNERS = {
     2: {
-      border:   "border-brand-gold",
-      banner: {
-        bg:     "bg-brand-gold",
-        text:   "text-brand-dark",
-        title:  "Heat Alert — CIF Level 2",
-        lead:   "Frequent water breaks. Watch for heat illness.",
-        limits: [
-          "Water breaks every 30 minutes minimum",
-          "Watch carefully for heat-illness signs"
-        ]
-      }
+      bg:    "bg-brand-gold",
+      text:  "text-brand-dark",
+      title: "Heat Alert — CIF Level 2",
+      lead:  "Frequent water breaks. Watch for heat illness.",
+      limits: [
+        "Water breaks every 30 minutes minimum",
+        "Watch carefully for heat-illness signs"
+      ]
     },
     3: {
-      border:   "border-orange-500",
-      banner: {
-        bg:     "bg-orange-500",
-        text:   "text-brand-dark",
-        title:  "Heat Alert — CIF Level 3",
-        lead:   "Activity reduced. Practice limited to two hours.",
-        limits: [
-          "Maximum 2 hours of practice",
-          "Four 4-minute water breaks per hour",
-          "Lighter clothing"
-        ]
-      }
+      bg:    "bg-brand-gold",
+      text:  "text-brand-dark",
+      title: "Heat Alert — CIF Level 3",
+      lead:  "Activity reduced. Practice limited to two hours.",
+      limits: [
+        "Maximum 2 hours of practice",
+        "Four 4-minute water breaks per hour",
+        "Lighter clothing"
+      ]
     },
     4: {
-      border:   "border-brand-red",
-      banner: {
-        bg:     "bg-brand-red",
-        text:   "text-brand-dark",
-        title:  "Heat Alert — CIF Level 4",
-        lead:   "Strict limits. Practice and equipment restricted.",
-        limits: [
-          "Maximum 1 hour of practice",
-          "Four 4-minute water breaks per hour",
-          "No equipment (no shin guards, ball touches only)"
-        ]
-      }
+      bg:    "bg-brand-red-dark",
+      text:  "text-white",
+      title: "Heat Alert — CIF Level 4",
+      lead:  "Strict limits. Practice and equipment restricted.",
+      limits: [
+        "Maximum 1 hour of practice",
+        "Four 4-minute water breaks per hour",
+        "No equipment"
+      ]
     },
     5: {
-      border:   "border-brand-red-dark",
-      banner: {
-        bg:     "bg-brand-red-dark",
-        text:   "text-white",
-        title:  "Outdoor Activity Suspended — CIF Level 5",
-        lead:   "WBGT has crossed the closure threshold. Watch the home-page banner for the official call.",
-        limits: [
-          "No outdoor activity",
-          "Suspend practices and games until conditions cool",
-          "Region 13 closes fields"
-        ]
-      }
+      bg:    "bg-brand-red-dark",
+      text:  "text-white",
+      title: "Outdoor Activity Suspended — CIF Level 5",
+      lead:  "WBGT has crossed the closure threshold. Watch the home-page status bar for the official call.",
+      limits: [
+        "No outdoor activity",
+        "Suspend practices and games until conditions cool",
+        "Region 13 closes fields"
+      ]
     }
   };
 
@@ -159,8 +150,8 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
     if (el) el.textContent = value == null ? "—" : String(value);
   }
 
-  function show(id)  { var el = document.getElementById(id); if (el) el.removeAttribute("hidden"); }
-  function hide(id)  { var el = document.getElementById(id); if (el) el.setAttribute("hidden", ""); }
+  function show(id) { var el = document.getElementById(id); if (el) el.removeAttribute("hidden"); }
+  function hide(id) { var el = document.getElementById(id); if (el) el.setAttribute("hidden", ""); }
 
   function formatUpdated(iso) {
     if (!iso) return "—";
@@ -255,25 +246,16 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
     while (host.firstChild) host.removeChild(host.firstChild);
     host.setAttribute("hidden", "");
 
-    var palette = WBGT_PALETTE[level];
-    if (!palette || !palette.banner) return;
-    var b = palette.banner;
+    var b = WBGT_BANNERS[level];
+    if (!b) return;
 
     var box = document.createElement("div");
     box.className = b.bg + " " + b.text + " p-5";
 
-    var head = document.createElement("div");
-    head.className = "flex items-center gap-3 mb-2";
-    var icon = document.createElement("span");
-    icon.className = "text-2xl";
-    icon.setAttribute("aria-hidden", "true");
-    icon.textContent = level >= 5 ? "🚫" : "🌡️";
     var title = document.createElement("p");
-    title.className = "text-base font-bold uppercase tracking-wider m-0";
+    title.className = "text-base font-bold uppercase tracking-wider mb-2 m-0";
     title.textContent = b.title;
-    head.appendChild(icon);
-    head.appendChild(title);
-    box.appendChild(head);
+    box.appendChild(title);
 
     var lead = document.createElement("p");
     lead.className = "text-sm font-semibold mb-3 m-0";
@@ -291,16 +273,6 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
 
     host.appendChild(box);
     host.removeAttribute("hidden");
-  }
-
-  function applyWbgtPalette(level) {
-    var card = document.getElementById("wbgt-card");
-    if (!card) return;
-    Object.keys(WBGT_PALETTE).forEach(function (k) {
-      card.classList.remove(WBGT_PALETTE[k].border);
-    });
-    var p = WBGT_PALETTE[level];
-    if (p) card.classList.add(p.border);
   }
 
   function render(data) {
@@ -322,7 +294,6 @@ WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind s
     setText("cif-level",  w.level != null ? w.level : "—");
     setText("cif-label",  w.levelLabel || "—");
 
-    applyWbgtPalette(w.level);
     renderHeatBanner(w.level);
     renderForecast(data.forecast || []);
 
