@@ -67,6 +67,7 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
 ## Related
 
 - [Heat Policy](/resources/heat-policy/): CIF alert levels and required actions
+- [Rain Policy](/resources/rain-policy/): wet-field closure thresholds
 - [Safety](/resources/safety/): concussion, sudden cardiac arrest, incident reporting
 
 <script>

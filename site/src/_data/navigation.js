@@ -208,6 +208,7 @@ module.exports = [
       { label: "Newsletters",             url: "/resources/newsletters/" },
       { label: "Safety",                  url: "/resources/safety/" },
       { label: "Heat Policy",             url: "/resources/heat-policy/" },
+      { label: "Rain Policy",             url: "/resources/rain-policy/" },
       { label: "Weather & Field Status",  url: "/resources/weather/" },
     ],
   },

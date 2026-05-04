@@ -32,15 +32,6 @@ When WBGT crosses into Level 5, the weather page shows a closure banner. The boa
 
 If a coach or family judges conditions to be unsafe at any level, they have the final say on individual participation. Either coach in a game may elect not to play in hot conditions without forfeit penalty.
 
-## Wet field policy
-
-Heavy rain saturates the fields and makes them unsafe to play on, even after the storm has passed. Region 13 closes fields when either of the following thresholds is crossed:
-
-- More than 0.25 inches of rain in the past 48 hours, or
-- More than 1 inch of rain in the past 72 hours.
-
-When closed for wet conditions, both games and practices are canceled and fields stay closed until conditions improve. The current 48-hour and 72-hour rainfall totals are visible on [Weather and Field Conditions](/resources/weather/); a closure banner appears there automatically when a threshold is crossed. As with heat closures, the board confirms the call and posts the official closure to the home page banner.
-
 ## What you can do
 
 - **Hydrate before, during, and after.** Cold water; sports drinks for longer practices.
@@ -54,6 +45,7 @@ These thresholds and required actions follow the California Interscholastic Fede
 ## Related
 
 - [Weather and Field Conditions](/resources/weather/): live WBGT, current conditions, 7-day forecast
+- [Rain Policy](/resources/rain-policy/): wet-field closure thresholds
 - [Safety](/resources/safety/): concussion, sudden cardiac arrest, incident reporting
 
 *Last updated: [DATE]*

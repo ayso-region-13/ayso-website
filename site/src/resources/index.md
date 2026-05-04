@@ -25,6 +25,12 @@ California CIF Wet Bulb Globe Temperature alert levels and what each means for R
 
 [Heat Policy](/resources/heat-policy/)
 
+## Rain Policy
+
+Wet-field closure thresholds. Region 13 closes fields when recent rainfall has saturated the playing surfaces.
+
+[Rain Policy](/resources/rain-policy/)
+
 ## Weather and Field Conditions
 
 Live readings from Region 13's on-site weather station, current WBGT, and a 7-day Pasadena forecast.
