@@ -1,0 +1,235 @@
+---
+permalink: "/temp.html"
+eleventyExcludeFromCollections: true
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Conditions — AYSO Region 13</title>
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #221f1f;
+    background: #fff;
+    padding: 1.5rem 1.25rem 2rem;
+    max-width: 32rem;
+    margin: 0 auto;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+  }
+  .header .logo {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    background: url(/images/logo.svg) center / contain no-repeat;
+  }
+  h1 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #8e2929;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+  }
+  .field-status {
+    padding: 0.85rem 1rem;
+    margin: 0 -1.25rem 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .field-status.open       { background: #a6ce57; color: #221f1f; }
+  .field-status.monitoring { background: #f4bd4d; color: #221f1f; }
+  .field-status.closed     { background: #83312d; color: #fff; }
+  .field-status .msg {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.85;
+  }
+  .stat {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #ede8e2;
+  }
+  .stat:first-of-type { padding-top: 0; }
+  .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #6b6b6b;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+  .value {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .value-row { display: flex; align-items: baseline; gap: 0.5rem; }
+  .secondary {
+    font-size: 0.875rem;
+    color: #555;
+    margin-top: 0.5rem;
+  }
+  .pill {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .pill-1 { background: #e9f2dc; color: #2a5a18; }
+  .pill-2, .pill-3 { background: #fbe9b8; color: #5a4500; }
+  .pill-4, .pill-5 { background: #83312d; color: #fff; }
+  .updated {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 1rem;
+  }
+  .err {
+    padding: 1rem;
+    background: #ede8e2;
+    border-left: 4px solid #83312d;
+    color: #221f1f;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+  .loading {
+    padding: 1rem 0;
+    color: #888;
+    font-size: 0.95rem;
+  }
+  .back {
+    margin-top: auto;
+    padding-top: 2.5rem;
+  }
+  .back a {
+    display: inline-block;
+    padding: 0.85rem 1.5rem;
+    background: #8e2929;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+  }
+  .back a:active { background: #83312d; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="logo" role="img" aria-label="AYSO Region 13 logo"></span>
+  <h1>AYSO Region 13<br>Live Conditions</h1>
+</div>
+
+{% if fieldstatus.enabled %}
+<div class="field-status {{ fieldstatus.status | lower }}" role="status">
+  ⚽ Fields are {{ fieldstatus.status }} ⚽
+  {% if fieldstatus.message %}<span class="msg">{{ fieldstatus.message }}</span>{% endif %}
+</div>
+{% endif %}
+
+<div id="error" class="err" hidden>
+  Live data unavailable. Try refreshing in a minute.
+</div>
+
+<div id="content">
+  <div class="stat">
+    <div class="label">Temperature</div>
+    <div class="value-row">
+      <span class="value"><span id="temp">—</span>°F</span>
+    </div>
+    <div class="secondary">
+      Feels like <span id="feels">—</span>°F · Humidity <span id="humidity">—</span>%
+    </div>
+  </div>
+
+  <div class="stat">
+    <div class="label">WBGT</div>
+    <div class="value-row">
+      <span class="value"><span id="wbgt">—</span>°F</span>
+    </div>
+    <div class="secondary">
+      <span id="cif-label">—</span>
+      <span class="pill" id="cif-pill" hidden>Level <span id="cif-level">—</span></span>
+    </div>
+  </div>
+
+  <div class="updated">Updated <span id="updated">—</span></div>
+</div>
+
+<div class="back">
+  <a href="/">← Back to site</a>
+</div>
+
+<script>
+(function () {
+  function $(id) { return document.getElementById(id); }
+  function setText(id, v) { var el = $(id); if (el) el.textContent = (v == null || v === "") ? "—" : v; }
+  function show(id) { var el = $(id); if (el) el.hidden = false; }
+  function hide(id) { var el = $(id); if (el) el.hidden = true; }
+
+  function formatUpdated(iso) {
+    if (!iso) return "—";
+    try {
+      return new Date(iso).toLocaleTimeString("en-US", {
+        hour: "numeric", minute: "2-digit", timeZone: "America/Los_Angeles"
+      });
+    } catch (_) { return iso; }
+  }
+
+  fetch("/api/weather", { cache: "no-cache" })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      var c = data.current || {};
+      var w = data.wbgt || {};
+      setText("temp", c.tempF);
+      setText("feels", c.feelsLikeF);
+      setText("humidity", c.humidity);
+      setText("wbgt", w.valueF);
+      setText("cif-label", w.levelLabel);
+      setText("cif-level", w.level);
+
+      if (w.level) {
+        var pill = $("cif-pill");
+        pill.classList.add("pill-" + w.level);
+        pill.hidden = false;
+      }
+
+      setText("updated", formatUpdated(c.stationTimestamp || data.fetchedAt));
+    })
+    .catch(function () {
+      // Leave the content visible with — placeholders so the layout is
+      // still readable; just surface the error notice above it.
+      show("error");
+    });
+})();
+</script>
+
+</body>
+</html>
