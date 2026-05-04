@@ -202,11 +202,13 @@ module.exports = [
     section: "resources",
     topNav: false,
     children: [
-      { label: "Resources Overview",  url: "/resources/" },
-      { label: "Document Library",    url: "/resources/documents/" },
-      { label: "Photo Gallery",       url: "/resources/gallery/" },
-      { label: "Newsletters",         url: "/resources/newsletters/" },
-      { label: "Safety & Heat Policy",url: "/resources/safety/" },
+      { label: "Resources Overview",      url: "/resources/" },
+      { label: "Document Library",        url: "/resources/documents/" },
+      { label: "Photo Gallery",           url: "/resources/gallery/" },
+      { label: "Newsletters",             url: "/resources/newsletters/" },
+      { label: "Safety",                  url: "/resources/safety/" },
+      { label: "Heat Policy",             url: "/resources/heat-policy/" },
+      { label: "Weather & Field Status",  url: "/resources/weather/" },
     ],
   },
 

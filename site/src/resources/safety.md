@@ -50,11 +50,12 @@ Coaches and team managers must complete concussion and SCA awareness training th
 
 ## Heat Policy
 
-Region 13 monitors heat conditions using Wet Bulb Globe Temperature (WBGT) measurements. When conditions reach Alert Level 3, games may be shortened. Either coach may elect not to play without forfeit penalty.
+Region 13 follows California CIF heat acclimatization guidelines and monitors Wet Bulb Globe Temperature (WBGT) at our fields. Activities are modified or canceled based on the alert level (1–5).
 
-Families and players have final say on participation in hot conditions.
+- [Heat Policy and alert levels](/resources/heat-policy/) — full CIF thresholds and required actions
+- [Weather and Field Conditions](/resources/weather/) — live WBGT from our weather station
 
-Use the Zelus app to check current conditions: [zelusports.com](https://zelusports.com)
+Either coach in a game may elect not to play in hot conditions without forfeit penalty. Families and players have final say on individual participation.
 
 Notifications are sent by 7 AM on game days or 4 PM on practice days when heat alerts are in effect.
 
