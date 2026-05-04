@@ -15,7 +15,7 @@
      Elements that set their own focus styles (e.g. focus:outline-none on
      the footer search input) keep their custom behavior. */
   :focus-visible {
-    outline: 2px solid theme(colors.brand.red-dark);
+    outline: 2px solid theme(colors.brand-red-dark);
     outline-offset: 2px;
     border-radius: 2px;
   }
