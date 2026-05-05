@@ -48,6 +48,22 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ## Completed ✓
 
+### Session 19 (2026-05-05) — EXTRA launch + infrastructure cleanup
+- [x] **EXTRA program launched** — `/programs/extra/` made public (was `noindex`/stub) with tryout dates (5/16, 6/6, 6/13 at Blair High School), program details, costs ($620 total), and SportsEvent schema (start 2026-09-01, end 2027-05-30). Hero image `extra-interior.jpg` and home-tile crop `home/tile_extra.jpg` added.
+- [x] **Home page tile grid reordered** — All-Stars tile removed from grid (page itself preserved), EXTRA™ tile added. New order: Spring → Fall → EXTRA™ → Pre-School → Upper Division → EPIC.
+- [x] **Footer Programs column** matches the home tile order; EXTRA labeled "EXTRA (10U Select)".
+- [x] **Programs top-nav menu alphabetized** — All Programs pinned at top, EXTRA inserted between EPIC and Fall Soccer; Tournaments stay in their own divider section, also alphabetized.
+- [x] **/programs/ index** — new "Select Programs" section at the top with EXTRA™ in its own table; description meta updated.
+- [x] **EXTRA in `llms.txt`** — bullet added under Programs.
+- [x] **/extra redirect** repointed from `/programs/` to `/programs/extra/` directly. /weather → /resources/weather/ added for symmetry.
+- [x] **™ on first mention** — "EXTRA™" on home tile, programs index "Select Programs" row, llms.txt, and `/programs/extra/` body lead. Nav menu and footer chrome use plain "EXTRA" (label convention).
+- [x] **Tryout-list standardization** — B10U/G10U notation throughout (was mixed B10U/U10G); time rows unbolded so the visual pattern is "bold date / regular times".
+- [x] **/calendar redirect repointed** to `/about/calendar/` (was hitting the static season-overview at `/schedules/calendar/`); the schedules page's "View Calendar" section now explains the live region calendar lives on its own page.
+- [x] **Staging-deploy Slack notifications** — new `.github/workflows/notify-staging-deploy.yml` watches CF Pages staging builds and posts a one-line success/failure message to `#notify-website-status` (channel `C0A024YGR9C`). Reuses `wait-for-cf-deploy.sh` with `PROJECT=ayso-website-staging`. No-op pushes (where CF didn't register a deployment) skip notification silently.
+- [x] **`heroImage` frontmatter normalized** to full `/images/...` paths across 12 pages + `_data/og.js` defaults; `base.njk` no longer prepends `/images/`. Closes the Pages CMS image-preview 404 issue — CMS uploads stored as `/images/foo.jpg` now Just Work.
+- [x] **UTC off-by-one in date filter + footer transform fixed** — both formatters now pin to `America/Los_Angeles` via `Intl.DateTimeFormat`. `sitemap.xml <lastmod>` and per-page `<time datetime>` no longer drift forward a day on late-Pacific-evening commits when built on Cloudflare Pages (UTC).
+- [x] **todo.md cleanup** — dropped stale EXTRA-XXX-placeholder item; reworded two items to use roles instead of speculating about a specific person's name.
+
 ### Session 18 (2026-05-04) — live weather page + heat policy
 - [x] **Board minutes 2023+ decision: archive-by-request** — confirmed the existing `/about/board-minutes/` policy (visitors email `rc@ayso13.org` for archive copies) covers 2023, 2024, 2025 minutes too. Not publicly posting individual PDFs going forward. Closes the open todo from session 17.
 - [x] **`/resources/weather/`** — live current conditions, WBGT + CIF alert level, 7-day forecast. Server-rendered field-status reference (read from `_data/fieldstatus.json`). Inline JS uses safe DOM construction (no innerHTML) to render forecast cards; same-origin fetch to `/api/weather`.
