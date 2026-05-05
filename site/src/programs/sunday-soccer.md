@@ -3,7 +3,7 @@
 title: "Sunday Soccer"
 layout: page.njk
 section: programs
-heroImage: "game-01.jpg"
+heroImage: "/images/game-01.jpg"
 description: "Sunday Soccer offers weekly skills training and a goalkeeper academy for Region 13 players. Open to all skill levels."
 ---
 

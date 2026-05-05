@@ -14,9 +14,19 @@ try {
   // Not yet generated — will use current date as fallback
 }
 
+// Pin every date format to America/Los_Angeles so output matches the editor's
+// expectation regardless of where the build runs (CF Pages runners are UTC,
+// which would otherwise shift late-evening Pacific commits forward by a day
+// in sitemap <lastmod> and "Last updated" footers).
+const PACIFIC_TZ = "America/Los_Angeles";
 const DATE_FMT = new Intl.DateTimeFormat("en-US", {
+  timeZone: PACIFIC_TZ,
   year: "numeric", month: "long", day: "numeric",
 });
+const ISO_DATE_FMT = new Intl.DateTimeFormat("en-CA", {
+  timeZone: PACIFIC_TZ,
+  year: "numeric", month: "2-digit", day: "2-digit",
+}); // "en-CA" outputs YYYY-MM-DD natively.
 
 module.exports = function (eleventyConfig) {
 
@@ -58,7 +68,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter("date", (dateObj, format) => {
     const d = dateObj instanceof Date ? dateObj : new Date(dateObj);
     if (format === "yyyy-MM-dd") {
-      return d.toISOString().split("T")[0];
+      return ISO_DATE_FMT.format(d);
     }
     return d.toISOString();
   });
@@ -169,7 +179,7 @@ module.exports = function (eleventyConfig) {
 
     const raw  = (rel && fileDates[rel]) ? fileDates[rel] : new Date().toISOString();
     const date = new Date(raw);
-    const iso  = date.toISOString().split("T")[0];
+    const iso  = ISO_DATE_FMT.format(date);
     const nice = DATE_FMT.format(date);
 
     return content.replace(

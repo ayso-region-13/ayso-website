@@ -3,7 +3,7 @@
 title: "Grad Series"
 layout: page.njk
 section: programs
-heroImage: "grad-series-02.jpg"
+heroImage: "/images/grad-series-02.jpg"
 description: "Grad Series helps 8U players transition to 10U soccer with additional coaching, game experience, and skill development."
 ---
 

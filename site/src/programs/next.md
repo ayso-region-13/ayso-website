@@ -3,7 +3,7 @@
 title: "NEXT"
 layout: page.njk
 section: programs
-heroImage: "action-05.jpg"
+heroImage: "/images/action-05.jpg"
 description: "NEXT is an advanced training program for skilled players ages 10–14 who want more challenge alongside their regular Fall Soccer season."
 ---
 

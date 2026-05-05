@@ -3,7 +3,7 @@
 title: "Spring Soccer"
 layout: page.njk
 section: programs
-heroImage: "action-06.jpg"
+heroImage: "/images/action-06.jpg"
 description: "Spring Soccer is Region 13's recreational spring program. Open registration for all players ages 6–14."
 ---
 

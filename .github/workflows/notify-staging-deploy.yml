@@ -1,0 +1,72 @@
+name: Notify Staging Deploy
+
+# Watches Cloudflare Pages staging builds. Posts a one-line message to
+# #notify-website-status when a deploy reaches success or failure.
+#
+# Skips notification entirely when no CF Pages deployment is found for
+# the pushed SHA (treats that as a no-op push — e.g. a push that didn't
+# actually trigger a build, or where the wait timed out before CF
+# registered the deployment).
+#
+# Security: All ${{ ... }} substitutions go through env: blocks before
+# being referenced as $VARS in run:, per the recommended GH Actions
+# pattern. SHA + workflow-context values only — no untrusted input.
+
+on:
+  push:
+    branches: [staging]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    name: Wait for CF staging deploy, notify Slack
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Wait for Cloudflare Pages staging deploy
+        id: cf_wait
+        continue-on-error: true
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          PROJECT: ayso-website-staging
+          SHA: ${{ github.sha }}
+        run: bash .github/scripts/wait-for-cf-deploy.sh
+
+      - name: Notify Slack — staging deploy live
+        if: steps.cf_wait.outputs.final_status == 'success'
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ github.sha }}
+          BUILD_SECONDS: ${{ steps.cf_wait.outputs.build_seconds }}
+        run: |
+          SHORT="${SHA:0:7}"
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg sha "$SHORT" --arg secs "$BUILD_SECONDS" '{
+              channel: "C0A024YGR9C",
+              text: ":white_check_mark: Staging deploy live — \($sha) is now serving on staging.ayso13.org. Build took \($secs)s."
+            }')"
+
+      - name: Notify Slack — staging deploy failed
+        if: steps.cf_wait.outputs.final_status == 'failure' || steps.cf_wait.outputs.final_status == 'timeout'
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ github.sha }}
+          STAGE: ${{ steps.cf_wait.outputs.final_stage }}
+          STATUS: ${{ steps.cf_wait.outputs.final_status }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          SHORT="${SHA:0:7}"
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg sha "$SHORT" --arg stage "$STAGE" --arg status "$STATUS" --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: ":x: Staging deploy \($status) — \($sha) at stage \($stage) on staging.ayso13.org. <\($run)|View run>"
+            }')"
