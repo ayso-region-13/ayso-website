@@ -31,11 +31,11 @@ Region 13 is launching 10U EXTRA™ this Fall for both girls and boys **born bet
 G10U: 10:15–11am  
 B10U: 11:15am–12pm
 - **6/6/2026**  
-**G10U: 10:15–11am**  
-**B10U: 11:15am–12pm**
+G10U: 10:15–11am  
+B10U: 11:15am–12pm
 - **6/13/2026**  
-**G10U: 10:15–11am**  
-**B10U: 11:15am–12pm**
+G10U: 10:15–11am  
+B10U: 11:15am–12pm
 
 What to bring to tryouts:
 
