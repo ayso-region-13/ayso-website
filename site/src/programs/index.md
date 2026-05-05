@@ -15,7 +15,7 @@ Tryout-based select play that runs across multiple seasons.
 
 | Program | Ages | Description |
 |---------|------|-------------|
-| [EXTRA](/programs/extra) | 10U | Tryout-based select program. Fall through Spring. Competes against other EXTRA teams in Section 1 West. |
+| [EXTRA™](/programs/extra) | 10U | Tryout-based select program. Fall through Spring. Competes against other EXTRA teams in Section 1 West. |
 
 ## Fall Programs (September - December)
 
