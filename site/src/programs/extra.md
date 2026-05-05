@@ -1,21 +1,51 @@
 ---
-title: "Region 13 EXTRA"
-description: "Region 13 EXTRA is a tryout-based select soccer program for players seeking a more competitive experience while staying within AYSO's player-centered philosophy. Launching 10U for Fall 2026."
+title: Region 13 EXTRA
+description: Region 13 EXTRA is a tryout-based select soccer program for players
+  seeking a more competitive experience while staying within AYSO's
+  player-centered philosophy. Launching 10U for Fall 2026.
 layout: page.njk
 section: programs
-eleventyExcludeFromCollections: true
-noindex: true
+heroImage: extra-interior.jpg
+eventName: "AYSO Region 13 EXTRA 2026/27"
+eventStartDate: "2026-09-01"
+eventEndDate: "2027-05-30"
 ---
+![AYSO Region 13 EXTRA program](/images/extra-interior.jpg)
 
 EXTRA™ is an exciting new program offered by Region 13 for players who are looking for a more competitive soccer experience while still enjoying the positive, player-centered environment that AYSO is known for. It's a great fit for kids who love soccer, want to develop their skills further, and are ready to take on a higher level of commitment.
 
 EXTRA™ is a tryout-based, select program that stays true to AYSO's core philosophies. The program runs from Fall through Spring, with teams competing against other EXTRA™ teams across Section 1 West.
 
-Region 13 is launching 10U EXTRA™ this Fall for both girls and boys born **between August 1, 2016 and July 31, 2017**.
+Region 13 is launching 10U EXTRA™ this Fall for both girls and boys **born between August 1, 2016 and July 31, 2017.**
 
-**Tryouts will take place on XXX at XXX.**
 
-Additional details about registration and what to expect at tryouts will be shared soon.
+
+---
+
+## Tryouts
+
+**Tryouts will be held at [Blair High School.](https://www.ayso13.org/fields/blair/)**   
+*Players must attend at least 2 of the dates to be considered for a team:*
+
+- **5/16/2026**  
+G10U: 10:15–11am  
+B10U: 11:15am–12pm
+- **6/6/2026**  
+G10U: 10:15–11am  
+B10U: 11:15am–12pm
+- **6/13/2026**  
+G10U: 10:15–11am  
+B10U: 11:15am–12pm
+
+What to bring to tryouts:
+
+- cleats
+- shin guards
+- water
+- generic athletic attire
+- positive attitude!
+
+---
 
 ## Program Details
 
@@ -30,20 +60,17 @@ Players selected for an EXTRA™ team are committing to this program and may not
 
 ## Program Cost
 
-Because EXTRA™ includes additional elements such as extended seasons, uniforms, and administrative support, the program fees are higher than those of standard Region 13 programs.
+Because EXTRA™ includes additional elements such as extended seasons, uniform sets, and administrative support, the program fees are higher than those of standard Region 13 programs.
 
-2026 EXTRA™ Registration: $XXX
+AYSO National Membership: $25   
+AYSO Region 13 Fall Registration: $195   
+AYSO Region 13 EXTRA Fee: $400  
+**TOTAL: $620**
 
-## Questions
+
+
+## Questions?
 
 Contact [Albert Estepa](mailto:albert@ayso13.org), AYSO Region 13 EXTRA™ Coordinator.
-
-## References
-
-- [AYSO Southern California EXTRA Developmental Soccer League (SCEDSL) 2025–2026](https://dt5602vnjxv0c.cloudfront.net/portals/15336/docs/guidelines/scedsl_gaming_circuit_guidelines_2025.pdf)
-- [AYSO National on EXTRA (Wiki)](https://wiki.ayso.org/wiki/Category:Extra)
-- [AYSO national EXTRA page](https://ayso.org/ayso-extra/)
-- [South Pasadena EXTRA (Region 214)](https://www.ayso214.org/Default.aspx?tabid=961357)
-- [Alhambra EXTRA (Region 60)](https://www.ayso60.org/Default.aspx?tabid=949215)
 
 *Last updated: [DATE]*
