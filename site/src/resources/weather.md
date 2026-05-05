@@ -4,7 +4,7 @@ title: "Weather and Field Conditions"
 layout: page.njk
 section: resources
 description: "Current conditions, Wet Bulb Globe Temperature (WBGT), and 7-day forecast for AYSO Region 13 fields in Pasadena. Live data from our on-site weather station."
-heroImage: action-04.jpg
+heroImage: /images/action-04.jpg
 showFieldStatus: true
 ---
 

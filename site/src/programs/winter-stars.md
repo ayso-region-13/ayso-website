@@ -3,7 +3,7 @@
 title: "Winter Stars"
 layout: page.njk
 section: programs
-heroImage: "grad-series-01.jpg"
+heroImage: "/images/grad-series-01.jpg"
 description: "Winter Stars is Region 13's winter soccer program for returning Fall Soccer players. Games run December through February."
 ---
 

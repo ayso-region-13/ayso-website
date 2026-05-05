@@ -3,7 +3,7 @@
 title: "Women's Coaching Alliance"
 layout: page.njk
 section: coaches
-heroImage: "wca-01.jpg"
+heroImage: "/images/wca-01.jpg"
 description: "The Women's Coaching Alliance (WCA) supports and encourages women coaches in AYSO Region 13."
 ---
 

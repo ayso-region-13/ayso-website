@@ -3,7 +3,7 @@
 title: "Upper Division (16U/19U)"
 layout: page.njk
 section: programs
-heroImage: "action-03.jpg"
+heroImage: "/images/action-03.jpg"
 description: "Upper Division soccer for players ages 15–19 (16U and 19U) in the Pasadena area. Schedules designed to avoid conflicts with high school soccer."
 ---
 

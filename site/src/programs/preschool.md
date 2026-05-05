@@ -3,7 +3,7 @@
 title: "Preschool Soccer (4U/5U)"
 layout: page.njk
 section: programs
-heroImage: "action-04.jpg"
+heroImage: "/images/action-04.jpg"
 description: "Preschool soccer for children ages 3–5 (4U and 5U). A fun, age-appropriate introduction to the game for the youngest players."
 ---
 

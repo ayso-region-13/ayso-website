@@ -5,7 +5,7 @@ description: Region 13 EXTRA is a tryout-based select soccer program for players
   player-centered philosophy. Launching 10U for Fall 2026.
 layout: page.njk
 section: programs
-heroImage: extra-interior.jpg
+heroImage: /images/extra-interior.jpg
 eventName: AYSO Region 13 EXTRA 2026/27
 eventStartDate: 2026-09-01
 eventEndDate: 2027-05-30
