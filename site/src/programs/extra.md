@@ -6,9 +6,9 @@ description: Region 13 EXTRA is a tryout-based select soccer program for players
 layout: page.njk
 section: programs
 heroImage: extra-interior.jpg
-eventName: "AYSO Region 13 EXTRA 2026/27"
-eventStartDate: "2026-09-01"
-eventEndDate: "2027-05-30"
+eventName: AYSO Region 13 EXTRA 2026/27
+eventStartDate: 2026-09-01
+eventEndDate: 2027-05-30
 ---
 ![AYSO Region 13 EXTRA program](/images/extra-interior.jpg)
 
@@ -24,7 +24,7 @@ Region 13 is launching 10U EXTRA™ this Fall for both girls and boys **born bet
 
 ## Tryouts
 
-**Tryouts will be held at [Blair High School.](https://www.ayso13.org/fields/blair/)**   
+**Tryouts will be held at [Blair High School.](https://www.ayso13.org/fields/blair/)**  
 *Players must attend at least 2 of the dates to be considered for a team:*
 
 - **5/16/2026**  
@@ -62,10 +62,11 @@ Players selected for an EXTRA™ team are committing to this program and may not
 
 Because EXTRA™ includes additional elements such as extended seasons, uniform sets, and administrative support, the program fees are higher than those of standard Region 13 programs.
 
-AYSO National Membership: $25   
-AYSO Region 13 Fall Registration: $195   
+AYSO National Membership: $25  
+AYSO Region 13 Fall Registration: $195  
 AYSO Region 13 EXTRA Fee: $400  
-**TOTAL: $620**
+**TOTAL: $620**  
+*Scholarships are available.*
 
 
 
