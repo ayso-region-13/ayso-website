@@ -1,11 +1,10 @@
 ---
-
-title: "Thanksgiving Tournament"
+title: Thanksgiving Tournament
+description: The Region 13 Thanksgiving Tournament is an annual AYSO soccer
+  tournament held over Thanksgiving weekend in Pasadena.
 layout: page.njk
 section: programs
-description: "The Region 13 Thanksgiving Tournament is an annual AYSO soccer tournament held over Thanksgiving weekend in Pasadena."
 ---
-
 The Thanksgiving Tournament is a three-day competition held the weekend after Thanksgiving for 10U, 12U, and 14U teams.
 
 ![Thanksgiving Tournament game action](/images/thanksgiving-interior.jpg)
@@ -20,11 +19,13 @@ The Thanksgiving Tournament is a three-day competition held the weekend after Th
 
 ## Divisions and Fees (2025)
 
+
 | Division | Format | Max Players | Registration Fee | Referee Deposit |
-|----------|--------|-------------|------------------|-----------------|
+| -------- | ------ | ----------- | ---------------- | --------------- |
 | 10U | 7v7 | 11 | $450 | $300 |
 | 12U | 9v9 | 14 | $475 | $300 |
 | 14U | 11v11 | 16 | $500 | $300 |
+
 
 ## Schedule (2025)
 
@@ -34,12 +35,12 @@ The Thanksgiving Tournament is a three-day competition held the weekend after Th
 
 ## Registration
 
-- Registration deadline: November 14
+- Registration deadline: approximately two weeks before Thanksgiving
 - Teams must have an AYSO ID to register
 - Each team must provide a three-person referee team
 - Registration handled through InLeague
 
-[Register on InLeague](https://ayso13.inleague.com/app)
+
 
 ## Referee Requirements
 
@@ -48,6 +49,7 @@ Each team must provide referees for assigned games. The $300 referee deposit is 
 ## Volunteer Opportunities
 
 The tournament needs volunteers for:
+
 - Field setup
 - Check-in
 - Scorekeeping
