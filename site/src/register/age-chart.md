@@ -46,7 +46,7 @@ Visual chart (image)
 
 ## Playing in a Different Division
 
-Requests to play down in the next lower division or play up in the next higher division are considered on a case-by-case basis, depending on total registration numbers, team formation, volunteer availability, and player ability. See [AYSO national guidelines](https://wiki.ayso.org/wiki/Age_Guide,_Determination_%26_Divisions#Playing_Up_an_Age_Division) for more information.
+Requests to play down in the next lower division or play up in the next higher division are considered on a case-by-case basis, depending on total registration numbers, team formation, volunteer availability, and player ability. Requests to play down, specifically, are rarely approved. See [AYSO national guidelines](https://wiki.ayso.org/wiki/Age_Guide,_Determination_%26_Divisions#Playing_Up_an_Age_Division) for more information.
 
 To request to play down or up, [fill out the special request form](https://docs.google.com/forms/d/e/1FAIpQLSezuuG9zC01603UNRBNesCIvDrvOzqySEVSwG5C3J5fkhigaQ/viewform?usp=sf_link).
 
