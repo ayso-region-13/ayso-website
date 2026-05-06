@@ -4,7 +4,10 @@ title: "Winter Stars"
 layout: page.njk
 section: programs
 heroImage: "/images/grad-series-01.jpg"
-description: "Winter Stars is Region 13's winter soccer program for returning Fall Soccer players. Games run December through February."
+description: "Winter Stars is Region 13's winter soccer program for returning Fall Soccer players. Games run January through February."
+eventName: "AYSO Region 13 Winter Stars 2027"
+eventStartDate: "2027-01-01"
+eventEndDate: "2027-02-28"
 ---
 
 Winter Stars is an 8-week program offering skills training and small-sided games for players ages 6 and up during the winter months.
@@ -15,7 +18,7 @@ Winter Stars is an 8-week program offering skills training and small-sided games
 
 - Ages: 6U and older
 - When: Sundays, 3:30-5pm
-- Season: January through early March (8 weeks)
+- Season: January through February (~8 weeks)
 - Cost: $125
 - Location: Marshall Fundamental School, Pasadena
 

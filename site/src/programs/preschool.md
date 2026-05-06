@@ -5,6 +5,9 @@ layout: page.njk
 section: programs
 heroImage: "/images/action-04.jpg"
 description: "Preschool soccer for children ages 3–5 (4U and 5U). A fun, age-appropriate introduction to the game for the youngest players."
+eventName: "AYSO Region 13 Preschool Soccer 2026"
+eventStartDate: "2026-09-12"
+eventEndDate: "2026-11-14"
 ---
 
 The Preschool program introduces children ages 4-5 to soccer through play and motor skill development.
@@ -15,7 +18,7 @@ The Preschool program introduces children ages 4-5 to soccer through play and mo
 
 - Ages: 4U (age 4) and 5U (age 5)
 - When: Saturday mornings, one hour per week
-- Season: Early September through mid-October (8 weeks)
+- Season: First weekend after Labor Day through two weeks before Thanksgiving (~10 weeks)
 - Format: Jamboree style — no formal teams or games
 
 ## How It Works
