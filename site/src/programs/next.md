@@ -4,7 +4,10 @@ title: "NEXT"
 layout: page.njk
 section: programs
 heroImage: "/images/action-05.jpg"
-description: "NEXT is an advanced training program for skilled players ages 10–14 who want more challenge alongside their regular Fall Soccer season."
+description: "NEXT is an advanced training program for skilled players ages 10–14. Runs September through July each year."
+eventName: "AYSO Region 13 NEXT 2026/27"
+eventStartDate: "2026-09-01"
+eventEndDate: "2027-07-31"
 ---
 
 NEXT provides advanced training and competitive play for players in 10U, 12U, and 14U who want more soccer alongside their regular Fall Core team.
@@ -15,7 +18,7 @@ NEXT provides advanced training and competitive play for players in 10U, 12U, an
 
 - Ages: 10U, 12U, 14U
 - When: Sundays or Mondays (varies by division)
-- Season: Fall (runs alongside Fall Soccer)
+- Season: September through July each year
 - Cost: Included with Fall Soccer registration
 - Format: 75+ minutes of training, scrimmages, and friendly matches
 

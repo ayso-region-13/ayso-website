@@ -5,6 +5,9 @@ description: All-Stars is Region 13's competitive tournament program. Selected
 layout: page.njk
 section: programs
 heroImage: /images/all-stars-01.jpg
+eventName: AYSO Region 13 All-Stars 2027
+eventStartDate: 2027-01-01
+eventEndDate: 2027-02-28
 ---
 
 All-Stars is a competitive winter program for advanced players in 10U, 12U, and 14U. Teams represent Region 13 in tournaments against other AYSO regions.
@@ -14,7 +17,7 @@ All-Stars is a competitive winter program for advanced players in 10U, 12U, and 
 ## Quick Facts
 
 - Ages: 10U, 12U, 14U
-- Season: January through mid-March
+- Season: January through February
 - Games: Saturdays and Sundays
 - Practices: Twice per week
 - Cost: $150 (plus tournament fees)
@@ -52,7 +55,7 @@ Multiple locations with staggered times by age group.
 
 - Registration deadline: November 30
 - Team announcements: Mid-December
-- Season: January through mid-March
+- Season: January through February
 
 ## Eligibility
 
