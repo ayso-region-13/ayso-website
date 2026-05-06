@@ -35,12 +35,12 @@ The Thanksgiving Tournament is a three-day competition held the weekend after Th
 
 ## Registration
 
-- Registration deadline: November 14
+- Registration deadline: approximately two weeks before Thanksgiving
 - Teams must have an AYSO ID to register
 - Each team must provide a three-person referee team
 - Registration handled through InLeague
 
-<!-- [Register on InLeague](https://ayso13.inleague.com/app) -->
+
 
 ## Referee Requirements
 
