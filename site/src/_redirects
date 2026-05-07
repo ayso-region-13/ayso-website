@@ -524,7 +524,6 @@
 /area-h-playoffs/               /fields/area-h/                                 301
 /area-h-playoffs                /fields/area-h/                                 301
 /become-a-referee-old/*         /referees/                                      301
-/fall-soccer                    /programs/fall-soccer/                          301
 /fieldmap/                      /fields/                                        301
 /fieldmap                       /fields/                                        301
 /in-what-role-would-you-like-to-volunteer/  /volunteers/roles/                  301
@@ -543,6 +542,36 @@
 
 # WP author archives — collapse to /about/
 /author/*                       /about/                                         301
+
+# Case-sensitive variants of common path mistypes (CF Pages is case-sensitive)
+/Coach/                         /coaches/                                       301
+/Coach                          /coaches/                                       301
+/Referee/                       /referees/                                      301
+/newsletter/                    /resources/newsletters/                         301
+/newsletter                     /resources/newsletters/                         301
+/newsletters                    /resources/newsletters/                         301
+
+# More WP page paths surfaced in GA4 404 report (2026-05-06)
+/board/                         /about/leadership/                              301
+/board                          /about/leadership/                              301
+/cal/                           /about/calendar/                                301
+/cal                            /about/calendar/                                301
+/all-about-ayso-region-13/      /about/                                         301
+/all-about-ayso-region-13       /about/                                         301
+/blair-high-school-map/         /fields/blair/                                  301
+/blair-high-school-map          /fields/blair/                                  301
+/new/                           /                                               301
+/new                            /                                               301
+/programs/region13extra         /programs/extra/                                301
+
+# More WP uploads 404'ing in GA4
+/wp-content/uploads/2022/03/Respect-the-Referee.pdf                   /referees/faqs/  301
+/wp-content/uploads/2022/08/Victoryp22.jpg                            /fields/victory/  301
+/wp-content/uploads/2022/11/Team-Lists-Nov16.pdf                      /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2023/11/Region-13-Guidelines-for-Penalty-Kicks-2023.pdf  /assets/docs/penalty-kick-guidelines.pdf  301
+/wp-content/uploads/2024/04/R13-2024-Registration-Flyer.pdf           /register/       301
+/wp-content/uploads/2025/08/2025-12U-Division-Meeting.pptx            /coaches/        301
+/wp-content/uploads/2025/11/TT25_Team_List_C.pdf                      /programs/tournaments/thanksgiving/  301
 
 # Old WP-style board-minutes filenames (2014–2022) — those PDFs are no longer
 # served (moved to archive/board-minutes/ outside site/). Catch only the old
