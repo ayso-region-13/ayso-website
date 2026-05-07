@@ -45,28 +45,58 @@ jobs:
           KEY: 61d4461c23b7dcda89290711860408d3
           HOST: www.ayso13.org
         run: |
-          set -euo pipefail
-          URLS_JSON=$(
-            curl -sSL "https://${HOST}/sitemap.xml" |
-            grep -oE '<loc>[^<]+' |
-            sed 's|<loc>||' |
-            jq -R . | jq -s .
-          )
+          set -uo pipefail
+
+          # Fetch sitemap with explicit retries + diagnostics. The previous
+          # `curl | grep | sed | jq | jq` one-liner exited silently under
+          # set -e if any pipe stage failed (e.g. a transient CF edge cache
+          # miss returning HTML instead of XML, which makes grep return 1 and
+          # kill the whole script before any echo could fire).
+          SITEMAP=/tmp/sitemap.xml
+          for attempt in 1 2 3; do
+            HTTP=$(curl -sSL -o "$SITEMAP" -w '%{http_code}' \
+              -H 'User-Agent: ayso13-indexnow/1.0' \
+              "https://${HOST}/sitemap.xml" || echo "curl-failed")
+            BYTES=$(wc -c < "$SITEMAP" 2>/dev/null || echo 0)
+            echo "Attempt $attempt — sitemap fetch: HTTP=$HTTP, bytes=$BYTES"
+            if [ "$HTTP" = "200" ] && [ "$BYTES" -gt 100 ]; then
+              break
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "Retrying in 15s..."
+              sleep 15
+            fi
+          done
+          if [ "$HTTP" != "200" ] || [ "$BYTES" -lt 100 ]; then
+            echo "::error::Sitemap fetch failed after 3 attempts. Last response head:"
+            head -c 500 "$SITEMAP" || true
+            exit 1
+          fi
+
+          URLS_JSON=$(grep -oE '<loc>[^<]+' "$SITEMAP" | sed 's|<loc>||' | jq -R . | jq -s .)
           COUNT=$(echo "$URLS_JSON" | jq 'length')
-          echo "Submitting $COUNT URLs to IndexNow"
+          echo "Sitemap parsed: $COUNT URLs"
+          if [ "$COUNT" -lt 1 ]; then
+            echo "::error::No <loc> entries found in sitemap"
+            head -c 500 "$SITEMAP"
+            exit 1
+          fi
+
           PAYLOAD=$(jq -n \
             --arg host "$HOST" \
             --arg key "$KEY" \
             --arg keyLocation "https://${HOST}/${KEY}.txt" \
             --argjson urls "$URLS_JSON" \
             '{host: $host, key: $key, keyLocation: $keyLocation, urlList: $urls}')
+
           HTTP_CODE=$(curl -sS -o /tmp/indexnow.body -w '%{http_code}' \
             -X POST \
             -H 'Content-Type: application/json' \
             -d "$PAYLOAD" \
             https://api.indexnow.org/IndexNow)
           echo "IndexNow response: $HTTP_CODE"
-          cat /tmp/indexnow.body
+          cat /tmp/indexnow.body || true
+          echo
           # Per IndexNow docs:
           #   200 OK = accepted
           #   202 Accepted = queued
