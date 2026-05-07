@@ -43,14 +43,19 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SHA: ${{ github.sha }}
           BUILD_SECONDS: ${{ steps.cf_wait.outputs.build_seconds }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           SHORT="${SHA:0:7}"
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHORT" --arg secs "$BUILD_SECONDS" '{
+            --data "$(jq -nc --arg sha "$SHORT" --arg secs "$BUILD_SECONDS" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
-              text: ":white_check_mark: Staging deploy live — \($sha) is now serving on staging.ayso13.org. Build took \($secs)s."
+              text: "Staging deploy live — \($sha)",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Staging deploy live* — `\($sha)` is now serving on staging.ayso13.org. Build took \($secs)s." } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+              ]
             }')"
 
       - name: Notify Slack — staging deploy failed
@@ -59,14 +64,17 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SHA: ${{ github.sha }}
           STAGE: ${{ steps.cf_wait.outputs.final_stage }}
-          STATUS: ${{ steps.cf_wait.outputs.final_status }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           SHORT="${SHA:0:7}"
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHORT" --arg stage "$STAGE" --arg status "$STATUS" --arg run "$RUN_URL" '{
+            --data "$(jq -nc --arg sha "$SHORT" --arg stage "$STAGE" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
-              text: ":x: Staging deploy \($status) — \($sha) at stage \($stage) on staging.ayso13.org. <\($run)|View run>"
+              text: "Staging deploy failed — \($sha)",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":x: *Staging deploy failed* — `\($sha)` failed at stage `\($stage)` on staging.ayso13.org." } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run for details>" } ] }
+              ]
             }')"
