@@ -176,6 +176,8 @@
 /coach                          /coaches/                                       301
 /coach-training/                /coaches/training/                              301
 /coach-training                 /coaches/training/                              301
+/coach-training/medical-forms/  /resources/safety/                              301
+/coach-training/medical-forms   /resources/safety/                              301
 /practice/                      /coaches/practice/                              301
 /practice                       /coaches/practice/                              301
 /practice/practice-faq/         /coaches/practice/                              301
@@ -272,6 +274,8 @@
 # ── Fields ────────────────────────────────────────────────────────────────
 /map/                           /fields/                                        301
 /map                            /fields/                                        301
+/region-13-map/                 /fields/                                        301
+/region-13-map                  /fields/                                        301
 /goals/                         /fields/goals/                                  301
 /goals                          /fields/goals/                                  301
 /victory/                       /fields/victory/                                301
@@ -491,7 +495,11 @@
 
 # Other WP PDFs that point to closest current page (no recovered file)
 /wp-content/uploads/2022/03/July_2014.pdf                             /about/board-minutes/ 301
+/wp-content/uploads/2022/03/August_2015.pdf                           /about/board-minutes/ 301
 /wp-content/uploads/2022/03/phsnorth.jpg                              /fields/pasadena-hs/  301
+/wp-content/uploads/2022/03/rosebowl.jpg                              /about/               301
+/wp-content/uploads/2022/08/2021-AYSO-Concussion-SCA.pdf              /assets/docs/concussion-sca-forms.pdf 301
+/wp-content/uploads/2023/02/1677572030-814390417fe413b.png            /about/               301
 /wp-content/uploads/2025/11/TT25_RefSched_B.pdf                       /referees/scheduling/ 301
 
 # Old WP-style board-minutes filenames (2014–2022) — those PDFs are no longer
