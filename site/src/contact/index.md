@@ -57,6 +57,4 @@ View the current board of directors and their contact information.
 - [Leadership](/about/leadership) — Board contacts
 - [About Region 13](/about) — Our organization
 
-t
-
 *Last updated: [DATE]*
