@@ -1,12 +1,11 @@
 ---
-
-title: "Contact Us"
+title: Contact Us
+description: Contact AYSO Region 13. Phone, email, and mailing address for the
+  Pasadena area youth soccer region.
 layout: page.njk
 section: contact
-permalink: "/contact/"
-description: "Contact AYSO Region 13. Phone, email, and mailing address for the Pasadena area youth soccer region."
+permalink: /contact/
 ---
-
 ## General Contact
 
 - Email: [info@ayso13.org](mailto:info@ayso13.org)
@@ -25,8 +24,9 @@ We serve players in Pasadena, Altadena, La Cañada Flintridge, and surrounding c
 
 ## Department Contacts
 
+
 | Department | Email |
-|------------|-------|
+| ----------------------- | --------------------------------------------------- |
 | Regional Commissioner | [rc@ayso13.org](mailto:rc@ayso13.org) |
 | Registration | [registrar@ayso13.org](mailto:registrar@ayso13.org) |
 | Coaching | [coach@ayso13.org](mailto:coach@ayso13.org) |
@@ -37,6 +37,7 @@ We serve players in Pasadena, Altadena, La Cañada Flintridge, and surrounding c
 | Fields | [fields@ayso13.org](mailto:fields@ayso13.org) |
 | Pictures | [pictures@ayso13.org](mailto:pictures@ayso13.org) |
 | Website | [webmaster@ayso13.org](mailto:webmaster@ayso13.org) |
+
 
 ## Feedback
 
@@ -55,5 +56,7 @@ View the current board of directors and their contact information.
 - [Feedback](/contact/feedback) — Submit feedback
 - [Leadership](/about/leadership) — Board contacts
 - [About Region 13](/about) — Our organization
+
+t
 
 *Last updated: [DATE]*
