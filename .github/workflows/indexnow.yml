@@ -32,7 +32,12 @@ jobs:
         # Polls the CF Pages API for a deployment matching the SHA we just
         # pushed and waits until it reaches a terminal state. Replaces the
         # earlier `sleep 150` guess so the URLs we submit are guaranteed to
-        # resolve when search engines fetch them.
+        # resolve when search engines fetch them. Also emits the
+        # deployment's pages.dev preview URL as `deployment_url`, which the
+        # next step uses to fetch the sitemap (CF's customer-zone WAF
+        # blocks the GH Actions runner IP on www.ayso13.org; the pages.dev
+        # origin URL bypasses that).
+        id: cf_wait
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
@@ -44,19 +49,24 @@ jobs:
         env:
           KEY: 61d4461c23b7dcda89290711860408d3
           HOST: www.ayso13.org
+          DEPLOY_URL: ${{ steps.cf_wait.outputs.deployment_url }}
         run: |
           set -uo pipefail
 
-          # Fetch sitemap with explicit retries + diagnostics. The previous
-          # `curl | grep | sed | jq | jq` one-liner exited silently under
-          # set -e if any pipe stage failed (e.g. a transient CF edge cache
-          # miss returning HTML instead of XML, which makes grep return 1 and
-          # kill the whole script before any echo could fire).
+          # Fetch sitemap from the CF Pages preview URL (bypasses
+          # customer-zone WAF on www.ayso13.org which blocks the GH
+          # Actions runner via Super Bot Fight Mode + edge-level IP
+          # reputation). The pages.dev origin serves the same content
+          # but isn't behind our zone-level rules. Fall back to the
+          # canonical hostname if the deploy_url output is unavailable.
+          FETCH_URL="${DEPLOY_URL:-https://${HOST}}/sitemap.xml"
+          echo "Fetching sitemap from: $FETCH_URL"
+
           SITEMAP=/tmp/sitemap.xml
           for attempt in 1 2 3; do
             HTTP=$(curl -sSL -o "$SITEMAP" -w '%{http_code}' \
               -H 'User-Agent: ayso13-indexnow/1.0' \
-              "https://${HOST}/sitemap.xml" || echo "curl-failed")
+              "$FETCH_URL" || echo "curl-failed")
             BYTES=$(wc -c < "$SITEMAP" 2>/dev/null || echo 0)
             echo "Attempt $attempt — sitemap fetch: HTTP=$HTTP, bytes=$BYTES"
             if [ "$HTTP" = "200" ] && [ "$BYTES" -gt 100 ]; then
