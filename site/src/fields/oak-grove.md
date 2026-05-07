@@ -7,6 +7,12 @@ placeAddress: "4463 Oak Grove Dr"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
 description: "Oak Grove Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
+parking: "Street"
+restrooms: "No"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
 
 ## Location

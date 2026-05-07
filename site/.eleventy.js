@@ -166,6 +166,34 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+  // --- Transform: move Field Info callout to just above "Last updated:" ---
+  // page.njk renders the Field Info cream box at the top of <article> (so the
+  // CMS rendering preview shows it inline). For the public page we want it at
+  // the bottom — useful reference info, not the lead. Match the rendered
+  // block, strip it from the top, re-inject right before the "Last updated:"
+  // paragraph. Only fires on /fields/ pages with a Field Info block present.
+  eleventyConfig.addTransform("field-info-bottom", function (content) {
+    if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;
+    if (!this.page.url || !this.page.url.startsWith("/fields/")) return content;
+
+    const fieldInfoRegex = /<div class="bg-brand-cream rounded-lg border border-brand-cream[^"]*">\s*<p[^>]*>Field Info<\/p>[\s\S]*?<\/div>/;
+    const m = content.match(fieldInfoRegex);
+    if (!m) return content;
+
+    const fieldInfoHtml = m[0];
+    content = content.replace(fieldInfoRegex, "");
+
+    // Re-inject just before the "Last updated:" paragraph. The date-placeholder
+    // transform may or may not have fired by the time we run, so match either
+    // the raw [DATE] form or the rendered <time> form.
+    const lastUpdatedRegex = /(<p><em>Last updated:[\s\S]*?<\/em><\/p>)/;
+    if (lastUpdatedRegex.test(content)) {
+      return content.replace(lastUpdatedRegex, fieldInfoHtml + "\n$1");
+    }
+    // Fallback: append at the bottom of the prose container.
+    return content.replace(/(<\/div>\s*<\/article>)/, fieldInfoHtml + "\n$1");
+  });
+
   // --- Transform: replace [DATE] placeholder with per-file last-modified date ---
   eleventyConfig.addTransform("date-placeholder", function (content) {
     if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;

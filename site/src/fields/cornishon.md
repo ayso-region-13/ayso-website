@@ -6,6 +6,12 @@ placeAddress: "4400 Cornishon Ave"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
 description: "Cornishon field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
+parking: "Street"
+restrooms: "Yes, in Community Center"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
 
 Cornishon is a smaller practice field in La Cañada, located near FIS Upper and FIS Lower.

@@ -7,6 +7,12 @@ placeAddress: "300 S Madre St"
 placeLocality: "Pasadena"
 placePostalCode: "91107"
 description: "Wilson Middle School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
+parking: "Street and Lot"
+restrooms: "Yes"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
 
 ## Location

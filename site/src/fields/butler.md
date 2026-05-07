@@ -6,6 +6,11 @@ placeAddress: "1505 N Marengo Ave"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
 description: "Butler Middle School fields — AYSO Region 13 practice location in Pasadena. Address, parking, and field notes."
+parking: "Street"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
 
 ## Location

@@ -7,6 +7,12 @@ placeAddress: "360 N Arroyo Blvd"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
 description: "Brookside Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
+parking: "Lot"
+restrooms: "Yes, by field"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
 
 Brookside Park is located near the Rose Bowl in Pasadena.
