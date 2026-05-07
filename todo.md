@@ -17,8 +17,6 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ## Remaining Tasks
 
-### Content
-- [ ] **Fill in field facility info** — Pages CMS exposes `parking`, `restrooms`, `surface`, `lighting`, and `snackBar` fields on every field page. When populated, they render as a "Field Info" callout at the top of the page. Priority pages (most visited on game days): Victory Park, Blair, McKinley, LCHS, Muir, La Salle. Fields coordinator (Jessica Ferree, fields@ayso13.org) and practice fields coordinator (Rolf Mauermann, rolf@ayso13.org) have the operational knowledge. **Action:** email both with CMS link.
 
 ### Post-Launch (this week)
 - [x] Announce launch internally — completed 2026-05-02
@@ -53,6 +51,8 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [x] **Recovered PDFs marked authoritative** — todo closed; the recovered Wayback/Drive PDFs are accepted as the current authoritative versions.
 - [x] **IndexNow workflow recovered** — was failing on every push to main with HTTP 403 from `https://www.ayso13.org/sitemap.xml`. Cloudflare's Super Bot Fight Mode (newly enabled in CF dashboard) was challenging the GH Actions runner via IP/AS-number reputation at the edge layer, ABOVE WAF custom rules. WAF Skip rule (managed rules + Super BFM + Browser Integrity Check + Security Level) cleared the rule for residential IPs but couldn't bypass the edge filter on Microsoft Azure runner IPs. Workaround: switched `.github/workflows/indexnow.yml` to fetch the sitemap from the deployment's `pages.dev` preview URL (already exported as `deployment_url` by `wait-for-cf-deploy.sh`). Pages-direct origin bypasses customer-zone WAF entirely. Also hardened the script with a 3-attempt retry loop, byte-size sanity check, file-based parsing (no curl-in-pipeline pipefail brittleness), and explicit error logging that prints the first 500 bytes of any failed response. WAF Skip rule still in place as a defense-in-depth allowlist for any third-party tool using `User-Agent: ayso13-indexnow`.
 - [x] **4 new feature todos added** — air-quality policy page, AQI integration in weather-api Worker, NWS weather-warning Slack integration, rain-forecast notice (proactive Slack post). All in Post-Launch (later).
+- [x] **Field Info populated on all 22 field pages** — ingested CSV with parking, restrooms, surface, lighting, snackBar for every field. Added a `field-info-bottom` transform in `.eleventy.js` that moves the rendered Field Info callout from the top of `<article>` to just above the "Last updated:" line on public pages (CMS preview still shows it inline at the top via the layout). Closes the long-running facility-info todo.
+- [x] **Staging Slack notify reformatted** to match production: bold title, code-formatted SHA, context block with workflow-run link.
 
 ### Session 20 (2026-05-06) — GA4/GSC API access + 48 redirects from log analysis
 - [x] **Google Search Console + GA4 API access** — OAuth client created in GCP project `ayso13-seo`, consent screen configured (External, test user), token saved to `~/.config/claude-seo/oauth-token.json` with `webmasters` + `analytics.readonly` + `indexing` scopes. GA4 Property ID `307558725` written to `~/.config/claude-seo/google-api.json`. APIs enabled: Search Console, Indexing, GA4 Data, PageSpeed Insights, CrUX. Closes the long-standing GA4-API-access todo.
