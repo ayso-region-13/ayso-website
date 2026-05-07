@@ -19,6 +19,7 @@ The Preschool program introduces children ages 4-5 to soccer through play and mo
 - Ages: 4U (age 4) and 5U (age 5)
 - When: Saturday mornings, one hour per week
 - Season: First weekend after Labor Day through two weeks before Thanksgiving (~10 weeks)
+- Location: [Victory Park](/fields/victory/)
 - Format: Jamboree style — no formal teams or games
 
 ## How It Works
@@ -37,9 +38,10 @@ You'll be assigned to a session when you register.
 
 ## Schedule
 
-- Season: 8 Saturdays, early September through mid-October
+- Season: ~10 Saturdays, first weekend after Labor Day through two weeks before Thanksgiving
+- All sessions held at [Victory Park](/fields/victory/)
 - Makeup dates set per season for weather cancellations
-- Location and exact start date announced in August before each season starts
+- Exact start date announced in August before each season starts
 
 ## Registration
 

@@ -18,9 +18,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ## Remaining Tasks
 
 ### Content
-- [ ] **Each season, update season-specific schedules** — `/programs/next/` (per-division day/time/field once Spond groups are set) and `/programs/preschool/` (exact start date and location before August). Generalized for now to avoid stale 2025 data.
 - [ ] **Fill in field facility info** — Pages CMS exposes `parking`, `restrooms`, `surface`, `lighting`, and `snackBar` fields on every field page. When populated, they render as a "Field Info" callout at the top of the page. Priority pages (most visited on game days): Victory Park, Blair, McKinley, LCHS, Muir, La Salle. Fields coordinator (Jessica Ferree, fields@ayso13.org) and practice fields coordinator (Rolf Mauermann, rolf@ayso13.org) have the operational knowledge. **Action:** email both with CMS link.
-- [ ] **Verify recovered PDFs are still authoritative** — In session 17 we recovered 5 coach manuals (2022 vintage), 4 referee guidelines (2023–2024), and 6 inclusive-coaching PDFs from Wayback / Drive. These haven't been opened in current coaching context. **Action:** 30-min sanity scan to flag anything stale (esp. coach manuals — 8U kick-ins, 10U build-out, 12U substitutions). Have the referee resource owner sanity-check the referee guidelines.
 
 ### Post-Launch (this week)
 - [x] Announce launch internally — completed 2026-05-02
