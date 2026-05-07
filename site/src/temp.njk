@@ -199,6 +199,17 @@ eleventyExcludeFromCollections: true
     </div>
   </div>
 
+  <div class="stat">
+    <div class="label">Air Quality (AQI)</div>
+    <div class="value-row">
+      <span class="value"><span id="aqi">—</span></span>
+    </div>
+    <div class="secondary">
+      <span id="aqi-category">—</span>
+      <span class="pill" id="aqi-pill" hidden><span id="aqi-pollutant">—</span></span>
+    </div>
+  </div>
+
   <div class="updated">Updated <span id="updated">—</span></div>
 </div>
 
@@ -222,11 +233,25 @@ eleventyExcludeFromCollections: true
     } catch (_) { return iso; }
   }
 
+  // Map EPA AQI value to a 1-6 band so we can reuse the same pill colors
+  // already defined for CIF heat levels (1=Good→green, 2=Moderate→gold,
+  // 3=USG→gold, 4=Unhealthy→red, 5=Very Unhealthy→red, 6=Hazardous→red).
+  function aqiBand(aqi) {
+    if (aqi == null) return null;
+    if (aqi <= 50)  return 1;
+    if (aqi <= 100) return 2;
+    if (aqi <= 150) return 3;
+    if (aqi <= 200) return 4;
+    if (aqi <= 300) return 5;
+    return 6;
+  }
+
   fetch("/api/weather", { cache: "no-cache" })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(function (data) {
       var c = data.current || {};
       var w = data.wbgt || {};
+      var a = data.airQuality || {};
       setText("temp", c.tempF);
       setText("feels", c.feelsLikeF);
       setText("humidity", c.humidity);
@@ -238,6 +263,17 @@ eleventyExcludeFromCollections: true
         var pill = $("cif-pill");
         pill.classList.add("pill-" + w.level);
         pill.hidden = false;
+      }
+
+      setText("aqi", a.aqi);
+      setText("aqi-category", a.category);
+      setText("aqi-pollutant", a.dominantPollutant);
+      var band = aqiBand(a.aqi);
+      if (band) {
+        var apill = $("aqi-pill");
+        // Reuse existing pill-1..pill-5 colors; band 6 maps to closed-tier red.
+        apill.classList.add("pill-" + Math.min(band, 5));
+        apill.hidden = false;
       }
 
       setText("updated", formatUpdated(c.stationTimestamp || data.fetchedAt));

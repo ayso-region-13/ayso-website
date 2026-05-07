@@ -355,6 +355,10 @@
 /heat                           /resources/heat-policy/                         301
 /weather/                       /resources/weather/                             301
 /weather                        /resources/weather/                             301
+/aqi/                           /resources/air-quality-policy/                  301
+/aqi                            /resources/air-quality-policy/                  301
+/air-quality/                   /resources/air-quality-policy/                  301
+/air-quality                    /resources/air-quality-policy/                  301
 /incident/                      /resources/safety/                              301
 /incident                       /resources/safety/                              301
 /tickets/                       /resources/                                     301
