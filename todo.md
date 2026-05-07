@@ -45,6 +45,9 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ## Completed ✓
 
+### Session 21 (2026-05-07) — SportsEvent schema warnings cleared
+- [x] **Added 5 missing SportsEvent fields** flagged by GSC: `description`, `image`, `performer`, `organizer.url`, and `offers.validFrom`. Updated `_includes/schema-org.njk`. All program pages with `eventStartDate` + `eventEndDate` set now emit a complete SportsEvent block. Frontmatter optionally overrides `offers.validFrom` via `eventOfferValidFrom`. Verified on `/programs/extra/`. GSC will re-validate over the next 1-2 weeks.
+
 ### Session 20 (2026-05-06) — GA4/GSC API access + 48 redirects from log analysis
 - [x] **Google Search Console + GA4 API access** — OAuth client created in GCP project `ayso13-seo`, consent screen configured (External, test user), token saved to `~/.config/claude-seo/oauth-token.json` with `webmasters` + `analytics.readonly` + `indexing` scopes. GA4 Property ID `307558725` written to `~/.config/claude-seo/google-api.json`. APIs enabled: Search Console, Indexing, GA4 Data, PageSpeed Insights, CrUX. Closes the long-standing GA4-API-access todo.
 - [x] **Program schedules + SportsEvent schema for 5 programs** — Preschool (Sept 12 → Nov 14, 2026), NEXT (Sept 2026 → July 2027), All-Stars (Jan 1 → Feb 28, 2027), Spring Soccer (Mar 1 → May 31, 2027), Winter Stars (Jan 1 → Feb 28, 2027). Quick Facts text updated to match. All five emit SportsEvent JSON-LD. Closes "Confirm 2027 program dates" todo.
