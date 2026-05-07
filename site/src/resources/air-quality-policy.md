@@ -23,16 +23,6 @@ Live AQI readings for our service area are on the [Weather and Field Conditions]
 
 The closure trigger is **AQI above 150**. This matches Pasadena Unified School District's wildfire-smoke guidance and aligns with CIF and CDC recommendations for youth sports during poor air quality.
 
-## Field owners have final say
-
-Region 13 plays at fields owned by cities, school districts, and private organizations. Their air-quality policies are independent of Region 13's and may close fields earlier than our threshold:
-
-- **Pasadena Unified School District** typically closes school fields when AQI is 151 or higher, sometimes earlier during active wildfire events.
-- **La Cañada Unified School District** sets its own thresholds for LCHS and other district fields.
-- **City of Pasadena, City of La Cañada Flintridge, and City of South Pasadena** follow [South Coast AQMD](https://www.aqmd.gov/) guidance for their park facilities.
-
-When a field owner has closed a field for air quality, it is closed regardless of what our automated banner shows. We post owner closures to the home page banner as soon as we are notified.
-
 ## How we measure
 
 AQI readings come from the EPA's [AirNow](https://www.airnow.gov/) network of regulatory air monitors. The [Weather and Field Conditions](/resources/weather/) page shows the current AQI for our area, the dominant pollutant (typically ozone in summer or PM2.5 during wildfire smoke), and the EPA category. Readings update hourly.
@@ -51,11 +41,10 @@ Ground-level ozone — typical of hot summer afternoons in the LA Basin — is a
 
 ## What you can do
 
-- **Check the home page banner first.** It shows the official Region 13 closure status, including any owner-driven closures we have been notified about.
+- **Check the home page banner first.** It shows the official Region 13 closure status.
 - **Check the weather page for the live AQI reading.** The current value and category live there.
 - **Use AirNow.gov directly during wildfire events.** The [Pasadena monitor](https://www.airnow.gov/?city=Pasadena&state=CA&country=USA) updates hourly; you can check it any time.
 - **Listen to your child.** If a player feels short of breath, dizzy, or develops a cough during play, stop the activity. Asthma sufferers should keep rescue inhalers nearby.
-- **Either coach may elect not to play in poor air quality without forfeit penalty.** Families and players have final say on individual participation regardless of regional policy.
 
 ## Related
 
