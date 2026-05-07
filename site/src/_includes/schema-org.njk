@@ -95,19 +95,38 @@
 
 {% if section == "programs" and eventStartDate and eventEndDate %}
 {# ── Program pages: SportsEvent (requires eventStartDate + eventEndDate
-   in front matter; eventName optional, falls back to page title) ─── #}
+   in front matter; eventName optional, falls back to page title.
+   description, image, performer, organizer.url, and offers.validFrom
+   all populated to satisfy Google's "Events" structured-data
+   recommendations — none are strictly required, but missing fields
+   trigger non-critical warnings in GSC. Frontmatter optionally
+   overrides offers.validFrom via `eventOfferValidFrom`. ─── #}
+{% set sportsEventImage = heroImage or og.sectionDefaults[section] or og.fallback %}
+{% set sportsEventDesc  = description or site.description %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "SportsEvent",
   "name": {{ (eventName or title) | dump | safe }},
+  "description": {{ sportsEventDesc | dump | safe }},
+  "image": "{{ site.url }}{{ sportsEventImage }}",
   "url": "{{ site.url }}{{ page.url }}",
   "startDate": {{ eventStartDate | dump | safe }},
   "endDate": {{ eventEndDate | dump | safe }},
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
   "sport": "Soccer",
-  "organizer": { "@id": "{{ site.url }}/#org" },
+  "organizer": {
+    "@id": "{{ site.url }}/#org",
+    "@type": "SportsOrganization",
+    "name": "AYSO Region 13",
+    "url": "{{ site.url }}/"
+  },
+  "performer": {
+    "@id": "{{ site.url }}/#org",
+    "@type": "SportsOrganization",
+    "name": "AYSO Region 13"
+  },
   "location": {
     "@type": "Place",
     "name": "AYSO Region 13 fields",
@@ -121,7 +140,8 @@
   "offers": {
     "@type": "Offer",
     "url": "{{ site.url }}/register/",
-    "availability": "https://schema.org/InStock"
+    "availability": "https://schema.org/InStock",
+    "validFrom": {{ (eventOfferValidFrom or eventStartDate) | dump | safe }}
   }
 }
 </script>
