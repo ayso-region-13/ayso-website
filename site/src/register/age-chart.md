@@ -48,7 +48,7 @@ Visual chart (image)
 
 Requests to play down in the next lower division or play up in the next higher division are considered on a case-by-case basis, depending on total registration numbers, team formation, volunteer availability, and player ability. Requests to play down, specifically, are rarely approved. See [AYSO national guidelines](https://wiki.ayso.org/wiki/Age_Guide,_Determination_%26_Divisions#Playing_Up_an_Age_Division) for more information.
 
-To request to play down or up, [fill out the special request form](https://docs.google.com/forms/d/e/1FAIpQLSezuuG9zC01603UNRBNesCIvDrvOzqySEVSwG5C3J5fkhigaQ/viewform?usp=sf_link).
+To request to play down or up, [fill out the special request form](https://ayso13.typeform.com/to/m7F2U34z).
 
 **One exception for Fall 2026:** Players who were in 8U during Fall 2025 and participated in Grad Series in Winter 2026 are likely to have play-up requests approved. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) to submit a request.
 
