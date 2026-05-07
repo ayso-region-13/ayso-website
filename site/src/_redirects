@@ -496,11 +496,82 @@
 # Other WP PDFs that point to closest current page (no recovered file)
 /wp-content/uploads/2022/03/July_2014.pdf                             /about/board-minutes/ 301
 /wp-content/uploads/2022/03/August_2015.pdf                           /about/board-minutes/ 301
+/wp-content/uploads/2022/03/2020-09-03-minutes_1.pdf                  /about/board-minutes/ 301
 /wp-content/uploads/2022/03/phsnorth.jpg                              /fields/pasadena-hs/  301
 /wp-content/uploads/2022/03/rosebowl.jpg                              /fields/area-h/       301
+/wp-content/uploads/2022/03/Region-13-Guidelines-for-10U-Referees-2021.pdf  /assets/docs/10u-referee-guidelines.pdf  301
+/wp-content/uploads/2022/03/Region-13-Guidelines-for-12U-Referees-2021.pdf  /assets/docs/12u-referee-guidelines.pdf  301
+/wp-content/uploads/2022/07/ParentPledge.pdf                          /families/pledge/     301
 /wp-content/uploads/2022/08/2021-AYSO-Concussion-SCA.pdf              /assets/docs/concussion-sca-forms.pdf 301
 /wp-content/uploads/2023/02/1677572030-814390417fe413b.png            /about/               301
+/wp-content/uploads/2023/03/Game-Card.pdf                             /coaches/game-cards/  301
+/wp-content/uploads/2024/09/prts01-v03.pdf                            /referees/resources/  301
+/wp-content/uploads/2024/09/region13-2024-week1.pdf                   /schedules/games/     301
+/wp-content/uploads/2024/10/2024-Picture-Day-Order-Form-1.pdf         /resources/pictures/  301
+/wp-content/uploads/2024/10/LC-City-Council-Age-Group-Limitation-1.pdf /fields/lchs/        301
+/wp-content/uploads/2024/10/region13-game-schedule-2024-week8.pdf     /schedules/games/     301
+/wp-content/uploads/2024/10/region13-game-schedule-2024-week11.pdf    /schedules/games/     301
+/wp-content/uploads/2024/11/TT24-Teams-v5.pdf                         /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2024/11/Victory-Park-Thanksgiving-Field-Map-2024-final.pdf  /fields/victory/  301
+/wp-content/uploads/2025/11/Ref_Assignments25v7.pdf                   /referees/scheduling/ 301
+/wp-content/uploads/2025/11/TT25_Villa_Parke_field_map_v3.pdf         /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2025/11/TT25_VP_field_map_v3.pdf                  /programs/tournaments/thanksgiving/  301
 /wp-content/uploads/2025/11/TT25_RefSched_B.pdf                       /referees/scheduling/ 301
+
+# Old WP page paths surfaced in GSC 404 report (2026-05-06)
+/apply-to-volunteer/            /volunteers/                                    301
+/apply-to-volunteer             /volunteers/                                    301
+/area-h-playoffs/               /fields/area-h/                                 301
+/area-h-playoffs                /fields/area-h/                                 301
+/become-a-referee-old/*         /referees/                                      301
+/fieldmap/                      /fields/                                        301
+/fieldmap                       /fields/                                        301
+/in-what-role-would-you-like-to-volunteer/  /volunteers/roles/                  301
+/in-what-role-would-you-like-to-volunteer   /volunteers/roles/                  301
+/next_team/                     /programs/next/                                 301
+/next_team                      /programs/next/                                 301
+/region13fields-2/              /fields/                                        301
+/region13fields-2               /fields/                                        301
+/respect-the-referee/           /referees/faqs/                                 301
+/respect-the-referee            /referees/faqs/                                 301
+/vip/                           /programs/epic/                                 301
+/vip                            /programs/epic/                                 301
+/volunteer/volunteer-training-information/*  /volunteers/classes/               301
+/download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents/  /referees/resources/  301
+/download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents   /referees/resources/  301
+
+# WP author archives — collapse to /about/
+/author/*                       /about/                                         301
+
+# Case-sensitive variants of common path mistypes (CF Pages is case-sensitive)
+/Coach/                         /coaches/                                       301
+/Coach                          /coaches/                                       301
+/Referee/                       /referees/                                      301
+/newsletter/                    /resources/newsletters/                         301
+/newsletter                     /resources/newsletters/                         301
+/newsletters                    /resources/newsletters/                         301
+
+# More WP page paths surfaced in GA4 404 report (2026-05-06)
+/board/                         /about/leadership/                              301
+/board                          /about/leadership/                              301
+/cal/                           /about/calendar/                                301
+/cal                            /about/calendar/                                301
+/all-about-ayso-region-13/      /about/                                         301
+/all-about-ayso-region-13       /about/                                         301
+/blair-high-school-map/         /fields/blair/                                  301
+/blair-high-school-map          /fields/blair/                                  301
+/new/                           /                                               301
+/new                            /                                               301
+/programs/region13extra         /programs/extra/                                301
+
+# More WP uploads 404'ing in GA4
+/wp-content/uploads/2022/03/Respect-the-Referee.pdf                   /referees/faqs/  301
+/wp-content/uploads/2022/08/Victoryp22.jpg                            /fields/victory/  301
+/wp-content/uploads/2022/11/Team-Lists-Nov16.pdf                      /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2023/11/Region-13-Guidelines-for-Penalty-Kicks-2023.pdf  /assets/docs/penalty-kick-guidelines.pdf  301
+/wp-content/uploads/2024/04/R13-2024-Registration-Flyer.pdf           /register/       301
+/wp-content/uploads/2025/08/2025-12U-Division-Meeting.pptx            /coaches/        301
+/wp-content/uploads/2025/11/TT25_Team_List_C.pdf                      /programs/tournaments/thanksgiving/  301
 
 # Old WP-style board-minutes filenames (2014–2022) — those PDFs are no longer
 # served (moved to archive/board-minutes/ outside site/). Catch only the old
