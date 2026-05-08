@@ -1,18 +1,17 @@
 ---
-
-title: "Allendale Park"
+title: Allendale Park
+description: Allendale Park fields — AYSO Region 13 game location in Pasadena.
+  Address, parking, and directions.
 layout: page.njk
 section: fields
-placeAddress: "1130 S Marengo Ave"
-placeLocality: "Pasadena"
+placeAddress: 1130 S Marengo Ave
+placeLocality: Pasadena
 placePostalCode: "91106"
-description: "Allendale Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 parking: "Street and Lot"
 restrooms: "Yes, by field"
 surface: "Grass"
 lighting: "No"
 snackBar: "No"
-
 ---
 
 Allendale Park is a practice field and parking location for Blair High School.
