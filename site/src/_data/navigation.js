@@ -111,6 +111,7 @@ module.exports = [
       { label: "Mission & Philosophy",  url: "/about/" },
       { label: "History",               url: "/about/history/" },
       { label: "Leadership & Board",    url: "/about/leadership/" },
+      { label: "Past Commissioners",    url: "/about/past-commissioners/" },
       { label: "Calendar",              url: "/about/calendar/" },
       { label: "Board Minutes",         url: "/about/board-minutes/" },
       { label: "Policies",              url: "/about/policies/" },
