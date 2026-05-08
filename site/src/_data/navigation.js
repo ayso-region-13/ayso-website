@@ -94,10 +94,11 @@ module.exports = [
       { label: "Kids Zone",                   url: "/families/pledge/" },
       { label: "Frequently Asked Questions",  url: "/families/faqs/" },
       { label: "Sideline Behavior",           url: "/families/support/" },
-      // Role sections — most families have someone who's also a coach, ref, or manager
-      { label: "Coach",         url: "/coaches/",   divider: true, dividerLabel: "I'm also a…" },
+      // Role sections — most families have someone who's also a coach, ref, or volunteer
+      { label: "Coach",         url: "/coaches/",    divider: true, dividerLabel: "I'm also a…" },
       { label: "Referee",       url: "/referees/" },
       { label: "Team Manager",  url: "/managers/" },
+      { label: "Volunteer",     url: "/volunteers/" },
     ],
   },
 
