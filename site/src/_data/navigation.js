@@ -187,6 +187,7 @@ module.exports = [
     topNav: false,
     children: [
       { label: "Volunteer Overview",      url: "/volunteers/" },
+      { label: "Open Volunteer Roles",    url: "/volunteers/open-roles/" },
       { label: "Volunteer Roles",         url: "/volunteers/roles/" },
       { label: "Training Classes",        url: "/volunteers/classes/" },
       { label: "Training Requirements",   url: "/volunteers/training-matrix/" },
