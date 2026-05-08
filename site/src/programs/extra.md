@@ -60,12 +60,12 @@ Players selected for an EXTRA™ team are committing to this program and may not
 
 ## Program Cost
 
-Because EXTRA™ includes additional elements such as extended seasons, uniform sets, and administrative support, the program fees are higher than those of standard Region 13 programs.
+Because EXTRA™ includes additional elements such as extended seasons, uniform sets, a number of tournaments, and administrative support, the program fees are higher than those of standard Region 13 programs.
 
 AYSO National Membership: $25  
 AYSO Region 13 Fall Registration: $195  
-AYSO Region 13 EXTRA Fee: $400  
-**TOTAL: $620**  
+AYSO Region 13 EXTRA Fee: $550  
+**TOTAL: $770**  
 *Scholarships are available.*
 
 

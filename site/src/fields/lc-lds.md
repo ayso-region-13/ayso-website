@@ -6,6 +6,12 @@ placeAddress: "1830 Foothill Blvd"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
 description: "LC LDS field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
+parking: "Street"
+restrooms: "Yes"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
 
 ## Location

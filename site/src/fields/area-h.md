@@ -7,6 +7,12 @@ placeAddress: "1001 Rose Bowl Dr"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
 description: "Area H fields — AYSO Region 13 game and practice location. Address, parking, and directions."
+parking: "Lot"
+restrooms: "Yes, by field"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
 
 Area H is a practice field location at the Rose Bowl complex.

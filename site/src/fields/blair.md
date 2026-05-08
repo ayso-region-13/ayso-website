@@ -7,6 +7,12 @@ placeAddress: "1301 S Marengo Ave"
 placeLocality: "Pasadena"
 placePostalCode: "91106"
 description: "Blair High School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
+parking: "Street and Lot"
+restrooms: "Yes, at Lower field"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
 
 Blair High School has two field areas used for practices and games.

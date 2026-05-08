@@ -7,6 +7,12 @@ placeAddress: "1905 Lincoln Ave"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
 description: "Muir South practice fields — AYSO Region 13 location in Pasadena. Address, parking, and directions."
+parking: "Lot"
+restrooms: "Port-a-Potty"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
 
 Muir South is a softball field used for practices.
