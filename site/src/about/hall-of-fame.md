@@ -28,6 +28,13 @@ description: "The AYSO Region 13 Hall of Fame honors volunteers and players who 
 | 2022 | Rick Quiring, Nicole Maccala |
 | 2021 | Andrew Lansford, Sung Kim |
 
+### Notable Referees
+| Year | 10U | 12U | 14U |
+|------|-----|-----|-----|
+| 2025 | Kate Sleeth | AJ Splichal | Andrew Holmquist |
+| 2024 | Rolf Mauermann | Harry Plotkin | Caitlin Bogert |
+| 2023 | Eric Detweiler | Natalia Kim | Akiko Yamagami |
+
 ### James Shopbell Award (Outstanding Youth Referee)
 | Year | Recipient |
 |------|-----------|
@@ -60,6 +67,19 @@ description: "The AYSO Region 13 Hall of Fame honors volunteers and players who 
 | 2022 | Scott Davis |
 | 2016 | Steve Hawkins, Erik Forrester, Chip Heller |
 | 2015 | Rob Owen |
+| 2011 | Steve Bickel |
+| 2009 | Craig Snodgrass |
+| 2008 | John Cucchissi |
+| 2007 | Gil Acedo |
+| 2006 | Bruce Hancock |
+| 2004 | Al Padley |
+| 2003 | Jeff Simmonds |
+| 2002 | Brad Wright |
+| 2001 | Stan and Toni Maddison |
+| 2000 | Pat Huber |
+| 1999 | Bill Owen |
+| 1998 | James Maddox |
+| 1997 | Michael Walizer |
 
 ### Bill Carroll Award (Lifetime Service as Volunteer)
 | Year | Recipient |
@@ -67,6 +87,21 @@ description: "The AYSO Region 13 Hall of Fame honors volunteers and players who 
 | 2025 | Dan Jeffries |
 | 2024 | Taj Chiu |
 | 2022 | Al Prado, DeWayne McMullin |
+| 2021 | Neil Weinberger |
+| 2019 | Steve Haegelin |
+| 2017 | Kelly Leyva, Paul Harrison |
+| 2016 | Kareem Badaruddin |
+| 2015 | Toni Maddison |
+| 2011 | Marco Quezada |
+| 2010 | Frank Bigelow |
+| 2009 | Jennifer & Tom Hart |
+| 2005 | Bill Owen |
+| 2003 | Maureen Hiroshige |
+| 2002 | Mike Walizer |
+| 2001 | Colin Hill |
+| 2000 | Annsley Strong |
+| 1998 | Myles Standish |
+| 1996 | Bill Carroll |
 
 ## Team Name of the Year
 | Year | Names |
