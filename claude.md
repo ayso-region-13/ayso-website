@@ -52,6 +52,9 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] **`heroImage` paths normalized + UTC date bug fixed (2026-05-05)** — All `heroImage` frontmatter values now use full `/images/foo.jpg` paths (matching body markdown); `base.njk` no longer prepends `/images/`. Fixes Pages CMS image previews. Separately, the `date` filter and `[DATE]` transform in `.eleventy.js` now pin to `America/Los_Angeles` instead of UTC, so sitemap `<lastmod>` and "Last updated" footers don't drift forward a day on late-Pacific-evening commits.
 - [x] **Field Info populated on all 22 field pages (2026-05-07)** — `parking`, `restrooms`, `surface`, `lighting`, `snackBar` filled in for every field page; ingest from a CSV → frontmatter pipeline. `field-info-bottom` transform in `.eleventy.js` moves the rendered "Field Info" cream callout from the top of `<article>` to just above the "Last updated:" line on public pages (CMS preview still shows it inline at the top via the layout, so editors see it where they're editing).
 - [x] **IndexNow workflow recovery (2026-05-07)** — CF Super Bot Fight Mode was blocking the GitHub Actions runner via edge-level IP/AS-number reputation, above WAF custom rules. Switched the IndexNow sitemap fetch to use the Cloudflare Pages preview URL (already exported as `deployment_url` by `wait-for-cf-deploy.sh`); pages.dev origin bypasses customer-zone WAF. Also hardened the script with retry, byte-size sanity check, and explicit error logging.
+- [x] **Historical content backfill (2026-05-08)** — added `/about/past-commissioners/` page (1974–present, 30 commissioners) from WP export. Backfilled Hall of Fame (Notable Referees + 14 more Walizer winners back to 1997 + 15 more Bill Carroll winners back to 1996). History page expanded with the "why 13?" origin, Edward Lapointe Brookside dedication, split Victory Park lighting timeline, La Cañada Youth Sports Coalition. New `/about/celebration-of-womens-soccer/` rebuilt from the 2022 Wix recap site (35-photo GLightbox gallery, excluded from main nav, linked from Sisterhood + History timeline + Related Pages).
+- [x] **GSC + GA4 quick-win pass (2026-05-08)** — pulled 28-day GSC + GA4 + CF edge data via `claude-seo` plugin scripts. Added 4 high-impression redirects (`/age-chart-2025`, `/ayso-history`, `/4u-playground`, `/b14u-spring-schedule-2026`). Home page title rewritten to "Pasadena Youth Soccer League | AYSO Region 13" (leads with the local-intent query that ranks for "ayso soccer near me", "pasadena soccer league", etc., currently pos 5–11). Brookside meta description + lead now explicitly cite "Rose Bowl Stadium" (targeting pos 8.6 ranking for "rose bowl park"). History page opens with bold "AYSO stands for the American Youth Soccer Organization" sentence (targeting pos 7.1 for "what does AYSO stand for"). GSC + GA4 instructions added to Key Scripts; `oauth_client_path` added to `~/.config/claude-seo/google-api.json` so token auto-refreshes.
+- [x] **Photo gallery a11y + SRI hardening (2026-05-08)** — `/audit` flagged the Celebration page's enumeration alt text ("photo N of 35") as a WCAG 1.1.1 issue. Read each photo and wrote descriptive alt text (group lineups, Cobi Jones segment, Spieker Field small-sided games, exhibition-match action). Added sha384 SRI integrity hashes to GLightbox CDN scripts on both `/about/celebration-of-womens-soccer/` and `/resources/gallery/`; deferred the script and gated init on `DOMContentLoaded`.
 
 ## Branched / staged for later
 
@@ -162,6 +165,40 @@ node scripts/check-links.js      # Check internal links
 
 Note: Search (`/search/`) only works after a full `npm run build` — not in dev server.
 
+### GSC + GA4 data pulls
+
+OAuth is wired up via the `claude-seo` plugin scripts. Token + property ID live at `~/.config/claude-seo/`. Token auto-refreshes when `oauth_client_path` in `~/.config/claude-seo/google-api.json` points at the OAuth client_secret JSON (file lives at repo root `client_secret_*.json`, gitignored).
+
+```bash
+SEO=~/.claude/plugins/cache/agricidaniel-seo/claude-seo/1.9.6/scripts
+
+# GSC
+python3 $SEO/gsc_query.py sites                                              # list verified properties
+python3 $SEO/gsc_query.py sitemaps -p sc-domain:ayso13.org                    # sitemap status + errors
+python3 $SEO/gsc_query.py query -p sc-domain:ayso13.org --days 28 \
+    --dimensions page --limit 50                                             # top pages last 28d
+python3 $SEO/gsc_query.py query -p sc-domain:ayso13.org --days 28 \
+    --dimensions query --limit 50                                            # top queries last 28d
+python3 $SEO/gsc_query.py query -p sc-domain:ayso13.org --days 28 \
+    --dimensions query,page --limit 500 --json                               # full query→page pairs
+
+# GA4 (property 307558725, default in google-api.json)
+python3 $SEO/ga4_report.py -r top-pages --days 28 --limit 100                # top organic landing pages
+python3 $SEO/ga4_report.py -r organic   --days 28                            # organic traffic overview
+python3 $SEO/ga4_report.py -r device    --days 28                            # by device
+python3 $SEO/ga4_report.py -r country   --days 28                            # by country
+
+# Auth check / reauth
+python3 $SEO/google_auth.py --check                                          # verify all credentials work
+python3 $SEO/google_auth.py --auth --creds <path-to-client_secret.json>      # full re-auth (browser flow)
+```
+
+Notes:
+- GSC search analytics covers Google web search clicks/impressions only — for 404 hits use `check-404s.sh` (Cloudflare edge logs, 24h retention, free plan).
+- GA4 records page_views via gtag, including hits to the 404 page itself (it loads gtag) — landing pages with very high bounce that don't exist as routes are likely 404s.
+- The 404 page is `_site/404.html`; the gtag tag is included via `base.njk`.
+- Note re GA4 numbers: GA4 reports CTR as a percentage value (e.g., `3.66`), not a fraction — don't multiply by 100 when formatting.
+
 ## Content Placeholders (still in some pages)
 - `[INLEAGUE: description]` — 36 remaining, documented in `links-to-resolve.md`
 - `[IMAGE: description]` — 0 remaining (all removed/sourced)
@@ -257,4 +294,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/workers/weather-api/` — Cloudflare Worker that powers `/resources/weather/`. Cron-polls Tempest station 33318 + NWS forecast every 5 min, computes WBGT, tracks rolling rainfall in KV, serves at `www.ayso13.org/api/weather` (also bound on `staging.ayso13.org/api/weather`). Deploy with `cd workers/weather-api && npx wrangler deploy`. `TEMPEST_TOKEN` is a wrangler secret (not in git); station ID, lat/lon, and KV id are in `wrangler.toml`. See `workers/weather-api/README.md` for setup details.
 
 ---
-*Last updated: 2026-05-07 (session 21 — SportsEvent schema fixes, IndexNow recovery, Field Info populated, AQI work branched)*
+*Last updated: 2026-05-08 (session 22 — historical content backfill, Celebration of Women's Soccer page, GSC quick-win pass, gallery a11y + SRI fixes)*

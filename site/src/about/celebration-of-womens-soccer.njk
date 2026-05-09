@@ -8,11 +8,14 @@ heroImage: /images/celebration-2022/celebration-06.jpg
 eleventyExcludeFromCollections: true
 ---
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css"
+      integrity="sha384-GPAzSuZc0kFvdIev6wm9zg8gnafE8tLso7rsAYQfc9hAdWCpOcpcNI5W9lWkYcsd"
+      crossorigin="anonymous">
 
 <div class="not-prose mb-6">
   <img src="/images/celebration-2022/celebration-06.jpg"
-       alt="Celebration of Women's Soccer at the Rose Bowl"
+       alt="Region 13 players of all ages gathered in front of the Rose Bowl"
        class="w-full h-auto rounded shadow-sm"
        loading="eager"
        fetchpriority="high">
@@ -29,21 +32,49 @@ eleventyExcludeFromCollections: true
   <h2 class="sr-only">Photo gallery</h2>
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
     {% set photos = [
-      "celebration-01.jpg", "celebration-02.jpg", "celebration-03.jpg", "celebration-04.jpg", "celebration-05.jpg",
-      "celebration-06.jpg", "celebration-07.jpg", "celebration-08.jpg", "celebration-09.jpg", "celebration-10.jpg",
-      "celebration-11.jpg", "celebration-12.jpg", "celebration-13.jpg", "celebration-14.jpg", "celebration-15.jpg",
-      "celebration-16.jpg", "celebration-17.jpg", "celebration-18.jpg", "celebration-19.jpg", "celebration-20.jpg",
-      "celebration-21.jpg", "celebration-22.jpg", "celebration-23.jpg", "celebration-24.jpg", "celebration-25.jpg",
-      "celebration-26.jpg", "celebration-27.jpg", "celebration-28.jpg", "celebration-29.jpg", "celebration-30.jpg",
-      "celebration-31.jpg", "celebration-32.jpg", "celebration-33.jpg", "celebration-34.jpg", "celebration-35.jpg"
+      { src: "celebration-01.jpg", alt: "Group of Region 13 players and coaches posing in front of the Rose Bowl entrance" },
+      { src: "celebration-02.jpg", alt: "Speaker in a Celebration of Women's Soccer t-shirt addressing players outside the Rose Bowl" },
+      { src: "celebration-03.jpg", alt: "Five adults posing in front of a Rose Bowl plaque" },
+      { src: "celebration-04.jpg", alt: "Woman speaking to a crowd of kids and parents on a sunlit walkway" },
+      { src: "celebration-05.jpg", alt: "Coach with a soccer ball addressing a large crowd of masked young players" },
+      { src: "celebration-06.jpg", alt: "Lineup of small children in mixed-color jerseys holding soccer balls in front of the Rose Bowl" },
+      { src: "celebration-07.jpg", alt: "Small girls in red and green pinnies playing a small-sided game inside the Rose Bowl" },
+      { src: "celebration-08.jpg", alt: "Red-haired girl in a red AYSO Region 13 jersey holding a pink soccer ball, Rose Bowl Honda jumbotron behind her" },
+      { src: "celebration-09.jpg", alt: "Boy in a green pinnie playing in goal during a small-sided game at Spieker Field" },
+      { src: "celebration-10.jpg", alt: "Girl kicking a soccer ball in front of the Spieker Field at the Rose Bowl banner" },
+      { src: "celebration-11.jpg", alt: "Toddler chasing a soccer ball across the grass" },
+      { src: "celebration-12.jpg", alt: "Boy in a red AYSO jersey sprinting after the ball with mouth open in excitement" },
+      { src: "celebration-13.jpg", alt: "Three girls in green pinnies competing for the ball, Spieker Field banner in background" },
+      { src: "celebration-14.jpg", alt: "Two teams walking onto the Rose Bowl pitch in line before the exhibition match" },
+      { src: "celebration-15.jpg", alt: "Players in red jerseys lined up with referees before the exhibition match" },
+      { src: "celebration-16.jpg", alt: "Wide-angle view of both exhibition teams and officials at midfield with the AYSO Region 13 logo on the Rose Bowl jumbotron" },
+      { src: "celebration-17.jpg", alt: "Cobi Jones in a blue sweater posing with a group of Region 13 girls" },
+      { src: "celebration-18.jpg", alt: "Cobi Jones smiling with the AYSO Region 13 logo on the Rose Bowl jumbotron behind him" },
+      { src: "celebration-19.jpg", alt: "Cobi Jones speaking to kids seated in a circle on the Rose Bowl pitch" },
+      { src: "celebration-20.jpg", alt: "Large group of kids on the Rose Bowl pitch with arms raised, cheering" },
+      { src: "celebration-21.jpg", alt: "Panoramic view of the Rose Bowl interior at twilight" },
+      { src: "celebration-22.jpg", alt: "Teen player in a white Celebration t-shirt striking the ball at the goal mouth" },
+      { src: "celebration-23.jpg", alt: "Players in red and white Sisterhood jerseys chasing the ball during the exhibition match" },
+      { src: "celebration-24.jpg", alt: "Field-level view of the lit Rose Bowl at night with a corner flag in the foreground and play in progress" },
+      { src: "celebration-25.jpg", alt: "Teen player in a red Celebration of Women's Soccer t-shirt dribbling on the field" },
+      { src: "celebration-26.jpg", alt: "View from the Rose Bowl stands at twilight looking down at the lit field below" },
+      { src: "celebration-27.jpg", alt: "Two players in red and white Sisterhood number 13 jerseys battling for the ball, viewed from behind" },
+      { src: "celebration-28.jpg", alt: "Wide view of the exhibition match at the Rose Bowl with the AYSO logo on the jumbotron" },
+      { src: "celebration-29.jpg", alt: "Player in a white Sisterhood 13 jersey shooting at goal as defenders converge" },
+      { src: "celebration-30.jpg", alt: "Players in Celebration and Sisterhood jerseys near the goal as the ball flies in" },
+      { src: "celebration-31.jpg", alt: "Teen player in a white Celebration shirt dribbling along the goal line" },
+      { src: "celebration-32.jpg", alt: "Three players in red Region 13 shirts celebrating; one leaping for a high-five" },
+      { src: "celebration-33.jpg", alt: "Three referees in blue uniforms posing on the Rose Bowl pitch with the AYSO Region 13 logo above them" },
+      { src: "celebration-34.jpg", alt: "Team photo of older girls and coaches in white Celebration of Women's Soccer t-shirts" },
+      { src: "celebration-35.jpg", alt: "Group of teen girls in red Region 13 shirts cheering and posing on the Rose Bowl pitch" }
     ] %}
     {% for photo in photos %}
-    <a href="/images/celebration-2022/{{ photo }}"
+    <a href="/images/celebration-2022/{{ photo.src }}"
        class="celebration-photo glightbox block w-full aspect-square overflow-hidden rounded-sm group"
        data-gallery="celebration"
-       data-description="Celebration of Women's Soccer — Rose Bowl, March 2022">
-      <img src="/images/celebration-2022/{{ photo }}"
-           alt="Celebration of Women's Soccer — photo {{ loop.index }} of {{ photos.length }}"
+       data-description="{{ photo.alt }}">
+      <img src="/images/celebration-2022/{{ photo.src }}"
+           alt="{{ photo.alt }}"
            loading="lazy"
            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
@@ -59,7 +90,12 @@ eleventyExcludeFromCollections: true
   <li><a href="/about/history/">History</a> — Region 13's story, including the 1973 launch of girls' soccer</li>
 </ul>
 
-<script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"
+        integrity="sha384-MZZbZ6RXJudK43v1qY1zOWKOU2yfeBPatuFoKyHAaAgHTUZhwblRTc9CphTt4IGQ"
+        crossorigin="anonymous"
+        defer></script>
 <script>
-  GLightbox({ selector: '.celebration-photo', loop: true, touchNavigation: true, zoomable: true });
+  document.addEventListener('DOMContentLoaded', function () {
+    GLightbox({ selector: '.celebration-photo', loop: true, touchNavigation: true, zoomable: true });
+  });
 </script>

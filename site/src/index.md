@@ -1,7 +1,6 @@
 ---
-title: AYSO Region 13
-description: AYSO Region 13 offers no-tryout youth soccer for ages 4–19 in
-  Pasadena, Altadena, and La Cañada. Everyone plays. Register now.
+title: "Pasadena Youth Soccer League"
+description: "AYSO Region 13 is the volunteer-run Pasadena youth soccer league — serving Pasadena, Altadena, La Cañada, and surrounding communities since 1972. No tryouts, everyone plays, ages 4–19. Register now."
 layout: home.njk
 section: home
 ---

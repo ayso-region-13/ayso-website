@@ -20,6 +20,8 @@
 /age-chart-2023                 /register/age-chart/                            301
 /age-chart-2024/                /register/age-chart/                            301
 /age-chart-2024                 /register/age-chart/                            301
+/age-chart-2025/                /register/age-chart/                            301
+/age-chart-2025                 /register/age-chart/                            301
 /divisions/                     /register/age-chart/                            301
 /divisions                      /register/age-chart/                            301
 /volunteer/                     /volunteers/                                    301
@@ -34,6 +36,8 @@
 /about-us                       /about/                                         301
 /history/                       /about/history/                                 301
 /history                        /about/history/                                 301
+/ayso-history/                  /about/history/                                 301
+/ayso-history                   /about/history/                                 301
 /leadership/                    /about/leadership/                              301
 /leadership                     /about/leadership/                              301
 /policy/                        /about/policies/                                301
@@ -130,6 +134,8 @@
 /standings                      /schedules/standings/                           301
 /standings/fall-core-2025-standings/    /schedules/standings/                   301
 /standings/fall-core-2025-standings     /schedules/standings/                   301
+/b14u-spring-schedule-2026/             /schedules/                             301
+/b14u-spring-schedule-2026              /schedules/                             301
 /fall-playoffs/                 /schedules/                                     301
 /fall-playoffs                  /schedules/                                     301
 /results/                       /schedules/                                     301
@@ -431,6 +437,8 @@
 /4u                             /programs/preschool/                            301
 /5u                             /programs/preschool/                            301
 /4u5u                           /programs/preschool/                            301
+/4u-playground                  /programs/preschool/                            301
+/4u-playground/                 /programs/preschool/                            301
 /gradseries                     /programs/grad-series/                          301
 /gradseries/                    /programs/grad-series/                          301
 /sisterhood                     /about/sisterhood/                              301
