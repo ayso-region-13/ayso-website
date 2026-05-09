@@ -1,0 +1,65 @@
+---
+layout: page.njk
+title: "Celebration of Women's Soccer"
+description: "On March 18, 2022 at the Rose Bowl, AYSO Region 13 marked its 50th year of fielding girls' soccer teams with a Celebration of Women's Soccer — a kickoff for the Sisterhood of Soccer."
+section: about
+permalink: /about/celebration-of-womens-soccer/
+heroImage: /images/celebration-2022/celebration-06.jpg
+eleventyExcludeFromCollections: true
+---
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css">
+
+<div class="not-prose mb-6">
+  <img src="/images/celebration-2022/celebration-06.jpg"
+       alt="Celebration of Women's Soccer at the Rose Bowl"
+       class="w-full h-auto rounded shadow-sm"
+       loading="eager"
+       fetchpriority="high">
+  <p class="text-sm uppercase tracking-wide text-brand-maroon font-semibold mt-4">Region 13 in the Rose Bowl — March 18, 2022</p>
+</div>
+
+<p>Entering its 50th year fielding girls' soccer teams, AYSO Region 13 held a Celebration of Women's Soccer on March 18, 2022 at the Rose Bowl.</p>
+
+<p>The evening commemorated Region 13's role in creating the Brandi Chastain statue by the Rose Bowl, and served as a kickoff for Region 13's <a href="/about/sisterhood/">Sisterhood of Soccer</a> — a group of volunteers dedicated to recruiting and mentoring female players, referees, and coaches.</p>
+
+<p>First, Region 13's younger players took over the field with small-sided games. Then Cobi Jones — former US Men's National Team and LA Galaxy star, and current co-owner of LA women's pro soccer team Angel City FC — gave the kids some inspiration. Finally, fans were treated to an exhibition match featuring Region 13's G16U and G19U players. Scroll down for a recap.</p>
+
+<div class="not-prose mt-10">
+  <h2 class="sr-only">Photo gallery</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+    {% set photos = [
+      "celebration-01.jpg", "celebration-02.jpg", "celebration-03.jpg", "celebration-04.jpg", "celebration-05.jpg",
+      "celebration-06.jpg", "celebration-07.jpg", "celebration-08.jpg", "celebration-09.jpg", "celebration-10.jpg",
+      "celebration-11.jpg", "celebration-12.jpg", "celebration-13.jpg", "celebration-14.jpg", "celebration-15.jpg",
+      "celebration-16.jpg", "celebration-17.jpg", "celebration-18.jpg", "celebration-19.jpg", "celebration-20.jpg",
+      "celebration-21.jpg", "celebration-22.jpg", "celebration-23.jpg", "celebration-24.jpg", "celebration-25.jpg",
+      "celebration-26.jpg", "celebration-27.jpg", "celebration-28.jpg", "celebration-29.jpg", "celebration-30.jpg",
+      "celebration-31.jpg", "celebration-32.jpg", "celebration-33.jpg", "celebration-34.jpg", "celebration-35.jpg"
+    ] %}
+    {% for photo in photos %}
+    <a href="/images/celebration-2022/{{ photo }}"
+       class="celebration-photo glightbox block w-full aspect-square overflow-hidden rounded-sm group"
+       data-gallery="celebration"
+       data-description="Celebration of Women's Soccer — Rose Bowl, March 2022">
+      <img src="/images/celebration-2022/{{ photo }}"
+           alt="Celebration of Women's Soccer — photo {{ loop.index }} of {{ photos.length }}"
+           loading="lazy"
+           sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+           class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<h2>Related Pages</h2>
+<ul>
+  <li><a href="/about/sisterhood/">Sisterhood of Soccer</a> — the volunteer initiative this event launched</li>
+  <li><a href="/coaches/wca/">Women's Coaching Alliance</a> — mentoring program for young women coaches</li>
+  <li><a href="/about/history/">History</a> — Region 13's story, including the 1973 launch of girls' soccer</li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"></script>
+<script>
+  GLightbox({ selector: '.celebration-photo', loop: true, touchNavigation: true, zoomable: true });
+</script>

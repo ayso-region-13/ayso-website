@@ -21,6 +21,8 @@ The Sisterhood of Soccer was founded on October 27, 2019 by Taj Chiu and Carolin
 
 Research shows that 94% of female C-suite executives played competitive sports, with over half competing in college. Youth athletic participation provides long-term benefits for girls and women.
 
+The initiative was publicly kicked off at the [Celebration of Women's Soccer](/about/celebration-of-womens-soccer/) on March 18, 2022 at the Rose Bowl, marking Region 13's 50th year of fielding girls' soccer teams.
+
 ## How to Participate
 
 The Sisterhood welcomes moms, sisters, and friends interested in coaching or refereeing.
@@ -39,6 +41,7 @@ Email: [sisterhood@ayso13.org](mailto:sisterhood@ayso13.org)
 
 ## Related Pages
 
+- [Celebration of Women's Soccer](/about/celebration-of-womens-soccer/) — March 2022 Rose Bowl event with photo recap
 - [Women's Coaching Alliance](/coaches/wca) — Program for young women coaches
 - [Inclusion](/about/inclusion) — Our commitment to all participants
 - [Volunteer Roles](/volunteers/roles) — Ways to help

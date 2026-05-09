@@ -31,6 +31,7 @@ Region 13 was formed in 1972 when Pasadena, Altadena, and La Cañada separated f
 | 1997 | Joined the City of Pasadena and Pasadena Unified School District to light Victory Park, Pasadena High School, John Muir High School, and Washington Middle School |
 | 1998 | Co-invested with Pasadena Southwest Little League in the complete renovation of McKinley Field |
 | 2018 | Contributed to the Rose Bowl Legacy Foundation for the Brandi Chastain statue at Area H, commemorating the 1999 USWNT World Cup victory |
+| 2022 | [Celebration of Women's Soccer](/about/celebration-of-womens-soccer/) at the Rose Bowl — marked Region 13's 50th year fielding girls' teams and launched the Sisterhood of Soccer |
 | 2022 | Donated a new softball scoreboard for John Muir High School |
 
 Region 13 has also helped replace and rehabilitate the sprinkler systems at John Muir High School and Pasadena High School.
