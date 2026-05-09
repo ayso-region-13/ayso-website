@@ -8,9 +8,11 @@ description: "AYSO Region 13 has served the Pasadena area since 1972. Learn the 
 
 <img src="/images/about-history.jpeg" alt="AYSO Region 13 community gathering" class="max-w-full rounded my-4">
 
+**AYSO** stands for the **American Youth Soccer Organization** — a national volunteer-run youth soccer league founded in 1964 in the Los Angeles area. Region 13 is the AYSO region that serves Pasadena, Altadena, and La Cañada, and was chartered in 1972.
+
 ## AYSO National
 
-AYSO was founded in 1964 in Los Angeles with 9 teams. Today it serves more than 600,000 players across 50,000+ teams nationwide.
+AYSO — the American Youth Soccer Organization — was founded in 1964 in the Los Angeles area with 9 teams. Today it serves more than 600,000 players across 50,000+ teams nationwide.
 
 ## Region 13
 
