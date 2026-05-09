@@ -20,7 +20,7 @@ Our main season runs from September through mid-November.
 | [Fall Soccer](/programs/fall-soccer) | 6-14 | Core recreational program |
 | [Upper Division](/programs/upper-division) | 15-19 | High school age program |
 | [NEXT](/programs/next) | 10-14 | Advanced training supplement |
-| [EPIC](/programs/epic) | All ages | Inclusion program for players needing assistance |
+| [EPIC](/programs/epic) | All ages | Adaptive soccer for players needing assistance |
 | [Sunday Soccer](/programs/sunday-soccer) | 6+ | Skills academy and goalkeeper training |
 
 

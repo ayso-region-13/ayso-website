@@ -3,7 +3,7 @@
 title: "EPIC (Everyone Plays In our Community)"
 layout: page.njk
 section: programs
-description: "EPIC (Everyone Plays in the Community) pairs players who need field assistance with volunteer buddies for a fully inclusive soccer experience."
+description: "EPIC (Everyone Plays in the Community) pairs players who need field assistance with volunteer buddies for an adaptive soccer experience."
 ---
 
 ![EPIC players at Region 13](/images/epic-interior.jpg)

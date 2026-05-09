@@ -3,7 +3,7 @@
 title: "Diversity, Equity, and Inclusion"
 layout: page.njk
 section: about
-description: "AYSO Region 13 is committed to diversity, equity, and inclusion in youth soccer. Learn about our DEI efforts and the EPIC inclusion program."
+description: "AYSO Region 13 is committed to diversity, equity, and inclusion in youth soccer. Learn about our DEI efforts and the EPIC adaptive soccer program."
 ---
 
 AYSO Region 13 welcomes all participants regardless of race, ethnicity, national origin, religion, gender, gender identity, sexual orientation, socioeconomic position, ability, or disability.
@@ -46,7 +46,7 @@ Members interested in DEI initiatives can contact [info@ayso13.org](mailto:info@
 
 ## Related Pages
 
-- [EPIC Program](/programs/epic) — Inclusion program
+- [EPIC Program](/programs/epic) — Adaptive soccer program
 - [Sisterhood of Soccer](/about/sisterhood) — Supporting women in soccer
 - [Mission](/about/) — Our core philosophies
 
