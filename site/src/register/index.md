@@ -53,7 +53,7 @@ Programs available:
 - Preschool (4U/5U) — fall only
 - Spring Soccer
 - Winter Stars
-- EPIC (inclusion program)
+- EPIC (adaptive soccer)
 
 ## What is Included
 
