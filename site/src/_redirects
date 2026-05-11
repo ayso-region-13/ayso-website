@@ -581,6 +581,52 @@
 /wp-content/uploads/2025/08/2025-12U-Division-Meeting.pptx            /coaches/        301
 /wp-content/uploads/2025/11/TT25_Team_List_C.pdf                      /programs/tournaments/thanksgiving/  301
 
+# From GSC 2026-05-10 not-found drilldown
+# Board minute PDFs
+/wp-content/uploads/2022/03/2021-03-04-minutes.pdf                    /about/board-minutes/  301
+/wp-content/uploads/2022/03/April_2019.pdf                            /about/board-minutes/  301
+/wp-content/uploads/2022/03/June_2017.pdf                             /about/board-minutes/  301
+/wp-content/uploads/2022/03/November_2016.pdf                         /about/board-minutes/  301
+/wp-content/uploads/2022/03/October_2016.pdf                          /about/board-minutes/  301
+# Coaching docs
+/wp-content/uploads/2022/03/Region-13-PPs-20200615.pdf                /coaches/practice/     301
+/wp-content/uploads/2023/08/Region-13-Modifications-for-8U-7U-6U-2022.docx.pdf  /coaches/    301
+/wp-content/uploads/2024/09/prts06-v02.pdf                            /referees/resources/   301
+/wp-content/uploads/2024/10/prts07-v02.pdf                            /referees/resources/   301
+# Registration flyer
+/wp-content/uploads/2022/05/R13-registration-flyer-2022.pdf           /register/             301
+# Thanksgiving Tournament artifacts
+/wp-content/uploads/2022/12/R13-BRACKET-FINAL.pdf                     /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2022/12/R13-RESULTS-FINAL.pdf                     /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2024/10/Application-TT2024.pdf                    /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2024/10/Invitation-TT2024-1.pdf                   /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2024/10/Referee-Form-TT2024.pdf                   /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2024/10/Roster-TT2024.pdf                         /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2024/11/Almansor-Thanksgiving-Field-Map-2024.pdf  /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2024/11/TT24-Sched-Ref-01.pdf                     /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2024/11/TT24-Teams.pdf                            /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2025/11/TT25_Robinson_field_map_v3.pdf            /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2025/11/TT25_Rose_Bowl_field_map_v3.pdf           /programs/tournaments/thanksgiving/  301
+# Field map / schedules / policies
+/wp-content/uploads/2023/04/BOSC-2023-Field-Map.pdf                   /fields/               301
+/wp-content/uploads/2025/11/Sched25_f.pdf                             /schedules/            301
+/wp-content/uploads/2024/11/LC-City-Council-Age-Group-Limitation-November.pdf  /fields/lchs/  301
+
+# Old WP attachment / misc paths from GSC 2026-05-10 drilldown
+/index.php                       /                                              301
+/arcadia-city-hall-soccer-field/ /fields/                                       301
+/arcadia-city-hall-soccer-field  /fields/                                       301
+/schedule/schedule-faq/          /families/faqs/                                301
+/schedule/schedule-faq           /families/faqs/                                301
+/created-with-gimp-2/            /                                              301
+/created-with-gimp-2             /                                              301
+/la-salle-google-map2-2/         /fields/la-salle/                              301
+/la-salle-google-map2-2          /fields/la-salle/                              301
+/mst-logo-2019/                  /                                              301
+/mst-logo-2019                   /                                              301
+/screenshot-2024-09-02-215902/   /                                              301
+/screenshot-2024-09-02-215902    /                                              301
+
 # Old WP-style board-minutes filenames (2014–2022) — those PDFs are no longer
 # served (moved to archive/board-minutes/ outside site/). Catch only the old
 # `ayso13-board-minutes-*` prefix so it doesn't intercept the current
