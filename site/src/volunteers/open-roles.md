@@ -24,7 +24,7 @@ As the Social Media Coordinator, you'll work with our Director of Communications
 
 ## Photographer
 
-As the Photographer, you’ll help capture the moments that make the season memorable for players and families. You’ll take photos at games, events, and regional activities to highlight the AYSO experience. This role supports the region’s communications, social media, and community engagement efforts. If you enjoy photography and storytelling, this is a creative and rewarding way to contribute.
+As the Photographer, you’ll help capture the moments that make the season memorable for players and families. You’ll take photos at games, events, and regional activities to highlight the AYSO experience. You even get a cool t-shirt that identifies you as a Region 13 photgrapher! This role supports the region’s communications, social media, and community engagement efforts. If you enjoy photography and storytelling, this is a creative and rewarding way to contribute.
 
 ## Grants & Sponsors
 
