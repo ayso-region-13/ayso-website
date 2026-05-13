@@ -14,7 +14,7 @@ Players must have been registered and played in the preceding Fall Core soccer l
 
 ## Application Process
 
-1. Complete the tournament application
+1. [Complete the Tournament Application](https://ayso13.typeform.com/tournament-form)
 2. Obtain regional approval
 3. Submit rosters to the registrar and tournament coordinator
 4. Processing through AYSO National Office
@@ -25,9 +25,10 @@ Regional approval is required before any tournament participation.
 
 | Need | Contact |
 |------|---------|
-| Approval and signatures | Region Commissioner (Terry) |
+| Approval and signatures | Region Commissioner (Patrick) |
+| Tournament Director | Ben |
 | Financial matters | Treasurer (Shant) |
-| Equipment | Equipment manager (Celina) |
+| Uniforms | Ron |
 | Roster and ID cards | Registrar (Shanti) |
 | Referee documentation | Regional Referee Administrator (Harry) |
 

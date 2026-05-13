@@ -38,6 +38,9 @@ Region 13 hosts two competitive tournaments each year for 10U-14U teams.
 ### How to Form a Tournament Team
 For information on forming tournament teams or trying out for All-Stars, see [Tournament Teams](/coaches/tournament-teams).
 
+### Coaches: Apply to Attend a Tournament
+Coaches taking a team to a tournament: [Complete the Tournament Application](https://ayso13.typeform.com/tournament-form).
+
 ### Requirements
 - Players must be registered AYSO members
 - Most tournaments require minimum game participation in regular season
