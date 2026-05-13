@@ -25,7 +25,7 @@ Choose the course that matches your child's division:
 
 Register through eTrainU.
 
-[eTrainU](https://ayso13.inleague.com/eTrainu/index/)
+[eTrainU](https://ayso13.inleague.com/app/eTrainU)
 
 ### Step 2: LiveScan Fingerprinting
 
@@ -49,7 +49,7 @@ Training classes are held before the fall season, typically in August. The regio
 
 Refresher courses (2 hours, outdoor on soccer fields) are available but not mandatory.
 
-[Training Calendar on eTrainU](https://ayso13.inleague.com/eTrainu/index/)
+[Training Calendar on eTrainU](https://ayso13.inleague.com/app/eTrainU)
 
 For training before July, contact [referee@ayso13.org](mailto:referee@ayso13.org).
 

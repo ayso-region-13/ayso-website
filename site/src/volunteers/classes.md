@@ -18,7 +18,7 @@ These one-time courses are completed through eTrainU:
 - CDC Concussion Awareness
 - Sudden Cardiac Arrest Awareness
 
-[eTrainU](https://ayso13.inleague.com/eTrainu/index/)
+[eTrainU](https://ayso13.inleague.com/app/eTrainU)
 
 ## Coach Training
 
@@ -72,7 +72,7 @@ LiveScan is a one-time requirement for all adult volunteers. See the [LiveScan p
 
 In-person classes are scheduled nearly every weekend in August, with weeknight options available. The full schedule is posted in July.
 
-[Training Calendar on eTrainU](https://ayso13.inleague.com/eTrainu/index/)
+[Training Calendar on eTrainU](https://ayso13.inleague.com/app/eTrainU)
 
 ## Contact
 

@@ -51,7 +51,7 @@ No additional training required. The league hires professional coaches for these
 
 Classes are scheduled nearly every weekend in August before the fall season, with weeknight options available. Registration is through eTrainU.
 
-[Training Calendar on eTrainU](https://ayso13.inleague.com/eTrainu/index/)
+[Training Calendar on eTrainU](https://ayso13.inleague.com/app/eTrainU)
 
 ## Contact
 
