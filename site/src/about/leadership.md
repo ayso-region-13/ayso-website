@@ -39,7 +39,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Sisterhood of Soccer | Open | [sisterhood@ayso13.org](mailto:sisterhood@ayso13.org) |
 | USWL/MLS Liaison | Open | — |
 | VIP Coordinator | Tony D'Angelo | [vip@ayso13.org](mailto:vip@ayso13.org) |
-| Tournament Coordinator | Ben Hernandez-Stein | [td@ayso13.org](mailto:td@ayso13.org) |
+| Tournament Coordinator | Ben Hernandez-Stern | [td@ayso13.org](mailto:td@ayso13.org) |
 | Picture Day Coordinator | Amandeep Singh | [pictures@ayso13.org](mailto:pictures@ayso13.org) |
 | Volunteer & Team Manager Coordinator | Jonelle Kelly | [teams@ayso13.org](mailto:teams@ayso13.org) |
 | Winter Stars Coordinator | Albert Estepa | [winterstars@ayso13.org](mailto:winterstars@ayso13.org) |
