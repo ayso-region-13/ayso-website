@@ -25,12 +25,12 @@ Regional approval is required before any tournament participation.
 
 | Need | Contact |
 |------|---------|
-| Approval and signatures | Region Commissioner (Patrick) |
-| Tournament Director | Ben |
-| Financial matters | Treasurer (Shant) |
-| Uniforms | Ron |
-| Roster and ID cards | Registrar (Shanti) |
-| Referee documentation | Regional Referee Administrator (Harry) |
+| Approval and signatures | Region Commissioner (Patrick Shopbell) |
+| Tournament Director | Ben Hernandez-Stein |
+| Financial matters | Treasurer (Shant Kamanjian) |
+| Uniforms | Ron Johnson |
+| Roster and ID cards | Registrar (Shanti Rao) |
+| Referee documentation | Regional Referee Administrator (Harry Plotkin) |
 
 ## Standards
 
