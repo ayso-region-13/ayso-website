@@ -39,7 +39,7 @@ Injuries, risks, stray dogs, and other concerns can be reported here.
 
 Feedback: Provide [feedback to coach staff](https://form.jotform.com/82564401768159) or write to coach@ayso13.org
 
-Provide [feedback to the referee staff](https://ayso13.typeform.com/to/DpPtKysI) or write to referee@ayso13.org
+Provide [feedback to the referee staff](https://ayso13.typeform.com/referee-fb) or write to referee@ayso13.org
 
 Or email: [safety@ayso13.org](mailto:safety@ayso13.org)
 

@@ -26,7 +26,7 @@ description: "Required training for AYSO Region 13 team managers — SafeSport, 
 - Access Training Library, then Safe Haven, then View Courses
 - Enroll in "AYSO's Safe Haven 2022"
 
-[eTrainU](https://ayso13.inleague.com/eTrainu/index/)
+[eTrainU](https://ayso13.inleague.com/app/eTrainU)
 
 ### 4. Required Reading
 - Volunteer Slack channel guidelines

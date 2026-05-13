@@ -1,10 +1,11 @@
 ---
-title: "Open Volunteer Roles"
+title: Open Volunteer Roles
+description: AYSO Region 13 board and operations positions currently open.
+  Auditor, At-Large Board Members, Social Media Coordinator, Grants & Sponsors,
+  and more.
 layout: page.njk
 section: volunteers
-description: "AYSO Region 13 board and operations positions currently open. Auditor, At-Large Board Members, Social Media Coordinator, Grants & Sponsors, and more."
 ---
-
 These are the AYSO Region 13 board and operations positions currently looking for volunteers. The list is updated as roles are filled and as new needs arise — for the full catalog of every volunteer role in the region (including ones that are filled), see [Volunteer Roles](/volunteers/roles/).
 
 *As of April 22, 2026.*
@@ -20,6 +21,10 @@ As an At-Large Board Member, you'll be part of the team that helps guide the reg
 ## Social Media Coordinator
 
 As the Social Media Coordinator, you'll work with our Director of Communications and our volunteer photographers to help manage and grow the region's online presence. You'll create and share content that highlights programs, events, and community engagement. This role ensures families stay informed and connected throughout the season. If you enjoy communication and creativity, this is a great opportunity to make an impact.
+
+## Photographer
+
+As the Photographer, you’ll help capture the moments that make the season memorable for players and families. You’ll take photos at games, events, and regional activities to highlight the AYSO experience. You even get a cool t-shirt that identifies you as a Region 13 photgrapher! This role supports the region’s communications, social media, and community engagement efforts. If you enjoy photography and storytelling, this is a creative and rewarding way to contribute.
 
 ## Grants & Sponsors
 
