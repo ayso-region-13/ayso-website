@@ -31,7 +31,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Position | Name | Email |
 | ------------------------------------ | --------------------- | ------------------------------------------------------------- |
 | Communications | Bret Nicely | [communications@ayso13.org](mailto:communications@ayso13.org) |
-| Web site | Matthew Goldman | [webmaster@ayso13.org](mailto:webmaster@ayso13.org) |
+| Website | Matthew Goldman | [webmaster@ayso13.org](mailto:webmaster@ayso13.org) |
 | Fields | Jessica Ferree | [fields@ayso13.org](mailto:fields@ayso13.org) |
 | Practice Field Coordinator | Rolf Mauermann | [rolf@ayso13.org](mailto:rolf@ayso13.org) |
 | Uniforms & Equipment | Ron Johnson | [equipment@ayso13.org](mailto:equipment@ayso13.org) |
@@ -39,7 +39,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Sisterhood of Soccer | Open | [sisterhood@ayso13.org](mailto:sisterhood@ayso13.org) |
 | USWL/MLS Liaison | Open | — |
 | VIP Coordinator | Tony D'Angelo | [vip@ayso13.org](mailto:vip@ayso13.org) |
-| Tournament Director | Ben Hernandez-Stein | [td@ayso13.org](mailto:td@ayso13.org) |
+| Tournament Coordinator | Ben Hernandez-Stein | [td@ayso13.org](mailto:td@ayso13.org) |
 | Picture Day Coordinator | Amandeep Singh | [pictures@ayso13.org](mailto:pictures@ayso13.org) |
 | Volunteer & Team Manager Coordinator | Jonelle Kelly | [teams@ayso13.org](mailto:teams@ayso13.org) |
 | Winter Stars Coordinator | Albert Estepa | [winterstars@ayso13.org](mailto:winterstars@ayso13.org) |
@@ -48,7 +48,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Advanced Play Coordinator | Samir Singh | [samir@ayso13.org](mailto:samir@ayso13.org) |
 | 4U/5U Program Coordinator | Melissa Amonoo-Neizer | [melissa@ayso13.org](mailto:melissa@ayso13.org) |
 | Director of Coach Instruction | Brandi Lane | [training@ayso13.org](mailto:training@ayso13.org) |
-| Game Scheduler | Matthew Goldman | [scheduler@ayso13.org](mailto:scheduler@ayso13.org) |
+| Game Scheduler & Statistics | Matthew Goldman | [scheduler@ayso13.org](mailto:scheduler@ayso13.org) |
 
 
 ## Division Coach Administrators

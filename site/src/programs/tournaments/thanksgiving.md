@@ -59,7 +59,7 @@ Sign up through the tournament portal.
 
 ## Contact
 
-Tournament Director
+Tournament Coordinator
 Email: [td@ayso13.org](mailto:td@ayso13.org)
 Phone: 626-316-6900
 

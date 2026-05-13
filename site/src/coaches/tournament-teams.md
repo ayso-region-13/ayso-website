@@ -26,7 +26,7 @@ Regional approval is required before any tournament participation.
 | Need | Contact |
 |------|---------|
 | Approval and signatures | Region Commissioner (Patrick Shopbell) |
-| Tournament Director | Ben Hernandez-Stein |
+| Tournament Coordinator | Ben Hernandez-Stein |
 | Financial matters | Treasurer (Shant Kamanjian) |
 | Uniforms | Ron Johnson |
 | Roster and ID cards | Registrar (Shanti Rao) |

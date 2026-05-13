@@ -182,13 +182,13 @@ Region 13 awards trophies and/or medals for most of our seasons and activities. 
 
 ### Tournaments
 
-#### Tournament Director
+#### Tournament Coordinator
 
-The Tournament Director oversees our Region’s two annual tournaments: The Thanksgiving Tournament, which takes place the weekend after Thanksgiving and the Bill Owen Spring Classic, which normally takes place in the late spring. The Tournament Director manages all aspects of the tournaments and works with many other Region staff, including especially the RRA and the Fields Coordinator. Our Tournaments are managed via an online portal, which handles registration, referee and player roster submission, and payments. Our tournaments are a significant income source for our Region.
+The Tournament Coordinator oversees our Region’s two annual tournaments: The Thanksgiving Tournament, which takes place the weekend after Thanksgiving and the Bill Owen Spring Classic, which normally takes place in the late spring. The Tournament Coordinator manages all aspects of the tournaments and works with many other Region staff, including especially the RRA and the Fields Coordinator. Our Tournaments are managed via an online portal, which handles registration, referee and player roster submission, and payments. Our tournaments are a significant income source for our Region.
 
 #### Rose City Cup Director
 
-The Rose City Cup Director is like the Tournament Director, but for our own Region 13 end-of-season playoff tournament. Responsibilities are similar, with a somewhat smaller scope, since the Rose City Cup involves only our own Region 13 teams. Nevertheless, the Rose City Cup Director must deal with issues of field availability, game scheduling, referees, and trophies and medals. Working on the Rose City Cup is an excellent way to introduce oneself to the tournament process.
+The Rose City Cup Director is like the Tournament Coordinator, but for our own Region 13 end-of-season playoff tournament. Responsibilities are similar, with a somewhat smaller scope, since the Rose City Cup involves only our own Region 13 teams. Nevertheless, the Rose City Cup Director must deal with issues of field availability, game scheduling, referees, and trophies and medals. Working on the Rose City Cup is an excellent way to introduce oneself to the tournament process.
 
 ## How to Volunteer
 
