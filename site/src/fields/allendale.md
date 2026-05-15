@@ -13,7 +13,8 @@ surface: "Grass"
 lighting: "No"
 snackBar: "No"
 ---
-Allendale Park is a practice field and parking location for Blair High School.
+
+Allendale Park is a practice field and serves as the primary parking lot for AYSO Region 13 activities at Blair High School. The park sits at Marengo Avenue and Allendale Road, two blocks south of Blair.
 
 ## Location
 
