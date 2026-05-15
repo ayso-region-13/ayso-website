@@ -7,6 +7,8 @@ permalink: "/resources/"
 description: "AYSO Region 13 resources — document library, photo gallery, newsletter archive, and safety policies."
 ---
 
+AYSO Region 13's resource hub pulls together the materials families, coaches, and referees use most often — registration links and InLeague access, season-by-season safety policies for heat and rain, the live weather page driven by Region 13's on-site weather station, picture-day information, the photo gallery, and the document library of forms and handbooks. Bookmark this page during the season for one-stop access, or jump to a section below.
+
 ## Quick Links
 
 - [Registration](https://ayso13.inleague.com/app) — Register for programs
