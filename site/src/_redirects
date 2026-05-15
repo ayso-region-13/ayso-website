@@ -134,6 +134,7 @@
 /standings                      /schedules/standings/                           301
 /standings/fall-core-2025-standings/    /schedules/standings/                   301
 /standings/fall-core-2025-standings     /schedules/standings/                   301
+/standings_historical/*                 /schedules/standings/                   301
 /b14u-spring-schedule-2026/             /schedules/                             301
 /b14u-spring-schedule-2026              /schedules/                             301
 /fall-playoffs/                 /schedules/                                     301
@@ -142,6 +143,8 @@
 /results                        /schedules/                                     301
 /calendar/                      /about/calendar/                                301
 /calendar                       /about/calendar/                                301
+/calendar/download.php          /about/calendar/                                301
+/calendar/event.php             /about/calendar/                                301
 /weekly/                        /schedules/                                     301
 /weekly                         /schedules/                                     301
 /schedule-changelog-2025/       /schedules/                                     301
@@ -555,6 +558,8 @@
 # Case-sensitive variants of common path mistypes (CF Pages is case-sensitive)
 /Coach/                         /coaches/                                       301
 /Coach                          /coaches/                                       301
+/Schedule/                      /schedules/                                     301
+/Schedule                       /schedules/                                     301
 /Referee/                       /referees/                                      301
 /newsletter/                    /resources/newsletters/                         301
 /newsletter                     /resources/newsletters/                         301
@@ -581,6 +586,7 @@
 /wp-content/uploads/2024/04/R13-2024-Registration-Flyer.pdf           /register/       301
 /wp-content/uploads/2025/08/2025-12U-Division-Meeting.pptx            /coaches/        301
 /wp-content/uploads/2025/11/TT25_Team_List_C.pdf                      /programs/tournaments/thanksgiving/  301
+/wp-content/uploads/2025/09/ref-card-2023.pdf                         /referees/resources/  301
 
 # From GSC 2026-05-10 not-found drilldown
 # Board minute PDFs
