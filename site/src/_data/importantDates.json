@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "dates": [
+    { "date": "2026-05-20", "name": "Zoom Q&A", "link": "/about/calendar/" },
+    { "date": "2026-05-31", "name": "End of Early Registration", "link": "/register/" },
+    { "date": "2026-07-31", "name": "End of Regular Registration", "link": "/register/" },
+    { "date": "2026-09-01", "name": "Fall Soccer kickoff", "link": "/programs/fall-soccer/" },
+    { "date": "2026-09-12", "name": "Preschool (4U/5U) season begins", "link": "/programs/preschool/" },
+    { "date": "2026-11-27", "name": "Thanksgiving Tournament", "link": "/programs/tournaments/thanksgiving/" }
+  ]
+}

@@ -38,6 +38,26 @@ content:
         type: rich-text
         description: "Supports bold, links, and multiple sentences. Links open inline — no separate URL field needed."
 
+  - name: importantDates
+    label: Important Dates
+    type: file
+    path: site/src/_data/importantDates.json
+    fields:
+      - name: enabled
+        label: "Show Important Dates widget on home page"
+        type: boolean
+      - name: dates
+        label: "Dates"
+        type: object
+        list:
+          min: 0
+          max: 20
+        description: "List as many as you like — the home page shows the next 3 upcoming events. Past events are hidden automatically."
+        fields:
+          - { name: date, label: "Date",             type: date }
+          - { name: name, label: "Event Name",       type: string }
+          - { name: link, label: "Link (optional)",  type: string, required: false, description: "Internal path (e.g. /programs/fall-soccer/) or full external URL." }
+
   # ── Single pages ─────────────────────────────────────────────────────────
 
   - name: home
