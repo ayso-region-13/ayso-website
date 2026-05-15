@@ -62,14 +62,14 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | G6U Division Coach Administrator | Open | [coachg6u@ayso13.org](mailto:coachg6u@ayso13.org) |
 | B7U Division Coach Administrator | Mary Cholko & Lauren Stevenson | [coachb7u@ayso13.org](mailto:coachb7u@ayso13.org) |
 | G7U Division Coach Administrator | Jonathan Lui | [coachg7u@ayso13.org](mailto:coachg7u@ayso13.org) |
-| B8U Division Coach Administrator | Open | [coachb8u@ayso13.org](mailto:coachb8u@ayso13.org) |
+| B8U Division Coach Administrator | Lauren Cross | [coachb8u@ayso13.org](mailto:coachb8u@ayso13.org) |
 | G8U Division Coach Administrator | Open | [coachg8u@ayso13.org](mailto:coachg8u@ayso13.org) |
 | B10U Division Coach Administrator | Tona Rodriguez | [coachb10u@ayso13.org](mailto:coachb10u@ayso13.org) |
-| G10U Division Coach Administrator | Open | [coachg10u@ayso13.org](mailto:coachg10u@ayso13.org) |
+| G10U Division Coach Administrator | Yliana Johansen-Méndez | [coachg10u@ayso13.org](mailto:coachg10u@ayso13.org) |
 | B12U Division Coach Administrator | Samir Singh | [coachb12u@ayso13.org](mailto:coachb12u@ayso13.org) |
 | G12U Division Coach Administrator | Andy Thompson | [coachg12u@ayso13.org](mailto:coachg12u@ayso13.org) |
 | B14U Division Coach Administrator | Azeem Khaja | [coachb14u@ayso13.org](mailto:coachb14u@ayso13.org) |
-| G14U Division Coach Administrator | Open | [coachg14u@ayso13.org](mailto:coachg14u@ayso13.org) |
+| G14U Division Coach Administrator | Claire Plotkin | [coachg14u@ayso13.org](mailto:coachg14u@ayso13.org) |
 | Upper Division (16U/19U) Coordinator | Open | [ud@ayso13.org](mailto:ud@ayso13.org) |
 
 
