@@ -9,8 +9,8 @@
 # (so we submit URLs after they're guaranteed to resolve).
 #
 # Required env:
-#   CF_API_TOKEN   - Cloudflare API token with Pages:Read access
-#   CF_ACCOUNT_ID  - Cloudflare account ID
+#   CLOUDFLARE_PAGES_API_TOKEN  - Cloudflare API token with Pages:Read access
+#   CLOUDFLARE_ACCOUNT_ID       - Cloudflare account ID
 #
 # Optional env (with defaults):
 #   PROJECT        - Pages project name (default: ayso-website-prod)
@@ -28,8 +28,8 @@
 
 set -euo pipefail
 
-: "${CF_API_TOKEN:?CF_API_TOKEN required}"
-: "${CF_ACCOUNT_ID:?CF_ACCOUNT_ID required}"
+: "${CLOUDFLARE_PAGES_API_TOKEN:?CLOUDFLARE_PAGES_API_TOKEN required}"
+: "${CLOUDFLARE_ACCOUNT_ID:?CLOUDFLARE_ACCOUNT_ID required}"
 PROJECT="${PROJECT:-ayso-website-prod}"
 SHA="${SHA:-${GITHUB_SHA:-}}"
 FIND_TIMEOUT="${FIND_TIMEOUT:-180}"
@@ -41,8 +41,8 @@ if [ -z "$SHA" ]; then
   exit 2
 fi
 
-API="https://api.cloudflare.com/client/v4/accounts/$CF_ACCOUNT_ID/pages/projects/$PROJECT/deployments"
-AUTH_HEADER="Authorization: Bearer $CF_API_TOKEN"
+API="https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT/deployments"
+AUTH_HEADER="Authorization: Bearer $CLOUDFLARE_PAGES_API_TOKEN"
 
 # Best-effort GH Actions output
 emit() {
