@@ -240,21 +240,28 @@ layout: base.njk
 
 </div>{# /bg-brand-cream #}
 
-{# ── About + Roles ──────────────────────────────────────────────── #}
+{# ── About + Dates + Roles ──────────────────────────────────────── #}
+{% set _datesUpcoming = importantDates.dates | upcomingEvents(5) %}
+{% set _showDates = importantDates.enabled and _datesUpcoming.length > 0 %}
 <section class="bg-white border-y-[6px] border-brand-maroon">
   <div class="max-w-screen-xl mx-auto px-4 py-12">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-      {# About blurb #}
-      <div class="lg:col-span-2">
-        <div class="flex items-center gap-5 mb-5">
-          <img src="/images/logo.svg" alt="" class="h-20 w-20 shrink-0" aria-hidden="true" loading="lazy">
-          <h2 class="text-2xl md:text-3xl font-extrabold text-brand-dark uppercase tracking-tight">About AYSO Region 13</h2>
+      {# About blurb — spans 2/3 when no dates column, 1/3 when 3 cols #}
+      <div{% if not _showDates %} class="lg:col-span-2"{% endif %}>
+        <div class="flex items-center gap-4 mb-5">
+          <img src="/images/logo.svg" alt="" class="{% if _showDates %}h-14 w-14{% else %}h-20 w-20{% endif %} shrink-0" aria-hidden="true" loading="lazy">
+          <h2 class="{% if _showDates %}text-xl md:text-2xl{% else %}text-2xl md:text-3xl{% endif %} font-extrabold text-brand-dark uppercase tracking-tight">About AYSO Region 13</h2>
         </div>
         <div class="prose prose-home max-w-none">
           {{ content | safe }}
         </div>
       </div>
+
+      {# Important Dates — middle column, only renders if events exist #}
+      {% if _showDates %}
+      {% include "important-dates.njk" %}
+      {% endif %}
 
       {# Role-based quick links #}
       <div class="bg-brand-maroon rounded-lg p-6 self-start border-4 border-brand-red">

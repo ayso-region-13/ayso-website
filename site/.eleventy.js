@@ -83,6 +83,35 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter("currentYear", () => new Date().getFullYear());
 
+  // Compact MMM d, yyyy formatter (Pacific) for the Important Dates widget
+  const SHORT_DATE_FMT = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+  eleventyConfig.addFilter("shortDate", (dateInput) => {
+    if (!dateInput) return "";
+    const d = typeof dateInput === "string" ? new Date(dateInput + "T12:00:00") : new Date(dateInput);
+    return SHORT_DATE_FMT.format(d);
+  });
+
+  // Filter: drop past events, sort ascending, take first n. Used by the home
+  // page Important Dates widget. Server-side build matches the on-page JS that
+  // re-runs the same comparison so the widget never shows stale past events
+  // between publishes.
+  eleventyConfig.addFilter("upcomingEvents", (events, n) => {
+    const limit = typeof n === "number" ? n : 3;
+    if (!Array.isArray(events)) return [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return events
+      .filter(e => e && e.date && e.name)
+      .filter(e => new Date(e.date + "T00:00:00") >= today)
+      .sort((a, b) => String(a.date).localeCompare(String(b.date)))
+      .slice(0, limit);
+  });
+
   // Returns true if the current page URL starts with the given section path
   eleventyConfig.addFilter("isActiveSection", (pageUrl, sectionUrl) => {
     if (!pageUrl || !sectionUrl) return false;
