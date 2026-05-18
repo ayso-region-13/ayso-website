@@ -39,8 +39,8 @@ jobs:
         # origin URL bypasses that).
         id: cf_wait
         env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CLOUDFLARE_PAGES_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           PROJECT: ayso-website-prod
           SHA: ${{ github.sha }}
         run: bash .github/scripts/wait-for-cf-deploy.sh
