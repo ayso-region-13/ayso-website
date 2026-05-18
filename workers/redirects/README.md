@@ -42,8 +42,24 @@ step that errors out if **`CLOUDFLARE_ACCOUNT_ID`** is not set. This
 exists because some maintainers have multiple Cloudflare accounts on
 their machine and an un-pinned `wrangler` could push to the wrong one.
 
-Set it once per shell session (or add to `~/.zshrc` / a `.envrc` if
-you use direnv):
+### Recommended setup: direnv
+
+The repo ships a `.envrc.example` at the root. Copy it to `.envrc`,
+fill in the AYSO Region 13 account ID, and `direnv allow`:
+
+```bash
+cd /path/to/ayso-website
+cp .envrc.example .envrc        # the real .envrc is gitignored
+$EDITOR .envrc                  # paste the account ID
+direnv allow
+```
+
+After that, `CLOUDFLARE_ACCOUNT_ID` is exported whenever you're inside
+the repo. `cd` out and it unloads.
+
+### Alternative: shell rc
+
+If you don't use direnv, export it per-shell:
 
 ```bash
 export CLOUDFLARE_ACCOUNT_ID=<ayso13-account-id>
