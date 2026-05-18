@@ -29,6 +29,13 @@ const cases = [
   { path: "/Coach",                d: "/coaches/" },
   { path: "/Coach/",               d: "/coaches/" },
   { path: "/board",                d: "/about/leadership/" },
+  // 2026-05-18 additions from CF 404 log
+  { path: "/contactus",            d: "/contact/" },
+  { path: "/wp-content/uploads/NEWS_114.png",  d: "/resources/newsletters/" },
+  { path: "/wp-content/uploads/2022/03/January_2016.pdf",  d: "/about/board-minutes/" },
+  { path: "/wp-content/uploads/2022/03/20211007-AYSO-Board-Meeting.pdf",  d: "/about/board-minutes/" },
+  { path: "/tournament-volunteer-signup/",  d: "/volunteers/" },
+  { path: "/login",                d: "https://ayso13.inleague.com/app/welcome" },
 ];
 
 const splatCases = [
