@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-18T16:06:01.757Z
-// 562 exact rules + 8 splat rules = 570 total
+// Last generated: 2026-05-18T17:31:27.730Z
+// 575 exact rules + 8 splat rules = 583 total
 
 export const EXACT = {
   "/heat/": {
@@ -868,6 +868,18 @@ export const EXACT = {
     "d": "/about/board-minutes/",
     "s": 301
   },
+  "/wp-content/uploads/2022/03/January_2016.pdf": {
+    "d": "/about/board-minutes/",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/03/June_2016.pdf": {
+    "d": "/about/board-minutes/",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/03/20211007-AYSO-Board-Meeting.pdf": {
+    "d": "/about/board-minutes/",
+    "s": 301
+  },
   "/wp-content/uploads/2025/11/TT25_Team_List_C.pdf": {
     "d": "/programs/tournaments/thanksgiving/",
     "s": 301
@@ -890,6 +902,38 @@ export const EXACT = {
   },
   "/wp-content/uploads/2025/11/TT25_RefSched_B.pdf": {
     "d": "/referees/scheduling/",
+    "s": 301
+  },
+  "/wp-content/uploads/NEWS_114.png": {
+    "d": "/resources/newsletters/",
+    "s": 301
+  },
+  "/wp-content/uploads/registration114.png": {
+    "d": "/register/",
+    "s": 301
+  },
+  "/wp-content/uploads/Manager_114.png": {
+    "d": "/managers/",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/07/AYSOU-Training-Library-1024x471.png": {
+    "d": "/coaches/training/",
+    "s": 301
+  },
+  "/tournament-volunteer-signup/": {
+    "d": "/volunteers/",
+    "s": 301
+  },
+  "/tournament-volunteer-signup": {
+    "d": "/volunteers/",
+    "s": 301
+  },
+  "/login": {
+    "d": "https://ayso13.inleague.com/app/welcome",
+    "s": 301
+  },
+  "/login/": {
+    "d": "https://ayso13.inleague.com/app/welcome",
     "s": 301
   },
   "/wp-content/uploads/2025/11/Ref_Assignments25v7.pdf": {
@@ -1713,6 +1757,14 @@ export const EXACT = {
     "s": 301
   },
   "/contact-us": {
+    "d": "/contact/",
+    "s": 301
+  },
+  "/contactus/": {
+    "d": "/contact/",
+    "s": 301
+  },
+  "/contactus": {
     "d": "/contact/",
     "s": 301
   },

@@ -254,6 +254,9 @@
 /wp-content/uploads/2022/03/June_2017.pdf                             /about/board-minutes/  301
 /wp-content/uploads/2022/03/November_2016.pdf                         /about/board-minutes/  301
 /wp-content/uploads/2022/03/October_2016.pdf                          /about/board-minutes/  301
+/wp-content/uploads/2022/03/January_2016.pdf                          /about/board-minutes/  301
+/wp-content/uploads/2022/03/June_2016.pdf                             /about/board-minutes/  301
+/wp-content/uploads/2022/03/20211007-AYSO-Board-Meeting.pdf           /about/board-minutes/  301
 
 # -- Thanksgiving Tournament 2025 (current cycle) --
 /wp-content/uploads/2025/11/TT25_Team_List_C.pdf                      /programs/tournaments/thanksgiving/  301
@@ -262,6 +265,18 @@
 /wp-content/uploads/2025/11/TT25_Robinson_field_map_v3.pdf            /programs/tournaments/thanksgiving/  301
 /wp-content/uploads/2025/11/TT25_Rose_Bowl_field_map_v3.pdf           /programs/tournaments/thanksgiving/  301
 /wp-content/uploads/2025/11/TT25_RefSched_B.pdf                       /referees/scheduling/ 301
+
+# Newsletter / banner / training PNGs (hotlinked from old emails or external sites)
+/wp-content/uploads/NEWS_114.png                                      /resources/newsletters/  301
+/wp-content/uploads/registration114.png                               /register/               301
+/wp-content/uploads/Manager_114.png                                   /managers/               301
+/wp-content/uploads/2022/07/AYSOU-Training-Library-1024x471.png       /coaches/training/       301
+
+# Old sign-up + login paths from WP
+/tournament-volunteer-signup/   /volunteers/                                    301
+/tournament-volunteer-signup    /volunteers/                                    301
+/login                          https://ayso13.inleague.com/app/welcome         301
+/login/                         https://ayso13.inleague.com/app/welcome         301
 /wp-content/uploads/2025/11/Ref_Assignments25v7.pdf                   /referees/scheduling/ 301
 
 # =============================================================================
@@ -504,6 +519,8 @@
 # -- Contact --
 /contact-us/                    /contact/                                       301
 /contact-us                     /contact/                                       301
+/contactus/                     /contact/                                       301
+/contactus                      /contact/                                       301
 /feedback/                      /contact/feedback/                              301
 /feedback                       /contact/feedback/                              301
 
