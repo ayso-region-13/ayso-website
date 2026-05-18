@@ -143,8 +143,11 @@
 /f                                  /programs/fall-soccer/                   301
 /f/                                 /programs/fall-soccer/                   301
 /4u                                 /programs/preschool/                     301
+/4u/                                /programs/preschool/                     301
 /5u                                 /programs/preschool/                     301
+/5u/                                /programs/preschool/                     301
 /4u5u                               /programs/preschool/                     301
+/4u5u/                              /programs/preschool/                     301
 /gradseries                         /programs/grad-series/                   301
 /gradseries/                        /programs/grad-series/                   301
 /next_team/                         /programs/next/                          301
@@ -186,6 +189,7 @@
 /flights/                           /programs/tournaments/                   301
 /flights                            /programs/tournaments/                   301
 /t                                  /programs/tournaments/                   301
+/t/                                 /programs/tournaments/                   301
 /thanksgiving-tournament-new        /programs/tournaments/thanksgiving/      301
 /thanksgiving-tournament-new/       /programs/tournaments/thanksgiving/      301
 
@@ -215,6 +219,7 @@
 /fall-playoffs/                     /schedules/                              301
 /fall-playoffs                      /schedules/                              301
 /g                                  /schedules/games/                        301
+/g/                                 /schedules/games/                        301
 /teams                              /schedules/                              301
 /teams/                             /schedules/                              301
 /brackets                           /schedules/                              301
@@ -332,9 +337,11 @@
 /respect-the-referee/               /referees/faqs/                          301
 /respect-the-referee                /referees/faqs/                          301
 /ref                                /referees/                               301
+/ref/                               /referees/                               301
 /download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents/ /referees/resources/                     301
 /download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents /referees/resources/                     301
 /Referee/                           /referees/                               301
+/Referee                            /referees/                               301
 
 /become-a-referee-old/*             /referees/                               301
 
@@ -492,6 +499,7 @@
 /newsletter/                        /resources/newsletters/                  301
 /newsletter                         /resources/newsletters/                  301
 /newsletters                        /resources/newsletters/                  301
+/newsletters/                       /resources/newsletters/                  301
 
 # ======================================================================
 # Contact
@@ -515,6 +523,7 @@
 /profile                            https://ayso13.inleague.com/app/family-profile 301
 /donate                             https://ayso13.inleague.com/invoices/donations 301
 /apply                              https://ayso13.inleague.com/app/volunteer 301
+/apply/                             https://ayso13.inleague.com/app/volunteer 301
 /start                              https://ayso13.inleague.com/app/welcome  301
 /start/                             https://ayso13.inleague.com/app/welcome  301
 /dashboard                          https://ayso13.inleague.com/app/         301
@@ -522,6 +531,7 @@
 /login                              https://ayso13.inleague.com/app/welcome  301
 /login/                             https://ayso13.inleague.com/app/welcome  301
 /aysou                              https://ayso13.inleague.com/app/eTrainU  301
+/aysou/                             https://ayso13.inleague.com/app/eTrainU  301
 /eTrainU/                           https://ayso13.inleague.com/app/eTrainU  301
 /safesport/                         https://ayso13.inleague.com/app/eTrainU  301
 /pay/                               https://ayso13.inleague.com/app/invoices/current 301
@@ -540,10 +550,13 @@
 /mentor                             https://ayso13.typeform.com/mentor       301
 /mentor/                            https://ayso13.typeform.com/mentor       301
 /gcud                               https://ayso13.typeform.com/1CSPUD2025   301
+/gcud/                              https://ayso13.typeform.com/1CSPUD2025   301
 /gc16                               https://form.typeform.com/to/vf4lZIRo    301
 /gc16/                              https://form.typeform.com/to/vf4lZIRo    301
 /pog                                https://ayso13.typeform.com/SSreg        301
+/pog/                               https://ayso13.typeform.com/SSreg        301
 /gctt                               https://form.typeform.com/to/VIFJoyJ4    301
+/gctt/                              https://form.typeform.com/to/VIFJoyJ4    301
 /r                                  https://ayso13.typeform.com/to/Ah0JFeOp  301
 /r/                                 https://ayso13.typeform.com/to/Ah0JFeOp  301
 
