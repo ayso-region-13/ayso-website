@@ -5,13 +5,17 @@ compatibility_date = "2025-05-18"
 # Mount on /api/csp-report on both prod + staging. The more-specific
 # route here means it takes precedence over the redirect Worker's
 # /* and won't try to fetch(request) for these POSTs.
+#
+# Trailing * is required: CF Routes include the query string in
+# pattern matching, so without it a GET to /api/csp-report?admin_key=...
+# falls through to Pages (404) instead of the Worker.
 
 [[routes]]
-pattern = "www.ayso13.org/api/csp-report"
+pattern = "www.ayso13.org/api/csp-report*"
 zone_name = "ayso13.org"
 
 [[routes]]
-pattern = "staging.ayso13.org/api/csp-report"
+pattern = "staging.ayso13.org/api/csp-report*"
 zone_name = "ayso13.org"
 
 # KV for storing violation reports. 30-day TTL is set per-record in
@@ -22,7 +26,7 @@ zone_name = "ayso13.org"
 #   Then paste the resulting id below.
 [[kv_namespaces]]
 binding = "CSP_REPORTS"
-id = "PASTE_KV_NAMESPACE_ID_HERE"
+id = "d6a804159968475db6bcbf7354b45d0f"
 
 # Required secret (set with `wrangler secret put ADMIN_KEY`):
 #   ADMIN_KEY - random string used to gate GET /api/csp-report?admin_key=...
