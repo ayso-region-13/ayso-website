@@ -1,9 +1,9 @@
 # Cloudflare Pages redirect rules
 # Format: /old-path  /new-path  301
-# Old WordPress paths → new Eleventy site structure
+# Old WordPress paths -> new Eleventy site structure
 # Each old URL is listed with and without trailing slash for safety.
 
-# ── Home & registration ───────────────────────────────────────────────────
+# -- Home & registration ---------------------------------------------------
 /play/                          /families/                                       301
 /play                           /families/                                       301
 /pen/                           /register/                                      301
@@ -27,7 +27,7 @@
 /volunteer/                     /volunteers/                                    301
 /volunteer                      /volunteers/                                    301
 
-# ── About ─────────────────────────────────────────────────────────────────
+# -- About -----------------------------------------------------------------
 /mission/                       /about/                                         301
 /mission                        /about/                                         301
 /philosophies/                  /about/                                         301
@@ -59,7 +59,7 @@
 /minutes/                       /about/board-minutes/                           301
 /minutes                        /about/board-minutes/                           301
 
-# ── Programs ──────────────────────────────────────────────────────────────
+# -- Programs --------------------------------------------------------------
 /fall/                          /programs/fall-soccer/                          301
 /fall                           /programs/fall-soccer/                          301
 /fall-soccer/                   /programs/fall-soccer/                          301
@@ -125,7 +125,7 @@
 /flights/                       /programs/tournaments/                          301
 /flights                        /programs/tournaments/                          301
 
-# ── Schedules ─────────────────────────────────────────────────────────────
+# -- Schedules -------------------------------------------------------------
 /schedule/                      /schedules/games/                               301
 /schedule                       /schedules/games/                               301
 /games/                         /schedules/games/                               301
@@ -152,7 +152,7 @@
 /rain-cancellation-plan-november-15-16-2025/    /schedules/                     301
 /rain-cancellation-plan-november-15-16-2025     /schedules/                     301
 
-# ── Families (was Parents) ────────────────────────────────────────────────
+# -- Families (was Parents) ------------------------------------------------
 # Old WP shortcuts
 /team/                          /families/team/                                  301
 /team                           /families/team/                                  301
@@ -166,7 +166,7 @@
 /pledge                         /families/pledge/                                301
 /ideas-for-being-a-supportive-ayso-parent/      /families/support/               301
 /ideas-for-being-a-supportive-ayso-parent       /families/support/               301
-# Section rename Parents → Families (May 2026)
+# Section rename Parents -> Families (May 2026)
 /parents/                       /families/                                       301
 /parents                        /families/                                       301
 /parents/team/                  /families/team/                                  301
@@ -180,7 +180,7 @@
 /parents/support/               /families/support/                               301
 /parents/support                /families/support/                               301
 
-# ── Coaches ───────────────────────────────────────────────────────────────
+# -- Coaches ---------------------------------------------------------------
 /coach/                         /coaches/                                       301
 /coach                          /coaches/                                       301
 /coach-training/                /coaches/training/                              301
@@ -212,7 +212,7 @@
 /coach/coach-information-for-tournament-play/   /coaches/tournament-teams/      301
 /coach/coach-information-for-tournament-play    /coaches/tournament-teams/      301
 
-# ── Referees ──────────────────────────────────────────────────────────────
+# -- Referees --------------------------------------------------------------
 /referee/                       /referees/                                      301
 /referee                        /referees/                                      301
 /referee-overview/              /referees/                                      301
@@ -248,7 +248,7 @@
 /respect-the-referee-2/         /referees/faqs/                                 301
 /respect-the-referee-2          /referees/faqs/                                 301
 
-# ── Team Managers ─────────────────────────────────────────────────────────
+# -- Team Managers ---------------------------------------------------------
 /manager/                       /managers/                                      301
 /manager                        /managers/                                      301
 /required-training-for-team-managers/   /managers/training/                     301
@@ -256,7 +256,7 @@
 /team-manager-tasks/            /managers/tasks/                                301
 /team-manager-tasks             /managers/tasks/                                301
 
-# ── Volunteers ────────────────────────────────────────────────────────────
+# -- Volunteers ------------------------------------------------------------
 /roles/                         /volunteers/roles/                              301
 /roles                          /volunteers/roles/                              301
 /classes/                       /volunteers/classes/                            301
@@ -280,7 +280,7 @@
 /treasurer/                     /volunteers/sponsors/                           301
 /treasurer                      /volunteers/sponsors/                           301
 
-# ── Fields ────────────────────────────────────────────────────────────────
+# -- Fields ----------------------------------------------------------------
 /map/                           /fields/                                        301
 /map                            /fields/                                        301
 /region-13-map/                 /fields/                                        301
@@ -346,7 +346,7 @@
 /practice/portable-lights/      /fields/                                        301
 /practice/portable-lights       /fields/                                        301
 
-# ── Resources ─────────────────────────────────────────────────────────────
+# -- Resources -------------------------------------------------------------
 # Note: /forms/ now serves a real page (the Google Apps Script upload tool).
 # Old query-string variants like /forms/?go=1 flow through to the new page,
 # where its inline JS detects the query string and triggers the iframe.
@@ -371,13 +371,13 @@
 /news/                          /resources/newsletters/                         301
 /news                           /resources/newsletters/                         301
 
-# ── Contact ───────────────────────────────────────────────────────────────
+# -- Contact ---------------------------------------------------------------
 /contact-us/                    /contact/                                       301
 /contact-us                     /contact/                                       301
 /feedback/                      /contact/feedback/                              301
 /feedback                       /contact/feedback/                              301
 
-# ── Deleted / junk pages → home or closest equivalent ────────────────────
+# -- Deleted / junk pages -> home or closest equivalent --------------------
 /sample-page/                   /                                               301
 /sample-page                    /                                               301
 /subscribed/                    /                                               301
@@ -390,7 +390,7 @@
 /extra                          /programs/extra/                                301
 /programs/extra                 /programs/extra/                                301
 
-# ── Short links — InLeague ────────────────────────────────────────────────
+# -- Short links -- InLeague ------------------------------------------------
 # Migrated from WordPress Redirection plugin (April 7 2026)
 /etrainu                        https://ayso13.inleague.com/app/eTrainU         301
 /etrainu/                       https://ayso13.inleague.com/app/eTrainU         301
@@ -407,13 +407,13 @@
 /profile/                       https://ayso13.inleague.com/app/family-profile  301
 /donate                         https://ayso13.inleague.com/invoices/donations  301
 /donate/                        https://ayso13.inleague.com/invoices/donations  301
-/dashboard                      https://ayso13.inleague.com/app/                301
+/eashboard                      https://ayso13.inleague.com/app/                301
 /dashboard/                     https://ayso13.inleague.com/app/                301
 /apply                          https://ayso13.inleague.com/app/volunteer       301
 /admin                          https://ayso13.inleague.com/app/                301
 /admin/                         https://ayso13.inleague.com/app/                301
 
-# ── Short links — external ────────────────────────────────────────────────
+# -- Short links -- external ------------------------------------------------
 /pizza                          https://www.vyblee.com/corner-kick-cafe         301
 /pizza/                         https://www.vyblee.com/corner-kick-cafe         301
 /signup                         https://www.wejoinin.com/AYSORegion13           301
@@ -426,7 +426,7 @@
 /pog                            https://ayso13.typeform.com/SSreg               301
 /gctt                           https://form.typeform.com/to/VIFJoyJ4           301
 
-# ── Short links — new site pages ──────────────────────────────────────────
+# -- Short links -- new site pages ------------------------------------------
 /t                              /programs/tournaments/                          301
 /g                              /schedules/games/                               301
 /f                              /programs/fall-soccer/                          301
@@ -465,12 +465,12 @@
 /faqs/how-are-standings-determined/ /schedules/standings/                       301
 /faqs/how-long-are-the-games    /register/age-chart/                            301
 /faqs/how-long-are-the-games/   /register/age-chart/                            301
-# ── 404 sweep (from CF Analytics, 2026-05-02) ─────────────────────────────
+# -- 404 sweep (from CF Analytics, 2026-05-02) -----------------------------
 # Cleanup of inbound dead links from old WP/legacy URLs identified in the
 # first 24h of zone analytics. Stable WP-vintage URLs that still pull
 # real traffic; fold each to its closest current page rather than the home.
 
-# Apple touch icon variants — root file served via passthrough; precomposed
+# Apple touch icon variants -- root file served via passthrough; precomposed
 # is a deprecated alias browsers still occasionally probe.
 /apple-touch-icon-precomposed.png  /apple-touch-icon.png                        301
 
@@ -485,7 +485,7 @@
 /wp-content/uploads/cropped-AYSO-R13-Logo-266-192x192.png             /images/logo.svg      301
 /wp-content/uploads/2023/08/logo-gold.png                             /images/logo.svg      301
 
-# Hotlinked WP-uploads PDFs — recovered originals, served from /assets/docs/
+# Hotlinked WP-uploads PDFs -- recovered originals, served from /assets/docs/
 /wp-content/uploads/2022/07/Intermediate-Coach.pdf                    /assets/docs/intermediate-coach.pdf       301
 /wp-content/uploads/2022/07/6U-Coach.pdf                              /assets/docs/6u-coach.pdf                 301
 /wp-content/uploads/2022/07/8U-Coach.pdf                              /assets/docs/8u-coach.pdf                 301
@@ -495,9 +495,9 @@
 /wp-content/uploads/2023/08/Region-13-Guidelines-for-10U-Referees-2023.pdf /assets/docs/10u-referee-guidelines.pdf 301
 /wp-content/uploads/2023/08/Region-13-Guidelines-for-12U-Referees-2023.pdf /assets/docs/12u-referee-guidelines.pdf 301
 
-# Renamed-PDF backstops — earlier versions of /assets/docs/ filenames were
+# Renamed-PDF backstops -- earlier versions of /assets/docs/ filenames were
 # briefly live; these catch any external links that landed during that
-# window. Game cards (2023) intentionally not redirected — they were old
+# window. Game cards (2023) intentionally not redirected -- they were old
 # and we no longer serve them.
 /assets/docs/region13-10u-referee-guidelines-2023.pdf  /assets/docs/10u-referee-guidelines.pdf  301
 /assets/docs/region13-12u-referee-guidelines-2023.pdf  /assets/docs/12u-referee-guidelines.pdf  301
@@ -552,7 +552,7 @@
 /download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents/  /referees/resources/  301
 /download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents   /referees/resources/  301
 
-# WP author archives — collapse to /about/
+# WP author archives -- collapse to /about/
 /author/*                       /about/                                         301
 
 # Case-sensitive variants of common path mistypes (CF Pages is case-sensitive)
@@ -634,17 +634,17 @@
 /screenshot-2024-09-02-215902/   /                                              301
 /screenshot-2024-09-02-215902    /                                              301
 
-# Old WP-style board-minutes filenames (2014–2022) — those PDFs are no longer
+# Old WP-style board-minutes filenames (2014-2022) -- those PDFs are no longer
 # served (moved to archive/board-minutes/ outside site/). Catch only the old
 # `ayso13-board-minutes-*` prefix so it doesn't intercept the current
 # `ayso-executive-board-meeting-*` files that are still served.
 /assets/docs/minutes/ayso13-board-minutes-*                           /about/board-minutes/ 301
 
-# Common typo for Victory Park field — actual URL is /fields/victory/
+# Common typo for Victory Park field -- actual URL is /fields/victory/
 /fields/victory-park/           /fields/victory/                                301
 /fields/victory-park            /fields/victory/                                301
 
-# Old WP map sub-paths — /maps and /maps/ already redirect above (line 415-416);
+# Old WP map sub-paths -- /maps and /maps/ already redirect above (line 415-416);
 # this catches /maps/region-13-map2/ and any future sub-paths
 /maps/*                         /fields/                                        301
 
@@ -661,8 +661,8 @@
 /new/includes/programs/allstar.php /programs/all-stars/                         301
 /new/*                          /                                               301
 
-# /r — regex ^\/r(?:\/|\?.*)?$ approximated (Cloudflare _redirects has no regex support)
-# Splat rule last — exact matches above take priority and perform better
+# /r -- regex ^\/r(?:\/|\?.*)?$ approximated (Cloudflare _redirects has no regex support)
+# Splat rule last -- exact matches above take priority and perform better
 /r                              https://ayso13.typeform.com/to/Ah0JFeOp         301
 /r/                             https://ayso13.typeform.com/to/Ah0JFeOp         301
 /r/*                            https://ayso13.typeform.com/to/Ah0JFeOp         301
