@@ -223,13 +223,17 @@
 /etrainu                        https://ayso13.inleague.com/app/eTrainU         301
 /etrainu/                       https://ayso13.inleague.com/app/eTrainU         301
 /eTrainU                        https://ayso13.inleague.com/app/eTrainU         301
-/aysou                          https://ayso13.inleague.com/app/eTrainU         301
 /safesport                      https://ayso13.inleague.com/app/eTrainU         301
 /pay                            https://ayso13.inleague.com/app/invoices/current 301
 /profile                        https://ayso13.inleague.com/app/family-profile  301
 /donate                         https://ayso13.inleague.com/invoices/donations  301
 /apply                          https://ayso13.inleague.com/app/volunteer       301
 /start                          https://ayso13.inleague.com/app/welcome         301
+/start/                         https://ayso13.inleague.com/app/welcome         301
+/dashboard                      https://ayso13.inleague.com/app/                301
+/dashboard/                     https://ayso13.inleague.com/app/                301
+/register/volunteer/            /volunteers/                                    301
+/register/volunteer             /volunteers/                                    301
 
 # -- High-traffic hotlinked WP-uploads (images and PDFs) --
 /wp-content/uploads/2025/12/AYSO-BirthChart.png                       /register/age-chart/  301
@@ -504,14 +508,12 @@
 /feedback                       /contact/feedback/                              301
 
 # -- InLeague short links (less-common) --
+/aysou                          https://ayso13.inleague.com/app/eTrainU         301
 /eTrainU/                       https://ayso13.inleague.com/app/eTrainU         301
 /safesport/                     https://ayso13.inleague.com/app/eTrainU         301
-/start/                         https://ayso13.inleague.com/app/welcome         301
 /pay/                           https://ayso13.inleague.com/app/invoices/current 301
 /profile/                       https://ayso13.inleague.com/app/family-profile  301
 /donate/                        https://ayso13.inleague.com/invoices/donations  301
-/eashboard                      https://ayso13.inleague.com/app/                301
-/dashboard/                     https://ayso13.inleague.com/app/                301
 /admin                          https://ayso13.inleague.com/app/                301
 /admin/                         https://ayso13.inleague.com/app/                301
 

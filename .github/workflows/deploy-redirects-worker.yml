@@ -1,0 +1,51 @@
+name: Deploy Redirect Worker
+
+# Auto-deploys the ayso13-redirects Cloudflare Worker on any push to
+# main that affects either:
+#   - site/src/_redirects (the source-of-truth file the Worker reads)
+#   - workers/redirects/** (the Worker code itself)
+#
+# Also triggers on changes to this workflow file, plus manual dispatch.
+#
+# Required repo secrets:
+#   CLOUDFLARE_API_TOKEN  - Cloudflare API token with permissions:
+#                            Account -> Workers Scripts -> Edit
+#                            Account -> Account Settings -> Read
+#                            (Create at dash.cloudflare.com -> My Profile ->
+#                             API Tokens -> Create Token -> "Edit Cloudflare
+#                             Workers" template. Don't reuse the Pages-scoped
+#                             CF_API_TOKEN -- that one lacks Workers:Edit.)
+#   CLOUDFLARE_ACCOUNT_ID - AYSO Region 13 account ID (the same value the
+#                            .envrc uses locally).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/src/_redirects'
+      - 'workers/redirects/**'
+      - '.github/workflows/deploy-redirects-worker.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'workers/redirects/package-lock.json'
+
+      - name: Install
+        working-directory: workers/redirects
+        run: npm ci
+
+      - name: Build, test, deploy
+        working-directory: workers/redirects
+        run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
