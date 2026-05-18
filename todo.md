@@ -45,10 +45,12 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ## Completed ✓
 
-### Session 26 (2026-05-18) — CSP enforcing + Important Dates widget shipped
-- [x] **CSP enforcing live on prod** — see "CSP promoted to enforcing" item above for full detail. Closes the long-running todo from session 21. First violation caught + resolved during staging soak; prod rollout clean.
+### Session 26 (2026-05-18) — CSP enforcing + Important Dates + redirect cleanup
+- [x] **CSP enforcing live on prod** — see "CSP promoted to enforcing" item above for full detail. Closes the long-running todo from session 21. First violation caught + resolved during staging soak (`gallery.eo.page` font from EmailOctopus widget added to `font-src`); prod rollout clean.
 - [x] **Important Dates widget shipped to prod** — was sitting on `dates-widget` branch since 2026-05-15. Merged staging into it (resolved CLAUDE.md + fileDates.json conflicts), PR #3 to staging, promoted with the CSP work.
-- [x] **csp-report Worker deployed** — new `workers/csp-report/`, route `/api/csp-report*` on both prod + staging, KV-backed (`CSP_REPORTS`), 30-day TTL. POST handler stores reports; GET admin endpoint gates on `ADMIN_KEY` secret. Three round-trips verified during rollout (curl POST → 204, curl GET → reports back as JSON, real browser violation captured and triaged within minutes of the enforcing switch).
+- [x] **csp-report Worker deployed** — new `workers/csp-report/`, route `/api/csp-report*` on both prod + staging, KV-backed (`CSP_REPORTS`), 30-day TTL. POST handler stores reports; GET admin endpoint gates on `ADMIN_KEY` secret (stored in 1Password). Three round-trips verified during rollout (curl POST → 204, curl GET → reports back as JSON, real browser violation captured and triaged within minutes of the enforcing switch).
+- [x] **Slash-pair audit + 13 redirect fixes** — `awk`-based audit of `_redirects` for source paths where the trailing-slash and bare-path variants point to different destinations (or only one variant exists). Found 1 outright bug (`/Referee` 404'd while `/Referee/` redirected correctly) and 12 short URLs missing trailing-slash variants. All fixed. Zero destination mismatches remain. Worker map regenerated: 588 exact + 8 splat = 596 rules. `/livescan` was reported as broken but tested fine — likely browser cache on the reporter's side.
+- [x] **Redirect Worker split into prod + staging environments** — Workers environments in `wrangler.toml`: `[env.production]` Worker `ayso13-redirects` @ www, `[env.staging]` Worker `ayso13-redirects-staging` @ staging. `npm run deploy:prod` / `deploy:staging`. Workflow triggers on both `main` and `staging` pushes, branches on `github.ref_name`. Closes the gap where staging redirect changes required a manual Worker deploy that would inadvertently also ship to prod.
 - [x] **GitHub Actions bumped to v6** — `actions/checkout@v4` + `actions/setup-node@v4` → `@v6` across all four workflows. Clears the Node 20 deprecation warnings; forced cutoff is June 2026.
 - [x] **`csp*.json` gitignored** — local debug snapshots of the CSP-report admin endpoint output should never be committed.
 
