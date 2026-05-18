@@ -1,668 +1,720 @@
 # Cloudflare Pages redirect rules
 # Format: /old-path  /new-path  301
-# Old WordPress paths → new Eleventy site structure
-# Each old URL is listed with and without trailing slash for safety.
+#
+# Source of truth for ALL redirects (570+ rules). The Cloudflare Pages
+# native _redirects file is silently capped at ~224 active rules; we work
+# around that by deploying workers/redirects/, a Cloudflare Worker that
+# parses this file at build time via scripts/generate-map.js and serves
+# every redirect with no cap. CF Pages still uses this file for the first
+# ~224 rules; the Worker is the durable backstop for the rest.
+#
+# Organized by subject. Order within a subject does NOT matter for the
+# Worker (exact-match map, O(1)). Splat patterns inside a section are
+# placed at the end of that section.
 
-# ── Home & registration ───────────────────────────────────────────────────
-/play/                          /families/                                       301
-/play                           /families/                                       301
-/pen/                           /register/                                      301
-/pen                            /register/                                      301
-/fb/                            /families/                                       301
-/fb                             /families/                                       301
-/lc/                            /register/                                      301
-/lc                             /register/                                      301
-/Register/                      /register/                                      301
-/Register                       /register/                                      301
-/age/                           /register/age-chart/                            301
-/age                            /register/age-chart/                            301
-/age-chart-2023/                /register/age-chart/                            301
-/age-chart-2023                 /register/age-chart/                            301
-/age-chart-2024/                /register/age-chart/                            301
-/age-chart-2024                 /register/age-chart/                            301
-/age-chart-2025/                /register/age-chart/                            301
-/age-chart-2025                 /register/age-chart/                            301
-/divisions/                     /register/age-chart/                            301
-/divisions                      /register/age-chart/                            301
-/volunteer/                     /volunteers/                                    301
-/volunteer                      /volunteers/                                    301
+# ======================================================================
+# Home & registration
+# ======================================================================
+/age-chart-2025/                    /register/age-chart/                     301
+/age-chart-2025                     /register/age-chart/                     301
+/Register/                          /register/                               301
+/Register                           /register/                               301
+/age/                               /register/age-chart/                     301
+/age                                /register/age-chart/                     301
+/age-chart-2023/                    /register/age-chart/                     301
+/age-chart-2023                     /register/age-chart/                     301
+/age-chart-2024/                    /register/age-chart/                     301
+/age-chart-2024                     /register/age-chart/                     301
+/divisions/                         /register/age-chart/                     301
+/divisions                          /register/age-chart/                     301
+/volunteer/                         /volunteers/                             301
+/volunteer                          /volunteers/                             301
+/registration                       /register/                               301
+/registration/                      /register/                               301
+/register/volunteer/                /volunteers/                             301
+/register/volunteer                 /volunteers/                             301
+/lc/                                /register/                               301
+/lc                                 /register/                               301
+/refund                             /register/                               301
+/refund/                            /register/                               301
+/play/                              /families/                               301
+/play                               /families/                               301
+/pen/                               /register/                               301
+/pen                                /register/                               301
+/fb/                                /families/                               301
+/fb                                 /families/                               301
+/volunteer-faq/                     /volunteers/faqs/                        301
+/volunteer-faq                      /volunteers/faqs/                        301
 
-# ── About ─────────────────────────────────────────────────────────────────
-/mission/                       /about/                                         301
-/mission                        /about/                                         301
-/philosophies/                  /about/                                         301
-/philosophies                   /about/                                         301
-/about-us/                      /about/                                         301
-/about-us                       /about/                                         301
-/history/                       /about/history/                                 301
-/history                        /about/history/                                 301
-/ayso-history/                  /about/history/                                 301
-/ayso-history                   /about/history/                                 301
-/leadership/                    /about/leadership/                              301
-/leadership                     /about/leadership/                              301
-/policy/                        /about/policies/                                301
-/policy                         /about/policies/                                301
-/fine-print/                    /about/fine-print/                              301
-/fine-print                     /about/fine-print/                              301
-/privacy-policy/                /about/policies/                                301
-/privacy-policy                 /about/policies/                                301
-/inclusion/                     /about/inclusion/                               301
-/inclusion                      /about/inclusion/                               301
-/fame/                          /about/hall-of-fame/                            301
-/fame                           /about/hall-of-fame/                            301
-/neighbors/                     /about/neighbors/                               301
-/neighbors                      /about/neighbors/                               301
-/sisterhood-of-soccer/          /about/sisterhood/                              301
-/sisterhood-of-soccer           /about/sisterhood/                              301
-/celebration-of-womens-soccer/  /about/sisterhood/                              301
-/celebration-of-womens-soccer   /about/sisterhood/                              301
-/minutes/                       /about/board-minutes/                           301
-/minutes                        /about/board-minutes/                           301
+/volunteer/volunteer-training-information/* /volunteers/classes/                     301
 
-# ── Programs ──────────────────────────────────────────────────────────────
-/fall/                          /programs/fall-soccer/                          301
-/fall                           /programs/fall-soccer/                          301
-/fall-soccer/                   /programs/fall-soccer/                          301
-/fall-soccer                    /programs/fall-soccer/                          301
-/upper-division/                /programs/upper-division/                       301
-/upper-division                 /programs/upper-division/                       301
-/preschool/                     /programs/preschool/                            301
-/preschool                      /programs/preschool/                            301
-/next/                          /programs/next/                                 301
-/next                           /programs/next/                                 301
-/winter-stars/                  /programs/winter-stars/                         301
-/winter-stars                   /programs/winter-stars/                         301
-/all-stars/                     /programs/all-stars/                            301
-/all-stars                      /programs/all-stars/                            301
-/all-stars-rules/               /programs/all-stars/                            301
-/all-stars-rules                /programs/all-stars/                            301
-/grad-series/                   /programs/grad-series/                          301
-/grad-series                    /programs/grad-series/                          301
-/spring/                        /programs/spring-soccer/                        301
-/spring                         /programs/spring-soccer/                        301
-/spring-soccer/                 /programs/spring-soccer/                        301
-/spring-soccer                  /programs/spring-soccer/                        301
-/springcup2024-upper-division/  /programs/spring-soccer/                        301
-/springcup2024-upper-division   /programs/spring-soccer/                        301
-/sunday/                        /programs/sunday-soccer/                        301
-/sunday                         /programs/sunday-soccer/                        301
-/sunday-soccer/                 /programs/sunday-soccer/                        301
-/sunday-soccer                  /programs/sunday-soccer/                        301
-/epic/                          /programs/epic/                                 301
-/epic                           /programs/epic/                                 301
-/camp/                          /programs/                                      301
-/camp                           /programs/                                      301
-/summer-camps/                  /programs/                                      301
-/summer-camps                   /programs/                                      301
-/programs/camps/                /programs/                                      301
-/programs/camps                 /programs/                                      301
-/tournament/                    /programs/tournaments/                          301
-/tournament                     /programs/tournaments/                          301
-/tournaments/                   /programs/tournaments/                          301
-/tournaments                    /programs/tournaments/                          301
-/thanksgiving-tournament/       /programs/tournaments/thanksgiving/             301
-/thanksgiving-tournament        /programs/tournaments/thanksgiving/             301
-/thanksgiving-tournament-2024/                      /programs/tournaments/thanksgiving/    301
-/thanksgiving-tournament-2024                       /programs/tournaments/thanksgiving/    301
-/thanksgiving-tournament-2024-schedule/             /programs/tournaments/thanksgiving/    301
-/thanksgiving-tournament-2024-schedule              /programs/tournaments/thanksgiving/    301
-/thanksgiving-tournament-results-2024/              /programs/tournaments/thanksgiving/    301
-/thanksgiving-tournament-results-2024               /programs/tournaments/thanksgiving/    301
-/thanksgiving-tournament-documents/                 /programs/tournaments/thanksgiving/    301
-/thanksgiving-tournament-documents                  /programs/tournaments/thanksgiving/    301
-/region-13-thanksgiving-tournament-2025-final-standings/    /programs/tournaments/thanksgiving/     301
-/region-13-thanksgiving-tournament-2025-final-standings     /programs/tournaments/thanksgiving/     301
-/rosecity/                      /programs/tournaments/rose-city-cup/            301
-/rosecity                       /programs/tournaments/rose-city-cup/            301
-/rose-city-cup/                 /programs/tournaments/rose-city-cup/            301
-/rose-city-cup                  /programs/tournaments/rose-city-cup/            301
-/rose-city-cup-2025-final-standings/    /programs/tournaments/rose-city-cup/    301
-/rose-city-cup-2025-final-standings     /programs/tournaments/rose-city-cup/    301
-/bracket/                       /programs/tournaments/                          301
-/bracket                        /programs/tournaments/                          301
-/matrix/                        /programs/tournaments/                          301
-/matrix                         /programs/tournaments/                          301
-/flights/                       /programs/tournaments/                          301
-/flights                        /programs/tournaments/                          301
+# ======================================================================
+# About
+# ======================================================================
+/ayso-history/                      /about/history/                          301
+/ayso-history                       /about/history/                          301
+/calendar/download.php              /about/calendar/                         301
+/calendar/event.php                 /about/calendar/                         301
+/history/                           /about/history/                          301
+/history                            /about/history/                          301
+/leadership/                        /about/leadership/                       301
+/leadership                         /about/leadership/                       301
+/fame/                              /about/hall-of-fame/                     301
+/fame                               /about/hall-of-fame/                     301
+/mission/                           /about/                                  301
+/mission                            /about/                                  301
+/inclusion/                         /about/inclusion/                        301
+/inclusion                          /about/inclusion/                        301
+/sisterhood-of-soccer/              /about/sisterhood/                       301
+/sisterhood-of-soccer               /about/sisterhood/                       301
+/sisterhood                         /about/sisterhood/                       301
+/sisterhood/                        /about/sisterhood/                       301
+/celebration-of-womens-soccer/      /about/sisterhood/                       301
+/celebration-of-womens-soccer       /about/sisterhood/                       301
+/neighbors/                         /about/neighbors/                        301
+/neighbors                          /about/neighbors/                        301
+/minutes/                           /about/board-minutes/                    301
+/minutes                            /about/board-minutes/                    301
+/calendar/                          /about/calendar/                         301
+/calendar                           /about/calendar/                         301
+/policy/                            /about/policies/                         301
+/policy                             /about/policies/                         301
+/philosophies/                      /about/                                  301
+/philosophies                       /about/                                  301
+/about-us/                          /about/                                  301
+/about-us                           /about/                                  301
+/fine-print/                        /about/fine-print/                       301
+/fine-print                         /about/fine-print/                       301
+/privacy-policy/                    /about/policies/                         301
+/privacy-policy                     /about/policies/                         301
+/board/                             /about/leadership/                       301
+/board                              /about/leadership/                       301
+/cal/                               /about/calendar/                         301
+/cal                                /about/calendar/                         301
+/all-about-ayso-region-13/          /about/                                  301
+/all-about-ayso-region-13           /about/                                  301
 
-# ── Schedules ─────────────────────────────────────────────────────────────
-/schedule/                      /schedules/games/                               301
-/schedule                       /schedules/games/                               301
-/games/                         /schedules/games/                               301
-/games                          /schedules/games/                               301
-/standings/                     /schedules/standings/                           301
-/standings                      /schedules/standings/                           301
-/standings/fall-core-2025-standings/    /schedules/standings/                   301
-/standings/fall-core-2025-standings     /schedules/standings/                   301
-/standings_historical/*                 /schedules/standings/                   301
-/b14u-spring-schedule-2026/             /schedules/                             301
-/b14u-spring-schedule-2026              /schedules/                             301
-/fall-playoffs/                 /schedules/                                     301
-/fall-playoffs                  /schedules/                                     301
-/results/                       /schedules/                                     301
-/results                        /schedules/                                     301
-/calendar/                      /about/calendar/                                301
-/calendar                       /about/calendar/                                301
-/calendar/download.php          /about/calendar/                                301
-/calendar/event.php             /about/calendar/                                301
-/weekly/                        /schedules/                                     301
-/weekly                         /schedules/                                     301
-/schedule-changelog-2025/       /schedules/                                     301
-/schedule-changelog-2025        /schedules/                                     301
-/rain-cancellation-plan-november-15-16-2025/    /schedules/                     301
-/rain-cancellation-plan-november-15-16-2025     /schedules/                     301
+/assets/docs/minutes/ayso13-board-minutes-* /about/board-minutes/                    301
 
-# ── Families (was Parents) ────────────────────────────────────────────────
-# Old WP shortcuts
-/team/                          /families/team/                                  301
-/team                           /families/team/                                  301
-/Team/                          /families/team/                                  301
-/Team                           /families/team/                                  301
-/uniform/                       /families/equipment/                             301
-/uniform                        /families/equipment/                             301
-/equipment-guide/               /families/equipment/                             301
-/equipment-guide                /families/equipment/                             301
-/pledge/                        /families/pledge/                                301
-/pledge                         /families/pledge/                                301
-/ideas-for-being-a-supportive-ayso-parent/      /families/support/               301
-/ideas-for-being-a-supportive-ayso-parent       /families/support/               301
-# Section rename Parents → Families (May 2026)
-/parents/                       /families/                                       301
-/parents                        /families/                                       301
-/parents/team/                  /families/team/                                  301
-/parents/team                   /families/team/                                  301
-/parents/equipment/             /families/equipment/                             301
-/parents/equipment              /families/equipment/                             301
-/parents/pledge/                /families/pledge/                                301
-/parents/pledge                 /families/pledge/                                301
-/parents/faqs/                  /families/faqs/                                  301
-/parents/faqs                   /families/faqs/                                  301
-/parents/support/               /families/support/                               301
-/parents/support                /families/support/                               301
+# ======================================================================
+# Programs
+# ======================================================================
+/4u-playground                      /programs/preschool/                     301
+/4u-playground/                     /programs/preschool/                     301
+/extra/                             /programs/extra/                         301
+/extra                              /programs/extra/                         301
+/programs/extra                     /programs/extra/                         301
+/fall/                              /programs/fall-soccer/                   301
+/fall                               /programs/fall-soccer/                   301
+/fall-soccer/                       /programs/fall-soccer/                   301
+/fall-soccer                        /programs/fall-soccer/                   301
+/spring/                            /programs/spring-soccer/                 301
+/spring                             /programs/spring-soccer/                 301
+/spring-soccer/                     /programs/spring-soccer/                 301
+/spring-soccer                      /programs/spring-soccer/                 301
+/winter-stars/                      /programs/winter-stars/                  301
+/winter-stars                       /programs/winter-stars/                  301
+/all-stars/                         /programs/all-stars/                     301
+/all-stars                          /programs/all-stars/                     301
+/epic/                              /programs/epic/                          301
+/epic                               /programs/epic/                          301
+/grad-series/                       /programs/grad-series/                   301
+/grad-series                        /programs/grad-series/                   301
+/sunday/                            /programs/sunday-soccer/                 301
+/sunday                             /programs/sunday-soccer/                 301
+/preschool/                         /programs/preschool/                     301
+/preschool                          /programs/preschool/                     301
+/next/                              /programs/next/                          301
+/next                               /programs/next/                          301
+/upper-division/                    /programs/upper-division/                301
+/upper-division                     /programs/upper-division/                301
+/camp/                              /programs/                               301
+/camp                               /programs/                               301
+/all-stars-rules/                   /programs/all-stars/                     301
+/all-stars-rules                    /programs/all-stars/                     301
+/springcup2024-upper-division/      /programs/spring-soccer/                 301
+/springcup2024-upper-division       /programs/spring-soccer/                 301
+/sunday-soccer/                     /programs/sunday-soccer/                 301
+/sunday-soccer                      /programs/sunday-soccer/                 301
+/summer-camps/                      /programs/                               301
+/summer-camps                       /programs/                               301
+/programs/camps/                    /programs/                               301
+/programs/camps                     /programs/                               301
+/f                                  /programs/fall-soccer/                   301
+/f/                                 /programs/fall-soccer/                   301
+/4u                                 /programs/preschool/                     301
+/5u                                 /programs/preschool/                     301
+/4u5u                               /programs/preschool/                     301
+/gradseries                         /programs/grad-series/                   301
+/gradseries/                        /programs/grad-series/                   301
+/next_team/                         /programs/next/                          301
+/next_team                          /programs/next/                          301
+/vip/                               /programs/epic/                          301
+/vip                                /programs/epic/                          301
+/victory-park-with-4u5u-2024-2/     /programs/preschool/                     301
+/victory-park-with-4u5u-2024-2      /programs/preschool/                     301
 
-# ── Coaches ───────────────────────────────────────────────────────────────
-/coach/                         /coaches/                                       301
-/coach                          /coaches/                                       301
-/coach-training/                /coaches/training/                              301
-/coach-training                 /coaches/training/                              301
-/coach-training/medical-forms/  /resources/safety/                              301
-/coach-training/medical-forms   /resources/safety/                              301
-/practice/                      /coaches/practice/                              301
-/practice                       /coaches/practice/                              301
-/practice/practice-faq/         /coaches/practice/                              301
-/practice/practice-faq          /coaches/practice/                              301
-/coach/game-prep-for-6u-8u/     /coaches/game-day/                             301
-/coach/game-prep-for-6u-8u      /coaches/game-day/                             301
-/game-cards/                    /coaches/game-cards/                            301
-/game-cards                     /coaches/game-cards/                            301
-/skills-drills/                 /coaches/drills/                                301
-/skills-drills                  /coaches/drills/                                301
-/pie/                           /coaches/pie/                                   301
-/pie                            /coaches/pie/                                   301
-/shootout/                      /coaches/shootout/                              301
-/shootout                       /coaches/shootout/                              301
-/tournament-teams/              /coaches/tournament-teams/                      301
-/tournament-teams               /coaches/tournament-teams/                      301
-/wca/                           /coaches/wca/                                   301
-/wca                            /coaches/wca/                                   301
-/coach-faq/                     /coaches/faqs/                                  301
-/coach-faq                      /coaches/faqs/                                  301
-/coach/player-ratings/          /coaches/player-ratings/                        301
-/coach/player-ratings           /coaches/player-ratings/                        301
-/coach/coach-information-for-tournament-play/   /coaches/tournament-teams/      301
-/coach/coach-information-for-tournament-play    /coaches/tournament-teams/      301
+# ======================================================================
+# Tournaments
+# ======================================================================
+/tournament/                        /programs/tournaments/                   301
+/tournament                         /programs/tournaments/                   301
+/tournaments/                       /programs/tournaments/                   301
+/tournaments                        /programs/tournaments/                   301
+/thanksgiving-tournament/           /programs/tournaments/thanksgiving/      301
+/thanksgiving-tournament            /programs/tournaments/thanksgiving/      301
+/rosecity/                          /programs/tournaments/rose-city-cup/     301
+/rosecity                           /programs/tournaments/rose-city-cup/     301
+/rose-city-cup/                     /programs/tournaments/rose-city-cup/     301
+/rose-city-cup                      /programs/tournaments/rose-city-cup/     301
+/thanksgiving-tournament-2024/      /programs/tournaments/thanksgiving/      301
+/thanksgiving-tournament-2024       /programs/tournaments/thanksgiving/      301
+/thanksgiving-tournament-2024-schedule/ /programs/tournaments/thanksgiving/      301
+/thanksgiving-tournament-2024-schedule /programs/tournaments/thanksgiving/      301
+/thanksgiving-tournament-results-2024/ /programs/tournaments/thanksgiving/      301
+/thanksgiving-tournament-results-2024 /programs/tournaments/thanksgiving/      301
+/thanksgiving-tournament-documents/ /programs/tournaments/thanksgiving/      301
+/thanksgiving-tournament-documents  /programs/tournaments/thanksgiving/      301
+/region-13-thanksgiving-tournament-2025-final-standings/ /programs/tournaments/thanksgiving/      301
+/region-13-thanksgiving-tournament-2025-final-standings /programs/tournaments/thanksgiving/      301
+/rose-city-cup-2025-final-standings/ /programs/tournaments/rose-city-cup/     301
+/rose-city-cup-2025-final-standings /programs/tournaments/rose-city-cup/     301
+/bracket/                           /programs/tournaments/                   301
+/bracket                            /programs/tournaments/                   301
+/matrix/                            /programs/tournaments/                   301
+/matrix                             /programs/tournaments/                   301
+/flights/                           /programs/tournaments/                   301
+/flights                            /programs/tournaments/                   301
+/t                                  /programs/tournaments/                   301
+/thanksgiving-tournament-new        /programs/tournaments/thanksgiving/      301
+/thanksgiving-tournament-new/       /programs/tournaments/thanksgiving/      301
 
-# ── Referees ──────────────────────────────────────────────────────────────
-/referee/                       /referees/                                      301
-/referee                        /referees/                                      301
-/referee-overview/              /referees/                                      301
-/referee-overview               /referees/                                      301
-/referee-staff/                 /referees/                                      301
-/referee-staff                  /referees/                                      301
-/why-i-referee/                 /referees/                                      301
-/why-i-referee                  /referees/                                      301
-/referee-training-home/         /referees/training/                             301
-/referee-training-home          /referees/training/                             301
-/referee-training-calendar/     /referees/training/                             301
-/referee-training-calendar      /referees/training/                             301
-/ussf-referee-policy/           /referees/training/                             301
-/ussf-referee-policy            /referees/training/                             301
-/referee-upgrades/              /referees/upgrades/                             301
-/referee-upgrades               /referees/upgrades/                             301
-/referee-scheduling/            /referees/scheduling/                           301
-/referee-scheduling             /referees/scheduling/                           301
-/laws-of-the-game/              /referees/laws/                                 301
-/laws-of-the-game               /referees/laws/                                 301
-/pro/                           /referees/pro/                                  301
-/pro                            /referees/pro/                                  301
-/player-referee-organization-pro-youth-referee-program/     /referees/pro/      301
-/player-referee-organization-pro-youth-referee-program      /referees/pro/      301
-/referee-resources/             /referees/resources/                            301
-/referee-resources              /referees/resources/                            301
-/referee-document-library/      /referees/resources/                            301
-/referee-document-library       /referees/resources/                            301
-/referee-mentor-program/        /referees/resources/                            301
-/referee-mentor-program         /referees/resources/                            301
-/ask-the-referee/               /referees/ask-the-referee/                      301
-/ask-the-referee                /referees/ask-the-referee/                      301
-/respect-the-referee-2/         /referees/faqs/                                 301
-/respect-the-referee-2          /referees/faqs/                                 301
+# ======================================================================
+# Schedules
+# ======================================================================
+/Schedule/                          /schedules/                              301
+/Schedule                           /schedules/                              301
+/b14u-spring-schedule-2026/         /schedules/                              301
+/b14u-spring-schedule-2026          /schedules/                              301
+/standings/fall-core-2025-standings/ /schedules/standings/                    301
+/standings/fall-core-2025-standings /schedules/standings/                    301
+/schedule/                          /schedules/games/                        301
+/schedule                           /schedules/games/                        301
+/games/                             /schedules/games/                        301
+/games                              /schedules/games/                        301
+/standings/                         /schedules/standings/                    301
+/standings                          /schedules/standings/                    301
+/results/                           /schedules/                              301
+/results                            /schedules/                              301
+/weekly/                            /schedules/                              301
+/weekly                             /schedules/                              301
+/schedule-changelog-2025/           /schedules/                              301
+/schedule-changelog-2025            /schedules/                              301
+/rain-cancellation-plan-november-15-16-2025/ /schedules/                              301
+/rain-cancellation-plan-november-15-16-2025 /schedules/                              301
+/fall-playoffs/                     /schedules/                              301
+/fall-playoffs                      /schedules/                              301
+/g                                  /schedules/games/                        301
+/teams                              /schedules/                              301
+/teams/                             /schedules/                              301
+/brackets                           /schedules/                              301
+/brackets/                          /schedules/                              301
+/fall-core-2025-standings           /schedules/standings/                    301
+/fall-core-2025-standings/          /schedules/standings/                    301
+/faqs/how-are-standings-determined  /schedules/standings/                    301
+/faqs/how-are-standings-determined/ /schedules/standings/                    301
 
-# ── Team Managers ─────────────────────────────────────────────────────────
-/manager/                       /managers/                                      301
-/manager                        /managers/                                      301
-/required-training-for-team-managers/   /managers/training/                     301
-/required-training-for-team-managers    /managers/training/                     301
-/team-manager-tasks/            /managers/tasks/                                301
-/team-manager-tasks             /managers/tasks/                                301
+/standings_historical/*             /schedules/standings/                    301
 
-# ── Volunteers ────────────────────────────────────────────────────────────
-/roles/                         /volunteers/roles/                              301
-/roles                          /volunteers/roles/                              301
-/classes/                       /volunteers/classes/                            301
-/classes                        /volunteers/classes/                            301
-/livescan/                      /volunteers/livescan/                           301
-/livescan                       /volunteers/livescan/                           301
-/Livescan/                      /volunteers/livescan/                           301
-/Livescan                       /volunteers/livescan/                           301
-/LiveScan/                      /volunteers/livescan/                           301
-/LiveScan                       /volunteers/livescan/                           301
-/tent/                          /volunteers/tent/                               301
-/tent                           /volunteers/tent/                               301
-/onboarding/                    /volunteers/onboarding/                         301
-/onboarding                     /volunteers/onboarding/                         301
-/volunteer-faq/                 /volunteers/faqs/                               301
-/volunteer-faq                  /volunteers/faqs/                               301
-/dca/                           /volunteers/roles/                              301
-/dca                            /volunteers/roles/                              301
-/sponsor/                       /volunteers/sponsors/                           301
-/sponsor                        /volunteers/sponsors/                           301
-/treasurer/                     /volunteers/sponsors/                           301
-/treasurer                      /volunteers/sponsors/                           301
+# ======================================================================
+# Families (was Parents)
+# ======================================================================
+/schedule/schedule-faq/             /families/faqs/                          301
+/schedule/schedule-faq              /families/faqs/                          301
+/team/                              /families/team/                          301
+/team                               /families/team/                          301
+/uniform/                           /families/equipment/                     301
+/uniform                            /families/equipment/                     301
+/pledge/                            /families/pledge/                        301
+/pledge                             /families/pledge/                        301
+/parents/                           /families/                               301
+/parents                            /families/                               301
+/parents/pledge/                    /families/pledge/                        301
+/parents/pledge                     /families/pledge/                        301
+/parents/support/                   /families/support/                       301
+/parents/support                    /families/support/                       301
+/parents/team/                      /families/team/                          301
+/parents/team                       /families/team/                          301
+/parents/faqs/                      /families/faqs/                          301
+/parents/faqs                       /families/faqs/                          301
+/Team/                              /families/team/                          301
+/Team                               /families/team/                          301
+/equipment-guide/                   /families/equipment/                     301
+/equipment-guide                    /families/equipment/                     301
+/ideas-for-being-a-supportive-ayso-parent/ /families/support/                       301
+/ideas-for-being-a-supportive-ayso-parent /families/support/                       301
+/parents/equipment/                 /families/equipment/                     301
+/parents/equipment                  /families/equipment/                     301
 
-# ── Fields ────────────────────────────────────────────────────────────────
-/map/                           /fields/                                        301
-/map                            /fields/                                        301
-/region-13-map/                 /fields/                                        301
-/region-13-map                  /fields/                                        301
-/goals/                         /fields/goals/                                  301
-/goals                          /fields/goals/                                  301
-/victory/                       /fields/victory/                                301
-/victory                        /fields/victory/                                301
-/victory-goal-assembly/         /fields/victory/                                301
-/victory-goal-assembly          /fields/victory/                                301
-/victory-goal-disassembly/      /fields/victory/                                301
-/victory-goal-disassembly       /fields/victory/                                301
-/blair/                         /fields/blair/                                  301
-/blair                          /fields/blair/                                  301
-/blair-goal-assembly/           /fields/blair/                                  301
-/blair-goal-assembly            /fields/blair/                                  301
-/blair-goal-disassembly/        /fields/blair/                                  301
-/blair-goal-disassembly         /fields/blair/                                  301
-/muir/                          /fields/muir/                                   301
-/muir                           /fields/muir/                                   301
-/muir-south/                    /fields/muir-south/                             301
-/muir-south                     /fields/muir-south/                             301
-/jefferson/                     /fields/jefferson/                              301
-/jefferson                      /fields/jefferson/                              301
-/mckinley/                      /fields/mckinley/                               301
-/mckinley                       /fields/mckinley/                               301
-/mcdonald/                      /fields/mcdonald/                               301
-/mcdonald                       /fields/mcdonald/                               301
-/wilson/                        /fields/wilson/                                 301
-/wilson                         /fields/wilson/                                 301
-/brookside/                     /fields/brookside/                              301
-/brookside                      /fields/brookside/                              301
-/marshall/                      /fields/marshall/                               301
-/marshall                       /fields/marshall/                               301
-/paradise/                      /fields/paradise/                               301
-/paradise                       /fields/paradise/                               301
-/oak-grove/                     /fields/oak-grove/                              301
-/oak-grove                      /fields/oak-grove/                              301
-/lchs/                          /fields/lchs/                                   301
-/lchs                           /fields/lchs/                                   301
-/la-salle/                      /fields/la-salle/                               301
-/la-salle                       /fields/la-salle/                               301
-/allendale/                     /fields/allendale/                              301
-/allendale                      /fields/allendale/                              301
-/la-canada-fields/              /fields/                                        301
-/la-canada-fields               /fields/                                        301
-/pasadena/                      /fields/                                        301
-/pasadena                       /fields/                                        301
-/cornishon/                     /fields/                                        301
-/cornishon                      /fields/                                        301
-/lds/                           /fields/                                        301
-/lds                            /fields/                                        301
-/butler/                        /fields/                                        301
-/butler                         /fields/                                        301
-/eaton/                         /fields/                                        301
-/eaton                          /fields/                                        301
-/pusd/                          /fields/                                        301
-/pusd                           /fields/                                        301
-/fis-upper/                     /fields/                                        301
-/fis-upper                      /fields/                                        301
-/fis-lower/                     /fields/                                        301
-/fis-lower                      /fields/                                        301
-/practice/portable-lights/      /fields/                                        301
-/practice/portable-lights       /fields/                                        301
+# ======================================================================
+# Coaches
+# ======================================================================
+/coach/                             /coaches/                                301
+/coach                              /coaches/                                301
+/coach-training/                    /coaches/training/                       301
+/coach-training                     /coaches/training/                       301
+/practice/                          /coaches/practice/                       301
+/practice                           /coaches/practice/                       301
+/practice/practice-faq/             /coaches/practice/                       301
+/practice/practice-faq              /coaches/practice/                       301
+/coach/game-prep-for-6u-8u/         /coaches/game-day/                       301
+/coach/game-prep-for-6u-8u          /coaches/game-day/                       301
+/game-cards/                        /coaches/game-cards/                     301
+/game-cards                         /coaches/game-cards/                     301
+/skills-drills/                     /coaches/drills/                         301
+/skills-drills                      /coaches/drills/                         301
+/pie/                               /coaches/pie/                            301
+/pie                                /coaches/pie/                            301
+/shootout/                          /coaches/shootout/                       301
+/shootout                           /coaches/shootout/                       301
+/tournament-teams/                  /coaches/tournament-teams/               301
+/tournament-teams                   /coaches/tournament-teams/               301
+/wca/                               /coaches/wca/                            301
+/wca                                /coaches/wca/                            301
+/coach-faq/                         /coaches/faqs/                           301
+/coach-faq                          /coaches/faqs/                           301
+/coach/player-ratings/              /coaches/player-ratings/                 301
+/coach/player-ratings               /coaches/player-ratings/                 301
+/coach/coach-information-for-tournament-play/ /coaches/tournament-teams/               301
+/coach/coach-information-for-tournament-play /coaches/tournament-teams/               301
+/Coach/                             /coaches/                                301
+/Coach                              /coaches/                                301
 
-# ── Resources ─────────────────────────────────────────────────────────────
-# Note: /forms/ now serves a real page (the Google Apps Script upload tool).
-# Old query-string variants like /forms/?go=1 flow through to the new page,
-# where its inline JS detects the query string and triggers the iframe.
-/resources/newsletter/          /resources/newsletters/                         301
-/resources/newsletter           /resources/newsletters/                         301
-/report/                        /resources/documents/                           301
-/report                         /resources/documents/                           301
-/pictures/                      /resources/gallery/                             301
-/pictures                       /resources/gallery/                             301
-/photos-u10/                    /resources/gallery/                             301
-/photos-u10                     /resources/gallery/                             301
-/safety/                        /resources/safety/                              301
-/safety                         /resources/safety/                              301
-/heat/                          /resources/heat-policy/                         301
-/heat                           /resources/heat-policy/                         301
-/weather/                       /resources/weather/                             301
-/weather                        /resources/weather/                             301
-/incident/                      /resources/safety/                              301
-/incident                       /resources/safety/                              301
-/tickets/                       /resources/                                     301
-/tickets                        /resources/                                     301
-/news/                          /resources/newsletters/                         301
-/news                           /resources/newsletters/                         301
+# ======================================================================
+# Referees
+# ======================================================================
+/referee/                           /referees/                               301
+/referee                            /referees/                               301
+/referee-training-home/             /referees/training/                      301
+/referee-training-home              /referees/training/                      301
+/referee-upgrades/                  /referees/upgrades/                      301
+/referee-upgrades                   /referees/upgrades/                      301
+/referee-scheduling/                /referees/scheduling/                    301
+/referee-scheduling                 /referees/scheduling/                    301
+/laws-of-the-game/                  /referees/laws/                          301
+/laws-of-the-game                   /referees/laws/                          301
+/ask-the-referee/                   /referees/ask-the-referee/               301
+/ask-the-referee                    /referees/ask-the-referee/               301
+/referee-overview/                  /referees/                               301
+/referee-overview                   /referees/                               301
+/referee-staff/                     /referees/                               301
+/referee-staff                      /referees/                               301
+/why-i-referee/                     /referees/                               301
+/why-i-referee                      /referees/                               301
+/referee-training-calendar/         /referees/training/                      301
+/referee-training-calendar          /referees/training/                      301
+/ussf-referee-policy/               /referees/training/                      301
+/ussf-referee-policy                /referees/training/                      301
+/pro/                               /referees/pro/                           301
+/pro                                /referees/pro/                           301
+/player-referee-organization-pro-youth-referee-program/ /referees/pro/                           301
+/player-referee-organization-pro-youth-referee-program /referees/pro/                           301
+/referee-resources/                 /referees/resources/                     301
+/referee-resources                  /referees/resources/                     301
+/referee-document-library/          /referees/resources/                     301
+/referee-document-library           /referees/resources/                     301
+/referee-mentor-program/            /referees/resources/                     301
+/referee-mentor-program             /referees/resources/                     301
+/respect-the-referee-2/             /referees/faqs/                          301
+/respect-the-referee-2              /referees/faqs/                          301
+/respect                            /referees/faqs/                          301
+/respect/                           /referees/faqs/                          301
+/respect-the-referee/               /referees/faqs/                          301
+/respect-the-referee                /referees/faqs/                          301
+/ref                                /referees/                               301
+/download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents/ /referees/resources/                     301
+/download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents /referees/resources/                     301
+/Referee/                           /referees/                               301
 
-# ── Contact ───────────────────────────────────────────────────────────────
-/contact-us/                    /contact/                                       301
-/contact-us                     /contact/                                       301
-/feedback/                      /contact/feedback/                              301
-/feedback                       /contact/feedback/                              301
+/become-a-referee-old/*             /referees/                               301
 
-# ── Deleted / junk pages → home or closest equivalent ────────────────────
-/sample-page/                   /                                               301
-/sample-page                    /                                               301
-/subscribed/                    /                                               301
-/subscribed                     /                                               301
-/homepage-refresh-25/           /                                               301
-/homepage-refresh-25            /                                               301
-/trophies/                      /                                               301
-/trophies                       /                                               301
-/extra/                         /programs/extra/                                301
-/extra                          /programs/extra/                                301
-/programs/extra                 /programs/extra/                                301
+# ======================================================================
+# Team Managers
+# ======================================================================
+/manager/                           /managers/                               301
+/manager                            /managers/                               301
+/required-training-for-team-managers/ /managers/training/                      301
+/required-training-for-team-managers /managers/training/                      301
+/team-manager-tasks/                /managers/tasks/                         301
+/team-manager-tasks                 /managers/tasks/                         301
 
-# ── Short links — InLeague ────────────────────────────────────────────────
-# Migrated from WordPress Redirection plugin (April 7 2026)
-/etrainu                        https://ayso13.inleague.com/app/eTrainU         301
-/etrainu/                       https://ayso13.inleague.com/app/eTrainU         301
-/eTrainU                        https://ayso13.inleague.com/app/eTrainU         301
-/eTrainU/                       https://ayso13.inleague.com/app/eTrainU         301
-/aysou                          https://ayso13.inleague.com/app/eTrainU         301
-/safesport                      https://ayso13.inleague.com/app/eTrainU         301
-/safesport/                     https://ayso13.inleague.com/app/eTrainU         301
-/start                          https://ayso13.inleague.com/app/welcome         301
-/start/                         https://ayso13.inleague.com/app/welcome         301
-/pay                            https://ayso13.inleague.com/app/invoices/current 301
-/pay/                           https://ayso13.inleague.com/app/invoices/current 301
-/profile                        https://ayso13.inleague.com/app/family-profile  301
-/profile/                       https://ayso13.inleague.com/app/family-profile  301
-/donate                         https://ayso13.inleague.com/invoices/donations  301
-/donate/                        https://ayso13.inleague.com/invoices/donations  301
-/dashboard                      https://ayso13.inleague.com/app/                301
-/dashboard/                     https://ayso13.inleague.com/app/                301
-/apply                          https://ayso13.inleague.com/app/volunteer       301
-/admin                          https://ayso13.inleague.com/app/                301
-/admin/                         https://ayso13.inleague.com/app/                301
+# ======================================================================
+# Volunteers
+# ======================================================================
+/livescan/                          /volunteers/livescan/                    301
+/livescan                           /volunteers/livescan/                    301
+/roles/                             /volunteers/roles/                       301
+/roles                              /volunteers/roles/                       301
+/classes/                           /volunteers/classes/                     301
+/classes                            /volunteers/classes/                     301
+/tournament-volunteer-signup/       /volunteers/                             301
+/tournament-volunteer-signup        /volunteers/                             301
+/Livescan/                          /volunteers/livescan/                    301
+/Livescan                           /volunteers/livescan/                    301
+/LiveScan/                          /volunteers/livescan/                    301
+/LiveScan                           /volunteers/livescan/                    301
+/tent/                              /volunteers/tent/                        301
+/tent                               /volunteers/tent/                        301
+/onboarding/                        /volunteers/onboarding/                  301
+/onboarding                         /volunteers/onboarding/                  301
+/dca/                               /volunteers/roles/                       301
+/dca                                /volunteers/roles/                       301
+/sponsor/                           /volunteers/sponsors/                    301
+/sponsor                            /volunteers/sponsors/                    301
+/treasurer/                         /volunteers/sponsors/                    301
+/treasurer                          /volunteers/sponsors/                    301
+/apply-to-volunteer/                /volunteers/                             301
+/apply-to-volunteer                 /volunteers/                             301
+/in-what-role-would-you-like-to-volunteer/ /volunteers/roles/                       301
+/in-what-role-would-you-like-to-volunteer /volunteers/roles/                       301
 
-# ── Short links — external ────────────────────────────────────────────────
-/pizza                          https://www.vyblee.com/corner-kick-cafe         301
-/pizza/                         https://www.vyblee.com/corner-kick-cafe         301
-/signup                         https://www.wejoinin.com/AYSORegion13           301
-/signup/                        https://www.wejoinin.com/AYSORegion13           301
-/mentor                         https://ayso13.typeform.com/mentor              301
-/mentor/                        https://ayso13.typeform.com/mentor              301
-/gcud                           https://ayso13.typeform.com/1CSPUD2025          301
-/gc16                           https://form.typeform.com/to/vf4lZIRo           301
-/gc16/                          https://form.typeform.com/to/vf4lZIRo           301
-/pog                            https://ayso13.typeform.com/SSreg               301
-/gctt                           https://form.typeform.com/to/VIFJoyJ4           301
+# ======================================================================
+# Fields
+# ======================================================================
+/victory/                           /fields/victory/                         301
+/victory                            /fields/victory/                         301
+/arcadia-city-hall-soccer-field/    /fields/                                 301
+/arcadia-city-hall-soccer-field     /fields/                                 301
+/map/                               /fields/                                 301
+/map                                /fields/                                 301
+/maps/                              /fields/                                 301
+/maps                               /fields/                                 301
+/blair/                             /fields/blair/                           301
+/blair                              /fields/blair/                           301
+/muir/                              /fields/muir/                            301
+/muir                               /fields/muir/                            301
+/brookside/                         /fields/brookside/                       301
+/brookside                          /fields/brookside/                       301
+/allendale/                         /fields/allendale/                       301
+/allendale                          /fields/allendale/                       301
+/jefferson/                         /fields/jefferson/                       301
+/jefferson                          /fields/jefferson/                       301
+/mckinley/                          /fields/mckinley/                        301
+/mckinley                           /fields/mckinley/                        301
+/mcdonald/                          /fields/mcdonald/                        301
+/mcdonald                           /fields/mcdonald/                        301
+/wilson/                            /fields/wilson/                          301
+/wilson                             /fields/wilson/                          301
+/marshall/                          /fields/marshall/                        301
+/marshall                           /fields/marshall/                        301
+/lchs/                              /fields/lchs/                            301
+/lchs                               /fields/lchs/                            301
+/la-salle/                          /fields/la-salle/                        301
+/la-salle                           /fields/la-salle/                        301
+/region-13-map/                     /fields/                                 301
+/region-13-map                      /fields/                                 301
+/goals/                             /fields/goals/                           301
+/goals                              /fields/goals/                           301
+/victory-goal-assembly/             /fields/victory/                         301
+/victory-goal-assembly              /fields/victory/                         301
+/victory-goal-disassembly/          /fields/victory/                         301
+/victory-goal-disassembly           /fields/victory/                         301
+/blair-goal-assembly/               /fields/blair/                           301
+/blair-goal-assembly                /fields/blair/                           301
+/blair-goal-disassembly/            /fields/blair/                           301
+/blair-goal-disassembly             /fields/blair/                           301
+/muir-south/                        /fields/muir-south/                      301
+/muir-south                         /fields/muir-south/                      301
+/paradise/                          /fields/paradise/                        301
+/paradise                           /fields/paradise/                        301
+/oak-grove/                         /fields/oak-grove/                       301
+/oak-grove                          /fields/oak-grove/                       301
+/la-canada-fields/                  /fields/                                 301
+/la-canada-fields                   /fields/                                 301
+/pasadena/                          /fields/                                 301
+/pasadena                           /fields/                                 301
+/cornishon/                         /fields/                                 301
+/cornishon                          /fields/                                 301
+/lds/                               /fields/                                 301
+/lds                                /fields/                                 301
+/butler/                            /fields/                                 301
+/butler                             /fields/                                 301
+/eaton/                             /fields/                                 301
+/eaton                              /fields/                                 301
+/pusd/                              /fields/                                 301
+/pusd                               /fields/                                 301
+/fis-upper/                         /fields/                                 301
+/fis-upper                          /fields/                                 301
+/fis-lower/                         /fields/                                 301
+/fis-lower                          /fields/                                 301
+/practice/portable-lights/          /fields/                                 301
+/practice/portable-lights           /fields/                                 301
+/fieldmap/                          /fields/                                 301
+/fieldmap                           /fields/                                 301
+/region13fields-2/                  /fields/                                 301
+/region13fields-2                   /fields/                                 301
+/fields/victory-park/               /fields/victory/                         301
+/fields/victory-park                /fields/victory/                         301
+/area-h-playoffs/                   /fields/area-h/                          301
+/area-h-playoffs                    /fields/area-h/                          301
+/blair-high-school-map/             /fields/blair/                           301
+/blair-high-school-map              /fields/blair/                           301
+/la-salle-google-map2-2/            /fields/la-salle/                        301
+/la-salle-google-map2-2             /fields/la-salle/                        301
 
-# ── Short links — new site pages ──────────────────────────────────────────
-/t                              /programs/tournaments/                          301
-/g                              /schedules/games/                               301
-/f                              /programs/fall-soccer/                          301
-/f/                             /programs/fall-soccer/                          301
-/ref                            /referees/                                      301
-/maps                           /fields/                                        301
-/maps/                          /fields/                                        301
-/teams                          /schedules/                                     301
-/teams/                         /schedules/                                     301
-/brackets                       /schedules/                                     301
-/brackets/                      /schedules/                                     301
-/4u                             /programs/preschool/                            301
-/5u                             /programs/preschool/                            301
-/4u5u                           /programs/preschool/                            301
-/4u-playground                  /programs/preschool/                            301
-/4u-playground/                 /programs/preschool/                            301
-/gradseries                     /programs/grad-series/                          301
-/gradseries/                    /programs/grad-series/                          301
-/sisterhood                     /about/sisterhood/                              301
-/sisterhood/                    /about/sisterhood/                              301
-/respect                        /referees/faqs/                                 301
-/respect/                       /referees/faqs/                                 301
-/refund                         /register/                                      301
-/refund/                        /register/                                      301
-/registration                   /register/                                      301
-/registration/                  /register/                                      301
-/status                         https://status.ayso13.org/                      301
-/status/                        https://status.ayso13.org/                      301
-/archive                        /                                               301
-/archive/                       /                                               301
-/thanksgiving-tournament-new    /programs/tournaments/thanksgiving/             301
-/thanksgiving-tournament-new/   /programs/tournaments/thanksgiving/             301
-/fall-core-2025-standings       /schedules/standings/                           301
-/fall-core-2025-standings/      /schedules/standings/                           301
-/faqs/how-are-standings-determined /schedules/standings/                        301
-/faqs/how-are-standings-determined/ /schedules/standings/                       301
-/faqs/how-long-are-the-games    /register/age-chart/                            301
-/faqs/how-long-are-the-games/   /register/age-chart/                            301
-# ── 404 sweep (from CF Analytics, 2026-05-02) ─────────────────────────────
-# Cleanup of inbound dead links from old WP/legacy URLs identified in the
-# first 24h of zone analytics. Stable WP-vintage URLs that still pull
-# real traffic; fold each to its closest current page rather than the home.
+/maps/*                             /fields/                                 301
 
-# Apple touch icon variants — root file served via passthrough; precomposed
-# is a deprecated alias browsers still occasionally probe.
-/apple-touch-icon-precomposed.png  /apple-touch-icon.png                        301
+# ======================================================================
+# Resources
+# ======================================================================
+/heat/                              /resources/heat-policy/                  301
+/heat                               /resources/heat-policy/                  301
+/pictures/                          /resources/gallery/                      301
+/pictures                           /resources/gallery/                      301
+/safety/                            /resources/safety/                       301
+/safety                             /resources/safety/                       301
+/weather/                           /resources/weather/                      301
+/weather                            /resources/weather/                      301
+/incident/                          /resources/safety/                       301
+/incident                           /resources/safety/                       301
+/tickets/                           /resources/                              301
+/tickets                            /resources/                              301
+/news/                              /resources/newsletters/                  301
+/news                               /resources/newsletters/                  301
+/report/                            /resources/documents/                    301
+/report                             /resources/documents/                    301
+/coach-training/medical-forms/      /resources/safety/                       301
+/coach-training/medical-forms       /resources/safety/                       301
+/resources/newsletter/              /resources/newsletters/                  301
+/resources/newsletter               /resources/newsletters/                  301
+/photos-u10/                        /resources/gallery/                      301
+/photos-u10                         /resources/gallery/                      301
+/newsletter/                        /resources/newsletters/                  301
+/newsletter                         /resources/newsletters/                  301
+/newsletters                        /resources/newsletters/                  301
 
-# Old WP author archive
-/author/brandi/                 /about/leadership/                              301
-/author/brandi                  /about/leadership/                              301
+# ======================================================================
+# Contact
+# ======================================================================
+/contact-us/                        /contact/                                301
+/contact-us                         /contact/                                301
+/contactus/                         /contact/                                301
+/contactus                          /contact/                                301
+/feedback/                          /contact/feedback/                       301
+/feedback                           /contact/feedback/                       301
+/tel:6263166900                     /contact/                                301
 
-# Hotlinked WP-uploads images
-/wp-content/uploads/2025/12/AYSO-BirthChart.png                       /register/age-chart/  301
-/wp-content/uploads/2025/08/AYSO-Age-Determination-Chart-MY26-MY27.png /register/age-chart/  301
-/wp-content/uploads/AYSO-R13-Logo-266.png                             /images/logo.svg      301
-/wp-content/uploads/cropped-AYSO-R13-Logo-266-192x192.png             /images/logo.svg      301
-/wp-content/uploads/2023/08/logo-gold.png                             /images/logo.svg      301
+# ======================================================================
+# Short links -- InLeague
+# ======================================================================
+/etrainu                            https://ayso13.inleague.com/app/eTrainU  301
+/etrainu/                           https://ayso13.inleague.com/app/eTrainU  301
+/eTrainU                            https://ayso13.inleague.com/app/eTrainU  301
+/safesport                          https://ayso13.inleague.com/app/eTrainU  301
+/pay                                https://ayso13.inleague.com/app/invoices/current 301
+/profile                            https://ayso13.inleague.com/app/family-profile 301
+/donate                             https://ayso13.inleague.com/invoices/donations 301
+/apply                              https://ayso13.inleague.com/app/volunteer 301
+/start                              https://ayso13.inleague.com/app/welcome  301
+/start/                             https://ayso13.inleague.com/app/welcome  301
+/dashboard                          https://ayso13.inleague.com/app/         301
+/dashboard/                         https://ayso13.inleague.com/app/         301
+/login                              https://ayso13.inleague.com/app/welcome  301
+/login/                             https://ayso13.inleague.com/app/welcome  301
+/aysou                              https://ayso13.inleague.com/app/eTrainU  301
+/eTrainU/                           https://ayso13.inleague.com/app/eTrainU  301
+/safesport/                         https://ayso13.inleague.com/app/eTrainU  301
+/pay/                               https://ayso13.inleague.com/app/invoices/current 301
+/profile/                           https://ayso13.inleague.com/app/family-profile 301
+/donate/                            https://ayso13.inleague.com/invoices/donations 301
+/admin                              https://ayso13.inleague.com/app/         301
+/admin/                             https://ayso13.inleague.com/app/         301
 
-# Hotlinked WP-uploads PDFs — recovered originals, served from /assets/docs/
-/wp-content/uploads/2022/07/Intermediate-Coach.pdf                    /assets/docs/intermediate-coach.pdf       301
-/wp-content/uploads/2022/07/6U-Coach.pdf                              /assets/docs/6u-coach.pdf                 301
-/wp-content/uploads/2022/07/8U-Coach.pdf                              /assets/docs/8u-coach.pdf                 301
-/wp-content/uploads/2022/07/10U-Coach.pdf                             /assets/docs/10u-coach.pdf                301
-/wp-content/uploads/2022/07/12U-Coach.pdf                             /assets/docs/12u-coach.pdf                301
+# ======================================================================
+# Short links -- external
+# ======================================================================
+/pizza                              https://www.vyblee.com/corner-kick-cafe  301
+/pizza/                             https://www.vyblee.com/corner-kick-cafe  301
+/signup                             https://www.wejoinin.com/AYSORegion13    301
+/signup/                            https://www.wejoinin.com/AYSORegion13    301
+/mentor                             https://ayso13.typeform.com/mentor       301
+/mentor/                            https://ayso13.typeform.com/mentor       301
+/gcud                               https://ayso13.typeform.com/1CSPUD2025   301
+/gc16                               https://form.typeform.com/to/vf4lZIRo    301
+/gc16/                              https://form.typeform.com/to/vf4lZIRo    301
+/pog                                https://ayso13.typeform.com/SSreg        301
+/gctt                               https://form.typeform.com/to/VIFJoyJ4    301
+/r                                  https://ayso13.typeform.com/to/Ah0JFeOp  301
+/r/                                 https://ayso13.typeform.com/to/Ah0JFeOp  301
+
+/r/*                                https://ayso13.typeform.com/to/Ah0JFeOp  301
+
+# ======================================================================
+# Short links -- new site pages
+# ======================================================================
+/archive                            /                                        301
+/archive/                           /                                        301
+/faqs/how-long-are-the-games        /register/age-chart/                     301
+/faqs/how-long-are-the-games/       /register/age-chart/                     301
+
+# ======================================================================
+# Deleted / junk pages
+# ======================================================================
+/sample-page/                       /                                        301
+/sample-page                        /                                        301
+/subscribed/                        /                                        301
+/subscribed                         /                                        301
+/homepage-refresh-25/               /                                        301
+/homepage-refresh-25                /                                        301
+/trophies/                          /                                        301
+/trophies                           /                                        301
+/new                                /                                        301
+
+# ======================================================================
+# Apple touch icon
+# ======================================================================
+/apple-touch-icon-precomposed.png   /apple-touch-icon.png                    301
+
+# ======================================================================
+# WP author archives
+# ======================================================================
+/author/brandi/                     /about/leadership/                       301
+/author/brandi                      /about/leadership/                       301
+
+/author/*                           /about/                                  301
+
+# ======================================================================
+# WP-uploads images (logos + banners)
+# ======================================================================
+/wp-content/uploads/2025/12/AYSO-BirthChart.png /register/age-chart/                     301
+/wp-content/uploads/2025/08/AYSO-Age-Determination-Chart-MY26-MY27.png /register/age-chart/                     301
+/wp-content/uploads/AYSO-R13-Logo-266.png /images/logo.svg                         301
+/wp-content/uploads/NEWS_114.png    /resources/newsletters/                  301
+/wp-content/uploads/registration114.png /register/                               301
+/wp-content/uploads/Manager_114.png /managers/                               301
+/wp-content/uploads/2022/07/AYSOU-Training-Library-1024x471.png /coaches/training/                       301
+/wp-content/uploads/cropped-AYSO-R13-Logo-266-192x192.png /images/logo.svg                         301
+/wp-content/uploads/2023/08/logo-gold.png /images/logo.svg                         301
+/wp-content/uploads/2022/03/phsnorth.jpg /fields/pasadena-hs/                     301
+/wp-content/uploads/2022/03/rosebowl.jpg /fields/area-h/                          301
+/wp-content/uploads/2023/02/1677572030-814390417fe413b.png /about/                                  301
+/wp-content/uploads/2022/08/Victoryp22.jpg /fields/victory/                         301
+
+# ======================================================================
+# WP-uploads PDFs -- Board minutes
+# ======================================================================
+/wp-content/uploads/2022/03/2021-03-04-minutes.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/April_2019.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/June_2017.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/November_2016.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/October_2016.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/January_2016.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/June_2016.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/20211007-AYSO-Board-Meeting.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/July_2014.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/August_2015.pdf /about/board-minutes/                    301
+/wp-content/uploads/2022/03/2020-09-03-minutes_1.pdf /about/board-minutes/                    301
+
+# ======================================================================
+# WP-uploads PDFs -- Tournament artifacts
+# ======================================================================
+/wp-content/uploads/2025/11/TT25_Team_List_C.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2025/11/TT25_Villa_Parke_field_map_v3.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2025/11/TT25_VP_field_map_v3.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2025/11/TT25_Robinson_field_map_v3.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2025/11/TT25_Rose_Bowl_field_map_v3.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2024/11/TT24-Teams-v5.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2024/11/TT24-Teams.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2024/11/TT24-Sched-Ref-01.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2024/11/Almansor-Thanksgiving-Field-Map-2024.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2024/10/Application-TT2024.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2024/10/Invitation-TT2024-1.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2024/10/Referee-Form-TT2024.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2024/10/Roster-TT2024.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2022/12/R13-BRACKET-FINAL.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2022/12/R13-RESULTS-FINAL.pdf /programs/tournaments/thanksgiving/      301
+/wp-content/uploads/2022/11/Team-Lists-Nov16.pdf /programs/tournaments/thanksgiving/      301
+
+# ======================================================================
+# WP-uploads PDFs -- Coaches & referees
+# ======================================================================
+/wp-content/uploads/2022/07/Intermediate-Coach.pdf /assets/docs/intermediate-coach.pdf      301
+/wp-content/uploads/2022/07/6U-Coach.pdf /assets/docs/6u-coach.pdf                301
+/wp-content/uploads/2022/07/8U-Coach.pdf /assets/docs/8u-coach.pdf                301
+/wp-content/uploads/2022/07/10U-Coach.pdf /assets/docs/10u-coach.pdf               301
+/wp-content/uploads/2022/07/12U-Coach.pdf /assets/docs/12u-coach.pdf               301
+/wp-content/uploads/2022/08/2021-AYSO-Concussion-SCA.pdf /assets/docs/concussion-sca-forms.pdf    301
+/wp-content/uploads/2025/09/ref-card-2023.pdf /referees/resources/                     301
+/wp-content/uploads/2025/11/TT25_RefSched_B.pdf /referees/scheduling/                    301
+/wp-content/uploads/2025/11/Ref_Assignments25v7.pdf /referees/scheduling/                    301
 /wp-content/uploads/2024/09/Region-13-Modifications-for-8U-7U-6U-2024.pdf /assets/docs/6u-7u-8u-modifications.pdf  301
-/wp-content/uploads/2023/08/Region-13-Guidelines-for-10U-Referees-2023.pdf /assets/docs/10u-referee-guidelines.pdf 301
-/wp-content/uploads/2023/08/Region-13-Guidelines-for-12U-Referees-2023.pdf /assets/docs/12u-referee-guidelines.pdf 301
+/wp-content/uploads/2023/08/Region-13-Guidelines-for-10U-Referees-2023.pdf /assets/docs/10u-referee-guidelines.pdf  301
+/wp-content/uploads/2023/08/Region-13-Guidelines-for-12U-Referees-2023.pdf /assets/docs/12u-referee-guidelines.pdf  301
+/wp-content/uploads/2022/03/Region-13-Guidelines-for-10U-Referees-2021.pdf /assets/docs/10u-referee-guidelines.pdf  301
+/wp-content/uploads/2022/03/Region-13-Guidelines-for-12U-Referees-2021.pdf /assets/docs/12u-referee-guidelines.pdf  301
+/wp-content/uploads/2023/03/Game-Card.pdf /coaches/game-cards/                     301
+/wp-content/uploads/2024/09/prts01-v03.pdf /referees/resources/                     301
+/wp-content/uploads/2022/03/Respect-the-Referee.pdf /referees/faqs/                          301
+/wp-content/uploads/2023/11/Region-13-Guidelines-for-Penalty-Kicks-2023.pdf /assets/docs/penalty-kick-guidelines.pdf 301
+/wp-content/uploads/2025/08/2025-12U-Division-Meeting.pptx /coaches/                                301
+/wp-content/uploads/2022/03/Region-13-PPs-20200615.pdf /coaches/practice/                       301
+/wp-content/uploads/2023/08/Region-13-Modifications-for-8U-7U-6U-2022.docx.pdf /coaches/                                301
+/wp-content/uploads/2024/09/prts06-v02.pdf /referees/resources/                     301
+/wp-content/uploads/2024/10/prts07-v02.pdf /referees/resources/                     301
 
-# Renamed-PDF backstops — earlier versions of /assets/docs/ filenames were
-# briefly live; these catch any external links that landed during that
-# window. Game cards (2023) intentionally not redirected — they were old
-# and we no longer serve them.
-/assets/docs/region13-10u-referee-guidelines-2023.pdf  /assets/docs/10u-referee-guidelines.pdf  301
-/assets/docs/region13-12u-referee-guidelines-2023.pdf  /assets/docs/12u-referee-guidelines.pdf  301
-/assets/docs/region13-6u-7u-8u-modifications-2024.pdf  /assets/docs/6u-7u-8u-modifications.pdf  301
-/assets/docs/penalty-kick-guidelines-2023.pdf          /assets/docs/penalty-kick-guidelines.pdf  301
-/assets/docs/gender-diversity-toolkit-2024.pdf         /assets/docs/gender-diversity-toolkit.pdf  301
+# ======================================================================
+# WP-uploads -- other PDFs/files
+# ======================================================================
+/wp-content/uploads/2022/07/ParentPledge.pdf /families/pledge/                        301
+/wp-content/uploads/2024/11/Victory-Park-Thanksgiving-Field-Map-2024-final.pdf /fields/victory/                         301
+/wp-content/uploads/2024/09/region13-2024-week1.pdf /schedules/games/                        301
+/wp-content/uploads/2024/10/2024-Picture-Day-Order-Form-1.pdf /resources/pictures/                     301
+/wp-content/uploads/2024/10/LC-City-Council-Age-Group-Limitation-1.pdf /fields/lchs/                            301
+/wp-content/uploads/2024/10/region13-game-schedule-2024-week8.pdf /schedules/games/                        301
+/wp-content/uploads/2024/10/region13-game-schedule-2024-week11.pdf /schedules/games/                        301
+/wp-content/uploads/2024/04/R13-2024-Registration-Flyer.pdf /register/                               301
+/wp-content/uploads/2022/05/R13-registration-flyer-2022.pdf /register/                               301
+/wp-content/uploads/2023/04/BOSC-2023-Field-Map.pdf /fields/                                 301
+/wp-content/uploads/2025/11/Sched25_f.pdf /schedules/                              301
+/wp-content/uploads/2024/11/LC-City-Council-Age-Group-Limitation-November.pdf /fields/lchs/                            301
 
-# Other WP PDFs that point to closest current page (no recovered file)
-/wp-content/uploads/2022/03/July_2014.pdf                             /about/board-minutes/ 301
-/wp-content/uploads/2022/03/August_2015.pdf                           /about/board-minutes/ 301
-/wp-content/uploads/2022/03/2020-09-03-minutes_1.pdf                  /about/board-minutes/ 301
-/wp-content/uploads/2022/03/phsnorth.jpg                              /fields/pasadena-hs/  301
-/wp-content/uploads/2022/03/rosebowl.jpg                              /fields/area-h/       301
-/wp-content/uploads/2022/03/Region-13-Guidelines-for-10U-Referees-2021.pdf  /assets/docs/10u-referee-guidelines.pdf  301
-/wp-content/uploads/2022/03/Region-13-Guidelines-for-12U-Referees-2021.pdf  /assets/docs/12u-referee-guidelines.pdf  301
-/wp-content/uploads/2022/07/ParentPledge.pdf                          /families/pledge/     301
-/wp-content/uploads/2022/08/2021-AYSO-Concussion-SCA.pdf              /assets/docs/concussion-sca-forms.pdf 301
-/wp-content/uploads/2023/02/1677572030-814390417fe413b.png            /about/               301
-/wp-content/uploads/2023/03/Game-Card.pdf                             /coaches/game-cards/  301
-/wp-content/uploads/2024/09/prts01-v03.pdf                            /referees/resources/  301
-/wp-content/uploads/2024/09/region13-2024-week1.pdf                   /schedules/games/     301
-/wp-content/uploads/2024/10/2024-Picture-Day-Order-Form-1.pdf         /resources/pictures/  301
-/wp-content/uploads/2024/10/LC-City-Council-Age-Group-Limitation-1.pdf /fields/lchs/        301
-/wp-content/uploads/2024/10/region13-game-schedule-2024-week8.pdf     /schedules/games/     301
-/wp-content/uploads/2024/10/region13-game-schedule-2024-week11.pdf    /schedules/games/     301
-/wp-content/uploads/2024/11/TT24-Teams-v5.pdf                         /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2024/11/Victory-Park-Thanksgiving-Field-Map-2024-final.pdf  /fields/victory/  301
-/wp-content/uploads/2025/11/Ref_Assignments25v7.pdf                   /referees/scheduling/ 301
-/wp-content/uploads/2025/11/TT25_Villa_Parke_field_map_v3.pdf         /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2025/11/TT25_VP_field_map_v3.pdf                  /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2025/11/TT25_RefSched_B.pdf                       /referees/scheduling/ 301
+# ======================================================================
+# Renamed-PDF backstops (assets/docs)
+# ======================================================================
+/assets/docs/region13-10u-referee-guidelines-2023.pdf /assets/docs/10u-referee-guidelines.pdf  301
+/assets/docs/region13-12u-referee-guidelines-2023.pdf /assets/docs/12u-referee-guidelines.pdf  301
+/assets/docs/region13-6u-7u-8u-modifications-2024.pdf /assets/docs/6u-7u-8u-modifications.pdf  301
+/assets/docs/penalty-kick-guidelines-2023.pdf /assets/docs/penalty-kick-guidelines.pdf 301
+/assets/docs/gender-diversity-toolkit-2024.pdf /assets/docs/gender-diversity-toolkit.pdf 301
 
-# Old WP page paths surfaced in GSC 404 report (2026-05-06)
-/apply-to-volunteer/            /volunteers/                                    301
-/apply-to-volunteer             /volunteers/                                    301
-/area-h-playoffs/               /fields/area-h/                                 301
-/area-h-playoffs                /fields/area-h/                                 301
-/become-a-referee-old/*         /referees/                                      301
-/fieldmap/                      /fields/                                        301
-/fieldmap                       /fields/                                        301
-/in-what-role-would-you-like-to-volunteer/  /volunteers/roles/                  301
-/in-what-role-would-you-like-to-volunteer   /volunteers/roles/                  301
-/next_team/                     /programs/next/                                 301
-/next_team                      /programs/next/                                 301
-/region13fields-2/              /fields/                                        301
-/region13fields-2               /fields/                                        301
-/respect-the-referee/           /referees/faqs/                                 301
-/respect-the-referee            /referees/faqs/                                 301
-/vip/                           /programs/epic/                                 301
-/vip                            /programs/epic/                                 301
-/volunteer/volunteer-training-information/*  /volunteers/classes/               301
-/download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents/  /referees/resources/  301
-/download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents   /referees/resources/  301
+# ======================================================================
+# Misc WP attachment paths
+# ======================================================================
+/created-with-gimp-2/               /                                        301
+/created-with-gimp-2                /                                        301
+/mst-logo-2019/                     /                                        301
+/mst-logo-2019                      /                                        301
+/screenshot-2024-09-02-215902/      /                                        301
+/screenshot-2024-09-02-215902       /                                        301
 
-# WP author archives — collapse to /about/
-/author/*                       /about/                                         301
+# ======================================================================
+# Root index.php
+# ======================================================================
+/index.php                          /                                        301
 
-# Case-sensitive variants of common path mistypes (CF Pages is case-sensitive)
-/Coach/                         /coaches/                                       301
-/Coach                          /coaches/                                       301
-/Schedule/                      /schedules/                                     301
-/Schedule                       /schedules/                                     301
-/Referee/                       /referees/                                      301
-/newsletter/                    /resources/newsletters/                         301
-/newsletter                     /resources/newsletters/                         301
-/newsletters                    /resources/newsletters/                         301
+# ======================================================================
+# Pre-WP /new/* legacy paths
+# ======================================================================
+/new/                               /                                        301
+/new/standings/scores.php           /schedules/                              301
+/new/includes/about/history.php     /about/                                  301
+/new/includes/programs/allstar.php  /programs/all-stars/                     301
 
-# More WP page paths surfaced in GA4 404 report (2026-05-06)
-/board/                         /about/leadership/                              301
-/board                          /about/leadership/                              301
-/cal/                           /about/calendar/                                301
-/cal                            /about/calendar/                                301
-/all-about-ayso-region-13/      /about/                                         301
-/all-about-ayso-region-13       /about/                                         301
-/blair-high-school-map/         /fields/blair/                                  301
-/blair-high-school-map          /fields/blair/                                  301
-/new/                           /                                               301
-/new                            /                                               301
-/programs/region13extra         /programs/extra/                                301
+/new/*                              /                                        301
 
-# More WP uploads 404'ing in GA4
-/wp-content/uploads/2022/03/Respect-the-Referee.pdf                   /referees/faqs/  301
-/wp-content/uploads/2022/08/Victoryp22.jpg                            /fields/victory/  301
-/wp-content/uploads/2022/11/Team-Lists-Nov16.pdf                      /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2023/11/Region-13-Guidelines-for-Penalty-Kicks-2023.pdf  /assets/docs/penalty-kick-guidelines.pdf  301
-/wp-content/uploads/2024/04/R13-2024-Registration-Flyer.pdf           /register/       301
-/wp-content/uploads/2025/08/2025-12U-Division-Meeting.pptx            /coaches/        301
-/wp-content/uploads/2025/11/TT25_Team_List_C.pdf                      /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2025/09/ref-card-2023.pdf                         /referees/resources/  301
-
-# From GSC 2026-05-10 not-found drilldown
-# Board minute PDFs
-/wp-content/uploads/2022/03/2021-03-04-minutes.pdf                    /about/board-minutes/  301
-/wp-content/uploads/2022/03/April_2019.pdf                            /about/board-minutes/  301
-/wp-content/uploads/2022/03/June_2017.pdf                             /about/board-minutes/  301
-/wp-content/uploads/2022/03/November_2016.pdf                         /about/board-minutes/  301
-/wp-content/uploads/2022/03/October_2016.pdf                          /about/board-minutes/  301
-# Coaching docs
-/wp-content/uploads/2022/03/Region-13-PPs-20200615.pdf                /coaches/practice/     301
-/wp-content/uploads/2023/08/Region-13-Modifications-for-8U-7U-6U-2022.docx.pdf  /coaches/    301
-/wp-content/uploads/2024/09/prts06-v02.pdf                            /referees/resources/   301
-/wp-content/uploads/2024/10/prts07-v02.pdf                            /referees/resources/   301
-# Registration flyer
-/wp-content/uploads/2022/05/R13-registration-flyer-2022.pdf           /register/             301
-# Thanksgiving Tournament artifacts
-/wp-content/uploads/2022/12/R13-BRACKET-FINAL.pdf                     /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2022/12/R13-RESULTS-FINAL.pdf                     /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2024/10/Application-TT2024.pdf                    /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2024/10/Invitation-TT2024-1.pdf                   /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2024/10/Referee-Form-TT2024.pdf                   /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2024/10/Roster-TT2024.pdf                         /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2024/11/Almansor-Thanksgiving-Field-Map-2024.pdf  /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2024/11/TT24-Sched-Ref-01.pdf                     /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2024/11/TT24-Teams.pdf                            /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2025/11/TT25_Robinson_field_map_v3.pdf            /programs/tournaments/thanksgiving/  301
-/wp-content/uploads/2025/11/TT25_Rose_Bowl_field_map_v3.pdf           /programs/tournaments/thanksgiving/  301
-# Field map / schedules / policies
-/wp-content/uploads/2023/04/BOSC-2023-Field-Map.pdf                   /fields/               301
-/wp-content/uploads/2025/11/Sched25_f.pdf                             /schedules/            301
-/wp-content/uploads/2024/11/LC-City-Council-Age-Group-Limitation-November.pdf  /fields/lchs/  301
-
-# Old WP attachment / misc paths from GSC 2026-05-10 drilldown
-/index.php                       /                                              301
-/arcadia-city-hall-soccer-field/ /fields/                                       301
-/arcadia-city-hall-soccer-field  /fields/                                       301
-/schedule/schedule-faq/          /families/faqs/                                301
-/schedule/schedule-faq           /families/faqs/                                301
-/created-with-gimp-2/            /                                              301
-/created-with-gimp-2             /                                              301
-/la-salle-google-map2-2/         /fields/la-salle/                              301
-/la-salle-google-map2-2          /fields/la-salle/                              301
-/mst-logo-2019/                  /                                              301
-/mst-logo-2019                   /                                              301
-/screenshot-2024-09-02-215902/   /                                              301
-/screenshot-2024-09-02-215902    /                                              301
-
-# Old WP-style board-minutes filenames (2014–2022) — those PDFs are no longer
-# served (moved to archive/board-minutes/ outside site/). Catch only the old
-# `ayso13-board-minutes-*` prefix so it doesn't intercept the current
-# `ayso-executive-board-meeting-*` files that are still served.
-/assets/docs/minutes/ayso13-board-minutes-*                           /about/board-minutes/ 301
-
-# Common typo for Victory Park field — actual URL is /fields/victory/
-/fields/victory-park/           /fields/victory/                                301
-/fields/victory-park            /fields/victory/                                301
-
-# Old WP map sub-paths — /maps and /maps/ already redirect above (line 415-416);
-# this catches /maps/region-13-map2/ and any future sub-paths
-/maps/*                         /fields/                                        301
-
-# Malformed tel: links scraped as paths
-/tel:6263166900                 /contact/                                       301
-
-# Old WP scheduling post for 4U/5U at Victory Park
-/victory-park-with-4u5u-2024-2/ /programs/preschool/                            301
-/victory-park-with-4u5u-2024-2  /programs/preschool/                            301
-
-# Pre-WP `/new/...` paths from the original ayso13.org rebuild
-/new/standings/scores.php       /schedules/                                     301
-/new/includes/about/history.php /about/                                         301
-/new/includes/programs/allstar.php /programs/all-stars/                         301
-/new/*                          /                                               301
-
-# /r — regex ^\/r(?:\/|\?.*)?$ approximated (Cloudflare _redirects has no regex support)
-# Splat rule last — exact matches above take priority and perform better
-/r                              https://ayso13.typeform.com/to/Ah0JFeOp         301
-/r/                             https://ayso13.typeform.com/to/Ah0JFeOp         301
-/r/*                            https://ayso13.typeform.com/to/Ah0JFeOp         301
+# ======================================================================
+# Case-sensitive variants & typos
+# ======================================================================
+/status                             https://status.ayso13.org/               301
+/status/                            https://status.ayso13.org/               301
+/programs/region13extra             /programs/extra/                         301

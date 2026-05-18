@@ -14,7 +14,7 @@ Register by **May 31** to pay **$220**. The price goes up to $235 in June and $2
 
 ## Pay What You Can
 
-**Soccer is for everyone.** Families who need assistance can pay what they can afford. Families who can contribute more help make this possible. To pay what you can, adjust pricing at checkout or contact [registrar@ayso13.org](mailto:registrar@ayso13.org) for assistance.
+**Soccer is for everyone.** Families who need assistance can pay what they can afford. Families who can contribute more help make this possible. To pay what you can, adjust pricing at checkout on the registration form.
 
 ## Registration Fees
 

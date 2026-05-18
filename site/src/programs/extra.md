@@ -37,6 +37,8 @@ B10U: 11:15am–12pm
 G10U: 10:15–11am  
 B10U: 11:15am–12pm
 
+## [RSVP for TRYOUTS](https://ayso13.typeform.com/extratryout2026)
+
 What to bring to tryouts:
 
 - cleats
