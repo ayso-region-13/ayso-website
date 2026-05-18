@@ -8,3 +8,4 @@ client_secret_*.json
 gbp-setup.md
 .claude/
 node_modules/
+csp*.json

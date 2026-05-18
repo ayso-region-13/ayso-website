@@ -1,0 +1,60 @@
+{# ── Important Dates column ───────────────────────────────────────────
+   Used inside the About + Roles section on the home page as the middle
+   column. Renders up to 5 upcoming events from _data/importantDates.json
+   (CMS-edited). Inline script re-checks each card's data-date against
+   today and hides past events on the client — so the widget never shows
+   stale dates between publishes. Without JS, the build-time filter is
+   accurate as of the last publish.
+
+   This partial is conditionally included by home.njk; the column is
+   wrapped in <div id="important-dates"> so the JS can target it.
+   Empty/disabled state is handled by home.njk (it omits the include
+   entirely and switches the surrounding grid back to 2-col). #}
+
+{% set upcoming = importantDates.dates | upcomingEvents(5) %}
+<div id="important-dates">
+  <div class="flex items-center gap-3 mb-4">
+    <h2 class="text-xl md:text-2xl font-extrabold text-brand-dark uppercase tracking-tight">Upcoming Dates</h2>
+  </div>
+
+  <ul class="space-y-2">
+    {% for ev in upcoming %}
+    <li class="date-card" data-date="{{ ev.date }}">
+      {% if ev.link %}
+      <a href="{{ ev.link }}" class="block bg-brand-cream border-l-4 border-brand-red-dark px-4 py-3 hover:bg-brand-cream/70 transition-colors">
+        <div class="text-xs font-bold uppercase tracking-wider text-brand-red-dark">{{ ev.date | shortDate }}</div>
+        <div class="text-sm font-semibold text-brand-dark mt-1 leading-snug">{{ ev.name }}</div>
+      </a>
+      {% else %}
+      <div class="block bg-brand-cream border-l-4 border-brand-red-dark px-4 py-3">
+        <div class="text-xs font-bold uppercase tracking-wider text-brand-red-dark">{{ ev.date | shortDate }}</div>
+        <div class="text-sm font-semibold text-brand-dark mt-1 leading-snug">{{ ev.name }}</div>
+      </div>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+
+  <a href="/about/calendar/" class="inline-block mt-4 text-sm font-semibold text-brand-red-dark hover:underline">See all events →</a>
+</div>
+<script>
+  (function () {
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var section = document.getElementById('important-dates');
+    if (!section) return;
+    var cards = section.querySelectorAll('.date-card');
+    var visible = 0;
+    cards.forEach(function (c) {
+      var iso = c.dataset.date;
+      if (!iso) return;
+      var d = new Date(iso + 'T00:00:00');
+      if (d < today) {
+        c.hidden = true;
+      } else {
+        visible++;
+      }
+    });
+    if (visible === 0) section.hidden = true;
+  })();
+</script>
