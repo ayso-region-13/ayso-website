@@ -1,0 +1,15 @@
+name = "ayso13-redirects"
+main = "src/index.js"
+compatibility_date = "2025-05-18"
+
+# Mount on root of prod + staging domains. The more-specific
+# `/api/weather` route (weather-api Worker) wins by precedence, so
+# this Worker never sees those requests.
+
+[[routes]]
+pattern = "www.ayso13.org/*"
+zone_name = "ayso13.org"
+
+[[routes]]
+pattern = "staging.ayso13.org/*"
+zone_name = "ayso13.org"

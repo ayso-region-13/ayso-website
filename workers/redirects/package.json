@@ -1,0 +1,16 @@
+{
+  "name": "ayso13-redirects",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cloudflare Worker that handles 570+ legacy URL redirects in front of the AYSO Region 13 Cloudflare Pages site. Source of truth is site/src/_redirects; the build script parses that file and emits src/map.js for the Worker bundle.",
+  "scripts": {
+    "build": "node scripts/generate-map.js",
+    "test": "node scripts/test-map.mjs",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && npm test && wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^4.87.0"
+  }
+}
