@@ -2,14 +2,28 @@ name = "ayso13-redirects"
 main = "src/index.js"
 compatibility_date = "2025-05-18"
 
-# Mount on root of prod + staging domains. The more-specific
-# `/api/weather` route (weather-api Worker) wins by precedence, so
-# this Worker never sees those requests.
+# Two environments: production (mounted on www.ayso13.org) and
+# staging (mounted on staging.ayso13.org). Deploy with one of the
+# npm scripts (deploy:prod / deploy:staging) so the --env flag is
+# always set; bare `wrangler deploy` without --env will not pick
+# either env block.
+#
+# Same Worker code + same generated map.js gets deployed to both;
+# the env split lets staging redirect changes get previewed on
+# staging.ayso13.org without touching prod.
+#
+# The more-specific routes for the weather-api and csp-report
+# Workers still win precedence on both hostnames; this Worker only
+# sees what those don't claim.
 
-[[routes]]
-pattern = "www.ayso13.org/*"
-zone_name = "ayso13.org"
+[env.production]
+name = "ayso13-redirects"
+routes = [
+  { pattern = "www.ayso13.org/*", zone_name = "ayso13.org" }
+]
 
-[[routes]]
-pattern = "staging.ayso13.org/*"
-zone_name = "ayso13.org"
+[env.staging]
+name = "ayso13-redirects-staging"
+routes = [
+  { pattern = "staging.ayso13.org/*", zone_name = "ayso13.org" }
+]

@@ -1,26 +1,28 @@
 name: Deploy Redirect Worker
 
-# Auto-deploys the ayso13-redirects Cloudflare Worker on any push to
-# main that affects either:
-#   - site/src/_redirects (the source-of-truth file the Worker reads)
-#   - workers/redirects/** (the Worker code itself)
+# Auto-deploys the ayso13-redirects Cloudflare Worker on pushes to
+# main (-> production env, www.ayso13.org) or staging (-> staging
+# env, staging.ayso13.org). The Worker uses Workers environments
+# so prod and staging are separate deployments sharing the same
+# source code + generated map.js.
 #
-# Also triggers on changes to this workflow file, plus manual dispatch.
+# Trigger paths:
+#   - site/src/_redirects        (the source-of-truth file)
+#   - workers/redirects/**       (Worker code, map, scripts)
+#   - this workflow file
+#
+# Manual dispatch is also supported (will deploy whichever branch
+# the workflow is dispatched on -- defaults to main).
 #
 # Required repo secrets:
 #   CLOUDFLARE_API_TOKEN  - Cloudflare API token with permissions:
 #                            Account -> Workers Scripts -> Edit
 #                            Account -> Account Settings -> Read
-#                            (Create at dash.cloudflare.com -> My Profile ->
-#                             API Tokens -> Create Token -> "Edit Cloudflare
-#                             Workers" template. Don't reuse the Pages-scoped
-#                             CF_API_TOKEN -- that one lacks Workers:Edit.)
-#   CLOUDFLARE_ACCOUNT_ID - AYSO Region 13 account ID (the same value the
-#                            .envrc uses locally).
+#   CLOUDFLARE_ACCOUNT_ID - AYSO Region 13 account ID.
 
 on:
   push:
-    branches: [main]
+    branches: [main, staging]
     paths:
       - 'site/src/_redirects'
       - 'workers/redirects/**'
@@ -43,9 +45,19 @@ jobs:
         working-directory: workers/redirects
         run: npm ci
 
-      - name: Build, test, deploy
+      - name: Deploy (branch-scoped env)
         working-directory: workers/redirects
-        run: npm run deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "Branch = main -> deploying to production (www.ayso13.org)"
+            npm run deploy:prod
+          elif [ "${{ github.ref_name }}" = "staging" ]; then
+            echo "Branch = staging -> deploying to staging (staging.ayso13.org)"
+            npm run deploy:staging
+          else
+            echo "::error::Unsupported branch ${{ github.ref_name }} -- not deploying"
+            exit 1
+          fi
