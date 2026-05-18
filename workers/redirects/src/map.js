@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-18T17:39:47.562Z
-// 575 exact rules + 8 splat rules = 583 total
+// Last generated: 2026-05-18T19:40:34.003Z
+// 588 exact rules + 8 splat rules = 596 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -468,11 +468,23 @@ export const EXACT = {
     "d": "/programs/preschool/",
     "s": 301
   },
+  "/4u/": {
+    "d": "/programs/preschool/",
+    "s": 301
+  },
   "/5u": {
     "d": "/programs/preschool/",
     "s": 301
   },
+  "/5u/": {
+    "d": "/programs/preschool/",
+    "s": 301
+  },
   "/4u5u": {
+    "d": "/programs/preschool/",
+    "s": 301
+  },
+  "/4u5u/": {
     "d": "/programs/preschool/",
     "s": 301
   },
@@ -624,6 +636,10 @@ export const EXACT = {
     "d": "/programs/tournaments/",
     "s": 301
   },
+  "/t/": {
+    "d": "/programs/tournaments/",
+    "s": 301
+  },
   "/thanksgiving-tournament-new": {
     "d": "/programs/tournaments/thanksgiving/",
     "s": 301
@@ -721,6 +737,10 @@ export const EXACT = {
     "s": 301
   },
   "/g": {
+    "d": "/schedules/games/",
+    "s": 301
+  },
+  "/g/": {
     "d": "/schedules/games/",
     "s": 301
   },
@@ -1136,6 +1156,10 @@ export const EXACT = {
     "d": "/referees/",
     "s": 301
   },
+  "/ref/": {
+    "d": "/referees/",
+    "s": 301
+  },
   "/download/ayso-guidance-for-referees-coaches-other-volunteers-and-parents/": {
     "d": "/referees/resources/",
     "s": 301
@@ -1145,6 +1169,10 @@ export const EXACT = {
     "s": 301
   },
   "/Referee/": {
+    "d": "/referees/",
+    "s": 301
+  },
+  "/Referee": {
     "d": "/referees/",
     "s": 301
   },
@@ -1696,6 +1724,10 @@ export const EXACT = {
     "d": "/resources/newsletters/",
     "s": 301
   },
+  "/newsletters/": {
+    "d": "/resources/newsletters/",
+    "s": 301
+  },
   "/contact-us/": {
     "d": "/contact/",
     "s": 301
@@ -1756,6 +1788,10 @@ export const EXACT = {
     "d": "https://ayso13.inleague.com/app/volunteer",
     "s": 301
   },
+  "/apply/": {
+    "d": "https://ayso13.inleague.com/app/volunteer",
+    "s": 301
+  },
   "/start": {
     "d": "https://ayso13.inleague.com/app/welcome",
     "s": 301
@@ -1781,6 +1817,10 @@ export const EXACT = {
     "s": 301
   },
   "/aysou": {
+    "d": "https://ayso13.inleague.com/app/eTrainU",
+    "s": 301
+  },
+  "/aysou/": {
     "d": "https://ayso13.inleague.com/app/eTrainU",
     "s": 301
   },
@@ -1840,6 +1880,10 @@ export const EXACT = {
     "d": "https://ayso13.typeform.com/1CSPUD2025",
     "s": 301
   },
+  "/gcud/": {
+    "d": "https://ayso13.typeform.com/1CSPUD2025",
+    "s": 301
+  },
   "/gc16": {
     "d": "https://form.typeform.com/to/vf4lZIRo",
     "s": 301
@@ -1852,7 +1896,15 @@ export const EXACT = {
     "d": "https://ayso13.typeform.com/SSreg",
     "s": 301
   },
+  "/pog/": {
+    "d": "https://ayso13.typeform.com/SSreg",
+    "s": 301
+  },
   "/gctt": {
+    "d": "https://form.typeform.com/to/VIFJoyJ4",
+    "s": 301
+  },
+  "/gctt/": {
     "d": "https://form.typeform.com/to/VIFJoyJ4",
     "s": 301
   },
