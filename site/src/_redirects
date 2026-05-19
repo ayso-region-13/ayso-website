@@ -166,6 +166,8 @@
 /tournaments                        /programs/tournaments/                   301
 /thanksgiving-tournament/           /programs/tournaments/thanksgiving/      301
 /thanksgiving-tournament            /programs/tournaments/thanksgiving/      301
+/r13thanksgiving/                   /programs/tournaments/thanksgiving/      301
+/r13thanksgiving                    /programs/tournaments/thanksgiving/      301
 /rosecity/                          /programs/tournaments/rose-city-cup/     301
 /rosecity                           /programs/tournaments/rose-city-cup/     301
 /rose-city-cup/                     /programs/tournaments/rose-city-cup/     301
@@ -512,6 +514,10 @@
 /feedback                           /contact/feedback/                       301
 /tel:6263166900                     /contact/                                301
 
+# Legacy WP RSS feed -- some aggregators still poll it
+/feed/                              /resources/newsletters/                  301
+/feed                               /resources/newsletters/                  301
+
 # ======================================================================
 # Short links -- InLeague
 # ======================================================================
@@ -597,21 +603,21 @@
 /author/*                           /about/                                  301
 
 # ======================================================================
-# WP-uploads images (logos + banners)
+# WP-uploads images -- legacy hotlinks that point to a real image asset
 # ======================================================================
-/wp-content/uploads/2025/12/AYSO-BirthChart.png /register/age-chart/                     301
-/wp-content/uploads/2025/08/AYSO-Age-Determination-Chart-MY26-MY27.png /register/age-chart/                     301
+# Image -> image redirects only. Old image -> HTML-page redirects were
+# removed: a 301 from a JPG request to an HTML page still produces a
+# broken image at the embedding site, so the redirect added no value.
+# Anything where we don't have a real image replacement now 404s
+# (the honest answer).
 /wp-content/uploads/AYSO-R13-Logo-266.png /images/logo.svg                         301
-/wp-content/uploads/NEWS_114.png    /resources/newsletters/                  301
-/wp-content/uploads/registration114.png /register/                               301
-/wp-content/uploads/Manager_114.png /managers/                               301
-/wp-content/uploads/2022/07/AYSOU-Training-Library-1024x471.png /coaches/training/                       301
 /wp-content/uploads/cropped-AYSO-R13-Logo-266-192x192.png /images/logo.svg                         301
 /wp-content/uploads/2023/08/logo-gold.png /images/logo.svg                         301
-/wp-content/uploads/2022/03/phsnorth.jpg /fields/pasadena-hs/                     301
-/wp-content/uploads/2022/03/rosebowl.jpg /fields/area-h/                          301
-/wp-content/uploads/2023/02/1677572030-814390417fe413b.png /about/                                  301
-/wp-content/uploads/2022/08/Victoryp22.jpg /fields/victory/                         301
+/wp-content/uploads/2022/03/aysos1logo.png /images/ayso-section1-logo.png            301
+/wp-content/uploads/2025/12/AYSO-BirthChart.png /images/age-chart-2026.png               301
+/wp-content/uploads/2025/08/AYSO-Age-Determination-Chart-MY26-MY27.png /images/age-chart-2026.png               301
+/wp-content/uploads/2022/07/AYSOU-Training-Library-1024x471.png /images/volunteer-faq/AYSOU-Training-Library-1024x471.png 301
+/wp-content/uploads/2022/08/Victoryp22.jpg /images/victory-01.jpg                   301
 
 # ======================================================================
 # WP-uploads PDFs -- Board minutes
