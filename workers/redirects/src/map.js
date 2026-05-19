@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-19T15:05:03.845Z
-// 592 exact rules + 8 splat rules = 600 total
+// Last generated: 2026-05-19T15:08:53.283Z
+// 587 exact rules + 8 splat rules = 595 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -1996,32 +1996,8 @@ export const EXACT = {
     "d": "/about/leadership/",
     "s": 301
   },
-  "/wp-content/uploads/2025/12/AYSO-BirthChart.png": {
-    "d": "/register/age-chart/",
-    "s": 301
-  },
-  "/wp-content/uploads/2025/08/AYSO-Age-Determination-Chart-MY26-MY27.png": {
-    "d": "/register/age-chart/",
-    "s": 301
-  },
   "/wp-content/uploads/AYSO-R13-Logo-266.png": {
     "d": "/images/logo.svg",
-    "s": 301
-  },
-  "/wp-content/uploads/NEWS_114.png": {
-    "d": "/resources/newsletters/",
-    "s": 301
-  },
-  "/wp-content/uploads/registration114.png": {
-    "d": "/register/",
-    "s": 301
-  },
-  "/wp-content/uploads/Manager_114.png": {
-    "d": "/managers/",
-    "s": 301
-  },
-  "/wp-content/uploads/2022/07/AYSOU-Training-Library-1024x471.png": {
-    "d": "/coaches/training/",
     "s": 301
   },
   "/wp-content/uploads/cropped-AYSO-R13-Logo-266-192x192.png": {
@@ -2032,20 +2008,24 @@ export const EXACT = {
     "d": "/images/logo.svg",
     "s": 301
   },
-  "/wp-content/uploads/2022/03/phsnorth.jpg": {
-    "d": "/fields/pasadena-hs/",
+  "/wp-content/uploads/2022/03/aysos1logo.png": {
+    "d": "/images/ayso-section1-logo.png",
     "s": 301
   },
-  "/wp-content/uploads/2022/03/rosebowl.jpg": {
-    "d": "/fields/area-h/",
+  "/wp-content/uploads/2025/12/AYSO-BirthChart.png": {
+    "d": "/images/age-chart-2026.png",
     "s": 301
   },
-  "/wp-content/uploads/2023/02/1677572030-814390417fe413b.png": {
-    "d": "/about/",
+  "/wp-content/uploads/2025/08/AYSO-Age-Determination-Chart-MY26-MY27.png": {
+    "d": "/images/age-chart-2026.png",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/07/AYSOU-Training-Library-1024x471.png": {
+    "d": "/images/volunteer-faq/AYSOU-Training-Library-1024x471.png",
     "s": 301
   },
   "/wp-content/uploads/2022/08/Victoryp22.jpg": {
-    "d": "/fields/victory/",
+    "d": "/images/victory-01.jpg",
     "s": 301
   },
   "/wp-content/uploads/2022/03/2021-03-04-minutes.pdf": {
