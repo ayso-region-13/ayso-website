@@ -166,6 +166,8 @@
 /tournaments                        /programs/tournaments/                   301
 /thanksgiving-tournament/           /programs/tournaments/thanksgiving/      301
 /thanksgiving-tournament            /programs/tournaments/thanksgiving/      301
+/r13thanksgiving/                   /programs/tournaments/thanksgiving/      301
+/r13thanksgiving                    /programs/tournaments/thanksgiving/      301
 /rosecity/                          /programs/tournaments/rose-city-cup/     301
 /rosecity                           /programs/tournaments/rose-city-cup/     301
 /rose-city-cup/                     /programs/tournaments/rose-city-cup/     301
@@ -512,6 +514,10 @@
 /feedback                           /contact/feedback/                       301
 /tel:6263166900                     /contact/                                301
 
+# Legacy WP RSS feed -- some aggregators still poll it
+/feed/                              /resources/newsletters/                  301
+/feed                               /resources/newsletters/                  301
+
 # ======================================================================
 # Short links -- InLeague
 # ======================================================================
@@ -612,6 +618,10 @@
 /wp-content/uploads/2022/03/rosebowl.jpg /fields/area-h/                          301
 /wp-content/uploads/2023/02/1677572030-814390417fe413b.png /about/                                  301
 /wp-content/uploads/2022/08/Victoryp22.jpg /fields/victory/                         301
+/wp-content/uploads/2022/03/aysos1logo.png /about/                                  301
+/wp-content/uploads/2022/03/fireballs.jpg /about/history/                          301
+/wp-content/uploads/2022/04/8urunningsm.jpg /programs/fall-soccer/                   301
+/wp-content/uploads/2022/09/launch.png /programs/                               301
 
 # ======================================================================
 # WP-uploads PDFs -- Board minutes

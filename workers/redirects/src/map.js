@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-18T19:40:34.003Z
-// 588 exact rules + 8 splat rules = 596 total
+// Last generated: 2026-05-19T15:03:32.818Z
+// 596 exact rules + 8 splat rules = 604 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -541,6 +541,14 @@ export const EXACT = {
     "s": 301
   },
   "/thanksgiving-tournament": {
+    "d": "/programs/tournaments/thanksgiving/",
+    "s": 301
+  },
+  "/r13thanksgiving/": {
+    "d": "/programs/tournaments/thanksgiving/",
+    "s": 301
+  },
+  "/r13thanksgiving": {
     "d": "/programs/tournaments/thanksgiving/",
     "s": 301
   },
@@ -1756,6 +1764,14 @@ export const EXACT = {
     "d": "/contact/",
     "s": 301
   },
+  "/feed/": {
+    "d": "/resources/newsletters/",
+    "s": 301
+  },
+  "/feed": {
+    "d": "/resources/newsletters/",
+    "s": 301
+  },
   "/etrainu": {
     "d": "https://ayso13.inleague.com/app/eTrainU",
     "s": 301
@@ -2030,6 +2046,22 @@ export const EXACT = {
   },
   "/wp-content/uploads/2022/08/Victoryp22.jpg": {
     "d": "/fields/victory/",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/03/aysos1logo.png": {
+    "d": "/about/",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/03/fireballs.jpg": {
+    "d": "/about/history/",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/04/8urunningsm.jpg": {
+    "d": "/programs/fall-soccer/",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/09/launch.png": {
+    "d": "/programs/",
     "s": 301
   },
   "/wp-content/uploads/2022/03/2021-03-04-minutes.pdf": {
