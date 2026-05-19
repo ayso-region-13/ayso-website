@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-19T15:03:32.818Z
-// 596 exact rules + 8 splat rules = 604 total
+// Last generated: 2026-05-19T15:05:03.845Z
+// 592 exact rules + 8 splat rules = 600 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -2046,22 +2046,6 @@ export const EXACT = {
   },
   "/wp-content/uploads/2022/08/Victoryp22.jpg": {
     "d": "/fields/victory/",
-    "s": 301
-  },
-  "/wp-content/uploads/2022/03/aysos1logo.png": {
-    "d": "/about/",
-    "s": 301
-  },
-  "/wp-content/uploads/2022/03/fireballs.jpg": {
-    "d": "/about/history/",
-    "s": 301
-  },
-  "/wp-content/uploads/2022/04/8urunningsm.jpg": {
-    "d": "/programs/fall-soccer/",
-    "s": 301
-  },
-  "/wp-content/uploads/2022/09/launch.png": {
-    "d": "/programs/",
     "s": 301
   },
   "/wp-content/uploads/2022/03/2021-03-04-minutes.pdf": {
