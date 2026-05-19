@@ -14,3 +14,31 @@
 # on a machine with multiple accounts.
 
 export CLOUDFLARE_ACCOUNT_ID="REPLACE_WITH_AYSO13_ACCOUNT_ID"
+
+# Per-project Google credentials for the claude-seo plugin scripts.
+# Symlinks ~/.config/claude-seo at this project's .seo-creds/ so that
+# running an SEO query from any other project on this machine can't
+# clobber the ayso13 config (which was happening). On first entry the
+# existing global state is moved aside to a .preserved-* directory.
+#
+# Setup steps:
+#   1. mkdir .seo-creds
+#   2. Drop into .seo-creds/ three files (all gitignored):
+#        client_secret.json  -- OAuth client JSON from Google Cloud
+#        google-api.json     -- { "ga4_property_id": "...",
+#                                 "oauth_client_path":
+#                                   "<absolute path to client_secret.json>" }
+#        oauth-token.json    -- created automatically on first auth;
+#                                you can also seed it from an existing
+#                                ~/.config/claude-seo/oauth-token.json
+#   3. direnv allow (re-runs this file)
+if [ -d "$PWD/.seo-creds" ]; then
+  GLOBAL_SEO="$HOME/.config/claude-seo"
+  if [ ! -L "$GLOBAL_SEO" ] || [ "$(readlink "$GLOBAL_SEO")" != "$PWD/.seo-creds" ]; then
+    if [ -d "$GLOBAL_SEO" ] && [ ! -L "$GLOBAL_SEO" ]; then
+      mv "$GLOBAL_SEO" "$GLOBAL_SEO.preserved-$(date +%Y%m%d%H%M%S)"
+    fi
+    /bin/mkdir -p "$HOME/.config"
+    /bin/ln -sfn "$PWD/.seo-creds" "$GLOBAL_SEO"
+  fi
+fi

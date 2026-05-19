@@ -180,7 +180,14 @@ Note: Search (`/search/`) only works after a full `npm run build` — not in dev
 
 ### GSC + GA4 data pulls
 
-OAuth is wired up via the `claude-seo` plugin scripts. Token + property ID live at `~/.config/claude-seo/`. Token auto-refreshes when `oauth_client_path` in `~/.config/claude-seo/google-api.json` points at the OAuth client_secret JSON (file lives at repo root `client_secret_*.json`, gitignored).
+OAuth is wired up via the `claude-seo` plugin scripts. Token + property ID live in **`.seo-creds/`** at the repo root (gitignored), symlinked into place at `~/.config/claude-seo` by `.envrc` on direnv entry. The symlink dance is required because the claude-seo plugin scripts hardcode `~/.config/claude-seo` and other projects on the same machine were silently overwriting the file (notafintech.co clobbered it on 2026-05-19 — wedged GSC + GA4 access until the per-project pattern was set up).
+
+`.seo-creds/` contents (all gitignored):
+- `client_secret.json` — OAuth client JSON from Google Cloud Console (project `ayso13-seo`)
+- `google-api.json` — `{ "ga4_property_id": "307558725", "oauth_client_path": "/Users/matthew/dev/ayso-website/.seo-creds/client_secret.json" }`
+- `oauth-token.json` — OAuth refresh token, written on first auth flow
+
+Token auto-refreshes when the entries above are valid. To re-auth from scratch: `python3 $SEO/google_auth.py --auth --creds .seo-creds/client_secret.json`.
 
 ```bash
 SEO=~/.claude/plugins/cache/agricidaniel-seo/claude-seo/1.9.6/scripts
