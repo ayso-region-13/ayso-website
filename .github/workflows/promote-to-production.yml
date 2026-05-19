@@ -33,11 +33,33 @@ jobs:
         run: |
           git checkout main
           git pull origin main
+          MAIN_BEFORE=$(git rev-parse HEAD)
           git merge origin/staging --no-edit --no-ff -X theirs
           git push origin main
+
+          # Extract titles of the commits being promoted (everything from
+          # MAIN_BEFORE up to the merge commit, excluding the merge commit
+          # itself via --no-merges). Capped at 10 lines for Slack; overflow
+          # gets a "...and N more" footer.
+          FULL=$(git log "$MAIN_BEFORE..HEAD" --no-merges --pretty=format:'%s')
+          COUNT=$(printf '%s\n' "$FULL" | grep -c . || true)
+          LIST=$(printf '%s\n' "$FULL" | head -10 | sed 's/^/• /')
+          if [ "$COUNT" -gt 10 ]; then
+            REMAINING=$((COUNT - 10))
+            LIST="$(printf '%s\n• …and %s more' "$LIST" "$REMAINING")"
+          fi
+          if [ -z "$LIST" ]; then
+            LIST="• (no new commits)"
+            COUNT=0
+          fi
+
           {
             echo "sha_short=$(git rev-parse --short HEAD)"
             echo "sha_full=$(git rev-parse HEAD)"
+            echo "commit_count=$COUNT"
+            echo "commits<<COMMITS_EOF"
+            echo "$LIST"
+            echo "COMMITS_EOF"
           } >> "$GITHUB_OUTPUT"
 
       - name: Notify Slack — promotion merged, awaiting Cloudflare deploy
@@ -45,16 +67,23 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SHA: ${{ steps.merge.outputs.sha_short }}
+          COUNT: ${{ steps.merge.outputs.commit_count }}
+          COMMITS: ${{ steps.merge.outputs.commits }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHA" --arg run "$RUN_URL" '{
+            --data "$(jq -nc \
+              --arg sha "$SHA" \
+              --arg run "$RUN_URL" \
+              --arg count "$COUNT" \
+              --arg commits "$COMMITS" '{
               channel: "C0A024YGR9C",
               text: "Promotion merged — Cloudflare deploying \($sha)…",
               blocks: [
-                { type: "section", text: { type: "mrkdwn", text: ":hourglass_flowing_sand: *Promotion merged* — Cloudflare is now building `\($sha)`. Slack will update when the deploy is live (~2 min)." } },
+                { type: "section", text: { type: "mrkdwn", text: ":hourglass_flowing_sand: *Promotion merged* — Cloudflare is now building `\($sha)` (\($count) commits). Slack will update when the deploy is live (~2 min)." } },
+                { type: "section", text: { type: "mrkdwn", text: "*Promoting:*\n\($commits)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
               ]
             }')"
@@ -73,17 +102,25 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SHA: ${{ steps.merge.outputs.sha_short }}
+          COUNT: ${{ steps.merge.outputs.commit_count }}
+          COMMITS: ${{ steps.merge.outputs.commits }}
           BUILD_SECONDS: ${{ steps.cf_wait.outputs.build_seconds }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHA" --arg secs "$BUILD_SECONDS" --arg run "$RUN_URL" '{
+            --data "$(jq -nc \
+              --arg sha "$SHA" \
+              --arg secs "$BUILD_SECONDS" \
+              --arg run "$RUN_URL" \
+              --arg count "$COUNT" \
+              --arg commits "$COMMITS" '{
               channel: "C0A024YGR9C",
               text: "Production deploy live — \($sha)",
               blocks: [
                 { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Production deploy live* — `\($sha)` is now serving on www.ayso13.org. Build took \($secs)s." } },
+                { type: "section", text: { type: "mrkdwn", text: "*Promoted (\($count) commits):*\n\($commits)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
               ]
             }')"
