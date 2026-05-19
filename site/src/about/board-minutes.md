@@ -1,7 +1,6 @@
 ---
 title: Board Minutes
-description: AYSO Region 13 board meeting minutes from recent seasons. Older
-  minutes available on request.
+description: AYSO Region 13 board meeting minutes from recent seasons.
 layout: page.njk
 section: about
 ---
