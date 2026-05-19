@@ -26,6 +26,42 @@ jobs:
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Need history to compute commit titles in event.before..sha range.
+          # 50 covers any realistic single push without cloning the whole repo.
+          fetch-depth: 50
+
+      - name: Extract commit titles for Slack
+        id: commits
+        env:
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          # If 'before' is the all-zero SHA (first push to branch) or isn't
+          # in our shallow fetch, fall back to just the tip commit.
+          ZERO="0000000000000000000000000000000000000000"
+          if [ "$BEFORE" = "$ZERO" ] || ! git rev-parse "$BEFORE" >/dev/null 2>&1; then
+            LIST="$(git log -1 --pretty=format:'• %s' "$AFTER")"
+            COUNT=1
+          else
+            FULL="$(git log "$BEFORE..$AFTER" --no-merges --pretty=format:'%s')"
+            COUNT=$(printf '%s\n' "$FULL" | grep -c . || true)
+            LIST="$(printf '%s\n' "$FULL" | head -10 | sed 's/^/• /')"
+            if [ "$COUNT" -gt 10 ]; then
+              REMAINING=$((COUNT - 10))
+              LIST="$(printf '%s\n• …and %s more' "$LIST" "$REMAINING")"
+            fi
+          fi
+          if [ -z "$LIST" ]; then
+            LIST="• (no new commits)"
+            COUNT=0
+          fi
+          {
+            echo "count=$COUNT"
+            echo "list<<COMMITS_EOF"
+            echo "$LIST"
+            echo "COMMITS_EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Wait for Cloudflare Pages staging deploy
         id: cf_wait
@@ -44,16 +80,22 @@ jobs:
           SHA: ${{ github.sha }}
           BUILD_SECONDS: ${{ steps.cf_wait.outputs.build_seconds }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          COMMITS: ${{ steps.commits.outputs.list }}
         run: |
           SHORT="${SHA:0:7}"
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHORT" --arg secs "$BUILD_SECONDS" --arg run "$RUN_URL" '{
+            --data "$(jq -nc \
+              --arg sha "$SHORT" \
+              --arg secs "$BUILD_SECONDS" \
+              --arg run "$RUN_URL" \
+              --arg commits "$COMMITS" '{
               channel: "C0A024YGR9C",
               text: "Staging deploy live — \($sha)",
               blocks: [
                 { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Staging deploy live* — `\($sha)` is now serving on staging.ayso13.org. Build took \($secs)s." } },
+                { type: "section", text: { type: "mrkdwn", text: "*Changes:*\n\($commits)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
               ]
             }')"
@@ -65,16 +107,22 @@ jobs:
           SHA: ${{ github.sha }}
           STAGE: ${{ steps.cf_wait.outputs.final_stage }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          COMMITS: ${{ steps.commits.outputs.list }}
         run: |
           SHORT="${SHA:0:7}"
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHORT" --arg stage "$STAGE" --arg run "$RUN_URL" '{
+            --data "$(jq -nc \
+              --arg sha "$SHORT" \
+              --arg stage "$STAGE" \
+              --arg run "$RUN_URL" \
+              --arg commits "$COMMITS" '{
               channel: "C0A024YGR9C",
               text: "Staging deploy failed — \($sha)",
               blocks: [
                 { type: "section", text: { type: "mrkdwn", text: ":x: *Staging deploy failed* — `\($sha)` failed at stage `\($stage)` on staging.ayso13.org." } },
+                { type: "section", text: { type: "mrkdwn", text: "*Changes attempted:*\n\($commits)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run for details>" } ] }
               ]
             }')"
