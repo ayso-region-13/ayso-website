@@ -20,6 +20,7 @@ eleventyExcludeFromCollections: true
 # CSP; the rest of the site keeps the strict global one.
 /pagefind/*
   Cache-Control: public, max-age=86400
+  ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'
 
 /.well-known/traffic-advice
