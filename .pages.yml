@@ -1,8 +1,20 @@
 branch: staging
 
 media:
-  input: site/src/images
-  output: /images
+  # Two buckets so editors can upload images AND PDFs through the CMS.
+  # Image fields and the rich-text editor's "insert image" button use
+  # the `images` bucket; the rich-text editor's "insert link" upload
+  # and any explicit type:file fields use the `docs` bucket.
+  - name: images
+    label: Images
+    input: site/src/images
+    output: /images
+    extensions: [jpg, jpeg, png, gif, webp, svg]
+  - name: docs
+    label: Documents (PDFs)
+    input: site/src/assets/docs
+    output: /assets/docs
+    extensions: [pdf]
 
 content:
 
@@ -86,6 +98,7 @@ content:
       - name: heroImage
         label: "Hero Image"
         type: image
+        media: images
         required: false
       - { name: heroImageAlt, label: "Hero Image Alt Text", type: string, required: false }
       - { name: body,         label: Content,               type: rich-text }
@@ -103,6 +116,7 @@ content:
       - name: heroImage
         label: "Hero Image"
         type: image
+        media: images
         required: false
       - { name: heroImageAlt, label: "Hero Image Alt Text", type: string, required: false }
       - { name: eventName,      label: "Event name (for schema)",      type: string, required: false, description: "Optional. Used in JSON-LD SportsEvent schema. Falls back to page title if blank." }
@@ -182,6 +196,7 @@ content:
       - name: heroImage
         label: "Hero Image"
         type: image
+        media: images
         required: false
       - { name: heroImageAlt,    label: "Hero Image Alt Text",  type: string, required: false }
       - { name: placeAddress,    label: "Street Address",       type: string, required: false, description: "E.g. '2575 Paloma St'. Used for Place schema." }

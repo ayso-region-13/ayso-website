@@ -1,15 +1,14 @@
 ---
-
-title: "Board Minutes"
+title: Board Minutes
+description: AYSO Region 13 board meeting minutes from recent seasons.
 layout: page.njk
 section: about
-description: "AYSO Region 13 board meeting minutes from recent seasons. Older minutes available on request."
 ---
-
 Board meetings are held on the first Thursday of every month at 7:15pm. Everyone is welcome to attend.
 
 ## Recent meeting minutes
 
+- [May 7, 2026](/assets/docs/minutes/ayso-executive-board-meeting-2026-05-07.pdf)
 - [February 5, 2026](/assets/docs/minutes/ayso-executive-board-meeting-2026-02-05.pdf)
 - [January 8, 2026](/assets/docs/minutes/ayso-executive-board-meeting-2026-01-08.pdf)
 - [December 4, 2025](/assets/docs/minutes/ayso-executive-board-meeting-2025-12-04.pdf)
