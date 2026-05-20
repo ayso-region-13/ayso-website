@@ -1,5 +1,5 @@
 {
   "enabled": true,
-  "status": "Open",
-  "message": "All fields open"
+  "status": "Monitoring",
+  "message": "All fields are currently open, although the air quality is moderate. Coaches, use your discretion!"
 }
