@@ -53,13 +53,14 @@ Children are placed in divisions based on their age as of July 31 of the current
 
 | Division | Ages | Format |
 | ----------------- | ----- | --------------------------------------------------------- |
-| 4U/5U (Preschool) | 4-5 | Small-sided games, learning basics |
-| 6U | 6 | 4v4, no goalkeepers |
-| 8U | 7-8 | 4v4, no goalkeepers |
-| 10U | 9-10 | 7v7 with goalkeepers |
-| 12U | 11-12 | 9v9 |
-| 14U | 13-14 | 11v11 (full field) |
-| 16U/19U | 15-19 | 11v11, [Upper Division program](/programs/upper-division) |
+| 4U/5U (Preschool) | 3-4 | Small-sided games, learning basics |
+| 6U | 5 | 4v4, no goalkeepers |
+| 7U | 6 | 4v4, no goalkeepers |
+| 8U | 7 | 4v4, no goalkeepers |
+| 10U | 8-9 | 7v7 with goalkeepers |
+| 12U | 10-11 | 9v9 |
+| 14U | 12-13 | 11v11 (full field) |
+| 16U/19U | 14-18 | 11v11, [Upper Division program](/programs/upper-division) |
 
 
 Check the [age chart](/register/age-chart/) for exact birth date cutoffs.
