@@ -63,7 +63,7 @@ Children are placed in divisions based on their age as of July 31 of the current
 | 16U/19U | 14-18 | 11v11, [Upper Division program](/programs/upper-division) |
 
 
-Check the [age chart](/register/age-chart/) for exact birth date cutoffs.
+The "U" in division names can be thought of as "under", meaning, for example, that 7U is "under 7". Check the [age chart](/register/age-chart/) for exact birth date cutoffs.
 
 ## The Volunteer Requirement
 
