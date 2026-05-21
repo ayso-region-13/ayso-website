@@ -22,6 +22,10 @@ Enter the field from Penn Street.
 
 <iframe src="https://maps.google.com/maps?q=134+E+Penn+St,+Pasadena,+CA+91103&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
+## Subfield Map
+
+![Butler — practice subfields 1 through 12 (the X'd areas are off-limits)](/images/fields/butler-subfield-map.jpg)
+
 ## Parking
 
 Street parking only on Howard, Elizabeth, Penn, or Marengo. No on-campus parking is available.
