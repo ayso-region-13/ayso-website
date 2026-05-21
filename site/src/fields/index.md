@@ -42,14 +42,14 @@ description: "Field maps and locations for AYSO Region 13 youth soccer in Pasade
 
 ### La Cañada
 
+- [Cornishon](/fields/cornishon) — 6U–8U game field
+- [FIS Lower](/fields/fis-lower/) — 12U game field and practice field (Foothill Intermediate School)
+- [FIS Upper](/fields/fis-upper/) — 6U–8U game field and practice field (Foothill Intermediate School)
+- [La Cañada Elementary](/fields/la-canada-elementary/) — Practice field (fall season)
 - [La Cañada High School (LCHS)](/fields/lchs) — Practice and game fields
 - [LC LDS](/fields/lc-lds) — Game field for 6U–8U and practice field
 - [Oak Grove](/fields/oak-grove) — Practice field
 - [Paradise Canyon](/fields/paradise) — Practice field
-- [Cornishon](/fields/cornishon) — 6U–8U game field
-- [FIS Upper](/fields/fis-upper/) — 6U–8U game field and practice field (Foothill Intermediate School)
-- [FIS Lower](/fields/fis-lower/) — 12U game field and practice field (Foothill Intermediate School)
-- [La Cañada Elementary](/fields/la-canada-elementary/) — Practice field (fall season)
 
 ## Contacts
 
