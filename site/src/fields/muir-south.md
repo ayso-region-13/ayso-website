@@ -8,9 +8,9 @@ placeLocality: "Pasadena"
 placePostalCode: "91103"
 description: "Muir South practice fields — AYSO Region 13 location in Pasadena. Address, parking, and directions."
 parking: "Lot"
-restrooms: "Port-a-Potty"
+restrooms: "Port-a-Potty (near baseball infield)"
 surface: "Grass"
-lighting: "No"
+lighting: "Yes"
 snackBar: "No"
 
 ---

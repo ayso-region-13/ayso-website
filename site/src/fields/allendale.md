@@ -10,7 +10,7 @@ placePostalCode: "91106"
 parking: "Street and Lot"
 restrooms: "Yes, by field"
 surface: "Grass"
-lighting: "No"
+lighting: "Yes"
 snackBar: "No"
 ---
 

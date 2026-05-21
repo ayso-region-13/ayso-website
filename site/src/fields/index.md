@@ -21,37 +21,38 @@ description: "Field maps and locations for AYSO Region 13 youth soccer in Pasade
 
 ### Pasadena
 
-- [Victory Park](/fields/victory) — Primary game fields for 6U-12U
-- [Blair High School](/fields/blair) — Practice and game fields
+- [Victory Park](/fields/victory) — Primary game fields for 6U–12U; also a practice field
+- [Blair High School](/fields/blair) — Currently a game field only
 - [McKinley](/fields/mckinley) — Practice and game fields
-- [Marshall Fundamental](/fields/marshall) — Practice field
+- [Marshall Fundamental](/fields/marshall) — Game field only (10U and 14U)
 - [Wilson MS](/fields/wilson) — Practice field
 - [Jefferson Park](/fields/jefferson) — Practice field
 - [McDonald Park](/fields/mcdonald) — Practice field
 - [Allendale Park](/fields/allendale) — Practice field
 - [Brookside Park](/fields/brookside) — Near Rose Bowl
 - [Butler Middle School](/fields/butler) — Practice field
-- [Cornishon](/fields/cornishon) — Smaller practice field, La Cañada
-- [FIS Upper](/fields/fis-upper/) — Foothill Intermediate School, La Cañada
-- [FIS Lower](/fields/fis-lower/) — Foothill Intermediate School, La Cañada
 
 ### Altadena
 
-- [Muir High School](/fields/muir) — Practice fields with portable lighting
-- [Muir South](/fields/muir-south) — Softball field
+- [Muir High School North](/fields/muir) — 12U game field
+- [Muir South](/fields/muir-south) — Practice field
 
 ### La Cañada
 
 - [La Cañada High School (LCHS)](/fields/lchs) — Practice and game fields
-- [LC LDS](/fields/lc-lds) — Practice field
+- [LC LDS](/fields/lc-lds) — Game field for 6U–8U and practice field
 - [Oak Grove](/fields/oak-grove) — Practice field
 - [Paradise Canyon](/fields/paradise) — Practice field
+- [Cornishon](/fields/cornishon) — 6U–8U game field
+- [FIS Upper](/fields/fis-upper/) — 6U–8U game field and practice field (Foothill Intermediate School)
+- [FIS Lower](/fields/fis-lower/) — 12U game field and practice field (Foothill Intermediate School)
+- [La Cañada Elementary](/fields/la-canada-elementary/) — Practice field (fall season)
 
 ### Other Locations
 
 - [La Salle High School](/fields/la-salle) — Practice field
 - [Pasadena High School](/fields/pasadena-hs) — North field, practice
-- [Rose Bowl Area H](/fields/area-h) — Practice fields (Mon–Thu, fall season)
+- [Rose Bowl Area H](/fields/area-h) — Practice field (Monday–Friday, fall season)
 
 ## Contacts
 

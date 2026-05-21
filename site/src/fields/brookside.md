@@ -3,14 +3,14 @@
 title: "Brookside Park"
 layout: page.njk
 section: fields
-placeAddress: "360 N Arroyo Blvd"
+placeAddress: "460 N Arroyo Blvd"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
 description: "Brookside Park, next to the Rose Bowl in Pasadena, is one of AYSO Region 13's main game-day field locations. Address, parking, and directions."
 parking: "Lot"
 restrooms: "Yes, by field"
 surface: "Grass"
-lighting: "No"
+lighting: "Yes (present, not currently in use)"
 snackBar: "No"
 
 ---
@@ -19,13 +19,11 @@ Brookside Park sits next to the Rose Bowl Stadium in Pasadena and is one of AYSO
 
 ## Location
 
-[360 N Arroyo Blvd, Pasadena CA 91103](https://maps.google.com/?q=360+N+Arroyo+Blvd,+Pasadena,+CA+91103)
+[460 N Arroyo Blvd, Pasadena CA 91103](https://maps.google.com/?q=460+N+Arroyo+Blvd,+Pasadena,+CA+91103)
 
 The park is the grassy space between Kidspace and the Rose Bowl Aquatic Center.
 
-<iframe src="https://maps.google.com/maps?q=360+N+Arroyo+Blvd,+Pasadena,+CA+91103&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-![Brookside Park / Rose Bowl Area field map](/images/fields/brookside-area-h-map.png)
+<iframe src="https://maps.google.com/maps?q=460+N+Arroyo+Blvd,+Pasadena,+CA+91103&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 ## Availability
 

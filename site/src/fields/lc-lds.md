@@ -6,8 +6,8 @@ placeAddress: "1830 Foothill Blvd"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
 description: "LC LDS field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
-parking: "Street"
-restrooms: "Yes"
+parking: "Lot (Mayor's Discovery Park, adjacent)"
+restrooms: "Yes (Mayor's Discovery Park, adjacent)"
 surface: "Grass"
 lighting: "No"
 snackBar: "No"
@@ -22,7 +22,11 @@ snackBar: "No"
 
 ## Parking
 
-The LDS Church and the YMCA have asked AYSO families not to use their parking lots. Street parking is available on Foothill Boulevard (uphill from the field) or on side streets (downhill). Plan extra time for parking and walking.
+Park in the adjacent Mayor's Discovery Park lot. The LDS Church and the YMCA have asked AYSO families not to use their parking lots. Street parking on Foothill Boulevard or side streets is also available if the lot fills.
+
+## Restrooms
+
+Restrooms are in the adjacent Mayor's Discovery Park.
 
 ## Gate
 
