@@ -19,31 +19,31 @@ description: "Field maps and locations for AYSO Region 13 youth soccer in Pasade
 
 ## Field List
 
-| Field | City | Practice | Games | Ages | Notes |
-|---|---|:---:|:---:|---|---|
-| [Allendale Park](/fields/allendale) | Pasadena | ✓ | | | |
-| [Blair High School](/fields/blair) | Pasadena | | ✓ | | Currently a game field only |
-| [Brookside Park](/fields/brookside) | Pasadena | | ✓ | | Next to the Rose Bowl |
-| [Butler Middle School](/fields/butler) | Pasadena | ✓ | | | Enter from Penn St; coach-coded restroom |
-| [Jefferson Park](/fields/jefferson) | Pasadena | ✓ | | | |
-| [La Salle High School](/fields/la-salle) | Pasadena | ✓ | | | |
-| [Marshall Fundamental](/fields/marshall) | Pasadena | | ✓ | 10U, 14U | Game field only |
-| [McDonald Park](/fields/mcdonald) | Pasadena | ✓ | | | |
-| [McKinley](/fields/mckinley) | Pasadena | ✓ | ✓ | | |
-| [Pasadena High School](/fields/pasadena-hs) | Pasadena | ✓ | | | North field |
-| [Rose Bowl Area H](/fields/area-h) | Pasadena | ✓ | | | Mon–Fri, fall season |
-| [Victory Park](/fields/victory) | Pasadena | ✓ | ✓ | 6U–12U | Primary game fields |
-| [Wilson MS](/fields/wilson) | Pasadena | ✓ | | | |
-| [Muir High School North](/fields/muir) | Altadena | | ✓ | 12U | |
-| [Muir South](/fields/muir-south) | Altadena | ✓ | | | |
-| [Cornishon](/fields/cornishon) | La Cañada | | ✓ | 6U–8U | |
-| [FIS Lower](/fields/fis-lower/) | La Cañada | ✓ | ✓ | 12U | Foothill Intermediate School |
-| [FIS Upper](/fields/fis-upper/) | La Cañada | ✓ | ✓ | 6U–8U | Foothill Intermediate School |
-| [La Cañada Elementary](/fields/la-canada-elementary/) | La Cañada | ✓ | | | Fall season only |
-| [La Cañada High School (LCHS)](/fields/lchs) | La Cañada | ✓ | ✓ | | JV Baseball Field has lights |
-| [LC LDS](/fields/lc-lds) | La Cañada | ✓ | ✓ | 6U–8U | |
-| [Oak Grove](/fields/oak-grove) | La Cañada | ✓ | | | |
-| [Paradise Canyon](/fields/paradise) | La Cañada | ✓ | | | |
+| Field | City | Practice | Games | Ages |
+|---|---|:---:|:---:|---|
+| [Allendale Park](/fields/allendale) | Pasadena | ✓ | | |
+| [Blair High School](/fields/blair) | Pasadena | | ✓ | |
+| [Brookside Park](/fields/brookside) | Pasadena | | ✓ | |
+| [Butler Middle School](/fields/butler) | Pasadena | ✓ | | |
+| [Jefferson Park](/fields/jefferson) | Pasadena | ✓ | | |
+| [La Salle High School](/fields/la-salle) | Pasadena | ✓ | | |
+| [Marshall Fundamental](/fields/marshall) | Pasadena | | ✓ | 10U, 14U |
+| [McDonald Park](/fields/mcdonald) | Pasadena | ✓ | | |
+| [McKinley](/fields/mckinley) | Pasadena | ✓ | ✓ | |
+| [Pasadena High School](/fields/pasadena-hs) | Pasadena | ✓ | | |
+| [Rose Bowl Area H](/fields/area-h) | Pasadena | ✓ | | |
+| [Victory Park](/fields/victory) | Pasadena | ✓ | ✓ | 6U–12U |
+| [Wilson MS](/fields/wilson) | Pasadena | ✓ | | |
+| [Muir High School North](/fields/muir) | Altadena | | ✓ | 12U |
+| [Muir South](/fields/muir-south) | Altadena | ✓ | | |
+| [Cornishon](/fields/cornishon) | La Cañada | | ✓ | 6U–8U |
+| [FIS Lower](/fields/fis-lower/) | La Cañada | ✓ | ✓ | 12U |
+| [FIS Upper](/fields/fis-upper/) | La Cañada | ✓ | ✓ | 6U–8U |
+| [La Cañada Elementary](/fields/la-canada-elementary/) | La Cañada | ✓ | | |
+| [La Cañada High School (LCHS)](/fields/lchs) | La Cañada | ✓ | ✓ | |
+| [LC LDS](/fields/lc-lds) | La Cañada | ✓ | ✓ | 6U–8U |
+| [Oak Grove](/fields/oak-grove) | La Cañada | ✓ | | |
+| [Paradise Canyon](/fields/paradise) | La Cañada | ✓ | | |
 
 ## Contacts
 
