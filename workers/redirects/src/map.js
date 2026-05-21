@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-21T02:15:02.219Z
-// 594 exact rules + 8 splat rules = 602 total
+// Last generated: 2026-05-21T19:25:56.108Z
+// 596 exact rules + 8 splat rules = 604 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -701,6 +701,14 @@ export const EXACT = {
     "s": 301
   },
   "/standings": {
+    "d": "/schedules/standings/",
+    "s": 301
+  },
+  "/standings-2/": {
+    "d": "/schedules/standings/",
+    "s": 301
+  },
+  "/standings-2": {
     "d": "/schedules/standings/",
     "s": 301
   },
