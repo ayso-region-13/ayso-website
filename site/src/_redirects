@@ -517,6 +517,13 @@
 # Legacy WP RSS feed -- some aggregators still poll it
 /feed/                              /resources/newsletters/                  301
 /feed                               /resources/newsletters/                  301
+/feed/atom/                         /resources/newsletters/                  301
+/board/feed/                        /resources/newsletters/                  301
+/vip/feed/                          /resources/newsletters/                  301
+/governing-documents/               /about/policies/                         301
+/governing-documents                /about/policies/                         301
+/coach/training-for-coaches/        /coaches/training/                       301
+/coach/training-for-coaches         /coaches/training/                       301
 
 # ======================================================================
 # Short links -- InLeague
