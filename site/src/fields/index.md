@@ -21,19 +21,19 @@ description: "Field maps and locations for AYSO Region 13 youth soccer in Pasade
 
 ### Pasadena
 
-- [Victory Park](/fields/victory) — Primary game fields for 6U–12U; also a practice field
-- [Blair High School](/fields/blair) — Currently a game field only
-- [McKinley](/fields/mckinley) — Practice and game fields
-- [Marshall Fundamental](/fields/marshall) — Game field only (10U and 14U)
-- [Wilson MS](/fields/wilson) — Practice field
-- [Jefferson Park](/fields/jefferson) — Practice field
-- [McDonald Park](/fields/mcdonald) — Practice field
 - [Allendale Park](/fields/allendale) — Practice field
+- [Blair High School](/fields/blair) — Currently a game field only
 - [Brookside Park](/fields/brookside) — Near Rose Bowl
 - [Butler Middle School](/fields/butler) — Practice field
+- [Jefferson Park](/fields/jefferson) — Practice field
 - [La Salle High School](/fields/la-salle) — Practice field
+- [Marshall Fundamental](/fields/marshall) — Game field only (10U and 14U)
+- [McDonald Park](/fields/mcdonald) — Practice field
+- [McKinley](/fields/mckinley) — Practice and game fields
 - [Pasadena High School](/fields/pasadena-hs) — North field, practice
 - [Rose Bowl Area H](/fields/area-h) — Practice field (Monday–Friday, fall season)
+- [Victory Park](/fields/victory) — Primary game fields for 6U–12U; also a practice field
+- [Wilson MS](/fields/wilson) — Practice field
 
 ### Altadena
 
