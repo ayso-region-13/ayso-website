@@ -31,6 +31,9 @@ description: "Field maps and locations for AYSO Region 13 youth soccer in Pasade
 - [Allendale Park](/fields/allendale) — Practice field
 - [Brookside Park](/fields/brookside) — Near Rose Bowl
 - [Butler Middle School](/fields/butler) — Practice field
+- [La Salle High School](/fields/la-salle) — Practice field
+- [Pasadena High School](/fields/pasadena-hs) — North field, practice
+- [Rose Bowl Area H](/fields/area-h) — Practice field (Monday–Friday, fall season)
 
 ### Altadena
 
@@ -47,12 +50,6 @@ description: "Field maps and locations for AYSO Region 13 youth soccer in Pasade
 - [FIS Upper](/fields/fis-upper/) — 6U–8U game field and practice field (Foothill Intermediate School)
 - [FIS Lower](/fields/fis-lower/) — 12U game field and practice field (Foothill Intermediate School)
 - [La Cañada Elementary](/fields/la-canada-elementary/) — Practice field (fall season)
-
-### Other Locations
-
-- [La Salle High School](/fields/la-salle) — Practice field
-- [Pasadena High School](/fields/pasadena-hs) — North field, practice
-- [Rose Bowl Area H](/fields/area-h) — Practice field (Monday–Friday, fall season)
 
 ## Contacts
 
