@@ -15,7 +15,7 @@ snackBar: "No"
 
 ---
 
-Muir South is a softball field used for practices.
+Muir South is a practice field near the softball area of the Muir High School campus, separate from Muir North.
 
 ## Location
 
@@ -23,9 +23,9 @@ Muir South is a softball field used for practices.
 
 <iframe src="https://maps.google.com/maps?q=John+Muir+High+School,+1905+Lincoln+Ave,+Altadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-## Field Notes
+## Field Layout
 
-This field is located in the softball area of the Muir High School campus, separate from the main practice fields at Muir North and Muir Central.
+![Muir South — 12U (150' x 220') and 10U (120' x 180') fields](/images/fields/muir-south-map.jpg)
 
 ## Problems & Contact
 

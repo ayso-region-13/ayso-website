@@ -22,6 +22,10 @@ Cornishon is a smaller practice field in La Cañada, located near FIS Upper and 
 
 <iframe src="https://maps.google.com/maps?q=4429+Cornishon+Ave,+La+Canada+Flintridge,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
+## Field Layout
+
+![Cornishon — 10U field, 130' x 180'](/images/fields/cornishon-10u-map.jpg)
+
 ## Parking
 
 Park on Cornishon Avenue. Do not use the Community Center parking lot — violators will be cited and towed.
