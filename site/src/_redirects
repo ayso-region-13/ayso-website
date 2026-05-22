@@ -212,6 +212,8 @@
 /standings                          /schedules/standings/                    301
 /standings-2/                       /schedules/standings/                    301
 /standings-2                        /schedules/standings/                    301
+/Standings-2/                       /schedules/standings/                    301
+/Standings-2                        /schedules/standings/                    301
 /results/                           /schedules/                              301
 /results                            /schedules/                              301
 /weekly/                            /schedules/                              301
@@ -521,6 +523,7 @@
 /feed                               /resources/newsletters/                  301
 /feed/atom/                         /resources/newsletters/                  301
 /board/feed/                        /resources/newsletters/                  301
+/tournaments/feed/                  /resources/newsletters/                  301
 /vip/feed/                          /resources/newsletters/                  301
 /governing-documents/               /about/policies/                         301
 /governing-documents                /about/policies/                         301
