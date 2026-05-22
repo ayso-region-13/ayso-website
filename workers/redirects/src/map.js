@@ -1,6 +1,6 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-22T15:01:52.601Z
+// Last generated: 2026-05-22T15:45:57.362Z
 // 599 exact rules + 8 splat rules = 607 total
 
 export const EXACT = {
