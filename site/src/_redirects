@@ -206,6 +206,8 @@
 /standings/fall-core-2025-standings /schedules/standings/                    301
 /schedule/                          /schedules/games/                        301
 /schedule                           /schedules/games/                        301
+/schedule/schedwk/                  /schedules/                              301
+/schedule/schedwk                   /schedules/                              301
 /games/                             /schedules/games/                        301
 /games                              /schedules/games/                        301
 /standings/                         /schedules/standings/                    301
@@ -630,6 +632,7 @@
 /wp-content/uploads/2025/08/AYSO-Age-Determination-Chart-MY26-MY27.png /images/age-chart-2026.png               301
 /wp-content/uploads/2022/07/AYSOU-Training-Library-1024x471.png /images/volunteer-faq/AYSOU-Training-Library-1024x471.png 301
 /wp-content/uploads/2022/08/Victoryp22.jpg /images/victory-01.jpg                   301
+/wp-content/uploads/2022/07/Jefferson.jpg /images/fields/jefferson-subfield-map.jpg 301
 
 # ======================================================================
 # WP-uploads PDFs -- Board minutes
@@ -684,14 +687,18 @@
 /wp-content/uploads/2022/03/Region-13-Guidelines-for-10U-Referees-2021.pdf /assets/docs/10u-referee-guidelines.pdf  301
 /wp-content/uploads/2022/03/Region-13-Guidelines-for-12U-Referees-2021.pdf /assets/docs/12u-referee-guidelines.pdf  301
 /wp-content/uploads/2023/03/Game-Card.pdf /coaches/game-cards/                     301
-/wp-content/uploads/2024/09/prts01-v03.pdf /referees/resources/                     301
+/wp-content/uploads/2024/09/prts01-v03.pdf /schedules/                              301
 /wp-content/uploads/2022/03/Respect-the-Referee.pdf /assets/docs/respect-the-referee.pdf 301
 /wp-content/uploads/2023/11/Region-13-Guidelines-for-Penalty-Kicks-2023.pdf /assets/docs/penalty-kick-guidelines.pdf 301
 /wp-content/uploads/2025/08/2025-12U-Division-Meeting.pptx /coaches/                                301
 /wp-content/uploads/2022/03/Region-13-PPs-20200615.pdf /assets/docs/region-13-policies-protocols.pdf 301
 /wp-content/uploads/2023/08/Region-13-Modifications-for-8U-7U-6U-2022.docx.pdf /coaches/                                301
-/wp-content/uploads/2024/09/prts06-v02.pdf /referees/resources/                     301
-/wp-content/uploads/2024/10/prts07-v02.pdf /referees/resources/                     301
+/wp-content/uploads/2024/09/prts06-v02.pdf /schedules/                              301
+/wp-content/uploads/2024/10/prts07-v02.pdf /schedules/                              301
+/wp-content/uploads/2024/09/prts10-v01.pdf /schedules/                              301
+/wp-content/uploads/2024/10/prts10-v02.pdf /schedules/                              301
+/wp-content/uploads/2024/10/prts12-v02.pdf /schedules/                              301
+/wp-content/uploads/2023/09/fifa_11plus.pdf /assets/docs/fifa-11plus.pdf            301
 
 # ======================================================================
 # WP-uploads -- other PDFs/files
