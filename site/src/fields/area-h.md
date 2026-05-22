@@ -7,7 +7,7 @@ placeAddress: "1001 Rose Bowl Dr"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
 description: "Area H fields — AYSO Region 13 game and practice location. Address, parking, and directions."
-parking: "Lot"
+parking: "Street and Lot"
 restrooms: "Yes, by field"
 surface: "Grass"
 lighting: "No"
@@ -27,17 +27,18 @@ The AYSO tent at Area H is located near the blockhouse.
 
 <iframe src="https://maps.google.com/maps?q=Rose+Bowl,+Pasadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
+## Subfield Map
+
+![Area H — subfields H1 through H6](/images/fields/area-h-subfield-map.png)
+
 ## Availability
 
-Area H (Fields 1–4) is available as backup practice space during the fall season, Monday through Thursday from 5:00 PM until dark. There are no lights, so field use ends at dusk.
-
-**Do not use Area H on Fridays.** There is no AYSO use authorized on Fridays.
+Area H (Fields 1–4) is available as backup practice space during the fall season, Monday through Friday from 5:00 PM until dark. There are no lights, so field use ends at dusk.
 
 ## Rules
 
 - Use Fields 1–4 only
 - Accommodate other park users courteously — this is shared public space
-- Teams self-assign to open fields; no reservations
 - Blackout dates are posted each season — check with the region before scheduling
 
 ## Fields

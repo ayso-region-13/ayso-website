@@ -1,33 +1,33 @@
 ---
-title: Muir High School
-description: Muir High School fields — AYSO Region 13 game location in Pasadena.
-  Address, parking, and directions.
+
+title: "Muir High School North"
 layout: page.njk
 section: fields
-placeAddress: 1905 Lincoln Ave
-placeLocality: Pasadena
-placePostalCode: "91103"
-parking: Street
-restrooms: Port-a-Potty
-surface: Grass
-lighting: No
-snackBar: No
+placeAddress: "1905 Lincoln Ave"
+placeLocality: "Altadena"
+placePostalCode: "91001"
+description: "Muir High School North — AYSO Region 13 12U game field in Altadena. Address, parking, and directions."
+parking: "Street"
+restrooms: "Port-a-Potty"
+surface: "Grass"
+lighting: "No"
+snackBar: "No"
+
 ---
-Muir High School has multiple field areas for practices.
+
+Muir High School North is a 12U game field at John Muir High School in Altadena.
 
 ## Location
 
 [John Muir High School, 1905 Lincoln Ave, Altadena](https://maps.google.com/?q=John+Muir+High+School,+1905+Lincoln+Ave,+Altadena,+CA)
 
-## Field Areas
+<iframe src="https://maps.google.com/maps?q=John+Muir+High+School,+1905+Lincoln+Ave,+Altadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-- Muir North: Grass field with space for a 10U and 12U field.
-- Muir Central: Large turf field (check current availability)
-- [Muir South](/fields/muir-south): 10U field
+Muir South is a separate practice field at the same school — see [Muir South](/fields/muir-south/).
 
 ## Parking
 
-Exercise caution on Montana Street's west end. There are "No Parking" signs near the school bus lot, and local enforcement actively tickets this zone, including on the weekend.
+Exercise caution on Montana Street's west end. There are subtle "No Parking" signs near the school bus lot, and local enforcement actively tickets this zone, including on Sunday evenings.
 
 ## Problems & Contact
 

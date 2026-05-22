@@ -2,24 +2,29 @@
 title: "Octavia E. Butler Middle School"
 layout: page.njk
 section: fields
-placeAddress: "1505 N Marengo Ave"
+placeAddress: "134 E Penn St"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
 description: "Butler Middle School fields — AYSO Region 13 practice location in Pasadena. Address, parking, and field notes."
 parking: "Street"
+restrooms: "Yes (coach has access code)"
 surface: "Grass"
-lighting: "No"
+lighting: "Yes"
 snackBar: "No"
 
 ---
 
 ## Location
 
-[1505 N Marengo Ave, Pasadena, CA 91103](https://maps.google.com/?q=1505+N+Marengo+Ave,+Pasadena,+CA+91103)
+[134 E Penn St, Pasadena, CA 91103](https://maps.google.com/?q=134+E+Penn+St,+Pasadena,+CA+91103)
 
-Enter the field at the corner of Marengo and Howard.
+Enter the field from Penn Street.
 
-<iframe src="https://maps.google.com/maps?q=1505+N+Marengo+Ave,+Pasadena,+CA+91103&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<iframe src="https://maps.google.com/maps?q=134+E+Penn+St,+Pasadena,+CA+91103&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+## Subfield Map
+
+![Butler — practice subfields 1 through 12 (the X'd areas are off-limits)](/images/fields/butler-subfield-map.jpg)
 
 ## Parking
 
@@ -27,13 +32,7 @@ Street parking only on Howard, Elizabeth, Penn, or Marengo. No on-campus parking
 
 ## Restrooms
 
-Locker rooms in the gym are available for restroom use. The doors are held open with magnetic washers placed in the door frames.
-
-When you are the last team to leave, remove the magnetic washers and make sure the building is secured before you go.
-
-## Gate
-
-The last team leaving at 9:00 PM (8:00 PM on Fridays) is responsible for securing the Marengo gate after confirming everyone has left.
+A restroom is in the first mini-building inside the field entrance from Penn Street. The door is code-locked — ask your coach for the code (it isn't published publicly).
 
 ## Problems & Contact
 

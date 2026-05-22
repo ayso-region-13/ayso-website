@@ -10,7 +10,7 @@ description: "La Cañada High School fields — AYSO Region 13 game location in 
 parking: "Lot"
 restrooms: "Yes"
 surface: "Grass"
-lighting: "No"
+lighting: "Yes (JV Baseball Field only)"
 snackBar: "No"
 
 ---
