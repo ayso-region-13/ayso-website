@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-22T15:45:57.362Z
-// 599 exact rules + 8 splat rules = 607 total
+// Last generated: 2026-05-22T17:59:19.007Z
+// 606 exact rules + 8 splat rules = 614 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -686,6 +686,14 @@ export const EXACT = {
   },
   "/schedule": {
     "d": "/schedules/games/",
+    "s": 301
+  },
+  "/schedule/schedwk/": {
+    "d": "/schedules/",
+    "s": 301
+  },
+  "/schedule/schedwk": {
+    "d": "/schedules/",
     "s": 301
   },
   "/games/": {
@@ -2076,6 +2084,10 @@ export const EXACT = {
     "d": "/images/victory-01.jpg",
     "s": 301
   },
+  "/wp-content/uploads/2022/07/Jefferson.jpg": {
+    "d": "/images/fields/jefferson-subfield-map.jpg",
+    "s": 301
+  },
   "/wp-content/uploads/2022/03/2021-03-04-minutes.pdf": {
     "d": "/about/board-minutes/",
     "s": 301
@@ -2245,7 +2257,7 @@ export const EXACT = {
     "s": 301
   },
   "/wp-content/uploads/2024/09/prts01-v03.pdf": {
-    "d": "/referees/resources/",
+    "d": "/schedules/",
     "s": 301
   },
   "/wp-content/uploads/2022/03/Respect-the-Referee.pdf": {
@@ -2269,11 +2281,27 @@ export const EXACT = {
     "s": 301
   },
   "/wp-content/uploads/2024/09/prts06-v02.pdf": {
-    "d": "/referees/resources/",
+    "d": "/schedules/",
     "s": 301
   },
   "/wp-content/uploads/2024/10/prts07-v02.pdf": {
-    "d": "/referees/resources/",
+    "d": "/schedules/",
+    "s": 301
+  },
+  "/wp-content/uploads/2024/09/prts10-v01.pdf": {
+    "d": "/schedules/",
+    "s": 301
+  },
+  "/wp-content/uploads/2024/10/prts10-v02.pdf": {
+    "d": "/schedules/",
+    "s": 301
+  },
+  "/wp-content/uploads/2024/10/prts12-v02.pdf": {
+    "d": "/schedules/",
+    "s": 301
+  },
+  "/wp-content/uploads/2023/09/fifa_11plus.pdf": {
+    "d": "/assets/docs/fifa-11plus.pdf",
     "s": 301
   },
   "/wp-content/uploads/2022/07/ParentPledge.pdf": {
