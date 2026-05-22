@@ -35,7 +35,12 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/css/style.css");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy("src/assets/docs");
-  eleventyConfig.addPassthroughCopy("src/_redirects");
+  // NOTE: src/_redirects is intentionally NOT passed through.
+  // The ayso13-redirects Worker (workers/redirects/) handles all 607
+  // redirects upstream of Pages. Emitting _redirects to _site/ triggered
+  // CF Pages' "Maximum number of dynamic rules supported is 100" parser
+  // and was suspected of producing 500s on freshly-uploaded files.
+  // The src file remains source-of-truth for the Worker map generator.
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
   // Browsers (esp. iOS Safari) probe /apple-touch-icon.png at the root.
   eleventyConfig.addPassthroughCopy({ "src/images/apple-touch-icon.png": "apple-touch-icon.png" });

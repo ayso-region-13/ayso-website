@@ -1,6 +1,6 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-22T02:05:05.757Z
+// Last generated: 2026-05-22T15:45:57.362Z
 // 599 exact rules + 8 splat rules = 607 total
 
 export const EXACT = {
@@ -2209,7 +2209,7 @@ export const EXACT = {
     "s": 301
   },
   "/wp-content/uploads/2025/09/ref-card-2023.pdf": {
-    "d": "/referees/resources/",
+    "d": "/assets/docs/referee-quick-reference-card.pdf",
     "s": 301
   },
   "/wp-content/uploads/2025/11/TT25_RefSched_B.pdf": {
@@ -2249,7 +2249,7 @@ export const EXACT = {
     "s": 301
   },
   "/wp-content/uploads/2022/03/Respect-the-Referee.pdf": {
-    "d": "/referees/faqs/",
+    "d": "/assets/docs/respect-the-referee.pdf",
     "s": 301
   },
   "/wp-content/uploads/2023/11/Region-13-Guidelines-for-Penalty-Kicks-2023.pdf": {
@@ -2261,7 +2261,7 @@ export const EXACT = {
     "s": 301
   },
   "/wp-content/uploads/2022/03/Region-13-PPs-20200615.pdf": {
-    "d": "/coaches/practice/",
+    "d": "/assets/docs/region-13-policies-protocols.pdf",
     "s": 301
   },
   "/wp-content/uploads/2023/08/Region-13-Modifications-for-8U-7U-6U-2022.docx.pdf": {
@@ -2293,7 +2293,7 @@ export const EXACT = {
     "s": 301
   },
   "/wp-content/uploads/2024/10/LC-City-Council-Age-Group-Limitation-1.pdf": {
-    "d": "/fields/lchs/",
+    "d": "/assets/docs/lc-city-council-age-group-limitation.pdf",
     "s": 301
   },
   "/wp-content/uploads/2024/10/region13-game-schedule-2024-week8.pdf": {
@@ -2321,7 +2321,7 @@ export const EXACT = {
     "s": 301
   },
   "/wp-content/uploads/2024/11/LC-City-Council-Age-Group-Limitation-November.pdf": {
-    "d": "/fields/lchs/",
+    "d": "/assets/docs/lc-city-council-age-group-limitation.pdf",
     "s": 301
   },
   "/assets/docs/region13-10u-referee-guidelines-2023.pdf": {

@@ -29,7 +29,7 @@ The AYSO tent at Area H is located near the blockhouse.
 
 ## Subfield Map
 
-![Area H — subfields H1 through H6](/images/fields/area-h-subfield-map.png)
+![Rose Bowl complex — Area H subfields 1 through 9 plus the adjacent Jackie Robinson and Brookside subfield areas](/images/fields/rose-bowl-area-h-subfield-map.jpg)
 
 ## Availability
 

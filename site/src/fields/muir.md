@@ -25,6 +25,12 @@ Muir High School North is a 12U game field at John Muir High School in Altadena.
 
 Muir South is a separate practice field at the same school — see [Muir South](/fields/muir-south/).
 
+## Field Layouts
+
+![Muir North practice field — subfields 1 through 10 with parking guidance](/images/fields/muir-north-subfield-map.jpg)
+
+![Muir North/Central game-field layout — 10U/12U fields, parking, and "Do not park" zones](/images/fields/muir-north-game-map.jpg)
+
 ## Parking
 
 Exercise caution on Montana Street's west end. There are subtle "No Parking" signs near the school bus lot, and local enforcement actively tickets this zone, including on Sunday evenings.

@@ -15,7 +15,7 @@ Our policies follow this hierarchy:
 1. IFAB Laws of the Game (international football rules)
 2. AYSO National Rules and Regulations
 3. AYSO Standard Policies & Procedures
-4. Region 13 Policies and Procedures
+4. Region 13 Policies and Procedures — [Region 13 Policies & Protocols (PDF)](/assets/docs/region-13-policies-protocols.pdf) covers refund schedule, conduct standards, and local addendums
 5. AYSO Section 1 Rules of Competition
 6. AYSO Area 1-C Combined Rules
 
@@ -56,7 +56,7 @@ Coaches and families must model good sportsmanship and avoid disparaging volunte
 - Coaches coach
 - Parents cheer
 
-Coaches initial game cards confirming they understand this policy.
+Coaches initial game cards confirming they understand this policy. See the full [Respect the Referee policy (PDF)](/assets/docs/respect-the-referee.pdf) for details.
 
 ## Disputes and Concerns
 
@@ -73,3 +73,6 @@ Personal data is handled according to AYSO National Board-approved privacy polic
 - [Kids Zone](/families/pledge/) — Sideline conduct expectations
 
 *Last updated: [DATE]*
+
+
+<!-- v2 hash-bust -->
