@@ -27,6 +27,8 @@ Blair High School has two field areas used for practices and games.
 
 ![Blair Lower game field map](/images/fields/blair-games-lower-map.jpg)
 
+![Blair High School parking and walk path — entry points, "Home / Away / Goals Stored Here" markers on the lower field](/images/fields/blair-park-map.png)
+
 ## Parking
 
 Park on Marengo Avenue or at Allendale Park/library and walk to the fields. Do not park in residential areas.
