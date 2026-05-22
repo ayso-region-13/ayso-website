@@ -36,7 +36,7 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - [x] Kids Zone — replaces Parent Pledge, follows AYSO National's authoritative 10 guidelines
 - [x] Newsletter system — `/resources/newsletters/` with EmailOctopus subscribe widget + 97-link archive (2021–2025); old `/news/` URL redirects in
 - [x] Form upload tool — `/forms/` page replicates the legacy Google Apps Script upload flow
-- [x] PDFs migrated from old WordPress to local `/assets/docs/` — penalty-kick guidelines, FIFA 11+ warmup, concussion/SCA forms
+- [x] PDFs migrated from old WordPress to local `/assets/docs/` — penalty-kick guidelines, FIFA 11+ warmup, concussion/SCA forms; later add (2026-05-22 WP archive sweep): referee quick-reference card, Respect the Referee policy, Region 13 Policies & Protocols, LC City Council age-group letter
 - [x] Review and refine site
 - [x] Create redirect mapping (159 old URLs → `site/src/_redirects`)
 - [x] Deploy to Cloudflare Pages ← **staging.ayso13.org / www.ayso13.org**
@@ -44,7 +44,7 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 
 **Headline state (as of 2026-05-19):**
 - **Hosting**: Cloudflare Pages (prod `www.ayso13.org`, staging `staging.ayso13.org`). CMS commits land on `staging`; `/ayso promote` merges to `main`.
-- **Workers (4)**: `weather-api` (Tempest + NWS, WBGT/rain, 5-min cron, KV cache, AQI ready on `aqi-feature`), `redirects` prod + staging envs (596+ rules), `csp-report` (30d KV), pages-deploy gates in workflows.
+- **Workers (4)**: `weather-api` (Tempest + NWS, WBGT/rain, 5-min cron, KV cache, AQI ready on `aqi-feature`), `redirects` prod + staging envs (607 rules: 599 exact + 8 splat), `csp-report` (30d KV), pages-deploy gates in workflows. **Note**: `src/_redirects` is intentionally NOT passed-through to `_site/` (.eleventy.js line 38) — Worker handles all redirects upstream of Pages; emitting the file triggered the "Maximum number of dynamic rules supported is 100" warning and correlated with the blob-hash-poisoning bug below.
 - **CMS**: Pages CMS at app.pagescms.org, `branch: staging`. Two media buckets — `images` and `docs` (PDFs). Editor uploads PDFs in Documents bucket, types path into rich-text link dialog.
 - **Slack** (`#notify-website-status`): staging + promote workflows post success/failure with commit titles. `/ayso` Slack bot for field status, announcements, promote dispatch.
 - **Schema**: multi-typed `SportsOrganization` + `NonprofitOrganization` + WebSite + BreadcrumbList + Place (22 fields) + FAQPage + Person (Steve Hawkins) + SportsEvent (date-gated). EIN 95-6205398 on `#org`.
@@ -52,6 +52,7 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 - **Performance**: image pipeline = WebP + original-format only (AVIF intentionally disabled — see note below), hero LCP via eager-load + post-LCP rotation, Pagefind search.
 - **Live features**: 22 field pages w/ maps + Field Info callouts. Live weather/heat/rain at `/resources/`. 12 programs incl. EXTRA™. 30-Q&A Ask the Referee. CMS-editable Important Dates widget on home. EmailOctopus newsletter signup. Photo gallery (62 photos, GLightbox SRI'd).
 - **Image pipeline note (sticky)**: `@11ty/eleventy-img` formats are `["webp","auto"]` only. AVIF disabled because Cloudflare Pages build cache won't engage for this project ("Skipping build output cache..." despite preset = Eleventy / V3 / toggle on). AVIF encoding is 60%+ of build time. Build dropped ~4:14 → ~1:30 without it. DO NOT re-enable unless CF cache is fixed first.
+- **CF Pages blob-hash-poisoning gotcha (sticky)**: when a Pages deploy fails at `stage=initialize` or `stage=deploy`, the uploaded bytes can end up as a poisoned blob in CF's content-addressed storage. Subsequent deploys report success but still serve `HTTP 500` with empty body on every URL whose content matches the poisoned hash. Fix: mutate the affected file bytes to force a new hash. **PDFs / binaries**: `printf '\n' >> file.pdf` is enough (readers tolerate trailing junk past `%%EOF`). **HTML pages**: a trailing newline in the `.md` source is NOT enough (markdown-it strips it; rendered HTML is byte-identical). Inject something that survives rendering, e.g. `<!-- vN hash-bust -->`. Confirm by hitting the deployment-specific URL `https://<deployId>.ayso-website-staging.pages.dev/<path>` — if it 500s there too, it's poisoning, not CDN cache. See commits 613da27 + 5d1365c (2026-05-22) for the worked example.
 - **SEO + analytics**: GA4 `G-9YM9ZDW1J9`, GSC `sc-domain:ayso13.org`, GA4 property `307558725`. Per-project Google creds in `.seo-creds/` (gitignored, direnv-symlinked to `~/.config/claude-seo`).
 
 ## Branched / staged for later
@@ -300,4 +301,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/workers/weather-api/` — Cloudflare Worker that powers `/resources/weather/`. Cron-polls Tempest station 33318 + NWS forecast every 5 min, computes WBGT, tracks rolling rainfall in KV, serves at `www.ayso13.org/api/weather` (also bound on `staging.ayso13.org/api/weather`). Deploy with `cd workers/weather-api && npx wrangler deploy`. `TEMPEST_TOKEN` is a wrangler secret (not in git); station ID, lat/lon, and KV id are in `wrangler.toml`. See `workers/weather-api/README.md` for setup details.
 
 ---
-*Last updated: 2026-05-19 (session 27 — Pagefind search restored after CSP enforce, per-project Google creds isolation, 24h-404 cleanup + image-redirect audit, Pages CMS docs media bucket, Slack commit titles in deploy notifications)*
+*Last updated: 2026-05-22 (session 28 — Pagefind Component UI + brand-gold highlight, WP-archive ingestion: 8 field maps + 4 evergreen PDFs, fields/index sortable-table redesign + map-overview-v2, stop emitting `_redirects` to Pages output, CF Pages blob-hash-poisoning diagnosed + fixed)*
