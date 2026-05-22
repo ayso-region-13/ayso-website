@@ -47,13 +47,20 @@ permalink: /search/
     --pf-result-title-font-size: 17px;
     --pf-result-excerpt-font-size: 15px;
   }
-  /* Brand-gold match highlight, matching the original Default UI styling */
+  /* Brand-gold match highlight, matching the original Default UI styling.
+     !important is required because the Component UI's own rule uses a
+     specificity-boosting :is(*, #\#) trick to set the default mark style
+     to a transparent background + brand-dark text. */
+  .pf-result-excerpt mark,
+  .pf-heading-excerpt mark,
+  .pf-searchbox-result-excerpt mark,
   pagefind-results mark,
   pagefind-summary mark {
-    background: #f4bd4d;
-    color: #221F1F;
+    background: #f4bd4d !important;
+    color: #221F1F !important;
     padding: 0 2px;
     border-radius: 2px;
+    font-weight: 600;
   }
 </style>
 
