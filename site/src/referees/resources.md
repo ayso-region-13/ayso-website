@@ -22,6 +22,8 @@ Age-group specific rules and modifications:
 - [10U Referee Guidelines (2023)](/assets/docs/10u-referee-guidelines.pdf)
 - [12U Referee Guidelines (2023)](/assets/docs/12u-referee-guidelines.pdf)
 - [Penalty Kick Guidelines (2023)](/assets/docs/penalty-kick-guidelines.pdf)
+- [Referee Quick-Reference Card](/assets/docs/referee-quick-reference-card.pdf) — pocket-sized rules and signals summary
+- [Respect the Referee Policy](/assets/docs/respect-the-referee.pdf) — Region 13's expectations for coaches, parents, and spectators
 
 ### National and International Rules
 
@@ -32,7 +34,7 @@ For canonical rules, refer to the official sources:
 - [AYSO Section 1](https://www.ayso1s.org) — Section-level rules and player-development materials
 - [Section 1 PDI Implementation (2025)](https://ayso1ref.com/lib1/pdf/2025_Section_1_PDI_Implementation.2025-07-31.pdf) — Player Development Initiative implementation guide
 
-For the Region 13 referee quick-reference card or current pre-season meeting materials, contact [referee@ayso13.org](mailto:referee@ayso13.org).
+For current pre-season meeting materials, contact [referee@ayso13.org](mailto:referee@ayso13.org).
 
 ## Game Materials
 

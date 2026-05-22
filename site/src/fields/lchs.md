@@ -43,6 +43,10 @@ Fields for 6U through 14U and upper division fields for 16U-19U.
 
 Goals at LCHS-JV are pre-assembled. Lift goals when moving them. Do not drag across the grass. Corner flags are in designated bins.
 
+## City Policy
+
+The La Cañada Flintridge City Council has placed age-group limits on use of the LCHS fields. For background, see the November 2024 [letter from Region 13 to the City Council (PDF)](/assets/docs/lc-city-council-age-group-limitation.pdf).
+
 ## Problems & Contact
 
 - Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
