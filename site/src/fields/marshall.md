@@ -21,9 +21,7 @@ snackBar: "No"
 
 <iframe src="https://maps.google.com/maps?q=990+Allen+Ave,+Pasadena,+CA+91104&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-![Marshall Fundamental field map](/images/fields/marshall-map-1.png)
-
-![Marshall Fundamental field map (detail)](/images/fields/marshall-map-2.jpg)
+![Marshall Fundamental field map](/images/fields/marshall-map-2.jpg)
 
 ## Problems & Contact
 
