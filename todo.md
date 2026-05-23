@@ -38,7 +38,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 - [ ] **Forecast notice — heads-up Slack post when rain is predicted** — proactive complement to the reactive "rain threshold tripped" notify. Cron job (or piggyback on the existing 5-min weather refresh) inspects the NWS 14-period forecast we already cache; when probability of precipitation exceeds X% (e.g. 60%) for any period in the next 24/48/72 hours, post to a dedicated Slack channel (e.g. `#weather-watch` or similar). Throttle: post at most once per 24 h per forecasted event so the channel doesn't get spammed across cron ticks. Goes alongside (not instead of) the existing closure-threshold-trip todo above.
 
 ### Recurring / annual
-- [ ] **Refresh IFAB edition note** on `/referees/ask-the-referee/` — IFAB publishes Laws of the Game annually in June. Update the italic line under the page intro from "2025/26" to the new edition.
+- [x] **Refresh IFAB edition note** — retired 2026-05-23 (session 28). All IFAB links repointed to the edition-agnostic `https://www.theifab.com/laws-of-the-game-documents/` index, and the italic note on `/referees/ask-the-referee/` now reads "current IFAB Laws of the Game" with no year. Nothing to refresh annually anymore.
 - [ ] **Update SportsEvent dates each season** via Pages CMS — `eventStartDate` and `eventEndDate` on `/programs/fall-soccer/`, plus future Spring Soccer / All-Stars / Winter Stars when dates are added.
 
 ---
