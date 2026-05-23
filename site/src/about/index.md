@@ -46,6 +46,11 @@ AYSO supports [Project Play's 8 Children's Rights in Sports](https://projectplay
 7. To be treated with dignity
 8. To enjoy themselves
 
+## Follow Region 13
+
+- Instagram: [@aysoregion13](https://www.instagram.com/aysoregion13)
+- Facebook: [/ayso13](https://www.facebook.com/ayso13)
+
 ## Related Pages
 
 - [History](/about/history) — Region 13's story
