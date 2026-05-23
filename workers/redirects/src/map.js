@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-22T17:59:19.007Z
-// 606 exact rules + 8 splat rules = 614 total
+// Last generated: 2026-05-23T18:42:33.088Z
+// 610 exact rules + 8 splat rules = 618 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -2088,6 +2088,10 @@ export const EXACT = {
     "d": "/images/fields/jefferson-subfield-map.jpg",
     "s": 301
   },
+  "/wp-content/uploads/2025/10/r13thanksgiving.jpg": {
+    "d": "/images/thanksgiving-interior.jpg",
+    "s": 301
+  },
   "/wp-content/uploads/2022/03/2021-03-04-minutes.pdf": {
     "d": "/about/board-minutes/",
     "s": 301
@@ -2129,6 +2133,10 @@ export const EXACT = {
     "s": 301
   },
   "/wp-content/uploads/2022/03/2020-09-03-minutes_1.pdf": {
+    "d": "/about/board-minutes/",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/03/November_2014.pdf": {
     "d": "/about/board-minutes/",
     "s": 301
   },
@@ -2302,6 +2310,14 @@ export const EXACT = {
   },
   "/wp-content/uploads/2023/09/fifa_11plus.pdf": {
     "d": "/assets/docs/fifa-11plus.pdf",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/03/KFPM.pdf": {
+    "d": "/assets/docs/kfpm-procedure.pdf",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/03/R13Mods8U7U6U-2018.pdf": {
+    "d": "/assets/docs/6u-7u-8u-modifications.pdf",
     "s": 301
   },
   "/wp-content/uploads/2022/07/ParentPledge.pdf": {
