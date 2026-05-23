@@ -27,7 +27,7 @@ See [Coach Training](/coaches/training/) for the full certification path and [Ga
 
 ## Referee Resources
 
-- [Laws of the Game (IFAB)](https://www.theifab.com/laws/) — official rulebook
+- [Laws of the Game (IFAB)](https://www.theifab.com/laws-of-the-game-documents/) — official rulebook
 - [Region 13 6U/7U/8U Modifications](/assets/docs/6u-7u-8u-modifications.pdf)
 - [Region 13 10U Referee Guidelines](/assets/docs/10u-referee-guidelines.pdf)
 - [Region 13 12U Referee Guidelines](/assets/docs/12u-referee-guidelines.pdf)

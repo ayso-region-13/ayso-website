@@ -12,6 +12,8 @@ Sign up to receive the Region 13 newsletter — season updates, event announceme
 
 <script async src="https://eomail6.com/form/5061a593-f313-11eb-96e5-06b4694bee2a.js" data-form="5061a593-f313-11eb-96e5-06b4694bee2a"></script>
 
+Also follow Region 13 on [Instagram](https://www.instagram.com/aysoregion13) and [Facebook](https://www.facebook.com/ayso13) for between-newsletter updates.
+
 ## Other AYSO Newsletters
 
 - [AYSO WhistleStop Newsletter](https://ayso.wufoo.com/forms/m1ulp2ab0t7jte3/) — National AYSO referee newsletter
