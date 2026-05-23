@@ -12,7 +12,7 @@ The Laws of the Game are the official rules for soccer, established by the Inter
 
 The Laws of the Game are published by the International Football Association Board:
 
-- [IFAB Laws of the Game](https://www.theifab.com/laws/) — read online or download PDF
+- [IFAB Laws of the Game](https://www.theifab.com/laws-of-the-game-documents/) — read online or download PDF
 - IFAB also publishes a free mobile app ("Laws of the Game") on iOS and Android
 - Print copies can be ordered through AYSO national or your local sporting-goods retailer
 

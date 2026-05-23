@@ -29,7 +29,7 @@ Age-group specific rules and modifications:
 
 For canonical rules, refer to the official sources:
 
-- [IFAB Laws of the Game](https://www.theifab.com/laws/) — Official rulebook (updated each June)
+- [IFAB Laws of the Game](https://www.theifab.com/laws-of-the-game-documents/) — Official rulebook (updated each June)
 - [AYSO National](https://www.ayso.org) — National rules, regulations, and the AYSO addendum to IFAB Laws
 - [AYSO Section 1](https://www.ayso1s.org) — Section-level rules and player-development materials
 - [Section 1 PDI Implementation (2025)](https://ayso1ref.com/lib1/pdf/2025_Section_1_PDI_Implementation.2025-07-31.pdf) — Player Development Initiative implementation guide
