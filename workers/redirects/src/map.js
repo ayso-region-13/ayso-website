@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-23T18:42:33.088Z
-// 610 exact rules + 8 splat rules = 618 total
+// Last generated: 2026-05-24T23:31:04.533Z
+// 611 exact rules + 9 splat rules = 620 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -2092,6 +2092,10 @@ export const EXACT = {
     "d": "/images/thanksgiving-interior.jpg",
     "s": 301
   },
+  "/wp-content/uploads/2022/09/launch.png": {
+    "d": "/images/sponsor-launch.png",
+    "s": 301
+  },
   "/wp-content/uploads/2022/03/2021-03-04-minutes.pdf": {
     "d": "/about/board-minutes/",
     "s": 301
@@ -2480,6 +2484,11 @@ export const SPLAT = [
   {
     "re": "^/author/(.*)$",
     "d": "/about/",
+    "s": 301
+  },
+  {
+    "re": "^/apple-touch-icon-(.*)$",
+    "d": "/apple-touch-icon.png",
     "s": 301
   },
   {
