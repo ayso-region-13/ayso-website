@@ -1,6 +1,6 @@
 ---
 
-title: "About AYSO Region 13 — Pasadena's Youth Soccer League Since 1972"
+title: "Pasadena's Youth Soccer Team"
 layout: page.njk
 section: about
 permalink: "/about/"
