@@ -6,6 +6,8 @@ section: fields
 placeAddress: "1000 E Mountain St"
 placeLocality: "Pasadena"
 placePostalCode: "91104"
+placeLat: 34.161522
+placeLon: -118.129913
 description: "McDonald Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 parking: "Street"
 restrooms: "Yes"

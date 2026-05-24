@@ -6,6 +6,8 @@ section: fields
 placeAddress: "460 N Arroyo Blvd"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
+placeLat: 34.152555
+placeLon: -118.1664
 description: "Brookside Park, next to the Rose Bowl in Pasadena, is one of AYSO Region 13's main game-day field locations. Address, parking, and directions."
 parking: "Lot"
 restrooms: "Yes, by field"

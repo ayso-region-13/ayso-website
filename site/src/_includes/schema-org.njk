@@ -165,7 +165,12 @@
     "addressRegion": "CA",
     "postalCode": {{ placePostalCode | default("") | dump | safe }},
     "addressCountry": "US"
-  }
+  }{% if placeLat and placeLon %},
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": {{ placeLat }},
+    "longitude": {{ placeLon }}
+  }{% endif %}
 }
 </script>
 {% endif %}

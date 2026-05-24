@@ -6,6 +6,8 @@ section: fields
 placeAddress: "325 S Oak Knoll Ave"
 placeLocality: "Pasadena"
 placePostalCode: "91101"
+placeLat: 34.138613
+placeLon: -118.136001
 description: "McKinley School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 parking: "Street and Lot"
 restrooms: "Yes"

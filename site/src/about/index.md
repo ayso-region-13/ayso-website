@@ -1,10 +1,10 @@
 ---
 
-title: "Mission and Philosophies"
+title: "About AYSO Region 13 — Pasadena's Youth Soccer League Since 1972"
 layout: page.njk
 section: about
 permalink: "/about/"
-description: "AYSO Region 13 has offered open-enrollment, no-tryout youth soccer in the Pasadena area since 1972. A 501(c)(3) volunteer-run nonprofit serving players ages 4–19."
+description: "AYSO Region 13 is the Pasadena-area youth soccer league — open-enrollment, no-tryout community soccer since 1972. A 501(c)(3) volunteer-run nonprofit serving players ages 4–19 across Pasadena, Altadena, and La Cañada Flintridge."
 ---
 
 AYSO Region 13 is part of the American Youth Soccer Organization, a 501(c)(3) nonprofit (EIN 95-6205398). We have provided youth soccer programs for players ages 4–19 in Pasadena, Altadena, La Cañada Flintridge, and surrounding communities since 1972.

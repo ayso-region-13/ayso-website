@@ -5,6 +5,8 @@ section: fields
 placeAddress: "1830 Foothill Blvd"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
+placeLat: 34.211681
+placeLon: -118.216191
 description: "LC LDS field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
 parking: "Lot (Mayor's Discovery Park, adjacent)"
 restrooms: "Yes (Mayor's Discovery Park, adjacent)"

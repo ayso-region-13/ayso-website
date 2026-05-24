@@ -5,6 +5,8 @@ section: fields
 placeAddress: "4540 Encinas Dr"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
+placeLat: 34.208761
+placeLon: -118.206263
 description: "La Cañada Elementary field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
 parking: "Street"
 restrooms: "Yes"

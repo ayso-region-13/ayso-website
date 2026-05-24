@@ -7,6 +7,8 @@ section: fields
 placeAddress: 1130 S Marengo Ave
 placeLocality: Pasadena
 placePostalCode: "91106"
+placeLat: 34.126168
+placeLon: -118.144817
 parking: "Street and Lot"
 restrooms: "Yes, by field"
 surface: "Grass"

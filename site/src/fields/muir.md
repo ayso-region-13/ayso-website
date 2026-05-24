@@ -6,6 +6,8 @@ section: fields
 placeAddress: "1905 Lincoln Ave"
 placeLocality: "Altadena"
 placePostalCode: "91001"
+placeLat: 34.181721
+placeLon: -118.165731
 description: "Muir High School North — AYSO Region 13 12U game field in Altadena. Address, parking, and directions."
 parking: "Street"
 restrooms: "Port-a-Potty"

@@ -5,6 +5,8 @@ section: fields
 placeAddress: "134 E Penn St"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
+placeLat: 34.174452
+placeLon: -118.147133
 description: "Butler Middle School fields — AYSO Region 13 practice location in Pasadena. Address, parking, and field notes."
 parking: "Street"
 restrooms: "Yes (coach has access code)"
