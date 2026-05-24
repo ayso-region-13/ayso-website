@@ -6,6 +6,8 @@ section: fields
 placeAddress: "1501 E Villa St"
 placeLocality: "Pasadena"
 placePostalCode: "91106"
+placeLat: 34.154427
+placeLon: -118.120222
 description: "Jefferson Center fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 parking: "Street"
 restrooms: "Yes"

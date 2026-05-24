@@ -6,6 +6,8 @@ section: fields
 placeAddress: "4463 Oak Grove Dr"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
+placeLat: 34.193642
+placeLon: -118.178138
 description: "Oak Grove Park fields — AYSO Region 13 game location in La Cañada. Address, parking, and directions."
 parking: "Street"
 restrooms: "No"

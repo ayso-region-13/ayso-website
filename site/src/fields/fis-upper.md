@@ -5,6 +5,8 @@ section: fields
 placeAddress: "4471 Chevy Chase Dr"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
+placeLat: 34.203796
+placeLon: -118.201106
 description: "FIS Upper field — AYSO Region 13 practice and game location in La Cañada. Address, parking, and field map."
 parking: "Street"
 restrooms: "Yes (building adjacent to FIS Upper/Lower)"

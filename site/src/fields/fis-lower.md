@@ -5,6 +5,8 @@ section: fields
 placeAddress: "Cornishon Ave & Atlee Dr"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
+placeLat: 34.2027
+placeLon: -118.2032
 description: "FIS Lower field — AYSO Region 13 practice and game location in La Cañada. Address, parking, and field map."
 parking: "Street"
 restrooms: "Yes (building adjacent to FIS Upper/Lower)"

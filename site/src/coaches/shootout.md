@@ -1,9 +1,9 @@
 ---
 
-title: "Shootout Guide"
+title: "Soccer Shootout Guide — Kicks From the Penalty Mark"
 layout: page.njk
 section: coaches
-description: "Shootout (penalty kick) rules and procedures for AYSO Region 13 games."
+description: "How a soccer shootout works: kicks from the penalty mark (KFPM) procedure, order, and player eligibility. AYSO Region 13's tie-breaker rules for playoffs and tournaments."
 ---
 
 Penalty shootouts determine match outcomes when games end in ties during playoffs and tournaments.

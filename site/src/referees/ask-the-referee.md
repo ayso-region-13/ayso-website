@@ -1,6 +1,6 @@
 ---
-title: "Ask the Referee — Youth Soccer Rules Q&A"
+title: "Ask the Referee — Soccer Rules Q&A"
 layout: ask-the-referee.njk
 section: referees
-description: "Plain-language soccer rules — goalkeeper handling, throw-in restrictions, offside, fouls, build-out lines, and more. Region 13's Ask the Referee archive."
+description: "Soccer rules answered by Steve Hawkins, AYSO Region 13's Advisor on the Laws of the Game. Goalkeeper handling, offside, build-out lines, handball, fouls — 30+ Q&As."
 ---

@@ -6,6 +6,8 @@ section: fields
 placeAddress: "990 Allen Ave"
 placeLocality: "Pasadena"
 placePostalCode: "91104"
+placeLat: 34.163105
+placeLon: -118.113
 description: "Marshall Fundamental School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions."
 parking: "Street and Lot"
 restrooms: "Yes"
