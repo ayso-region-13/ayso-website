@@ -1,6 +1,6 @@
 ---
 
-title: "Pasadena's Youth Soccer Team"
+title: "Pasadena's Youth Soccer League"
 layout: page.njk
 section: about
 permalink: "/about/"
