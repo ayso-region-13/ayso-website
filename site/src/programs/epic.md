@@ -8,12 +8,18 @@ description: "EPIC (Everyone Plays in the Community) pairs players who need fiel
 
 ![EPIC players at Region 13](/images/epic-interior.jpg)
 
-## Quick Facts
-
-- Ages: All ages
-- Season: September through December
-- Cost: $60
-- Registration: Open throughout the season
+<div class="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-10 my-6">
+  <div class="flex-1">
+    <h2 id="quick-facts">Quick Facts</h2>
+    <ul>
+      <li>Ages: All ages</li>
+      <li>Season: September through December</li>
+      <li>Cost: $60</li>
+      <li>Registration: Open throughout the season</li>
+    </ul>
+  </div>
+  <img src="/images/epic-logo.png" alt="Official AYSO EPIC program shield logo" width="180" class="h-auto shrink-0 mx-auto sm:mx-0">
+</div>
 
 ## How It Works
 
@@ -50,8 +56,8 @@ To join, contact: [tony@ayso13.org](mailto:tony@ayso13.org)
 
 ## Contact
 
-Program Manager: Tony D'Angelo
-Email: [vip@ayso13.org](mailto:vip@ayso13.org)
+EPIC Coordinator: Tony D'Angelo
+Email: [epic@ayso13.org](mailto:epic@ayso13.org)
 
 ## Related Pages
 
