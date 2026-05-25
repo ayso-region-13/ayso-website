@@ -6,6 +6,8 @@ section: programs
 description: "EPIC (Everyone Plays in the Community) pairs players who need field assistance with volunteer buddies for an adaptive soccer experience."
 ---
 
+<img src="/images/epic-logo.png" alt="Official AYSO EPIC program shield logo" width="200" style="height:auto;float:right;margin:0 0 1rem 1.5rem;">
+
 ![EPIC players at Region 13](/images/epic-interior.jpg)
 
 ## Quick Facts
