@@ -45,6 +45,13 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ## Completed ✓
 
+### Session 31 (2026-05-25) — GBP ownership secured + local-SEO foundation complete
+- [x] **Google Business Profile claim resolved** — user took control of the existing GBP (place id `g/11b8_wr4q5`, cid `9491143221518550898`) and made initial profile updates off-platform. Closes the long-standing "Verify / claim existing Google Business Profile" todo. (Commit f6cc899.)
+- [x] **Added a second Owner on GBP** — defensive measure so the profile survives a single-account loss/forgotten-password event.
+- [x] **NAP consistency validated** — name/address/phone on GBP matches `site/src/_data/site.json`; minor updates made on the GBP side where needed.
+- [x] **Bing Places mirrored** — imported listing from GBP via bingplaces.com and invited a second user. Same defensive 2-user posture across both directories.
+- [x] **Clubhouse exterior photo check** — found small (213×142) archive copy at `new/map_photo/clubhouse.jpg` in the WP archive. Too low-res for GBP. Decision: leave in archive; capture a fresh high-res shot next time someone's at the Unit E mailing address.
+
 ### Session 30 (2026-05-24) — Site-health sweep + EPIC rebrand + home tiles
 - [x] **Full site-health check** — ran 404s (CF GraphQL), redirect spot-checks, GA4 organic, GSC, and CSP all in parallel. Headline: site is healthy. GA4 28d: 2,691 sessions / 2,186 users / 5,235 pageviews (~96 sessions/day). GSC 28d: 666 clicks / 27,699 imp / 2.4% CTR — essentially flat vs. yesterday's pull (too soon for session 29's SERP fixes to influence ranking). Worker map 621 rules, spot-checks all 301 → correct. CSP: zero new violations in 4+ days; latest report still `2026-05-20T00:16:50Z` (4-day clean streak).
 - [x] **404 daily sweep (2026-05-24)** — last-24h pull surfaced 3 actionable misses (rest CF SSL probes + scanner noise):
