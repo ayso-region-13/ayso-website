@@ -56,8 +56,8 @@ To join, contact: [tony@ayso13.org](mailto:tony@ayso13.org)
 
 ## Contact
 
-Program Manager: Tony D'Angelo
-Email: [vip@ayso13.org](mailto:vip@ayso13.org)
+EPIC Coordinator: Tony D'Angelo
+Email: [epic@ayso13.org](mailto:epic@ayso13.org)
 
 ## Related Pages
 

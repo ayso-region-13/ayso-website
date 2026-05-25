@@ -57,7 +57,7 @@ Organize a celebration with awards distribution, coach and referee gifts, and vo
 ### Field Host Recruitment
 Recruit family volunteers to staff the AYSO Region 13 tent at Victory Park. Sign up through WeJoinIn.
 
-### Trophy Distribution (4U-8U and VIP Teams)
+### Trophy Distribution (4U-8U and EPIC Teams)
 Designate someone to collect personalized trophies, verify accuracy, and distribute to players.
 
 ## Tools

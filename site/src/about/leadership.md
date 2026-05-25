@@ -38,7 +38,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Special Events | Bicky Law | [bicky@ayso13.org](mailto:bicky@ayso13.org) |
 | Sisterhood of Soccer | Open | [sisterhood@ayso13.org](mailto:sisterhood@ayso13.org) |
 | USWL/MLS Liaison | Open | — |
-| VIP Coordinator | Tony D'Angelo | [vip@ayso13.org](mailto:vip@ayso13.org) |
+| EPIC Coordinator | Tony D'Angelo | [epic@ayso13.org](mailto:epic@ayso13.org) |
 | Tournament Director | Patrick Shopbell | [td@ayso13.org](mailto:td@ayso13.org) |
 | Tournament Coordinator | Ben Hernandez-Stern | — |
 | Picture Day Coordinator | Amandeep Singh | [pictures@ayso13.org](mailto:pictures@ayso13.org) |
