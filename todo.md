@@ -21,7 +21,7 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 ### Post-Launch (this week)
 - [x] Announce launch internally — completed 2026-05-02
 - [x] **Monitor 404s** — Cloudflare zone analytics → Traffic. Free plan blocks the status-code panel in the dashboard, so use `site/scripts/check-404s.sh` (GraphQL Analytics API; ~24h retention). First-day sweep on 2026-05-02 caught and redirected the actionable 404s (apple-touch-icon, /author/brandi/, WP-uploads images/PDFs, /new/* pre-WP paths, /victory-park-with-4u5u-2024-2/). Email Address Obfuscation enabled in zone Scrape Shield.
-- [ ] **Verify / claim existing Google Business Profile** — GBP confirmed to exist at https://maps.app.goo.gl/7JwbWpkMsCmytRBG8 (place id `g/11b8_wr4q5`, cid `9491143221518550898`). Open question: is Region 13 the verified owner with admin access? If not, claim via business.google.com → "Manage this business" → ownership transfer or new-claim flow. Copy/paste sheet for filling out the profile details at `gbp-setup.md` (gitignored, root). Manual action.
+- [x] **Verify / claim existing Google Business Profile** — completed 2026-05-25. Owner access secured on the existing GBP (place id `g/11b8_wr4q5`, cid `9491143221518550898`) and initial profile updates made off-platform. Schema `sameAs` had been pointing at this profile since session 29.
 - [x] **Submit sitemap to Google Search Console** — submitted 2026-05-01
 - [x] **Retire `new.ayso13.org`** — retired 2026-05-01
 
