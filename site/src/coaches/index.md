@@ -1,12 +1,11 @@
 ---
-
-title: "Coaching"
+title: Coaching
+description: Volunteer coaching in AYSO Region 13. No soccer experience required
+  — we provide full training and resources for all coaches.
 layout: page.njk
 section: coaches
-permalink: "/coaches/"
-description: "Volunteer coaching in AYSO Region 13. No soccer experience required — we provide full training and resources for all coaches."
+permalink: /coaches/
 ---
-
 ![Coach working with players at Region 13](/images/coaches-interior.jpg)
 
 ## Why Coach?
@@ -18,17 +17,21 @@ description: "Volunteer coaching in AYSO Region 13. No soccer experience require
 
 ## Time Commitment
 
+
 | Division | Practice | Games | Planning |
-|----------|----------|-------|----------|
+| -------- | ----------- | ----------------- | ------------ |
 | 6U-8U | 60 min/week | Saturday mornings | ~30 min/week |
 | 10U-14U | 90 min/week | Saturday mornings | ~60 min/week |
+
 
 ## Team Structure
 
 ### 6U-8U
+
 Teams require both a Head Coach and Assistant Coach. During games, teams split in half and play on two fields simultaneously — one coach supervises each group.
 
 ### 10U-14U
+
 Teams need a Head Coach. An Assistant Coach is recommended but not required.
 
 ## How to Become a Coach
@@ -42,6 +45,7 @@ Teams need a Head Coach. An Assistant Coach is recommended but not required.
 ## What We Provide
 
 Every coach receives:
+
 - Coach bag with balls, pump, cones, pinnies
 - First aid kit
 - Laws of the Game booklet
@@ -51,10 +55,12 @@ Every coach receives:
 
 ## Key Contacts
 
+
 | Role | Contact |
-|------|---------|
-| Regional Coach Administrator | Brandi Lane |
-| Deputy Coach Administrator | Susan Streets |
+| ---------------------------- | ----------- |
+| Regional Coach Administrator | Luke Power |
+| Deputy Coach Administrator | Brandi Lane |
+
 
 Division Coach Administrators oversee specific age groups and can answer division-specific questions.
 
