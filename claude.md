@@ -166,14 +166,22 @@ Note: Search (`/search/`) only works after a full `npm run build` — not in dev
 
 ### GSC + GA4 data pulls
 
-OAuth is wired up via the `claude-seo` plugin scripts. Token + property ID live in **`.seo-creds/`** at the repo root (gitignored), symlinked into place at `~/.config/claude-seo` by `.envrc` on direnv entry. The symlink dance is required because the claude-seo plugin scripts hardcode `~/.config/claude-seo` and other projects on the same machine were silently overwriting the file (notafintech.co clobbered it on 2026-05-19 — wedged GSC + GA4 access until the per-project pattern was set up).
+OAuth is wired up via the `claude-seo` plugin scripts. Token + property ID live in **`.seo-creds/`** at the repo root (gitignored), symlinked into place at `~/.config/claude-seo` by `.envrc` on direnv entry. The symlink dance is required because the claude-seo plugin scripts hardcode `~/.config/claude-seo` and other projects on the same machine were silently overwriting the file (notafintech.co clobbered it on 2026-05-19 and again on 2026-05-27).
+
+**The symlink does NOT prevent cross-project clobbering** — it just keeps the path canonical. Other projects on this machine that also use claude-seo can re-auth or write config through the shared path and overwrite ayso13's identity/properties. We attempted a durable service-account fix on 2026-05-27, but the ayso13 GA4 property is Workspace-locked and rejects SA emails ("This email doesn't match a Google Account" — hard block, not bypassable via "Notify by email" toggle or the v1alpha Admin API). Settled defense:
+1. `.seo-creds/google-api.json.ayso13-backup` — canonical backup, used for restore after clobbering.
+2. **Before any GA4/GSC query**, `cat ~/.config/claude-seo/google-api.json` and verify `ga4_property_id == 307558725`. See memory `feedback_check_seo_creds_first`. If clobbered: restore from backup + re-auth via `google_auth.py --auth --creds .seo-creds/client_secret.json`.
+3. Don't re-auth unless necessary — each auth flow writes the shared token and risks clobbering elsewhere.
 
 `.seo-creds/` contents (all gitignored):
 - `client_secret.json` — OAuth client JSON from Google Cloud Console (project `ayso13-seo`)
 - `google-api.json` — `{ "ga4_property_id": "307558725", "oauth_client_path": "/Users/matthew/dev/ayso-website/.seo-creds/client_secret.json" }`
+- `google-api.json.ayso13-backup` — canonical backup for restore after clobbering
 - `oauth-token.json` — OAuth refresh token, written on first auth flow
 
 Token auto-refreshes when the entries above are valid. To re-auth from scratch: `python3 $SEO/google_auth.py --auth --creds .seo-creds/client_secret.json`.
+
+The CSP report Worker admin key is also exported by `.envrc` as `CSP_ADMIN_KEY` for the daily review one-liner — see `## Files` → `.envrc` notes below and the daily-review command in this file.
 
 ```bash
 SEO=~/.claude/plugins/cache/agricidaniel-seo/claude-seo/1.9.6/scripts
@@ -301,4 +309,4 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `/workers/weather-api/` — Cloudflare Worker that powers `/resources/weather/`. Cron-polls Tempest station 33318 + NWS forecast every 5 min, computes WBGT, tracks rolling rainfall in KV, serves at `www.ayso13.org/api/weather` (also bound on `staging.ayso13.org/api/weather`). Deploy with `cd workers/weather-api && npx wrangler deploy`. `TEMPEST_TOKEN` is a wrangler secret (not in git); station ID, lat/lon, and KV id are in `wrangler.toml`. See `workers/weather-api/README.md` for setup details.
 
 ---
-*Last updated: 2026-05-25 (session 31 — Local-SEO foundation complete: GBP claim resolved (place id `g/11b8_wr4q5`, cid `9491143221518550898`), 2nd Owner added for redundancy, NAP validated against site/src/_data/site.json, Bing Places mirrored with second user invited. No repo code changes this session beyond closing the GBP todo.)*
+*Last updated: 2026-05-27 (session 32 — Site-health review (404s/redirects/GA4/GSC/CSP all clean, CSP at 7+ days zero new violations); main↔staging sync recovery after CMS accidentally pointed at main shipped 3 commits straight to prod (caught staging up + promoted); seo-creds clobbering recurrence diagnosed + attempted service-account isolation (GA4 Workspace-locked, SA rejected); settled defense: `.seo-creds/google-api.json.ayso13-backup` + new memory `feedback_check_seo_creds_first` requiring property-ID verification before any GA4/GSC query; CSP_ADMIN_KEY exported in .envrc for daily review one-liner; updated claude-seo-isolation-prompt.md for handoff to other Claude sessions on this machine.)*

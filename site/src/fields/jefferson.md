@@ -12,7 +12,7 @@ description: "Jefferson Center fields — AYSO Region 13 game location in Pasade
 parking: "Street"
 restrooms: "Yes"
 surface: "Grass"
-lighting: "No"
+lighting: "Yes"
 snackBar: "No"
 
 ---
