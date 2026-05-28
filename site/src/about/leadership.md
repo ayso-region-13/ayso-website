@@ -58,7 +58,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Position | Name | Email |
 | ------------------------------------ | ------------------------------ | --------------------------------------------------- |
 | Deputy Coach Administrator | Brandi Lane | [brandi@ayso13.org](mailto:brandi@ayso13.org) |
-| B6U Division Coach Administrator | Grace Molina | [coachb6u@ayso13.org](mailto:coachb6u@ayso13.org) |
+| B6U Division Coach Administrator | Grace Chavarin | [coachb6u@ayso13.org](mailto:coachb6u@ayso13.org) |
 | G6U Division Coach Administrator | Karen Yenofsky | [coachg6u@ayso13.org](mailto:coachg6u@ayso13.org) |
 | B7U Division Coach Administrator | Mary Cholko & Lauren Stevenson | [coachb7u@ayso13.org](mailto:coachb7u@ayso13.org) |
 | G7U Division Coach Administrator | Jonathan Lui | [coachg7u@ayso13.org](mailto:coachg7u@ayso13.org) |
