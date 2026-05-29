@@ -466,7 +466,15 @@ function ensureFrameBox() {
   state.frameBox = { x: Math.max(8, (rect.width - w) / 2), y: Math.max(8, (rect.height - h) / 2), w: w, h: h };
 }
 function applyFrameBox() {
-  ensureFrameBox();
+  // Locked → the box is pinned to ground coordinates: reproject its NW/SE
+  // corners every frame so it tracks zoom and pan. Unlocked → screen-anchored.
+  if (state.frameLocked && state.frameGeo) {
+    const pNW = map.project(state.frameGeo.nw);
+    const pSE = map.project(state.frameGeo.se);
+    state.frameBox = { x: pNW.x, y: pNW.y, w: pSE.x - pNW.x, h: pSE.y - pNW.y };
+  } else {
+    ensureFrameBox();
+  }
   const b = state.frameBox, el = document.getElementById("frameBox");
   el.style.left = b.x + "px"; el.style.top = b.y + "px";
   el.style.width = b.w + "px"; el.style.height = b.h + "px";
@@ -479,12 +487,24 @@ function refreshFrameBox() { if (!map) return; applyFrameBox(); syncMetersReadou
 // Lock the export frame so the corner grip and meters field can't change it.
 function toggleFrameLock() {
   state.frameLocked = !state.frameLocked;
+  if (state.frameLocked) {
+    // Pin to ground: capture the current box's geographic corners.
+    ensureFrameBox();
+    const b = state.frameBox;
+    const nw = map.unproject([b.x, b.y]);
+    const se = map.unproject([b.x + b.w, b.y + b.h]);
+    state.frameGeo = { nw: [nw.lng, nw.lat], se: [se.lng, se.lat] };
+  } else {
+    // Release to screen-anchored, keeping its current on-screen position.
+    state.frameGeo = null;
+  }
   const btn = document.getElementById("frameLockBtn");
   btn.textContent = state.frameLocked ? "🔒 Frame" : "🔓 Frame";
   btn.classList.toggle("active", state.frameLocked);
   document.getElementById("frameHandle").style.display = state.frameLocked ? "none" : "block";
   document.getElementById("frameMeters").disabled = state.frameLocked;
   document.getElementById("frameBox").classList.toggle("locked", state.frameLocked);
+  applyFrameBox();
 }
 
 // Resize the box from a typed meters value, keeping the top-left fixed.
