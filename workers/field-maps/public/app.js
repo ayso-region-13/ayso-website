@@ -109,6 +109,7 @@ function wireUi() {
   document.getElementById("fieldSelect").addEventListener("change", (e) => selectField(e.target.value));
   document.getElementById("variantSelect").addEventListener("change", (e) => { state.variant = e.target.value; if (state.field) loadVariant(); updateFilename(); });
   document.getElementById("frameMeters").addEventListener("input", (e) => setFrameMeters(Number(e.target.value)));
+  document.getElementById("frameLockBtn").addEventListener("click", toggleFrameLock);
   wireFrameHandle();
   document.getElementById("recenterBtn").addEventListener("click", recenter);
   document.getElementById("previewBtn").addEventListener("click", () => doExport(false));
@@ -154,6 +155,7 @@ function wireFrameHandle() {
     document.removeEventListener("touchend", end);
   };
   const start = (e) => {
+    if (state.frameLocked) return;
     dragging = true;
     document.addEventListener("mousemove", move);
     document.addEventListener("mouseup", end);
@@ -474,6 +476,17 @@ function syncMetersReadout() {
 }
 // Map move/zoom: reposition box on screen unchanged, refresh the meters readout.
 function refreshFrameBox() { if (!map) return; applyFrameBox(); syncMetersReadout(); }
+// Lock the export frame so the corner grip and meters field can't change it.
+function toggleFrameLock() {
+  state.frameLocked = !state.frameLocked;
+  const btn = document.getElementById("frameLockBtn");
+  btn.textContent = state.frameLocked ? "🔒 Frame" : "🔓 Frame";
+  btn.classList.toggle("active", state.frameLocked);
+  document.getElementById("frameHandle").style.display = state.frameLocked ? "none" : "block";
+  document.getElementById("frameMeters").disabled = state.frameLocked;
+  document.getElementById("frameBox").classList.toggle("locked", state.frameLocked);
+}
+
 // Resize the box from a typed meters value, keeping the top-left fixed.
 function setFrameMeters(m) {
   ensureFrameBox();

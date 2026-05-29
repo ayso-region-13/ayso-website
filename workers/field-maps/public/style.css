@@ -81,6 +81,8 @@ main { flex: 1; display: flex; min-height: 0; }
   border: 2px dashed rgba(255,255,255,0.85);
   border-radius: 2px;
 }
+#frameBox.locked { border-style: solid; border-color: var(--gold); }
+#frameLockBtn.active { background: var(--gold); border-color: var(--gold); font-weight: 600; }
 /* Corner grip to drag-resize the export frame (the rest of the overlay stays
    pointer-events:none so the map is interactive inside the frame). */
 #frameHandle {
