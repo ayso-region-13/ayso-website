@@ -70,7 +70,11 @@ export default {
     }
     res.headers.set("X-Content-Type-Options", "nosniff");
     res.headers.set("X-Frame-Options", "DENY");
-    res.headers.set("Referrer-Policy", "same-origin");
+    // NOT "same-origin": that strips the Referer on cross-origin requests to
+    // api.mapbox.com, and Mapbox's URL-restricted token validates the Referer
+    // (no Referer → 403 on every tile). strict-origin-when-cross-origin sends
+    // the bare origin cross-origin, which satisfies the URL restriction.
+    res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
     return res;
   },
 };

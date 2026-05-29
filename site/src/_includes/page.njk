@@ -89,17 +89,37 @@ layout: base.njk
          wrapper classes keep it clear of the field-info-bottom transform. #}
       {% if section == "fields" and fieldmaps and fieldmaps[page.fileSlug] and fieldmaps[page.fileSlug].variants %}
       {% set fmaps = fieldmaps[page.fileSlug] %}
+      <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css"
+            integrity="sha384-GPAzSuZc0kFvdIev6wm9zg8gnafE8tLso7rsAYQfc9hAdWCpOcpcNI5W9lWkYcsd"
+            crossorigin="anonymous">
       <div class="not-prose mb-8 max-w-3xl" data-field-maps>
         <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-red-dark mb-3">Field Maps</h2>
         <div class="flex flex-wrap gap-5">
           {% for vid, v in fmaps.variants %}
           <figure class="flex-1 min-w-[18rem] rounded-lg overflow-hidden border border-brand-cream">
-            <img src="{{ v.png }}" alt="{{ v.alt }}" sizes="(min-width: 768px) 600px, 100vw" class="w-full h-auto block">
+            {# Thumbnail (eleventy-img → responsive WebP) links to the full-res
+               PNG, opened in a zoom/pan lightbox. Grouped so game/practice can
+               be swiped between. #}
+            <a href="{{ v.png }}" class="gmap-lightbox block" data-gallery="fieldmaps-{{ page.fileSlug }}"
+               data-title="{{ v.label or title }}" aria-label="Enlarge {{ v.label or 'field map' }}">
+              <img src="{{ v.png }}" alt="{{ v.alt }}" sizes="(min-width: 768px) 600px, 100vw" class="w-full h-auto block">
+            </a>
             {% if v.label %}<figcaption class="bg-brand-cream text-brand-dark text-sm font-medium px-3 py-2">{{ v.label }}</figcaption>{% endif %}
           </figure>
           {% endfor %}
         </div>
+        <p class="text-xs text-brand-dark/60 mt-2">Tap a map to enlarge — scroll or pinch to zoom, drag to pan.</p>
       </div>
+      <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"
+              integrity="sha384-MZZbZ6RXJudK43v1qY1zOWKOU2yfeBPatuFoKyHAaAgHTUZhwblRTc9CphTt4IGQ"
+              crossorigin="anonymous"></script>
+      <script>
+        (function () {
+          function init() { if (window.GLightbox) GLightbox({ selector: '.gmap-lightbox', zoomable: true, touchNavigation: true, loop: true }); }
+          if (document.readyState !== 'loading') init(); else document.addEventListener('DOMContentLoaded', init);
+        })();
+      </script>
       {% endif %}
 
       <div class="prose max-w-3xl">

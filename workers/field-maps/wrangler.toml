@@ -29,22 +29,26 @@ run_worker_first = true
 
 # ── Vars (non-secret config; safe to commit) ────────────────────────────────
 [vars]
-# Your Cloudflare Access team domain, e.g. "ayso13.cloudflareaccess.com".
-# Find it under Zero Trust → Settings → Custom Pages / team domain.
-ACCESS_TEAM_DOMAIN = "REPLACE_WITH_TEAM_DOMAIN.cloudflareaccess.com"
-# The Access application's AUD tag (Zero Trust → Access → Applications →
-# the field-maps app → Overview → Application Audience (AUD) Tag).
-ACCESS_AUD = "REPLACE_WITH_ACCESS_APPLICATION_AUD"
+# Cloudflare Access team domain (non-secret).
+ACCESS_TEAM_DOMAIN = "ayso13.cloudflareaccess.com"
+# The Access application's AUD tag for "AYSO Region 13 Field Map Editor"
+# (app id e0c15c32-03ec-4ccd-bd57-0c7d9729204f). Non-secret — security comes
+# from verifying the JWT signature against the team JWKS, not AUD secrecy.
+ACCESS_AUD = "04006393cf3ae6e9f13a60eb017aecf192ff42026dbb77a0dcaca19ab4bd75d9"
 # Repo and branch the editor commits to. Staging only — never main.
 GITHUB_REPO = "ayso-region-13/ayso-website"
-GITHUB_BRANCH = "staging"
-# Public, URL-restricted Mapbox token (pk....). Used client-side for GL tiles
-# and the Static Images API. Restrict it to https://fields.ayso13.org/* in the
-# Mapbox account. Served to the editor via GET /api/config. It is intentionally
-# public — the Access gate is what limits who can load the editor.
-MAPBOX_TOKEN_PUBLIC = "REPLACE_WITH_URL_RESTRICTED_PUBLIC_MAPBOX_TOKEN"
+# TEMPORARY: editor commits to the field-maps feature branch while building out
+# all the maps, so they can be previewed on Cloudflare without touching staging.
+# Switch back to "staging" once the maps are reviewed and ready to ship.
+GITHUB_BRANCH = "field-maps"
 
 # ── Secrets (set with `wrangler secret put <NAME>`; never commit) ────────────
+# This repo is PUBLIC, so the Mapbox token is a secret rather than a committed
+# var — even a URL-restricted public token can be reused from a spoofed referer
+# to burn the account's quota. The editor receives it only via GET /api/config,
+# after Cloudflare Access has authenticated the request.
+#   MAPBOX_TOKEN_PUBLIC - public Mapbox token (pk....), URL-restricted to
+#                  https://fields.ayso13.org/* in the Mapbox account.
 #   GITHUB_TOKEN - fine-grained PAT scoped to ayso-region-13/ayso-website with
 #                  Contents: Read & Write. Used by the Git Data API commit flow.
 #                  Create at github.com/settings/tokens?type=beta

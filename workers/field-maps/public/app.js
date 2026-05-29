@@ -24,17 +24,26 @@ const STYLE = "satellite-v9";
 const EARTH_CIRCUMFERENCE = 40075016.686, TILE = 512;
 
 const MARKER_TYPES = {
-  goal:     { color: "#2f6fed", code: "G", name: "Goal" },
-  restroom: { color: "#6b3fa0", code: "R", name: "Restroom" },
-  parking:  { color: "#1f8a4c", code: "P", name: "Parking" },
-  tent:     { color: "#d11313", code: "T", name: "Field Host Tent" },
-  checkin:  { color: "#d11313", code: "C", name: "Picture-Day Check-in" },
+  goal:     { color: "#2f6fed", code: "G", emoji: "🥅", name: "Goal" },
+  restroom: { color: "#6b3fa0", code: "R", emoji: "🚻", name: "Restroom" },
+  parking:  { color: "#1f8a4c", code: "P", emoji: "🅿️", name: "Parking" },
+  tent:     { color: "#d11313", code: "T", emoji: "⛺", name: "Field Host Tent" },
+  checkin:  { color: "#d11313", code: "C", emoji: "📷", name: "Picture-Day Check-in" },
 };
+// Field size presets by AYSO age division → [widthM, lengthM]. Starting points
+// (small-sided field guidance); fine-tune by dragging or via width/length.
+// Picking a preset also sets the field's age label.
 const FIELD_PRESETS = {
-  "4v4":  [18, 27], "5v5": [23, 35], "7v7": [37, 55],
-  "9v9":  [46, 73], "11v11": [64, 100],
+  "6U":      [18, 27],   // 4v4
+  "7U":      [18, 27],   // 4v4
+  "8U":      [30, 46],   // 7v7 (small)
+  "10U":     [37, 55],   // 7v7
+  "12U":     [46, 73],   // 9v9
+  "14U":     [55, 91],   // 11v11 (youth)
+  "16U/19U": [64, 100],  // 11v11
 };
 const HOME_COLOR = "#2f6fed", AWAY_COLOR = "#d98324";
+const EMOJI_FONT = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", -apple-system, Arial, sans-serif';
 
 const state = {
   config: null, fields: [], field: null, variant: "game",
@@ -155,8 +164,8 @@ function onClick(e) {
   const id = "e" + state.seq++;
   let el;
   if (state.tool === "field") {
-    const [w, l] = FIELD_PRESETS["7v7"];
-    el = { id, kind: "field", center: c, widthM: w, lengthM: l, rotationDeg: 0, name: "", ageGroup: "", preset: "7v7", markHome: state.variant === "game" };
+    const [w, l] = FIELD_PRESETS["10U"];
+    el = { id, kind: "field", center: c, widthM: w, lengthM: l, rotationDeg: 0, name: "", ageGroup: "10U", preset: "10U", markHome: state.variant === "game" };
   } else if (state.tool === "grid") {
     el = { id, kind: "grid", center: c, widthM: 70, lengthM: 50, rotationDeg: 0, cols: 3, rows: 2, scheme: "letters", startIndex: 0, name: "" };
   } else if (state.tool === "line") {
@@ -187,15 +196,20 @@ function onDown(e) {
     return;
   }
   const b = pick(e.point, ["shapes-fill", "shapes-line", "markers-c", "labels", "sidelines"]);
-  if (b.length) {
-    const eid = b[0].properties && b[0].properties.eid;
-    if (eid) {
-      select(eid);
-      state.drag = { mode: "move", id: eid, last: e.lngLat };
-      map.dragPan.disable();
-      e.preventDefault();
-      return;
-    }
+  // Pick the topmost element that isn't locked, so clicks pass through a locked
+  // outer box to the fields drawn on top of it.
+  let eid = null;
+  for (let i = 0; i < b.length; i++) {
+    const id = b[i].properties && b[i].properties.eid;
+    const el = id && byId(id);
+    if (el && !el.locked) { eid = id; break; }
+  }
+  if (eid) {
+    select(eid);
+    state.drag = { mode: "move", id: eid, last: e.lngLat };
+    map.dragPan.disable();
+    e.preventDefault();
+    return;
   }
   select(null);
 }
@@ -219,9 +233,9 @@ function onMove(e) {
   } else if (state.drag.mode === "vertex" && el.points) {
     el.points[state.drag.idx] = cur;
   }
-  rebuild();
+  rebuildMap(); // map only during drag — panel refreshes on mouseup (keeps perf + focus)
 }
-function onUp() { if (state.drag) { state.drag = null; map.dragPan.enable(); renderSelPanel(); } }
+function onUp() { if (state.drag) { state.drag = null; map.dragPan.enable(); renderSelPanel(); renderElemList(); } }
 
 function pick(pt, layers) {
   const present = layers.filter((l) => map.getLayer(l));
@@ -230,7 +244,10 @@ function pick(pt, layers) {
 }
 
 // ─── Build all map sources from state ──────────────────────────────────────────
-function rebuild() {
+// rebuildMap() refreshes only the map layers (no panel re-render) — call it on
+// keystroke edits so the input you're typing in keeps focus. rebuild() also
+// re-renders the side panel (use it for selection / preset / structural changes).
+function rebuildMap() {
   const shapes = [], sidelines = [], labels = [], markers = [], handles = [];
 
   state.elements.forEach((el) => {
@@ -269,9 +286,9 @@ function rebuild() {
     }
   });
 
-  // Selection handles
+  // Selection handles — none for locked elements (can't move/resize on the map).
   const sel = byId(state.selectedId);
-  if (sel) {
+  if (sel && !sel.locked) {
     if (sel.kind === "field" || sel.kind === "grid") {
       const ring = Geo.rectRing(sel.center, sel.widthM, sel.lengthM, sel.rotationDeg);
       for (let i = 0; i < 4; i++) handles.push(handle(ring[i], sel.id, "corner", i));
@@ -284,8 +301,8 @@ function rebuild() {
 
   setData("shapes", shapes); setData("sidelines", sidelines);
   setData("labels", labels); setData("markers", markers); setData("handles", handles);
-  renderSelPanel(); renderElemList();
 }
+function rebuild() { rebuildMap(); renderSelPanel(); renderElemList(); }
 function setData(id, features) { const s = map.getSource(id); if (s) s.setData(fc(features)); }
 function poly(ring, eid, props) { return { type: "Feature", properties: { eid, ...props }, geometry: { type: "Polygon", coordinates: [ring] } }; }
 function lineFeat(pts, eid, props) { return { type: "Feature", properties: { eid, ...props }, geometry: { type: "LineString", coordinates: pts } }; }
@@ -307,7 +324,7 @@ function renderSelPanel() {
     html = `
       <div class="field-row"><label class="block">Name<input data-k="name" value="${esc(el.name)}" placeholder="e.g. VP1"></label>
       <label class="block">Age<input data-k="ageGroup" value="${esc(el.ageGroup)}" placeholder="e.g. 10U"></label></div>
-      <label class="block">Size preset<select data-k="preset">${presetOpts(el.preset)}</select></label>
+      <label class="block">Field size (by age)<select data-k="preset">${presetOpts(el.preset)}</select></label>
       <div class="field-row"><label class="block">Width m<input type="number" data-k="widthM" value="${el.widthM}"></label>
       <label class="block">Length m<input type="number" data-k="lengthM" value="${el.lengthM}"></label></div>
       <label class="block">Rotation °<input type="number" data-k="rotationDeg" value="${el.rotationDeg}"></label>
@@ -335,6 +352,7 @@ function renderSelPanel() {
   } else if (el.kind === "marker") {
     html = `<p>${MARKER_TYPES[el.type].name}</p><p class="hint">Drag to reposition.</p>`;
   }
+  html += `<label class="inline" style="margin-top:.5rem"><input type="checkbox" data-k="locked" ${el.locked ? "checked" : ""}> 🔒 Lock — freeze on map (edit fields on top of it)</label>`;
   html += `<button type="button" class="del" id="delSel">Delete element</button>`;
   panel.innerHTML = html;
   panel.querySelectorAll("[data-k]").forEach((inp) => inp.addEventListener("input", () => applyField(el, inp)));
@@ -345,13 +363,23 @@ function renderSelPanel() {
 function applyField(el, inp) {
   const k = inp.dataset.k;
   let v = inp.type === "checkbox" ? inp.checked : (inp.type === "number" ? Number(inp.value) : inp.value);
-  if (k === "preset" && FIELD_PRESETS[v]) { el.preset = v; el.widthM = FIELD_PRESETS[v][0]; el.lengthM = FIELD_PRESETS[v][1]; }
-  else el[k] = v;
-  rebuild();
+  // Choosing an age size preset sets the field size AND auto-labels by age.
+  // It changes other panel inputs, so it's the one case that re-renders the panel.
+  if (k === "preset" && FIELD_PRESETS[v]) {
+    el.preset = v; el.widthM = FIELD_PRESETS[v][0]; el.lengthM = FIELD_PRESETS[v][1]; el.ageGroup = v;
+    rebuild();
+    return;
+  }
+  // Every other edit (text/number/checkbox/select): update the element and the
+  // map, but DON'T re-render the side panel — re-rendering destroys the <input>
+  // and drops focus mid-keystroke. renderElemList is safe (separate elements).
+  el[k] = v;
+  rebuildMap();
+  renderElemList();
 }
 function presetOpts(cur) {
-  return Object.keys(FIELD_PRESETS).map((k) => `<option value="${k}"${cur===k?" selected":""}>${k} (${FIELD_PRESETS[k][0]}×${FIELD_PRESETS[k][1]} m)</option>`).join("") +
-    `<option value="custom"${cur==="custom"?" selected":""}>Custom</option>`;
+  return Object.keys(FIELD_PRESETS).map((k) => `<option value="${k}"${cur===k?" selected":""}>${k} — ${FIELD_PRESETS[k][0]}×${FIELD_PRESETS[k][1]} m</option>`).join("") +
+    `<option value="custom"${cur==="custom"?" selected":""}>Custom size</option>`;
 }
 
 function renderElemList() {
@@ -366,7 +394,7 @@ function renderElemList() {
       : MARKER_TYPES[el.type].name;
     const row = document.createElement("div");
     row.className = "item" + (el.id === state.selectedId ? " sel" : "");
-    row.innerHTML = `<span class="grow">${esc(name)}</span><button class="del" data-del="${el.id}">✕</button>`;
+    row.innerHTML = `<span class="grow">${el.locked ? "🔒 " : ""}${esc(name)}</span><button class="del" data-del="${el.id}">✕</button>`;
     row.querySelector(".grow").addEventListener("click", () => select(el.id));
     row.querySelector("[data-del]").addEventListener("click", () => { state.elements = state.elements.filter((x) => x.id !== el.id); if (state.selectedId === el.id) select(null); else rebuild(); });
     list.appendChild(row);
@@ -374,7 +402,7 @@ function renderElemList() {
 }
 
 // ─── Framing guide ──────────────────────────────────────────────────────────
-function frameMeters() { return Math.max(40, Math.min(600, Number(document.getElementById("frameMeters").value) || 200)); }
+function frameMeters() { return Math.max(40, Math.min(1200, Number(document.getElementById("frameMeters").value) || 200)); }
 function refreshFrameBox() {
   if (!map) return;
   const lat = map.getCenter().lat;
@@ -478,11 +506,12 @@ function drawElement(ctx, project, el) {
     ctx.lineWidth = 4 * SCALE; ctx.strokeStyle = "rgba(255,255,255,0.92)";
     ctx.strokeText(el.text, p.x, p.y); ctx.fillStyle = el.color; ctx.fillText(el.text, p.x, p.y);
   } else if (el.kind === "marker") {
-    const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 11 * SCALE;
-    ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = t.color; ctx.fill();
-    ctx.lineWidth = 2.5 * SCALE; ctx.strokeStyle = "#fff"; ctx.stroke();
-    ctx.fillStyle = "#fff"; ctx.font = `bold ${13 * SCALE}px Arial`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.fillText(t.code, p.x, p.y + SCALE);
+    const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 13 * SCALE;
+    // White badge with a colored ring, emoji glyph centered.
+    ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
+    ctx.lineWidth = 2.5 * SCALE; ctx.strokeStyle = t.color; ctx.stroke();
+    ctx.font = `${15 * SCALE}px ${EMOJI_FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(t.emoji, p.x, p.y + SCALE);
   }
 }
 
@@ -512,7 +541,7 @@ function drawTitle(ctx) {
 function drawLegend(ctx) {
   const items = [];
   const markerTypes = [...new Set(state.elements.filter((e) => e.kind === "marker").map((e) => e.type))];
-  markerTypes.forEach((t) => items.push({ color: MARKER_TYPES[t].color, code: MARKER_TYPES[t].code, name: MARKER_TYPES[t].name }));
+  markerTypes.forEach((t) => items.push({ emoji: MARKER_TYPES[t].emoji, name: MARKER_TYPES[t].name }));
   if (state.elements.some((e) => e.kind === "field" && e.markHome)) {
     items.push({ line: HOME_COLOR, name: "Home sideline" });
     items.push({ line: AWAY_COLOR, name: "Away sideline" });
@@ -529,11 +558,11 @@ function drawLegend(ctx) {
       ctx.strokeStyle = it.line; ctx.lineWidth = 5 * SCALE; ctx.lineCap = "round";
       ctx.beginPath(); ctx.moveTo(x + padX, cy); ctx.lineTo(x + padX + 16 * SCALE, cy); ctx.stroke();
     } else {
-      ctx.beginPath(); ctx.arc(x + padX + 7 * SCALE, cy, 7 * SCALE, 0, Math.PI * 2); ctx.fillStyle = it.color; ctx.fill();
-      ctx.fillStyle = "#fff"; ctx.font = `bold ${9 * SCALE}px Arial`; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(it.code, x + padX + 7 * SCALE, cy + 0.5 * SCALE);
+      ctx.font = `${15 * SCALE}px ${EMOJI_FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(it.emoji, x + padX + 8 * SCALE, cy);
     }
     ctx.fillStyle = "#221f1f"; ctx.font = `${12 * SCALE}px -apple-system, Arial, sans-serif`; ctx.textAlign = "left"; ctx.textBaseline = "middle";
-    ctx.fillText(it.name, x + padX + 22 * SCALE, cy);
+    ctx.fillText(it.name, x + padX + 24 * SCALE, cy);
   });
 }
 

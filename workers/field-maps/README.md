@@ -34,7 +34,12 @@ Board member ─(CF Access OTP)─▶ fields.ayso13.org (this Worker)
 - Create a **public** token (`pk.…`) and add a **URL restriction** for
   `https://fields.ayso13.org/*`. This token is used client-side (GL tiles +
   Static Images API); the URL restriction + the Access gate are its protection.
-- Put it in `wrangler.toml` `[vars] MAPBOX_TOKEN_PUBLIC`.
+- This repo is **public**, so store it as a **secret**, not a committed var
+  (a URL restriction is spoofable by non-browser clients). The editor receives
+  it via `GET /api/config` only after Access authenticates the request:
+  ```
+  wrangler secret put MAPBOX_TOKEN_PUBLIC
+  ```
 
 ### 2. Cloudflare Access application (Zero Trust)
 - Zero Trust → Access → Applications → **Add a self-hosted application**.
@@ -65,13 +70,22 @@ Board member ─(CF Access OTP)─▶ fields.ayso13.org (this Worker)
 - `workers_dev = false` keeps the `*.workers.dev` URL off so Access can't be
   bypassed through it.
 
-### 5. Account guard + deploy
-`CLOUDFLARE_ACCOUNT_ID` must be exported (the repo `.envrc` does this) so the
-`preflight` script doesn't deploy to the wrong account.
+### 5. Auth (token, not OAuth) + deploy
+Deploy with a **Cloudflare API token scoped to the AYSO account + ayso13.org
+zone**, not `wrangler login`. OAuth login caches an account-wide token in
+`~/.wrangler` that other projects on this machine can clobber or that can target
+the wrong account; a scoped token physically cannot. This matches how CI deploys
+(GitHub Actions `CLOUDFLARE_API_TOKEN`). The repo `.envrc` exports both:
+```
+export CLOUDFLARE_ACCOUNT_ID="…"   # already present; pins the account
+export CLOUDFLARE_API_TOKEN="…"    # AYSO-scoped token; wrangler uses it directly
+```
+Token permissions: Account · Workers Scripts:Edit, Access Apps&Policies:Edit,
+Account Settings:Read; Zone (ayso13.org) · Workers Routes:Edit, DNS:Edit.
 ```
 cd workers/field-maps
 npm install
-npm run deploy      # runs preflight, then wrangler deploy
+npm run deploy      # runs preflight, then wrangler deploy (token auth)
 npm run tail        # live logs while testing
 ```
 

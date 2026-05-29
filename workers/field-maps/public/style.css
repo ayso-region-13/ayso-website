@@ -74,9 +74,10 @@ main { flex: 1; display: flex; min-height: 0; }
   position: absolute; inset: 0; pointer-events: none;
   display: flex; align-items: center; justify-content: center;
 }
+/* Export-bounds indicator: a subtle dashed outline only — no dimming of the
+   surrounding map (the dark box-shadow read as the whole editor being grayed). */
 #frameBox {
-  border: 2px dashed rgba(255,255,255,0.9);
-  box-shadow: 0 0 0 9999px rgba(0,0,0,0.28);
+  border: 2px dashed rgba(255,255,255,0.7);
   border-radius: 2px;
 }
 
@@ -122,6 +123,8 @@ button.del { color: #b22; border-color: #e3c4c4; padding: 0.2rem 0.45rem; font-s
 
 /* ── Modal + toast ───────────────────────────────────────── */
 .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 50; }
+/* `hidden` must win over display:flex above, else the modal never closes. */
+.modal[hidden] { display: none; }
 .modal-card { background: #fff; border-radius: 10px; padding: 1.2rem; max-width: 90vw; max-height: 88vh; overflow: auto; }
 .modal-card h2 { margin-top: 0; color: var(--red-dark); }
 .modal-card img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; }

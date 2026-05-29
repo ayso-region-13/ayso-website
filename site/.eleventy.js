@@ -181,9 +181,15 @@ module.exports = function (eleventyConfig) {
   // --- Global data ---
   eleventyConfig.addGlobalData("currentYear", () => new Date().getFullYear());
 
-  // True when this build is for the staging branch on Cloudflare Pages.
-  // Used by _headers.njk and robots.njk to block crawlers on staging only.
-  eleventyConfig.addGlobalData("isStaging", () => process.env.CF_PAGES_BRANCH === "staging");
+  // True for any Cloudflare Pages build that is NOT production (the `main`
+  // branch) — i.e. staging AND preview branches (e.g. field-maps). Used by
+  // _headers.njk and robots.njk to emit noindex so only www.ayso13.org (main)
+  // is crawlable. Local dev (npm start) has no CF_PAGES_BRANCH → treated as
+  // production (allow), which is fine since local builds are never served.
+  eleventyConfig.addGlobalData("isStaging", () => {
+    const branch = process.env.CF_PAGES_BRANCH;
+    return !!branch && branch !== "main";
+  });
 
   // --- Transform: auto-style InLeague Register links as big yellow buttons ---
   // Editors save plain markdown via Pages CMS (which mangles raw HTML) — this
