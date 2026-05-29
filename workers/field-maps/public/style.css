@@ -79,6 +79,21 @@ main { flex: 1; display: flex; min-height: 0; }
 #frameBox {
   border: 2px dashed rgba(255,255,255,0.7);
   border-radius: 2px;
+  position: relative;
+}
+/* Corner grip to drag-resize the export frame (the rest of the overlay stays
+   pointer-events:none so the map is interactive inside the frame). */
+#frameHandle {
+  position: absolute;
+  right: -10px; bottom: -10px;
+  width: 20px; height: 20px;
+  background: #fff;
+  border: 3px solid var(--maroon);
+  border-radius: 4px;
+  cursor: nwse-resize;
+  pointer-events: auto;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.45);
+  touch-action: none;
 }
 
 #panel {

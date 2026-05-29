@@ -109,6 +109,7 @@ function wireUi() {
   document.getElementById("fieldSelect").addEventListener("change", (e) => selectField(e.target.value));
   document.getElementById("variantSelect").addEventListener("change", (e) => { state.variant = e.target.value; if (state.field) loadVariant(); updateFilename(); });
   document.getElementById("frameMeters").addEventListener("input", refreshFrameBox);
+  wireFrameHandle();
   document.getElementById("recenterBtn").addEventListener("click", recenter);
   document.getElementById("previewBtn").addEventListener("click", () => doExport(false));
   document.getElementById("saveBtn").addEventListener("click", () => doExport(true));
@@ -123,6 +124,47 @@ function wireUi() {
   }));
 }
 function setHint(t) { document.getElementById("toolHint").textContent = t; }
+
+// Drag the dashed frame's corner grip to resize the export bounds. The frame is
+// centered on the map center (= export center), so width is derived from the
+// cursor's horizontal distance to center; height follows the export aspect.
+function wireFrameHandle() {
+  const handle = document.getElementById("frameHandle");
+  const input = document.getElementById("frameMeters");
+  let dragging = false;
+  const move = (e) => {
+    if (!dragging) return;
+    const pt = e.touches ? e.touches[0] : e;
+    const rect = document.getElementById("map").getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const halfW = Math.abs(pt.clientX - cx);
+    const lat = map.getCenter().lat;
+    const mpp = EARTH_CIRCUMFERENCE * Math.cos((lat * Math.PI) / 180) / (TILE * Math.pow(2, map.getZoom()));
+    let meters = Math.round((2 * halfW * mpp) / 10) * 10; // snap to 10 m
+    meters = Math.max(40, Math.min(1200, meters));
+    input.value = meters;
+    refreshFrameBox();
+    e.preventDefault();
+  };
+  const end = () => {
+    dragging = false;
+    document.removeEventListener("mousemove", move);
+    document.removeEventListener("mouseup", end);
+    document.removeEventListener("touchmove", move);
+    document.removeEventListener("touchend", end);
+  };
+  const start = (e) => {
+    dragging = true;
+    document.addEventListener("mousemove", move);
+    document.addEventListener("mouseup", end);
+    document.addEventListener("touchmove", move, { passive: false });
+    document.addEventListener("touchend", end);
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  handle.addEventListener("mousedown", start);
+  handle.addEventListener("touchstart", start, { passive: false });
+}
 
 // ─── Fields ──────────────────────────────────────────────────────────────────
 async function loadFields() {
