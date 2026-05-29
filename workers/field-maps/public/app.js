@@ -52,6 +52,7 @@ const state = {
   doc: null, variants: [], // current field's saved doc + available layouts
   elements: [], selectedId: null, tool: null,
   drag: null, seq: 1,
+  history: [], histIndex: -1, // element-state snapshots for undo/redo
 };
 let map;
 
@@ -62,9 +63,9 @@ async function init() {
   if (!state.config.mapboxToken) throw new Error("Mapbox token not configured (MAPBOX_TOKEN_PUBLIC).");
   document.getElementById("who").textContent = state.config.editor || "";
 
-  // Preload the AYSO logo for the export title pill.
+  // Preload the AYSO Region 13 logo for the export title pill (square viewBox).
   state.logo = new Image();
-  state.logo.src = "/ayso-logo.png";
+  state.logo.src = "/region13-logo.svg";
 
   mapboxgl.accessToken = state.config.mapboxToken;
   map = new mapboxgl.Map({
@@ -102,7 +103,13 @@ async function init() {
   map.on("mousemove", onMove);
   map.on("mouseup", onUp);
   map.on("click", onClick);
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") { state.tool = null; select(null); setHint("Click a tool, then click the map. Esc cancels."); } });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { state.tool = null; select(null); setHint("Click a tool, then click the map. Esc cancels."); }
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "z" && !/^(input|textarea|select)$/i.test((e.target.tagName || ""))) {
+      e.preventDefault();
+      if (e.shiftKey) redo(); else undo();
+    }
+  });
 
   wireUi();
   await loadFields();
@@ -122,6 +129,8 @@ function wireUi() {
   });
   document.getElementById("frameMeters").addEventListener("input", (e) => setFrameMeters(Number(e.target.value)));
   document.getElementById("frameLockBtn").addEventListener("click", toggleFrameLock);
+  document.getElementById("undoBtn").addEventListener("click", undo);
+  document.getElementById("redoBtn").addEventListener("click", redo);
   wireFrameHandle();
   document.getElementById("recenterBtn").addEventListener("click", recenter);
   document.getElementById("previewBtn").addEventListener("click", () => doExport(false));
@@ -245,7 +254,10 @@ async function loadVariant() {
     if (v.view && v.view.center) map.jumpTo({ center: v.view.center, zoom: v.view.zoom || 17 });
     if (v.view && v.view.frameMeters) document.getElementById("frameMeters").value = v.view.frameMeters;
     if (v.label) document.getElementById("variantLabel").value = v.label;
-    if (Array.isArray(v.elements)) state.elements = v.elements.map((e) => ({ ...e, id: e.id || "e" + state.seq++ }));
+    // Always assign FRESH session ids (don't reuse saved e.id) so state.seq
+    // advances past loaded elements — otherwise a newly placed element reuses an
+    // id like "e1" and collides with a loaded one (they'd select/lock together).
+    if (Array.isArray(v.elements)) state.elements = v.elements.map((e) => ({ ...e, id: "e" + state.seq++ }));
     // Restore + pin the saved export frame (reconstruct from center + width)
     // so the dashed frame persists across loads, glued to the same ground.
     if (v.view && v.view.center && v.view.frameMeters) {
@@ -257,6 +269,7 @@ async function loadVariant() {
   syncFrameLockUI();
   rebuild();
   refreshFrameBox();
+  resetHistory(); // baseline = the just-loaded layout
 }
 
 // ─── Placement ─────────────────────────────────────────────────────────────
@@ -275,13 +288,14 @@ function onClick(e) {
   } else if (state.tool === "word") {
     const text = prompt("Word / label text:", "Park Here");
     if (!text) { state.tool = null; clearToolBtns(); return; }
-    el = { id, kind: "text", center: c, text, color: "#15610e", size: 18 };
+    el = { id, kind: "text", center: c, text, color: "#83312d", size: 18 };
   } else {
     el = { id, kind: "marker", type: state.tool, center: c };
   }
   state.elements.push(el);
   state.tool = null; clearToolBtns();
   select(id);
+  snapshot(true);
   setHint("Drag to move; drag handles to resize/rotate. Esc deselects.");
 }
 function clearToolBtns() { document.querySelectorAll(".tool.active").forEach((x) => x.classList.remove("active")); }
@@ -337,7 +351,7 @@ function onMove(e) {
   }
   rebuildMap(); // map only during drag — panel refreshes on mouseup (keeps perf + focus)
 }
-function onUp() { if (state.drag) { state.drag = null; map.dragPan.enable(); renderSelPanel(); renderElemList(); } }
+function onUp() { if (state.drag) { state.drag = null; map.dragPan.enable(); renderSelPanel(); renderElemList(); snapshot(true); } }
 
 function pick(pt, layers) {
   const present = layers.filter((l) => map.getLayer(l));
@@ -415,6 +429,31 @@ function handle(coord, eid, role, idx) { return { type: "Feature", properties: {
 function byId(id) { return state.elements.find((e) => e.id === id); }
 function select(id) { state.selectedId = id; rebuild(); }
 
+// ─── Undo / redo (element-state snapshots) ──────────────────────────────────
+let snapTimer = null;
+function snapshot(immediate) {
+  clearTimeout(snapTimer);
+  const take = () => {
+    const snap = JSON.stringify(state.elements);
+    if (state.history[state.histIndex] === snap) return; // no-op change
+    state.history = state.history.slice(0, state.histIndex + 1);
+    state.history.push(snap);
+    if (state.history.length > 60) state.history.shift();
+    state.histIndex = state.history.length - 1;
+    updateUndoButtons();
+  };
+  if (immediate) take(); else snapTimer = setTimeout(take, 600); // debounce typing
+}
+function resetHistory() { state.history = [JSON.stringify(state.elements)]; state.histIndex = 0; updateUndoButtons(); }
+function restoreHistory() { state.elements = JSON.parse(state.history[state.histIndex]); state.selectedId = null; rebuild(); updateUndoButtons(); }
+function undo() { clearTimeout(snapTimer); if (state.histIndex > 0) { state.histIndex--; restoreHistory(); } }
+function redo() { if (state.histIndex < state.history.length - 1) { state.histIndex++; restoreHistory(); } }
+function updateUndoButtons() {
+  const u = document.getElementById("undoBtn"), r = document.getElementById("redoBtn");
+  if (u) u.disabled = state.histIndex <= 0;
+  if (r) r.disabled = state.histIndex >= state.history.length - 1;
+}
+
 function renderSelPanel() {
   const wrap = document.getElementById("selWrap"), panel = document.getElementById("selPanel");
   const el = byId(state.selectedId);
@@ -459,7 +498,7 @@ function renderSelPanel() {
   panel.innerHTML = html;
   panel.querySelectorAll("[data-k]").forEach((inp) => inp.addEventListener("input", () => applyField(el, inp)));
   const del = document.getElementById("delSel");
-  if (del) del.addEventListener("click", () => { state.elements = state.elements.filter((x) => x.id !== el.id); select(null); });
+  if (del) del.addEventListener("click", () => { state.elements = state.elements.filter((x) => x.id !== el.id); select(null); snapshot(true); });
 }
 
 function applyField(el, inp) {
@@ -470,6 +509,7 @@ function applyField(el, inp) {
   if (k === "preset" && FIELD_PRESETS[v]) {
     el.preset = v; el.widthM = FIELD_PRESETS[v][0]; el.lengthM = FIELD_PRESETS[v][1]; el.ageGroup = v;
     rebuild();
+    snapshot(false);
     return;
   }
   // Every other edit (text/number/checkbox/select): update the element and the
@@ -478,6 +518,7 @@ function applyField(el, inp) {
   el[k] = v;
   rebuildMap();
   renderElemList();
+  snapshot(false);
 }
 function presetOpts(cur) {
   return Object.keys(FIELD_PRESETS).map((k) => `<option value="${k}"${cur===k?" selected":""}>${k} — ${FIELD_PRESETS[k][0]}×${FIELD_PRESETS[k][1]} m</option>`).join("") +
@@ -497,11 +538,11 @@ function renderElemList() {
     const row = document.createElement("div");
     row.className = "item" + (el.id === state.selectedId ? " sel" : "");
     row.innerHTML = `<span class="grow">${esc(name)}</span>` +
-      `<button class="lockbtn" data-lock="${el.id}" title="${el.locked ? "Unlock (allow moving/resizing)" : "Lock (freeze on map)"}">${el.locked ? "🔒" : "🔓"}</button>` +
+      `<button class="lockbtn${el.locked ? " locked" : ""}" data-lock="${el.id}" title="${el.locked ? "Unlock (allow moving/resizing)" : "Lock (freeze on map)"}">${el.locked ? "🔒" : "🔓"}</button>` +
       `<button class="del" data-del="${el.id}">✕</button>`;
     row.querySelector(".grow").addEventListener("click", () => select(el.id));
-    row.querySelector("[data-lock]").addEventListener("click", () => { const m = byId(el.id); if (m) { m.locked = !m.locked; rebuild(); } });
-    row.querySelector("[data-del]").addEventListener("click", () => { state.elements = state.elements.filter((x) => x.id !== el.id); if (state.selectedId === el.id) select(null); else rebuild(); });
+    row.querySelector("[data-lock]").addEventListener("click", () => { const m = byId(el.id); if (m) { m.locked = !m.locked; rebuild(); snapshot(true); } });
+    row.querySelector("[data-del]").addEventListener("click", () => { state.elements = state.elements.filter((x) => x.id !== el.id); if (state.selectedId === el.id) select(null); else rebuild(); snapshot(true); });
     list.appendChild(row);
   });
 }
@@ -645,8 +686,10 @@ function drawElement(ctx, project, el) {
       if (ha) {
         strokeSeg(ctx, project, ha.home.a, ha.home.b, HOME_COLOR, 7);
         strokeSeg(ctx, project, ha.away.a, ha.away.b, AWAY_COLOR, 6);
-        textBox(ctx, project(ha.home.mid[0], ha.home.mid[1]), "HOME", { size: 13 * SCALE, bg: HOME_COLOR, fg: "#fff", center: true });
-        textBox(ctx, project(ha.away.mid[0], ha.away.mid[1]), "AWAY", { size: 13 * SCALE, bg: AWAY_COLOR, fg: "#fff", center: true });
+        // Labels run ALONG each touchline (rotated) so they don't overlap the
+        // field interior — important on small fields.
+        sidelineLabel(ctx, project, ha.home.a, ha.home.b, "HOME", HOME_COLOR);
+        sidelineLabel(ctx, project, ha.away.a, ha.away.b, "AWAY", AWAY_COLOR);
       }
     }
     const t = [el.name, el.ageGroup].filter(Boolean).join("  ");
@@ -673,11 +716,9 @@ function drawElement(ctx, project, el) {
     ctx.lineCap = "round"; ctx.lineWidth = (el.width || 5) * SCALE; ctx.strokeStyle = el.color; ctx.stroke();
     if (el.label) { const p = project(el.points[0][0], el.points[0][1]); textBox(ctx, p, el.label, { size: 13 * SCALE, bg: "rgba(0,0,0,0.6)", fg: "#fff", left: true }); }
   } else if (el.kind === "text") {
+    // Dark-red text on a white pill — reads clearly over grass/satellite.
     const p = project(el.center[0], el.center[1]);
-    ctx.font = `bold ${(el.size || 18) * SCALE}px -apple-system, Arial, sans-serif`;
-    ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.lineWidth = 4 * SCALE; ctx.strokeStyle = "rgba(255,255,255,0.92)";
-    ctx.strokeText(el.text, p.x, p.y); ctx.fillStyle = el.color; ctx.fillText(el.text, p.x, p.y);
+    textBox(ctx, p, el.text, { size: (el.size || 18) * SCALE, bg: "rgba(255,255,255,0.95)", fg: el.color || "#83312d", center: true });
   } else if (el.kind === "marker") {
     const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 19 * SCALE;
     // White badge with a colored ring, large emoji glyph, and the name in a
@@ -704,6 +745,25 @@ function strokeSeg(ctx, project, a, b, color, w) {
   ctx.lineCap = "round"; ctx.lineWidth = w * SCALE; ctx.strokeStyle = color; ctx.stroke();
 }
 
+// A pill label centered on a touchline and rotated to run along it (kept upright).
+function sidelineLabel(ctx, project, a, b, text, color) {
+  const pa = project(a[0], a[1]), pb = project(b[0], b[1]);
+  let angle = Math.atan2(pb.y - pa.y, pb.x - pa.x);
+  if (angle > Math.PI / 2 || angle < -Math.PI / 2) angle += Math.PI; // never upside-down
+  const mx = (pa.x + pb.x) / 2, my = (pa.y + pb.y) / 2;
+  const size = 13 * SCALE, padX = 7 * SCALE, padY = 4 * SCALE;
+  ctx.save();
+  ctx.translate(mx, my);
+  ctx.rotate(angle);
+  ctx.font = `bold ${size}px -apple-system, Arial, sans-serif`;
+  const w = ctx.measureText(text).width, h = size + padY * 2;
+  ctx.fillStyle = color;
+  roundRect(ctx, -w / 2 - padX, -h / 2, w + padX * 2, h, 4 * SCALE); ctx.fill();
+  ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillText(text, 0, 0);
+  ctx.restore();
+}
+
 function drawTitle(ctx) {
   const v = document.getElementById("variantLabel").value.trim() || (state.variant === "practice" ? "Practice" : "Game Day");
   const text = `${state.field.title} — ${v}`;
@@ -711,8 +771,9 @@ function drawTitle(ctx) {
   ctx.font = `bold ${17 * SCALE}px -apple-system, Arial, sans-serif`;
   const textW = ctx.measureText(text).width;
   const logo = state.logo;
-  const logoH = 30 * SCALE;
-  const logoW = (logo && logo.naturalWidth) ? logoH * (logo.naturalWidth / logo.naturalHeight) : 0;
+  const logoH = 32 * SCALE;
+  // Region 13 logo is ~square; fall back to square if the SVG reports no size.
+  const logoW = (logo && logo.naturalWidth && logo.naturalHeight) ? logoH * (logo.naturalWidth / logo.naturalHeight) : (logo ? logoH : 0);
   const gap = logoW ? 9 * SCALE : 0;
   const pillH = logoH + pad;
   const pillW = pad * 2 + logoW + gap + textW;

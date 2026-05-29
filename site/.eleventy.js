@@ -256,6 +256,42 @@ module.exports = function (eleventyConfig) {
     return content.replace(/(<div class="prose[^"]*">)/, "$1\n" + block);
   });
 
+  // --- Transform: in-page table of contents for field pages ---
+  // After the maps block is relocated, collect the <h2 id="…"> headings inside
+  // the article (markdown sections + the map sections) and render a "On this
+  // page" jump list at the top of the article. Runs after field-maps-after-
+  // directions so the map headings are present and in order.
+  eleventyConfig.addTransform("field-page-toc", function (content) {
+    if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;
+    if (!this.page.url || !this.page.url.startsWith("/fields/")) return content;
+
+    const aStart = content.indexOf("<article");
+    if (aStart < 0) return content;
+    const tagEnd = content.indexOf(">", aStart) + 1;
+    const aEnd = content.indexOf("</article>", tagEnd);
+    if (aEnd < 0) return content;
+    const inner = content.slice(tagEnd, aEnd);
+
+    const headings = [];
+    const re = /<h2[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g;
+    let m;
+    while ((m = re.exec(inner)) !== null) {
+      const text = m[2].replace(/<[^>]+>/g, "").trim();
+      if (text) headings.push({ id: m[1], text: text });
+    }
+    if (headings.length < 3) return content; // not worth a TOC
+
+    const items = headings.map((h) =>
+      `<li><a href="#${h.id}" class="block py-1 text-brand-red-dark hover:text-brand-dark transition-colors">${h.text}</a></li>`
+    ).join("");
+    const toc =
+      `<nav class="not-prose mb-6 max-w-3xl bg-brand-cream rounded-lg p-4" aria-label="On this page">` +
+      `<p class="text-xs font-semibold uppercase tracking-wider text-brand-red-dark mb-2">On this page</p>` +
+      `<ul class="text-sm">${items}</ul></nav>`;
+
+    return content.slice(0, tagEnd) + "\n" + toc + content.slice(tagEnd);
+  });
+
   // --- Transform: replace [DATE] placeholder with per-file last-modified date ---
   eleventyConfig.addTransform("date-placeholder", function (content) {
     if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;

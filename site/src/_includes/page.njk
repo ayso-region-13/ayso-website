@@ -94,27 +94,29 @@ layout: base.njk
          directions → game map → practice map). #}
       {% if section == "fields" and fieldmaps and fieldmaps[page.fileSlug] and fieldmaps[page.fileSlug].variants %}
       {% set fmaps = fieldmaps[page.fileSlug] %}
-      {% macro mapfig(v) %}
-      <figure class="flex-1 min-w-[18rem] rounded-lg overflow-hidden border border-brand-cream">
-        <a href="{{ v.png }}" class="gmap-lightbox block" data-gallery="fieldmaps-{{ page.fileSlug }}"
-           data-title="{{ v.label or title }}" aria-label="Enlarge {{ v.label or 'field map' }}">
-          <img src="{{ v.png }}" alt="{{ v.alt }}" sizes="(min-width: 768px) 600px, 100vw" class="w-full h-auto block">
-        </a>
-        {% if v.label %}<figcaption class="bg-brand-cream text-brand-dark text-sm font-medium px-3 py-2">{{ v.label }}</figcaption>{% endif %}
-      </figure>
+      {# Each map is its own anchored section so the in-page TOC links to it
+         ("Field Map for Games", "Field Map for Practices", or the layout name). #}
+      {% macro mapsection(v, heading, anchor) %}
+      <section class="not-prose mb-6 max-w-3xl">
+        <h2 id="{{ anchor }}" class="text-lg font-bold text-brand-red-dark mb-3">{{ heading }}</h2>
+        <figure class="rounded-lg overflow-hidden border border-brand-cream">
+          <a href="{{ v.png }}" class="gmap-lightbox block" data-gallery="fieldmaps-{{ page.fileSlug }}"
+             data-title="{{ heading }}" aria-label="Enlarge {{ heading }}">
+            <img src="{{ v.png }}" alt="{{ v.alt }}" sizes="(min-width: 768px) 760px, 100vw" class="w-full h-auto block">
+          </a>
+        </figure>
+        <p class="text-xs text-brand-dark/60 mt-1">Tap to enlarge — scroll or pinch to zoom, drag to pan.</p>
+      </section>
       {% endmacro %}
       <!--FM_START-->
       <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css"
             integrity="sha384-GPAzSuZc0kFvdIev6wm9zg8gnafE8tLso7rsAYQfc9hAdWCpOcpcNI5W9lWkYcsd"
             crossorigin="anonymous">
-      <div class="not-prose mb-8 max-w-3xl" data-field-maps>
-        <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-red-dark mb-3">Field Maps</h2>
-        <div class="flex flex-wrap gap-5">
-          {% for vid in ["game", "practice"] %}{% if fmaps.variants[vid] %}{{ mapfig(fmaps.variants[vid]) }}{% endif %}{% endfor %}
-          {% for vid, v in fmaps.variants %}{% if vid != "game" and vid != "practice" %}{{ mapfig(v) }}{% endif %}{% endfor %}
-        </div>
-        <p class="text-xs text-brand-dark/60 mt-2">Tap a map to enlarge — scroll or pinch to zoom, drag to pan.</p>
+      <div data-field-maps>
+        {% if fmaps.variants.game %}{{ mapsection(fmaps.variants.game, "Field Map for Games", "field-map-games") }}{% endif %}
+        {% if fmaps.variants.practice %}{{ mapsection(fmaps.variants.practice, "Field Map for Practices", "field-map-practices") }}{% endif %}
+        {% for vid, v in fmaps.variants %}{% if vid != "game" and vid != "practice" %}{{ mapsection(v, "Field Map — " + (v.label or vid), "field-map-" + vid) }}{% endif %}{% endfor %}
       </div>
       <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"
               integrity="sha384-MZZbZ6RXJudK43v1qY1zOWKOU2yfeBPatuFoKyHAaAgHTUZhwblRTc9CphTt4IGQ"

@@ -130,6 +130,7 @@ main { flex: 1; display: flex; min-height: 0; }
 .item .grow { cursor: pointer; }
 button.del { color: #b22; border-color: #e3c4c4; padding: 0.2rem 0.45rem; font-size: 0.75rem; }
 button.lockbtn { padding: 0.2rem 0.4rem; font-size: 0.85rem; line-height: 1; flex-shrink: 0; }
+button.lockbtn.locked { background: #b9b9b9; border-color: #9a9a9a; }
 
 /* Selected-element panel */
 #selPanel .field-row { display: flex; gap: 0.5rem; }
