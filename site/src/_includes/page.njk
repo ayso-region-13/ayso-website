@@ -80,6 +80,28 @@ layout: base.njk
         </dl>
       </div>
       {% endif %}
+
+      {# Field Maps — auto-rendered from site/src/_data/fieldmaps/<slug>.json,
+         which is produced by the field-map editor tool (workers/field-maps/).
+         Eleventy namespaces that directory as the `fieldmaps` global, keyed by
+         filename, so fieldmaps[page.fileSlug] is this field's doc. Degrades to
+         nothing when a field has no saved map (most, initially). Distinct
+         wrapper classes keep it clear of the field-info-bottom transform. #}
+      {% if section == "fields" and fieldmaps and fieldmaps[page.fileSlug] and fieldmaps[page.fileSlug].variants %}
+      {% set fmaps = fieldmaps[page.fileSlug] %}
+      <div class="not-prose mb-8 max-w-3xl" data-field-maps>
+        <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-red-dark mb-3">Field Maps</h2>
+        <div class="flex flex-wrap gap-5">
+          {% for vid, v in fmaps.variants %}
+          <figure class="flex-1 min-w-[18rem] rounded-lg overflow-hidden border border-brand-cream">
+            <img src="{{ v.png }}" alt="{{ v.alt }}" sizes="(min-width: 768px) 600px, 100vw" class="w-full h-auto block">
+            {% if v.label %}<figcaption class="bg-brand-cream text-brand-dark text-sm font-medium px-3 py-2">{{ v.label }}</figcaption>{% endif %}
+          </figure>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
       <div class="prose max-w-3xl">
         {# Hide the H1 in markdown since we display it in the page header above #}
         <style>
