@@ -49,6 +49,7 @@ const EMOJI_FONT = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", -
 
 const state = {
   config: null, fields: [], field: null, variant: "game",
+  doc: null, variants: [], // current field's saved doc + available layouts
   elements: [], selectedId: null, tool: null,
   drag: null, seq: 1,
 };
@@ -82,9 +83,9 @@ async function init() {
     map.addLayer({ id: "sidelines", type: "line", source: "sidelines",
       paint: { "line-color": ["get", "color"], "line-width": ["coalesce", ["get", "w"], 5] } });
     map.addLayer({ id: "markers-c", type: "circle", source: "markers",
-      paint: { "circle-radius": 9, "circle-color": ["get", "color"], "circle-stroke-width": 2, "circle-stroke-color": "#fff" } });
+      paint: { "circle-radius": 12, "circle-color": ["get", "color"], "circle-stroke-width": 2, "circle-stroke-color": "#fff" } });
     map.addLayer({ id: "markers-code", type: "symbol", source: "markers",
-      layout: { "text-field": ["get", "code"], "text-size": 11, "text-allow-overlap": true },
+      layout: { "text-field": ["get", "code"], "text-size": 13, "text-allow-overlap": true },
       paint: { "text-color": "#fff" } });
     map.addLayer({ id: "labels", type: "symbol", source: "labels",
       layout: { "text-field": ["get", "text"], "text-size": ["coalesce", ["get", "size"], 13], "text-allow-overlap": true, "text-anchor": "center" },
@@ -113,7 +114,12 @@ function fc(features) { return { type: "FeatureCollection", features }; }
 // ─── UI wiring ─────────────────────────────────────────────────────────────
 function wireUi() {
   document.getElementById("fieldSelect").addEventListener("change", (e) => selectField(e.target.value));
-  document.getElementById("variantSelect").addEventListener("change", (e) => { state.variant = e.target.value; if (state.field) loadVariant(); updateFilename(); });
+  document.getElementById("variantSelect").addEventListener("change", (e) => {
+    if (e.target.value === "__add__") { addLayout(); return; }
+    state.variant = e.target.value;
+    if (state.field) loadVariant();
+    updateFilename();
+  });
   document.getElementById("frameMeters").addEventListener("input", (e) => setFrameMeters(Number(e.target.value)));
   document.getElementById("frameLockBtn").addEventListener("click", toggleFrameLock);
   wireFrameHandle();
@@ -186,8 +192,44 @@ async function selectField(slug) {
   state.field = state.fields.find((f) => f.slug === slug) || null;
   document.getElementById("saveBtn").disabled = !state.field;
   if (!state.field) return;
+  state.doc = await fetchDoc(slug);
+  buildVariantList();
+  state.variant = "game";
+  populateVariantSelect();
   recenter();
-  await loadVariant();
+  loadVariant();
+  updateFilename();
+}
+
+async function fetchDoc(slug) {
+  try { return await api("/api/map/" + slug); } catch (_) { return { variants: {} }; }
+}
+// Available layouts for the current field: Game + Practice + any saved named ones.
+function buildVariantList() {
+  const std = [{ id: "game", label: "Game Day" }, { id: "practice", label: "Practice" }];
+  const variants = (state.doc && state.doc.variants) || {};
+  const extra = Object.keys(variants)
+    .filter((k) => k !== "game" && k !== "practice")
+    .map((k) => ({ id: k, label: (variants[k] && variants[k].label) || k }));
+  state.variants = std.concat(extra);
+}
+function populateVariantSelect() {
+  const sel = document.getElementById("variantSelect");
+  sel.innerHTML = state.variants.map((v) =>
+    `<option value="${esc(v.id)}"${v.id === state.variant ? " selected" : ""}>${esc(v.label)}</option>`).join("")
+    + `<option value="__add__">+ Add layout…</option>`;
+}
+function addLayout() {
+  const sel = document.getElementById("variantSelect");
+  const name = prompt('Name this layout (e.g. "Field A", "Tournament"):', "");
+  if (!name || !name.trim()) { sel.value = state.variant; return; }
+  const id = name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  if (!id) { sel.value = state.variant; return; }
+  if (!state.variants.some((v) => v.id === id)) state.variants.push({ id: id, label: name.trim() });
+  state.variant = id;
+  populateVariantSelect();
+  loadVariant();
+  document.getElementById("variantLabel").value = name.trim();
   updateFilename();
 }
 function recenter() { if (state.field) { map.jumpTo({ center: [state.field.lon, state.field.lat], zoom: 17 }); state.frameBox = null; refreshFrameBox(); } }
@@ -197,8 +239,7 @@ async function loadVariant() {
   document.getElementById("variantLabel").value = "";
   // Reset frame to default (unlocked) unless a saved frame is restored below.
   state.frameBox = null; state.frameGeo = null; state.frameLocked = false;
-  let doc = null;
-  try { doc = await api("/api/map/" + state.field.slug); } catch (_) {}
+  const doc = state.doc;
   const v = doc && doc.variants && doc.variants[state.variant];
   if (v) {
     if (v.view && v.view.center) map.jumpTo({ center: v.view.center, zoom: v.view.zoom || 17 });
@@ -571,6 +612,9 @@ async function doExport(commit) {
     modal(false);
     toast(`Saved (${res.commit.slice(0, 7)}). Preview rebuilds in ~1–2 min at field-maps.ayso-website-staging.pages.dev.`, "success");
     const f = state.fields.find((x) => x.slug === state.field.slug); if (f) f.hasMap = true;
+    // Refresh the cached doc + layout list so a newly-saved named layout sticks.
+    state.doc = await fetchDoc(state.field.slug);
+    buildVariantList(); populateVariantSelect();
   } catch (e) { modal(false); toast("Save failed: " + e.message, "error"); }
 }
 
@@ -635,14 +679,14 @@ function drawElement(ctx, project, el) {
     ctx.lineWidth = 4 * SCALE; ctx.strokeStyle = "rgba(255,255,255,0.92)";
     ctx.strokeText(el.text, p.x, p.y); ctx.fillStyle = el.color; ctx.fillText(el.text, p.x, p.y);
   } else if (el.kind === "marker") {
-    const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 13 * SCALE;
-    // White badge with a colored ring, emoji glyph centered, and the name in a
+    const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 19 * SCALE;
+    // White badge with a colored ring, large emoji glyph, and the name in a
     // white pill to the right (reads on grass).
     ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
-    ctx.lineWidth = 2.5 * SCALE; ctx.strokeStyle = t.color; ctx.stroke();
-    ctx.font = `${15 * SCALE}px ${EMOJI_FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.lineWidth = 3 * SCALE; ctx.strokeStyle = t.color; ctx.stroke();
+    ctx.font = `${24 * SCALE}px ${EMOJI_FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
     ctx.fillText(t.emoji, p.x, p.y + SCALE);
-    textBox(ctx, { x: p.x + r + 5 * SCALE, y: p.y }, t.name, { size: 12 * SCALE, bg: "rgba(255,255,255,0.92)", fg: "#221f1f", left: true });
+    textBox(ctx, { x: p.x + r + 5 * SCALE, y: p.y }, t.name, { size: 13 * SCALE, bg: "rgba(255,255,255,0.92)", fg: "#221f1f", left: true });
   }
 }
 
