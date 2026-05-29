@@ -189,6 +189,8 @@ function recenter() { if (state.field) { map.jumpTo({ center: [state.field.lon, 
 async function loadVariant() {
   state.elements = []; select(null);
   document.getElementById("variantLabel").value = "";
+  // Reset frame to default (unlocked) unless a saved frame is restored below.
+  state.frameBox = null; state.frameGeo = null; state.frameLocked = false;
   let doc = null;
   try { doc = await api("/api/map/" + state.field.slug); } catch (_) {}
   const v = doc && doc.variants && doc.variants[state.variant];
@@ -197,8 +199,17 @@ async function loadVariant() {
     if (v.view && v.view.frameMeters) document.getElementById("frameMeters").value = v.view.frameMeters;
     if (v.label) document.getElementById("variantLabel").value = v.label;
     if (Array.isArray(v.elements)) state.elements = v.elements.map((e) => ({ ...e, id: e.id || "e" + state.seq++ }));
+    // Restore + pin the saved export frame (reconstruct from center + width)
+    // so the dashed frame persists across loads, glued to the same ground.
+    if (v.view && v.view.center && v.view.frameMeters) {
+      const c = v.view.center, m = v.view.frameMeters, aspect = OUT_H / OUT_W;
+      state.frameGeo = { nw: Geo.destination(c, -m / 2, (m * aspect) / 2), se: Geo.destination(c, m / 2, -(m * aspect) / 2) };
+      state.frameLocked = true;
+    }
   }
+  syncFrameLockUI();
   rebuild();
+  refreshFrameBox();
 }
 
 // ─── Placement ─────────────────────────────────────────────────────────────
@@ -485,6 +496,15 @@ function syncMetersReadout() {
 // Map move/zoom: reposition box on screen unchanged, refresh the meters readout.
 function refreshFrameBox() { if (!map) return; applyFrameBox(); syncMetersReadout(); }
 // Lock the export frame so the corner grip and meters field can't change it.
+function syncFrameLockUI() {
+  const locked = state.frameLocked;
+  const btn = document.getElementById("frameLockBtn");
+  btn.textContent = locked ? "🔒 Frame" : "🔓 Frame";
+  btn.classList.toggle("active", locked);
+  document.getElementById("frameHandle").style.display = locked ? "none" : "block";
+  document.getElementById("frameMeters").disabled = locked;
+  document.getElementById("frameBox").classList.toggle("locked", locked);
+}
 function toggleFrameLock() {
   state.frameLocked = !state.frameLocked;
   if (state.frameLocked) {
@@ -498,12 +518,7 @@ function toggleFrameLock() {
     // Release to screen-anchored, keeping its current on-screen position.
     state.frameGeo = null;
   }
-  const btn = document.getElementById("frameLockBtn");
-  btn.textContent = state.frameLocked ? "🔒 Frame" : "🔓 Frame";
-  btn.classList.toggle("active", state.frameLocked);
-  document.getElementById("frameHandle").style.display = state.frameLocked ? "none" : "block";
-  document.getElementById("frameMeters").disabled = state.frameLocked;
-  document.getElementById("frameBox").classList.toggle("locked", state.frameLocked);
+  syncFrameLockUI();
   applyFrameBox();
 }
 
