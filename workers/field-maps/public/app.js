@@ -440,7 +440,7 @@ async function doExport(commit) {
   try {
     const res = await api("/api/map/" + state.field.slug, { method: "POST", body: { variant: state.variant, pngBase64: dataUrl, annotation } });
     modal(false);
-    toast(`Saved to staging (${res.commit.slice(0, 7)}). Appears after the staging build; promote to go live.`, "success");
+    toast(`Saved (${res.commit.slice(0, 7)}). Preview rebuilds in ~1–2 min at field-maps.ayso-website-staging.pages.dev.`, "success");
     const f = state.fields.find((x) => x.slug === state.field.slug); if (f) f.hasMap = true;
   } catch (e) { modal(false); toast("Save failed: " + e.message, "error"); }
 }
