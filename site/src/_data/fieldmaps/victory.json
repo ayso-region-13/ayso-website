@@ -6,10 +6,10 @@
       "label": "Game Day Layout",
       "view": {
         "center": [
-          -118.09599562335384,
-          34.16051790436835
+          -118.09599562335379,
+          34.16051791168549
         ],
-        "zoom": 17.582436767913457,
+        "zoom": 17.58243676778843,
         "bearing": 0,
         "frameMeters": 330,
         "width": 1000,
@@ -31,7 +31,7 @@
           "ageGroup": "10U",
           "preset": "10U",
           "markHome": true,
-          "locked": true
+          "locked": false
         },
         {
           "id": "e2",
@@ -52,12 +52,12 @@
           "id": "e3",
           "kind": "field",
           "center": [
-            -118.09608082366606,
-            34.160774860709665
+            -118.09620263020203,
+            34.16082525595961
           ],
           "widthM": 37,
           "lengthM": 55,
-          "rotationDeg": 269,
+          "rotationDeg": 360,
           "name": "VP3",
           "ageGroup": "10U",
           "preset": "10U",
@@ -81,27 +81,11 @@
           "locked": true
         },
         {
-          "id": "e5",
-          "kind": "field",
-          "center": [
-            -118.09480360438799,
-            34.16121201303234
-          ],
-          "widthM": 46,
-          "lengthM": 73,
-          "rotationDeg": 0,
-          "name": "VP5",
-          "ageGroup": "12U",
-          "preset": "12U",
-          "markHome": true,
-          "locked": true
-        },
-        {
           "id": "e6",
           "kind": "field",
           "center": [
-            -118.0954364084848,
-            34.16069319465342
+            -118.09484254300936,
+            34.16136781664943
           ],
           "widthM": 30,
           "lengthM": 46,
@@ -110,7 +94,7 @@
           "ageGroup": "8U",
           "preset": "8U",
           "markHome": true,
-          "locked": true
+          "locked": false
         },
         {
           "id": "e7",
@@ -126,7 +110,7 @@
           "ageGroup": "7U",
           "preset": "7U",
           "markHome": true,
-          "locked": true
+          "locked": false
         },
         {
           "id": "e8",
@@ -142,7 +126,7 @@
           "ageGroup": "6U",
           "preset": "6U",
           "markHome": true,
-          "locked": true
+          "locked": false
         },
         {
           "id": "e9",
@@ -181,6 +165,21 @@
             -118.09665182965462,
             34.16114929481162
           ]
+        },
+        {
+          "id": "e1",
+          "kind": "field",
+          "center": [
+            -118.09484559421759,
+            34.161147014685454
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true
         }
       ],
       "png": "/images/fields/victory-game.png",
