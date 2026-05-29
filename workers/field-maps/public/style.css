@@ -72,14 +72,14 @@ main { flex: 1; display: flex; min-height: 0; }
 /* Framing overlay: shows the exact extent that will be exported. */
 #frameOverlay {
   position: absolute; inset: 0; pointer-events: none;
-  display: flex; align-items: center; justify-content: center;
 }
-/* Export-bounds indicator: a subtle dashed outline only — no dimming of the
-   surrounding map (the dark box-shadow read as the whole editor being grayed). */
+/* Export-bounds crop box: a dashed outline, absolutely positioned by JS
+   (left/top/width/height) so it can be a top-left-anchored, drag-resizable crop.
+   No dimming of the surrounding map. */
 #frameBox {
-  border: 2px dashed rgba(255,255,255,0.7);
+  position: absolute;
+  border: 2px dashed rgba(255,255,255,0.85);
   border-radius: 2px;
-  position: relative;
 }
 /* Corner grip to drag-resize the export frame (the rest of the overlay stays
    pointer-events:none so the map is interactive inside the frame). */

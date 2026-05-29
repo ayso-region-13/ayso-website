@@ -108,7 +108,7 @@ function fc(features) { return { type: "FeatureCollection", features }; }
 function wireUi() {
   document.getElementById("fieldSelect").addEventListener("change", (e) => selectField(e.target.value));
   document.getElementById("variantSelect").addEventListener("change", (e) => { state.variant = e.target.value; if (state.field) loadVariant(); updateFilename(); });
-  document.getElementById("frameMeters").addEventListener("input", refreshFrameBox);
+  document.getElementById("frameMeters").addEventListener("input", (e) => setFrameMeters(Number(e.target.value)));
   wireFrameHandle();
   document.getElementById("recenterBtn").addEventListener("click", recenter);
   document.getElementById("previewBtn").addEventListener("click", () => doExport(false));
@@ -136,14 +136,14 @@ function wireFrameHandle() {
     if (!dragging) return;
     const pt = e.touches ? e.touches[0] : e;
     const rect = document.getElementById("map").getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const halfW = Math.abs(pt.clientX - cx);
-    const lat = map.getCenter().lat;
-    const mpp = EARTH_CIRCUMFERENCE * Math.cos((lat * Math.PI) / 180) / (TILE * Math.pow(2, map.getZoom()));
-    let meters = Math.round((2 * halfW * mpp) / 10) * 10; // snap to 10 m
-    meters = Math.max(40, Math.min(1200, meters));
-    input.value = meters;
-    refreshFrameBox();
+    ensureFrameBox();
+    // Top-left stays fixed; width grows to the cursor. Height follows aspect.
+    let w = (pt.clientX - rect.left) - state.frameBox.x;
+    let meters = clampMeters(Math.round((w * mppNow()) / 10) * 10);
+    state.frameBox.w = meters / mppNow();
+    state.frameBox.h = state.frameBox.w * (OUT_H / OUT_W);
+    applyFrameBox();
+    syncMetersReadout();
     e.preventDefault();
   };
   const end = () => {
@@ -182,7 +182,7 @@ async function selectField(slug) {
   await loadVariant();
   updateFilename();
 }
-function recenter() { if (state.field) { map.jumpTo({ center: [state.field.lon, state.field.lat], zoom: 17 }); refreshFrameBox(); } }
+function recenter() { if (state.field) { map.jumpTo({ center: [state.field.lon, state.field.lat], zoom: 17 }); state.frameBox = null; refreshFrameBox(); } }
 
 async function loadVariant() {
   state.elements = []; select(null);
@@ -444,22 +444,52 @@ function renderElemList() {
 }
 
 // ─── Framing guide ──────────────────────────────────────────────────────────
-function frameMeters() { return Math.max(40, Math.min(1200, Number(document.getElementById("frameMeters").value) || 200)); }
-function refreshFrameBox() {
-  if (!map) return;
+// The dashed box is a fixed on-screen crop: pan the map to position it, drag the
+// corner grip to grow it right/down from a fixed TOP-LEFT. The export center is
+// the box's center (not the map center). The meters field is a live readout of
+// the box's ground width at the current zoom (and resizes the box when typed).
+function clampMeters(m) { return Math.max(40, Math.min(1200, m || 200)); }
+function mppNow() {
   const lat = map.getCenter().lat;
-  const mpp = EARTH_CIRCUMFERENCE * Math.cos((lat * Math.PI) / 180) / (TILE * Math.pow(2, map.getZoom()));
-  const w = frameMeters() / mpp;
-  const box = document.getElementById("frameBox");
-  box.style.width = w + "px"; box.style.height = w * (OUT_H / OUT_W) + "px";
+  return EARTH_CIRCUMFERENCE * Math.cos((lat * Math.PI) / 180) / (TILE * Math.pow(2, map.getZoom()));
+}
+function ensureFrameBox() {
+  if (state.frameBox) return;
+  const rect = document.getElementById("map").getBoundingClientRect();
+  const w = clampMeters(Number(document.getElementById("frameMeters").value)) / mppNow();
+  const h = w * (OUT_H / OUT_W);
+  state.frameBox = { x: Math.max(8, (rect.width - w) / 2), y: Math.max(8, (rect.height - h) / 2), w: w, h: h };
+}
+function applyFrameBox() {
+  ensureFrameBox();
+  const b = state.frameBox, el = document.getElementById("frameBox");
+  el.style.left = b.x + "px"; el.style.top = b.y + "px";
+  el.style.width = b.w + "px"; el.style.height = b.h + "px";
+}
+function syncMetersReadout() {
+  if (state.frameBox) document.getElementById("frameMeters").value = clampMeters(Math.round(state.frameBox.w * mppNow() / 10) * 10);
+}
+// Map move/zoom: reposition box on screen unchanged, refresh the meters readout.
+function refreshFrameBox() { if (!map) return; applyFrameBox(); syncMetersReadout(); }
+// Resize the box from a typed meters value, keeping the top-left fixed.
+function setFrameMeters(m) {
+  ensureFrameBox();
+  state.frameBox.w = clampMeters(m) / mppNow();
+  state.frameBox.h = state.frameBox.w * (OUT_H / OUT_W);
+  applyFrameBox();
 }
 
 // ─── Export ─────────────────────────────────────────────────────────────────
 async function doExport(commit) {
   if (!state.field) return toast("Pick a field first.", "error");
   state.tool = null; clearToolBtns();
-  const center = [map.getCenter().lng, map.getCenter().lat];
-  const meters = frameMeters();
+  // Export captures exactly the dashed crop box: center = box center, width =
+  // box ground width at the current zoom.
+  ensureFrameBox();
+  const b = state.frameBox;
+  const cc = map.unproject([b.x + b.w / 2, b.y + b.h / 2]);
+  const center = [cc.lng, cc.lat];
+  const meters = clampMeters(Math.round(b.w * mppNow()));
   const zoom = Geo.zoomForGroundWidth(center[1], meters, OUT_W);
 
   modal(true, "Rendering…", '<p class="subtle">Fetching satellite base and compositing…</p>');
