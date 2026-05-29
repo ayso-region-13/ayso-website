@@ -436,8 +436,11 @@ function renderElemList() {
       : MARKER_TYPES[el.type].name;
     const row = document.createElement("div");
     row.className = "item" + (el.id === state.selectedId ? " sel" : "");
-    row.innerHTML = `<span class="grow">${el.locked ? "🔒 " : ""}${esc(name)}</span><button class="del" data-del="${el.id}">✕</button>`;
+    row.innerHTML = `<span class="grow">${esc(name)}</span>` +
+      `<button class="lockbtn" data-lock="${el.id}" title="${el.locked ? "Unlock (allow moving/resizing)" : "Lock (freeze on map)"}">${el.locked ? "🔒" : "🔓"}</button>` +
+      `<button class="del" data-del="${el.id}">✕</button>`;
     row.querySelector(".grow").addEventListener("click", () => select(el.id));
+    row.querySelector("[data-lock]").addEventListener("click", () => { const m = byId(el.id); if (m) { m.locked = !m.locked; rebuild(); } });
     row.querySelector("[data-del]").addEventListener("click", () => { state.elements = state.elements.filter((x) => x.id !== el.id); if (state.selectedId === el.id) select(null); else rebuild(); });
     list.appendChild(row);
   });
