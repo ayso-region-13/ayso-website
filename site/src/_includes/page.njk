@@ -87,8 +87,23 @@ layout: base.njk
          filename, so fieldmaps[page.fileSlug] is this field's doc. Degrades to
          nothing when a field has no saved map (most, initially). Distinct
          wrapper classes keep it clear of the field-info-bottom transform. #}
+      {# Maps render in a fixed order — game first, then practice, then any other
+         named layouts (e.g. "A"/"B"). The block is wrapped in FM_START/FM_END
+         markers; the field-maps-after-directions transform in .eleventy.js moves
+         it to just below the Google directions embed (so the page reads:
+         directions → game map → practice map). #}
       {% if section == "fields" and fieldmaps and fieldmaps[page.fileSlug] and fieldmaps[page.fileSlug].variants %}
       {% set fmaps = fieldmaps[page.fileSlug] %}
+      {% macro mapfig(v) %}
+      <figure class="flex-1 min-w-[18rem] rounded-lg overflow-hidden border border-brand-cream">
+        <a href="{{ v.png }}" class="gmap-lightbox block" data-gallery="fieldmaps-{{ page.fileSlug }}"
+           data-title="{{ v.label or title }}" aria-label="Enlarge {{ v.label or 'field map' }}">
+          <img src="{{ v.png }}" alt="{{ v.alt }}" sizes="(min-width: 768px) 600px, 100vw" class="w-full h-auto block">
+        </a>
+        {% if v.label %}<figcaption class="bg-brand-cream text-brand-dark text-sm font-medium px-3 py-2">{{ v.label }}</figcaption>{% endif %}
+      </figure>
+      {% endmacro %}
+      <!--FM_START-->
       <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css"
             integrity="sha384-GPAzSuZc0kFvdIev6wm9zg8gnafE8tLso7rsAYQfc9hAdWCpOcpcNI5W9lWkYcsd"
@@ -96,18 +111,8 @@ layout: base.njk
       <div class="not-prose mb-8 max-w-3xl" data-field-maps>
         <h2 class="text-xs font-semibold uppercase tracking-wider text-brand-red-dark mb-3">Field Maps</h2>
         <div class="flex flex-wrap gap-5">
-          {% for vid, v in fmaps.variants %}
-          <figure class="flex-1 min-w-[18rem] rounded-lg overflow-hidden border border-brand-cream">
-            {# Thumbnail (eleventy-img → responsive WebP) links to the full-res
-               PNG, opened in a zoom/pan lightbox. Grouped so game/practice can
-               be swiped between. #}
-            <a href="{{ v.png }}" class="gmap-lightbox block" data-gallery="fieldmaps-{{ page.fileSlug }}"
-               data-title="{{ v.label or title }}" aria-label="Enlarge {{ v.label or 'field map' }}">
-              <img src="{{ v.png }}" alt="{{ v.alt }}" sizes="(min-width: 768px) 600px, 100vw" class="w-full h-auto block">
-            </a>
-            {% if v.label %}<figcaption class="bg-brand-cream text-brand-dark text-sm font-medium px-3 py-2">{{ v.label }}</figcaption>{% endif %}
-          </figure>
-          {% endfor %}
+          {% for vid in ["game", "practice"] %}{% if fmaps.variants[vid] %}{{ mapfig(fmaps.variants[vid]) }}{% endif %}{% endfor %}
+          {% for vid, v in fmaps.variants %}{% if vid != "game" and vid != "practice" %}{{ mapfig(v) }}{% endif %}{% endfor %}
         </div>
         <p class="text-xs text-brand-dark/60 mt-2">Tap a map to enlarge — scroll or pinch to zoom, drag to pan.</p>
       </div>
@@ -120,6 +125,7 @@ layout: base.njk
           if (document.readyState !== 'loading') init(); else document.addEventListener('DOMContentLoaded', init);
         })();
       </script>
+      <!--FM_END-->
       {% endif %}
 
       <div class="prose max-w-3xl">

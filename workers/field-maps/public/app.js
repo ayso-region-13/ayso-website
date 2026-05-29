@@ -42,7 +42,9 @@ const FIELD_PRESETS = {
   "14U":     [55, 91],   // 11v11 (youth)
   "16U/19U": [64, 100],  // 11v11
 };
-const HOME_COLOR = "#2f6fed", AWAY_COLOR = "#d98324";
+// HOME/AWAY: a colour-blind-safe blue↔orange pair, both dark enough for white
+// text to clear WCAG AA and to read as solid pills/lines on green grass.
+const HOME_COLOR = "#1d4ed8", AWAY_COLOR = "#c2410c";
 const EMOJI_FONT = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", -apple-system, Arial, sans-serif';
 
 const state = {
@@ -58,6 +60,10 @@ async function init() {
   state.config = await api("/api/config");
   if (!state.config.mapboxToken) throw new Error("Mapbox token not configured (MAPBOX_TOKEN_PUBLIC).");
   document.getElementById("who").textContent = state.config.editor || "";
+
+  // Preload the AYSO logo for the export title pill.
+  state.logo = new Image();
+  state.logo.src = "/ayso-logo.png";
 
   mapboxgl.accessToken = state.config.mapboxToken;
   map = new mapboxgl.Map({
@@ -630,11 +636,13 @@ function drawElement(ctx, project, el) {
     ctx.strokeText(el.text, p.x, p.y); ctx.fillStyle = el.color; ctx.fillText(el.text, p.x, p.y);
   } else if (el.kind === "marker") {
     const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 13 * SCALE;
-    // White badge with a colored ring, emoji glyph centered.
+    // White badge with a colored ring, emoji glyph centered, and the name in a
+    // white pill to the right (reads on grass).
     ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
     ctx.lineWidth = 2.5 * SCALE; ctx.strokeStyle = t.color; ctx.stroke();
     ctx.font = `${15 * SCALE}px ${EMOJI_FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
     ctx.fillText(t.emoji, p.x, p.y + SCALE);
+    textBox(ctx, { x: p.x + r + 5 * SCALE, y: p.y }, t.name, { size: 12 * SCALE, bg: "rgba(255,255,255,0.92)", fg: "#221f1f", left: true });
   }
 }
 
@@ -655,10 +663,23 @@ function strokeSeg(ctx, project, a, b, color, w) {
 function drawTitle(ctx) {
   const v = document.getElementById("variantLabel").value.trim() || (state.variant === "practice" ? "Practice" : "Game Day");
   const text = `${state.field.title} — ${v}`;
-  ctx.font = `bold ${18 * SCALE}px -apple-system, Arial, sans-serif`;
-  const w = ctx.measureText(text).width, padX = 12 * SCALE, padY = 8 * SCALE, x = 12 * SCALE, y = 12 * SCALE;
-  ctx.fillStyle = "rgba(142,41,41,0.92)"; roundRect(ctx, x, y, w + padX * 2, 26 * SCALE + padY, 6 * SCALE); ctx.fill();
-  ctx.fillStyle = "#fff"; ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.fillText(text, x + padX, y + padY);
+  const pad = 10 * SCALE, x = 12 * SCALE, y = 12 * SCALE;
+  ctx.font = `bold ${17 * SCALE}px -apple-system, Arial, sans-serif`;
+  const textW = ctx.measureText(text).width;
+  const logo = state.logo;
+  const logoH = 30 * SCALE;
+  const logoW = (logo && logo.naturalWidth) ? logoH * (logo.naturalWidth / logo.naturalHeight) : 0;
+  const gap = logoW ? 9 * SCALE : 0;
+  const pillH = logoH + pad;
+  const pillW = pad * 2 + logoW + gap + textW;
+  // White pill reads clearly on grass; logo sits on its natural white; maroon text on white clears AA.
+  ctx.fillStyle = "rgba(255,255,255,0.96)";
+  roundRect(ctx, x, y, pillW, pillH, 8 * SCALE); ctx.fill();
+  ctx.strokeStyle = "rgba(0,0,0,0.18)"; ctx.lineWidth = 1 * SCALE; ctx.stroke();
+  let tx = x + pad;
+  if (logoW) { ctx.drawImage(logo, tx, y + (pillH - logoH) / 2, logoW, logoH); tx += logoW + gap; }
+  ctx.fillStyle = "#8e2929"; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+  ctx.fillText(text, tx, y + pillH / 2);
 }
 
 function drawLegend(ctx) {
