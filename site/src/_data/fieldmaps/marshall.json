@@ -1,0 +1,105 @@
+{
+  "field": "marshall",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "game": {
+      "label": "Game Day Layout",
+      "view": {
+        "center": [
+          -118.11101014069399,
+          34.163348563468745
+        ],
+        "zoom": 17.4173291521464,
+        "bearing": 0,
+        "frameMeters": 370,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e66",
+          "kind": "field",
+          "center": [
+            -118.11006551225154,
+            34.16366422832016
+          ],
+          "widthM": 50,
+          "lengthM": 108,
+          "rotationDeg": 269,
+          "name": "",
+          "ageGroup": "14U",
+          "preset": "custom",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e67",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.11092627181309,
+            34.16409521415085
+          ],
+          "rotationDeg": 178,
+          "locked": true
+        },
+        {
+          "id": "e68",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.11014055282884,
+            34.164120781066615
+          ],
+          "locked": true
+        },
+        {
+          "id": "e69",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.1114780407631,
+            34.163419515044694
+          ],
+          "locked": true
+        },
+        {
+          "id": "e70",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.1112571786894,
+            34.16294122636016
+          ],
+          "locked": true
+        },
+        {
+          "id": "e71",
+          "kind": "text",
+          "center": [
+            -118.11170838364153,
+            34.163425650298464
+          ],
+          "text": "Men's",
+          "color": "#83312d",
+          "size": 18
+        },
+        {
+          "id": "e72",
+          "kind": "text",
+          "center": [
+            -118.11152416376784,
+            34.162947749093235
+          ],
+          "text": "Women's",
+          "color": "#83312d",
+          "size": 18
+        }
+      ],
+      "png": "/images/fields/marshall-game.png",
+      "alt": "Marshall Fundamental game field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
