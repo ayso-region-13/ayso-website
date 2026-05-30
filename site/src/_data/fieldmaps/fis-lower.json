@@ -216,6 +216,99 @@
       "png": "/images/fields/fis-lower-game.png",
       "alt": "Foothill Intermediate School — Lower (FIS Lower) game field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "fis-lower-10u-games": {
+      "label": "FIS Lower 10U Games",
+      "view": {
+        "center": [
+          -118.20301822445725,
+          34.2037594276334
+        ],
+        "zoom": 18.304163332560798,
+        "bearing": 0,
+        "frameMeters": 200,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e25",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.20340363592132,
+            34.20332313246806
+          ],
+          "locked": true
+        },
+        {
+          "id": "e27",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.2036787704717,
+            34.20377459675946
+          ],
+          "locked": true
+        },
+        {
+          "id": "e28",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.20316370100642,
+            34.20400912743206
+          ],
+          "locked": true
+        },
+        {
+          "id": "e29",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.20376557993174,
+            34.20344673135655
+          ],
+          "rotationDeg": 91,
+          "locked": true
+        },
+        {
+          "id": "e30",
+          "kind": "field",
+          "center": [
+            -118.20294504035344,
+            34.20359530211336
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "Lower A",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e31",
+          "kind": "field",
+          "center": [
+            -118.20246396063006,
+            34.203598606075744
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "Lower B",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true,
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/fis-lower-fis-lower-10u-games.png",
+      "alt": "Foothill Intermediate School — Lower (FIS Lower) fis-lower-10u-games field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
