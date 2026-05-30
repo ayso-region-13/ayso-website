@@ -4,16 +4,14 @@
   "variants": {
     "map": {
       "label": "Region Overview",
-      "png": "/images/fields/overview-map.png",
-      "alt": "AYSO Region 13 field locations across Pasadena, Altadena, and La Cañada Flintridge",
       "view": {
         "center": [
-          -118.143066,
-          34.1676455
+          -118.1445831306757,
+          34.1712712896521
         ],
-        "zoom": 11.992,
+        "zoom": 11.992380574939139,
         "bearing": 0,
-        "frameMeters": 15895,
+        "frameMeters": 15894,
         "width": 1000,
         "height": 750,
         "scale": 2
@@ -28,7 +26,11 @@
             34.126168
           ],
           "name": "Allendale",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.13395561986108,
+            34.129063354508396
+          ]
         },
         {
           "id": "e2",
@@ -39,7 +41,11 @@
             34.161349
           ],
           "name": "Rose Bowl Area H",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.18109455775439,
+            34.16175926693283
+          ]
         },
         {
           "id": "e3",
@@ -50,7 +56,11 @@
             34.12361
           ],
           "name": "Blair Lower",
-          "play": "game"
+          "play": "game",
+          "label": [
+            -118.13225179916141,
+            34.12117168044094
+          ]
         },
         {
           "id": "e4",
@@ -61,7 +71,11 @@
             34.12361
           ],
           "name": "Blair Upper",
-          "play": "game"
+          "play": "game",
+          "label": [
+            -118.16115411580303,
+            34.122390809319754
+          ]
         },
         {
           "id": "e5",
@@ -72,7 +86,11 @@
             34.152555
           ],
           "name": "Brookside",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.17656386198128,
+            34.152637651147565
+          ]
         },
         {
           "id": "e6",
@@ -83,7 +101,11 @@
             34.174452
           ],
           "name": "Butler MS",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.13737616699363,
+            34.17438235773783
+          ]
         },
         {
           "id": "e7",
@@ -94,7 +116,11 @@
             34.204084
           ],
           "name": "Cornishon",
-          "play": "game"
+          "play": "game",
+          "label": [
+            -118.2175031246396,
+            34.20160203171525
+          ]
         },
         {
           "id": "e8",
@@ -105,7 +131,11 @@
             34.2027
           ],
           "name": "FIS Lower",
-          "play": "both"
+          "play": "both",
+          "label": [
+            -118.20357373189134,
+            34.196171922365885
+          ]
         },
         {
           "id": "e9",
@@ -116,7 +146,11 @@
             34.203796
           ],
           "name": "FIS Upper",
-          "play": "both"
+          "play": "both",
+          "label": [
+            -118.19179695702469,
+            34.1988641304724
+          ]
         },
         {
           "id": "e10",
@@ -127,7 +161,11 @@
             34.154427
           ],
           "name": "Jefferson",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.11156971412622,
+            34.15488399920352
+          ]
         },
         {
           "id": "e11",
@@ -138,7 +176,11 @@
             34.208761
           ],
           "name": "LC Elementary",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.19821389054745,
+            34.212202094600904
+          ]
         },
         {
           "id": "e12",
@@ -149,7 +191,11 @@
             34.161022
           ],
           "name": "La Salle HS",
-          "play": "game"
+          "play": "game",
+          "label": [
+            -118.06570690265782,
+            34.1575183257049
+          ]
         },
         {
           "id": "e13",
@@ -160,7 +206,11 @@
             34.211681
           ],
           "name": "LC LDS",
-          "play": "both"
+          "play": "both",
+          "label": [
+            -118.22451854237836,
+            34.207874953986874
+          ]
         },
         {
           "id": "e14",
@@ -171,7 +221,11 @@
             34.193642
           ],
           "name": "La Cañada HS",
-          "play": "both"
+          "play": "both",
+          "label": [
+            -118.1864221034964,
+            34.18983512796595
+          ]
         },
         {
           "id": "e15",
@@ -182,7 +236,11 @@
             34.163105
           ],
           "name": "Marshall",
-          "play": "game"
+          "play": "game",
+          "label": [
+            -118.12165228587337,
+            34.164475916808726
+          ]
         },
         {
           "id": "e16",
@@ -193,7 +251,11 @@
             34.161522
           ],
           "name": "McDonald",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.13985392419484,
+            34.16152204095142
+          ]
         },
         {
           "id": "e17",
@@ -204,7 +266,11 @@
             34.138613
           ],
           "name": "McKinley",
-          "play": "game"
+          "play": "game",
+          "label": [
+            -118.1360010000002,
+            34.14364029411019
+          ]
         },
         {
           "id": "e18",
@@ -215,7 +281,11 @@
             34.179469
           ],
           "name": "Muir South",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.15768680601083,
+            34.174208232674374
+          ]
         },
         {
           "id": "e19",
@@ -226,7 +296,11 @@
             34.181721
           ],
           "name": "Muir North",
-          "play": "game"
+          "play": "game",
+          "label": [
+            -118.15337469229497,
+            34.183335728957736
+          ]
         },
         {
           "id": "e20",
@@ -237,7 +311,11 @@
             34.193642
           ],
           "name": "Oak Grove",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.16838116699327,
+            34.1902920884467
+          ]
         },
         {
           "id": "e21",
@@ -248,7 +326,11 @@
             34.20811
           ],
           "name": "Paradise Canyon",
-          "play": "practice"
+          "play": "practice",
+          "label": [
+            -118.17967415269864,
+            34.203938900586884
+          ]
         },
         {
           "id": "e22",
@@ -259,7 +341,11 @@
             34.159389
           ],
           "name": "Victory Park",
-          "play": "both"
+          "play": "both",
+          "label": [
+            -118.08761471104954,
+            34.159541318501134
+          ]
         },
         {
           "id": "e23",
@@ -270,9 +356,16 @@
             34.144236
           ],
           "name": "Wilson MS",
-          "play": "game"
+          "play": "game",
+          "label": [
+            -118.07459453482633,
+            34.140731625559845
+          ]
         }
-      ]
+      ],
+      "png": "/images/fields/overview-map.png",
+      "alt": "AYSO Region 13 field locations across Pasadena, Altadena, and La Cañada Flintridge",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
