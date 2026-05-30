@@ -66,7 +66,7 @@ button:hover:not(:disabled) { filter: brightness(0.97); }
 
 /* ── Main split ──────────────────────────────────────────── */
 main { flex: 1; display: flex; min-height: 0; }
-#mapWrap { flex: 1; position: relative; min-width: 0; }
+#mapWrap { flex: 1; position: relative; min-width: 0; overflow: hidden; }
 #map { position: absolute; inset: 0; }
 
 /* Framing overlay: shows the exact extent that will be exported. */
@@ -146,7 +146,7 @@ button.lockbtn.locked { background: #b9b9b9; border-color: #9a9a9a; }
 .modal[hidden] { display: none; }
 .modal-card { background: #fff; border-radius: 10px; padding: 1.2rem; max-width: 90vw; max-height: 88vh; overflow: auto; }
 .modal-card h2 { margin-top: 0; color: var(--red-dark); }
-.modal-card img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; }
+.modal-card img { max-width: 100%; max-height: 72vh; width: auto; height: auto; border: 1px solid var(--line); border-radius: 6px; }
 .modal-actions { margin-top: 1rem; display: flex; justify-content: flex-end; gap: 0.5rem; }
 
 .toast {

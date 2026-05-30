@@ -42,9 +42,11 @@ const FIELD_PRESETS = {
   "14U":     [55, 91],   // 11v11 (youth)
   "16U/19U": [64, 100],  // 11v11
 };
-// HOME/AWAY: a colour-blind-safe blue↔orange pair, both dark enough for white
-// text to clear WCAG AA and to read as solid pills/lines on green grass.
-const HOME_COLOR = "#1d4ed8", AWAY_COLOR = "#c2410c";
+// HOME/AWAY in brand colours: gold (dark text) ↔ maroon (white text). The big
+// lightness difference keeps them distinguishable (incl. colour-blind) and
+// readable on grass. (Brand green is unusable on a green field.)
+const HOME_COLOR = "#f4bd4d", HOME_TEXT = "#3a0d12";
+const AWAY_COLOR = "#8e2929", AWAY_TEXT = "#ffffff";
 const EMOJI_FONT = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", -apple-system, Arial, sans-serif';
 
 const state = {
@@ -256,7 +258,24 @@ function addLayout(copy) {
   document.getElementById("variantLabel").value = name.trim();
   updateFilename();
 }
-function recenter() { if (state.field) { map.jumpTo({ center: [state.field.lon, state.field.lat], zoom: 17 }); state.frameBox = null; refreshFrameBox(); } }
+function recenter() { if (state.field) { state.frameBox = null; fitToFrame(); refreshFrameBox(); } }
+
+// Zoom/pan so the export frame fits the visible map area (so a wide frame never
+// extends under the side panel). Uses the saved/locked geo frame if present,
+// else a default-sized box around the field center.
+function fitToFrame() {
+  if (!state.field) return;
+  let nw, se;
+  if (state.frameGeo) { nw = state.frameGeo.nw; se = state.frameGeo.se; }
+  else {
+    const c = [state.field.lon, state.field.lat];
+    const m = clampMeters(Number(document.getElementById("frameMeters").value) || 200);
+    const aspect = OUT_H / OUT_W;
+    nw = Geo.destination(c, -m / 2, (m * aspect) / 2);
+    se = Geo.destination(c, m / 2, -(m * aspect) / 2);
+  }
+  map.fitBounds([nw, se], { padding: 30, duration: 0 });
+}
 
 async function loadVariant() {
   state.elements = []; select(null);
@@ -266,7 +285,6 @@ async function loadVariant() {
   const doc = state.doc;
   const v = doc && doc.variants && doc.variants[state.variant];
   if (v) {
-    if (v.view && v.view.center) map.jumpTo({ center: v.view.center, zoom: v.view.zoom || 17 });
     if (v.view && v.view.frameMeters) document.getElementById("frameMeters").value = v.view.frameMeters;
     if (v.label) document.getElementById("variantLabel").value = v.label;
     // Always assign FRESH session ids (don't reuse saved e.id) so state.seq
@@ -282,6 +300,7 @@ async function loadVariant() {
     }
   }
   syncFrameLockUI();
+  fitToFrame();
   rebuild();
   refreshFrameBox();
   resetHistory(); // baseline = the just-loaded layout
@@ -298,6 +317,8 @@ function onClick(e) {
     el = { id, kind: "field", center: c, widthM: w, lengthM: l, rotationDeg: 0, name: "", ageGroup: "10U", preset: "10U", markHome: state.variant === "game" };
   } else if (state.tool === "grid") {
     el = { id, kind: "grid", center: c, widthM: 70, lengthM: 50, rotationDeg: 0, cols: 3, rows: 2, scheme: "letters", startIndex: 0, name: "" };
+  } else if (state.tool === "fan") {
+    el = { id, kind: "fan", center: c, radiusM: 60, startDeg: -45, sweepDeg: 90, wedges: 3, scheme: "letters", startIndex: 0, name: "" };
   } else if (state.tool === "line") {
     el = { id, kind: "line", points: [Geo.destination(c, -15, 0), Geo.destination(c, 15, 0)], color: HOME_COLOR, width: 5, label: "" };
   } else if (state.tool === "word") {
@@ -363,6 +384,9 @@ function onMove(e) {
     el.rotationDeg = Math.round(Geo.bearingDeg(el.center, cur));
   } else if (state.drag.mode === "vertex" && el.points) {
     el.points[state.drag.idx] = cur;
+  } else if (state.drag.mode === "fanarc" && el.kind === "fan") {
+    el.radiusM = Math.max(10, Math.round(Geo.distanceM(el.center, cur)));
+    el.startDeg = Geo.bearingDeg(el.center, cur) - el.sweepDeg / 2; // keep handle at arc mid
   }
   rebuildMap(); // map only during drag — panel refreshes on mouseup (keeps perf + focus)
 }
@@ -397,8 +421,8 @@ function rebuildMap() {
         if (ha) {
           sidelines.push(lineFeat([ha.home.a, ha.home.b], el.id, { color: HOME_COLOR, w: 6 }));
           sidelines.push(lineFeat([ha.away.a, ha.away.b], el.id, { color: AWAY_COLOR, w: 5 }));
-          labels.push(label(ha.home.mid, "HOME", el.id, { size: 12, color: "#cfe0ff" }));
-          labels.push(label(ha.away.mid, "AWAY", el.id, { size: 12, color: "#ffe6c9" }));
+          labels.push(label(ha.home.mid, "HOME", el.id, { size: 12, color: "#f4bd4d" }));
+          labels.push(label(ha.away.mid, "AWAY", el.id, { size: 12, color: "#ffd9d2" }));
         }
       }
     } else if (el.kind === "grid") {
@@ -411,6 +435,13 @@ function rebuildMap() {
         const top = Geo.rectRing(el.center, el.widthM, el.lengthM, el.rotationDeg);
         labels.push(label(Geo.midpoint(top[0], top[1]), el.name, el.id, { size: 15, color: "#fff8e6" }));
       }
+    } else if (el.kind === "fan") {
+      const cells = Geo.fanCells(el.center, el.radiusM, el.startDeg, el.sweepDeg, el.wedges);
+      cells.forEach((cell) => {
+        shapes.push(poly(cell.ring, el.id, { fill: "#f4bd4d", stroke: "#f4bd4d", strokeW: 2 }));
+        labels.push(label(cell.center, Geo.cellLabel(cell.index, el.scheme, el.startIndex), el.id, { size: 16, color: "#fff8e6" }));
+      });
+      if (el.name) labels.push(label(el.center, el.name, el.id, { size: 14, color: "#fff8e6" }));
     } else if (el.kind === "line") {
       shapes.push(lineFeat(el.points, el.id, { stroke: el.color, strokeW: el.width }));
       if (el.label) labels.push(label(el.points[0], el.label, el.id, { size: 13, color: el.color }));
@@ -432,6 +463,8 @@ function rebuildMap() {
       handles.push(handle(Geo.destination(sel.center, rot[0], rot[1]), sel.id, "rotate"));
     } else if (sel.kind === "line") {
       sel.points.forEach((p, i) => handles.push(handle(p, sel.id, "vertex", i)));
+    } else if (sel.kind === "fan") {
+      handles.push(handle(Geo.fanArcPoint(sel.center, sel.radiusM, sel.startDeg, sel.sweepDeg), sel.id, "fanarc"));
     }
   }
 
@@ -501,6 +534,15 @@ function renderSelPanel() {
       <div class="field-row"><label class="block">Width m<input type="number" data-k="widthM" value="${el.widthM}"></label>
       <label class="block">Length m<input type="number" data-k="lengthM" value="${el.lengthM}"></label></div>
       <label class="block">Rotation °<input type="number" data-k="rotationDeg" value="${el.rotationDeg}"></label>`;
+  } else if (el.kind === "fan") {
+    html = `
+      <label class="block">Area name<input data-k="name" value="${esc(el.name)}" placeholder="e.g. Allendale outfield"></label>
+      <div class="field-row"><label class="block">Sections<input type="number" min="1" data-k="wedges" value="${el.wedges}"></label>
+      <label class="block">Labels<select data-k="scheme"><option value="letters"${el.scheme==="letters"?" selected":""}>A, B, C…</option><option value="numbers"${el.scheme==="numbers"?" selected":""}>1, 2, 3…</option></select></label></div>
+      <div class="field-row"><label class="block">Radius m<input type="number" data-k="radiusM" value="${el.radiusM}"></label>
+      <label class="block">Sweep °<input type="number" data-k="sweepDeg" value="${el.sweepDeg}"></label></div>
+      <label class="block">Start #<input type="number" data-k="startIndex" value="${el.startIndex}"></label>
+      <p class="hint">Drag the arc handle to set size + direction. Sweep 90° = quarter circle (left/center/right).</p>`;
   } else if (el.kind === "line") {
     html = `<label class="block">Label<input data-k="label" value="${esc(el.label)}"></label>
       <label class="block">Color<input type="color" data-k="color" value="${el.color}"></label>
@@ -552,6 +594,7 @@ function renderElemList() {
   state.elements.forEach((el) => {
     const name = el.kind === "field" ? ("Field " + (el.name || el.ageGroup || "")).trim()
       : el.kind === "grid" ? ("Grid " + (el.name || `${el.cols}×${el.rows}`))
+      : el.kind === "fan" ? ("Fan " + (el.name || `${el.wedges}-section`))
       : el.kind === "line" ? "Line"
       : el.kind === "text" ? `“${el.text}”`
       : MARKER_TYPES[el.type].name;
@@ -709,8 +752,8 @@ function drawElement(ctx, project, el) {
         strokeSeg(ctx, project, ha.away.a, ha.away.b, AWAY_COLOR, 6);
         // Labels run ALONG each touchline (rotated) so they don't overlap the
         // field interior — important on small fields.
-        sidelineLabel(ctx, project, ha.home.a, ha.home.b, "HOME", HOME_COLOR);
-        sidelineLabel(ctx, project, ha.away.a, ha.away.b, "AWAY", AWAY_COLOR);
+        sidelineLabel(ctx, project, ha.home.a, ha.home.b, "HOME", HOME_COLOR, HOME_TEXT);
+        sidelineLabel(ctx, project, ha.away.a, ha.away.b, "AWAY", AWAY_COLOR, AWAY_TEXT);
       }
     }
     const t = [el.name, el.ageGroup].filter(Boolean).join("  ");
@@ -731,6 +774,18 @@ function drawElement(ctx, project, el) {
       const m = Geo.midpoint(ring[0], ring[1]);
       textBox(ctx, project(m[0], m[1]), el.name, { size: 15 * SCALE, bg: "rgba(58,13,18,0.82)", fg: "#fff8e6", center: true });
     }
+  } else if (el.kind === "fan") {
+    const cells = Geo.fanCells(el.center, el.radiusM, el.startDeg, el.sweepDeg, el.wedges);
+    cells.forEach((cell) => {
+      fillStrokeRing(ctx, project, cell.ring, "rgba(244,189,77,0.16)", "#f4bd4d", 2.5, null);
+      const p = project(cell.center[0], cell.center[1]);
+      ctx.fillStyle = "#fff8e6"; ctx.font = `bold ${17 * SCALE}px -apple-system, Arial, sans-serif`;
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.lineWidth = 3 * SCALE; ctx.strokeStyle = "rgba(0,0,0,0.55)";
+      const lbl = Geo.cellLabel(cell.index, el.scheme, el.startIndex);
+      ctx.strokeText(lbl, p.x, p.y); ctx.fillText(lbl, p.x, p.y);
+    });
+    if (el.name) textBox(ctx, project(el.center[0], el.center[1]), el.name, { size: 14 * SCALE, bg: "rgba(58,13,18,0.82)", fg: "#fff8e6", center: true });
   } else if (el.kind === "line") {
     ctx.beginPath();
     el.points.forEach((pt, i) => { const p = project(pt[0], pt[1]); i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); });
@@ -783,7 +838,7 @@ function drawMarkings(ctx, project, mk) {
 }
 
 // A pill label centered on a touchline and rotated to run along it (kept upright).
-function sidelineLabel(ctx, project, a, b, text, color) {
+function sidelineLabel(ctx, project, a, b, text, color, textColor) {
   const pa = project(a[0], a[1]), pb = project(b[0], b[1]);
   let angle = Math.atan2(pb.y - pa.y, pb.x - pa.x);
   if (angle > Math.PI / 2 || angle < -Math.PI / 2) angle += Math.PI; // never upside-down
@@ -796,7 +851,7 @@ function sidelineLabel(ctx, project, a, b, text, color) {
   const w = ctx.measureText(text).width, h = size + padY * 2;
   ctx.fillStyle = color;
   roundRect(ctx, -w / 2 - padX, -h / 2, w + padX * 2, h, 4 * SCALE); ctx.fill();
-  ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.fillStyle = textColor || "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
   ctx.fillText(text, 0, 0);
   ctx.restore();
 }

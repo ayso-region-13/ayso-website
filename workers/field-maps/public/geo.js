@@ -211,6 +211,33 @@
     };
   }
 
+  // A pie/sector grid (e.g. a baseball outfield) split into `wedges` equal
+  // sectors — left/center/right field. apex = the vertex (home-plate corner),
+  // startDeg = bearing of the first edge (0 = north, clockwise), sweepDeg = total
+  // angle (90 for a quarter circle). Returns wedge rings + label points.
+  function fanCells(center, radiusM, startDeg, sweepDeg, wedges) {
+    wedges = Math.max(1, wedges | 0);
+    var atBearing = function (deg, dist) {
+      var r = (deg * Math.PI) / 180;
+      return destination(center, Math.sin(r) * dist, Math.cos(r) * dist);
+    };
+    var step = sweepDeg / wedges, out = [];
+    for (var i = 0; i < wedges; i++) {
+      var a0 = startDeg + i * step, a1 = a0 + step;
+      var ring = [center.slice()];
+      var arcN = Math.max(4, Math.round(step / 4));
+      for (var j = 0; j <= arcN; j++) ring.push(atBearing(a0 + (a1 - a0) * (j / arcN), radiusM));
+      ring.push(center.slice());
+      out.push({ ring: ring, center: atBearing((a0 + a1) / 2, radiusM * 0.62), index: i });
+    }
+    return out;
+  }
+  // The single drag handle for a fan: midpoint of its arc.
+  function fanArcPoint(center, radiusM, startDeg, sweepDeg) {
+    var deg = startDeg + sweepDeg / 2, r = (deg * Math.PI) / 180;
+    return destination(center, Math.sin(r) * radiusM, Math.cos(r) * radiusM);
+  }
+
   // Cell label for a given index under a scheme.
   function cellLabel(index, scheme, startIndex) {
     var start = startIndex || 0;
@@ -276,6 +303,8 @@
     gridCells: gridCells,
     cellLabel: cellLabel,
     fieldMarkings: fieldMarkings,
+    fanCells: fanCells,
+    fanArcPoint: fanArcPoint,
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = Geo;
