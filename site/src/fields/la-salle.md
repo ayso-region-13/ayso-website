@@ -24,8 +24,6 @@ snackBar: "No"
 
 <iframe src="https://maps.google.com/maps?q=3880+E+Sierra+Madre+Blvd,+Pasadena,+CA+91107&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-![La Salle field map](/images/fields/lasalle-field-map.jpg)
-
 ## Problems & Contact
 
 - Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
