@@ -23,10 +23,6 @@ snackBar: "No"
 
 <iframe src="https://maps.google.com/maps?q=1501+E+Villa+St,+Pasadena,+CA+91106&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-## Subfield Map
-
-![Jefferson Park — Left, Center, and Right subfields](/images/fields/jefferson-subfield-map.jpg)
-
 ## Problems & Contact
 
 - Immediate issues (locked gate, no lights): text Rolf at 818-636-5395
