@@ -181,9 +181,15 @@ module.exports = function (eleventyConfig) {
   // --- Global data ---
   eleventyConfig.addGlobalData("currentYear", () => new Date().getFullYear());
 
-  // True when this build is for the staging branch on Cloudflare Pages.
-  // Used by _headers.njk and robots.njk to block crawlers on staging only.
-  eleventyConfig.addGlobalData("isStaging", () => process.env.CF_PAGES_BRANCH === "staging");
+  // True for any Cloudflare Pages build that is NOT production (the `main`
+  // branch) — i.e. staging AND preview branches (e.g. field-maps). Used by
+  // _headers.njk and robots.njk to emit noindex so only www.ayso13.org (main)
+  // is crawlable. Local dev (npm start) has no CF_PAGES_BRANCH → treated as
+  // production (allow), which is fine since local builds are never served.
+  eleventyConfig.addGlobalData("isStaging", () => {
+    const branch = process.env.CF_PAGES_BRANCH;
+    return !!branch && branch !== "main";
+  });
 
   // --- Transform: auto-style InLeague Register links as big yellow buttons ---
   // Editors save plain markdown via Pages CMS (which mangles raw HTML) — this
@@ -228,6 +234,42 @@ module.exports = function (eleventyConfig) {
     return content.replace(/(<\/div>\s*<\/article>)/, fieldInfoHtml + "\n$1");
   });
 
+  // --- Transform: in-page table of contents for field pages ---
+  // After the maps block is relocated, collect the <h2 id="…"> headings inside
+  // the article (markdown sections + the map sections) and render a "On this
+  // page" jump list at the top of the article. Runs after field-maps-after-
+  // directions so the map headings are present and in order.
+  eleventyConfig.addTransform("field-page-toc", function (content) {
+    if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;
+    if (!this.page.url || !this.page.url.startsWith("/fields/")) return content;
+
+    const aStart = content.indexOf("<article");
+    if (aStart < 0) return content;
+    const tagEnd = content.indexOf(">", aStart) + 1;
+    const aEnd = content.indexOf("</article>", tagEnd);
+    if (aEnd < 0) return content;
+    const inner = content.slice(tagEnd, aEnd);
+
+    const headings = [];
+    const re = /<h2[^>]*\sid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/g;
+    let m;
+    while ((m = re.exec(inner)) !== null) {
+      const text = m[2].replace(/<[^>]+>/g, "").trim();
+      if (text) headings.push({ id: m[1], text: text });
+    }
+    if (headings.length < 3) return content; // not worth a TOC
+
+    const items = headings.map((h) =>
+      `<li><a href="#${h.id}" class="block py-1 text-brand-red-dark hover:text-brand-dark transition-colors">${h.text}</a></li>`
+    ).join("");
+    const toc =
+      `<nav class="not-prose mb-6 max-w-3xl bg-brand-cream rounded-lg p-4" aria-label="On this page">` +
+      `<p class="text-xs font-semibold uppercase tracking-wider text-brand-red-dark mb-2">On this page</p>` +
+      `<ul class="text-sm">${items}</ul></nav>`;
+
+    return content.slice(0, tagEnd) + "\n" + toc + content.slice(tagEnd);
+  });
+
   // --- Transform: replace [DATE] placeholder with per-file last-modified date ---
   eleventyConfig.addTransform("date-placeholder", function (content) {
     if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;
@@ -258,6 +300,35 @@ module.exports = function (eleventyConfig) {
   // raw frontmatter / filename is the only reliable signal for "intentional"
   // date.
   const matter = require("gray-matter");
+  // --- Collection: field complexes ---
+  // Groups field pages that share a `complex` frontmatter slug (e.g. the three
+  // FIS fields) so member pages can cross-link siblings and share one wayfinder.
+  // Each complex also resolves a shared wayfinder by reading the member
+  // fieldmaps JSON for the first member that has a `wayfinder` variant.
+  eleventyConfig.addCollection("complexes", function (collectionApi) {
+    const fields = collectionApi.getFilteredByGlob("src/fields/*.md");
+    const map = {};
+    fields.forEach((f) => {
+      const cx = f.data.complex;
+      if (!cx) return;
+      if (!map[cx]) map[cx] = { slug: cx, name: f.data.complexName || cx, members: [], wayfinder: null };
+      if (f.data.complexName) map[cx].name = f.data.complexName;
+      map[cx].members.push({ slug: f.fileSlug, title: f.data.title, url: f.url });
+    });
+    Object.keys(map).forEach((cx) => {
+      for (const m of map[cx].members) {
+        try {
+          const doc = JSON.parse(fs.readFileSync(path.join(__dirname, "src/_data/fieldmaps", m.slug + ".json"), "utf8"));
+          if (doc.variants && doc.variants.wayfinder) {
+            map[cx].wayfinder = Object.assign({}, doc.variants.wayfinder, { hostSlug: m.slug });
+            break;
+          }
+        } catch (_) { /* member has no saved map yet */ }
+      }
+    });
+    return map;
+  });
+
   eleventyConfig.addCollection("qaAnswers", function(collectionApi) {
     const items = collectionApi.getFilteredByGlob("src/referees/qa/*.md")
       .map(item => {

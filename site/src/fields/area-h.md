@@ -3,6 +3,8 @@
 title: "Rose Bowl Area H"
 layout: page.njk
 section: fields
+complex: rose-bowl
+complexName: "Rose Bowl Area"
 placeAddress: "1001 Rose Bowl Dr"
 placeLocality: "Pasadena"
 placePostalCode: "91103"
@@ -28,10 +30,6 @@ The AYSO tent at Area H is located near the blockhouse.
 [Get directions](https://maps.google.com/?q=Rose+Bowl,+Pasadena,+CA)
 
 <iframe src="https://maps.google.com/maps?q=Rose+Bowl,+Pasadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-## Subfield Map
-
-![Rose Bowl complex — Area H subfields 1 through 9 plus the adjacent Jackie Robinson and Brookside subfield areas](/images/fields/rose-bowl-area-h-subfield-map.jpg)
 
 ## Availability
 

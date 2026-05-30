@@ -1,0 +1,106 @@
+{
+  "field": "butler",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.14745944827621,
+          34.17371175857181
+        ],
+        "zoom": 17.456680389121324,
+        "bearing": 0,
+        "frameMeters": 360,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e2",
+          "kind": "grid",
+          "center": [
+            -118.14759260718824,
+            34.17390269609565
+          ],
+          "widthM": 51,
+          "lengthM": 115,
+          "rotationDeg": 0,
+          "cols": 2,
+          "rows": 4,
+          "scheme": "numbers",
+          "startIndex": 0,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e3",
+          "kind": "grid",
+          "center": [
+            -118.14817678822769,
+            34.173728560774094
+          ],
+          "widthM": 57,
+          "lengthM": 62,
+          "rotationDeg": 0,
+          "cols": 2,
+          "rows": 2,
+          "scheme": "numbers",
+          "startIndex": 8,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e4",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.14797613701512,
+            34.17419475395975
+          ],
+          "locked": true
+        },
+        {
+          "id": "e5",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.14792634522249,
+            34.17462386146353
+          ],
+          "rotationDeg": 177,
+          "locked": true
+        },
+        {
+          "id": "e6",
+          "kind": "nogo",
+          "center": [
+            -118.14678936413843,
+            34.173706163515604
+          ],
+          "widthM": 59,
+          "lengthM": 113,
+          "rotationDeg": 358,
+          "label": "Do not use",
+          "locked": true
+        },
+        {
+          "id": "e7",
+          "kind": "nogo",
+          "center": [
+            -118.14877384408462,
+            34.17355335240883
+          ],
+          "widthM": 36,
+          "lengthM": 25,
+          "rotationDeg": 0,
+          "label": "Do not use"
+        }
+      ],
+      "png": "/images/fields/butler-practice.png",
+      "alt": "Octavia E. Butler Middle School practice field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}

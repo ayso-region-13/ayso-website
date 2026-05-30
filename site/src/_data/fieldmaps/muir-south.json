@@ -1,0 +1,102 @@
+{
+  "field": "muir-south",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.16344423454113,
+          34.17872068406267
+        ],
+        "zoom": 17.87163225137969,
+        "bearing": 0,
+        "frameMeters": 270,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e115",
+          "kind": "infield",
+          "center": [
+            -118.1633290734744,
+            34.1787725777634
+          ],
+          "radiusM": 67,
+          "startDeg": 90.16711467158859,
+          "sweepDeg": 90
+        },
+        {
+          "id": "e116",
+          "kind": "grid",
+          "center": [
+            -118.16232972561902,
+            34.178459152918634
+          ],
+          "widthM": 41,
+          "lengthM": 70,
+          "rotationDeg": 0,
+          "cols": 1,
+          "rows": 3,
+          "scheme": "letters",
+          "startIndex": 0,
+          "name": ""
+        },
+        {
+          "id": "e117",
+          "kind": "arrow",
+          "points": [
+            [
+              -118.16420014702278,
+              34.178854018717246
+            ],
+            [
+              -118.16286668883879,
+              34.1788515508114
+            ]
+          ],
+          "color": "#83312d",
+          "width": 7,
+          "label": "Walk this Way",
+          "locked": false
+        },
+        {
+          "id": "e118",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.16443581412909,
+            34.17892065214818
+          ]
+        },
+        {
+          "id": "e119",
+          "kind": "nogo",
+          "center": [
+            -118.16373776219419,
+            34.17859488818236
+          ],
+          "widthM": 50,
+          "lengthM": 36,
+          "rotationDeg": 0,
+          "label": "Do not park here"
+        },
+        {
+          "id": "e120",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.1647699243166,
+            34.178736609800836
+          ],
+          "rotationDeg": 30
+        }
+      ],
+      "png": "/images/fields/muir-south-practice.png",
+      "alt": "Muir South practice field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}

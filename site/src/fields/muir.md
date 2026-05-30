@@ -1,8 +1,10 @@
 ---
 
-title: "Muir High School North"
+title: "Muir North"
 layout: page.njk
 section: fields
+complex: muir
+complexName: "Muir High School Complex"
 placeAddress: "1905 Lincoln Ave"
 placeLocality: "Altadena"
 placePostalCode: "91001"
@@ -26,12 +28,6 @@ Muir High School North is a 12U game field at John Muir High School in Altadena.
 <iframe src="https://maps.google.com/maps?q=John+Muir+High+School,+1905+Lincoln+Ave,+Altadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
 Muir South is a separate practice field at the same school — see [Muir South](/fields/muir-south/).
-
-## Field Layouts
-
-![Muir North practice field — subfields 1 through 10 with parking guidance](/images/fields/muir-north-subfield-map.jpg)
-
-![Muir North/Central game-field layout — 10U/12U fields, parking, and "Do not park" zones](/images/fields/muir-north-game-map.jpg)
 
 ## Parking
 

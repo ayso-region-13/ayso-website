@@ -1,0 +1,63 @@
+{
+  "field": "brookside",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.16647668738061,
+          34.153134752262545
+        ],
+        "zoom": 17.103395068215654,
+        "bearing": 0,
+        "frameMeters": 460,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e15",
+          "kind": "grid",
+          "center": [
+            -118.1652282409061,
+            34.153364278583766
+          ],
+          "widthM": 57,
+          "lengthM": 131,
+          "rotationDeg": 341,
+          "cols": 1,
+          "rows": 3,
+          "scheme": "numbers",
+          "startIndex": 0,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e16",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.16610846026316,
+            34.153392117053315
+          ],
+          "locked": true
+        },
+        {
+          "id": "e17",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.16451621632996,
+            34.15353594400203
+          ],
+          "locked": false
+        }
+      ],
+      "png": "/images/fields/brookside-practice.png",
+      "alt": "Brookside Park practice field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}

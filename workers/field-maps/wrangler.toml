@@ -1,0 +1,51 @@
+name = "ayso13-field-maps"
+main = "src/index.js"
+compatibility_date = "2025-05-18"
+
+# Dedicated hostname. Keeps the editor off the public site's CSP / routes
+# and gives Cloudflare Access a clean application boundary.
+#
+# IMPORTANT: bind ONLY the custom domain. Do NOT enable the *.workers.dev
+# route — that URL is not protected by the Access app on fields.ayso13.org,
+# so leaving it on would let anyone bypass Access and hit /api/* (which holds
+# a GitHub write token). The Worker also verifies the Access JWT on every
+# request as defense-in-depth, but the workers.dev route should stay off.
+workers_dev = false
+
+[[routes]]
+pattern = "fields.ayso13.org"
+custom_domain = true
+
+# Static editor assets (public/index.html, app.js, style.css), served via the
+# ASSETS binding. run_worker_first = true makes the Worker fetch handler run
+# for EVERY request — including asset requests — so it can (a) verify the
+# Cloudflare Access JWT before serving anything and (b) attach the
+# Mapbox-permissive CSP to the HTML response. The Worker calls
+# env.ASSETS.fetch(request) to retrieve the static file once auth passes.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = true
+
+# ── Vars (non-secret config; safe to commit) ────────────────────────────────
+[vars]
+# Cloudflare Access team domain (non-secret).
+ACCESS_TEAM_DOMAIN = "ayso13.cloudflareaccess.com"
+# The Access application's AUD tag for "AYSO Region 13 Field Map Editor"
+# (app id e0c15c32-03ec-4ccd-bd57-0c7d9729204f). Non-secret — security comes
+# from verifying the JWT signature against the team JWKS, not AUD secrecy.
+ACCESS_AUD = "04006393cf3ae6e9f13a60eb017aecf192ff42026dbb77a0dcaca19ab4bd75d9"
+# Repo and branch the editor commits to. Staging only — never main.
+GITHUB_REPO = "ayso-region-13/ayso-website"
+GITHUB_BRANCH = "staging"
+
+# ── Secrets (set with `wrangler secret put <NAME>`; never commit) ────────────
+# This repo is PUBLIC, so the Mapbox token is a secret rather than a committed
+# var — even a URL-restricted public token can be reused from a spoofed referer
+# to burn the account's quota. The editor receives it only via GET /api/config,
+# after Cloudflare Access has authenticated the request.
+#   MAPBOX_TOKEN_PUBLIC - public Mapbox token (pk....), URL-restricted to
+#                  https://fields.ayso13.org/* in the Mapbox account.
+#   GITHUB_TOKEN - fine-grained PAT scoped to ayso-region-13/ayso-website with
+#                  Contents: Read & Write. Used by the Git Data API commit flow.
+#                  Create at github.com/settings/tokens?type=beta

@@ -2,6 +2,8 @@
 title: "Foothill Intermediate School — Lower (FIS Lower)"
 layout: page.njk
 section: fields
+complex: fis
+complexName: "Foothill Intermediate (FIS)"
 placeAddress: "Cornishon Ave & Atlee Dr"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
@@ -21,14 +23,6 @@ snackBar: "No"
 Corner of Cornishon Ave and Atlee Dr, La Cañada Flintridge, CA 91011.
 
 <iframe src="https://maps.google.com/maps?q=Cornishon+Ave+%26+Atlee+Dr,+La+Canada+Flintridge,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-## Field Layouts
-
-![FIS Lower — two 10U fields, 120' x 180' each](/images/fields/fis-lower-10u-map.jpg)
-
-![FIS Lower — 13U field, 186' x 262'](/images/fields/fis-lower-13u-map.jpg)
-
-![FIS Lower — subfield map](/images/fields/fis-lower-map.jpg)
 
 ## Parking
 

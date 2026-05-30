@@ -10,7 +10,7 @@ placeLon: -118.206263
 description: "La Cañada Elementary field — AYSO Region 13 practice location in La Cañada. Address, parking, and field notes."
 parking: "Street"
 restrooms: "Yes"
-surface: "Grass or Turf"
+surface: "Grass"
 lighting: "No"
 snackBar: "No"
 ---

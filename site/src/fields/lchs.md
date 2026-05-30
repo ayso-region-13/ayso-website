@@ -31,16 +31,6 @@ Restrooms are located in the building at the south end of the football field.
 
 Fields for 6U through 14U and upper division fields for 16U-19U.
 
-![LCHS practice field map — early season](/images/fields/lchs-practice-map-early.png)
-
-![LCHS practice field map — later season](/images/fields/lchs-practice-map-later.png)
-
-## Game Fields
-
-![LCHS 10U game field map](/images/fields/lchs-game-map-10u.jpg)
-
-![LCHS 12U game field map](/images/fields/lchs-game-map-12u.jpg)
-
 ## Goal Setup
 
 Goals at LCHS-JV are pre-assembled. Lift goals when moving them. Do not drag across the grass. Corner flags are in designated bins.

@@ -1,0 +1,293 @@
+{
+  "field": "area-h",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.16674278432876,
+          34.15860730300608
+        ],
+        "zoom": 16.69612619461385,
+        "bearing": 0,
+        "frameMeters": 610,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e21",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.16803813832502,
+            34.158196193683594
+          ],
+          "locked": true
+        },
+        {
+          "id": "e22",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.16437039442576,
+            34.158087799932616
+          ],
+          "locked": true
+        },
+        {
+          "id": "e23",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.16676461613768,
+            34.158840531442706
+          ],
+          "locked": true
+        },
+        {
+          "id": "e24",
+          "kind": "grid",
+          "center": [
+            -118.16552748029875,
+            34.15840695903688
+          ],
+          "widthM": 237,
+          "lengthM": 154,
+          "rotationDeg": 275,
+          "cols": 3,
+          "rows": 3,
+          "scheme": "numbers",
+          "startIndex": 0,
+          "name": "",
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/area-h-practice.png",
+      "alt": "Rose Bowl Area H practice field map",
+      "updatedBy": "matthew@ayso13.org"
+    },
+    "tournament": {
+      "label": "Tournament Layout",
+      "view": {
+        "center": [
+          -118.16697042654275,
+          34.15838449466237
+        ],
+        "zoom": 16.691407591165408,
+        "bearing": 0,
+        "frameMeters": 612,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e5",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.166787879694,
+            34.15884023240967
+          ],
+          "locked": true
+        },
+        {
+          "id": "e6",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.16800729263863,
+            34.15816954722057
+          ],
+          "locked": true
+        },
+        {
+          "id": "e8",
+          "kind": "field",
+          "center": [
+            -118.16657893673164,
+            34.15722085098916
+          ],
+          "widthM": 55,
+          "lengthM": 91,
+          "rotationDeg": 342,
+          "name": "9",
+          "ageGroup": "14U",
+          "preset": "14U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e9",
+          "kind": "field",
+          "center": [
+            -118.16588179034817,
+            34.15750018611263
+          ],
+          "widthM": 55,
+          "lengthM": 91,
+          "rotationDeg": 340,
+          "name": "10",
+          "ageGroup": "14U",
+          "preset": "14U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e10",
+          "kind": "field",
+          "center": [
+            -118.16651289128504,
+            34.15819244802918
+          ],
+          "widthM": 55,
+          "lengthM": 91,
+          "rotationDeg": 20,
+          "name": "8",
+          "ageGroup": "14U",
+          "preset": "14U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e11",
+          "kind": "field",
+          "center": [
+            -118.16526803862823,
+            34.15773094151784
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 338,
+          "name": "5",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e12",
+          "kind": "field",
+          "center": [
+            -118.1645669052827,
+            34.15879571928238
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "3",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e13",
+          "kind": "field",
+          "center": [
+            -118.16479571470326,
+            34.157955621871096
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 338,
+          "name": "4",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e14",
+          "kind": "field",
+          "center": [
+            -118.16453891472867,
+            34.15939797379832
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "2",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e16",
+          "kind": "field",
+          "center": [
+            -118.16522647388175,
+            34.159395668147994
+          ],
+          "widthM": 46,
+          "lengthM": 73,
+          "rotationDeg": 67,
+          "name": "1",
+          "ageGroup": "12U",
+          "preset": "12U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e17",
+          "kind": "field",
+          "center": [
+            -118.16511843671456,
+            34.15868166361574
+          ],
+          "widthM": 46,
+          "lengthM": 73,
+          "rotationDeg": 0,
+          "name": "6",
+          "ageGroup": "12U",
+          "preset": "12U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e18",
+          "kind": "field",
+          "center": [
+            -118.16569701227525,
+            34.15864305365045
+          ],
+          "widthM": 46,
+          "lengthM": 73,
+          "rotationDeg": 0,
+          "name": "7",
+          "ageGroup": "12U",
+          "preset": "12U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e19",
+          "kind": "marker",
+          "type": "tent",
+          "center": [
+            -118.16648294168708,
+            34.158842808943746
+          ],
+          "locked": true
+        },
+        {
+          "id": "e20",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.16442590122696,
+            34.15811193124793
+          ],
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/area-h-tournament.png",
+      "alt": "Rose Bowl Area H game field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}

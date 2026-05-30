@@ -1,0 +1,239 @@
+{
+  "field": "blair-lower",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "game": {
+      "label": "Game Day Layout",
+      "view": {
+        "center": [
+          -118.14442494407932,
+          34.12245570132167
+        ],
+        "zoom": 17.418027418364126,
+        "bearing": 0,
+        "frameMeters": 370,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e12",
+          "kind": "field",
+          "center": [
+            -118.14397548901692,
+            34.12221366680416
+          ],
+          "widthM": 58,
+          "lengthM": 104,
+          "rotationDeg": 317,
+          "name": "",
+          "ageGroup": "14U",
+          "preset": "custom",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e13",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.14393202185084,
+            34.12277141672621
+          ],
+          "locked": true
+        },
+        {
+          "id": "e14",
+          "kind": "text",
+          "center": [
+            -118.14303918057558,
+            34.122891642795494
+          ],
+          "text": "No Parking in Neighborhood",
+          "color": "#83312d",
+          "size": 18,
+          "locked": true
+        },
+        {
+          "id": "e15",
+          "kind": "text",
+          "center": [
+            -118.14379566299878,
+            34.12321374463643
+          ],
+          "text": "↖Park at Allendale",
+          "color": "#83312d",
+          "size": 18
+        },
+        {
+          "id": "e20",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.14272775131221,
+            34.121872337993594
+          ],
+          "rotationDeg": 225
+        },
+        {
+          "id": "e21",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.14453788765132,
+            34.12354260251119
+          ],
+          "rotationDeg": 234
+        },
+        {
+          "id": "e22",
+          "kind": "arrow",
+          "points": [
+            [
+              -118.14469529081111,
+              34.1234182222437
+            ],
+            [
+              -118.14410860630696,
+              34.12285554731665
+            ]
+          ],
+          "color": "#83312d",
+          "width": 7,
+          "label": ""
+        },
+        {
+          "id": "e24",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.14323573423962,
+            34.12202041236462
+          ]
+        }
+      ],
+      "png": "/images/fields/blair-lower-game.png",
+      "alt": "Blair Lower game field map",
+      "updatedBy": "matthew@ayso13.org"
+    },
+    "wayfinder": {
+      "label": "Wayfinder Layout",
+      "view": {
+        "center": [
+          -118.14349880946301,
+          34.12355263332587
+        ],
+        "zoom": 16.437637508447885,
+        "bearing": 0,
+        "frameMeters": 730,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e25",
+          "kind": "field",
+          "center": [
+            -118.1448040776189,
+            34.12319051099553
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 318,
+          "name": "Blair Upper",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": false,
+          "locked": true
+        },
+        {
+          "id": "e26",
+          "kind": "field",
+          "center": [
+            -118.14396228726334,
+            34.12220077300013
+          ],
+          "widthM": 49,
+          "lengthM": 106,
+          "rotationDeg": 319,
+          "name": "Blair Lower",
+          "ageGroup": "14U",
+          "preset": "custom",
+          "markHome": false,
+          "locked": true
+        },
+        {
+          "id": "e27",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.14550752924407,
+            34.124377571292015
+          ],
+          "locked": true
+        },
+        {
+          "id": "e28",
+          "kind": "text",
+          "center": [
+            -118.1449500035481,
+            34.12494242922428
+          ],
+          "text": "↑Additional Parking at Allendale",
+          "color": "#83312d",
+          "size": 18,
+          "locked": true
+        },
+        {
+          "id": "e29",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.14455890343355,
+            34.123688714932044
+          ],
+          "rotationDeg": 232,
+          "locked": true
+        },
+        {
+          "id": "e30",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.14260340285877,
+            34.12187699590274
+          ],
+          "rotationDeg": 235,
+          "locked": true
+        },
+        {
+          "id": "e31",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.1439264862262,
+            34.12275874993529
+          ],
+          "locked": true
+        },
+        {
+          "id": "e32",
+          "kind": "text",
+          "center": [
+            -118.14303610936908,
+            34.123206511559175
+          ],
+          "text": "Do Not Park in Neighborhood",
+          "color": "#83312d",
+          "size": 18,
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/blair-lower-wayfinder.png",
+      "alt": "Blair Lower wayfinder field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}

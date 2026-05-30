@@ -1,0 +1,104 @@
+{
+  "field": "cornishon",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "game": {
+      "label": "Game Day Layout",
+      "view": {
+        "center": [
+          -118.20342578331869,
+          34.20360268888385
+        ],
+        "zoom": 18.16666249132008,
+        "bearing": 0,
+        "frameMeters": 220,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e1",
+          "kind": "field",
+          "center": [
+            -118.20438958259841,
+            34.20343834210105
+          ],
+          "widthM": 18,
+          "lengthM": 27,
+          "rotationDeg": 271,
+          "name": "A",
+          "ageGroup": "7U",
+          "preset": "7U",
+          "markHome": true
+        },
+        {
+          "id": "e2",
+          "kind": "field",
+          "center": [
+            -118.20402891574588,
+            34.203432328681174
+          ],
+          "widthM": 18,
+          "lengthM": 27,
+          "rotationDeg": 270,
+          "name": "B",
+          "ageGroup": "7U",
+          "preset": "7U",
+          "markHome": true
+        },
+        {
+          "id": "e3",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.20375939686096,
+            34.20360671022388
+          ],
+          "rotationDeg": 270
+        },
+        {
+          "id": "e4",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.2031371780751,
+            34.20401135438928
+          ]
+        },
+        {
+          "id": "e5",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.20377003307925,
+            34.20390799437921
+          ]
+        },
+        {
+          "id": "e6",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.20380194173492,
+            34.20352534132651
+          ]
+        },
+        {
+          "id": "e7",
+          "kind": "infield",
+          "center": [
+            -118.20386430927184,
+            34.20389679824547
+          ],
+          "radiusM": 37,
+          "startDeg": 180.7993731997246,
+          "sweepDeg": 90
+        }
+      ],
+      "png": "/images/fields/cornishon-game.png",
+      "alt": "Cornishon Field game field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}

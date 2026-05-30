@@ -34,6 +34,15 @@ layout: base.njk
     <p class="mt-2 text-brand-maroon text-lg leading-relaxed max-w-2xl">{{ description }}</p>
     {% endif %}
 
+    {# Compact address + one-tap directions (opens the visitor's Maps app). #}
+    {% if section == "fields" and placeAddress %}
+    {% if placeLat and placeLon %}{% set dirDest = placeLat ~ "," ~ placeLon %}{% else %}{% set dirDest = placeAddress ~ ", " ~ (placeLocality or "Pasadena") ~ ", CA" %}{% endif %}
+    <p class="mt-3 text-sm text-brand-dark">
+      {{ placeAddress }}{% if placeLocality %}, {{ placeLocality }}{% endif %}{% if placePostalCode %} {{ placePostalCode }}{% endif %}
+      <a href="https://www.google.com/maps/dir/?api=1&destination={{ dirDest | urlencode }}" target="_blank" rel="noopener" class="ml-1 whitespace-nowrap font-semibold text-brand-red-dark hover:text-brand-dark">Get directions →</a>
+    </p>
+    {% endif %}
+
   </div>
 </div>
 
@@ -80,6 +89,72 @@ layout: base.njk
         </dl>
       </div>
       {% endif %}
+
+      {# Field Maps — auto-rendered from site/src/_data/fieldmaps/<slug>.json,
+         which is produced by the field-map editor tool (workers/field-maps/).
+         Eleventy namespaces that directory as the `fieldmaps` global, keyed by
+         filename, so fieldmaps[page.fileSlug] is this field's doc. Degrades to
+         nothing when a field has no saved map (most, initially). Distinct
+         wrapper classes keep it clear of the field-info-bottom transform. #}
+      {# Maps render at the top of the article (after the TOC, before the prose),
+         so the page reads: address → field maps → Location/directions → rest.
+         Order: game, then practice, then any other named layouts (e.g. "A"/"B"). #}
+      {% if section == "fields" %}
+      {% set fmaps = fieldmaps[page.fileSlug] %}
+      {% set cx = complex and collections.complexes[complex] %}
+      {% set cxWayfinder = cx and cx.wayfinder %}
+
+      {# Cross-link to sibling fields in the same complex (e.g. the FIS fields). #}
+      {% if cx and cx.members.length > 1 %}
+      <p class="not-prose mb-5 max-w-3xl text-sm bg-brand-cream rounded-lg p-3">
+        <span class="font-semibold text-brand-red-dark">Part of {{ cx.name }}:</span>
+        {% for m in cx.members %}{% if m.slug != page.fileSlug %}<a href="{{ m.url }}" class="ml-1 font-medium text-brand-red-dark underline hover:text-brand-dark">{{ m.title }}</a>{% endif %}{% endfor %}
+      </p>
+      {% endif %}
+
+      {# Field Maps — own game/practice maps, plus a shared complex wayfinder.
+         Each map is its own anchored section so the in-page TOC links to it.
+         Order: address → maps → Location/directions → rest. #}
+      {% if (fmaps and fmaps.variants) or cxWayfinder %}
+      {% macro mapsection(v, heading, anchor) %}
+      <section class="not-prose mb-6 max-w-3xl">
+        <h2 id="{{ anchor }}" class="text-lg font-bold text-brand-red-dark mb-3">{{ heading }}</h2>
+        <figure class="rounded-lg overflow-hidden border border-brand-cream">
+          <a href="{{ v.png }}" class="gmap-lightbox block" data-gallery="fieldmaps-{{ page.fileSlug }}"
+             data-title="{{ heading }}" aria-label="Enlarge {{ heading }}">
+            <img src="{{ v.png }}" alt="{{ v.alt }}" sizes="(min-width: 768px) 760px, 100vw" class="w-full h-auto block">
+          </a>
+        </figure>
+        <p class="text-xs text-brand-dark/60 mt-1">Tap to enlarge — scroll or pinch to zoom, drag to pan.</p>
+      </section>
+      {% endmacro %}
+      <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css"
+            integrity="sha384-GPAzSuZc0kFvdIev6wm9zg8gnafE8tLso7rsAYQfc9hAdWCpOcpcNI5W9lWkYcsd"
+            crossorigin="anonymous">
+      <div data-field-maps>
+        {% if fmaps and fmaps.variants %}
+        {% if fmaps.variants.game %}{{ mapsection(fmaps.variants.game, "Field Map for Games", "field-map-games") }}{% endif %}
+        {% if fmaps.variants.practice %}{{ mapsection(fmaps.variants.practice, "Field Map for Practices", "field-map-practices") }}{% endif %}
+        {# Own wayfinder only when NOT in a complex — complexes share one below. #}
+        {% if fmaps.variants.wayfinder and not complex %}{{ mapsection(fmaps.variants.wayfinder, "Getting Around", "field-map-wayfinder") }}{% endif %}
+        {% for vid, v in fmaps.variants %}{% if vid != "game" and vid != "practice" and vid != "wayfinder" %}{{ mapsection(v, "Field Map — " + (v.label or vid), "field-map-" + vid) }}{% endif %}{% endfor %}
+        {% endif %}
+        {# Shared wayfinder for the whole complex (hosted on one member). #}
+        {% if cxWayfinder %}{{ mapsection(cxWayfinder, "Getting Around — " + cx.name, "field-map-wayfinder") }}{% endif %}
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"
+              integrity="sha384-MZZbZ6RXJudK43v1qY1zOWKOU2yfeBPatuFoKyHAaAgHTUZhwblRTc9CphTt4IGQ"
+              crossorigin="anonymous"></script>
+      <script>
+        (function () {
+          function init() { if (window.GLightbox) GLightbox({ selector: '.gmap-lightbox', zoomable: true, touchNavigation: true, loop: true }); }
+          if (document.readyState !== 'loading') init(); else document.addEventListener('DOMContentLoaded', init);
+        })();
+      </script>
+      {% endif %}
+      {% endif %}
+
       <div class="prose max-w-3xl">
         {# Hide the H1 in markdown since we display it in the page header above #}
         <style>
