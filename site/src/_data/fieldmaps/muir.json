@@ -134,7 +134,7 @@
           "lengthM": 41,
           "rotationDeg": 0,
           "label": "Do not park here",
-          "locked": false
+          "locked": true
         },
         {
           "id": "e130",
