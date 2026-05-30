@@ -1,0 +1,278 @@
+{
+  "field": "overview",
+  "styleVersion": "streets-v12",
+  "variants": {
+    "map": {
+      "label": "Region Overview",
+      "png": "/images/fields/overview-map.png",
+      "alt": "AYSO Region 13 field locations across Pasadena, Altadena, and La Cañada Flintridge",
+      "view": {
+        "center": [
+          -118.143066,
+          34.1676455
+        ],
+        "zoom": 11.992,
+        "bearing": 0,
+        "frameMeters": 15895,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e1",
+          "kind": "place",
+          "slug": "allendale",
+          "center": [
+            -118.144817,
+            34.126168
+          ],
+          "name": "Allendale",
+          "play": "practice"
+        },
+        {
+          "id": "e2",
+          "kind": "place",
+          "slug": "area-h",
+          "center": [
+            -118.167667,
+            34.161349
+          ],
+          "name": "Rose Bowl Area H",
+          "play": "practice"
+        },
+        {
+          "id": "e3",
+          "kind": "place",
+          "slug": "blair-lower",
+          "center": [
+            -118.14477,
+            34.12361
+          ],
+          "name": "Blair Lower",
+          "play": "game"
+        },
+        {
+          "id": "e4",
+          "kind": "place",
+          "slug": "blair-upper",
+          "center": [
+            -118.14477,
+            34.12361
+          ],
+          "name": "Blair Upper",
+          "play": "game"
+        },
+        {
+          "id": "e5",
+          "kind": "place",
+          "slug": "brookside",
+          "center": [
+            -118.1664,
+            34.152555
+          ],
+          "name": "Brookside",
+          "play": "practice"
+        },
+        {
+          "id": "e6",
+          "kind": "place",
+          "slug": "butler",
+          "center": [
+            -118.147133,
+            34.174452
+          ],
+          "name": "Butler MS",
+          "play": "practice"
+        },
+        {
+          "id": "e7",
+          "kind": "place",
+          "slug": "cornishon",
+          "center": [
+            -118.203614,
+            34.204084
+          ],
+          "name": "Cornishon",
+          "play": "game"
+        },
+        {
+          "id": "e8",
+          "kind": "place",
+          "slug": "fis-lower",
+          "center": [
+            -118.2032,
+            34.2027
+          ],
+          "name": "FIS Lower",
+          "play": "both"
+        },
+        {
+          "id": "e9",
+          "kind": "place",
+          "slug": "fis-upper",
+          "center": [
+            -118.201106,
+            34.203796
+          ],
+          "name": "FIS Upper",
+          "play": "both"
+        },
+        {
+          "id": "e10",
+          "kind": "place",
+          "slug": "jefferson",
+          "center": [
+            -118.120222,
+            34.154427
+          ],
+          "name": "Jefferson",
+          "play": "practice"
+        },
+        {
+          "id": "e11",
+          "kind": "place",
+          "slug": "la-canada-elementary",
+          "center": [
+            -118.206263,
+            34.208761
+          ],
+          "name": "LC Elementary",
+          "play": "practice"
+        },
+        {
+          "id": "e12",
+          "kind": "place",
+          "slug": "la-salle",
+          "center": [
+            -118.069941,
+            34.161022
+          ],
+          "name": "La Salle HS",
+          "play": "game"
+        },
+        {
+          "id": "e13",
+          "kind": "place",
+          "slug": "lc-lds",
+          "center": [
+            -118.216191,
+            34.211681
+          ],
+          "name": "LC LDS",
+          "play": "both"
+        },
+        {
+          "id": "e14",
+          "kind": "place",
+          "slug": "lchs",
+          "center": [
+            -118.178138,
+            34.193642
+          ],
+          "name": "La Cañada HS",
+          "play": "both"
+        },
+        {
+          "id": "e15",
+          "kind": "place",
+          "slug": "marshall",
+          "center": [
+            -118.113,
+            34.163105
+          ],
+          "name": "Marshall",
+          "play": "game"
+        },
+        {
+          "id": "e16",
+          "kind": "place",
+          "slug": "mcdonald",
+          "center": [
+            -118.129913,
+            34.161522
+          ],
+          "name": "McDonald",
+          "play": "practice"
+        },
+        {
+          "id": "e17",
+          "kind": "place",
+          "slug": "mckinley",
+          "center": [
+            -118.136001,
+            34.138613
+          ],
+          "name": "McKinley",
+          "play": "game"
+        },
+        {
+          "id": "e18",
+          "kind": "place",
+          "slug": "muir-south",
+          "center": [
+            -118.163031,
+            34.179469
+          ],
+          "name": "Muir South",
+          "play": "practice"
+        },
+        {
+          "id": "e19",
+          "kind": "place",
+          "slug": "muir",
+          "center": [
+            -118.165731,
+            34.181721
+          ],
+          "name": "Muir North",
+          "play": "game"
+        },
+        {
+          "id": "e20",
+          "kind": "place",
+          "slug": "oak-grove",
+          "center": [
+            -118.178138,
+            34.193642
+          ],
+          "name": "Oak Grove",
+          "play": "practice"
+        },
+        {
+          "id": "e21",
+          "kind": "place",
+          "slug": "paradise",
+          "center": [
+            -118.187862,
+            34.20811
+          ],
+          "name": "Paradise Canyon",
+          "play": "practice"
+        },
+        {
+          "id": "e22",
+          "kind": "place",
+          "slug": "victory",
+          "center": [
+            -118.098292,
+            34.159389
+          ],
+          "name": "Victory Park",
+          "play": "both"
+        },
+        {
+          "id": "e23",
+          "kind": "place",
+          "slug": "wilson",
+          "center": [
+            -118.08159,
+            34.144236
+          ],
+          "name": "Wilson MS",
+          "play": "game"
+        }
+      ]
+    }
+  }
+}

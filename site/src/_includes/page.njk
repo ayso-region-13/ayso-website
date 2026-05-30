@@ -104,6 +104,20 @@ layout: base.njk
       {% set cx = complex and collections.complexes[complex] %}
       {% set cxWayfinder = cx and cx.wayfinder %}
 
+      {# Region overview map at the top of the /fields/ index. Uses the
+         editor-generated overview once its PNG exists (overviewMap.ready),
+         otherwise falls back to the legacy overview image. #}
+      {% if page.url == "/fields/" %}
+      {% set ov = fieldmaps.overview %}
+      <figure class="not-prose mb-6 max-w-3xl rounded-lg overflow-hidden border border-brand-cream">
+        {% if overviewMap.ready and ov and ov.variants and ov.variants.map %}
+        <img src="{{ ov.variants.map.png }}" alt="{{ ov.variants.map.alt }}" sizes="(min-width: 768px) 760px, 100vw" class="w-full h-auto block">
+        {% else %}
+        <img src="/images/fields/map-overview-v2.jpg" alt="Regional field map — all Region 13 game and practice locations across Pasadena, Altadena, and La Cañada Flintridge" sizes="(min-width: 768px) 760px, 100vw" class="w-full h-auto block">
+        {% endif %}
+      </figure>
+      {% endif %}
+
       {# Cross-link to sibling fields in the same complex (e.g. the FIS fields). #}
       {% if cx and cx.members.length > 1 %}
       <p class="not-prose mb-5 max-w-3xl text-sm bg-brand-cream rounded-lg p-3">
