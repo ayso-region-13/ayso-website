@@ -37,6 +37,70 @@
       "png": "/images/fields/allendale-game.png",
       "alt": "Allendale Park game field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.14496371040124,
+          34.126138274841054
+        ],
+        "zoom": 18.53995510489652,
+        "bearing": 0,
+        "frameMeters": 170,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e3",
+          "kind": "fan",
+          "center": [
+            -118.14482176999371,
+            34.12598583400087
+          ],
+          "innerRadiusM": 28,
+          "radiusM": 55,
+          "startDeg": -1.1232262771628712,
+          "sweepDeg": 90,
+          "wedges": 3,
+          "scheme": "lcr",
+          "startIndex": 0,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e4",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.14490825705559,
+            34.12592019668284
+          ]
+        },
+        {
+          "id": "e5",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.14533278646896,
+            34.125629971723384
+          ]
+        },
+        {
+          "id": "e6",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.14509905679195,
+            34.12661120448061
+          ]
+        }
+      ],
+      "png": "/images/fields/allendale-practice.png",
+      "alt": "Allendale Park practice field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
