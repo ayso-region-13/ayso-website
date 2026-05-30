@@ -115,6 +115,14 @@ async function init() {
 
   wireUi();
   await loadFields();
+
+  // Restore field/layout from the URL (so a refresh stays on the same field).
+  const params = new URLSearchParams(location.search);
+  const fieldParam = params.get("field");
+  if (fieldParam && state.fields.some((f) => f.slug === fieldParam)) {
+    document.getElementById("fieldSelect").value = fieldParam;
+    await selectField(fieldParam, params.get("layout"));
+  }
 }
 
 function addSrc(id) { map.addSource(id, { type: "geojson", data: fc([]) }); }
@@ -129,6 +137,7 @@ function wireUi() {
     state.variant = e.target.value;
     if (state.field) loadVariant();
     updateFilename();
+    updateUrl();
   });
   document.getElementById("frameMeters").addEventListener("input", (e) => setFrameMeters(Number(e.target.value)));
   document.getElementById("frameLockBtn").addEventListener("click", toggleFrameLock);
@@ -199,18 +208,28 @@ async function loadFields() {
   sel.innerHTML = '<option value="">— choose a field —</option>' +
     state.fields.map((f) => `<option value="${esc(f.slug)}">${esc(f.title)}${f.hasMap ? " ✓" : ""}</option>`).join("");
 }
-async function selectField(slug) {
+async function selectField(slug, initialLayout) {
   state.tool = null;
   state.field = state.fields.find((f) => f.slug === slug) || null;
   document.getElementById("saveBtn").disabled = !state.field;
   if (!state.field) return;
   state.doc = await fetchDoc(slug);
   buildVariantList();
-  state.variant = "game";
+  state.variant = (initialLayout && state.variants.some((v) => v.id === initialLayout)) ? initialLayout : "game";
   populateVariantSelect();
   recenter();
   loadVariant();
   updateFilename();
+  updateUrl();
+}
+
+// Keep ?field=&layout= in the URL so a refresh reloads the same field/layout.
+function updateUrl() {
+  if (!state.field) return;
+  const p = new URLSearchParams();
+  p.set("field", state.field.slug);
+  if (state.variant) p.set("layout", state.variant);
+  history.replaceState(null, "", location.pathname + "?" + p.toString());
 }
 
 async function fetchDoc(slug) {
@@ -257,6 +276,7 @@ function addLayout(copy) {
   }
   document.getElementById("variantLabel").value = name.trim();
   updateFilename();
+  updateUrl();
 }
 function recenter() { if (state.field) { state.frameBox = null; fitToFrame(); refreshFrameBox(); } }
 
