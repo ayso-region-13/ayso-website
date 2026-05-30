@@ -2,8 +2,75 @@
   "field": "area-h",
   "styleVersion": "satellite-v9",
   "variants": {
-    "game": {
-      "label": "Game Day Layout",
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.16674278432876,
+          34.15860730300608
+        ],
+        "zoom": 16.69612619461385,
+        "bearing": 0,
+        "frameMeters": 610,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e21",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.16803813832502,
+            34.158196193683594
+          ],
+          "locked": true
+        },
+        {
+          "id": "e22",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.16437039442576,
+            34.158087799932616
+          ],
+          "locked": true
+        },
+        {
+          "id": "e23",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.16676461613768,
+            34.158840531442706
+          ],
+          "locked": true
+        },
+        {
+          "id": "e24",
+          "kind": "grid",
+          "center": [
+            -118.16552748029875,
+            34.15840695903688
+          ],
+          "widthM": 237,
+          "lengthM": 154,
+          "rotationDeg": 275,
+          "cols": 3,
+          "rows": 3,
+          "scheme": "numbers",
+          "startIndex": 0,
+          "name": "",
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/area-h-practice.png",
+      "alt": "Rose Bowl Area H practice field map",
+      "updatedBy": "matthew@ayso13.org"
+    },
+    "tournament": {
+      "label": "Tournament Layout",
       "view": {
         "center": [
           -118.16697042654275,
@@ -218,75 +285,8 @@
           "locked": true
         }
       ],
-      "png": "/images/fields/area-h-game.png",
+      "png": "/images/fields/area-h-tournament.png",
       "alt": "Rose Bowl Area H game field map",
-      "updatedBy": "matthew@ayso13.org"
-    },
-    "practice": {
-      "label": "Practice Layout",
-      "view": {
-        "center": [
-          -118.16674278432876,
-          34.15860730300608
-        ],
-        "zoom": 16.69612619461385,
-        "bearing": 0,
-        "frameMeters": 610,
-        "width": 1000,
-        "height": 750,
-        "scale": 2
-      },
-      "elements": [
-        {
-          "id": "e21",
-          "kind": "marker",
-          "type": "parking",
-          "center": [
-            -118.16803813832502,
-            34.158196193683594
-          ],
-          "locked": true
-        },
-        {
-          "id": "e22",
-          "kind": "marker",
-          "type": "restroom",
-          "center": [
-            -118.16437039442576,
-            34.158087799932616
-          ],
-          "locked": true
-        },
-        {
-          "id": "e23",
-          "kind": "marker",
-          "type": "restroom",
-          "center": [
-            -118.16676461613768,
-            34.158840531442706
-          ],
-          "locked": true
-        },
-        {
-          "id": "e24",
-          "kind": "grid",
-          "center": [
-            -118.16552748029875,
-            34.15840695903688
-          ],
-          "widthM": 237,
-          "lengthM": 154,
-          "rotationDeg": 275,
-          "cols": 3,
-          "rows": 3,
-          "scheme": "numbers",
-          "startIndex": 0,
-          "name": "",
-          "locked": true
-        }
-      ],
-      "png": "/images/fields/area-h-practice.png",
-      "alt": "Rose Bowl Area H practice field map",
       "updatedBy": "matthew@ayso13.org"
     }
   }
