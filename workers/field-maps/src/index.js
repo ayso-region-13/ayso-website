@@ -254,21 +254,25 @@ async function deleteVariant(request, env, url, slug, auth) {
   const v = doc.variants && doc.variants[variant];
   if (!v) return json({ error: "No such layout" }, 404);
 
-  const files = [];
-  if (v.png) files.push({ path: "site/src" + v.png, delete: true }); // /images/… → site/src/images/…
+  const pngPath = v.png ? "site/src" + v.png : null; // /images/… → site/src/images/…
   delete doc.variants[variant];
   const remaining = Object.keys(doc.variants || {}).length;
-  if (remaining === 0) {
-    files.push({ path: jsonPath, delete: true });
-  } else {
-    files.push({ path: jsonPath, content: JSON.stringify(doc, null, 2) + "\n", encoding: "utf-8" });
-  }
+  const msg = `field maps: delete ${slug} (${variant})${auth.email ? ` [${auth.email}]` : ""}`;
+  let lastSha = null;
 
-  const sha = await commitFiles(env, {
-    message: `field maps: delete ${slug} (${variant})${auth.email ? ` [${auth.email}]` : ""}`,
-    files,
-  });
-  return json({ ok: true, commit: sha, remaining, branch: env.GITHUB_BRANCH });
+  // Update the JSON (keep the other layouts) or delete it if this was the last one.
+  if (remaining > 0) {
+    lastSha = await commitFiles(env, { message: msg, files: [{ path: jsonPath, content: JSON.stringify(doc, null, 2) + "\n", encoding: "utf-8" }] });
+  } else {
+    const jsha = await ghGetSha(env, jsonPath);
+    if (jsha) { const r = await ghDeleteFile(env, jsonPath, jsha, msg); lastSha = (r.commit && r.commit.sha) || lastSha; }
+  }
+  // Delete the layout's PNG.
+  if (pngPath) {
+    const psha = await ghGetSha(env, pngPath);
+    if (psha) { const r = await ghDeleteFile(env, pngPath, psha, msg + " (image)"); lastSha = (r.commit && r.commit.sha) || lastSha; }
+  }
+  return json({ ok: true, commit: lastSha || "", remaining, branch: env.GITHUB_BRANCH });
 }
 
 // Git Data API: ref → blobs → tree → commit → advance ref. One commit, no
@@ -383,6 +387,25 @@ async function ghGetFileText(env, filePath) {
     return new TextDecoder().decode(bytesFromBase64(data.content.replace(/\n/g, "")));
   }
   return data.content || "";
+}
+
+// Current blob SHA of a file (needed by the Contents API to delete). null if 404.
+async function ghGetSha(env, filePath) {
+  const res = await fetch(
+    `https://api.github.com/repos/${env.GITHUB_REPO}/contents/${filePath}?ref=${env.GITHUB_BRANCH}`,
+    { headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`, Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28", "User-Agent": "ayso13-field-maps-worker" } }
+  );
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`GitHub get sha ${filePath} → ${res.status}`);
+  return (await res.json()).sha;
+}
+
+// Delete a file via the Contents API (rock-solid, unlike tree sha:null).
+async function ghDeleteFile(env, filePath, sha, message) {
+  return gh(env, `/repos/${env.GITHUB_REPO}/contents/${filePath}`, {
+    method: "DELETE",
+    body: { message, sha, branch: env.GITHUB_BRANCH },
+  });
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
