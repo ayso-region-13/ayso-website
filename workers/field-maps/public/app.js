@@ -873,7 +873,11 @@ function drawInfield(ctx, project, inf) {
   ctx.strokeStyle = "rgba(255,255,255,0.55)"; ctx.lineWidth = 1.2 * SCALE;
   for (let x = minX - span; x < maxX; x += step) { ctx.beginPath(); ctx.moveTo(x, minY); ctx.lineTo(x + span, maxY); ctx.stroke(); }
   for (let x = minX; x < maxX + span; x += step) { ctx.beginPath(); ctx.moveTo(x, minY); ctx.lineTo(x - span, maxY); ctx.stroke(); }
-  ctx.restore();
+  ctx.restore(); // remove clip
+  // Re-trace the infield outline (the hatch loop's beginPath replaced the path).
+  ctx.beginPath();
+  pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
+  ctx.closePath();
   ctx.strokeStyle = "rgba(255,255,255,0.9)"; ctx.lineWidth = 2 * SCALE; ctx.stroke();
   ctx.restore();
   textBox(ctx, project(inf.center[0], inf.center[1]), "Stay off the infield", { size: 12 * SCALE, bg: "rgba(142,41,41,0.92)", fg: "#fff", center: true });
