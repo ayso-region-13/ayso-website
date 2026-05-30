@@ -87,6 +87,63 @@
       "png": "/images/fields/lc-lds-game.png",
       "alt": "LC LDS Field game field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.21601596120689,
+          34.21106218565561
+        ],
+        "zoom": 17.62596642671378,
+        "bearing": 0,
+        "frameMeters": 320,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e63",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.21605415972735,
+            34.211031941546565
+          ],
+          "locked": true
+        },
+        {
+          "id": "e64",
+          "kind": "text",
+          "center": [
+            -118.21688306763683,
+            34.21125622399485
+          ],
+          "text": "Do Not Park in Church Lot",
+          "color": "#83312d",
+          "size": 18
+        },
+        {
+          "id": "e65",
+          "kind": "grid",
+          "center": [
+            -118.21666893810504,
+            34.21061003204187
+          ],
+          "widthM": 38,
+          "lengthM": 76,
+          "rotationDeg": 331,
+          "cols": 1,
+          "rows": 3,
+          "scheme": "letters",
+          "startIndex": 0,
+          "name": ""
+        }
+      ],
+      "png": "/images/fields/lc-lds-practice.png",
+      "alt": "LC LDS Field practice field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
