@@ -2,8 +2,8 @@
   "field": "wilson",
   "styleVersion": "satellite-v9",
   "variants": {
-    "practice": {
-      "label": "Practice Layout",
+    "game": {
+      "label": "Game Day Layout",
       "view": {
         "center": [
           -118.08191292121754,
@@ -54,7 +54,7 @@
           ]
         }
       ],
-      "png": "/images/fields/wilson-practice.png",
+      "png": "/images/fields/wilson-game.png",
       "alt": "Wilson MS game field map",
       "updatedBy": "matthew@ayso13.org"
     }

@@ -34,7 +34,7 @@ permalink: /fields/
 | [McKinley](/fields/mckinley) | Pasadena |  | ✓ | 12U |
 | [Rose Bowl Area H](/fields/area-h) | Pasadena | ✓ |  |  |
 | [Victory Park](/fields/victory) | Pasadena | ✓ | ✓ | 4U–14U |
-| [Wilson MS](/fields/wilson) | Pasadena | ✓ |  |  |
+| [Wilson MS](/fields/wilson) | Pasadena |  | ✓ |  |
 | [Muir North](/fields/muir) | Altadena |  | ✓ | 10U, 12U |
 | [Muir South](/fields/muir-south) | Altadena | ✓ |  |  |
 | [Cornishon](/fields/cornishon) | La Cañada |  | ✓ | 7U, 8U |
