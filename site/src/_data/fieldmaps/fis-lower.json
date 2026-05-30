@@ -149,10 +149,10 @@
       "label": "Game Day Layout",
       "view": {
         "center": [
-          -118.20301822445703,
-          34.203759427633955
+          -118.20301822445731,
+          34.2037594303268
         ],
-        "zoom": 18.304163332560787,
+        "zoom": 18.3041633325147,
         "bearing": 0,
         "frameMeters": 200,
         "width": 1000,
@@ -161,16 +161,17 @@
       },
       "elements": [
         {
-          "id": "e20",
+          "id": "e33",
           "kind": "marker",
           "type": "equipment",
           "center": [
             -118.20340363592132,
             34.20332313246806
-          ]
+          ],
+          "locked": true
         },
         {
-          "id": "e21",
+          "id": "e34",
           "kind": "field",
           "center": [
             -118.20267572541131,
@@ -182,35 +183,50 @@
           "name": "",
           "ageGroup": "12U",
           "preset": "custom",
-          "markHome": true
+          "markHome": true,
+          "locked": true
         },
         {
-          "id": "e22",
+          "id": "e35",
           "kind": "marker",
           "type": "parking",
           "center": [
             -118.2036787704717,
             34.20377459675946
-          ]
+          ],
+          "locked": true
         },
         {
-          "id": "e23",
+          "id": "e36",
           "kind": "marker",
           "type": "restroom",
           "center": [
             -118.20316370100642,
             34.20400912743206
-          ]
+          ],
+          "locked": true
         },
         {
-          "id": "e24",
+          "id": "e37",
           "kind": "marker",
           "type": "entrance",
           "center": [
             -118.20376557993174,
             34.20344673135655
           ],
-          "rotationDeg": 91
+          "rotationDeg": 91,
+          "locked": true
+        },
+        {
+          "id": "e38",
+          "kind": "infield",
+          "center": [
+            -118.20346701614187,
+            34.203395022762265
+          ],
+          "radiusM": 28,
+          "startDeg": -0.3130577506970553,
+          "sweepDeg": 90
         }
       ],
       "png": "/images/fields/fis-lower-game.png",
