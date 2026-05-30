@@ -101,7 +101,7 @@ async function init() {
     map.addLayer({ id: "sidelines", type: "line", source: "sidelines",
       paint: { "line-color": ["get", "color"], "line-width": ["coalesce", ["get", "w"], 5] } });
     map.addLayer({ id: "markers-c", type: "circle", source: "markers",
-      paint: { "circle-radius": 12, "circle-color": ["get", "color"], "circle-stroke-width": 2, "circle-stroke-color": "#fff" } });
+      paint: { "circle-radius": ["coalesce", ["get", "r"], 12], "circle-color": ["get", "color"], "circle-stroke-width": ["coalesce", ["get", "sw"], 2], "circle-stroke-color": "#fff" } });
     map.addLayer({ id: "markers-code", type: "symbol", source: "markers",
       layout: { "text-field": ["get", "code"], "text-size": 15, "text-allow-overlap": true, "text-rotate": ["coalesce", ["get", "rot"], 0] },
       paint: { "text-color": "#fff" } });
@@ -606,7 +606,7 @@ function rebuildMap() {
       const color = PLAY_COLOR[el.play] || PLAY_COLOR.game;
       const lp = el.label || el.center; // pin is fixed at center; only the label moves
       if (el.label && Geo.distanceM(el.center, el.label) > 2) shapes.push(lineFeat([el.center, el.label], el.id, { stroke: "#444", strokeW: 1 }));
-      markers.push({ type: "Feature", properties: { eid: el.id, color, code: "" }, geometry: { type: "Point", coordinates: el.center } });
+      markers.push({ type: "Feature", properties: { eid: el.id, color, code: "", r: 5, sw: 1.5 }, geometry: { type: "Point", coordinates: el.center } });
       if (el.name) labels.push(label(lp, el.name, el.id, { size: 13, color: "#ffffff" }));
     } else if (el.kind === "marker") {
       const t = MARKER_TYPES[el.type];
@@ -1039,18 +1039,17 @@ function drawElement(ctx, project, el) {
     const p = project(el.center[0], el.center[1]);
     textBox(ctx, p, el.text, { size: (el.size || 18) * SCALE, bg: "rgba(255,255,255,0.95)", fg: el.color || "#83312d", center: true });
   } else if (el.kind === "place") {
-    // Region-overview pin: dot fixed at the field's coordinates; the name label
-    // can be dragged away (with a leader line) to declutter overlapping pins.
+    // Region-overview pin: a small teardrop pin whose TIP sits at the field's
+    // coordinates; the name label can be dragged away (leader line) to declutter.
     const p = project(el.center[0], el.center[1]);
-    const color = PLAY_COLOR[el.play] || PLAY_COLOR.game, r = 7 * SCALE;
+    const color = PLAY_COLOR[el.play] || PLAY_COLOR.game;
     const moved = el.label && Geo.distanceM(el.center, el.label) > 2;
     const lp = moved ? project(el.label[0], el.label[1]) : null;
     if (moved) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(lp.x, lp.y); ctx.strokeStyle = "rgba(40,40,40,0.7)"; ctx.lineWidth = 1.2 * SCALE; ctx.stroke(); }
-    ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = color; ctx.fill();
-    ctx.lineWidth = 2 * SCALE; ctx.strokeStyle = "#fff"; ctx.stroke();
+    const headY = drawPin(ctx, p.x, p.y, color); // returns head-center y
     if (el.name) {
       if (moved) textBox(ctx, lp, el.name, { size: 12 * SCALE, bg: "rgba(255,255,255,0.95)", fg: "#221f1f", center: true });
-      else textBox(ctx, { x: p.x + r + 4 * SCALE, y: p.y }, el.name, { size: 12 * SCALE, bg: "rgba(255,255,255,0.95)", fg: "#221f1f", left: true });
+      else textBox(ctx, { x: p.x + 5 * SCALE + 4 * SCALE, y: headY }, el.name, { size: 12 * SCALE, bg: "rgba(255,255,255,0.95)", fg: "#221f1f", left: true });
     }
   } else if (el.kind === "marker") {
     const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 19 * SCALE;
@@ -1080,6 +1079,18 @@ function strokeSeg(ctx, project, a, b, color, w) {
   const pa = project(a[0], a[1]), pb = project(b[0], b[1]);
   ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
   ctx.lineCap = "round"; ctx.lineWidth = w * SCALE; ctx.strokeStyle = color; ctx.stroke();
+}
+// A small teardrop map-pin whose TIP sits at (x,y). Returns the head-center y so
+// callers can align a label beside the head. Used for the region-overview pins.
+function drawPin(ctx, x, y, color) {
+  const r = 5 * SCALE, stem = 10 * SCALE, cy = y - stem - r;
+  ctx.beginPath(); // pointer triangle from head bottom to the tip
+  ctx.moveTo(x, y); ctx.lineTo(x - r * 0.72, cy + r * 0.55); ctx.lineTo(x + r * 0.72, cy + r * 0.55); ctx.closePath();
+  ctx.fillStyle = color; ctx.fill();
+  ctx.beginPath(); ctx.arc(x, cy, r, 0, Math.PI * 2); ctx.fillStyle = color; ctx.fill();
+  ctx.lineWidth = 1.4 * SCALE; ctx.strokeStyle = "#fff"; ctx.stroke();
+  ctx.beginPath(); ctx.arc(x, cy, r * 0.42, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
+  return cy;
 }
 
 // Fan wedge label: Left/Center/Right (home-plate view) or letters/numbers.
