@@ -25,17 +25,17 @@ permalink: /fields/
 | [Allendale Park](/fields/allendale) | Pasadena | ✓ |  |  |
 | [Blair Lower](/fields/blair-lower) | Pasadena |  | ✓ | 14U, UD |
 | [Blair Upper](/fields/blair-upper) | Pasadena |  | ✓ | 10U |
-| [Brookside Park](/fields/brookside) | Pasadena |  | ✓ | 10U, 12U |
+| [Brookside Park](/fields/brookside) | Pasadena | ✓ |  |  |
 | [Butler Middle School](/fields/butler) | Pasadena | ✓ |  |  |
 | [Jefferson Park](/fields/jefferson) | Pasadena | ✓ |  |  |
-| [La Salle High School](/fields/la-salle) | Pasadena | ✓ |  |  |
+| [La Salle High School](/fields/la-salle) | Pasadena |  | ✓ |  |
 | [Marshall Fundamental](/fields/marshall) | Pasadena |  | ✓ | 10U, 14U |
 | [McDonald Park](/fields/mcdonald) | Pasadena | ✓ |  |  |
 | [McKinley](/fields/mckinley) | Pasadena |  | ✓ | 12U |
 | [Rose Bowl Area H](/fields/area-h) | Pasadena | ✓ |  |  |
 | [Victory Park](/fields/victory) | Pasadena | ✓ | ✓ | 4U–14U |
 | [Wilson MS](/fields/wilson) | Pasadena | ✓ |  |  |
-| [Muir High School North](/fields/muir) | Altadena |  | ✓ | 10U, 12U |
+| [Muir North](/fields/muir) | Altadena |  | ✓ | 10U, 12U |
 | [Muir South](/fields/muir-south) | Altadena | ✓ |  |  |
 | [Cornishon](/fields/cornishon) | La Cañada |  | ✓ | 7U, 8U |
 | [FIS Lower](/fields/fis-lower/) | La Cañada | ✓ | ✓ | 12U |
