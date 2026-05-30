@@ -122,7 +122,8 @@ layout: base.njk
       <div data-field-maps>
         {% if fmaps.variants.game %}{{ mapsection(fmaps.variants.game, "Field Map for Games", "field-map-games") }}{% endif %}
         {% if fmaps.variants.practice %}{{ mapsection(fmaps.variants.practice, "Field Map for Practices", "field-map-practices") }}{% endif %}
-        {% for vid, v in fmaps.variants %}{% if vid != "game" and vid != "practice" %}{{ mapsection(v, "Field Map — " + (v.label or vid), "field-map-" + vid) }}{% endif %}{% endfor %}
+        {% if fmaps.variants.wayfinder %}{{ mapsection(fmaps.variants.wayfinder, "Getting Around", "field-map-wayfinder") }}{% endif %}
+        {% for vid, v in fmaps.variants %}{% if vid != "game" and vid != "practice" and vid != "wayfinder" %}{{ mapsection(v, "Field Map — " + (v.label or vid), "field-map-" + vid) }}{% endif %}{% endfor %}
       </div>
       <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"
               integrity="sha384-MZZbZ6RXJudK43v1qY1zOWKOU2yfeBPatuFoKyHAaAgHTUZhwblRTc9CphTt4IGQ"

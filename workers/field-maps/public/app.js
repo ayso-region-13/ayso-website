@@ -80,7 +80,7 @@ async function init() {
   map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-left");
 
   map.on("load", () => {
-    addSrc("shapes"); addSrc("sidelines"); addSrc("labels"); addSrc("markers"); addSrc("handles");
+    addSrc("shapes"); addSrc("sidelines"); addSrc("labels"); addSrc("markers"); addSrc("arrows"); addSrc("handles");
     map.addLayer({ id: "shapes-fill", type: "fill", source: "shapes",
       filter: ["==", ["geometry-type"], "Polygon"],
       paint: { "fill-color": ["coalesce", ["get", "fill"], "#f74b4b"], "fill-opacity": 0.2 } });
@@ -93,6 +93,9 @@ async function init() {
     map.addLayer({ id: "markers-code", type: "symbol", source: "markers",
       layout: { "text-field": ["get", "code"], "text-size": 15, "text-allow-overlap": true, "text-rotate": ["coalesce", ["get", "rot"], 0] },
       paint: { "text-color": "#fff" } });
+    map.addLayer({ id: "arrows", type: "symbol", source: "arrows",
+      layout: { "text-field": "▲", "text-size": 20, "text-allow-overlap": true, "text-rotate": ["get", "rot"], "text-rotation-alignment": "map", "text-anchor": "center" },
+      paint: { "text-color": ["get", "color"], "text-halo-color": "rgba(255,255,255,0.8)", "text-halo-width": 1.5 } });
     map.addLayer({ id: "labels", type: "symbol", source: "labels",
       layout: { "text-field": ["get", "text"], "text-size": ["coalesce", ["get", "size"], 13], "text-allow-overlap": true, "text-anchor": "center" },
       paint: { "text-color": ["coalesce", ["get", "color"], "#ffffff"], "text-halo-color": "rgba(0,0,0,0.75)", "text-halo-width": 1.6 } });
@@ -264,7 +267,7 @@ async function fetchDoc(slug) {
 }
 // Available layouts for the current field: Game + Practice + any saved named ones.
 function buildVariantList() {
-  const std = [{ id: "game", label: "Game Day" }, { id: "practice", label: "Practice" }];
+  const std = [{ id: "game", label: "Game Day" }, { id: "practice", label: "Practice" }, { id: "wayfinder", label: "Wayfinder" }];
   const variants = (state.doc && state.doc.variants) || {};
   const extra = Object.keys(variants)
     .filter((k) => k !== "game" && k !== "practice")
@@ -366,8 +369,12 @@ function onClick(e) {
     el = { id, kind: "grid", center: c, widthM: 70, lengthM: 50, rotationDeg: 0, cols: 3, rows: 2, scheme: "letters", startIndex: 0, name: "" };
   } else if (state.tool === "fan") {
     el = { id, kind: "fan", center: c, innerRadiusM: 25, radiusM: 65, startDeg: -45, sweepDeg: 90, wedges: 3, scheme: "lcr", startIndex: 0, name: "" };
+  } else if (state.tool === "infield") {
+    el = { id, kind: "infield", center: c, radiusM: 30, startDeg: -45, sweepDeg: 90 };
   } else if (state.tool === "line") {
     el = { id, kind: "line", points: [Geo.destination(c, -15, 0), Geo.destination(c, 15, 0)], color: HOME_COLOR, width: 5, label: "" };
+  } else if (state.tool === "arrow") {
+    el = { id, kind: "arrow", points: [c, Geo.destination(c, 30, 0)], color: "#83312d", width: 7, label: "" };
   } else if (state.tool === "word") {
     const text = prompt("Word / label text:", "Park Here");
     if (!text) { state.tool = null; clearToolBtns(); return; }
@@ -450,8 +457,8 @@ function onMove(e) {
     el.rotationDeg = Math.round(Geo.bearingDeg(el.center, cur));
   } else if (state.drag.mode === "vertex" && el.points) {
     el.points[state.drag.idx] = cur;
-  } else if (state.drag.mode === "fanarc" && el.kind === "fan") {
-    el.radiusM = Math.max(15, Math.round(Geo.distanceM(el.center, cur)));
+  } else if (state.drag.mode === "fanarc" && (el.kind === "fan" || el.kind === "infield")) {
+    el.radiusM = Math.max(10, Math.round(Geo.distanceM(el.center, cur)));
     el.startDeg = Geo.bearingDeg(el.center, cur) - el.sweepDeg / 2; // keep handle at arc mid
     if (el.innerRadiusM > el.radiusM - 5) el.innerRadiusM = Math.max(5, el.radiusM - 5);
   } else if (state.drag.mode === "faninner" && el.kind === "fan") {
@@ -474,7 +481,7 @@ function pick(pt, layers) {
 // keystroke edits so the input you're typing in keeps focus. rebuild() also
 // re-renders the side panel (use it for selection / preset / structural changes).
 function rebuildMap() {
-  const shapes = [], sidelines = [], labels = [], markers = [], handles = [];
+  const shapes = [], sidelines = [], labels = [], markers = [], arrows = [], handles = [];
 
   state.elements.forEach((el) => {
     if (el.kind === "field") {
@@ -516,6 +523,15 @@ function rebuildMap() {
       shapes.push(poly(inf.ring, el.id, { fill: "#d11313", stroke: "#ffffff", strokeW: 1.5 }));
       labels.push(label(inf.center, "Stay off the infield", el.id, { size: 11, color: "#ffffff" }));
       if (el.name) labels.push(label(Geo.fanArcPoint(el.center, el.radiusM * 1.12, el.startDeg, el.sweepDeg), el.name, el.id, { size: 14, color: "#fff8e6" }));
+    } else if (el.kind === "infield") {
+      const inf = Geo.fanInfield(el.center, el.radiusM, el.startDeg, el.sweepDeg);
+      shapes.push(poly(inf.ring, el.id, { fill: "#d11313", stroke: "#ffffff", strokeW: 1.5 }));
+      labels.push(label(inf.center, "Stay off the infield", el.id, { size: 11, color: "#ffffff" }));
+    } else if (el.kind === "arrow") {
+      const a = el.points[0], b = el.points[el.points.length - 1];
+      shapes.push(lineFeat(el.points, el.id, { stroke: el.color, strokeW: el.width }));
+      arrows.push({ type: "Feature", properties: { eid: el.id, color: el.color, rot: Geo.bearingDeg(a, b) }, geometry: { type: "Point", coordinates: b } });
+      if (el.label) labels.push(label(a, el.label, el.id, { size: 14, color: el.color }));
     } else if (el.kind === "line") {
       shapes.push(lineFeat(el.points, el.id, { stroke: el.color, strokeW: el.width }));
       if (el.label) labels.push(label(el.points[0], el.label, el.id, { size: 13, color: el.color }));
@@ -535,18 +551,20 @@ function rebuildMap() {
       for (let i = 0; i < 4; i++) handles.push(handle(ring[i], sel.id, "corner", i));
       const rot = Geo.rotateOffset(0, sel.lengthM / 2 + 18, sel.rotationDeg);
       handles.push(handle(Geo.destination(sel.center, rot[0], rot[1]), sel.id, "rotate"));
-    } else if (sel.kind === "line") {
+    } else if (sel.kind === "line" || sel.kind === "arrow") {
       sel.points.forEach((p, i) => handles.push(handle(p, sel.id, "vertex", i)));
     } else if (sel.kind === "fan") {
       handles.push(handle(Geo.fanArcPoint(sel.center, sel.radiusM, sel.startDeg, sel.sweepDeg), sel.id, "fanarc"));
       handles.push(handle(Geo.fanArcPoint(sel.center, sel.innerRadiusM, sel.startDeg, sel.sweepDeg), sel.id, "faninner"));
+    } else if (sel.kind === "infield") {
+      handles.push(handle(Geo.fanArcPoint(sel.center, sel.radiusM, sel.startDeg, sel.sweepDeg), sel.id, "fanarc"));
     } else if (sel.kind === "marker" && MARKER_TYPES[sel.type].arrow) {
       handles.push(handle(Geo.fanArcPoint(sel.center, 12, sel.rotationDeg || 0, 0), sel.id, "markerrot"));
     }
   }
 
   setData("shapes", shapes); setData("sidelines", sidelines);
-  setData("labels", labels); setData("markers", markers); setData("handles", handles);
+  setData("labels", labels); setData("markers", markers); setData("arrows", arrows); setData("handles", handles);
   if (state.frameBox) updateReservedZones(state.frameBox); // legend size tracks marker count
 }
 function rebuild() { rebuildMap(); renderSelPanel(); renderElemList(); }
@@ -624,6 +642,16 @@ function renderSelPanel() {
       <label class="block">Infield radius m<input type="number" data-k="innerRadiusM" value="${el.innerRadiusM}"></label></div>
       <label class="block">Sweep °<input type="number" data-k="sweepDeg" value="${el.sweepDeg}"></label>
       <p class="hint">Outer handle = size + direction; inner handle = infield edge. Left/Center/Right are from the home-plate view; the infield is marked off-limits.</p>`;
+  } else if (el.kind === "infield") {
+    html = `
+      <div class="field-row"><label class="block">Radius m<input type="number" data-k="radiusM" value="${el.radiusM}"></label>
+      <label class="block">Sweep °<input type="number" data-k="sweepDeg" value="${el.sweepDeg}"></label></div>
+      <p class="hint">Drag the arc handle to size + aim the off-limits infield. Sweep 90° = a quarter (a typical baseball infield). Apex = home plate.</p>`;
+  } else if (el.kind === "arrow") {
+    html = `<label class="block">Label (optional)<input data-k="label" value="${esc(el.label)}" placeholder="e.g. Walk this way"></label>
+      <label class="block">Color<input type="color" data-k="color" value="${el.color}"></label>
+      <label class="block">Thickness<input type="number" data-k="width" value="${el.width}"></label>
+      <p class="hint">Drag the two endpoint handles to size + aim the arrow (it points toward the second end).</p>`;
   } else if (el.kind === "line") {
     html = `<label class="block">Label<input data-k="label" value="${esc(el.label)}"></label>
       <label class="block">Color<input type="color" data-k="color" value="${el.color}"></label>
@@ -676,6 +704,8 @@ function renderElemList() {
     const name = el.kind === "field" ? ("Field " + (el.name || el.ageGroup || "")).trim()
       : el.kind === "grid" ? ("Grid " + (el.name || `${el.cols}×${el.rows}`))
       : el.kind === "fan" ? ("Fan " + (el.name || `${el.wedges}-section`))
+      : el.kind === "infield" ? "Infield warning"
+      : el.kind === "arrow" ? ("Arrow" + (el.label ? " — " + el.label : ""))
       : el.kind === "line" ? "Line"
       : el.kind === "text" ? `“${el.text}”`
       : MARKER_TYPES[el.type].name;
@@ -893,11 +923,25 @@ function drawElement(ctx, project, el) {
     });
     drawInfield(ctx, project, Geo.fanInfield(el.center, el.innerRadiusM, el.startDeg, el.sweepDeg));
     if (el.name) { const np = Geo.fanArcPoint(el.center, el.radiusM * 1.12, el.startDeg, el.sweepDeg); textBox(ctx, project(np[0], np[1]), el.name, { size: 14 * SCALE, bg: "rgba(58,13,18,0.82)", fg: "#fff8e6", center: true }); }
+  } else if (el.kind === "infield") {
+    drawInfield(ctx, project, Geo.fanInfield(el.center, el.radiusM, el.startDeg, el.sweepDeg));
   } else if (el.kind === "line") {
     ctx.beginPath();
     el.points.forEach((pt, i) => { const p = project(pt[0], pt[1]); i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); });
     ctx.lineCap = "round"; ctx.lineWidth = (el.width || 5) * SCALE; ctx.strokeStyle = el.color; ctx.stroke();
     if (el.label) { const p = project(el.points[0][0], el.points[0][1]); textBox(ctx, p, el.label, { size: 13 * SCALE, bg: "rgba(0,0,0,0.6)", fg: "#fff", left: true }); }
+  } else if (el.kind === "arrow") {
+    const a = project(el.points[0][0], el.points[0][1]);
+    const b = project(el.points[el.points.length - 1][0], el.points[el.points.length - 1][1]);
+    const w = (el.width || 7) * SCALE, head = w * 2.4;
+    const ang = Math.atan2(b.y - a.y, b.x - a.x);
+    const bx = b.x - Math.cos(ang) * head * 0.8, by = b.y - Math.sin(ang) * head * 0.8; // shaft stops short of tip
+    ctx.lineCap = "round"; ctx.lineWidth = w; ctx.strokeStyle = el.color;
+    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(bx, by); ctx.stroke();
+    ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(ang); ctx.fillStyle = el.color;
+    ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(-head, -head * 0.6); ctx.lineTo(-head, head * 0.6); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    if (el.label) textBox(ctx, a, el.label, { size: 14 * SCALE, bg: "rgba(255,255,255,0.95)", fg: el.color, center: true });
   } else if (el.kind === "text") {
     // Dark-red text on a white pill — reads clearly over grass/satellite.
     const p = project(el.center[0], el.center[1]);
