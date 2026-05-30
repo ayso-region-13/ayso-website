@@ -1,0 +1,25 @@
+{
+  "field": "la-canada-elementary",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.20568645909239,
+          34.208385686997076
+        ],
+        "zoom": 18.10245028805182,
+        "bearing": 0,
+        "frameMeters": 230,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [],
+      "png": "/images/fields/la-canada-elementary-practice.png",
+      "alt": "La Cañada Elementary practice field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
