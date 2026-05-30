@@ -4,7 +4,7 @@ title: "Muir South"
 layout: page.njk
 section: fields
 complex: muir
-complexName: "Muir High School"
+complexName: "Muir High School Complex"
 placeAddress: "1905 Lincoln Ave"
 placeLocality: "Pasadena"
 placePostalCode: "91103"

@@ -1,10 +1,10 @@
 ---
 
-title: "Muir High School North"
+title: "Muir North"
 layout: page.njk
 section: fields
 complex: muir
-complexName: "Muir High School"
+complexName: "Muir High School Complex"
 placeAddress: "1905 Lincoln Ave"
 placeLocality: "Altadena"
 placePostalCode: "91001"

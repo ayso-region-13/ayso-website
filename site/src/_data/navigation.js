@@ -74,7 +74,7 @@ module.exports = [
       { label: "Marshall Fundamental",  url: "/fields/marshall/" },
       { label: "McDonald Park",         url: "/fields/mcdonald/" },
       { label: "McKinley School",       url: "/fields/mckinley/" },
-      { label: "Muir High School North", url: "/fields/muir/" },
+      { label: "Muir North",            url: "/fields/muir/" },
       { label: "Muir South",            url: "/fields/muir-south/" },
       { label: "Oak Grove Park",        url: "/fields/oak-grove/" },
       { label: "Paradise Canyon",       url: "/fields/paradise/" },
