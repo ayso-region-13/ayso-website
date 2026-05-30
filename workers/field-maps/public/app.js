@@ -143,6 +143,7 @@ function wireUi() {
   document.getElementById("frameLockBtn").addEventListener("click", toggleFrameLock);
   document.getElementById("undoBtn").addEventListener("click", undo);
   document.getElementById("redoBtn").addEventListener("click", redo);
+  document.getElementById("deleteLayoutBtn").addEventListener("click", deleteCurrentLayout);
   wireFrameHandle();
   document.getElementById("recenterBtn").addEventListener("click", recenter);
   document.getElementById("previewBtn").addEventListener("click", () => doExport(false));
@@ -221,6 +222,29 @@ async function selectField(slug, initialLayout) {
   loadVariant();
   updateFilename();
   updateUrl();
+}
+
+// Delete the current layout (variant) — removes its map + JSON entry from the repo.
+async function deleteCurrentLayout() {
+  if (!state.field) return toast("Pick a field first.", "error");
+  const saved = state.doc && state.doc.variants && state.doc.variants[state.variant];
+  if (!saved) return toast("This layout isn't saved yet — nothing to delete.", "error");
+  const label = (state.variants.find((v) => v.id === state.variant) || {}).label || state.variant;
+  if (!confirm(`Delete the "${label}" layout for ${state.field.title}? This removes its map from the site.`)) return;
+  try {
+    const res = await api("/api/map/" + state.field.slug + "?variant=" + encodeURIComponent(state.variant), { method: "DELETE" });
+    toast(`Deleted "${label}" (${res.commit.slice(0, 7)}). Preview rebuilds shortly.`, "success");
+    state.doc = await fetchDoc(state.field.slug);
+    buildVariantList();
+    state.variant = state.variants.some((v) => v.id === "game") ? "game" : (state.variants[0] ? state.variants[0].id : "game");
+    populateVariantSelect();
+    loadVariant();
+    updateFilename();
+    updateUrl();
+    const f = state.fields.find((x) => x.slug === state.field.slug); if (f) f.hasMap = res.remaining > 0;
+  } catch (e) {
+    toast("Delete failed: " + e.message, "error");
+  }
 }
 
 // Keep ?field=&layout= in the URL so a refresh reloads the same field/layout.

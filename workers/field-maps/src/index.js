@@ -104,6 +104,7 @@ async function handleApi(request, env, url, auth) {
     const slug = mapMatch[1];
     if (request.method === "GET") return await getMap(env, slug);
     if (request.method === "POST") return await saveMap(request, env, slug, auth);
+    if (request.method === "DELETE") return await deleteVariant(request, env, url, slug, auth);
     return json({ error: "Method not allowed" }, 405);
   }
 
@@ -239,6 +240,37 @@ function defaultVariantLabel(variant) {
   return map[variant] || (variant.charAt(0).toUpperCase() + variant.slice(1) + " Layout");
 }
 
+// Delete one layout (variant): removes it from the doc + deletes its PNG. If it
+// was the last layout, the whole doc JSON is removed too.
+async function deleteVariant(request, env, url, slug, auth) {
+  const variant = url.searchParams.get("variant");
+  if (!variant || !/^[a-z0-9-]+$/.test(variant)) return json({ error: "Bad variant" }, 400);
+
+  const jsonPath = `${MAPS_DATA_DIR}/${slug}.json`;
+  const raw = await ghGetFileText(env, jsonPath);
+  if (!raw) return json({ error: "No saved map" }, 404);
+  let doc;
+  try { doc = JSON.parse(raw); } catch (_) { return json({ error: "Corrupt map JSON" }, 500); }
+  const v = doc.variants && doc.variants[variant];
+  if (!v) return json({ error: "No such layout" }, 404);
+
+  const files = [];
+  if (v.png) files.push({ path: "site/src" + v.png, delete: true }); // /images/… → site/src/images/…
+  delete doc.variants[variant];
+  const remaining = Object.keys(doc.variants || {}).length;
+  if (remaining === 0) {
+    files.push({ path: jsonPath, delete: true });
+  } else {
+    files.push({ path: jsonPath, content: JSON.stringify(doc, null, 2) + "\n", encoding: "utf-8" });
+  }
+
+  const sha = await commitFiles(env, {
+    message: `field maps: delete ${slug} (${variant})${auth.email ? ` [${auth.email}]` : ""}`,
+    files,
+  });
+  return json({ ok: true, commit: sha, remaining, branch: env.GITHUB_BRANCH });
+}
+
 // Git Data API: ref → blobs → tree → commit → advance ref. One commit, no
 // per-file SHA bookkeeping, handles create-or-update identically.
 async function commitFiles(env, { message, files }) {
@@ -251,12 +283,15 @@ async function commitFiles(env, { message, files }) {
   const baseCommit = await gh(env, `/repos/${repo}/git/commits/${baseCommitSha}`);
   const baseTreeSha = baseCommit.tree.sha;
 
-  const blobs = await Promise.all(
+  // Create blobs for added/updated files; deletions need no blob (sha: null).
+  const blobShas = await Promise.all(
     files.map((f) =>
-      gh(env, `/repos/${repo}/git/blobs`, {
-        method: "POST",
-        body: { content: f.content, encoding: f.encoding },
-      })
+      f.delete
+        ? Promise.resolve(null)
+        : gh(env, `/repos/${repo}/git/blobs`, {
+            method: "POST",
+            body: { content: f.content, encoding: f.encoding },
+          }).then((b) => b.sha)
     )
   );
 
@@ -268,7 +303,7 @@ async function commitFiles(env, { message, files }) {
         path: f.path,
         mode: "100644",
         type: "blob",
-        sha: blobs[i].sha,
+        sha: f.delete ? null : blobShas[i], // sha:null removes the path
       })),
     },
   });
