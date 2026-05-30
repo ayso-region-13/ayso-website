@@ -6,10 +6,10 @@
       "label": "Game Day Layout",
       "view": {
         "center": [
-          -118.09599562335379,
-          34.16051791168549
+          -118.09599562335386,
+          34.16051791900341
         ],
-        "zoom": 17.58243676778843,
+        "zoom": 17.58243676766339,
         "bearing": 0,
         "frameMeters": 330,
         "width": 1000,
@@ -31,7 +31,7 @@
           "ageGroup": "10U",
           "preset": "10U",
           "markHome": true,
-          "locked": false
+          "locked": true
         },
         {
           "id": "e2",
@@ -46,7 +46,8 @@
           "name": "VP2",
           "ageGroup": "10U",
           "preset": "10U",
-          "markHome": true
+          "markHome": true,
+          "locked": true
         },
         {
           "id": "e3",
@@ -68,8 +69,8 @@
           "id": "e4",
           "kind": "field",
           "center": [
-            -118.09541318631582,
-            34.16120240531254
+            -118.09555025774057,
+            34.16118241340705
           ],
           "widthM": 46,
           "lengthM": 73,
@@ -81,55 +82,55 @@
           "locked": true
         },
         {
+          "id": "e5",
+          "kind": "field",
+          "center": [
+            -118.09497423166626,
+            34.161369130041734
+          ],
+          "widthM": 24,
+          "lengthM": 40,
+          "rotationDeg": 269,
+          "name": "VP6-A",
+          "ageGroup": "8U",
+          "preset": "custom",
+          "markHome": true,
+          "locked": true
+        },
+        {
           "id": "e6",
           "kind": "field",
           "center": [
-            -118.09484254300936,
-            34.16136781664943
+            -118.09528492220615,
+            34.16066525920948
           ],
-          "widthM": 30,
-          "lengthM": 46,
+          "widthM": 18,
+          "lengthM": 27,
           "rotationDeg": 269,
-          "name": "VP6",
-          "ageGroup": "8U",
-          "preset": "8U",
+          "name": "VP7-A",
+          "ageGroup": "7U",
+          "preset": "7U",
           "markHome": true,
-          "locked": false
+          "locked": true
         },
         {
           "id": "e7",
           "kind": "field",
           "center": [
-            -118.09476296559296,
-            34.160755645191
+            -118.09445867861078,
+            34.16105868662511
           ],
-          "widthM": 18,
-          "lengthM": 27,
+          "widthM": 24,
+          "lengthM": 40,
           "rotationDeg": 269,
-          "name": "VP7",
-          "ageGroup": "7U",
-          "preset": "7U",
+          "name": "VP8-A",
+          "ageGroup": "8U",
+          "preset": "custom",
           "markHome": true,
-          "locked": false
+          "locked": true
         },
         {
           "id": "e8",
-          "kind": "field",
-          "center": [
-            -118.0943760571229,
-            34.160952336231446
-          ],
-          "widthM": 18,
-          "lengthM": 27,
-          "rotationDeg": 0,
-          "name": "VP8",
-          "ageGroup": "6U",
-          "preset": "6U",
-          "markHome": true,
-          "locked": false
-        },
-        {
-          "id": "e9",
           "kind": "marker",
           "type": "restroom",
           "center": [
@@ -139,47 +140,114 @@
           "locked": true
         },
         {
-          "id": "e10",
+          "id": "e9",
           "kind": "marker",
           "type": "tent",
           "center": [
-            -118.09571133182295,
-            34.160371065461675
+            -118.0957234286939,
+            34.16028498124
+          ],
+          "locked": true
+        },
+        {
+          "id": "e10",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.09623383061856,
+            34.15972253552435
           ],
           "locked": true
         },
         {
           "id": "e11",
           "kind": "marker",
-          "type": "parking",
-          "center": [
-            -118.09623383061856,
-            34.15972253552435
-          ]
-        },
-        {
-          "id": "e12",
-          "kind": "marker",
           "type": "checkin",
           "center": [
             -118.09665182965462,
             34.16114929481162
-          ]
+          ],
+          "locked": true
         },
         {
-          "id": "e1",
+          "id": "e13",
           "kind": "field",
           "center": [
-            -118.09484559421759,
-            34.161147014685454
+            -118.09496733234577,
+            34.161087156194895
           ],
-          "widthM": 37,
-          "lengthM": 55,
-          "rotationDeg": 0,
-          "name": "",
-          "ageGroup": "10U",
-          "preset": "10U",
-          "markHome": true
+          "widthM": 26,
+          "lengthM": 40,
+          "rotationDeg": 269,
+          "name": "VP6-B",
+          "ageGroup": "8U",
+          "preset": "custom",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e14",
+          "kind": "field",
+          "center": [
+            -118.09445404931482,
+            34.16076859951221
+          ],
+          "widthM": 26,
+          "lengthM": 40,
+          "rotationDeg": 270,
+          "name": "VP8-B",
+          "ageGroup": "8U",
+          "preset": "custom",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e15",
+          "kind": "field",
+          "center": [
+            -118.09495981824927,
+            34.160755625836984
+          ],
+          "widthM": 18,
+          "lengthM": 27,
+          "rotationDeg": 359,
+          "name": "VP7-B",
+          "ageGroup": "7U",
+          "preset": "7U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e16",
+          "kind": "field",
+          "center": [
+            -118.09570190103258,
+            34.160659565126835
+          ],
+          "widthM": 18,
+          "lengthM": 27,
+          "rotationDeg": 90,
+          "name": "VP5-A",
+          "ageGroup": "6U",
+          "preset": "6U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e17",
+          "kind": "field",
+          "center": [
+            -118.09555104027574,
+            34.16046271427011
+          ],
+          "widthM": 18,
+          "lengthM": 27,
+          "rotationDeg": 90,
+          "name": "VP5-B",
+          "ageGroup": "6U",
+          "preset": "6U",
+          "markHome": true,
+          "locked": true
         }
       ],
       "png": "/images/fields/victory-game.png",
