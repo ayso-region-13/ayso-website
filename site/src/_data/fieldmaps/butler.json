@@ -1,0 +1,69 @@
+{
+  "field": "butler",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.14745944827509,
+          34.17371174985777
+        ],
+        "zoom": 17.456680389270296,
+        "bearing": 0,
+        "frameMeters": 360,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e41",
+          "kind": "text",
+          "center": [
+            -118.14678076736227,
+            34.173760545041546
+          ],
+          "text": "Stay off Football Field",
+          "color": "#83312d",
+          "size": 18
+        },
+        {
+          "id": "e42",
+          "kind": "grid",
+          "center": [
+            -118.14759260718824,
+            34.17390269609565
+          ],
+          "widthM": 51,
+          "lengthM": 115,
+          "rotationDeg": 0,
+          "cols": 2,
+          "rows": 4,
+          "scheme": "numbers",
+          "startIndex": 0,
+          "name": ""
+        },
+        {
+          "id": "e43",
+          "kind": "grid",
+          "center": [
+            -118.14817678822769,
+            34.173728560774094
+          ],
+          "widthM": 57,
+          "lengthM": 62,
+          "rotationDeg": 0,
+          "cols": 2,
+          "rows": 2,
+          "scheme": "numbers",
+          "startIndex": 8,
+          "name": ""
+        }
+      ],
+      "png": "/images/fields/butler-practice.png",
+      "alt": "Octavia E. Butler Middle School practice field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
