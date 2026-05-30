@@ -23,8 +23,8 @@ permalink: /fields/
 | Field | City | Practice | Games | Ages |
 | ----------------------------------------------------- | --------- | -------- | ----- | -------- |
 | [Allendale Park](/fields/allendale) | Pasadena | ✓ |  |  |
-| [Blair High School](/fields/blair) | Pasadena |  | ✓ | 14U, UD |
-| [Blair Upper](/fields/blair) | Pasadena |  | ✓ | 10U |
+| [Blair Lower](/fields/blair-lower) | Pasadena |  | ✓ | 14U, UD |
+| [Blair Upper](/fields/blair-upper) | Pasadena |  | ✓ | 10U |
 | [Brookside Park](/fields/brookside) | Pasadena |  | ✓ | 10U, 12U |
 | [Butler Middle School](/fields/butler) | Pasadena | ✓ |  |  |
 | [Jefferson Park](/fields/jefferson) | Pasadena | ✓ |  |  |

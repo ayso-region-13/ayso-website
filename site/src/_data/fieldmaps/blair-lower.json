@@ -1,5 +1,5 @@
 {
-  "field": "blair",
+  "field": "blair-lower",
   "styleVersion": "satellite-v9",
   "variants": {
     "game": {
@@ -74,7 +74,7 @@
             -118.14463991630998,
             34.12368165172249
           ],
-          "text": "↖Park at Allendale",
+          "text": "\u2196Park at Allendale",
           "color": "#83312d",
           "size": 18
         },
@@ -117,7 +117,7 @@
           ]
         }
       ],
-      "png": "/images/fields/blair-game.png",
+      "png": "/images/fields/blair-lower-game.png",
       "alt": "Blair High School game field map",
       "updatedBy": "matthew@ayso13.org"
     }

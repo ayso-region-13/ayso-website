@@ -404,8 +404,10 @@
 /map                                /fields/                                 301
 /maps/                              /fields/                                 301
 /maps                               /fields/                                 301
-/blair/                             /fields/blair/                           301
-/blair                              /fields/blair/                           301
+/fields/blair/                      /fields/blair-lower/                     301
+/fields/blair                       /fields/blair-lower/                     301
+/blair/                             /fields/blair-lower/                     301
+/blair                              /fields/blair-lower/                     301
 /muir/                              /fields/muir/                            301
 /muir                               /fields/muir/                            301
 /brookside/                         /fields/brookside/                       301
