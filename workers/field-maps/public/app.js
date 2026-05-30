@@ -52,11 +52,20 @@ const HOME_COLOR = "#f4bd4d", HOME_TEXT = "#3a0d12";
 const AWAY_COLOR = "#8e2929", AWAY_TEXT = "#ffffff";
 const EMOJI_FONT = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", -apple-system, Arial, sans-serif';
 
+// Region Overview mode: a region-wide street map with one labeled pin per field
+// (kind "place"). Uses a light street base instead of satellite, and a much
+// larger frame than per-field maps. Saved under slug "overview", variant "map".
+const OVERVIEW_STYLE = "streets-v12";
+const OVERVIEW_SLUG = "overview";
+const PLAY_COLOR = { game: "#1f8a4c", practice: "#d11313", both: "#1f8a4c" };
+const PLAY_NAME = { game: "Game field", practice: "Practice field", both: "Game field" };
+function currentStyle() { return state.overview ? OVERVIEW_STYLE : STYLE; }
+
 const state = {
   config: null, fields: [], field: null, variant: "game",
   doc: null, variants: [], // current field's saved doc + available layouts
   elements: [], selectedId: null, tool: null,
-  drag: null, seq: 1,
+  drag: null, seq: 1, overview: false,
   history: [], histIndex: -1, // element-state snapshots for undo/redo
 };
 let map;
@@ -72,10 +81,13 @@ async function init() {
   state.logo = new Image();
   state.logo.src = "/region13-logo.svg";
 
+  state.overview = new URLSearchParams(location.search).get("overview") === "1";
+
   mapboxgl.accessToken = state.config.mapboxToken;
   map = new mapboxgl.Map({
-    container: "map", style: "mapbox://styles/mapbox/" + STYLE,
-    center: [-118.1445, 34.1478], zoom: 15,
+    container: "map", style: "mapbox://styles/mapbox/" + currentStyle(),
+    center: state.overview ? [-118.143, 34.168] : [-118.1445, 34.1478],
+    zoom: state.overview ? 11.8 : 15,
   });
   map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-left");
 
@@ -122,6 +134,10 @@ async function init() {
   wireUi();
   await loadFields();
 
+  if (state.overview) {
+    await selectOverview();
+    return;
+  }
   // Restore field/layout from the URL (so a refresh stays on the same field).
   const params = new URLSearchParams(location.search);
   const fieldParam = params.get("field");
@@ -136,7 +152,13 @@ function fc(features) { return { type: "FeatureCollection", features }; }
 
 // ─── UI wiring ─────────────────────────────────────────────────────────────
 function wireUi() {
-  document.getElementById("fieldSelect").addEventListener("change", (e) => selectField(e.target.value));
+  document.getElementById("fieldSelect").addEventListener("change", (e) => {
+    // Switching to a field from overview mode reloads (satellite base vs streets).
+    if (state.overview && e.target.value) { location.href = location.pathname + "?field=" + encodeURIComponent(e.target.value); return; }
+    selectField(e.target.value);
+  });
+  const ovBtn = document.getElementById("overviewBtn");
+  if (ovBtn) ovBtn.addEventListener("click", () => { location.href = location.pathname + "?overview=1"; });
   document.getElementById("variantSelect").addEventListener("change", (e) => {
     if (e.target.value === "__add_blank__") { addLayout(false); return; }
     if (e.target.value === "__add_copy__") { addLayout(true); return; }
@@ -228,6 +250,35 @@ async function selectField(slug, initialLayout) {
   loadVariant();
   updateFilename();
   updateUrl();
+}
+
+// Region Overview: load the seeded "overview" doc (one pin per field) as a single
+// "map" layout. Uses a synthetic field so the existing save/export path works.
+async function selectOverview() {
+  state.tool = null;
+  document.getElementById("fieldSelect").value = "";
+  state.field = { slug: OVERVIEW_SLUG, title: "Region Overview", lat: 34.168, lon: -118.143 };
+  document.getElementById("saveBtn").disabled = false;
+  // No Game/Practice layouts for the overview — just the one map.
+  const layoutCtl = document.getElementById("variantSelect").closest("label");
+  if (layoutCtl) layoutCtl.style.display = "none";
+  // The overview frame spans ~16 km, far beyond the per-field 1200 m cap.
+  document.getElementById("frameMeters").max = 40000;
+  // Show only the pin + word tools; field/grid/fan tools don't apply region-wide.
+  document.querySelectorAll(".tool").forEach((b) => {
+    b.style.display = (b.dataset.tool === "place" || b.dataset.tool === "word") ? "" : "none";
+  });
+  setHint("Drag a pin to reposition it. Add a pin with “Field pin”. Save to publish the overview.");
+
+  state.doc = await fetchDoc(OVERVIEW_SLUG);
+  if (state.doc && state.doc.variants && state.doc.variants.map && state.doc.variants.map.view && state.doc.variants.map.view.center) {
+    const c = state.doc.variants.map.view.center; state.field.lon = c[0]; state.field.lat = c[1];
+  }
+  state.variants = [{ id: "map", label: "Region Overview" }];
+  state.variant = "map";
+  populateVariantSelect();
+  loadVariant();
+  updateFilename();
 }
 
 // Delete the current layout (variant) — removes its map + JSON entry from the repo.
@@ -381,6 +432,10 @@ function onClick(e) {
     const text = prompt("Word / label text:", "Park Here");
     if (!text) { state.tool = null; clearToolBtns(); return; }
     el = { id, kind: "text", center: c, text, color: "#83312d", size: 18 };
+  } else if (state.tool === "place") {
+    const name = prompt("Field name for this pin:", "New field");
+    if (!name) { state.tool = null; clearToolBtns(); return; }
+    el = { id, kind: "place", center: c, name: name.trim(), play: "game" };
   } else {
     el = { id, kind: "marker", type: state.tool, center: c };
     if (state.tool === "entrance") el.rotationDeg = 0;
@@ -423,7 +478,7 @@ function onDown(e) {
   // elements (text, markers) over areas (field/grid/fan/line) so a text label or
   // marker sitting on top of a field is selectable instead of grabbing the field.
   let eid = null, bestRank = 99;
-  const rankOf = (k) => (k === "text" || k === "marker" ? 0 : k === "line" ? 1 : 2);
+  const rankOf = (k) => (k === "text" || k === "marker" || k === "place" ? 0 : k === "line" ? 1 : 2);
   for (let i = 0; i < b.length; i++) {
     const id = b[i].properties && b[i].properties.eid;
     const el = id && byId(id);
@@ -543,6 +598,10 @@ function rebuildMap() {
       if (el.label) labels.push(label(el.points[0], el.label, el.id, { size: 13, color: el.color }));
     } else if (el.kind === "text") {
       labels.push(label(el.center, el.text, el.id, { size: el.size || 18, color: el.color }));
+    } else if (el.kind === "place") {
+      const color = PLAY_COLOR[el.play] || PLAY_COLOR.game;
+      markers.push({ type: "Feature", properties: { eid: el.id, color, code: "" }, geometry: { type: "Point", coordinates: el.center } });
+      if (el.name) labels.push(label(el.center, el.name, el.id, { size: 13, color: "#ffffff" }));
     } else if (el.kind === "marker") {
       const t = MARKER_TYPES[el.type];
       markers.push({ type: "Feature", properties: { eid: el.id, color: t.color, code: t.code, rot: el.rotationDeg || 0 }, geometry: { type: "Point", coordinates: el.center } });
@@ -673,6 +732,13 @@ function renderSelPanel() {
     html = `<label class="block">Text<input data-k="text" value="${esc(el.text)}"></label>
       <label class="block">Color<input type="color" data-k="color" value="${el.color}"></label>
       <label class="block">Size<input type="number" data-k="size" value="${el.size}"></label>`;
+  } else if (el.kind === "place") {
+    html = `<label class="block">Field name<input data-k="name" value="${esc(el.name)}"></label>
+      <label class="block">Type<select data-k="play">
+        <option value="game"${el.play==="game"?" selected":""}>Game field (green)</option>
+        <option value="practice"${el.play==="practice"?" selected":""}>Practice field (red)</option>
+        <option value="both"${el.play==="both"?" selected":""}>Game &amp; practice (green)</option></select></label>
+      <p class="hint">Drag the pin to reposition. Edit the name to declutter overlapping labels.</p>`;
   } else if (el.kind === "marker") {
     html = `<p>${MARKER_TYPES[el.type].name}</p><p class="hint">Drag to reposition.</p>`;
   }
@@ -721,6 +787,7 @@ function renderElemList() {
       : el.kind === "arrow" ? ("Arrow" + (el.label ? " — " + el.label : ""))
       : el.kind === "line" ? "Line"
       : el.kind === "text" ? `“${el.text}”`
+      : el.kind === "place" ? `📍 ${el.name || "pin"}`
       : MARKER_TYPES[el.type].name;
     const row = document.createElement("div");
     row.className = "item" + (el.id === state.selectedId ? " sel" : "");
@@ -739,7 +806,7 @@ function renderElemList() {
 // corner grip to grow it right/down from a fixed TOP-LEFT. The export center is
 // the box's center (not the map center). The meters field is a live readout of
 // the box's ground width at the current zoom (and resizes the box when typed).
-function clampMeters(m) { return Math.max(40, Math.min(1200, m || 200)); }
+function clampMeters(m) { return Math.max(40, Math.min(state.overview ? 40000 : 1200, m || 200)); }
 function mppNow() {
   const lat = map.getCenter().lat;
   return EARTH_CIRCUMFERENCE * Math.cos((lat * Math.PI) / 180) / (TILE * Math.pow(2, map.getZoom()));
@@ -854,10 +921,12 @@ async function doExport(commit) {
   }
   const annotation = {
     label: document.getElementById("variantLabel").value.trim() || undefined,
-    styleVersion: STYLE,
+    styleVersion: currentStyle(),
     view: { center, zoom, bearing: 0, frameMeters: meters, width: OUT_W, height: OUT_H, scale: SCALE },
     elements: state.elements,
-    alt: `${state.field.title} ${state.variant} field map`,
+    alt: state.overview
+      ? "AYSO Region 13 field locations across Pasadena, Altadena, and La Cañada Flintridge"
+      : `${state.field.title} ${state.variant} field map`,
   };
   modal(true, "Saving…", '<p class="subtle">Committing PNG + annotation JSON to staging…</p>');
   try {
@@ -866,14 +935,15 @@ async function doExport(commit) {
     toast(`Saved (${res.commit.slice(0, 7)}). Preview rebuilds in ~1–2 min at field-maps.ayso-website-staging.pages.dev.`, "success");
     const f = state.fields.find((x) => x.slug === state.field.slug); if (f) f.hasMap = true;
     // Refresh the cached doc + layout list so a newly-saved named layout sticks.
+    // (Overview has a single fixed "map" layout — keep its variant list as-is.)
     state.doc = await fetchDoc(state.field.slug);
-    buildVariantList(); populateVariantSelect();
+    if (!state.overview) { buildVariantList(); populateVariantSelect(); }
   } catch (e) { modal(false); toast("Save failed: " + e.message, "error"); }
 }
 
 async function renderPng(center, zoom) {
   const token = encodeURIComponent(state.config.mapboxToken);
-  const url = `https://api.mapbox.com/styles/v1/mapbox/${STYLE}/static/` +
+  const url = `https://api.mapbox.com/styles/v1/mapbox/${currentStyle()}/static/` +
     `${center[0].toFixed(6)},${center[1].toFixed(6)},${zoom.toFixed(3)},0/${OUT_W}x${OUT_H}@2x` +
     `?access_token=${token}&attribution=true&logo=true`;
   const base = await loadImage(url);
@@ -962,6 +1032,13 @@ function drawElement(ctx, project, el) {
     // Dark-red text on a white pill — reads clearly over grass/satellite.
     const p = project(el.center[0], el.center[1]);
     textBox(ctx, p, el.text, { size: (el.size || 18) * SCALE, bg: "rgba(255,255,255,0.95)", fg: el.color || "#83312d", center: true });
+  } else if (el.kind === "place") {
+    // Region-overview pin: colored dot (game/practice) + name in a white pill.
+    const p = project(el.center[0], el.center[1]);
+    const color = PLAY_COLOR[el.play] || PLAY_COLOR.game, r = 7 * SCALE;
+    ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = color; ctx.fill();
+    ctx.lineWidth = 2 * SCALE; ctx.strokeStyle = "#fff"; ctx.stroke();
+    if (el.name) textBox(ctx, { x: p.x + r + 4 * SCALE, y: p.y }, el.name, { size: 12 * SCALE, bg: "rgba(255,255,255,0.95)", fg: "#221f1f", left: true });
   } else if (el.kind === "marker") {
     const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 19 * SCALE;
     // White badge with a colored ring; emoji glyph (or a rotatable arrow for the
@@ -1078,7 +1155,7 @@ function sidelineLabel(ctx, project, a, b, text, color, textColor) {
 
 function drawTitle(ctx) {
   const v = document.getElementById("variantLabel").value.trim() || (state.variant === "practice" ? "Practice" : "Game Day");
-  const text = `${state.field.title} — ${v}`;
+  const text = state.overview ? "AYSO Region 13 Fields" : `${state.field.title} — ${v}`;
   const pad = 10 * SCALE, x = 12 * SCALE, y = 12 * SCALE;
   ctx.font = `bold ${17 * SCALE}px -apple-system, Arial, sans-serif`;
   const textW = ctx.measureText(text).width;
@@ -1101,11 +1178,18 @@ function drawTitle(ctx) {
 
 function drawLegend(ctx) {
   const items = [];
-  const markerTypes = [...new Set(state.elements.filter((e) => e.kind === "marker").map((e) => e.type))];
-  markerTypes.forEach((t) => items.push({ emoji: MARKER_TYPES[t].emoji, name: MARKER_TYPES[t].name }));
-  if (state.elements.some((e) => e.kind === "field" && e.markHome)) {
-    items.push({ line: HOME_COLOR, name: "Home sideline" });
-    items.push({ line: AWAY_COLOR, name: "Away sideline" });
+  if (state.overview) {
+    // Game/practice color key for the region overview pins.
+    const plays = new Set(state.elements.filter((e) => e.kind === "place").map((e) => (e.play === "practice" ? "practice" : "game")));
+    if (plays.has("game")) items.push({ dot: PLAY_COLOR.game, name: "Game field" });
+    if (plays.has("practice")) items.push({ dot: PLAY_COLOR.practice, name: "Practice field" });
+  } else {
+    const markerTypes = [...new Set(state.elements.filter((e) => e.kind === "marker").map((e) => e.type))];
+    markerTypes.forEach((t) => items.push({ emoji: MARKER_TYPES[t].emoji, name: MARKER_TYPES[t].name }));
+    if (state.elements.some((e) => e.kind === "field" && e.markHome)) {
+      items.push({ line: HOME_COLOR, name: "Home sideline" });
+      items.push({ line: AWAY_COLOR, name: "Away sideline" });
+    }
   }
   if (!items.length) return;
   const lh = 24 * SCALE, padX = 12 * SCALE, padY = 10 * SCALE;
@@ -1115,7 +1199,10 @@ function drawLegend(ctx) {
   ctx.strokeStyle = "rgba(0,0,0,0.15)"; ctx.lineWidth = 1 * SCALE; ctx.stroke();
   items.forEach((it, i) => {
     const cy = y + padY + i * lh + lh / 2;
-    if (it.line) {
+    if (it.dot) {
+      ctx.fillStyle = it.dot; ctx.beginPath(); ctx.arc(x + padX + 8 * SCALE, cy, 6 * SCALE, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = 1.5 * SCALE; ctx.stroke();
+    } else if (it.line) {
       ctx.strokeStyle = it.line; ctx.lineWidth = 5 * SCALE; ctx.lineCap = "round";
       ctx.beginPath(); ctx.moveTo(x + padX, cy); ctx.lineTo(x + padX + 16 * SCALE, cy); ctx.stroke();
     } else {
