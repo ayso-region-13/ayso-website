@@ -122,7 +122,8 @@ function fc(features) { return { type: "FeatureCollection", features }; }
 function wireUi() {
   document.getElementById("fieldSelect").addEventListener("change", (e) => selectField(e.target.value));
   document.getElementById("variantSelect").addEventListener("change", (e) => {
-    if (e.target.value === "__add__") { addLayout(); return; }
+    if (e.target.value === "__add_blank__") { addLayout(false); return; }
+    if (e.target.value === "__add_copy__") { addLayout(true); return; }
     state.variant = e.target.value;
     if (state.field) loadVariant();
     updateFilename();
@@ -226,18 +227,32 @@ function populateVariantSelect() {
   const sel = document.getElementById("variantSelect");
   sel.innerHTML = state.variants.map((v) =>
     `<option value="${esc(v.id)}"${v.id === state.variant ? " selected" : ""}>${esc(v.label)}</option>`).join("")
-    + `<option value="__add__">+ Add layout…</option>`;
+    + `<option value="__add_blank__">+ New layout (blank)…</option>`
+    + `<option value="__add_copy__">+ New layout (copy of current)…</option>`;
 }
-function addLayout() {
+// Create a new named layout. copy=true clones the layout you're viewing (same
+// elements + frame) as a starting point — e.g. "Games B" as a variation of A.
+// copy=false starts blank — e.g. Practice vs Game.
+function addLayout(copy) {
   const sel = document.getElementById("variantSelect");
-  const name = prompt('Name this layout (e.g. "Field A", "Tournament"):', "");
+  const name = prompt(copy ? 'Name the copy (e.g. "Games B"):' : 'Name this layout (e.g. "Practice", "Tournament"):', "");
   if (!name || !name.trim()) { sel.value = state.variant; return; }
   const id = name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   if (!id) { sel.value = state.variant; return; }
+  // Snapshot the current layout's elements before switching (for the copy case).
+  const cloned = copy ? JSON.parse(JSON.stringify(state.elements)).map((e) => ({ ...e, id: "e" + state.seq++ })) : null;
   if (!state.variants.some((v) => v.id === id)) state.variants.push({ id: id, label: name.trim() });
   state.variant = id;
   populateVariantSelect();
-  loadVariant();
+  if (copy) {
+    // Keep the current frame; carry over a copy of the elements.
+    state.elements = cloned;
+    select(null);
+    rebuild();
+    resetHistory();
+  } else {
+    loadVariant(); // empty layout + default frame
+  }
   document.getElementById("variantLabel").value = name.trim();
   updateFilename();
 }
