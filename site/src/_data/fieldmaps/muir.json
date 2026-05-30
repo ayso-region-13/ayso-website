@@ -7,9 +7,9 @@
       "view": {
         "center": [
           -118.16694216131893,
-          34.18087920135967
+          34.18087926861158
         ],
-        "zoom": 15.982626654880557,
+        "zoom": 15.982626653730557,
         "bearing": 0,
         "frameMeters": 1000,
         "width": 1000,
@@ -18,7 +18,7 @@
       },
       "elements": [
         {
-          "id": "e104",
+          "id": "e121",
           "kind": "field",
           "center": [
             -118.16644099708046,
@@ -34,7 +34,7 @@
           "locked": true
         },
         {
-          "id": "e105",
+          "id": "e122",
           "kind": "field",
           "center": [
             -118.16603529269648,
@@ -50,7 +50,7 @@
           "locked": true
         },
         {
-          "id": "e106",
+          "id": "e123",
           "kind": "text",
           "center": [
             -118.16551026349411,
@@ -62,7 +62,7 @@
           "locked": true
         },
         {
-          "id": "e107",
+          "id": "e124",
           "kind": "text",
           "center": [
             -118.16521195144703,
@@ -74,7 +74,7 @@
           "locked": true
         },
         {
-          "id": "e108",
+          "id": "e125",
           "kind": "text",
           "center": [
             -118.16264646784374,
@@ -86,7 +86,7 @@
           "locked": true
         },
         {
-          "id": "e109",
+          "id": "e126",
           "kind": "marker",
           "type": "parking",
           "center": [
@@ -96,7 +96,7 @@
           "locked": true
         },
         {
-          "id": "e110",
+          "id": "e127",
           "kind": "marker",
           "type": "parking",
           "center": [
@@ -106,7 +106,7 @@
           "locked": true
         },
         {
-          "id": "e111",
+          "id": "e128",
           "kind": "arrow",
           "points": [
             [
@@ -124,7 +124,7 @@
           "locked": true
         },
         {
-          "id": "e112",
+          "id": "e129",
           "kind": "nogo",
           "center": [
             -118.16373232353766,
@@ -133,11 +133,11 @@
           "widthM": 48,
           "lengthM": 41,
           "rotationDeg": 0,
-          "label": "Do not use",
-          "locked": true
+          "label": "Do not park here",
+          "locked": false
         },
         {
-          "id": "e113",
+          "id": "e130",
           "kind": "infield",
           "center": [
             -118.16333855163573,
@@ -149,7 +149,7 @@
           "locked": true
         },
         {
-          "id": "e114",
+          "id": "e131",
           "kind": "field",
           "center": [
             -118.16231302507961,
