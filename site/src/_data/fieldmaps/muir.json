@@ -1,0 +1,173 @@
+{
+  "field": "muir",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "wayfinder": {
+      "label": "Wayfinder Layout",
+      "view": {
+        "center": [
+          -118.16694216131893,
+          34.18087920135967
+        ],
+        "zoom": 15.982626654880557,
+        "bearing": 0,
+        "frameMeters": 1000,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e104",
+          "kind": "field",
+          "center": [
+            -118.16644099708046,
+            34.18174220845346
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": false,
+          "locked": true
+        },
+        {
+          "id": "e105",
+          "kind": "field",
+          "center": [
+            -118.16603529269648,
+            34.18115980206652
+          ],
+          "widthM": 46,
+          "lengthM": 73,
+          "rotationDeg": 269,
+          "name": "",
+          "ageGroup": "12U",
+          "preset": "12U",
+          "markHome": false,
+          "locked": true
+        },
+        {
+          "id": "e106",
+          "kind": "text",
+          "center": [
+            -118.16551026349411,
+            34.181771822249615
+          ],
+          "text": "Muir North",
+          "color": "#83312d",
+          "size": 18,
+          "locked": true
+        },
+        {
+          "id": "e107",
+          "kind": "text",
+          "center": [
+            -118.16521195144703,
+            34.18030099208235
+          ],
+          "text": "Muir Central",
+          "color": "#83312d",
+          "size": 18,
+          "locked": true
+        },
+        {
+          "id": "e108",
+          "kind": "text",
+          "center": [
+            -118.16264646784374,
+            34.17819835212204
+          ],
+          "text": "Muir South",
+          "color": "#83312d",
+          "size": 18,
+          "locked": true
+        },
+        {
+          "id": "e109",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.16447213757084,
+            34.179047311237895
+          ],
+          "locked": true
+        },
+        {
+          "id": "e110",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.16508069414654,
+            34.18081430484324
+          ],
+          "locked": true
+        },
+        {
+          "id": "e111",
+          "kind": "arrow",
+          "points": [
+            [
+              -118.16426637656431,
+              34.178835340650906
+            ],
+            [
+              -118.16266588857378,
+              34.178824914943874
+            ]
+          ],
+          "color": "#83312d",
+          "width": 7,
+          "label": "",
+          "locked": true
+        },
+        {
+          "id": "e112",
+          "kind": "nogo",
+          "center": [
+            -118.16373232353766,
+            34.17853398759013
+          ],
+          "widthM": 48,
+          "lengthM": 41,
+          "rotationDeg": 0,
+          "label": "Do not use",
+          "locked": true
+        },
+        {
+          "id": "e113",
+          "kind": "infield",
+          "center": [
+            -118.16333855163573,
+            34.17878077820727
+          ],
+          "radiusM": 45,
+          "startDeg": 90.0000486373329,
+          "sweepDeg": 90,
+          "locked": true
+        },
+        {
+          "id": "e114",
+          "kind": "field",
+          "center": [
+            -118.16231302507961,
+            34.17856427183527
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": false,
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/muir-wayfinder.png",
+      "alt": "Muir High School North wayfinder field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
