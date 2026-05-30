@@ -304,6 +304,17 @@
           "preset": "10U",
           "markHome": true,
           "locked": true
+        },
+        {
+          "id": "e32",
+          "kind": "infield",
+          "center": [
+            -118.20347266640977,
+            34.203386252433205
+          ],
+          "radiusM": 29,
+          "startDeg": 0.7848555071914234,
+          "sweepDeg": 90
         }
       ],
       "png": "/images/fields/fis-lower-fis-lower-10u-games.png",
