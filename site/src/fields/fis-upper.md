@@ -24,12 +24,6 @@ snackBar: "No"
 
 <iframe src="https://maps.google.com/maps?q=4471+Chevy+Chase+Dr,+La+Canada+Flintridge,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-## Field Layouts
-
-![FIS Upper — 6U fields, 90' x 75' each](/images/fields/fis-upper-6u-map.jpg)
-
-![FIS Upper — subfield map](/images/fields/fis-upper-map.png)
-
 ## Parking
 
 Park on Chevy Chase Drive. Do not use the Community Center parking lot — violators will be cited and towed.
