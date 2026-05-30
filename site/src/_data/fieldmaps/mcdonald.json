@@ -20,6 +20,25 @@
       "png": "/images/fields/mcdonald-game.png",
       "alt": "McDonald Park game field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.12802220142589,
+          34.162537412698484
+        ],
+        "zoom": 17.982940189239706,
+        "bearing": 0,
+        "frameMeters": 250,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [],
+      "png": "/images/fields/mcdonald-practice.png",
+      "alt": "McDonald Park practice field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
