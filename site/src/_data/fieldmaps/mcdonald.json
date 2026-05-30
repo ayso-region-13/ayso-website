@@ -35,7 +35,24 @@
         "height": 750,
         "scale": 2
       },
-      "elements": [],
+      "elements": [
+        {
+          "id": "e82",
+          "kind": "grid",
+          "center": [
+            -118.12749025671715,
+            34.16253897480277
+          ],
+          "widthM": 31,
+          "lengthM": 56,
+          "rotationDeg": 0,
+          "cols": 1,
+          "rows": 1,
+          "scheme": "letters",
+          "startIndex": 0,
+          "name": ""
+        }
+      ],
       "png": "/images/fields/mcdonald-practice.png",
       "alt": "McDonald Park practice field map",
       "updatedBy": "matthew@ayso13.org"
