@@ -371,6 +371,8 @@ function onClick(e) {
     el = { id, kind: "fan", center: c, innerRadiusM: 25, radiusM: 65, startDeg: -45, sweepDeg: 90, wedges: 3, scheme: "lcr", startIndex: 0, name: "" };
   } else if (state.tool === "infield") {
     el = { id, kind: "infield", center: c, radiusM: 30, startDeg: -45, sweepDeg: 90 };
+  } else if (state.tool === "nogo") {
+    el = { id, kind: "nogo", center: c, widthM: 30, lengthM: 20, rotationDeg: 0, label: "Do not use" };
   } else if (state.tool === "line") {
     el = { id, kind: "line", points: [Geo.destination(c, -15, 0), Geo.destination(c, 15, 0)], color: HOME_COLOR, width: 5, label: "" };
   } else if (state.tool === "arrow") {
@@ -527,6 +529,10 @@ function rebuildMap() {
       const inf = Geo.fanInfield(el.center, el.radiusM, el.startDeg, el.sweepDeg);
       shapes.push(poly(inf.ring, el.id, { fill: "#d11313", stroke: "#ffffff", strokeW: 1.5 }));
       labels.push(label(inf.center, "Stay off the infield", el.id, { size: 11, color: "#ffffff" }));
+    } else if (el.kind === "nogo") {
+      const ring = Geo.rectRing(el.center, el.widthM, el.lengthM, el.rotationDeg);
+      shapes.push(poly(ring, el.id, { fill: "#d11313", stroke: "#ffffff", strokeW: 1.5 }));
+      labels.push(label(Geo.centroid(ring), el.label || "Do not use", el.id, { size: 12, color: "#ffffff" }));
     } else if (el.kind === "arrow") {
       const a = el.points[0], b = el.points[el.points.length - 1];
       shapes.push(lineFeat(el.points, el.id, { stroke: el.color, strokeW: el.width }));
@@ -546,7 +552,7 @@ function rebuildMap() {
   // Selection handles — none for locked elements (can't move/resize on the map).
   const sel = byId(state.selectedId);
   if (sel && !sel.locked) {
-    if (sel.kind === "field" || sel.kind === "grid") {
+    if (sel.kind === "field" || sel.kind === "grid" || sel.kind === "nogo") {
       const ring = Geo.rectRing(sel.center, sel.widthM, sel.lengthM, sel.rotationDeg);
       for (let i = 0; i < 4; i++) handles.push(handle(ring[i], sel.id, "corner", i));
       const rot = Geo.rotateOffset(0, sel.lengthM / 2 + 18, sel.rotationDeg);
@@ -647,6 +653,12 @@ function renderSelPanel() {
       <div class="field-row"><label class="block">Radius m<input type="number" data-k="radiusM" value="${el.radiusM}"></label>
       <label class="block">Sweep °<input type="number" data-k="sweepDeg" value="${el.sweepDeg}"></label></div>
       <p class="hint">Drag the arc handle to size + aim the off-limits infield. Sweep 90° = a quarter (a typical baseball infield). Apex = home plate.</p>`;
+  } else if (el.kind === "nogo") {
+    html = `<label class="block">Label<input data-k="label" value="${esc(el.label)}" placeholder="Do not use"></label>
+      <div class="field-row"><label class="block">Width m<input type="number" data-k="widthM" value="${el.widthM}"></label>
+      <label class="block">Length m<input type="number" data-k="lengthM" value="${el.lengthM}"></label></div>
+      <label class="block">Rotation °<input type="number" data-k="rotationDeg" value="${el.rotationDeg}"></label>
+      <p class="hint">A cross-hatched out-of-bounds box. Drag corners to resize, top handle to rotate.</p>`;
   } else if (el.kind === "arrow") {
     html = `<label class="block">Label (optional)<input data-k="label" value="${esc(el.label)}" placeholder="e.g. Walk this way"></label>
       <label class="block">Color<input type="color" data-k="color" value="${el.color}"></label>
@@ -705,6 +717,7 @@ function renderElemList() {
       : el.kind === "grid" ? ("Grid " + (el.name || `${el.cols}×${el.rows}`))
       : el.kind === "fan" ? ("Fan " + (el.name || `${el.wedges}-section`))
       : el.kind === "infield" ? "Infield warning"
+      : el.kind === "nogo" ? (el.label || "Do not use")
       : el.kind === "arrow" ? ("Arrow" + (el.label ? " — " + el.label : ""))
       : el.kind === "line" ? "Line"
       : el.kind === "text" ? `“${el.text}”`
@@ -925,6 +938,9 @@ function drawElement(ctx, project, el) {
     if (el.name) { const np = Geo.fanArcPoint(el.center, el.radiusM * 1.12, el.startDeg, el.sweepDeg); textBox(ctx, project(np[0], np[1]), el.name, { size: 14 * SCALE, bg: "rgba(58,13,18,0.82)", fg: "#fff8e6", center: true }); }
   } else if (el.kind === "infield") {
     drawInfield(ctx, project, Geo.fanInfield(el.center, el.radiusM, el.startDeg, el.sweepDeg));
+  } else if (el.kind === "nogo") {
+    const ring = Geo.rectRing(el.center, el.widthM, el.lengthM, el.rotationDeg);
+    drawHatchZone(ctx, project, ring, Geo.centroid(ring), el.label || "Do not use");
   } else if (el.kind === "line") {
     ctx.beginPath();
     el.points.forEach((pt, i) => { const p = project(pt[0], pt[1]); i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); });
@@ -982,12 +998,12 @@ function fanLabel(el, index) {
 }
 
 // Cross-hatched "Stay off the infield" no-go zone on export.
-function drawInfield(ctx, project, inf) {
-  const pts = inf.ring.map((c) => project(c[0], c[1]));
+// Cross-hatched red "off-limits" zone for any ring (infield sector, no-go box…).
+function drawHatchZone(ctx, project, ring, labelPoint, text) {
+  const pts = ring.map((c) => project(c[0], c[1]));
+  const trace = () => { ctx.beginPath(); pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y))); ctx.closePath(); };
   ctx.save();
-  ctx.beginPath();
-  pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
-  ctx.closePath();
+  trace();
   ctx.fillStyle = "rgba(209,19,19,0.16)"; ctx.fill();
   ctx.save();
   ctx.clip();
@@ -997,15 +1013,13 @@ function drawInfield(ctx, project, inf) {
   ctx.strokeStyle = "rgba(255,255,255,0.55)"; ctx.lineWidth = 1.2 * SCALE;
   for (let x = minX - span; x < maxX; x += step) { ctx.beginPath(); ctx.moveTo(x, minY); ctx.lineTo(x + span, maxY); ctx.stroke(); }
   for (let x = minX; x < maxX + span; x += step) { ctx.beginPath(); ctx.moveTo(x, minY); ctx.lineTo(x - span, maxY); ctx.stroke(); }
-  ctx.restore(); // remove clip
-  // Re-trace the infield outline (the hatch loop's beginPath replaced the path).
-  ctx.beginPath();
-  pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
-  ctx.closePath();
+  ctx.restore(); // remove clip (the hatch loop's beginPath replaced the path)
+  trace();
   ctx.strokeStyle = "rgba(255,255,255,0.9)"; ctx.lineWidth = 2 * SCALE; ctx.stroke();
   ctx.restore();
-  textBox(ctx, project(inf.center[0], inf.center[1]), "Stay off the infield", { size: 12 * SCALE, bg: "rgba(142,41,41,0.92)", fg: "#fff", center: true });
+  if (text) textBox(ctx, project(labelPoint[0], labelPoint[1]), text, { size: 12 * SCALE, bg: "rgba(142,41,41,0.92)", fg: "#fff", center: true });
 }
+function drawInfield(ctx, project, inf) { drawHatchZone(ctx, project, inf.ring, inf.center, "Stay off the infield"); }
 
 // A filled arrow within a marker badge, pointing at `deg` (0 = north).
 function drawArrow(ctx, cx, cy, r, deg, color) {
