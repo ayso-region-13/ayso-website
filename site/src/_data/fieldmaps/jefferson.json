@@ -1,0 +1,72 @@
+{
+  "field": "jefferson",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.11878289946324,
+          34.154928666406335
+        ],
+        "zoom": 18.103364423418984,
+        "bearing": 0,
+        "frameMeters": 230,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e12",
+          "kind": "infield",
+          "center": [
+            -118.11851950594844,
+            34.154645825398035
+          ],
+          "radiusM": 32,
+          "startDeg": 0.000043716467530430236,
+          "sweepDeg": 90,
+          "locked": true
+        },
+        {
+          "id": "e13",
+          "kind": "grid",
+          "center": [
+            -118.11817215044546,
+            34.15513959631414
+          ],
+          "widthM": 55,
+          "lengthM": 33,
+          "rotationDeg": 0,
+          "cols": 2,
+          "rows": 1,
+          "scheme": "numbers",
+          "startIndex": 0,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e14",
+          "kind": "grid",
+          "center": [
+            -118.11802289938421,
+            34.154809298790795
+          ],
+          "widthM": 28,
+          "lengthM": 40,
+          "rotationDeg": 0,
+          "cols": 1,
+          "rows": 1,
+          "scheme": "numbers",
+          "startIndex": 2,
+          "name": "",
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/jefferson-practice.png",
+      "alt": "Jefferson Park practice field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
