@@ -234,28 +234,6 @@ module.exports = function (eleventyConfig) {
     return content.replace(/(<\/div>\s*<\/article>)/, fieldInfoHtml + "\n$1");
   });
 
-  // --- Transform: move the Field Maps block to just below the directions embed ---
-  // page.njk renders the Field Maps block (wrapped in FM_START/FM_END markers) at
-  // the top of <article>. On /fields/ pages we relocate it to immediately after
-  // the first Google Maps embed iframe, so the page reads: directions → game map
-  // → practice map. If there's no embed, it stays at the top of the prose.
-  eleventyConfig.addTransform("field-maps-after-directions", function (content) {
-    if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;
-    if (!this.page.url || !this.page.url.startsWith("/fields/")) return content;
-
-    const m = content.match(/<!--FM_START-->([\s\S]*?)<!--FM_END-->/);
-    if (!m) return content;
-    const block = m[1];
-    content = content.replace(m[0], ""); // lift it out of the top of the article
-
-    const iframeRegex = /(<iframe[^>]*maps\.google[^>]*>\s*<\/iframe>)/i;
-    if (iframeRegex.test(content)) {
-      return content.replace(iframeRegex, "$1\n" + block);
-    }
-    // No directions embed — drop it back at the top of the prose container.
-    return content.replace(/(<div class="prose[^"]*">)/, "$1\n" + block);
-  });
-
   // --- Transform: in-page table of contents for field pages ---
   // After the maps block is relocated, collect the <h2 id="…"> headings inside
   // the article (markdown sections + the map sections) and render a "On this

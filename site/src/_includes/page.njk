@@ -34,6 +34,15 @@ layout: base.njk
     <p class="mt-2 text-brand-maroon text-lg leading-relaxed max-w-2xl">{{ description }}</p>
     {% endif %}
 
+    {# Compact address + one-tap directions (opens the visitor's Maps app). #}
+    {% if section == "fields" and placeAddress %}
+    {% if placeLat and placeLon %}{% set dirDest = placeLat ~ "," ~ placeLon %}{% else %}{% set dirDest = placeAddress ~ ", " ~ (placeLocality or "Pasadena") ~ ", CA" %}{% endif %}
+    <p class="mt-3 text-sm text-brand-dark">
+      {{ placeAddress }}{% if placeLocality %}, {{ placeLocality }}{% endif %}{% if placePostalCode %} {{ placePostalCode }}{% endif %}
+      <a href="https://www.google.com/maps/dir/?api=1&destination={{ dirDest | urlencode }}" target="_blank" rel="noopener" class="ml-1 whitespace-nowrap font-semibold text-brand-red-dark hover:text-brand-dark">Get directions →</a>
+    </p>
+    {% endif %}
+
   </div>
 </div>
 
@@ -87,11 +96,9 @@ layout: base.njk
          filename, so fieldmaps[page.fileSlug] is this field's doc. Degrades to
          nothing when a field has no saved map (most, initially). Distinct
          wrapper classes keep it clear of the field-info-bottom transform. #}
-      {# Maps render in a fixed order — game first, then practice, then any other
-         named layouts (e.g. "A"/"B"). The block is wrapped in FM_START/FM_END
-         markers; the field-maps-after-directions transform in .eleventy.js moves
-         it to just below the Google directions embed (so the page reads:
-         directions → game map → practice map). #}
+      {# Maps render at the top of the article (after the TOC, before the prose),
+         so the page reads: address → field maps → Location/directions → rest.
+         Order: game, then practice, then any other named layouts (e.g. "A"/"B"). #}
       {% if section == "fields" and fieldmaps and fieldmaps[page.fileSlug] and fieldmaps[page.fileSlug].variants %}
       {% set fmaps = fieldmaps[page.fileSlug] %}
       {# Each map is its own anchored section so the in-page TOC links to it
@@ -108,7 +115,6 @@ layout: base.njk
         <p class="text-xs text-brand-dark/60 mt-1">Tap to enlarge — scroll or pinch to zoom, drag to pan.</p>
       </section>
       {% endmacro %}
-      <!--FM_START-->
       <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/css/glightbox.min.css"
             integrity="sha384-GPAzSuZc0kFvdIev6wm9zg8gnafE8tLso7rsAYQfc9hAdWCpOcpcNI5W9lWkYcsd"
@@ -127,7 +133,6 @@ layout: base.njk
           if (document.readyState !== 'loading') init(); else document.addEventListener('DOMContentLoaded', init);
         })();
       </script>
-      <!--FM_END-->
       {% endif %}
 
       <div class="prose max-w-3xl">
