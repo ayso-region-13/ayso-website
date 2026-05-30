@@ -1,0 +1,92 @@
+{
+  "field": "lc-lds",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "game": {
+      "label": "Game Day Layout",
+      "view": {
+        "center": [
+          -118.21593100898194,
+          34.210875386569256
+        ],
+        "zoom": 17.58157550520766,
+        "bearing": 0,
+        "frameMeters": 330,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e57",
+          "kind": "field",
+          "center": [
+            -118.21677794803936,
+            34.21073669416187
+          ],
+          "widthM": 30,
+          "lengthM": 46,
+          "rotationDeg": 330,
+          "name": "",
+          "ageGroup": "8U",
+          "preset": "8U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e58",
+          "kind": "field",
+          "center": [
+            -118.21651401819372,
+            34.210430473281605
+          ],
+          "widthM": 30,
+          "lengthM": 46,
+          "rotationDeg": 60,
+          "name": "",
+          "ageGroup": "8U",
+          "preset": "8U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e59",
+          "kind": "infield",
+          "center": [
+            -118.21617524257073,
+            34.21093215381866
+          ],
+          "radiusM": 34,
+          "startDeg": 190.10926599637048,
+          "sweepDeg": 90,
+          "locked": true
+        },
+        {
+          "id": "e60",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.2160425229821,
+            34.21105007426017
+          ],
+          "locked": true
+        },
+        {
+          "id": "e62",
+          "kind": "text",
+          "center": [
+            -118.21694755030984,
+            34.21124414205144
+          ],
+          "text": "Do Not Park in Church Lot",
+          "color": "#83312d",
+          "size": 18,
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/lc-lds-game.png",
+      "alt": "LC LDS Field game field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
