@@ -338,7 +338,7 @@ function onClick(e) {
   } else if (state.tool === "grid") {
     el = { id, kind: "grid", center: c, widthM: 70, lengthM: 50, rotationDeg: 0, cols: 3, rows: 2, scheme: "letters", startIndex: 0, name: "" };
   } else if (state.tool === "fan") {
-    el = { id, kind: "fan", center: c, radiusM: 60, startDeg: -45, sweepDeg: 90, wedges: 3, scheme: "letters", startIndex: 0, name: "" };
+    el = { id, kind: "fan", center: c, innerRadiusM: 25, radiusM: 65, startDeg: -45, sweepDeg: 90, wedges: 3, scheme: "lcr", startIndex: 0, name: "" };
   } else if (state.tool === "line") {
     el = { id, kind: "line", points: [Geo.destination(c, -15, 0), Geo.destination(c, 15, 0)], color: HOME_COLOR, width: 5, label: "" };
   } else if (state.tool === "word") {
@@ -405,8 +405,11 @@ function onMove(e) {
   } else if (state.drag.mode === "vertex" && el.points) {
     el.points[state.drag.idx] = cur;
   } else if (state.drag.mode === "fanarc" && el.kind === "fan") {
-    el.radiusM = Math.max(10, Math.round(Geo.distanceM(el.center, cur)));
+    el.radiusM = Math.max(15, Math.round(Geo.distanceM(el.center, cur)));
     el.startDeg = Geo.bearingDeg(el.center, cur) - el.sweepDeg / 2; // keep handle at arc mid
+    if (el.innerRadiusM > el.radiusM - 5) el.innerRadiusM = Math.max(5, el.radiusM - 5);
+  } else if (state.drag.mode === "faninner" && el.kind === "fan") {
+    el.innerRadiusM = Math.max(5, Math.min(el.radiusM - 5, Math.round(Geo.distanceM(el.center, cur))));
   }
   rebuildMap(); // map only during drag — panel refreshes on mouseup (keeps perf + focus)
 }
@@ -456,12 +459,15 @@ function rebuildMap() {
         labels.push(label(Geo.midpoint(top[0], top[1]), el.name, el.id, { size: 15, color: "#fff8e6" }));
       }
     } else if (el.kind === "fan") {
-      const cells = Geo.fanCells(el.center, el.radiusM, el.startDeg, el.sweepDeg, el.wedges);
+      const cells = Geo.fanCells(el.center, el.innerRadiusM, el.radiusM, el.startDeg, el.sweepDeg, el.wedges);
       cells.forEach((cell) => {
         shapes.push(poly(cell.ring, el.id, { fill: "#f4bd4d", stroke: "#f4bd4d", strokeW: 2 }));
-        labels.push(label(cell.center, Geo.cellLabel(cell.index, el.scheme, el.startIndex), el.id, { size: 16, color: "#fff8e6" }));
+        labels.push(label(cell.center, fanLabel(el, cell.index), el.id, { size: 14, color: "#fff8e6" }));
       });
-      if (el.name) labels.push(label(el.center, el.name, el.id, { size: 14, color: "#fff8e6" }));
+      const inf = Geo.fanInfield(el.center, el.innerRadiusM, el.startDeg, el.sweepDeg);
+      shapes.push(poly(inf.ring, el.id, { fill: "#d11313", stroke: "#ffffff", strokeW: 1.5 }));
+      labels.push(label(inf.center, "Stay off the infield", el.id, { size: 11, color: "#ffffff" }));
+      if (el.name) labels.push(label(Geo.fanArcPoint(el.center, el.radiusM * 1.12, el.startDeg, el.sweepDeg), el.name, el.id, { size: 14, color: "#fff8e6" }));
     } else if (el.kind === "line") {
       shapes.push(lineFeat(el.points, el.id, { stroke: el.color, strokeW: el.width }));
       if (el.label) labels.push(label(el.points[0], el.label, el.id, { size: 13, color: el.color }));
@@ -485,6 +491,7 @@ function rebuildMap() {
       sel.points.forEach((p, i) => handles.push(handle(p, sel.id, "vertex", i)));
     } else if (sel.kind === "fan") {
       handles.push(handle(Geo.fanArcPoint(sel.center, sel.radiusM, sel.startDeg, sel.sweepDeg), sel.id, "fanarc"));
+      handles.push(handle(Geo.fanArcPoint(sel.center, sel.innerRadiusM, sel.startDeg, sel.sweepDeg), sel.id, "faninner"));
     }
   }
 
@@ -558,11 +565,14 @@ function renderSelPanel() {
     html = `
       <label class="block">Area name<input data-k="name" value="${esc(el.name)}" placeholder="e.g. Allendale outfield"></label>
       <div class="field-row"><label class="block">Sections<input type="number" min="1" data-k="wedges" value="${el.wedges}"></label>
-      <label class="block">Labels<select data-k="scheme"><option value="letters"${el.scheme==="letters"?" selected":""}>A, B, C…</option><option value="numbers"${el.scheme==="numbers"?" selected":""}>1, 2, 3…</option></select></label></div>
-      <div class="field-row"><label class="block">Radius m<input type="number" data-k="radiusM" value="${el.radiusM}"></label>
-      <label class="block">Sweep °<input type="number" data-k="sweepDeg" value="${el.sweepDeg}"></label></div>
-      <label class="block">Start #<input type="number" data-k="startIndex" value="${el.startIndex}"></label>
-      <p class="hint">Drag the arc handle to set size + direction. Sweep 90° = quarter circle (left/center/right).</p>`;
+      <label class="block">Labels<select data-k="scheme">
+        <option value="lcr"${el.scheme==="lcr"?" selected":""}>Left / Center / Right</option>
+        <option value="letters"${el.scheme==="letters"?" selected":""}>A, B, C…</option>
+        <option value="numbers"${el.scheme==="numbers"?" selected":""}>1, 2, 3…</option></select></label></div>
+      <div class="field-row"><label class="block">Outer radius m<input type="number" data-k="radiusM" value="${el.radiusM}"></label>
+      <label class="block">Infield radius m<input type="number" data-k="innerRadiusM" value="${el.innerRadiusM}"></label></div>
+      <label class="block">Sweep °<input type="number" data-k="sweepDeg" value="${el.sweepDeg}"></label>
+      <p class="hint">Outer handle = size + direction; inner handle = infield edge. Left/Center/Right are from the home-plate view; the infield is marked off-limits.</p>`;
   } else if (el.kind === "line") {
     html = `<label class="block">Label<input data-k="label" value="${esc(el.label)}"></label>
       <label class="block">Color<input type="color" data-k="color" value="${el.color}"></label>
@@ -795,17 +805,18 @@ function drawElement(ctx, project, el) {
       textBox(ctx, project(m[0], m[1]), el.name, { size: 15 * SCALE, bg: "rgba(58,13,18,0.82)", fg: "#fff8e6", center: true });
     }
   } else if (el.kind === "fan") {
-    const cells = Geo.fanCells(el.center, el.radiusM, el.startDeg, el.sweepDeg, el.wedges);
+    const cells = Geo.fanCells(el.center, el.innerRadiusM, el.radiusM, el.startDeg, el.sweepDeg, el.wedges);
     cells.forEach((cell) => {
       fillStrokeRing(ctx, project, cell.ring, "rgba(244,189,77,0.16)", "#f4bd4d", 2.5, null);
       const p = project(cell.center[0], cell.center[1]);
-      ctx.fillStyle = "#fff8e6"; ctx.font = `bold ${17 * SCALE}px -apple-system, Arial, sans-serif`;
+      ctx.fillStyle = "#fff8e6"; ctx.font = `bold ${15 * SCALE}px -apple-system, Arial, sans-serif`;
       ctx.textAlign = "center"; ctx.textBaseline = "middle";
       ctx.lineWidth = 3 * SCALE; ctx.strokeStyle = "rgba(0,0,0,0.55)";
-      const lbl = Geo.cellLabel(cell.index, el.scheme, el.startIndex);
+      const lbl = fanLabel(el, cell.index);
       ctx.strokeText(lbl, p.x, p.y); ctx.fillText(lbl, p.x, p.y);
     });
-    if (el.name) textBox(ctx, project(el.center[0], el.center[1]), el.name, { size: 14 * SCALE, bg: "rgba(58,13,18,0.82)", fg: "#fff8e6", center: true });
+    drawInfield(ctx, project, Geo.fanInfield(el.center, el.innerRadiusM, el.startDeg, el.sweepDeg));
+    if (el.name) { const np = Geo.fanArcPoint(el.center, el.radiusM * 1.12, el.startDeg, el.sweepDeg); textBox(ctx, project(np[0], np[1]), el.name, { size: 14 * SCALE, bg: "rgba(58,13,18,0.82)", fg: "#fff8e6", center: true }); }
   } else if (el.kind === "line") {
     ctx.beginPath();
     el.points.forEach((pt, i) => { const p = project(pt[0], pt[1]); i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); });
@@ -839,6 +850,33 @@ function strokeSeg(ctx, project, a, b, color, w) {
   const pa = project(a[0], a[1]), pb = project(b[0], b[1]);
   ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
   ctx.lineCap = "round"; ctx.lineWidth = w * SCALE; ctx.strokeStyle = color; ctx.stroke();
+}
+
+// Fan wedge label: Left/Center/Right (home-plate view) or letters/numbers.
+function fanLabel(el, index) {
+  return el.scheme === "lcr" ? Geo.lcrLabel(index, el.wedges) : Geo.cellLabel(index, el.scheme, el.startIndex);
+}
+
+// Cross-hatched "Stay off the infield" no-go zone on export.
+function drawInfield(ctx, project, inf) {
+  const pts = inf.ring.map((c) => project(c[0], c[1]));
+  ctx.save();
+  ctx.beginPath();
+  pts.forEach((p, i) => (i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)));
+  ctx.closePath();
+  ctx.fillStyle = "rgba(209,19,19,0.16)"; ctx.fill();
+  ctx.save();
+  ctx.clip();
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  pts.forEach((p) => { minX = Math.min(minX, p.x); minY = Math.min(minY, p.y); maxX = Math.max(maxX, p.x); maxY = Math.max(maxY, p.y); });
+  const span = maxY - minY, step = 11 * SCALE;
+  ctx.strokeStyle = "rgba(255,255,255,0.55)"; ctx.lineWidth = 1.2 * SCALE;
+  for (let x = minX - span; x < maxX; x += step) { ctx.beginPath(); ctx.moveTo(x, minY); ctx.lineTo(x + span, maxY); ctx.stroke(); }
+  for (let x = minX; x < maxX + span; x += step) { ctx.beginPath(); ctx.moveTo(x, minY); ctx.lineTo(x - span, maxY); ctx.stroke(); }
+  ctx.restore();
+  ctx.strokeStyle = "rgba(255,255,255,0.9)"; ctx.lineWidth = 2 * SCALE; ctx.stroke();
+  ctx.restore();
+  textBox(ctx, project(inf.center[0], inf.center[1]), "Stay off the infield", { size: 12 * SCALE, bg: "rgba(142,41,41,0.92)", fg: "#fff", center: true });
 }
 
 // Thin white pitch markings (halfway line, center circle + dot, goals) on export.
