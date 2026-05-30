@@ -57,7 +57,7 @@ export default {
         return await handleApi(request, env, url, auth);
       } catch (err) {
         console.error("API error:", err && err.stack ? err.stack : String(err));
-        return json({ error: "Internal error", detail: String(err && err.message || err) }, 500);
+        return json({ error: "Server error: " + String((err && err.message) || err) }, 500);
       }
     }
 
