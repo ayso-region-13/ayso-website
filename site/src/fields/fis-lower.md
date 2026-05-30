@@ -2,6 +2,8 @@
 title: "Foothill Intermediate School — Lower (FIS Lower)"
 layout: page.njk
 section: fields
+complex: fis
+complexName: "Foothill Intermediate (FIS)"
 placeAddress: "Cornishon Ave & Atlee Dr"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"

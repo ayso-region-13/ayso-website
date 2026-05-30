@@ -2,6 +2,8 @@
 title: "Cornishon Field"
 layout: page.njk
 section: fields
+complex: fis
+complexName: "Foothill Intermediate (FIS)"
 placeAddress: "4429 Cornishon Ave"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
@@ -23,12 +25,6 @@ Cornishon is a smaller practice field in La Cañada, located near FIS Upper and 
 [4429 Cornishon Ave, La Cañada CA 91011](https://maps.google.com/?q=4429+Cornishon+Ave,+La+Canada+Flintridge,+CA+91011)
 
 <iframe src="https://maps.google.com/maps?q=4429+Cornishon+Ave,+La+Canada+Flintridge,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-## Field Layouts
-
-![Cornishon — 10U field, 130' x 180'](/images/fields/cornishon-10u-map.jpg)
-
-![Cornishon, FIS Upper, and FIS Lower — parking overview showing the three adjacent fields](/images/fields/cornishon-fis-overview.jpg)
 
 ## Parking
 

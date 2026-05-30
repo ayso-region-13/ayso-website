@@ -300,6 +300,35 @@ module.exports = function (eleventyConfig) {
   // raw frontmatter / filename is the only reliable signal for "intentional"
   // date.
   const matter = require("gray-matter");
+  // --- Collection: field complexes ---
+  // Groups field pages that share a `complex` frontmatter slug (e.g. the three
+  // FIS fields) so member pages can cross-link siblings and share one wayfinder.
+  // Each complex also resolves a shared wayfinder by reading the member
+  // fieldmaps JSON for the first member that has a `wayfinder` variant.
+  eleventyConfig.addCollection("complexes", function (collectionApi) {
+    const fields = collectionApi.getFilteredByGlob("src/fields/*.md");
+    const map = {};
+    fields.forEach((f) => {
+      const cx = f.data.complex;
+      if (!cx) return;
+      if (!map[cx]) map[cx] = { slug: cx, name: f.data.complexName || cx, members: [], wayfinder: null };
+      if (f.data.complexName) map[cx].name = f.data.complexName;
+      map[cx].members.push({ slug: f.fileSlug, title: f.data.title, url: f.url });
+    });
+    Object.keys(map).forEach((cx) => {
+      for (const m of map[cx].members) {
+        try {
+          const doc = JSON.parse(fs.readFileSync(path.join(__dirname, "src/_data/fieldmaps", m.slug + ".json"), "utf8"));
+          if (doc.variants && doc.variants.wayfinder) {
+            map[cx].wayfinder = Object.assign({}, doc.variants.wayfinder, { hostSlug: m.slug });
+            break;
+          }
+        } catch (_) { /* member has no saved map yet */ }
+      }
+    });
+    return map;
+  });
+
   eleventyConfig.addCollection("qaAnswers", function(collectionApi) {
     const items = collectionApi.getFilteredByGlob("src/referees/qa/*.md")
       .map(item => {

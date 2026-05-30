@@ -99,10 +99,23 @@ layout: base.njk
       {# Maps render at the top of the article (after the TOC, before the prose),
          so the page reads: address → field maps → Location/directions → rest.
          Order: game, then practice, then any other named layouts (e.g. "A"/"B"). #}
-      {% if section == "fields" and fieldmaps and fieldmaps[page.fileSlug] and fieldmaps[page.fileSlug].variants %}
+      {% if section == "fields" %}
       {% set fmaps = fieldmaps[page.fileSlug] %}
-      {# Each map is its own anchored section so the in-page TOC links to it
-         ("Field Map for Games", "Field Map for Practices", or the layout name). #}
+      {% set cx = complex and collections.complexes[complex] %}
+      {% set cxWayfinder = cx and cx.wayfinder %}
+
+      {# Cross-link to sibling fields in the same complex (e.g. the FIS fields). #}
+      {% if cx and cx.members.length > 1 %}
+      <p class="not-prose mb-5 max-w-3xl text-sm bg-brand-cream rounded-lg p-3">
+        <span class="font-semibold text-brand-red-dark">Part of {{ cx.name }}:</span>
+        {% for m in cx.members %}{% if m.slug != page.fileSlug %}<a href="{{ m.url }}" class="ml-1 font-medium text-brand-red-dark underline hover:text-brand-dark">{{ m.title }}</a>{% endif %}{% endfor %}
+      </p>
+      {% endif %}
+
+      {# Field Maps — own game/practice maps, plus a shared complex wayfinder.
+         Each map is its own anchored section so the in-page TOC links to it.
+         Order: address → maps → Location/directions → rest. #}
+      {% if (fmaps and fmaps.variants) or cxWayfinder %}
       {% macro mapsection(v, heading, anchor) %}
       <section class="not-prose mb-6 max-w-3xl">
         <h2 id="{{ anchor }}" class="text-lg font-bold text-brand-red-dark mb-3">{{ heading }}</h2>
@@ -120,10 +133,15 @@ layout: base.njk
             integrity="sha384-GPAzSuZc0kFvdIev6wm9zg8gnafE8tLso7rsAYQfc9hAdWCpOcpcNI5W9lWkYcsd"
             crossorigin="anonymous">
       <div data-field-maps>
+        {% if fmaps and fmaps.variants %}
         {% if fmaps.variants.game %}{{ mapsection(fmaps.variants.game, "Field Map for Games", "field-map-games") }}{% endif %}
         {% if fmaps.variants.practice %}{{ mapsection(fmaps.variants.practice, "Field Map for Practices", "field-map-practices") }}{% endif %}
-        {% if fmaps.variants.wayfinder %}{{ mapsection(fmaps.variants.wayfinder, "Getting Around", "field-map-wayfinder") }}{% endif %}
+        {# Own wayfinder only when NOT in a complex — complexes share one below. #}
+        {% if fmaps.variants.wayfinder and not complex %}{{ mapsection(fmaps.variants.wayfinder, "Getting Around", "field-map-wayfinder") }}{% endif %}
         {% for vid, v in fmaps.variants %}{% if vid != "game" and vid != "practice" and vid != "wayfinder" %}{{ mapsection(v, "Field Map — " + (v.label or vid), "field-map-" + vid) }}{% endif %}{% endfor %}
+        {% endif %}
+        {# Shared wayfinder for the whole complex (hosted on one member). #}
+        {% if cxWayfinder %}{{ mapsection(cxWayfinder, "Getting Around — " + cx.name, "field-map-wayfinder") }}{% endif %}
       </div>
       <script src="https://cdn.jsdelivr.net/npm/glightbox@3.3.1/dist/js/glightbox.min.js"
               integrity="sha384-MZZbZ6RXJudK43v1qY1zOWKOU2yfeBPatuFoKyHAaAgHTUZhwblRTc9CphTt4IGQ"
@@ -134,6 +152,7 @@ layout: base.njk
           if (document.readyState !== 'loading') init(); else document.addEventListener('DOMContentLoaded', init);
         })();
       </script>
+      {% endif %}
       {% endif %}
 
       <div class="prose max-w-3xl">

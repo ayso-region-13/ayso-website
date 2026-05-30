@@ -3,6 +3,8 @@
 title: "Rose Bowl Area H"
 layout: page.njk
 section: fields
+complex: rose-bowl
+complexName: "Rose Bowl Area"
 placeAddress: "1001 Rose Bowl Dr"
 placeLocality: "Pasadena"
 placePostalCode: "91103"

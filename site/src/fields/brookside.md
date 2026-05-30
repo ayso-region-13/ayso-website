@@ -3,6 +3,8 @@
 title: "Brookside Park"
 layout: page.njk
 section: fields
+complex: rose-bowl
+complexName: "Rose Bowl Area"
 placeAddress: "460 N Arroyo Blvd"
 placeLocality: "Pasadena"
 placePostalCode: "91103"

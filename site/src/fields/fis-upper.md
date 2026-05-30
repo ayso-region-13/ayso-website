@@ -2,6 +2,8 @@
 title: "Foothill Intermediate School — Upper (FIS Upper)"
 layout: page.njk
 section: fields
+complex: fis
+complexName: "Foothill Intermediate (FIS)"
 placeAddress: "4471 Chevy Chase Dr"
 placeLocality: "La Cañada Flintridge"
 placePostalCode: "91011"
