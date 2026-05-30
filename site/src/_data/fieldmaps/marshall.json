@@ -100,6 +100,123 @@
       "png": "/images/fields/marshall-game.png",
       "alt": "Marshall Fundamental game field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "games-10u": {
+      "label": "Games - 10U",
+      "view": {
+        "center": [
+          -118.11101014069396,
+          34.16334856346836
+        ],
+        "zoom": 17.417329152146404,
+        "bearing": 0,
+        "frameMeters": 370,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e74",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.11092627181309,
+            34.16409521415085
+          ],
+          "rotationDeg": 178,
+          "locked": true
+        },
+        {
+          "id": "e75",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.11014055282884,
+            34.164120781066615
+          ],
+          "locked": true
+        },
+        {
+          "id": "e76",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.1114780407631,
+            34.163419515044694
+          ],
+          "locked": true
+        },
+        {
+          "id": "e77",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.1112571786894,
+            34.16294122636016
+          ],
+          "locked": true
+        },
+        {
+          "id": "e78",
+          "kind": "text",
+          "center": [
+            -118.11170838364153,
+            34.163425650298464
+          ],
+          "text": "Men's",
+          "color": "#83312d",
+          "size": 18,
+          "locked": true
+        },
+        {
+          "id": "e79",
+          "kind": "text",
+          "center": [
+            -118.11152416376784,
+            34.162947749093235
+          ],
+          "text": "Women's",
+          "color": "#83312d",
+          "size": 18,
+          "locked": true
+        },
+        {
+          "id": "e80",
+          "kind": "field",
+          "center": [
+            -118.11032733018888,
+            34.163663333124646
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "Marshall 1",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e81",
+          "kind": "field",
+          "center": [
+            -118.10973376468058,
+            34.16366231339431
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "Marshall 2",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true,
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/marshall-games-10u.png",
+      "alt": "Marshall Fundamental games-10u field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
