@@ -144,6 +144,78 @@
       "png": "/images/fields/fis-lower-wayfinder.png",
       "alt": "Foothill Intermediate School — Lower (FIS Lower) wayfinder field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "game": {
+      "label": "Game Day Layout",
+      "view": {
+        "center": [
+          -118.20301822445703,
+          34.203759427633955
+        ],
+        "zoom": 18.304163332560787,
+        "bearing": 0,
+        "frameMeters": 200,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e20",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.20340363592132,
+            34.20332313246806
+          ]
+        },
+        {
+          "id": "e21",
+          "kind": "field",
+          "center": [
+            -118.20267572541131,
+            34.20360269298632
+          ],
+          "widthM": 46,
+          "lengthM": 84,
+          "rotationDeg": 270,
+          "name": "",
+          "ageGroup": "12U",
+          "preset": "custom",
+          "markHome": true
+        },
+        {
+          "id": "e22",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.2036787704717,
+            34.20377459675946
+          ]
+        },
+        {
+          "id": "e23",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.20316370100642,
+            34.20400912743206
+          ]
+        },
+        {
+          "id": "e24",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.20376557993174,
+            34.20344673135655
+          ],
+          "rotationDeg": 91
+        }
+      ],
+      "png": "/images/fields/fis-lower-game.png",
+      "alt": "Foothill Intermediate School — Lower (FIS Lower) game field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
