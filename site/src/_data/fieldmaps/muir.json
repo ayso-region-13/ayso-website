@@ -168,6 +168,127 @@
       "png": "/images/fields/muir-wayfinder.png",
       "alt": "Muir High School North wayfinder field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "game": {
+      "label": "Game Day Layout",
+      "view": {
+        "center": [
+          -118.16653471421218,
+          34.18227984680273
+        ],
+        "zoom": 16.954033551186807,
+        "bearing": 0,
+        "frameMeters": 510,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e28",
+          "kind": "field",
+          "center": [
+            -118.16646992062252,
+            34.1817056184548
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 0,
+          "name": "",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e29",
+          "kind": "field",
+          "center": [
+            -118.16596547384859,
+            34.18112261165126
+          ],
+          "widthM": 46,
+          "lengthM": 73,
+          "rotationDeg": 270,
+          "name": "",
+          "ageGroup": "12U",
+          "preset": "12U",
+          "markHome": true
+        },
+        {
+          "id": "e30",
+          "kind": "infield",
+          "center": [
+            -118.16563164877799,
+            34.18193882007279
+          ],
+          "radiusM": 50,
+          "startDeg": 179.99994577602314,
+          "sweepDeg": 90
+        },
+        {
+          "id": "e31",
+          "kind": "infield",
+          "center": [
+            -118.1644150418532,
+            34.181871314421926
+          ],
+          "radiusM": 100,
+          "startDeg": 180.2766817407459,
+          "sweepDeg": 90
+        },
+        {
+          "id": "e32",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.16653285195599,
+            34.181009616926275
+          ]
+        },
+        {
+          "id": "e33",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.16617652457323,
+            34.18085320405774
+          ]
+        },
+        {
+          "id": "e34",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.16514390236168,
+            34.18081710873939
+          ]
+        },
+        {
+          "id": "e35",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.16647467605684,
+            34.180690774943855
+          ],
+          "rotationDeg": 7
+        },
+        {
+          "id": "e36",
+          "kind": "text",
+          "center": [
+            -118.16776908981504,
+            34.181845819089006
+          ],
+          "text": "Warning: Obey No Parking Signs",
+          "color": "#83312d",
+          "size": 18
+        }
+      ],
+      "png": "/images/fields/muir-game.png",
+      "alt": "Muir North game field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
