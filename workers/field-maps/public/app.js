@@ -376,6 +376,7 @@ function onClick(e) {
     el = { id, kind: "marker", type: state.tool, center: c };
     if (state.tool === "entrance") el.rotationDeg = 0;
   }
+  if (!confirmLayoutMatch(el.kind)) { state.tool = null; clearToolBtns(); return; }
   state.elements.push(el);
   state.tool = null; clearToolBtns();
   select(id);
@@ -383,6 +384,19 @@ function onClick(e) {
   setHint("Drag to move; drag handles to resize/rotate. Esc deselects.");
 }
 function clearToolBtns() { document.querySelectorAll(".tool.active").forEach((x) => x.classList.remove("active")); }
+
+// Warn on element/layout mismatches: a game Field on a Practice layout, or a
+// practice grid/fan on a Game layout. Returns false if the user cancels.
+function confirmLayoutMatch(kind) {
+  const v = state.variant || "";
+  if (kind === "field" && /practice/.test(v)) {
+    return confirm("This is a Practice layout, but you're adding a game Field.\nFields usually go on Game maps. Add it anyway?");
+  }
+  if ((kind === "grid" || kind === "fan") && /game/.test(v)) {
+    return confirm("This is a Game layout, but you're adding a practice " + (kind === "grid" ? "grid" : "fan") + ".\nThose usually go on Practice maps. Add it anyway?");
+  }
+  return true;
+}
 
 // ─── Interaction (move / resize / rotate / vertex) ─────────────────────────────
 function onDown(e) {
