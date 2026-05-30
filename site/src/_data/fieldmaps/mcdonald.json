@@ -1,0 +1,25 @@
+{
+  "field": "mcdonald",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "game": {
+      "label": "Game Day Layout",
+      "view": {
+        "center": [
+          -118.12788531935328,
+          34.16243021076524
+        ],
+        "zoom": 17.92635849274733,
+        "bearing": 0,
+        "frameMeters": 260,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [],
+      "png": "/images/fields/mcdonald-game.png",
+      "alt": "McDonald Park game field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
