@@ -24,11 +24,14 @@ const STYLE = "satellite-v9";
 const EARTH_CIRCUMFERENCE = 40075016.686, TILE = 512;
 
 const MARKER_TYPES = {
-  goal:     { color: "#2f6fed", code: "G", emoji: "🥅", name: "Goal" },
-  restroom: { color: "#6b3fa0", code: "R", emoji: "🚻", name: "Restroom" },
-  parking:  { color: "#1f8a4c", code: "P", emoji: "🅿️", name: "Parking" },
-  tent:     { color: "#d11313", code: "T", emoji: "⛺", name: "Field Host Tent" },
-  checkin:  { color: "#d11313", code: "C", emoji: "📷", name: "Picture-Day Check-in" },
+  goal:      { color: "#2f6fed", code: "G", emoji: "🥅", name: "Goal" },
+  restroom:  { color: "#6b3fa0", code: "R", emoji: "🚻", name: "Restroom" },
+  parking:   { color: "#1f8a4c", code: "P", emoji: "🅿️", name: "Parking" },
+  tent:      { color: "#d11313", code: "T", emoji: "⛺", name: "Field Host Tent" },
+  checkin:   { color: "#d11313", code: "C", emoji: "📷", name: "Picture-Day Check-in" },
+  equipment: { color: "#6b3fa0", code: "E", emoji: "🥅", name: "Equipment Storage" },
+  // Entrance is directional: a rotatable arrow; its text label stays upright.
+  entrance:  { color: "#15610e", code: "⬆", emoji: "⬆", name: "Entrance", arrow: true },
 };
 // Field size presets by AYSO age division → [widthM, lengthM]. Starting points
 // (small-sided field guidance); fine-tune by dragging or via width/length.
@@ -88,7 +91,7 @@ async function init() {
     map.addLayer({ id: "markers-c", type: "circle", source: "markers",
       paint: { "circle-radius": 12, "circle-color": ["get", "color"], "circle-stroke-width": 2, "circle-stroke-color": "#fff" } });
     map.addLayer({ id: "markers-code", type: "symbol", source: "markers",
-      layout: { "text-field": ["get", "code"], "text-size": 13, "text-allow-overlap": true },
+      layout: { "text-field": ["get", "code"], "text-size": 15, "text-allow-overlap": true, "text-rotate": ["coalesce", ["get", "rot"], 0] },
       paint: { "text-color": "#fff" } });
     map.addLayer({ id: "labels", type: "symbol", source: "labels",
       layout: { "text-field": ["get", "text"], "text-size": ["coalesce", ["get", "size"], 13], "text-allow-overlap": true, "text-anchor": "center" },
@@ -371,6 +374,7 @@ function onClick(e) {
     el = { id, kind: "text", center: c, text, color: "#83312d", size: 18 };
   } else {
     el = { id, kind: "marker", type: state.tool, center: c };
+    if (state.tool === "entrance") el.rotationDeg = 0;
   }
   state.elements.push(el);
   state.tool = null; clearToolBtns();
@@ -392,13 +396,17 @@ function onDown(e) {
     return;
   }
   const b = pick(e.point, ["shapes-fill", "shapes-line", "markers-c", "labels", "sidelines"]);
-  // Pick the topmost element that isn't locked, so clicks pass through a locked
-  // outer box to the fields drawn on top of it.
-  let eid = null;
+  // Choose the best non-locked element under the cursor. Prefer point-like
+  // elements (text, markers) over areas (field/grid/fan/line) so a text label or
+  // marker sitting on top of a field is selectable instead of grabbing the field.
+  let eid = null, bestRank = 99;
+  const rankOf = (k) => (k === "text" || k === "marker" ? 0 : k === "line" ? 1 : 2);
   for (let i = 0; i < b.length; i++) {
     const id = b[i].properties && b[i].properties.eid;
     const el = id && byId(id);
-    if (el && !el.locked) { eid = id; break; }
+    if (!el || el.locked) continue;
+    const r = rankOf(el.kind);
+    if (r < bestRank) { eid = id; bestRank = r; if (r === 0) break; }
   }
   if (eid) {
     select(eid);
@@ -434,6 +442,8 @@ function onMove(e) {
     if (el.innerRadiusM > el.radiusM - 5) el.innerRadiusM = Math.max(5, el.radiusM - 5);
   } else if (state.drag.mode === "faninner" && el.kind === "fan") {
     el.innerRadiusM = Math.max(5, Math.min(el.radiusM - 5, Math.round(Geo.distanceM(el.center, cur))));
+  } else if (state.drag.mode === "markerrot") {
+    el.rotationDeg = Math.round(Geo.bearingDeg(el.center, cur));
   }
   rebuildMap(); // map only during drag — panel refreshes on mouseup (keeps perf + focus)
 }
@@ -442,7 +452,7 @@ function onUp() { if (state.drag) { state.drag = null; map.dragPan.enable(); ren
 function pick(pt, layers) {
   const present = layers.filter((l) => map.getLayer(l));
   if (!present.length) return [];
-  return map.queryRenderedFeatures([[pt.x - 8, pt.y - 8], [pt.x + 8, pt.y + 8]], { layers: present });
+  return map.queryRenderedFeatures([[pt.x - 11, pt.y - 11], [pt.x + 11, pt.y + 11]], { layers: present });
 }
 
 // ─── Build all map sources from state ──────────────────────────────────────────
@@ -499,7 +509,7 @@ function rebuildMap() {
       labels.push(label(el.center, el.text, el.id, { size: el.size || 18, color: el.color }));
     } else if (el.kind === "marker") {
       const t = MARKER_TYPES[el.type];
-      markers.push({ type: "Feature", properties: { eid: el.id, color: t.color, code: t.code }, geometry: { type: "Point", coordinates: el.center } });
+      markers.push({ type: "Feature", properties: { eid: el.id, color: t.color, code: t.code, rot: el.rotationDeg || 0 }, geometry: { type: "Point", coordinates: el.center } });
     }
   });
 
@@ -516,11 +526,14 @@ function rebuildMap() {
     } else if (sel.kind === "fan") {
       handles.push(handle(Geo.fanArcPoint(sel.center, sel.radiusM, sel.startDeg, sel.sweepDeg), sel.id, "fanarc"));
       handles.push(handle(Geo.fanArcPoint(sel.center, sel.innerRadiusM, sel.startDeg, sel.sweepDeg), sel.id, "faninner"));
+    } else if (sel.kind === "marker" && MARKER_TYPES[sel.type].arrow) {
+      handles.push(handle(Geo.fanArcPoint(sel.center, 12, sel.rotationDeg || 0, 0), sel.id, "markerrot"));
     }
   }
 
   setData("shapes", shapes); setData("sidelines", sidelines);
   setData("labels", labels); setData("markers", markers); setData("handles", handles);
+  if (state.frameBox) updateReservedZones(state.frameBox); // legend size tracks marker count
 }
 function rebuild() { rebuildMap(); renderSelPanel(); renderElemList(); }
 function setData(id, features) { const s = map.getSource(id); if (s) s.setData(fc(features)); }
@@ -694,6 +707,31 @@ function applyFrameBox() {
   const b = state.frameBox, el = document.getElementById("frameBox");
   el.style.left = b.x + "px"; el.style.top = b.y + "px";
   el.style.width = b.w + "px"; el.style.height = b.h + "px";
+  updateReservedZones(b);
+}
+
+// Show where the export title + legend will sit (scaled to the frame), so the
+// user avoids placing elements under them. Sizes mirror the export layout.
+function updateReservedZones(b) {
+  const sx = b.w / OUT_W, sy = b.h / OUT_H;
+  const title = document.getElementById("titleZone");
+  if (title) {
+    title.style.left = 12 * sx + "px"; title.style.top = 12 * sy + "px";
+    title.style.width = 320 * sx + "px"; title.style.height = 58 * sy + "px";
+  }
+  const legend = document.getElementById("legendZone");
+  if (legend) {
+    const types = new Set(state.elements.filter((e) => e.kind === "marker").map((e) => e.type)).size;
+    let items = types + (state.elements.some((e) => e.kind === "field" && e.markHome) ? 2 : 0);
+    if (items === 0) { legend.style.display = "none"; }
+    else {
+      legend.style.display = "flex";
+      const hLogical = items * 24 + 24, wLogical = 210;
+      legend.style.left = 12 * sx + "px";
+      legend.style.top = (OUT_H - 12 - hLogical) * sy + "px";
+      legend.style.width = wLogical * sx + "px"; legend.style.height = hLogical * sy + "px";
+    }
+  }
 }
 function syncMetersReadout() {
   if (state.frameBox) document.getElementById("frameMeters").value = clampMeters(Math.round(state.frameBox.w * mppNow() / 10) * 10);
@@ -852,12 +890,16 @@ function drawElement(ctx, project, el) {
     textBox(ctx, p, el.text, { size: (el.size || 18) * SCALE, bg: "rgba(255,255,255,0.95)", fg: el.color || "#83312d", center: true });
   } else if (el.kind === "marker") {
     const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 19 * SCALE;
-    // White badge with a colored ring, large emoji glyph, and the name in a
-    // white pill to the right (reads on grass).
+    // White badge with a colored ring; emoji glyph (or a rotatable arrow for the
+    // entrance), and the name in an upright white pill to the right.
     ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = "#fff"; ctx.fill();
     ctx.lineWidth = 3 * SCALE; ctx.strokeStyle = t.color; ctx.stroke();
-    ctx.font = `${24 * SCALE}px ${EMOJI_FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
-    ctx.fillText(t.emoji, p.x, p.y + SCALE);
+    if (t.arrow) {
+      drawArrow(ctx, p.x, p.y, r, el.rotationDeg || 0, t.color);
+    } else {
+      ctx.font = `${24 * SCALE}px ${EMOJI_FONT}`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(t.emoji, p.x, p.y + SCALE);
+    }
     textBox(ctx, { x: p.x + r + 5 * SCALE, y: p.y }, t.name, { size: 13 * SCALE, bg: "rgba(255,255,255,0.92)", fg: "#221f1f", left: true });
   }
 }
@@ -905,6 +947,26 @@ function drawInfield(ctx, project, inf) {
   ctx.strokeStyle = "rgba(255,255,255,0.9)"; ctx.lineWidth = 2 * SCALE; ctx.stroke();
   ctx.restore();
   textBox(ctx, project(inf.center[0], inf.center[1]), "Stay off the infield", { size: 12 * SCALE, bg: "rgba(142,41,41,0.92)", fg: "#fff", center: true });
+}
+
+// A filled arrow within a marker badge, pointing at `deg` (0 = north).
+function drawArrow(ctx, cx, cy, r, deg, color) {
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.rotate((deg * Math.PI) / 180);
+  ctx.fillStyle = color;
+  const s = r * 0.9;
+  ctx.beginPath();
+  ctx.moveTo(0, -s);
+  ctx.lineTo(s * 0.6, -s * 0.05);
+  ctx.lineTo(s * 0.24, -s * 0.05);
+  ctx.lineTo(s * 0.24, s * 0.7);
+  ctx.lineTo(-s * 0.24, s * 0.7);
+  ctx.lineTo(-s * 0.24, -s * 0.05);
+  ctx.lineTo(-s * 0.6, -s * 0.05);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
 }
 
 // Thin white pitch markings (halfway line, center circle + dot, goals) on export.

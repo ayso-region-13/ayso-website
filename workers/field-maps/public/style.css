@@ -82,6 +82,23 @@ main { flex: 1; display: flex; min-height: 0; }
   border-radius: 2px;
 }
 #frameBox.locked { border-style: solid; border-color: var(--gold); }
+/* Reserved zones — show where the title (top-left) + legend (bottom-left) land
+   on export, so you don't place elements under them. Light-gray cross-hatch. */
+.reserved {
+  position: absolute;
+  pointer-events: none;
+  border: 1px dashed rgba(50,50,50,0.55);
+  border-radius: 4px;
+  background-color: rgba(255,255,255,0.28);
+  background-image:
+    repeating-linear-gradient(45deg, rgba(70,70,70,0.20) 0 2px, transparent 2px 9px),
+    repeating-linear-gradient(-45deg, rgba(70,70,70,0.20) 0 2px, transparent 2px 9px);
+  display: flex; align-items: flex-start; justify-content: center;
+}
+.reserved span {
+  font-size: 10px; font-weight: 700; color: #3a3a3a;
+  background: rgba(255,255,255,0.85); padding: 0 5px; border-radius: 0 0 3px 3px;
+}
 #frameLockBtn.active { background: var(--gold); border-color: var(--gold); font-weight: 600; }
 /* Corner grip to drag-resize the export frame (the rest of the overlay stays
    pointer-events:none so the map is interactive inside the frame). */

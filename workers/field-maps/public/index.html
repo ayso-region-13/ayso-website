@@ -47,7 +47,11 @@
   <main>
     <section id="mapWrap">
       <div id="map"></div>
-      <div id="frameOverlay" aria-hidden="true"><div id="frameBox"><div id="frameHandle" title="Drag to resize the export frame"></div></div></div>
+      <div id="frameOverlay" aria-hidden="true"><div id="frameBox">
+        <div id="titleZone" class="reserved"><span>Title</span></div>
+        <div id="legendZone" class="reserved"><span>Legend</span></div>
+        <div id="frameHandle" title="Drag to resize the export frame"></div>
+      </div></div>
     </section>
 
     <aside id="panel">
@@ -61,9 +65,11 @@
           <button type="button" data-tool="goal"     class="tool">🥅 Goal</button>
           <button type="button" data-tool="restroom" class="tool">🚻 Restroom</button>
           <button type="button" data-tool="parking"  class="tool">🅿️ Parking</button>
-          <button type="button" data-tool="tent"     class="tool">⛺ Host tent</button>
-          <button type="button" data-tool="checkin"  class="tool">📷 Check-in</button>
-          <button type="button" data-tool="word"     class="tool">🅰 Word</button>
+          <button type="button" data-tool="tent"      class="tool">⛺ Host tent</button>
+          <button type="button" data-tool="checkin"   class="tool">📷 Check-in</button>
+          <button type="button" data-tool="entrance"  class="tool">⬆ Entrance</button>
+          <button type="button" data-tool="equipment" class="tool">🥅 Equipment</button>
+          <button type="button" data-tool="word"      class="tool">🅰 Word</button>
         </div>
         <p class="hint" id="toolHint">Pick a field to begin. Click a tool, then click the map to place. Drag to move; drag handles to resize/rotate. Esc cancels.</p>
       </div>
