@@ -2,42 +2,6 @@
   "field": "allendale",
   "styleVersion": "satellite-v9",
   "variants": {
-    "game": {
-      "label": "Game Day Layout",
-      "view": {
-        "center": [
-          -118.14481699999982,
-          34.12616800268427
-        ],
-        "zoom": 18.305489343961018,
-        "bearing": 0,
-        "frameMeters": 200,
-        "width": 1000,
-        "height": 750,
-        "scale": 2
-      },
-      "elements": [
-        {
-          "id": "e1",
-          "kind": "fan",
-          "center": [
-            -118.14482176999364,
-            34.125981284648745
-          ],
-          "innerRadiusM": 29,
-          "radiusM": 55,
-          "startDeg": -1.123160424437117,
-          "sweepDeg": 90,
-          "wedges": 3,
-          "scheme": "lcr",
-          "startIndex": 0,
-          "name": ""
-        }
-      ],
-      "png": "/images/fields/allendale-game.png",
-      "alt": "Allendale Park game field map",
-      "updatedBy": "matthew@ayso13.org"
-    },
     "practice": {
       "label": "Practice Layout",
       "view": {

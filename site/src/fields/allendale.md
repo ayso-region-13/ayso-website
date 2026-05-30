@@ -25,8 +25,6 @@ Allendale Park is a practice field and serves as the primary parking lot for AYS
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7113.036348560157!2d-118.14481699999999!3d34.126168!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c49b038be929%3A0x445974ed9eefe831!2sAllendale%20Park!5e1!3m2!1sen!2sus!4v1776620933925!5m2!1sen!2sus" title="Allendale Park map" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-![Allendale Field](/images/fields/allendale-field.jpg)
-
 ## Parking for Blair
 
 Allendale Park and the library provide parking for families attending practices and games at Blair High School.
