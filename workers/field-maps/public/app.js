@@ -385,6 +385,11 @@ function rebuildMap() {
     if (el.kind === "field") {
       const ring = Geo.rectRing(el.center, el.widthM, el.lengthM, el.rotationDeg);
       shapes.push(poly(ring, el.id, { fill: "#f74b4b", stroke: "#ffffff", strokeW: 2 }));
+      // Thin white pitch markings (halfway line, center circle, goals).
+      const mk = Geo.fieldMarkings(el.center, el.widthM, el.lengthM, el.rotationDeg);
+      shapes.push(lineFeat(mk.halfway, el.id, { stroke: "#ffffff", strokeW: 1.5 }));
+      shapes.push(lineFeat(mk.circle, el.id, { stroke: "#ffffff", strokeW: 1.5 }));
+      mk.goals.forEach((g) => shapes.push(lineFeat(g, el.id, { stroke: "#ffffff", strokeW: 1.5 })));
       const txt = [el.name, el.ageGroup].filter(Boolean).join("\n");
       if (txt) labels.push(label(Geo.centroid(ring), txt, el.id, { size: 15 }));
       if (el.markHome) {
@@ -696,6 +701,7 @@ function drawElement(ctx, project, el) {
   if (el.kind === "field") {
     const ring = Geo.rectRing(el.center, el.widthM, el.lengthM, el.rotationDeg);
     fillStrokeRing(ctx, project, ring, "rgba(247,75,75,0.14)", "#ffffff", 3, "#83312d");
+    drawMarkings(ctx, project, Geo.fieldMarkings(el.center, el.widthM, el.lengthM, el.rotationDeg));
     if (el.markHome) {
       const ha = Geo.homeAway(ring);
       if (ha) {
@@ -758,6 +764,22 @@ function strokeSeg(ctx, project, a, b, color, w) {
   const pa = project(a[0], a[1]), pb = project(b[0], b[1]);
   ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
   ctx.lineCap = "round"; ctx.lineWidth = w * SCALE; ctx.strokeStyle = color; ctx.stroke();
+}
+
+// Thin white pitch markings (halfway line, center circle + dot, goals) on export.
+function drawMarkings(ctx, project, mk) {
+  ctx.strokeStyle = "rgba(255,255,255,0.9)"; ctx.lineWidth = 1.5 * SCALE; ctx.lineCap = "round";
+  const line = (pts, close) => {
+    ctx.beginPath();
+    pts.forEach((c, i) => { const p = project(c[0], c[1]); i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); });
+    if (close) ctx.closePath();
+    ctx.stroke();
+  };
+  line(mk.halfway, false);
+  line(mk.circle, true);
+  mk.goals.forEach((g) => line(g, true));
+  const d = project(mk.dot[0], mk.dot[1]);
+  ctx.beginPath(); ctx.arc(d.x, d.y, 2 * SCALE, 0, Math.PI * 2); ctx.fillStyle = "rgba(255,255,255,0.9)"; ctx.fill();
 }
 
 // A pill label centered on a touchline and rotated to run along it (kept upright).

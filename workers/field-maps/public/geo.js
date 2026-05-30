@@ -176,6 +176,41 @@
     return out;
   }
 
+  // Soccer-pitch markings for a field rectangle, returned as geo geometries so
+  // both the live editor and the export can draw them. Length is the goal-to-goal
+  // axis; goals sit at the two short ends, halfway line + center circle in the
+  // middle. All as LineStrings (the circle/goals are closed rings) so they draw
+  // as thin lines, not filled. Sizes scale with the field and are clamped so
+  // small-sided fields still look right.
+  function fieldMarkings(center, widthM, lengthM, rotationDeg) {
+    var hw = widthM / 2, hl = lengthM / 2;
+    var place = function (lx, ly) {
+      var o = rotateOffset(lx, ly, rotationDeg);
+      return destination(center, o[0], o[1]);
+    };
+    var halfway = [place(-hw, 0), place(hw, 0)];
+    var r = Math.max(2, Math.min(widthM, lengthM) * 0.15);
+    var circle = [];
+    for (var i = 0; i <= 40; i++) {
+      var a = (i / 40) * 2 * Math.PI;
+      circle.push(place(Math.cos(a) * r, Math.sin(a) * r));
+    }
+    var gw = Math.min(widthM * 0.5, 7.32) / 2; // half goal width
+    var gd = Math.max(1, Math.min(lengthM * 0.06, 2)); // net depth, outward
+    var goalAt = function (endY, dir) {
+      return [
+        place(-gw, endY), place(gw, endY),
+        place(gw, endY + dir * gd), place(-gw, endY + dir * gd), place(-gw, endY),
+      ];
+    };
+    return {
+      halfway: halfway,
+      circle: circle,
+      dot: center,
+      goals: [goalAt(hl, 1), goalAt(-hl, -1)],
+    };
+  }
+
   // Cell label for a given index under a scheme.
   function cellLabel(index, scheme, startIndex) {
     var start = startIndex || 0;
@@ -240,6 +275,7 @@
     bearingDeg: bearingDeg,
     gridCells: gridCells,
     cellLabel: cellLabel,
+    fieldMarkings: fieldMarkings,
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = Geo;
