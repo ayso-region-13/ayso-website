@@ -6,10 +6,10 @@
       "label": "Practice Layout",
       "view": {
         "center": [
-          -118.14745944827509,
-          34.17371174985777
+          -118.14745944827621,
+          34.17371174985938
         ],
-        "zoom": 17.456680389270296,
+        "zoom": 17.456680389270268,
         "bearing": 0,
         "frameMeters": 360,
         "width": 1000,
@@ -26,7 +26,8 @@
           ],
           "text": "Stay off Football Field",
           "color": "#83312d",
-          "size": 18
+          "size": 18,
+          "locked": true
         },
         {
           "id": "e42",
@@ -42,7 +43,8 @@
           "rows": 4,
           "scheme": "numbers",
           "startIndex": 0,
-          "name": ""
+          "name": "",
+          "locked": true
         },
         {
           "id": "e43",
@@ -58,7 +60,29 @@
           "rows": 2,
           "scheme": "numbers",
           "startIndex": 8,
-          "name": ""
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e44",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.14797613701512,
+            34.17419475395975
+          ],
+          "locked": true
+        },
+        {
+          "id": "e45",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.14792634522249,
+            34.17462386146353
+          ],
+          "rotationDeg": 177,
+          "locked": true
         }
       ],
       "png": "/images/fields/butler-practice.png",
