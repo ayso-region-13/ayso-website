@@ -6,34 +6,19 @@
       "label": "Game Day Layout",
       "view": {
         "center": [
-          -118.14349789545665,
-          34.12280463379443
+          -118.14442494407932,
+          34.12245570132167
         ],
-        "zoom": 17.498191813387866,
+        "zoom": 17.418027418364126,
         "bearing": 0,
-        "frameMeters": 350,
+        "frameMeters": 370,
         "width": 1000,
         "height": 750,
         "scale": 2
       },
       "elements": [
         {
-          "id": "e1",
-          "kind": "field",
-          "center": [
-            -118.14480571188491,
-            34.12323920419061
-          ],
-          "widthM": 37,
-          "lengthM": 55,
-          "rotationDeg": 318,
-          "name": "Blair Upper",
-          "ageGroup": "10U",
-          "preset": "10U",
-          "markHome": true
-        },
-        {
-          "id": "e2",
+          "id": "e12",
           "kind": "field",
           "center": [
             -118.14397548901692,
@@ -45,80 +30,91 @@
           "name": "",
           "ageGroup": "14U",
           "preset": "custom",
-          "markHome": true
+          "markHome": true,
+          "locked": true
         },
         {
-          "id": "e3",
+          "id": "e13",
           "kind": "marker",
           "type": "restroom",
           "center": [
             -118.14393202185084,
             34.12277141672621
-          ]
+          ],
+          "locked": true
         },
         {
-          "id": "e4",
+          "id": "e14",
           "kind": "text",
           "center": [
-            -118.14347561660938,
-            34.123478009503216
+            -118.14303918057558,
+            34.122891642795494
           ],
           "text": "No Parking in Neighborhood",
           "color": "#83312d",
-          "size": 18
+          "size": 18,
+          "locked": true
         },
         {
-          "id": "e5",
+          "id": "e15",
           "kind": "text",
           "center": [
-            -118.14463991630998,
-            34.12368165172249
+            -118.14379566299878,
+            34.12321374463643
           ],
-          "text": "\u2196Park at Allendale",
+          "text": "↖Park at Allendale",
           "color": "#83312d",
           "size": 18
         },
         {
-          "id": "e6",
+          "id": "e20",
           "kind": "marker",
           "type": "entrance",
           "center": [
-            -118.14462695130705,
-            34.123569937595306
+            -118.14272775131221,
+            34.121872337993594
+          ],
+          "rotationDeg": 225
+        },
+        {
+          "id": "e21",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.14453788765132,
+            34.12354260251119
           ],
           "rotationDeg": 234
         },
         {
-          "id": "e7",
-          "kind": "marker",
-          "type": "entrance",
-          "center": [
-            -118.14268285611976,
-            34.12181219886898
+          "id": "e22",
+          "kind": "arrow",
+          "points": [
+            [
+              -118.14469529081111,
+              34.1234182222437
+            ],
+            [
+              -118.14410860630696,
+              34.12285554731665
+            ]
           ],
-          "rotationDeg": 246
+          "color": "#83312d",
+          "width": 7,
+          "label": ""
         },
         {
-          "id": "e8",
+          "id": "e24",
           "kind": "marker",
           "type": "equipment",
           "center": [
-            -118.14477458437847,
-            34.12290140073979
-          ]
-        },
-        {
-          "id": "e9",
-          "kind": "marker",
-          "type": "equipment",
-          "center": [
-            -118.14305299959413,
-            34.12194303065857
+            -118.14323573423962,
+            34.12202041236462
           ]
         }
       ],
       "png": "/images/fields/blair-lower-game.png",
-      "alt": "Blair High School game field map",
+      "alt": "Blair Lower game field map",
       "updatedBy": "matthew@ayso13.org"
     }
   }
