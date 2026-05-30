@@ -185,6 +185,135 @@
       "png": "/images/fields/lchs-game-day-12u.png",
       "alt": "La Cañada High School (LCHS) game-day-12u field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.18019030845551,
+          34.19052450770428
+        ],
+        "zoom": 17.538855039964563,
+        "bearing": 0,
+        "frameMeters": 340,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e28",
+          "kind": "nogo",
+          "center": [
+            -118.18000771726399,
+            34.19095218873859
+          ],
+          "widthM": 89,
+          "lengthM": 89,
+          "rotationDeg": 335,
+          "label": "Do not use",
+          "locked": true
+        },
+        {
+          "id": "e29",
+          "kind": "infield",
+          "center": [
+            -118.17910693404815,
+            34.18991172716922
+          ],
+          "radiusM": 47,
+          "startDeg": 278.1300476478433,
+          "sweepDeg": 90,
+          "locked": true
+        },
+        {
+          "id": "e30",
+          "kind": "grid",
+          "center": [
+            -118.18005624328846,
+            34.190257566809564
+          ],
+          "widthM": 23,
+          "lengthM": 41,
+          "rotationDeg": 0,
+          "cols": 1,
+          "rows": 1,
+          "scheme": "numbers",
+          "startIndex": 0,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e32",
+          "kind": "grid",
+          "center": [
+            -118.17984933874484,
+            34.19035885732721
+          ],
+          "widthM": 16,
+          "lengthM": 39,
+          "rotationDeg": 0,
+          "cols": 1,
+          "rows": 1,
+          "scheme": "numbers",
+          "startIndex": 1,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e33",
+          "kind": "grid",
+          "center": [
+            -118.17976066536956,
+            34.19007594174103
+          ],
+          "widthM": 29,
+          "lengthM": 25,
+          "rotationDeg": 0,
+          "cols": 1,
+          "rows": 1,
+          "scheme": "numbers",
+          "startIndex": 2,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e34",
+          "kind": "grid",
+          "center": [
+            -118.17957065099321,
+            34.190446176973495
+          ],
+          "widthM": 33,
+          "lengthM": 40,
+          "rotationDeg": 0,
+          "cols": 1,
+          "rows": 2,
+          "scheme": "numbers",
+          "startIndex": 3,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e35",
+          "kind": "grid",
+          "center": [
+            -118.17925818290763,
+            34.19052651084151
+          ],
+          "widthM": 23,
+          "lengthM": 34,
+          "rotationDeg": 0,
+          "cols": 1,
+          "rows": 1,
+          "scheme": "numbers",
+          "startIndex": 5,
+          "name": ""
+        }
+      ],
+      "png": "/images/fields/lchs-practice.png",
+      "alt": "La Cañada High School (LCHS) practice field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
