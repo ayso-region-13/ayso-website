@@ -1,0 +1,188 @@
+{
+  "field": "mckinley",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "game": {
+      "label": "Game Day Layout",
+      "view": {
+        "center": [
+          -118.13613517422849,
+          34.13827662067666
+        ],
+        "zoom": 17.983354571290715,
+        "bearing": 0,
+        "frameMeters": 250,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e83",
+          "kind": "field",
+          "center": [
+            -118.13563425114434,
+            34.13809333092563
+          ],
+          "widthM": 46,
+          "lengthM": 73,
+          "rotationDeg": 0,
+          "name": "",
+          "ageGroup": "12U",
+          "preset": "12U",
+          "markHome": true,
+          "locked": true
+        },
+        {
+          "id": "e84",
+          "kind": "infield",
+          "center": [
+            -118.13588769435749,
+            34.137441802044876
+          ],
+          "radiusM": 30,
+          "startDeg": 0.36497453937408864,
+          "sweepDeg": 90,
+          "locked": true
+        },
+        {
+          "id": "e85",
+          "kind": "nogo",
+          "center": [
+            -118.13560741598029,
+            34.138663414585935
+          ],
+          "widthM": 58,
+          "lengthM": 32,
+          "rotationDeg": 0,
+          "label": "Do not use",
+          "locked": true
+        },
+        {
+          "id": "e86",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.13637370899119,
+            34.13882135917093
+          ],
+          "locked": true
+        },
+        {
+          "id": "e87",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.1349037383523,
+            34.13891267074851
+          ],
+          "locked": true
+        },
+        {
+          "id": "e88",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.1351989251539,
+            34.13898423920966
+          ],
+          "rotationDeg": 271,
+          "locked": true
+        },
+        {
+          "id": "e90",
+          "kind": "arrow",
+          "points": [
+            [
+              -118.13619191535787,
+              34.139087232883995
+            ],
+            [
+              -118.13618884436255,
+              34.138544205553885
+            ]
+          ],
+          "color": "#83312d",
+          "width": 7,
+          "label": "",
+          "locked": true
+        },
+        {
+          "id": "e91",
+          "kind": "arrow",
+          "points": [
+            [
+              -118.13619182606142,
+              34.13852939815747
+            ],
+            [
+              -118.13597714376895,
+              34.13852939815747
+            ]
+          ],
+          "color": "#83312d",
+          "width": 7,
+          "label": "",
+          "locked": true
+        },
+        {
+          "id": "e92",
+          "kind": "arrow",
+          "points": [
+            [
+              -118.13562025854424,
+              34.1390796414845
+            ],
+            [
+              -118.1361949725694,
+              34.13907711128235
+            ]
+          ],
+          "color": "#83312d",
+          "width": 7,
+          "label": "Walk this way",
+          "locked": true
+        },
+        {
+          "id": "e93",
+          "kind": "arrow",
+          "points": [
+            [
+              -118.13560497359715,
+              34.13896072189897
+            ],
+            [
+              -118.1356141445654,
+              34.13905433945702
+            ]
+          ],
+          "color": "#83312d",
+          "width": 7,
+          "label": "",
+          "locked": true
+        },
+        {
+          "id": "e95",
+          "kind": "arrow",
+          "points": [
+            [
+              -118.13532067357376,
+              34.138963252104645
+            ],
+            [
+              -118.13560497359715,
+              34.13896072189897
+            ]
+          ],
+          "color": "#83312d",
+          "width": 7,
+          "label": "",
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/mckinley-game.png",
+      "alt": "McKinley game field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
