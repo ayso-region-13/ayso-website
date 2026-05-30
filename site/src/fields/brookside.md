@@ -29,7 +29,7 @@ The park is the grassy space between Kidspace and the Rose Bowl Aquatic Center.
 
 <iframe src="https://maps.google.com/maps?q=460+N+Arroyo+Blvd,+Pasadena,+CA+91103&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-For the wider Rose Bowl area showing Brookside alongside Area H and Jackie Robinson, see the [Area H page](/fields/area-h/).
+For the wider Rose Bowl area, see the [Area H page](/fields/area-h/).
 
 ## Availability
 

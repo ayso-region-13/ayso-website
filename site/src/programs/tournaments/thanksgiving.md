@@ -13,7 +13,7 @@ The Thanksgiving Tournament is a three-day competition held the weekend after Th
 
 - When: Friday through Sunday following Thanksgiving
 - Ages: 10U, 12U, 14U
-- Location: Rose Bowl Area H (primary), plus Victory Park, Robinson Park, and Villa Parke
+- Location: Rose Bowl Area H (primary), plus Victory Park and Villa Parke
 - Format: Three guaranteed pool games plus playoff rounds
 - Open to: All interested teams (not limited to Region 13)
 
