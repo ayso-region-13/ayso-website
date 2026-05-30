@@ -93,6 +93,98 @@
       "png": "/images/fields/lchs-game.png",
       "alt": "La Cañada High School (LCHS) game field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "game-day-12u": {
+      "label": "Game Day - 12U",
+      "view": {
+        "center": [
+          -118.18029988707897,
+          34.190849058522616
+        ],
+        "zoom": 17.34091011052881,
+        "bearing": 0,
+        "frameMeters": 390,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e21",
+          "kind": "nogo",
+          "center": [
+            -118.17996361158242,
+            34.19101158409261
+          ],
+          "widthM": 91,
+          "lengthM": 95,
+          "rotationDeg": 336,
+          "label": "Do not use",
+          "locked": true
+        },
+        {
+          "id": "e22",
+          "kind": "infield",
+          "center": [
+            -118.17911817040965,
+            34.18991264128577
+          ],
+          "radiusM": 47,
+          "startDeg": 277.88308436188055,
+          "sweepDeg": 90,
+          "locked": true
+        },
+        {
+          "id": "e23",
+          "kind": "field",
+          "center": [
+            -118.17974445238723,
+            34.19038023953037
+          ],
+          "widthM": 46,
+          "lengthM": 73,
+          "rotationDeg": 66,
+          "name": "LCHS JV",
+          "ageGroup": "12U",
+          "preset": "12U",
+          "markHome": true,
+          "locked": false
+        },
+        {
+          "id": "e24",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.17877779798965,
+            34.19013515559979
+          ],
+          "locked": true
+        },
+        {
+          "id": "e25",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.18015575730368,
+            34.19003979237152
+          ],
+          "locked": true
+        },
+        {
+          "id": "e26",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.17877230811207,
+            34.19045303217182
+          ],
+          "rotationDeg": 272,
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/lchs-game-day-12u.png",
+      "alt": "La Cañada High School (LCHS) game-day-12u field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
