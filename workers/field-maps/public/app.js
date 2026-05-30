@@ -57,7 +57,7 @@ const EMOJI_FONT = '"Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", -
 // larger frame than per-field maps. Saved under slug "overview", variant "map".
 const OVERVIEW_STYLE = "streets-v12";
 const OVERVIEW_SLUG = "overview";
-const PLAY_COLOR = { game: "#1f8a4c", practice: "#d11313", both: "#1f8a4c" };
+const PLAY_COLOR = { game: "#d11313", practice: "#7a1010", both: "#d11313" };
 const PLAY_NAME = { game: "Game field", practice: "Practice field", both: "Game field" };
 function currentStyle() { return state.overview ? OVERVIEW_STYLE : STYLE; }
 
@@ -268,7 +268,7 @@ async function selectOverview() {
   document.querySelectorAll(".tool").forEach((b) => {
     b.style.display = (b.dataset.tool === "place" || b.dataset.tool === "word") ? "" : "none";
   });
-  setHint("Drag a pin to reposition it. Add a pin with “Field pin”. Save to publish the overview.");
+  setHint("Pins are fixed at each field's location — drag a field's label to move it (a leader line keeps it connected). Save to publish the overview.");
 
   state.doc = await fetchDoc(OVERVIEW_SLUG);
   if (state.doc && state.doc.variants && state.doc.variants.map && state.doc.variants.map.view && state.doc.variants.map.view.center) {
@@ -503,7 +503,11 @@ function onMove(e) {
   const cur = [e.lngLat.lng, e.lngLat.lat];
   if (state.drag.mode === "move") {
     const dLng = e.lngLat.lng - state.drag.last.lng, dLat = e.lngLat.lat - state.drag.last.lat;
-    if (el.points) el.points = el.points.map((p) => [p[0] + dLng, p[1] + dLat]);
+    if (el.kind === "place") {
+      // The pin stays at the field's true coordinates; dragging moves the label.
+      const base = el.label || el.center;
+      el.label = [base[0] + dLng, base[1] + dLat];
+    } else if (el.points) el.points = el.points.map((p) => [p[0] + dLng, p[1] + dLat]);
     else el.center = [el.center[0] + dLng, el.center[1] + dLat];
     state.drag.last = e.lngLat;
   } else if (state.drag.mode === "corner") {
@@ -600,8 +604,10 @@ function rebuildMap() {
       labels.push(label(el.center, el.text, el.id, { size: el.size || 18, color: el.color }));
     } else if (el.kind === "place") {
       const color = PLAY_COLOR[el.play] || PLAY_COLOR.game;
+      const lp = el.label || el.center; // pin is fixed at center; only the label moves
+      if (el.label && Geo.distanceM(el.center, el.label) > 2) shapes.push(lineFeat([el.center, el.label], el.id, { stroke: "#444", strokeW: 1 }));
       markers.push({ type: "Feature", properties: { eid: el.id, color, code: "" }, geometry: { type: "Point", coordinates: el.center } });
-      if (el.name) labels.push(label(el.center, el.name, el.id, { size: 13, color: "#ffffff" }));
+      if (el.name) labels.push(label(lp, el.name, el.id, { size: 13, color: "#ffffff" }));
     } else if (el.kind === "marker") {
       const t = MARKER_TYPES[el.type];
       markers.push({ type: "Feature", properties: { eid: el.id, color: t.color, code: t.code, rot: el.rotationDeg || 0 }, geometry: { type: "Point", coordinates: el.center } });
@@ -735,10 +741,10 @@ function renderSelPanel() {
   } else if (el.kind === "place") {
     html = `<label class="block">Field name<input data-k="name" value="${esc(el.name)}"></label>
       <label class="block">Type<select data-k="play">
-        <option value="game"${el.play==="game"?" selected":""}>Game field (green)</option>
-        <option value="practice"${el.play==="practice"?" selected":""}>Practice field (red)</option>
-        <option value="both"${el.play==="both"?" selected":""}>Game &amp; practice (green)</option></select></label>
-      <p class="hint">Drag the pin to reposition. Edit the name to declutter overlapping labels.</p>`;
+        <option value="game"${el.play==="game"?" selected":""}>Game field (red)</option>
+        <option value="practice"${el.play==="practice"?" selected":""}>Practice field (dark red)</option>
+        <option value="both"${el.play==="both"?" selected":""}>Game &amp; practice</option></select></label>
+      <p class="hint">The pin stays at the field's location; drag the label to move it. Edit the name to keep it short.</p>`;
   } else if (el.kind === "marker") {
     html = `<p>${MARKER_TYPES[el.type].name}</p><p class="hint">Drag to reposition.</p>`;
   }
@@ -1033,12 +1039,19 @@ function drawElement(ctx, project, el) {
     const p = project(el.center[0], el.center[1]);
     textBox(ctx, p, el.text, { size: (el.size || 18) * SCALE, bg: "rgba(255,255,255,0.95)", fg: el.color || "#83312d", center: true });
   } else if (el.kind === "place") {
-    // Region-overview pin: colored dot (game/practice) + name in a white pill.
+    // Region-overview pin: dot fixed at the field's coordinates; the name label
+    // can be dragged away (with a leader line) to declutter overlapping pins.
     const p = project(el.center[0], el.center[1]);
     const color = PLAY_COLOR[el.play] || PLAY_COLOR.game, r = 7 * SCALE;
+    const moved = el.label && Geo.distanceM(el.center, el.label) > 2;
+    const lp = moved ? project(el.label[0], el.label[1]) : null;
+    if (moved) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(lp.x, lp.y); ctx.strokeStyle = "rgba(40,40,40,0.7)"; ctx.lineWidth = 1.2 * SCALE; ctx.stroke(); }
     ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, Math.PI * 2); ctx.fillStyle = color; ctx.fill();
     ctx.lineWidth = 2 * SCALE; ctx.strokeStyle = "#fff"; ctx.stroke();
-    if (el.name) textBox(ctx, { x: p.x + r + 4 * SCALE, y: p.y }, el.name, { size: 12 * SCALE, bg: "rgba(255,255,255,0.95)", fg: "#221f1f", left: true });
+    if (el.name) {
+      if (moved) textBox(ctx, lp, el.name, { size: 12 * SCALE, bg: "rgba(255,255,255,0.95)", fg: "#221f1f", center: true });
+      else textBox(ctx, { x: p.x + r + 4 * SCALE, y: p.y }, el.name, { size: 12 * SCALE, bg: "rgba(255,255,255,0.95)", fg: "#221f1f", left: true });
+    }
   } else if (el.kind === "marker") {
     const p = project(el.center[0], el.center[1]); const t = MARKER_TYPES[el.type]; const r = 19 * SCALE;
     // White badge with a colored ring; emoji glyph (or a rotatable arrow for the
