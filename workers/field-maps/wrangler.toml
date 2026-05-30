@@ -37,10 +37,7 @@ ACCESS_TEAM_DOMAIN = "ayso13.cloudflareaccess.com"
 ACCESS_AUD = "04006393cf3ae6e9f13a60eb017aecf192ff42026dbb77a0dcaca19ab4bd75d9"
 # Repo and branch the editor commits to. Staging only — never main.
 GITHUB_REPO = "ayso-region-13/ayso-website"
-# TEMPORARY: editor commits to the field-maps feature branch while building out
-# all the maps, so they can be previewed on Cloudflare without touching staging.
-# Switch back to "staging" once the maps are reviewed and ready to ship.
-GITHUB_BRANCH = "field-maps"
+GITHUB_BRANCH = "staging"
 
 # ── Secrets (set with `wrangler secret put <NAME>`; never commit) ────────────
 # This repo is PUBLIC, so the Mapbox token is a secret rather than a committed
