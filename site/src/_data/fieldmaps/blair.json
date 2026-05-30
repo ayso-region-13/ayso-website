@@ -1,0 +1,87 @@
+{
+  "field": "blair",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "game": {
+      "label": "Game Day Layout",
+      "view": {
+        "center": [
+          -118.14349789545699,
+          34.12280462557331
+        ],
+        "zoom": 17.498191813528138,
+        "bearing": 0,
+        "frameMeters": 350,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e7",
+          "kind": "field",
+          "center": [
+            -118.14480571188491,
+            34.12323920419061
+          ],
+          "widthM": 37,
+          "lengthM": 55,
+          "rotationDeg": 318,
+          "name": "Blair Upper",
+          "ageGroup": "10U",
+          "preset": "10U",
+          "markHome": true
+        },
+        {
+          "id": "e8",
+          "kind": "field",
+          "center": [
+            -118.14397548901692,
+            34.12221366680416
+          ],
+          "widthM": 58,
+          "lengthM": 104,
+          "rotationDeg": 317,
+          "name": "",
+          "ageGroup": "14U",
+          "preset": "custom",
+          "markHome": true
+        },
+        {
+          "id": "e9",
+          "kind": "marker",
+          "type": "restroom",
+          "center": [
+            -118.14393202185084,
+            34.12277141672621
+          ]
+        },
+        {
+          "id": "e11",
+          "kind": "text",
+          "center": [
+            -118.14347561660938,
+            34.123478009503216
+          ],
+          "text": "No Parking in Neighborhood",
+          "color": "#83312d",
+          "size": 18
+        },
+        {
+          "id": "e13",
+          "kind": "text",
+          "center": [
+            -118.14463991630998,
+            34.12368165172249
+          ],
+          "text": "↖Park at Allendale",
+          "color": "#83312d",
+          "size": 18
+        }
+      ],
+      "png": "/images/fields/blair-game.png",
+      "alt": "Blair High School game field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
