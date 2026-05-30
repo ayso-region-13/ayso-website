@@ -190,10 +190,10 @@
       "label": "Practice Layout",
       "view": {
         "center": [
-          -118.18019030845551,
-          34.19052450770428
+          -118.1801903084555,
+          34.190524515481144
         ],
-        "zoom": 17.538855039964563,
+        "zoom": 17.53885503983153,
         "bearing": 0,
         "frameMeters": 340,
         "width": 1000,
@@ -202,7 +202,7 @@
       },
       "elements": [
         {
-          "id": "e28",
+          "id": "e46",
           "kind": "nogo",
           "center": [
             -118.18000771726399,
@@ -215,7 +215,7 @@
           "locked": true
         },
         {
-          "id": "e29",
+          "id": "e47",
           "kind": "infield",
           "center": [
             -118.17910693404815,
@@ -227,7 +227,7 @@
           "locked": true
         },
         {
-          "id": "e30",
+          "id": "e48",
           "kind": "grid",
           "center": [
             -118.18005624328846,
@@ -244,7 +244,7 @@
           "locked": true
         },
         {
-          "id": "e32",
+          "id": "e49",
           "kind": "grid",
           "center": [
             -118.17984933874484,
@@ -261,7 +261,7 @@
           "locked": true
         },
         {
-          "id": "e33",
+          "id": "e50",
           "kind": "grid",
           "center": [
             -118.17976066536956,
@@ -278,7 +278,7 @@
           "locked": true
         },
         {
-          "id": "e34",
+          "id": "e51",
           "kind": "grid",
           "center": [
             -118.17957065099321,
@@ -295,7 +295,7 @@
           "locked": true
         },
         {
-          "id": "e35",
+          "id": "e52",
           "kind": "grid",
           "center": [
             -118.17925818290763,
@@ -308,7 +308,27 @@
           "rows": 1,
           "scheme": "numbers",
           "startIndex": 5,
-          "name": ""
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e53",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.17870523207942,
+            34.18996207965357
+          ]
+        },
+        {
+          "id": "e54",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.17878330846375,
+            34.19048526252641
+          ],
+          "rotationDeg": 270
         }
       ],
       "png": "/images/fields/lchs-practice.png",
