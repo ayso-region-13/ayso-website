@@ -25,12 +25,6 @@ Blair High School has two field areas used for practices and games.
 
 <iframe src="https://maps.google.com/maps?q=1301+S+Marengo+Ave,+Pasadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-![Blair Upper game field map](/images/fields/blair-upper-game-map.jpg)
-
-![Blair Lower game field map](/images/fields/blair-games-lower-map.jpg)
-
-![Blair High School parking and walk path — entry points, "Home / Away / Goals Stored Here" markers on the lower field](/images/fields/blair-park-map.png)
-
 ## Parking
 
 Park on Marengo Avenue or at Allendale Park/library and walk to the fields. Do not park in residential areas.
