@@ -6,10 +6,10 @@
       "label": "Game Day Layout",
       "view": {
         "center": [
-          -118.14349789545699,
-          34.12280462557331
+          -118.14349789545665,
+          34.12280463379443
         ],
-        "zoom": 17.498191813528138,
+        "zoom": 17.498191813387866,
         "bearing": 0,
         "frameMeters": 350,
         "width": 1000,
@@ -18,7 +18,7 @@
       },
       "elements": [
         {
-          "id": "e7",
+          "id": "e1",
           "kind": "field",
           "center": [
             -118.14480571188491,
@@ -33,7 +33,7 @@
           "markHome": true
         },
         {
-          "id": "e8",
+          "id": "e2",
           "kind": "field",
           "center": [
             -118.14397548901692,
@@ -48,7 +48,7 @@
           "markHome": true
         },
         {
-          "id": "e9",
+          "id": "e3",
           "kind": "marker",
           "type": "restroom",
           "center": [
@@ -57,7 +57,7 @@
           ]
         },
         {
-          "id": "e11",
+          "id": "e4",
           "kind": "text",
           "center": [
             -118.14347561660938,
@@ -68,7 +68,7 @@
           "size": 18
         },
         {
-          "id": "e13",
+          "id": "e5",
           "kind": "text",
           "center": [
             -118.14463991630998,
@@ -77,6 +77,44 @@
           "text": "↖Park at Allendale",
           "color": "#83312d",
           "size": 18
+        },
+        {
+          "id": "e6",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.14462695130705,
+            34.123569937595306
+          ],
+          "rotationDeg": 234
+        },
+        {
+          "id": "e7",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.14268285611976,
+            34.12181219886898
+          ],
+          "rotationDeg": 246
+        },
+        {
+          "id": "e8",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.14477458437847,
+            34.12290140073979
+          ]
+        },
+        {
+          "id": "e9",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.14305299959413,
+            34.12194303065857
+          ]
         }
       ],
       "png": "/images/fields/blair-game.png",
