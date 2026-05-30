@@ -7,9 +7,9 @@
       "view": {
         "center": [
           -118.14745944827621,
-          34.17371174985938
+          34.17371175857181
         ],
-        "zoom": 17.456680389270268,
+        "zoom": 17.456680389121324,
         "bearing": 0,
         "frameMeters": 360,
         "width": 1000,
@@ -18,19 +18,7 @@
       },
       "elements": [
         {
-          "id": "e41",
-          "kind": "text",
-          "center": [
-            -118.14678076736227,
-            34.173760545041546
-          ],
-          "text": "Stay off Football Field",
-          "color": "#83312d",
-          "size": 18,
-          "locked": true
-        },
-        {
-          "id": "e42",
+          "id": "e2",
           "kind": "grid",
           "center": [
             -118.14759260718824,
@@ -47,7 +35,7 @@
           "locked": true
         },
         {
-          "id": "e43",
+          "id": "e3",
           "kind": "grid",
           "center": [
             -118.14817678822769,
@@ -64,7 +52,7 @@
           "locked": true
         },
         {
-          "id": "e44",
+          "id": "e4",
           "kind": "marker",
           "type": "restroom",
           "center": [
@@ -74,7 +62,7 @@
           "locked": true
         },
         {
-          "id": "e45",
+          "id": "e5",
           "kind": "marker",
           "type": "entrance",
           "center": [
@@ -83,6 +71,31 @@
           ],
           "rotationDeg": 177,
           "locked": true
+        },
+        {
+          "id": "e6",
+          "kind": "nogo",
+          "center": [
+            -118.14678936413843,
+            34.173706163515604
+          ],
+          "widthM": 59,
+          "lengthM": 113,
+          "rotationDeg": 358,
+          "label": "Do not use",
+          "locked": true
+        },
+        {
+          "id": "e7",
+          "kind": "nogo",
+          "center": [
+            -118.14877384408462,
+            34.17355335240883
+          ],
+          "widthM": 36,
+          "lengthM": 25,
+          "rotationDeg": 0,
+          "label": "Do not use"
         }
       ],
       "png": "/images/fields/butler-practice.png",
