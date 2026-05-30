@@ -31,7 +31,8 @@
           "rows": 1,
           "scheme": "letters",
           "startIndex": 0,
-          "name": ""
+          "name": "",
+          "locked": true
         },
         {
           "id": "e135",
@@ -42,7 +43,8 @@
           ],
           "radiusM": 61,
           "startDeg": 179.72447177373374,
-          "sweepDeg": 90
+          "sweepDeg": 90,
+          "locked": true
         },
         {
           "id": "e136",
@@ -53,7 +55,8 @@
           ],
           "radiusM": 32,
           "startDeg": 0.5208945981344186,
-          "sweepDeg": 90
+          "sweepDeg": 90,
+          "locked": true
         }
       ],
       "png": "/images/fields/oak-grove-practice.png",
