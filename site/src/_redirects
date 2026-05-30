@@ -406,6 +406,8 @@
 /maps                               /fields/                                 301
 /fields/blair/                      /fields/blair-lower/                     301
 /fields/blair                       /fields/blair-lower/                     301
+/fields/pasadena-hs/                /fields/                                  301
+/fields/pasadena-hs                 /fields/                                  301
 /blair/                             /fields/blair-lower/                     301
 /blair                              /fields/blair-lower/                     301
 /muir/                              /fields/muir/                            301

@@ -78,7 +78,6 @@ module.exports = [
       { label: "Muir South",            url: "/fields/muir-south/" },
       { label: "Oak Grove Park",        url: "/fields/oak-grove/" },
       { label: "Paradise Canyon",       url: "/fields/paradise/" },
-      { label: "Pasadena High School",  url: "/fields/pasadena-hs/" },
       { label: "Victory Park",          url: "/fields/victory/" },
       { label: "Wilson Middle School",  url: "/fields/wilson/" },
     ],

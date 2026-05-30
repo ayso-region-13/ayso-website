@@ -32,7 +32,6 @@ permalink: /fields/
 | [Marshall Fundamental](/fields/marshall) | Pasadena |  | ✓ | 10U, 14U |
 | [McDonald Park](/fields/mcdonald) | Pasadena | ✓ |  |  |
 | [McKinley](/fields/mckinley) | Pasadena |  | ✓ | 12U |
-| [Pasadena High School](/fields/pasadena-hs) | Pasadena | ✓ |  |  |
 | [Rose Bowl Area H](/fields/area-h) | Pasadena | ✓ |  |  |
 | [Victory Park](/fields/victory) | Pasadena | ✓ | ✓ | 4U–14U |
 | [Wilson MS](/fields/wilson) | Pasadena | ✓ |  |  |
