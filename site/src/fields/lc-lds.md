@@ -22,10 +22,6 @@ snackBar: "No"
 
 <iframe src="https://maps.google.com/maps?q=1830+Foothill+Blvd,+La+Canada,+CA+91011&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-## Field Layout
-
-![LDS — 10U field, 120' x 180'](/images/fields/lc-lds-10u-map.jpg)
-
 ## Parking
 
 Park in the adjacent Mayor's Discovery Park lot. The LDS Church and the YMCA have asked AYSO families not to use their parking lots. Street parking on Foothill Boulevard or side streets is also available if the lot fills.
