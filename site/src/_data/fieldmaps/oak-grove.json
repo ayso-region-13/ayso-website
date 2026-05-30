@@ -1,0 +1,64 @@
+{
+  "field": "oak-grove",
+  "styleVersion": "satellite-v9",
+  "variants": {
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.18004496644674,
+          34.19412908335575
+        ],
+        "zoom": 18.37832870346402,
+        "bearing": 0,
+        "frameMeters": 190,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e134",
+          "kind": "grid",
+          "center": [
+            -118.18018101993806,
+            34.19400291359476
+          ],
+          "widthM": 39,
+          "lengthM": 27,
+          "rotationDeg": 0,
+          "cols": 2,
+          "rows": 1,
+          "scheme": "letters",
+          "startIndex": 0,
+          "name": ""
+        },
+        {
+          "id": "e135",
+          "kind": "infield",
+          "center": [
+            -118.17930120735753,
+            34.19411732436765
+          ],
+          "radiusM": 61,
+          "startDeg": 179.72447177373374,
+          "sweepDeg": 90
+        },
+        {
+          "id": "e136",
+          "kind": "infield",
+          "center": [
+            -118.18038510017703,
+            34.19359966152629
+          ],
+          "radiusM": 32,
+          "startDeg": 0.5208945981344186,
+          "sweepDeg": 90
+        }
+      ],
+      "png": "/images/fields/oak-grove-practice.png",
+      "alt": "Oak Grove practice field map",
+      "updatedBy": "matthew@ayso13.org"
+    }
+  }
+}
