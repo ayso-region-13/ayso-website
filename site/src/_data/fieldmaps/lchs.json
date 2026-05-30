@@ -314,6 +314,77 @@
       "png": "/images/fields/lchs-practice.png",
       "alt": "La Cañada High School (LCHS) practice field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "practice-upper-division": {
+      "label": "Practice - Upper Division",
+      "view": {
+        "center": [
+          -118.18019030845598,
+          34.19052450770441
+        ],
+        "zoom": 17.53885503996456,
+        "bearing": 0,
+        "frameMeters": 340,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e36",
+          "kind": "nogo",
+          "center": [
+            -118.18000771726399,
+            34.19095218873859
+          ],
+          "widthM": 89,
+          "lengthM": 89,
+          "rotationDeg": 335,
+          "label": "Do not use",
+          "locked": true
+        },
+        {
+          "id": "e43",
+          "kind": "fan",
+          "center": [
+            -118.17911039388572,
+            34.18990479473378
+          ],
+          "innerRadiusM": 48,
+          "radiusM": 88,
+          "startDeg": 277.8775950461897,
+          "sweepDeg": 90,
+          "wedges": 3,
+          "scheme": "lcr",
+          "startIndex": 0,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e44",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.17870925242448,
+            34.18985240268296
+          ],
+          "locked": true
+        },
+        {
+          "id": "e45",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.17875570038325,
+            34.1904950758946
+          ],
+          "rotationDeg": 266,
+          "locked": true
+        }
+      ],
+      "png": "/images/fields/lchs-practice-upper-division.png",
+      "alt": "La Cañada High School (LCHS) practice-upper-division field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
