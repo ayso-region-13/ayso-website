@@ -336,6 +336,102 @@
       "png": "/images/fields/fis-lower-fis-lower-10u-games.png",
       "alt": "Foothill Intermediate School — Lower (FIS Lower) fis-lower-10u-games field map",
       "updatedBy": "matthew@ayso13.org"
+    },
+    "practice": {
+      "label": "Practice Layout",
+      "view": {
+        "center": [
+          -118.20306446628751,
+          34.20374840219088
+        ],
+        "zoom": 18.28268379384607,
+        "bearing": 0,
+        "frameMeters": 203,
+        "width": 1000,
+        "height": 750,
+        "scale": 2
+      },
+      "elements": [
+        {
+          "id": "e45",
+          "kind": "infield",
+          "center": [
+            -118.20346497484282,
+            34.20336420937575
+          ],
+          "radiusM": 31,
+          "startDeg": 0.8551305724996041,
+          "sweepDeg": 90,
+          "locked": true
+        },
+        {
+          "id": "e46",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.20371323946341,
+            34.20376301593987
+          ],
+          "locked": true
+        },
+        {
+          "id": "e47",
+          "kind": "marker",
+          "type": "entrance",
+          "center": [
+            -118.20374188538113,
+            34.20343133534374
+          ],
+          "rotationDeg": 94,
+          "locked": true
+        },
+        {
+          "id": "e48",
+          "kind": "grid",
+          "center": [
+            -118.20284908761163,
+            34.20373735030935
+          ],
+          "widthM": 112,
+          "lengthM": 20,
+          "rotationDeg": 0,
+          "cols": 3,
+          "rows": 1,
+          "scheme": "numbers",
+          "startIndex": 0,
+          "name": "",
+          "locked": false
+        },
+        {
+          "id": "e49",
+          "kind": "grid",
+          "center": [
+            -118.2026464985416,
+            34.20354315679043
+          ],
+          "widthM": 74,
+          "lengthM": 22,
+          "rotationDeg": 0,
+          "cols": 2,
+          "rows": 1,
+          "scheme": "numbers",
+          "startIndex": 3,
+          "name": "",
+          "locked": true
+        },
+        {
+          "id": "e50",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.2032995055962,
+            34.203319005389005
+          ]
+        }
+      ],
+      "png": "/images/fields/fis-lower-practice.png",
+      "alt": "Foothill Intermediate School — Lower (FIS Lower) practice field map",
+      "updatedBy": "matthew@ayso13.org"
     }
   }
 }
