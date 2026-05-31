@@ -104,6 +104,17 @@ layout: base.njk
       {% set cx = complex and collections.complexes[complex] %}
       {% set cxWayfinder = cx and cx.wayfinder %}
 
+      {# Region overview map at the top of the /fields/ index — the
+         editor-generated overview (eleventy-img serves it as responsive WebP).
+         Gated on the PNG existing so a fresh checkout never references a missing
+         file. #}
+      {% if page.url == "/fields/" and overviewMap.ready and fieldmaps.overview and fieldmaps.overview.variants and fieldmaps.overview.variants.map %}
+      {% set ovm = fieldmaps.overview.variants.map %}
+      <figure class="not-prose mb-6 max-w-3xl rounded-lg overflow-hidden border border-brand-cream">
+        <img src="{{ ovm.png }}" alt="{{ ovm.alt }}" sizes="(min-width: 768px) 760px, 100vw" class="w-full h-auto block">
+      </figure>
+      {% endif %}
+
       {# Cross-link to sibling fields in the same complex (e.g. the FIS fields). #}
       {% if cx and cx.members.length > 1 %}
       <p class="not-prose mb-5 max-w-3xl text-sm bg-brand-cream rounded-lg p-3">

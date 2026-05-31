@@ -7,10 +7,6 @@ layout: page.njk
 section: fields
 permalink: /fields/
 ---
-## Field Map
-
-![Regional field map — all Region 13 game and practice locations across Pasadena, Altadena, and La Cañada Flintridge](/images/fields/map-overview-v2.jpg)
-
 ## Game Day Basics
 
 - Home team (listed first on the schedule) sits on the north or west side of the field
