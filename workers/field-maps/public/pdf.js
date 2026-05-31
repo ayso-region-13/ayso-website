@@ -43,6 +43,8 @@
       const font = await doc.embedFont(StandardFonts.Helvetica);
       const bold = await doc.embedFont(StandardFonts.HelveticaBold);
 
+      const pageUrls = []; // parallel to doc.getPages(); used by the footer pass
+      const newPage = (url) => { const p = doc.addPage([W, H]); pageUrls.push(url || ""); return p; };
       const header = (page, title) => {
         page.drawRectangle({ x: 0, y: H - 46, width: W, height: 46, color: col(MAROON) });
         page.drawText(t(title), { x: 26, y: H - 31, size: 16, font: bold, color: rgb(1, 1, 1) });
@@ -51,16 +53,16 @@
         const s = Math.min(bw / emb.width, bh / emb.height);
         page.drawImage(emb, { x: bx + (bw - emb.width * s) / 2, y: by + (bh - emb.height * s) / 2, width: emb.width * s, height: emb.height * s });
       };
-      async function imagePage(slug, variant, title, maxW) {
+      async function imagePage(slug, variant, title, url, maxW) {
         const bytes = await fetchJpeg(slug, variant, maxW || 1700);
         if (!bytes) return false;
-        const page = doc.addPage([W, H]); header(page, title);
-        drawFit(page, await doc.embedJpg(bytes), 24, 24, W - 48, H - 46 - 36);
+        const page = newPage(url); header(page, title);
+        drawFit(page, await doc.embedJpg(bytes), 24, 30, W - 48, H - 46 - 30 - 6);
         return true;
       }
 
       // ── Cover ──
-      const cover = doc.addPage([W, H]);
+      const cover = newPage("www.ayso13.org/fields/");
       try {
         const lr = await fetch("/apple-touch-icon.png");
         if (lr.ok) cover.drawImage(await doc.embedPng(await lr.arrayBuffer()), { x: (W - 110) / 2, y: H - 215, width: 110, height: 110 });
@@ -73,7 +75,7 @@
       cover.drawText(stamp, { x: (W - font.widthOfTextAtSize(stamp, 11)) / 2, y: 50, size: 11, font, color: col(GREY) });
 
       // ── Region overview ──
-      await imagePage("overview", "map", "Region Overview");
+      await imagePage("overview", "map", "Region Overview", "www.ayso13.org/fields/");
 
       // ── Per field ──
       const ordered = [...fields].sort((a, b) => cityRank(a.locality) - cityRank(b.locality) || a.title.localeCompare(b.title));
@@ -83,11 +85,12 @@
         let md = null; try { md = await api("/api/map/" + f.slug); } catch (_) {}
         const variants = md && md.variants ? Object.keys(md.variants) : [];
         if (!variants.length) continue;
-        const ord = { game: 0, practice: 1, wayfinder: 2 };
+        const ord = { wayfinder: 0, game: 1, practice: 2 };
         variants.sort((a, b) => (ord[a] != null ? ord[a] : 9) - (ord[b] != null ? ord[b] : 9));
+        const fieldUrl = "www.ayso13.org/fields/" + f.slug + "/";
 
         // Field front page: info (left) + primary map (right).
-        const page = doc.addPage([W, H]); header(page, f.title);
+        const page = newPage(fieldUrl); header(page, f.title);
         let y = H - 92;
         const row = (k, v) => { if (!v) return; page.drawText(t(k), { x: 36, y, size: 11, font: bold, color: col(MAROON) }); page.drawText(t(v), { x: 150, y, size: 11, font, color: col(DARK) }); y -= 19; };
         row("Location", [f.address, f.locality, f.postalCode].filter(Boolean).join(", "));
@@ -101,8 +104,19 @@
         if (primary) drawFit(page, await doc.embedJpg(primary), W * 0.40, 36, W * 0.58, H - 46 - 60);
 
         // One full page per layout.
-        for (const vid of variants) await imagePage(f.slug, vid, f.title + " — " + layoutLabel(vid));
+        for (const vid of variants) await imagePage(f.slug, vid, f.title + " — " + layoutLabel(vid), fieldUrl);
       }
+
+      // ── Footer on every page: brand (left), page URL (center), page # (right). ──
+      const pages = doc.getPages();
+      pages.forEach((pg, idx) => {
+        const fy = 16;
+        pg.drawText("AYSO Region 13 - www.ayso13.org", { x: 24, y: fy, size: 8, font, color: rgb(0, 0, 0) });
+        const url = t(pageUrls[idx] || "");
+        if (url) pg.drawText(url, { x: (W - font.widthOfTextAtSize(url, 8)) / 2, y: fy, size: 8, font, color: rgb(0, 0, 0) });
+        const num = String(idx + 1);
+        pg.drawText(num, { x: W - 24 - font.widthOfTextAtSize(num, 8), y: fy, size: 8, font, color: rgb(0, 0, 0) });
+      });
 
       modal(true, "Building PDF…", '<p class="subtle">Finalizing…</p>');
       const blob = new Blob([await doc.save()], { type: "application/pdf" });
