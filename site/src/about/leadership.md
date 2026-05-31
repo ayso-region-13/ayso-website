@@ -37,6 +37,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Uniforms & Equipment | Ron Johnson | [equipment@ayso13.org](mailto:equipment@ayso13.org) |
 | Special Events | Bicky Law | [bicky@ayso13.org](mailto:bicky@ayso13.org) |
 | Sisterhood of Soccer | Open | [sisterhood@ayso13.org](mailto:sisterhood@ayso13.org) |
+| WCA (Women's Coaching Alliance) | Brandi Lane | [wca@ayso13.org](mailto:wca@ayso13.org) |
 | USWL/MLS Liaison | Open | — |
 | EPIC Coordinator | Tony D'Angelo | [epic@ayso13.org](mailto:epic@ayso13.org) |
 | Tournament Director | Patrick Shopbell | [td@ayso13.org](mailto:td@ayso13.org) |
