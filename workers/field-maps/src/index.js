@@ -30,7 +30,7 @@ const IMAGES_DIR = "site/src/images/fields";
 // reused here — that policy has no Mapbox origins and would break the editor.
 const EDITOR_CSP = [
   "default-src 'self'",
-  "script-src 'self' https://api.mapbox.com",
+  "script-src 'self' https://api.mapbox.com https://cdn.jsdelivr.net",
   "style-src 'self' 'unsafe-inline' https://api.mapbox.com",
   "worker-src blob:",
   "child-src blob:",
@@ -108,6 +108,18 @@ async function handleApi(request, env, url, auth) {
     return json({ error: "Method not allowed" }, 405);
   }
 
+  // Same-origin proxy for a committed map PNG, so the in-browser PDF builder can
+  // fetch image bytes without a CORS dance. Pulls from the public repo's raw host
+  // on the editor's branch (no size limit, unlike the Contents API's 1 MB cap).
+  const imgMatch = pathname.match(/^\/api\/img\/([a-z0-9][a-z0-9-]*)\/([a-z0-9][a-z0-9-]*)$/);
+  if (imgMatch && request.method === "GET") {
+    const [, slug, variant] = imgMatch;
+    const raw = `https://raw.githubusercontent.com/${env.GITHUB_REPO}/${env.GITHUB_BRANCH}/${IMAGES_DIR}/${slug}-${variant}.png`;
+    const r = await fetch(raw, { cf: { cacheTtl: 300 } });
+    if (!r.ok) return json({ error: "Image not found" }, 404);
+    return new Response(r.body, { headers: { "Content-Type": "image/png", "Cache-Control": "private, max-age=300" } });
+  }
+
   return json({ error: "Not found" }, 404);
 }
 
@@ -147,6 +159,14 @@ async function listFields(env) {
         lon,
         locality: fm.placeLocality || "Pasadena",
         hasMap: haveMap.has(slug),
+        // Extra frontmatter used by the unified-PDF info pages.
+        address: fm.placeAddress || "",
+        postalCode: fm.placePostalCode || "",
+        parking: fm.parking || "",
+        restrooms: fm.restrooms || "",
+        surface: fm.surface || "",
+        lighting: fm.lighting || "",
+        snackBar: fm.snackBar || "",
       };
     })
   );
