@@ -25,12 +25,12 @@ Registration typically opens May 1 each year. Earlier registration costs less:
 
 | Timeframe | Cost |
 | --------------- | ---- |
-| Through May 31 | $220 |
+| Through June 7 | $220 |
 | Through June 30 | $235 |
 | After June 30 | $250 |
 
 
-Sibling discount: $20 off per additional child through May 31.
+Sibling discount: $20 off per additional child through June 7.
 
 Scholarships: Region 13 uses a "pay what you can" model - no child is turned away for financial reasons. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org) confidentially.
 

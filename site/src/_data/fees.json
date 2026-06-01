@@ -3,11 +3,11 @@
   "fall": {
     "rangeShort": "$220-$250",
     "tiers": [
-      { "label": "Through May 31",   "amount": "$220" },
+      { "label": "Through June 7",   "amount": "$220" },
       { "label": "Through June 30",  "amount": "$235" },
       { "label": "After June 30",    "amount": "$250" }
     ],
-    "siblingDiscount": "$20 off per additional child through May 31"
+    "siblingDiscount": "$20 off per additional child through June 7"
   },
   "epic": "$60"
 }

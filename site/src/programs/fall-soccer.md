@@ -82,11 +82,11 @@ Practice day and time are set by your coach based on field availability.
 
 | Timeframe | Cost |
 |-----------|------|
-| Through May 31 | $220 |
+| Through June 7 | $220 |
 | Through June 30 | $235 |
 | After June 30 | $250 |
 
-Sibling discount: $20 off per additional child through May 31.
+Sibling discount: $20 off per additional child through June 7.
 
 ### What's Included
 
