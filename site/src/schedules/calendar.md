@@ -17,7 +17,7 @@ For individual team game schedules, log in to [InLeague](https://ayso13.inleague
 | Event | Typical Timing |
 | --------------------------- | -------------------- |
 | Registration Opens | May 1 |
-| Early Registration Deadline | May 31 |
+| Early Registration Deadline | June 7 |
 | Coach and Referee Training | August weekends |
 | Division Meetings | Late August |
 | Practices Begin | Day after Labor Day |

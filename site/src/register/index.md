@@ -8,7 +8,7 @@ permalink: /register/
 ---
 ## Fall 2026 registration is open
 
-Register by **May 31** to pay **$220**. The price goes up to $235 in June and $250 in July.
+Register by **June 7** to pay **$220**. The price goes up to $235 through June 30 and $250 after June 30.
 
 [Register on InLeague](https://ayso13.inleague.com/app)
 
