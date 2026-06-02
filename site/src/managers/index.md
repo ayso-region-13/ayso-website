@@ -1,15 +1,15 @@
 ---
-
-title: "Team Manager Overview"
+title: Team Manager Overview
+description: Team manager roles and responsibilities in AYSO Region 13. Managers
+  support coaches and keep teams organized throughout the season.
 layout: page.njk
 section: managers
-permalink: "/managers/"
-description: "Team manager roles and responsibilities in AYSO Region 13. Managers support coaches and keep teams organized throughout the season."
+permalink: /managers/
 ---
-
 ## Role Summary
 
 The team manager works alongside the coach to:
+
 - Communicate with families about schedules and logistics
 - Coordinate family volunteers
 - Manage snack schedules and team events
@@ -20,7 +20,7 @@ The key to success is delegation. Many tasks can be shared with other families o
 
 ## Key Contacts
 
-- Team Manager Coordinator: Krista Copelan ([team@ayso13.org](mailto:team@ayso13.org))
+- Team Manager Coordinator: Jonelle Kelly ([team@ayso13.org](mailto:team@ayso13.org))
 - Picture Day Coordinator: Amandeep Singh ([pictures@ayso13.org](mailto:pictures@ayso13.org))
 - Game-day emergencies: 626-702-AYSO
 
