@@ -33,7 +33,10 @@ module.exports = [
     children: [
       { label: "Player Registration",    url: "/register/" },
       { label: "Age Chart & Divisions",  url: "/register/age-chart/" },
-      { label: "Volunteer Registration", url: "/register/forms/" },
+      { label: "Volunteer",              url: "/volunteers/" },
+      { label: "Coach",                  url: "/coaches/" },
+      { label: "Referee",                url: "/referees/" },
+      { label: "Team Manager",           url: "/managers/" },
     ],
   },
 

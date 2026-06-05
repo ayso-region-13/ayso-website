@@ -6,10 +6,10 @@
       "label": "Wayfinder Layout",
       "view": {
         "center": [
-          -118.20284221280318,
-          34.20412809454997
+          -118.20284221280357,
+          34.20412810260905
         ],
-        "zoom": 17.51338498507748,
+        "zoom": 17.51338498493955,
         "bearing": 0,
         "frameMeters": 346,
         "width": 1000,
@@ -18,49 +18,17 @@
       },
       "elements": [
         {
-          "id": "e8",
-          "kind": "text",
-          "center": [
-            -118.2024999686108,
-            34.204188204771796
-          ],
-          "text": "FIS Upper",
-          "color": "#83312d",
-          "size": 18
-        },
-        {
-          "id": "e9",
-          "kind": "text",
-          "center": [
-            -118.20295925815853,
-            34.20360381722206
-          ],
-          "text": "FIS Lower",
-          "color": "#83312d",
-          "size": 18
-        },
-        {
           "id": "e10",
-          "kind": "text",
-          "center": [
-            -118.20419874168634,
-            34.20349280296176
-          ],
-          "text": "Cornishon",
-          "color": "#83312d",
-          "size": 18
-        },
-        {
-          "id": "e11",
           "kind": "marker",
           "type": "restroom",
           "center": [
             -118.20312084077881,
             34.20401202792725
-          ]
+          ],
+          "locked": true
         },
         {
-          "id": "e12",
+          "id": "e11",
           "kind": "infield",
           "center": [
             -118.20345871646904,
@@ -68,10 +36,11 @@
           ],
           "radiusM": 31,
           "startDeg": -1.1016725967954812,
-          "sweepDeg": 90
+          "sweepDeg": 90,
+          "locked": true
         },
         {
-          "id": "e13",
+          "id": "e12",
           "kind": "infield",
           "center": [
             -118.20389570236273,
@@ -79,40 +48,44 @@
           ],
           "radiusM": 33,
           "startDeg": 180.50699356496068,
-          "sweepDeg": 90
+          "sweepDeg": 90,
+          "locked": true
         },
         {
-          "id": "e14",
+          "id": "e13",
           "kind": "marker",
           "type": "entrance",
           "center": [
             -118.20206666862182,
             34.203907704671366
           ],
-          "rotationDeg": 272
+          "rotationDeg": 272,
+          "locked": true
         },
         {
-          "id": "e15",
+          "id": "e14",
           "kind": "marker",
           "type": "entrance",
           "center": [
             -118.203724638014,
             34.20342898608557
           ],
-          "rotationDeg": 88
+          "rotationDeg": 88,
+          "locked": true
         },
         {
-          "id": "e16",
+          "id": "e15",
           "kind": "marker",
           "type": "entrance",
           "center": [
             -118.20372840173748,
             34.20361566762435
           ],
-          "rotationDeg": 273
+          "rotationDeg": 273,
+          "locked": true
         },
         {
-          "id": "e17",
+          "id": "e16",
           "kind": "text",
           "center": [
             -118.20166809629762,
@@ -120,24 +93,127 @@
           ],
           "text": "Do Not Park Here",
           "color": "#83312d",
-          "size": 18
+          "size": 18,
+          "locked": true
+        },
+        {
+          "id": "e17",
+          "kind": "marker",
+          "type": "parking",
+          "center": [
+            -118.20108458321869,
+            34.203513242531216
+          ],
+          "locked": true
         },
         {
           "id": "e18",
           "kind": "marker",
           "type": "parking",
           "center": [
-            -118.20108458321869,
-            34.203513242531216
-          ]
+            -118.20368277725822,
+            34.20389852102096
+          ],
+          "locked": true
         },
         {
           "id": "e19",
-          "kind": "marker",
-          "type": "parking",
+          "kind": "field",
           "center": [
-            -118.20368277725822,
-            34.20389852102096
+            -118.20267090168169,
+            34.20360580237889
+          ],
+          "widthM": 46,
+          "lengthM": 73,
+          "rotationDeg": 270,
+          "name": "FIS Lower",
+          "ageGroup": "12U",
+          "preset": "12U",
+          "markHome": false,
+          "locked": true
+        },
+        {
+          "id": "e21",
+          "kind": "infield",
+          "center": [
+            -118.20217831511687,
+            34.204008634639465
+          ],
+          "radiusM": 18,
+          "startDeg": 271.02947601670456,
+          "sweepDeg": 90
+        },
+        {
+          "id": "e22",
+          "kind": "field",
+          "center": [
+            -118.20235793499393,
+            34.204262551682774
+          ],
+          "widthM": 18,
+          "lengthM": 27,
+          "rotationDeg": 270,
+          "name": "FIS Upper 1",
+          "ageGroup": "6U",
+          "preset": "6U",
+          "markHome": false,
+          "locked": true
+        },
+        {
+          "id": "e23",
+          "kind": "field",
+          "center": [
+            -118.20268649387181,
+            34.20415076978003
+          ],
+          "widthM": 18,
+          "lengthM": 27,
+          "rotationDeg": 0,
+          "name": "FIS Upper 2",
+          "ageGroup": "6U",
+          "preset": "6U",
+          "markHome": false,
+          "locked": true
+        },
+        {
+          "id": "e24",
+          "kind": "field",
+          "center": [
+            -118.20441614020237,
+            34.20373217700292
+          ],
+          "widthM": 18,
+          "lengthM": 27,
+          "rotationDeg": 0,
+          "name": "Cornishon",
+          "ageGroup": "7U",
+          "preset": "7U",
+          "markHome": false,
+          "locked": true
+        },
+        {
+          "id": "e25",
+          "kind": "field",
+          "center": [
+            -118.20418752008959,
+            34.20342492325814
+          ],
+          "widthM": 18,
+          "lengthM": 27,
+          "rotationDeg": 270,
+          "name": "Cornishon",
+          "ageGroup": "7U",
+          "preset": "7U",
+          "markHome": false,
+          "locked": true
+        },
+        {
+          "id": "e26",
+          "kind": "marker",
+          "type": "equipment",
+          "center": [
+            -118.20333005993137,
+            34.20332276724939
           ]
         }
       ],
