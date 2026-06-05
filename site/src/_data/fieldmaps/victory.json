@@ -258,10 +258,10 @@
       "label": "Practice Grid",
       "view": {
         "center": [
-          -118.09583326396613,
-          34.160588709244664
+          -118.09583326396594,
+          34.16058871656324
         ],
-        "zoom": 17.582435558082608,
+        "zoom": 17.582435557957556,
         "bearing": 0,
         "frameMeters": 330,
         "width": 1000,
@@ -287,7 +287,7 @@
           "locked": true
         },
         {
-          "id": "e19",
+          "id": "e18",
           "kind": "grid",
           "center": [
             -118.09519067371427,
@@ -304,7 +304,7 @@
           "locked": true
         },
         {
-          "id": "e20",
+          "id": "e19",
           "kind": "grid",
           "center": [
             -118.09438998586043,
@@ -321,7 +321,7 @@
           "locked": true
         },
         {
-          "id": "e21",
+          "id": "e20",
           "kind": "grid",
           "center": [
             -118.09612395955621,
@@ -338,7 +338,7 @@
           "locked": true
         },
         {
-          "id": "e22",
+          "id": "e21",
           "kind": "grid",
           "center": [
             -118.09562416713804,
@@ -355,7 +355,7 @@
           "locked": true
         },
         {
-          "id": "e23",
+          "id": "e22",
           "kind": "marker",
           "type": "parking",
           "center": [
@@ -365,7 +365,7 @@
           "locked": true
         },
         {
-          "id": "e24",
+          "id": "e23",
           "kind": "marker",
           "type": "restroom",
           "center": [
@@ -375,7 +375,7 @@
           "locked": true
         },
         {
-          "id": "e25",
+          "id": "e24",
           "kind": "text",
           "center": [
             -118.0950835753393,
@@ -387,7 +387,7 @@
           "locked": true
         },
         {
-          "id": "e26",
+          "id": "e25",
           "kind": "text",
           "center": [
             -118.09723574269061,
