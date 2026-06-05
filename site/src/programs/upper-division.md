@@ -1,73 +1,53 @@
 ---
-
-title: "Upper Division (16U/19U)"
+title: Upper Division (16U/19U)
+description: Upper Division soccer for players ages 15–19 (16U and 19U) in the
+  Pasadena area. Schedules designed to avoid conflicts with high school soccer.
 layout: page.njk
 section: programs
-heroImage: "/images/action-03.jpg"
-description: "Upper Division soccer for players ages 15–19 (16U and 19U) in the Pasadena area. Schedules designed to avoid conflicts with high school soccer."
+heroImage: /images/action-03.jpg
 ---
-
 ![Upper Division players in action](/images/upper-division-interior.jpg)
 
 ## Quick Facts
 
-- Ages: 15-19 (born 2005-2009)
+- Ages: 14-18 (born 2008-2012)
 - Season: August through early November
 - Games: Various days (not Saturdays)
+- Fields: Played across the San Gabriel Valley against nearby teams and Region 13 teams
 - Practices: Two per week
-- Format: 11v11
 
 ## Divisions
 
-### 16U
-- One competitive girls team
-- One competitive boys team
-- Competes in Area 1-C league
-
-### 19U
-- One girls team
-- One or two boys teams
-- Competes in Area 1-C league
+- 16U: 14- and 15-year olds
+- 19U: 16-, 17-, and 18-year olds
 
 ## Program Tracks
 
-### Competitive Track (Area 1-C League)
-- Two practices per week, late evening, primarily in Pasadena
-- Games throughout San Gabriel Valley (any day except Saturday)
-- Advanced certified coaches
-- Games against teams from other Area 1-C regions
+Starting in 2026, our AYSO Area is hosting two separate leagues in Upper Division. Players may apply to play in either league.
 
-### House League (16U Non-Competitive)
-- One practice per week on weeknights
-- Sunday morning games in South Pasadena or Pasadena
-- Occasional weeknight games
-- Minimum 50% playing time guaranteed
-- Certified coaches at Intermediate or Advanced level
+### Competitive League
+
+- The Competitive League is a program for players looking to train and compete alongside more advanced players. This program is similar to the standard Upper Division program run by the local AYSO Area for the past many years.
+- We expect to have enough players to form at least one competitive team in each division. If you are interested in this league, please signup ASAP!
+
+### Recreational League
+
+- The Recreational League is for players of all levels looking to practice and play in a well-structured soccer program built on the AYSO core philosophies. This league is similar to the B16U “House League” that Region 13 ran in 2025, but this season teams from other regions will be part of the fun.
+- We expect to have enough players to form more than one team in each division. The teams will be balanced with experienced and new players. Depending on numbers, we may play smaller-sided, i.e., 9v9 games.
 
 ## Schedule
 
 ### Key Dates
+
 - Training Camp: Late August (all players)
 - Season Start: After Labor Day
 - Season End: Early November (before CIF soccer season)
 - Player Draft: Mid-July
 
 ### Practice Times
+
 - Typically 8-8:30pm start
 - Two practices per week
-
-## Registration
-
-Registration is handled through InLeague. The process differs from younger divisions:
-
-1. Register for the waitlist
-2. Attend player draft (mid-July)
-3. Receive invitation if selected
-4. Sign Player Agreement to confirm spot
-
-Not all players who sign up are guaranteed a roster spot. Roster decisions are made after the draft based on player numbers and team balance.
-
-[Register on InLeague](https://ayso13.inleague.com/app)
 
 ## Contact
 
