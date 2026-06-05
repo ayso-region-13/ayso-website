@@ -35,6 +35,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Fields | Jessica Ferree | [fields@ayso13.org](mailto:fields@ayso13.org) |
 | Practice Field Coordinator | Rolf Mauermann | [rolf@ayso13.org](mailto:rolf@ayso13.org) |
 | Uniforms & Equipment | Ron Johnson | [equipment@ayso13.org](mailto:equipment@ayso13.org) |
+| At-Large Board Members | Gus Razo | [gus@ayso13.org](mailto:gusrazo@gmail.com) |
 | Special Events | Bicky Law | [bicky@ayso13.org](mailto:bicky@ayso13.org) |
 | Sisterhood of Soccer | Open | [sisterhood@ayso13.org](mailto:sisterhood@ayso13.org) |
 | WCA (Women's Coaching Alliance) | Brandi Lane | [wca@ayso13.org](mailto:wca@ayso13.org) |
@@ -71,7 +72,8 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | G12U Division Coach Administrator | Andy Thompson | [coachg12u@ayso13.org](mailto:coachg12u@ayso13.org) |
 | B14U Division Coach Administrator | Azeem Khaja | [coachb14u@ayso13.org](mailto:coachb14u@ayso13.org) |
 | G14U Division Coach Administrator | Claire Plotkin | [coachg14u@ayso13.org](mailto:coachg14u@ayso13.org) |
-| Upper Division (16U/19U) Coordinator | Open | [ud@ayso13.org](mailto:ud@ayso13.org) |
+| B16U/B19U Upper Division Coordinator | Susan Streets | [ud@ayso13.org](mailto:ud@ayso13.org) |
+| G16U/G19U Upper Division Coordinator | Aviva Wolfson | [ud@ayso13.org](mailto:ud@ayso13.org) |
 
 
 ## Regional Referee Administration
