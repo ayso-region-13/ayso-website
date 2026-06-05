@@ -40,7 +40,7 @@ Starting in 2026, our AYSO Area is hosting two separate leagues in Upper Divisio
 ### Key Dates
 
 - Team Formation: Mid-July
-- Season Start: After Labor Day
+- Season Start: End of August (before Labor Day)
 - Season End: Early November (before CIF soccer season)
 
 ### Practice Times
