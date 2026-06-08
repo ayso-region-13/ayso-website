@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-05-25T00:07:33.957Z
-// 612 exact rules + 9 splat rules = 621 total
+// Last generated: 2026-06-08T15:52:17.717Z
+// 618 exact rules + 9 splat rules = 627 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -1368,12 +1368,28 @@ export const EXACT = {
     "d": "/fields/",
     "s": 301
   },
+  "/fields/blair/": {
+    "d": "/fields/blair-lower/",
+    "s": 301
+  },
+  "/fields/blair": {
+    "d": "/fields/blair-lower/",
+    "s": 301
+  },
+  "/fields/pasadena-hs/": {
+    "d": "/fields/",
+    "s": 301
+  },
+  "/fields/pasadena-hs": {
+    "d": "/fields/",
+    "s": 301
+  },
   "/blair/": {
-    "d": "/fields/blair/",
+    "d": "/fields/blair-lower/",
     "s": 301
   },
   "/blair": {
-    "d": "/fields/blair/",
+    "d": "/fields/blair-lower/",
     "s": 301
   },
   "/muir/": {
@@ -2374,6 +2390,14 @@ export const EXACT = {
   },
   "/wp-content/uploads/2024/11/LC-City-Council-Age-Group-Limitation-November.pdf": {
     "d": "/assets/docs/lc-city-council-age-group-limitation.pdf",
+    "s": 301
+  },
+  "/uploads/2022/05/Voicemail.mp3": {
+    "d": "/assets/audio/voicemail.mp3",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/05/Voicemail.mp3": {
+    "d": "/assets/audio/voicemail.mp3",
     "s": 301
   },
   "/assets/docs/region13-10u-referee-guidelines-2023.pdf": {
