@@ -75,6 +75,21 @@
     Skip to main content
   </a>
 
+  <!-- Out-of-area helper banner. Hidden by default; revealed client-side
+       (see /api/geo fetch near </body>) only for visitors outside
+       California. Open Registration: copy is welcoming, never says a
+       family can't play here — just offers the national locator. -->
+  <div id="geo-banner" hidden class="bg-brand-red-dark text-white text-sm">
+    <div class="max-w-screen-2xl mx-auto px-4 py-2.5 flex items-center gap-3">
+      <p class="flex-1">
+        AYSO Region 13 is based in the Pasadena area. Looking for AYSO somewhere else?
+        <a href="/register/find-your-region/" class="underline font-semibold hover:text-brand-gold">Find your local region</a>.
+      </p>
+      <button type="button" id="geo-banner-dismiss" aria-label="Dismiss this message"
+              class="shrink-0 text-white/80 hover:text-white text-xl leading-none">&times;</button>
+    </div>
+  </div>
+
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <!--  HEADER / NAVIGATION                                           -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
@@ -418,6 +433,31 @@
           link.addEventListener('click', closeMenu);
         });
       }
+    })();
+  </script>
+
+  <!-- Out-of-area banner reveal: ask the redirects Worker (/api/geo) for the
+       visitor's Cloudflare region; show the banner only for non-California
+       visitors. Same-origin fetch (CSP connect-src 'self'); fails silent. -->
+  <script>
+    (function () {
+      var banner = document.getElementById('geo-banner');
+      if (!banner) return;
+      try { if (sessionStorage.getItem('geoBannerDismissed') === '1') return; } catch (e) {}
+      fetch('/api/geo')
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (g) {
+          if (!g) return;
+          var isLocal = (g.country === 'US' && g.regionCode === 'CA');
+          if (isLocal) return;            // California visitors: no banner
+          banner.hidden = false;
+          var dismiss = document.getElementById('geo-banner-dismiss');
+          if (dismiss) dismiss.addEventListener('click', function () {
+            banner.hidden = true;
+            try { sessionStorage.setItem('geoBannerDismissed', '1'); } catch (e) {}
+          });
+        })
+        .catch(function () {});
     })();
   </script>
 

@@ -31,6 +31,27 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
 
+    // 0. Geo endpoint — returns the visitor's Cloudflare-derived country
+    //    and region so the static pages can show an out-of-area banner
+    //    client-side (keeps the HTML cacheable; no per-request injection).
+    if (path === "/api/geo") {
+      const cf = request.cf || {};
+      return new Response(
+        JSON.stringify({
+          country: cf.country || null,       // e.g. "US"
+          region: cf.region || null,         // e.g. "California"
+          regionCode: cf.regionCode || null, // e.g. "CA"
+        }),
+        {
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+            "cache-control": "no-store",
+            "access-control-allow-origin": "*",
+          },
+        }
+      );
+    }
+
     // 1. Exact match.
     const hit = EXACT[path];
     if (hit) {
