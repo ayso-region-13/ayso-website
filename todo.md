@@ -17,6 +17,8 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ## Remaining Tasks
 
+### Scheduled follow-ups
+- [ ] **2026-06-22 (~2 weeks post-deploy): review out-of-area banner + `/register/find-your-region/` performance.** Deployed to prod 2026-06-08 (commit `c82dbba`). Must run **locally** (needs claude-seo creds at `~/.config/claude-seo/` — remote agents can't do this). Steps: (1) verify creds first per `feedback_check_seo_creds_first` memory (`cat ~/.config/claude-seo/google-api.json`, expect `ga4_property_id` 307558725); (2) GA4 — are out-of-California visitors landing on / reaching `/register/find-your-region/`? did out-of-area bounce on `/` and `/register` move off the ~70-80% baseline?; (3) confirm `https://www.ayso13.org/api/geo` still returns correct region JSON and the banner reveals for non-CA visitors (VPN/another state to see it — CA IPs won't); (4) check exits toward the AYSO national Region Locator if measurable. Then suggest copy/targeting tweaks. (Couldn't be scheduled as a remote routine: GA4/GSC pulls need local OAuth creds + the Claude GitHub App isn't installed on the repo.)
 
 ### Post-Launch (this week)
 - [x] Announce launch internally — completed 2026-05-02
