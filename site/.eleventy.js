@@ -35,6 +35,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets/css/style.css");
   eleventyConfig.addPassthroughCopy("src/assets/fonts");
   eleventyConfig.addPassthroughCopy("src/assets/docs");
+  eleventyConfig.addPassthroughCopy("src/assets/audio");
   // NOTE: src/_redirects is intentionally NOT passed through.
   // The ayso13-redirects Worker (workers/redirects/) handles all 607
   // redirects upstream of Pages. Emitting _redirects to _site/ triggered
