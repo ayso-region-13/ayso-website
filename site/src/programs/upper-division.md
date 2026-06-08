@@ -29,11 +29,13 @@ Starting in 2026, our AYSO Area is hosting two separate leagues in Upper Divisio
 
 - The Competitive League is a program for players looking to train and compete alongside more advanced players. This program is similar to the standard Upper Division program run by the local AYSO Area for the past many years.
 - We expect to have enough players to form at least one competitive team in each division. If you are interested in this league, please signup ASAP!
+- Games are expected to be on most Sundays and a few Monday or Wednesday evenings.
 
 ### Recreational League
 
 - The Recreational League is for players of all levels looking to practice and play in a well-structured soccer program built on the AYSO core philosophies. This league is similar to the B16U “House League” that Region 13 ran in 2025, but this season teams from other regions will be part of the fun.
 - We expect to have enough players to form more than one team in each division. The teams will be balanced with experienced and new players. Depending on numbers, we may play smaller-sided, i.e., 9v9 games.
+- Games are expected to be on most Sundays.
 
 ## Schedule
 
