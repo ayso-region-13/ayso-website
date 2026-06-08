@@ -8,11 +8,7 @@ section: volunteers
 ---
 These are the AYSO Region 13 board and operations positions currently looking for volunteers. The list is updated as roles are filled and as new needs arise — for the full catalog of every volunteer role in the region (including ones that are filled), see [Volunteer Roles](/volunteers/roles/).
 
-*As of April 22, 2026.*
-
-## Auditor
-
-As the Auditor, you'll help ensure the region's finances are accurate, transparent, and well-managed. You'll review financial records and confirm that income and expenses are properly documented. Audits are normally performed every six months. This role plays an important part in maintaining accountability and trust within the organization. If you're detail-oriented and value sound financial practices, this is a meaningful way to contribute.
+*As of June 7, 2026.*
 
 ## At-Large Board Member (up to 3)
 
@@ -45,10 +41,6 @@ As the Field Manager, you'll help ensure our game fields are safe, prepared, and
 ## NWSL/MLS Liaison
 
 As the NWSL/MLS Liaison, you'll help connect the region with the broader soccer community. You'll coordinate opportunities such as events, ticket programs, and special experiences. This role brings added value and excitement to players and families. If you enjoy partnerships and community engagement, this is a fun and impactful role.
-
-## 6U and 8U Division Coach Admins
-
-As a 6U or 8U Division Coach Admin, you'll support coaches in our youngest divisions. You will be responsible for helping to form teams in the month or so before the season starts. You'll then assist with communication, guidance, and coordination throughout the season. This role helps ensure a positive, development-focused experience for players and volunteers. If you enjoy supporting others and working with young athletes, this is a meaningful way to get involved.
 
 ## How to Apply
 

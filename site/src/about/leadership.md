@@ -21,7 +21,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Safety Director | Dan Jeffries | [safety@ayso13.org](mailto:safety@ayso13.org) |
 | Child & Volunteer Protection Advocate | Nan Sampath | [cvpa@ayso13.org](mailto:cvpa@ayso13.org) |
 | Secretary | Christina Scott | [secretary@ayso13.org](mailto:secretary@ayso13.org) |
-| Auditor | Open | [auditor@ayso13.org](mailto:auditor@ayso13.org) |
+| Auditor | Miriam Galvan | [auditor@ayso13.org](mailto:auditor@ayso13.org) |
 
 
 ## Club Operations
