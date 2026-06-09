@@ -16,7 +16,9 @@ jobs:
     name: Merge staging → main, wait for Cloudflare deploy
     runs-on: ubuntu-latest
     if: github.event.inputs.confirm == 'promote'
-    timeout-minutes: 20
+    # 28 min: covers the wait-for-cf-deploy budget (FIND_TIMEOUT 180s +
+    # DEPLOY_TIMEOUT 1200s = ~23 min) plus merge/setup overhead.
+    timeout-minutes: 28
     steps:
       - uses: actions/checkout@v6
         with:
@@ -133,24 +135,35 @@ jobs:
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           MERGE_OUTCOME: ${{ steps.merge.outcome }}
           CF_OUTCOME: ${{ steps.cf_wait.outcome }}
+          CF_STATUS: ${{ steps.cf_wait.outputs.final_status }}
         run: |
-          # Distinguish merge failure from Cloudflare-build failure so the
-          # Slack message is actionable.
+          # Distinguish three cases so the Slack message is actionable and
+          # not a false alarm:
+          #   - merge failed            -> hard failure, nothing promoted
+          #   - CF reported a real fail -> hard failure, build broke
+          #   - CF wait timed out       -> SOFT: CF Pages was just slow to
+          #     leave the queue; the build very likely finishes on its own.
           if [ "$MERGE_OUTCOME" != "success" ]; then
-            REASON="Merge from staging to main failed. Staging was not promoted."
+            HEADLINE=":x: *Promotion failed*"
+            REASON="Merge from staging to main failed. Staging was NOT promoted."
+          elif [ "$CF_STATUS" = "timeout" ]; then
+            HEADLINE=":hourglass_flowing_sand: *Production deploy still in progress*"
+            REASON="Merge to main succeeded, but Cloudflare Pages was still building \`$SHA\` when the wait window elapsed (CF queue is slow during busy periods). The build most likely completes on its own — check www.ayso13.org and the CF Pages dashboard before treating this as a failure."
           elif [ "$CF_OUTCOME" != "success" ]; then
-            REASON="Merge succeeded but Cloudflare Pages build failed for \`$SHA\`. Site is still serving the previous version."
+            HEADLINE=":x: *Production deploy failed*"
+            REASON="Merge succeeded but the Cloudflare Pages build FAILED for \`$SHA\`. Site is still serving the previous version. Check the CF Pages build log."
           else
+            HEADLINE=":x: *Promotion workflow failed*"
             REASON="Workflow failed. See run logs."
           fi
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg reason "$REASON" --arg run "$RUN_URL" '{
+            --data "$(jq -nc --arg head "$HEADLINE" --arg reason "$REASON" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
-              text: "Production deploy failed",
+              text: "Production promote notice",
               blocks: [
-                { type: "section", text: { type: "mrkdwn", text: ":x: *Production deploy failed* — \($reason)" } },
+                { type: "section", text: { type: "mrkdwn", text: "\($head) — \($reason)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run for details>" } ] }
               ]
             }')"
