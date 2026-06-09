@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-06-08T15:52:17.717Z
-// 618 exact rules + 9 splat rules = 627 total
+// Last generated: 2026-06-09T19:20:43.677Z
+// 628 exact rules + 9 splat rules = 637 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -405,6 +405,14 @@ export const EXACT = {
     "s": 301
   },
   "/upper-division": {
+    "d": "/programs/upper-division/",
+    "s": 301
+  },
+  "/upper-division-2/": {
+    "d": "/programs/upper-division/",
+    "s": 301
+  },
+  "/upper-division-2": {
     "d": "/programs/upper-division/",
     "s": 301
   },
@@ -920,6 +928,14 @@ export const EXACT = {
     "d": "/coaches/",
     "s": 301
   },
+  "/coach/coaching-staff/": {
+    "d": "/about/leadership/",
+    "s": 301
+  },
+  "/coach/coaching-staff": {
+    "d": "/about/leadership/",
+    "s": 301
+  },
   "/coach-training/": {
     "d": "/coaches/training/",
     "s": 301
@@ -1037,6 +1053,14 @@ export const EXACT = {
     "s": 301
   },
   "/referee": {
+    "d": "/referees/",
+    "s": 301
+  },
+  "/referee/referee-event-calendar/": {
+    "d": "/referees/",
+    "s": 301
+  },
+  "/referee/referee-event-calendar": {
     "d": "/referees/",
     "s": 301
   },
@@ -1349,6 +1373,14 @@ export const EXACT = {
     "s": 301
   },
   "/arcadia-city-hall-soccer-field": {
+    "d": "/fields/",
+    "s": 301
+  },
+  "/wp/region-13-map/": {
+    "d": "/fields/",
+    "s": 301
+  },
+  "/wp/region-13-map": {
     "d": "/fields/",
     "s": 301
   },
@@ -1678,6 +1710,14 @@ export const EXACT = {
   },
   "/heat": {
     "d": "/resources/heat-policy/",
+    "s": 301
+  },
+  "/document-library/": {
+    "d": "/resources/documents/",
+    "s": 301
+  },
+  "/document-library": {
+    "d": "/resources/documents/",
     "s": 301
   },
   "/pictures/": {
