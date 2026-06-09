@@ -6,22 +6,24 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800;900&display=swap">
 <style>
-  @page { size: 8.5in 11in; margin: 0; }
+  /* 0.5in @page margin keeps the sheet inside every printer's
+     non-printable border; content area is the 7.5x10in printable region. */
+  @page { size: 8.5in 11in; margin: 0.5in; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body {
-    width: 816px;
+    width: 720px;                 /* 7.5in printable width @96dpi */
     font-family: 'Raleway', sans-serif;
     background: #ede8e2;          /* brand-cream */
     color: #221f1f;               /* brand-dark */
   }
-  .page { width: 816px; display: flex; flex-direction: column; }
+  .page { width: 720px; display: flex; flex-direction: column; }
 
   /* ---- Header band ---- */
   .header {
     background: #83312d;          /* brand-red-dark */
     color: #fff;
-    padding: 26px 40px;
+    padding: 18px 40px;
     display: flex;
     align-items: center;
     gap: 22px;
@@ -32,9 +34,9 @@
   .header h1 { font-size: 30px; font-weight: 800; letter-spacing: .2px; }
   .header .sub { font-size: 14px; font-weight: 500; color: #ede8e2; margin-top: 4px; letter-spacing: 2.5px; text-transform: uppercase; }
 
-  .body { flex: 1; padding: 22px 40px 18px; }
+  .body { flex: 1; padding: 14px 40px 12px; }
 
-  .section { margin-bottom: 20px; }
+  .section { margin-bottom: 12px; }
   .section-title {
     font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
     color: #8e2929;               /* brand-maroon */
@@ -47,7 +49,7 @@
   /* ---- Logo row ---- */
   .logo-row { display: flex; gap: 18px; align-items: stretch; }
   .logo-card { flex: 1; border-radius: 10px; display: flex; align-items: center; justify-content: center; padding: 18px; }
-  .logo-card img { width: 110px; height: 110px; }
+  .logo-card img { width: 88px; height: 88px; }
   .logo-light { background: #fff; border: 1px solid #d9d2ca; }
   .logo-cream { background: #ede8e2; border: 1px solid #d9d2ca; }
   .logo-dark  { background: #230511; }   /* brand-header */
@@ -55,19 +57,19 @@
   .logo-meta b { color: #83312d; }
 
   /* ---- Fonts ---- */
-  .font-intro { font-size: 12px; margin-bottom: 12px; line-height: 1.5; }
+  .font-intro { font-size: 12px; margin-bottom: 8px; line-height: 1.45; }
   .font-intro b { color: #83312d; }
   .weights { display: flex; flex-direction: column; gap: 2px; }
   .weight-row { display: flex; align-items: baseline; gap: 14px; }
   .weight-row .label { width: 150px; font-size: 10.5px; font-weight: 600; color: #6b6663; letter-spacing: .3px; flex: 0 0 auto; }
-  .weight-row .specimen { font-size: 22px; color: #221f1f; white-space: nowrap; }
+  .weight-row .specimen { font-size: 18px; color: #221f1f; white-space: nowrap; }
   .w300 { font-weight: 300; } .w400 { font-weight: 400; } .w500 { font-weight: 500; }
   .w600 { font-weight: 600; } .w700 { font-weight: 700; } .w800 { font-weight: 800; } .w900 { font-weight: 900; }
 
   /* ---- Colors ---- */
   .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
   .swatch { border-radius: 8px; overflow: hidden; border: 1px solid #d9d2ca; background: #fff; }
-  .chip { height: 58px; position: relative; }
+  .chip { height: 46px; position: relative; }
   .chip .reserved {
     position: absolute; top: 6px; right: 6px;
     background: rgba(255,255,255,.9); color: #221f1f;
