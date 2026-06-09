@@ -16,7 +16,11 @@
 #   PROJECT        - Pages project name (default: ayso-website-prod)
 #   SHA            - commit hash to match (default: $GITHUB_SHA)
 #   FIND_TIMEOUT   - seconds to wait for CF to register the deployment (default: 180)
-#   DEPLOY_TIMEOUT - seconds to wait for the build to finish (default: 600)
+#   DEPLOY_TIMEOUT - seconds to wait for the build to finish (default: 1200)
+#                    Bumped 600->1200 on 2026-06-09: CF Pages routinely sits
+#                    in `queued` 10-12 min during busy windows, which timed out
+#                    the old 600s wait and fired false "deploy failed" alerts
+#                    even though the build completed fine afterward.
 #   POLL_INTERVAL  - seconds between polls (default: 10)
 #
 # Outputs (when GITHUB_OUTPUT is set):
@@ -33,7 +37,7 @@ set -euo pipefail
 PROJECT="${PROJECT:-ayso-website-prod}"
 SHA="${SHA:-${GITHUB_SHA:-}}"
 FIND_TIMEOUT="${FIND_TIMEOUT:-180}"
-DEPLOY_TIMEOUT="${DEPLOY_TIMEOUT:-600}"
+DEPLOY_TIMEOUT="${DEPLOY_TIMEOUT:-1200}"
 POLL_INTERVAL="${POLL_INTERVAL:-10}"
 
 if [ -z "$SHA" ]; then
