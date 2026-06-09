@@ -1,4 +1,8 @@
-branch: staging
+# NOTE: Pages CMS has no top-level `branch:` setting — it edits whichever
+# branch is selected in the UI, defaulting to the repo's GitHub default
+# branch. We set the GitHub default branch to `staging` (2026-06-08) so the
+# CMS always opens on staging. Do NOT rely on a `branch:` key here; it is
+# silently ignored.
 
 media:
   # Two buckets so editors can upload images AND PDFs through the CMS.

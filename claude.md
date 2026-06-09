@@ -45,7 +45,7 @@ Rebuilding ayso13.org from WordPress to a custom static site built with **Eleven
 **Headline state (as of 2026-05-19):**
 - **Hosting**: Cloudflare Pages (prod `www.ayso13.org`, staging `staging.ayso13.org`). CMS commits land on `staging`; `/ayso promote` merges to `main`.
 - **Workers (5)**: `weather-api` (Tempest + NWS, WBGT/rain, 5-min cron, KV cache, AQI ready on `aqi-feature`), `redirects` prod + staging envs (621 rules: 612 exact + 9 splat), `csp-report` (30d KV), `field-maps` (Access-gated map editor at `fields.ayso13.org`, commits to `staging` — see below), pages-deploy gates in workflows. **Note**: `src/_redirects` is intentionally NOT passed-through to `_site/` (.eleventy.js line 38) — Worker handles all redirects upstream of Pages; emitting the file triggered the "Maximum number of dynamic rules supported is 100" warning and correlated with the blob-hash-poisoning bug below.
-- **CMS**: Pages CMS at app.pagescms.org, `branch: staging`. Two media buckets — `images` and `docs` (PDFs). Editor uploads PDFs in Documents bucket, types path into rich-text link dialog.
+- **CMS**: Pages CMS at app.pagescms.org. Edits should land on `staging`. **The branch the CMS opens on = the repo's GitHub default branch** (Pages CMS has no `branch:` config key — the old `branch: staging` line in `.pages.yml` was silently ignored and caused repeated accidental edits to `main`). Fixed 2026-06-08 by setting the **GitHub default branch to `staging`** (`gh repo edit --default-branch staging`), so the CMS now opens on staging by default. Two media buckets — `images` and `docs` (PDFs). Editor uploads PDFs in Documents bucket, types path into rich-text link dialog.
 - **Slack** (`#notify-website-status`): staging + promote workflows post success/failure with commit titles. `/ayso` Slack bot for field status, announcements, promote dispatch.
 - **Schema**: multi-typed `SportsOrganization` + `NonprofitOrganization` + WebSite + BreadcrumbList + Place (23 fields, each with `geo.latitude`/`longitude` from `placeLat`/`placeLon` frontmatter) + FAQPage + Person (Steve Hawkins) + SportsEvent (date-gated). EIN 95-6205398 on `#org`. `sameAs` includes AYSO national, the GBP Maps Place URL (cid `9491143221518550898`), Instagram (`@aysoregion13`), and Facebook (`/ayso13`); both social profiles link back to ayso13.org for `rel="me"` verification.
 - **Hardened**: WCAG AA contrast, HSTS, CSP enforcing (`'wasm-unsafe-eval'` for Pagefind WASM), CSP report Worker, per-page noindex via frontmatter, per-section OG image defaults, `llms.txt`, IndexNow on every push.
@@ -248,7 +248,7 @@ Notes:
 
 - `staging` branch is live at **staging.ayso13.org** (separate Cloudflare Pages project, `ayso-website-staging`)
 - `main` branch deploys to **www.ayso13.org** (production CF Pages project, `ayso-website-prod`)
-- Pages CMS is configured with `branch: staging` in `.pages.yml` — all CMS edits go to staging
+- Pages CMS edits go to staging because the **GitHub default branch is `staging`** (set 2026-06-08), and Pages CMS opens on the repo default branch. (Pages CMS has no `branch:` config key — do not rely on one in `.pages.yml`.)
 - **Branch ruleset on `main`** requires PRs; `magoldman` (Repository admin) bypasses via the workflow's `PROMOTE_TOKEN` PAT
 - **Promote to production:** GitHub Actions workflow `.github/workflows/promote-to-production.yml` merges `staging` → `main`
   - From Slack: `/ayso promote` (slack-bot dispatches workflow_dispatch)
