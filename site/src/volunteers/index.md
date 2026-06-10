@@ -57,7 +57,7 @@ Classes are scheduled nearly every weekend in August before the fall season, wit
 
 - General questions: [info@ayso13.org](mailto:info@ayso13.org)
 - Phone: 626-316-6900
-- Address: 711 W. Woodbury Rd., Unit E, Altadena, CA 91001
+- Address: [711 W. Woodbury Rd., Unit E, Altadena, CA 91001](/contact/)
 
 ## Related Pages
 

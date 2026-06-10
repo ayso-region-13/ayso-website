@@ -56,7 +56,7 @@ For concerns not covered above:
 
 - Phone: 626-316-6900
 - Game-day emergencies: 626-702-AYSO
-- Address: 711 W. Woodbury Rd., Unit E, Altadena, CA 91001
+- Address: [711 W. Woodbury Rd., Unit E, Altadena, CA 91001](/contact/)
 
 ## Related Pages
 
