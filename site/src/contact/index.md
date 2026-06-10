@@ -23,6 +23,8 @@ AYSO Region 13
 711 W. Woodbury Rd., Unit E
 Altadena, CA 91001
 
+![The AYSO Region 13 office at 711 W. Woodbury Rd., Unit E in Altadena](/images/clubhouse.jpg)
+
 ## Service Area
 
 We serve players in Pasadena, Altadena, La Cañada Flintridge, and surrounding communities — ZIP codes 91001, 91011, 91101, 91103, 91104, 91105, 91106, 91107, and 91108.
