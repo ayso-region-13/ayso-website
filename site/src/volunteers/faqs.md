@@ -318,7 +318,7 @@ LiveScan in Region 13 is free. If you attend a LiveScan event in another region 
 - General questions: [info@ayso13.org](mailto:info@ayso13.org)
 - LiveScan / background check: [cvpa@ayso13.org](mailto:cvpa@ayso13.org)
 - Phone: 626-316-6900
-- Address: 711 W. Woodbury Rd., Unit E, Altadena, CA 91001
+- Address: [711 W. Woodbury Rd., Unit E, Altadena, CA 91001](/contact/)
 
 ## Related pages
 

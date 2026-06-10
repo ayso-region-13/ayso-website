@@ -128,6 +128,8 @@
 /next                               /programs/next/                          301
 /upper-division/                    /programs/upper-division/                301
 /upper-division                     /programs/upper-division/                301
+/upper-division-2/                  /programs/upper-division/                301
+/upper-division-2                   /programs/upper-division/                301
 /camp/                              /programs/                               301
 /camp                               /programs/                               301
 /all-stars-rules/                   /programs/all-stars/                     301
@@ -274,6 +276,8 @@
 # ======================================================================
 /coach/                             /coaches/                                301
 /coach                              /coaches/                                301
+/coach/coaching-staff/              /about/leadership/                       301
+/coach/coaching-staff               /about/leadership/                       301
 /coach-training/                    /coaches/training/                       301
 /coach-training                     /coaches/training/                       301
 /practice/                          /coaches/practice/                       301
@@ -308,6 +312,8 @@
 # ======================================================================
 /referee/                           /referees/                               301
 /referee                            /referees/                               301
+/referee/referee-event-calendar/    /referees/                               301
+/referee/referee-event-calendar     /referees/                               301
 /referee-training-home/             /referees/training/                      301
 /referee-training-home              /referees/training/                      301
 /referee-upgrades/                  /referees/upgrades/                      301
@@ -400,6 +406,8 @@
 /victory                            /fields/victory/                         301
 /arcadia-city-hall-soccer-field/    /fields/                                 301
 /arcadia-city-hall-soccer-field     /fields/                                 301
+/wp/region-13-map/                  /fields/                                 301
+/wp/region-13-map                   /fields/                                 301
 /map/                               /fields/                                 301
 /map                                /fields/                                 301
 /maps/                              /fields/                                 301
@@ -488,6 +496,8 @@
 # ======================================================================
 /heat/                              /resources/heat-policy/                  301
 /heat                               /resources/heat-policy/                  301
+/document-library/                  /resources/documents/                    301
+/document-library                   /resources/documents/                    301
 /pictures/                          /resources/gallery/                      301
 /pictures                           /resources/gallery/                      301
 /safety/                            /resources/safety/                       301
