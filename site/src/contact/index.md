@@ -31,6 +31,8 @@ Altadena, CA 91001
 
 We serve players in Pasadena, Altadena, La Cañada Flintridge, and surrounding communities — ZIP codes 91001, 91011, 91101, 91103, 91104, 91105, 91106, 91107, and 91108.
 
+Live farther away? [Find your local AYSO](/register/find-your-region/).
+
 ## Department Contacts
 
 
