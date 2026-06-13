@@ -44,14 +44,16 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
     <p class="text-sm uppercase tracking-wider text-brand-dark mb-1">WBGT, CIF Level <span id="cif-level">—</span></p>
     <p class="text-4xl font-bold text-brand-dark leading-none mb-2"><span id="wbgt">—</span>°F</p>
     <p class="text-sm font-semibold text-brand-dark mb-1" id="cif-label">—</p>
-    <p class="text-xs text-gray-500 mt-2 m-0"><a href="/resources/heat-policy/" class="text-brand-red-dark underline">All alert levels →</a></p>
+    <p class="text-xs text-gray-500 mt-2 m-0">Updated <span id="wbgt-updated">—</span></p>
+    <p class="text-xs text-gray-500 mt-1 m-0"><a href="/resources/heat-policy/" class="text-brand-red-dark underline">All alert levels →</a></p>
   </div>
   <div class="bg-brand-cream p-4">
     <p class="text-sm uppercase tracking-wider text-brand-dark mb-1">Air Quality (AQI)</p>
     <p class="text-4xl font-bold text-brand-dark leading-none mb-2"><span id="aqi">—</span></p>
     <p class="text-sm font-semibold text-brand-dark mb-1" id="aqi-category">—</p>
     <p class="text-sm text-gray-700 m-0">Pollutant: <span id="aqi-pollutant">—</span></p>
-    <p class="text-xs text-gray-500 mt-2 m-0"><a href="/resources/air-quality-policy/" class="text-brand-red-dark underline">All AQI bands →</a></p>
+    <p class="text-xs text-gray-500 mt-2 m-0">Updated <span id="aqi-updated">—</span></p>
+    <p class="text-xs text-gray-500 mt-1 m-0"><a href="/resources/air-quality-policy/" class="text-brand-red-dark underline">All AQI bands →</a></p>
   </div>
 </div>
 
@@ -189,6 +191,20 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
       var d = new Date(iso);
       return d.toLocaleString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/Los_Angeles" });
     } catch (_) { return iso; }
+  }
+
+  // AirNow reports hourly and the Worker hands us a preformatted local string
+  // ("YYYY-MM-DD HH:MM TZ", already Pacific) — NOT an ISO timestamp, so it
+  // can't go through formatUpdated (new Date() chokes on the "PST" suffix).
+  // Pull the hour/minute straight out and render to match the temp card.
+  function formatAqiObserved(s) {
+    if (!s) return "—";
+    var m = String(s).match(/\d{4}-\d{2}-\d{2}\s+(\d{2}):(\d{2})/);
+    if (!m) return s;
+    var hour = parseInt(m[1], 10);
+    var ampm = hour >= 12 ? "PM" : "AM";
+    var h12 = hour % 12; if (h12 === 0) h12 = 12;
+    return h12 + ":" + m[2] + " " + ampm;
   }
 
   function renderForecast(periods) {
@@ -448,9 +464,11 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
     setText("wbgt",       w.valueF != null ? w.valueF : "—");
     setText("cif-level",  w.level != null ? w.level : "—");
     setText("cif-label",  w.levelLabel || "—");
+    setText("wbgt-updated", formatUpdated(c.stationTimestamp || data.fetchedAt));
     setText("aqi",            a.aqi != null ? a.aqi : "—");
     setText("aqi-category",   a.category || "—");
     setText("aqi-pollutant",  a.dominantPollutant || "—");
+    setText("aqi-updated",    formatAqiObserved(a.observedAt));
 
     renderRainBanner(data.rain);
     renderAirBanner(data.airQuality);
