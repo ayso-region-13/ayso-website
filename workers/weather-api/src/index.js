@@ -37,6 +37,25 @@ const ALLOWED_ORIGINS = new Set([
 
 export default {
   async fetch(request, env, ctx) {
+    // Authenticated connectivity self-test. A POST carrying the shared
+    // X-Selftest-Key header posts a one-off test card to #notify-weather
+    // through the REAL postSlack path (this Worker's own token + channel
+    // var), then returns Slack's response. Driven by the `/ayso test-weather`
+    // Slack command; also runnable ad-hoc for ops checks. GET is unaffected.
+    if (request.method === "POST") {
+      const key = request.headers.get("X-Selftest-Key");
+      if (!env.WEATHER_SELFTEST_KEY || key !== env.WEATHER_SELFTEST_KEY) {
+        return jsonError(403, "forbidden");
+      }
+      const data = await postSlack(env, [
+        { type: "section", text: { type: "mrkdwn", text: ":satellite: *Weather notifications test* — confirms the weather Worker can post here. Real closure / NWS-alert / rain-forecast notices arrive in this channel automatically." } },
+      ], "Weather notifications connectivity test");
+      return new Response(JSON.stringify({ ok: !!(data && data.ok), slack: data }), {
+        status: data && data.ok ? 200 : 502,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+
     let payload = await env.WEATHER_KV.get(KV_KEY, { type: "json" });
     if (!payload) {
       // Cold start. Build the cache before serving so the first visitor
@@ -164,6 +183,7 @@ async function postSlack(env, blocks, text) {
   });
   const data = await res.json().catch(() => ({}));
   if (!data.ok) console.error("Slack postMessage failed:", data.error || res.status);
+  return data;
 }
 
 // Build the human-readable reason list behind a closure recommendation.
