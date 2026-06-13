@@ -48,17 +48,18 @@ If a player shows these signs, stop activity and seek medical attention.
 
 Coaches and team managers must complete concussion and SCA awareness training through eTrainU. This is required by California law.
 
-## Heat and Rain Policy
+## Heat, Rain, and Air Quality Policies
 
-Region 13 monitors heat and rainfall at our fields and modifies or cancels activities when conditions warrant. Heat decisions follow California CIF guidelines using Wet Bulb Globe Temperature (WBGT). Rain decisions are based on accumulated rainfall over the past 48 and 72 hours.
+Region 13 monitors heat, rainfall, and air quality at our fields and modifies or cancels activities when conditions warrant. Heat decisions follow California CIF guidelines using Wet Bulb Globe Temperature (WBGT). Rain decisions are based on accumulated rainfall over the past 48 and 72 hours. Air-quality decisions follow EPA AQI thresholds.
 
 - [Heat Policy and alert levels](/resources/heat-policy/): full CIF thresholds and required actions
 - [Rain Policy](/resources/rain-policy/): wet-field closure thresholds
+- [Air Quality Policy](/resources/air-quality-policy/): EPA AQI thresholds and required actions
 - [Weather and Field Conditions](/resources/weather/): live readings from our weather station
 
-Either coach in a game may elect not to play in hot or wet conditions without forfeit penalty. Families and players have final say on individual participation.
+Either coach in a game may elect not to play in hot, wet, or smoky conditions without forfeit penalty. Families and players have final say on individual participation.
 
-Notifications are sent by 7 AM on game days or 4 PM on practice days when heat or wet-field alerts are in effect.
+Notifications are sent by 7 AM on game days or 4 PM on practice days when heat, wet-field, or air-quality alerts are in effect.
 
 ## Incident Reporting
 

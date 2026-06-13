@@ -75,10 +75,11 @@ export default {
 };
 
 async function refresh(env) {
-  const [tempestObs, nwsForecast, prevRainState] = await Promise.all([
+  const [tempestObs, nwsForecast, prevRainState, airNowObs] = await Promise.all([
     fetchTempest(env),
     fetchNwsForecast(env),
     env.WEATHER_KV.get("rain:state", { type: "json" }),
+    fetchAirNow(env),
   ]);
 
   const wbgt = computeWbgt(tempestObs);
@@ -87,6 +88,7 @@ async function refresh(env) {
 
   const rainState = await updateRainState(env, tempestObs, prevRainState);
   const rain = rainAdvisory(rainState);
+  const airQuality = airAdvisory(airNowObs);
 
   const payload = {
     fetchedAt: new Date().toISOString(),
@@ -107,7 +109,8 @@ async function refresh(env) {
       levelLabel: cif.label,
     },
     rain: rain,
-    closureRecommended: cif.level >= 5 || rain.closureRecommended,
+    airQuality: airQuality,
+    closureRecommended: cif.level >= 5 || rain.closureRecommended || airQuality.closureRecommended,
     forecast: nwsForecast,
   };
 
@@ -194,6 +197,103 @@ function rainAdvisory(state) {
     thresholds: RAIN_THRESHOLDS_IN,
     closureRecommended,
     reason,
+  };
+}
+
+// ── Air quality (AirNow / EPA) ─────────────────────────────────────────
+//
+// AirNow is the EPA's official AQI feed — same data schools, fire
+// departments, and the South Coast AQMD reference. Free with an API key
+// from https://docs.airnowapi.org/ ; we read the nearest reporting area
+// to our forecast lat/lon. The endpoint returns one row per pollutant
+// (O3, PM2.5, PM10); we report the dominant (highest-AQI) row.
+//
+// Closure threshold: AQI > 150 (EPA "Unhealthy" or worse). See
+// /resources/air-quality-policy/ for the policy that drives this number.
+
+const AQI_CLOSURE_THRESHOLD = 150;
+
+async function fetchAirNow(env) {
+  const key = env.AIRNOW_API_KEY;
+  if (!key) {
+    // Soft fail: AirNow key is optional; without it we report the
+    // airQuality block as unavailable rather than throwing.
+    return null;
+  }
+  const lat = env.FORECAST_LAT;
+  const lon = env.FORECAST_LON;
+  const url =
+    "https://www.airnowapi.org/aq/observation/latLong/current/" +
+    `?format=application/json&latitude=${lat}&longitude=${lon}` +
+    `&distance=25&API_KEY=${key}`;
+  try {
+    const r = await fetch(url, { headers: { "User-Agent": env.USER_AGENT } });
+    if (!r.ok) {
+      console.error(`AirNow ${r.status}`);
+      return null;
+    }
+    const json = await r.json();
+    if (!Array.isArray(json) || json.length === 0) return null;
+    return json;
+  } catch (err) {
+    console.error("AirNow fetch failed:", err.message);
+    return null;
+  }
+}
+
+function airAdvisory(observations) {
+  if (!observations) {
+    return {
+      aqi: null,
+      category: null,
+      dominantPollutant: null,
+      reportingArea: null,
+      observedAt: null,
+      thresholdAqi: AQI_CLOSURE_THRESHOLD,
+      closureRecommended: false,
+      reason: null,
+      source: null,
+    };
+  }
+
+  // Pick the observation with the highest AQI — that's the dominant
+  // pollutant driving the EPA category. Ties go to PM2.5 (more concerning
+  // for short-term exertion).
+  const ranked = observations
+    .filter((o) => o && typeof o.AQI === "number")
+    .sort((a, b) => {
+      if (b.AQI !== a.AQI) return b.AQI - a.AQI;
+      // PM2.5 wins ties
+      const pm = (o) => (o.ParameterName === "PM2.5" ? 0 : 1);
+      return pm(a) - pm(b);
+    });
+  if (ranked.length === 0) {
+    return airAdvisory(null);
+  }
+  const top = ranked[0];
+
+  let observedAt = null;
+  if (top.DateObserved && typeof top.HourObserved === "number") {
+    // AirNow returns local time; we just record what they reported.
+    const date = String(top.DateObserved).trim(); // "2026-05-07 "
+    const hour = String(top.HourObserved).padStart(2, "0");
+    observedAt = `${date} ${hour}:00 ${top.LocalTimeZone || ""}`.trim();
+  }
+
+  const closureRecommended = top.AQI > AQI_CLOSURE_THRESHOLD;
+
+  return {
+    aqi: top.AQI,
+    category: (top.Category && top.Category.Name) || null,
+    dominantPollutant: top.ParameterName || null,
+    reportingArea: top.ReportingArea || null,
+    observedAt,
+    thresholdAqi: AQI_CLOSURE_THRESHOLD,
+    closureRecommended,
+    reason: closureRecommended
+      ? `AQI ${top.AQI} (${(top.Category && top.Category.Name) || "Unhealthy"}) — above the ${AQI_CLOSURE_THRESHOLD} closure threshold`
+      : null,
+    source: "AirNow / EPA",
   };
 }
 

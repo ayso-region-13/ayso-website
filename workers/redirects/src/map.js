@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-06-09T19:20:43.677Z
-// 628 exact rules + 9 splat rules = 637 total
+// Last generated: 2026-06-13T17:10:19.696Z
+// 632 exact rules + 9 splat rules = 641 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -1742,6 +1742,22 @@ export const EXACT = {
   },
   "/weather": {
     "d": "/resources/weather/",
+    "s": 301
+  },
+  "/aqi/": {
+    "d": "/resources/air-quality-policy/",
+    "s": 301
+  },
+  "/aqi": {
+    "d": "/resources/air-quality-policy/",
+    "s": 301
+  },
+  "/air-quality/": {
+    "d": "/resources/air-quality-policy/",
+    "s": 301
+  },
+  "/air-quality": {
+    "d": "/resources/air-quality-policy/",
     "s": 301
   },
   "/incident/": {
