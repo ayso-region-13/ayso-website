@@ -40,5 +40,5 @@ TEMPEST_STATION_ID = "33318"
 #   next ~72h has a probability of precipitation at or above this percent.
 # SLACK_BOT_TOKEN is a SECRET, not a var — set it with:
 #   npx wrangler secret put SLACK_BOT_TOKEN   (same xoxb token as the slack-bot)
-NOTIFY_WEATHER_CHANNEL_ID = "REPLACE_WITH_NOTIFY_WEATHER_CHANNEL_ID"
+NOTIFY_WEATHER_CHANNEL_ID = "C0BB7JJ0XRN"
 POP_FORECAST_THRESHOLD = "60"
