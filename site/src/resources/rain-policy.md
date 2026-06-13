@@ -57,6 +57,7 @@ The 48-hour and 72-hour windows are conservative enough to keep players safe on 
 
 - [Weather and Field Conditions](/resources/weather/): live conditions, 48-hour and 72-hour rainfall totals
 - [Heat Policy](/resources/heat-policy/): CIF heat alert levels and required actions
+- [Air Quality Policy](/resources/air-quality-policy/): EPA AQI thresholds and required actions
 - [Safety](/resources/safety/): concussion, sudden cardiac arrest, incident reporting
 
 *Last updated: [DATE]*

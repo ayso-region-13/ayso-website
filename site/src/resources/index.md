@@ -33,6 +33,12 @@ Wet-field closure thresholds. Region 13 closes fields when recent rainfall has s
 
 [Rain Policy](/resources/rain-policy/)
 
+## Air Quality Policy
+
+EPA AQI thresholds for outdoor activity. Region 13 cancels practices and games when AQI exceeds 150 (Unhealthy or worse).
+
+[Air Quality Policy](/resources/air-quality-policy/)
+
 ## Weather and Field Conditions
 
 Live readings from Region 13's on-site weather station, current WBGT, and a 7-day Pasadena forecast.

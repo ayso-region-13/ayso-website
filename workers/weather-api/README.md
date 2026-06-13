@@ -24,14 +24,23 @@ Cloudflare Worker that powers the live data on `/resources/weather/`. Polls the 
    # Paste the returned id into wrangler.toml under [[kv_namespaces]] id = "..."
    npx wrangler secret put TEMPEST_TOKEN     # paste the token
    npx wrangler secret put TEMPEST_STATION_ID # paste the station id
+   npx wrangler secret put AIRNOW_API_KEY    # OPTIONAL — enables the airQuality block
    npx wrangler deploy
    ```
+
+   The `AIRNOW_API_KEY` is optional; without it the Worker still runs and
+   the JSON envelope's `airQuality` block reports `null` values rather
+   than throwing. To get a key (free, ~5 min): register at
+   <https://docs.airnowapi.org/>, verify your email, copy the key from
+   "Web Services → My API". Powers the `/resources/weather/` and `/temp`
+   pages' AQI displays plus the air-quality closure advisory (AQI > 150).
 
 3. **Verify**
    ```bash
    curl -sS https://www.ayso13.org/api/weather | jq .
    ```
-   Expect: a JSON envelope with `current`, `wbgt`, `closureRecommended`, and `forecast` populated.
+   Expect: a JSON envelope with `current`, `wbgt`, `airQuality`,
+   `closureRecommended`, and `forecast` populated.
 
 ## Local dev
 

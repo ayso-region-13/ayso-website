@@ -46,6 +46,7 @@ These thresholds and required actions follow the California Interscholastic Fede
 
 - [Weather and Field Conditions](/resources/weather/): live WBGT, current conditions, 7-day forecast
 - [Rain Policy](/resources/rain-policy/): wet-field closure thresholds
+- [Air Quality Policy](/resources/air-quality-policy/): EPA AQI thresholds and required actions
 - [Safety](/resources/safety/): concussion, sudden cardiac arrest, incident reporting
 
 *Last updated: [DATE]*
