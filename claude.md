@@ -164,6 +164,8 @@ node scripts/check-links.js      # Check internal links
 ./scripts/check-404s.sh          # Pull last-24h 404s from CF GraphQL Analytics (needs CF_ZONE_ID + CF_API_TOKEN in site/.env)
 ```
 
+**Cloudflare API tokens (consolidated 2026-06-13):** `ayso13-worker-deploy` (Workers Scripts + KV Storage + Account Settings + Zone Workers Routes) deploys all four workers — in `.envrc` `CLOUDFLARE_API_TOKEN` + the GitHub `CLOUDFLARE_API_TOKEN` secret. `ayso13-pages-deploy-read` (Pages: Read) = GitHub `CLOUDFLARE_PAGES_API_TOKEN` for the promote status poll. `ayso13-website-healthcheck` (Zone Analytics: Read) backs BOTH the totavi healthcheck and `check-404s.sh` (`site/.env CF_API_TOKEN`) — value lives in `~/dev/site-healthcheck/secrets/ayso.yml`. Don't create per-tool deploy tokens; reuse these.
+
 Note: Search (`/search/`) only works after a full `npm run build` — not in dev server.
 
 ### GSC + GA4 data pulls
