@@ -4,6 +4,9 @@
  * /ayso               → choose Field Status or Announcement
  * /ayso field         → Field Status modal directly
  * /ayso announce      → Announcement modal directly
+ * /ayso promote       → trigger staging → production promotion
+ * /ayso test-weather  → post a connectivity test to #notify-weather via the
+ *                       weather-api Worker (verifies its Slack notifier path)
  *
  * Commits changes to both `staging` and `main` branches via GitHub API,
  * then posts a formatted update to the configured Slack channel.
@@ -13,6 +16,8 @@
  *   SLACK_BOT_TOKEN        — xoxb-... from Slack app → OAuth & Permissions
  *   SLACK_CHANNEL_ID       — channel ID for #general (starts with C)
  *   GITHUB_TOKEN           — fine-grained PAT with Contents: read+write on this repo
+ *   WEATHER_SELFTEST_KEY   — shared secret; matches the same on weather-api,
+ *                            gates the /api/weather self-test endpoint
  */
 
 const GITHUB_REPO        = 'ayso-region-13/ayso-website';
@@ -94,6 +99,14 @@ async function handleCommand(rawBody, env, ctx) {
     ctx.waitUntil(triggerPromotion(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
     return new Response(
       JSON.stringify({ response_type: 'ephemeral', text: '🚀 Promotion triggered — staging → production. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  if (text === 'test-weather' || text === 'weather-test') {
+    ctx.waitUntil(runWeatherSelfTest(env, params.get('response_url')));
+    return new Response(
+      JSON.stringify({ response_type: 'ephemeral', text: '🛰️ Testing weather notifications — posting a test card to #notify-weather…' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   }
@@ -267,6 +280,38 @@ function githubHeaders(token) {
     'Accept': 'application/vnd.github.v3+json',
     'User-Agent': 'AYSO-Slack-Bot'
   };
+}
+
+// Calls the weather-api Worker's authenticated self-test endpoint, which
+// posts a test card to #notify-weather via its REAL Slack notifier path,
+// then reports the outcome back to the command invoker (ephemeral).
+async function runWeatherSelfTest(env, responseUrl) {
+  let resultText;
+  try {
+    const res = await fetch('https://www.ayso13.org/api/weather', {
+      method: 'POST',
+      headers: { 'X-Selftest-Key': env.WEATHER_SELFTEST_KEY || '' }
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 403) {
+      resultText = '❌ Weather test rejected (auth). The WEATHER_SELFTEST_KEY secret is missing or mismatched between the bot and weather-api.';
+    } else if (data.ok) {
+      resultText = '✅ Test posted to <#C0BB7JJ0XRN|notify-weather> — the weather Worker can post. Real closure / NWS-alert / rain-forecast notices will land there automatically.';
+    } else {
+      const err = (data.slack && data.slack.error) || `HTTP ${res.status}`;
+      const hint = err === 'not_in_channel' ? ' Invite the bot to #notify-weather (`/invite @<bot>`).' : '';
+      resultText = `❌ Weather test failed: \`${err}\`.${hint}`;
+    }
+  } catch (e) {
+    resultText = `❌ Weather test error: ${e.message}`;
+  }
+  if (responseUrl) {
+    await fetch(responseUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ response_type: 'ephemeral', text: resultText })
+    });
+  }
 }
 
 // ── Slack API ─────────────────────────────────────────────────────────────
