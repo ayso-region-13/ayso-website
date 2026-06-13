@@ -4,9 +4,27 @@ Cloudflare Worker that powers the live data on `/resources/weather/`. Polls the 
 
 ## Architecture
 
-- **Cron trigger** (`*/5 * * * *`): refreshes the cached payload regardless of page traffic.
-- **HTTP route** (`www.ayso13.org/api/weather`): serves the cached payload from KV. Cold-start safety: if KV is empty (first deploy or eviction), the fetch handler refreshes synchronously before responding so the page never sees a 404 / empty response.
-- **KV namespace** (`WEATHER_KV`): single key `current` holds the latest envelope. A second key caches the resolved NWS forecast URL for the configured lat/lon.
+- **Cron trigger** (`*/5 * * * *`): refreshes the cached payload regardless of page traffic, then runs the Slack notifiers (below).
+- **HTTP route** (`www.ayso13.org/api/weather`): serves the cached payload from KV. Cold-start safety: if KV is empty (first deploy or eviction), the fetch handler refreshes synchronously before responding so the page never sees a 404 / empty response. (The fetch path never sends Slack notifications — only the cron path does — so concurrent page loads can't double-post.)
+- **KV namespace** (`WEATHER_KV`): single key `current` holds the latest envelope. A second key caches the resolved NWS forecast URL for the configured lat/lon. The notifiers keep their own state under `notify:closure`, `notify:nwsAlerts`, and `notify:rainForecast`.
+
+## Slack notifications
+
+After each cron refresh, three independent notifiers post to **#notify-weather** via the shared AYSO Slack bot (`chat.postMessage`). Each keeps its own KV state so it posts only on a *change*, never every tick. A Slack failure is logged but can never break the weather feed (notifications run after the cache write, under `Promise.allSettled`).
+
+| Notifier | Fires when | KV state |
+|---|---|---|
+| Closure threshold | `closureRecommended` transitions false→true (heat WBGT L5, rain >0.25"/48h or >1"/72h, or AQI > 150) and again true→false | `notify:closure` |
+| NWS active alerts | a new alert appears at `api.weather.gov/alerts/active?point=LAT,LON`, or a tracked one ends (dedup by alert id) | `notify:nwsAlerts` |
+| Rain forecast heads-up | any forecast period in the next ~72h has PoP ≥ `POP_FORECAST_THRESHOLD` (default 60); throttled to once per 24h per period | `notify:rainForecast` |
+
+On first run with no baseline, the NWS-alerts notifier seeds its state silently so a deploy during an active alert doesn't dump pre-existing alerts into the channel. The pure decision logic (`closureTransition`, `diffAlertIds`, `rainForecastDecision`) is unit-tested — run `npm test`.
+
+**Setup:** create the `#notify-weather` channel, invite the AYSO bot, then set `NOTIFY_WEATHER_CHANNEL_ID` in `wrangler.toml [vars]` to the channel id and add the bot token as a secret:
+
+```bash
+npx wrangler secret put SLACK_BOT_TOKEN   # same xoxb-... token as the slack-bot Worker
+```
 
 ## One-time setup
 
@@ -61,8 +79,10 @@ curl -sS http://localhost:8787/api/weather | jq .
 | `FORECAST_LAT` | `34.1478` | Latitude for NWS forecast (Pasadena City Hall) |
 | `FORECAST_LON` | `-118.1445` | Longitude for NWS forecast |
 | `USER_AGENT` | `(ayso13.org weather page, info@ayso13.org)` | NWS requires a contact email per their API policy |
+| `NOTIFY_WEATHER_CHANNEL_ID` | _(placeholder)_ | Slack channel id for #notify-weather (not secret) |
+| `POP_FORECAST_THRESHOLD` | `60` | Min forecast PoP % that triggers a rain heads-up |
 
-If Region 13 wants the forecast pinned to a specific field's coordinates, edit those vars and redeploy.
+Plus the `SLACK_BOT_TOKEN` **secret** (see Slack notifications). If Region 13 wants the forecast pinned to a specific field's coordinates, edit the lat/lon vars and redeploy.
 
 ## Output envelope
 
@@ -92,6 +112,7 @@ If Region 13 wants the forecast pinned to a specific field's coordinates, edit t
       "isDaytime": true,
       "tempF": 78,
       "tempUnit": "F",
+      "pop": 10,  // probability of precipitation %, or null
       "shortForecast": "Sunny",
       "detailedForecast": "Sunny, with a high near 78. ...",
       "windSummary": "5 to 10 mph SW",

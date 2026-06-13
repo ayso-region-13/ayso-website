@@ -31,3 +31,14 @@ FORECAST_LAT = "34.1478"
 FORECAST_LON = "-118.1445"
 USER_AGENT = "(ayso13.org weather page, info@ayso13.org)"
 TEMPEST_STATION_ID = "33318"
+
+# Slack notifications (see the "Slack notifications" section in src/index.js).
+# NOTIFY_WEATHER_CHANNEL_ID: the #notify-weather channel id (starts with C).
+#   Channel ids are not secret, so they live here. REPLACE the placeholder
+#   with the real id once the channel exists and the bot has been invited.
+# POP_FORECAST_THRESHOLD: rain heads-up fires when any forecast period in the
+#   next ~72h has a probability of precipitation at or above this percent.
+# SLACK_BOT_TOKEN is a SECRET, not a var — set it with:
+#   npx wrangler secret put SLACK_BOT_TOKEN   (same xoxb token as the slack-bot)
+NOTIFY_WEATHER_CHANNEL_ID = "C0BB7JJ0XRN"
+POP_FORECAST_THRESHOLD = "60"

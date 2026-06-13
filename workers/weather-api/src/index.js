@@ -66,8 +66,13 @@ export default {
   async scheduled(_event, env, _ctx) {
     // Cron fires regardless of traffic. Failures here just leave the
     // last-good payload in KV until the next tick.
+    //
+    // Slack notifications run ONLY on this cron path (never on the fetch()
+    // cold-start refresh) so concurrent page loads can't double-post. They
+    // run after the cache write and can never break the weather feed.
     try {
-      await refresh(env);
+      const payload = await refresh(env);
+      await notify(env, payload);
     } catch (err) {
       console.error("scheduled refresh failed:", err.message);
     }
@@ -118,6 +123,190 @@ async function refresh(env) {
     expirationTtl: 60 * 60 * 24, // 24 h safety net if the cron stalls
   });
   return payload;
+}
+
+// ── Slack notifications ────────────────────────────────────────────────
+//
+// Three independent notifiers, all posting to #notify-weather via the
+// shared AYSO Slack bot (SLACK_BOT_TOKEN). Each keeps its own state in KV
+// so it only posts on a *change*, never every 5-min tick:
+//   1. notifyClosure      — closureRecommended transitions (false↔true)
+//   2. notifyNwsAlerts     — new / ended NWS active alerts (dedup by id)
+//   3. notifyRainForecast  — heads-up when forecast PoP crosses a threshold
+//
+// The decision logic for each is a PURE function (closureTransition,
+// diffAlertIds, rainForecastDecision) exported at the bottom for unit
+// tests; the functions here are the thin IO shells around them.
+
+async function notify(env, payload) {
+  // allSettled so one notifier failing can't suppress the others.
+  await Promise.allSettled([
+    notifyClosure(env, payload),
+    notifyNwsAlerts(env),
+    notifyRainForecast(env, payload),
+  ]);
+}
+
+async function postSlack(env, blocks, text) {
+  const token = env.SLACK_BOT_TOKEN;
+  const channel = env.NOTIFY_WEATHER_CHANNEL_ID;
+  if (!token || !channel) {
+    console.error("Slack notify skipped: SLACK_BOT_TOKEN or NOTIFY_WEATHER_CHANNEL_ID not set");
+    return;
+  }
+  const res = await fetch("https://slack.com/api/chat.postMessage", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ channel, blocks, text }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!data.ok) console.error("Slack postMessage failed:", data.error || res.status);
+}
+
+// Build the human-readable reason list behind a closure recommendation.
+function closureReasons(payload) {
+  const reasons = [];
+  if (payload.wbgt && payload.wbgt.level >= 5) {
+    reasons.push("Heat: WBGT at CIF Level 5 — outdoor activity should be suspended");
+  }
+  if (payload.rain && payload.rain.closureRecommended && payload.rain.reason) {
+    reasons.push("Rain: " + payload.rain.reason);
+  }
+  if (payload.airQuality && payload.airQuality.closureRecommended && payload.airQuality.reason) {
+    reasons.push("Air quality: " + payload.airQuality.reason);
+  }
+  return reasons;
+}
+
+async function notifyClosure(env, payload) {
+  const prev = await env.WEATHER_KV.get("notify:closure", { type: "json" });
+  const prevActive = !!(prev && prev.active);
+  const nowActive = !!payload.closureRecommended;
+  const reasons = closureReasons(payload);
+  const decision = closureTransition(prevActive, nowActive, reasons);
+  if (!decision.post) return;
+
+  if (decision.kind === "tripped") {
+    const bullets = reasons.length ? reasons.map((r) => "• " + r).join("\n") : "• Weather closure threshold reached";
+    await postSlack(env, [
+      { type: "section", text: { type: "mrkdwn", text: `:warning: *Field-closure threshold reached*\n${bullets}` } },
+      { type: "context", elements: [{ type: "mrkdwn", text: "Use `/ayso field` to set field status · <https://www.ayso13.org/resources/weather/|Weather & field conditions>" }] },
+    ], `Field-closure threshold reached: ${reasons.join("; ") || "weather"}`);
+  } else {
+    await postSlack(env, [
+      { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Conditions are back below the closure threshold.* No weather-driven closure is recommended right now." } },
+      { type: "context", elements: [{ type: "mrkdwn", text: "<https://www.ayso13.org/resources/weather/|Weather & field conditions>" }] },
+    ], "Conditions back below the closure threshold");
+  }
+  await env.WEATHER_KV.put("notify:closure", JSON.stringify({ active: nowActive }));
+}
+
+async function notifyNwsAlerts(env) {
+  let alerts;
+  try {
+    alerts = await fetchNwsAlerts(env);
+  } catch (err) {
+    // Keep stored state untouched on a fetch failure so we don't re-post
+    // every still-active alert when the API recovers.
+    console.error("NWS alerts fetch failed:", err.message);
+    return;
+  }
+  const prev = await env.WEATHER_KV.get("notify:nwsAlerts", { type: "json" });
+
+  // First run (no baseline): seed silently so a deploy during an existing
+  // alert doesn't dump a burst of pre-existing alerts into the channel.
+  if (!prev) {
+    await env.WEATHER_KV.put("notify:nwsAlerts", JSON.stringify({ alerts: alerts.map((a) => ({ id: a.id, event: a.event })) }));
+    return;
+  }
+
+  const prevAlerts = prev.alerts || [];
+  const { newIds, endedIds } = diffAlertIds(prevAlerts.map((a) => a.id), alerts.map((a) => a.id));
+  if (!newIds.length && !endedIds.length) return;
+
+  const nowById = new Map(alerts.map((a) => [a.id, a]));
+  const prevById = new Map(prevAlerts.map((a) => [a.id, a]));
+  for (const id of newIds) {
+    const a = nowById.get(id);
+    await postSlack(env, alertBlocks(a), `NWS alert: ${a.event || "weather alert"}`);
+  }
+  for (const id of endedIds) {
+    const ev = (prevById.get(id) || {}).event || "weather alert";
+    await postSlack(env, [
+      { type: "section", text: { type: "mrkdwn", text: `:checkered_flag: *NWS ${ev} ended* — no longer in effect for our area.` } },
+    ], `NWS ${ev} ended`);
+  }
+  await env.WEATHER_KV.put("notify:nwsAlerts", JSON.stringify({ alerts: alerts.map((a) => ({ id: a.id, event: a.event })) }));
+}
+
+function alertBlocks(a) {
+  const fmt = (iso) => {
+    if (!iso) return null;
+    try {
+      return new Date(iso).toLocaleString("en-US", { timeZone: "America/Los_Angeles", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+    } catch (_) { return null; }
+  };
+  const lines = [`:rotating_light: *NWS ${a.event || "Weather Alert"}*`];
+  if (a.severity) lines.push(`*Severity:* ${a.severity}`);
+  if (a.headline) lines.push(a.headline);
+  const onset = fmt(a.onset);
+  const expires = fmt(a.expires);
+  if (onset || expires) lines.push(`*In effect:* ${onset || "now"} → ${expires || "until further notice"}`);
+  const blocks = [{ type: "section", text: { type: "mrkdwn", text: lines.join("\n") } }];
+  if (a.url) blocks.push({ type: "context", elements: [{ type: "mrkdwn", text: `<${a.url}|View on weather.gov>` }] });
+  return blocks;
+}
+
+async function notifyRainForecast(env, payload) {
+  const threshold = parseInt(env.POP_FORECAST_THRESHOLD || "60", 10);
+  const prev = await env.WEATHER_KV.get("notify:rainForecast", { type: "json" });
+  const nowTs = Date.now();
+  const decision = rainForecastDecision(payload.forecast || [], prev, threshold, nowTs);
+  if (!decision.post) return;
+
+  const p = decision.period;
+  await postSlack(env, [
+    { type: "section", text: { type: "mrkdwn", text: `:rain_cloud: *Rain in the forecast* — *${p.name}*: ${p.pop}% chance of precipitation.\n${p.shortForecast || ""}` } },
+    { type: "context", elements: [{ type: "mrkdwn", text: "<https://www.ayso13.org/resources/weather/|7-day forecast> · <https://www.ayso13.org/resources/rain-policy/|Rain policy>" }] },
+  ], `Rain in the forecast — ${p.name}: ${p.pop}%`);
+  await env.WEATHER_KV.put("notify:rainForecast", JSON.stringify({ alertedPeriod: p.name, ts: nowTs }));
+}
+
+// ── Pure decision logic (unit-tested) ──────────────────────────────────
+
+// Closure state machine: post only on a transition.
+//   false→true → {post:true, kind:"tripped"}
+//   true→false → {post:true, kind:"cleared"}
+//   unchanged  → {post:false}
+function closureTransition(prevActive, nowActive, reasons) {
+  if (nowActive && !prevActive) return { post: true, kind: "tripped", reasons: reasons || [] };
+  if (!nowActive && prevActive) return { post: true, kind: "cleared", reasons: [] };
+  return { post: false, kind: null, reasons: [] };
+}
+
+// Set difference over alert id lists.
+function diffAlertIds(prevIds, nowIds) {
+  const prev = new Set(prevIds || []);
+  const now = new Set(nowIds || []);
+  const newIds = [...now].filter((id) => !prev.has(id));
+  const endedIds = [...prev].filter((id) => !now.has(id));
+  return { newIds, endedIds };
+}
+
+// Rain-forecast throttle. Scans the next ~72h (6 day/night periods) for the
+// soonest period whose PoP meets the threshold. Posts unless we already
+// alerted on that same period within the last 24h.
+function rainForecastDecision(periods, prev, threshold, nowTs) {
+  const horizon = (periods || []).slice(0, 6);
+  const rainy = horizon.find((p) => p && typeof p.pop === "number" && p.pop >= threshold);
+  if (!rainy) return { post: false, period: null };
+  const within24h = !!(prev && prev.ts && (nowTs - prev.ts) < 24 * 60 * 60 * 1000);
+  const samePeriod = !!(prev && prev.alertedPeriod === rainy.name);
+  if (within24h && samePeriod) return { post: false, period: null };
+  return { post: true, period: rainy };
 }
 
 // ── Rain tracking ──────────────────────────────────────────────────────
@@ -428,11 +617,39 @@ async function fetchNwsForecast(env) {
     isDaytime: p.isDaytime,
     tempF: p.temperature,
     tempUnit: p.temperatureUnit,
+    // NWS gives probabilityOfPrecipitation as { unitCode, value } where
+    // value is 0-100 or null. Surface the bare number for the forecast
+    // heads-up notifier (and any future page use).
+    pop: (p.probabilityOfPrecipitation && p.probabilityOfPrecipitation.value != null)
+      ? p.probabilityOfPrecipitation.value
+      : null,
     shortForecast: p.shortForecast,
     detailedForecast: p.detailedForecast,
     windSummary: `${p.windSpeed || ""} ${p.windDirection || ""}`.trim(),
     icon: p.icon,
   }));
+}
+
+async function fetchNwsAlerts(env) {
+  const lat = env.FORECAST_LAT;
+  const lon = env.FORECAST_LON;
+  const ua = env.USER_AGENT || "(ayso-region-13)";
+  const url = `https://api.weather.gov/alerts/active?point=${lat},${lon}`;
+  const r = await fetch(url, { headers: { "User-Agent": ua, Accept: "application/geo+json" } });
+  if (!r.ok) throw new Error(`NWS alerts ${r.status}`);
+  const json = await r.json();
+  return ((json && json.features) || []).map((f) => {
+    const props = f.properties || {};
+    return {
+      id: f.id,
+      event: props.event || null,
+      severity: props.severity || null,
+      headline: props.headline || null,
+      onset: props.onset || props.effective || null,
+      expires: props.expires || props.ends || null,
+      url: props["@id"] || f.id,
+    };
+  });
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────
@@ -466,3 +683,7 @@ function jsonError(status, message) {
     headers: { "Content-Type": "application/json" },
   });
 }
+
+// Named exports for unit tests (Node). The Worker runtime uses the default
+// export above and ignores these.
+export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons };

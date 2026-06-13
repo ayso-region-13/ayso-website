@@ -1,0 +1,95 @@
+name: Deploy Workers
+
+# Auto-deploys the single-deployment Cloudflare Workers on push to main.
+#
+# These three Workers each have ONE deployment that serves both prod and
+# staging via routes (no wrangler prod/staging env split). So they must
+# deploy ONLY from main — never from staging — otherwise staging worker
+# code would reach the shared deployment that also serves www.ayso13.org.
+# Worker code lands on staging, gets promoted to main, and ships here.
+#
+#   - weather-api  (KV: WEATHER_KV) — /api/weather + Slack notifiers
+#   - csp-report   (KV: CSP_REPORTS) — CSP violation collector
+#   - field-maps   — Access-gated map editor at fields.ayso13.org
+#
+# The redirects Worker is NOT here: it has real prod/staging environments
+# and its own deploy-redirects-worker.yml that deploys on both branches.
+#
+# Required repo secrets:
+#   CLOUDFLARE_API_TOKEN  — token with Account -> Workers Scripts: Edit,
+#                            Workers KV Storage: Edit, Account Settings: Read
+#                            (the canonical ayso13-worker-deploy token)
+#   CLOUDFLARE_ACCOUNT_ID — AYSO Region 13 account id
+#
+# Existing wrangler secrets on each Worker (TEMPEST_TOKEN, AIRNOW_API_KEY,
+# SLACK_BOT_TOKEN, MAPBOX_TOKEN_PUBLIC, GITHUB_TOKEN, …) are NOT touched by
+# `wrangler deploy` — they persist across deployments.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'workers/weather-api/**'
+      - 'workers/csp-report/**'
+      - 'workers/field-maps/**'
+      - '.github/workflows/deploy-workers.yml'
+  workflow_dispatch:
+    inputs:
+      worker:
+        description: 'Which worker to deploy'
+        type: choice
+        default: all
+        options: [all, weather-api, csp-report, field-maps]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2 # need HEAD^ to diff which worker dirs changed
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Determine which workers to deploy
+        id: pick
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          WORKER_INPUT: ${{ github.event.inputs.worker }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            # WORKER_INPUT is a constrained choice, but validate anyway.
+            case "$WORKER_INPUT" in
+              all) sel="weather-api csp-report field-maps" ;;
+              weather-api|csp-report|field-maps) sel="$WORKER_INPUT" ;;
+              *) echo "::error::Unexpected worker input: $WORKER_INPUT"; exit 1 ;;
+            esac
+            echo "list=$sel" >> "$GITHUB_OUTPUT"
+          else
+            changed=""
+            for w in weather-api csp-report field-maps; do
+              if git diff --name-only HEAD^ HEAD | grep -q "^workers/$w/"; then
+                changed="$changed $w"
+              fi
+            done
+            echo "list=$(echo $changed | xargs)" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Deploy changed workers
+        if: steps.pick.outputs.list != ''
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          for w in ${{ steps.pick.outputs.list }}; do
+            echo "::group::Deploy $w"
+            ( cd "workers/$w" && npm ci && npm test --if-present && npm run deploy )
+            echo "::endgroup::"
+          done
