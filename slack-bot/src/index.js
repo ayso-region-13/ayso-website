@@ -5,6 +5,7 @@
  * /ayso field         → Field Status modal directly
  * /ayso announce      → Announcement modal directly
  * /ayso promote       → trigger staging → production promotion
+ * /ayso weather       → show current conditions (private/ephemeral reply)
  * /ayso test-weather  → post a connectivity test to #notify-weather via the
  *                       weather-api Worker (verifies its Slack notifier path)
  *
@@ -109,6 +110,13 @@ async function handleCommand(rawBody, env, ctx) {
       JSON.stringify({ response_type: 'ephemeral', text: '🛰️ Testing weather notifications — posting a test card to #notify-weather…' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
+  }
+
+  if (text === 'weather' || text === 'conditions') {
+    // Silent ack (no visible message); the ephemeral result follows via
+    // response_url so a cold-start /api/weather fetch can't blow the 3s limit.
+    ctx.waitUntil(sendWeatherStatus(params.get('response_url')));
+    return new Response('', { status: 200 });
   }
 
   let view;
@@ -280,6 +288,53 @@ function githubHeaders(token) {
     'Accept': 'application/vnd.github.v3+json',
     'User-Agent': 'AYSO-Slack-Bot'
   };
+}
+
+// Fetches the live /api/weather payload and replies privately (ephemeral)
+// to the command invoker with a concise conditions summary.
+async function sendWeatherStatus(responseUrl) {
+  if (!responseUrl) return;
+  let blocks, fallback;
+  try {
+    const res = await fetch('https://www.ayso13.org/api/weather', { headers: { 'Cache-Control': 'no-cache' } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const d = await res.json();
+    const c = d.current || {}, w = d.wbgt || {}, a = d.airQuality || {}, r = d.rain || {};
+    const fc = (Array.isArray(d.forecast) ? d.forecast : []).find(p => p && typeof p.pop === 'number');
+
+    const lines = ['*🌤 Current conditions — Region 13*'];
+    if (c.tempF != null) lines.push(`*Temp:* ${c.tempF}°F (feels ${c.feelsLikeF ?? '—'}°F) · Humidity ${c.humidity ?? '—'}% · Wind ${c.windMph ?? '—'} mph`);
+    if (w.valueF != null) lines.push(`*WBGT:* ${w.valueF}°F — CIF Level ${w.level} (${w.levelLabel || '—'})`);
+    if (a.aqi != null) lines.push(`*Air Quality:* AQI ${a.aqi} (${a.category || '—'})${a.dominantPollutant ? ' · ' + a.dominantPollutant : ''}`);
+    if (r.last48hInches != null) lines.push(`*Rain:* ${r.last48hInches}" past 48h / ${r.last72hInches}" past 72h`);
+    if (fc) lines.push(`*Forecast:* ${fc.name} — ${fc.pop}% chance of precip`);
+
+    if (d.closureRecommended) {
+      const reasons = [];
+      if (w.level >= 5) reasons.push('heat (WBGT Level 5)');
+      if (r.closureRecommended) reasons.push('rain');
+      if (a.closureRecommended) reasons.push('air quality');
+      lines.push(`*⚠️ Closure recommended* — ${reasons.join(', ') || 'weather'}. Use \`/ayso field\` to set field status.`);
+    } else {
+      lines.push('*✅ No weather-driven closure recommended.*');
+    }
+
+    let updated = null;
+    try { updated = c.stationTimestamp ? new Date(c.stationTimestamp).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', minute: '2-digit' }) : null; } catch (_) {}
+    blocks = [
+      { type: 'section', text: { type: 'mrkdwn', text: lines.join('\n') } },
+      { type: 'context', elements: [{ type: 'mrkdwn', text: `${updated ? 'Updated ' + updated + ' PT · ' : ''}<https://www.ayso13.org/resources/weather/|Full weather page>` }] }
+    ];
+    fallback = 'Current weather conditions';
+  } catch (e) {
+    blocks = [{ type: 'section', text: { type: 'mrkdwn', text: `⚠️ Couldn't reach the weather service: ${e.message}` } }];
+    fallback = 'Weather unavailable';
+  }
+  await fetch(responseUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ response_type: 'ephemeral', text: fallback, blocks })
+  });
 }
 
 // Calls the weather-api Worker's authenticated self-test endpoint, which
