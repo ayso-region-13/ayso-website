@@ -281,8 +281,8 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `site.json` — phone, email, address, InLeague URL, GA4 ID, founded year
 - `navigation.js` — full nav structure (top nav + section sidebars)
 - `fileDates.json` — auto-generated per-file last-modified dates (keys are `src/...` paths)
-- `announcements.json` — home page announcement bar (`enabled` boolean + `body` markdown); rendered via `markdownify` filter in `home.njk`
-- `fieldstatus.json` — home page field status widget (`enabled` boolean + `status` string + `message` string); color-coded Open/Monitoring/Closed; last-updated timestamp from `git log` at build time (Pacific time)
+- `announcements.json` — home page announcement bar (`enabled` boolean + `body` markdown); rendered via `markdownify` filter in `home.njk`, so the `body` supports inline links (e.g. `[Register Today for Fall 2026](/register/)` makes the whole bar text a link — styled by the existing `[&_a]:underline`). Sits **above** the hero on the home page.
+- `fieldstatus.json` — home page field status widget (`enabled` boolean + `status` string + `message` string); color-coded Open/Monitoring/Closed; last-updated timestamp from `git log` at build time (Pacific time). Sits **below** the hero (swapped with the announcement bar 2026-06-16).
 - `sponsors.js` — sponsor logos, URLs, and tier definitions
 - `fees.json` — Fall Soccer registration fee schedule (rangeShort + per-tier amounts + sibling discount). Used by `/register/`, `/programs/fall-soccer/`, and `/llms.txt`. Note: `/parents/index.md` is hardcoded because Pages CMS round-trips break Nunjucks template syntax in CMS-edited markdown bodies — when fees change, edit both
 - `og.js` — Per-section default OG image fallbacks. When a page has no `heroImage` frontmatter, `base.njk` picks the section default; otherwise the global fallback
