@@ -36,6 +36,9 @@ B10U: 11:15am–12pm
 - **6/13/2026**  
 G10U: 10:15–11am  
 B10U: 11:15am–12pm
+- **6/23/2026**  
+G10U: 5:30pm-6:30pm  
+B10U: 6:45pm-7:45pm
 
 ## [RSVP for TRYOUTS](https://ayso13.typeform.com/extratryout2026)
 

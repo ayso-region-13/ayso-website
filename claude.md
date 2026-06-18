@@ -253,8 +253,8 @@ Notes:
 
 - `staging` branch is live at **staging.ayso13.org** (separate Cloudflare Pages project, `ayso-website-staging`)
 - `main` branch deploys to **www.ayso13.org** (production CF Pages project, `ayso-website-prod`)
-- Pages CMS edits go to staging because the **GitHub default branch is `staging`** (set 2026-06-08), and Pages CMS opens on the repo default branch. (Pages CMS has no `branch:` config key — do not rely on one in `.pages.yml`.)
-- **Branch ruleset on `main`** requires PRs; `magoldman` (Repository admin) bypasses via the workflow's `PROMOTE_TOKEN` PAT
+- Pages CMS edits go to staging because the **GitHub default branch is `staging`** (set 2026-06-08), and Pages CMS *defaults* to the repo default branch. (Pages CMS has no `branch:` config key — do not rely on one in `.pages.yml`.) **Caveat:** the CMS branch picker still *exposes* `main` — editors can switch to it. So the staging-only flow is enforced by the `main` ruleset (below), not by the CMS itself.
+- **Branch ruleset on `main`** (`Protect Main`, ruleset id `15738123`) requires PRs + blocks force-push/deletion. **Target must be the literal `refs/heads/main`, NOT `~DEFAULT_BRANCH`** — because the default branch is `staging`, `~DEFAULT_BRANCH` resolves to staging and the ruleset silently protects the wrong branch (this happened: fixed 2026-06-13 by retargeting to `refs/heads/main`). Bypass = Repository admin role (`always`). **Org-owner caveat:** `ayso-region-13` is a GitHub **org**, and both Pages CMS editors (`magoldman`, `pshopbell`) are **org owners** → admin on every repo → they **bypass** this ruleset and *can* commit directly to `main` from the CMS if they switch the branch picker. The ruleset only *enforces* staging-only for **non-owner** writers (none today; `shantirao` is read-only). For the two owners it's process, not enforcement — rely on `/ayso promote`. `magoldman` also bypasses via the workflow's `PROMOTE_TOKEN` PAT.
 - **Promote to production:** GitHub Actions workflow `.github/workflows/promote-to-production.yml` merges `staging` → `main`
   - From Slack: `/ayso promote` (slack-bot dispatches workflow_dispatch)
   - From GitHub UI: Actions tab → "Promote Staging to Production" → Run workflow → type "promote"
@@ -281,8 +281,8 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `site.json` — phone, email, address, InLeague URL, GA4 ID, founded year
 - `navigation.js` — full nav structure (top nav + section sidebars)
 - `fileDates.json` — auto-generated per-file last-modified dates (keys are `src/...` paths)
-- `announcements.json` — home page announcement bar (`enabled` boolean + `body` markdown); rendered via `markdownify` filter in `home.njk`
-- `fieldstatus.json` — home page field status widget (`enabled` boolean + `status` string + `message` string); color-coded Open/Monitoring/Closed; last-updated timestamp from `git log` at build time (Pacific time)
+- `announcements.json` — home page announcement bar (`enabled` boolean + `body` markdown); rendered via `markdownify` filter in `home.njk`, so the `body` supports inline links (e.g. `[Register Today for Fall 2026](/register/)` makes the whole bar text a link — styled by the existing `[&_a]:underline`). Sits **above** the hero on the home page.
+- `fieldstatus.json` — home page field status widget (`enabled` boolean + `status` string + `message` string); color-coded Open/Monitoring/Closed; last-updated timestamp from `git log` at build time (Pacific time). Sits **below** the hero (swapped with the announcement bar 2026-06-16).
 - `sponsors.js` — sponsor logos, URLs, and tier definitions
 - `fees.json` — Fall Soccer registration fee schedule (rangeShort + per-tier amounts + sibling discount). Used by `/register/`, `/programs/fall-soccer/`, and `/llms.txt`. Note: `/parents/index.md` is hardcoded because Pages CMS round-trips break Nunjucks template syntax in CMS-edited markdown bodies — when fees change, edit both
 - `og.js` — Per-section default OG image fallbacks. When a page has no `heroImage` frontmatter, `base.njk` picks the section default; otherwise the global fallback

@@ -30,15 +30,13 @@ layout: base.njk
 {# ── Two-tone signature strip — lighter red below the maroon nav ── #}
 <div class="h-1.5 bg-brand-red"></div>
 
-{# ── Field status widget ─────────────────────────────────────────── #}
-{% if fieldstatus.enabled %}
-<div class="{% if fieldstatus.status | lower == 'closed' %}bg-brand-red-dark{% elif fieldstatus.status | lower == 'monitoring' %}bg-brand-gold{% else %}bg-brand-green{% endif %}">
-  <div class="max-w-screen-xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3">
-    <span class="text-xl" aria-hidden="true">⚽</span>
-    <p class="{% if fieldstatus.status | lower == 'closed' %}text-white{% else %}text-brand-dark{% endif %} text-sm font-bold uppercase tracking-wider">
-      Field Status: {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
+{# ── Announcements banner ─────────────────────────────────────────── #}
+{% if announcements.enabled %}
+<div class="bg-brand-gold">
+  <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-center gap-3">
+    <p class="text-brand-dark text-sm font-bold uppercase tracking-wider text-center [&_a]:underline [&_a]:hover:no-underline">
+      {{ announcements.body | markdownify | safe }}
     </p>
-    <span class="text-xl" aria-hidden="true">⚽</span>
   </div>
 </div>
 {% endif %}
@@ -186,13 +184,15 @@ layout: base.njk
   })();
 </script>
 
-{# ── Announcements banner ─────────────────────────────────────────── #}
-{% if announcements.enabled %}
-<div class="bg-brand-gold">
-  <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-center gap-3">
-    <p class="text-brand-dark text-sm font-bold uppercase tracking-wider text-center [&_a]:underline [&_a]:hover:no-underline">
-      {{ announcements.body | markdownify | safe }}
+{# ── Field status widget ─────────────────────────────────────────── #}
+{% if fieldstatus.enabled %}
+<div class="{% if fieldstatus.status | lower == 'closed' %}bg-brand-red-dark{% elif fieldstatus.status | lower == 'monitoring' %}bg-brand-gold{% else %}bg-brand-green{% endif %}">
+  <div class="max-w-screen-xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3">
+    <span class="text-xl" aria-hidden="true">⚽</span>
+    <p class="{% if fieldstatus.status | lower == 'closed' %}text-white{% else %}text-brand-dark{% endif %} text-sm font-bold uppercase tracking-wider">
+      Field Status: {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
     </p>
+    <span class="text-xl" aria-hidden="true">⚽</span>
   </div>
 </div>
 {% endif %}
