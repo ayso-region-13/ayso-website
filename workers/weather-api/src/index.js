@@ -440,11 +440,12 @@ async function fetchAirNow(env) {
   // live 2026-06-17) replaces "…by Latitude/Longitude"
   // (/aq/observation/latLong/current/), which RETIRES 2026-09-30.
   // We prefer the new endpoint and fall back to the old one (still alive
-  // until retirement) so a new-endpoint hiccup can't blank AQI during the
-  // transition. Both return the same observation schema that airAdvisory()
-  // parses (DateObserved/HourObserved/LocalTimeZone/ParameterName/AQI/
-  // Category/ReportingArea). TODO(before 2026-09-30): once the new endpoint
-  // is confirmed stable in prod, drop the OLD fallback.
+  // until retirement). A response is only ACCEPTED if it actually contains a
+  // usable numeric AQI — the new endpoint was observed returning a non-empty
+  // array with no numeric AQI (current-hour row pending), which would blank
+  // the card; in that case we log a sample and fall back to the old endpoint
+  // rather than accept unusable data. TODO(before 2026-09-30): once the new
+  // endpoint is confirmed consistently usable, drop the OLD fallback.
   const ENDPOINTS = [
     ["ziplatlong(new)", "https://www.airnowapi.org/aq/observation/current/ziplatlong/" + qs],
     ["latLong(old)",    "https://www.airnowapi.org/aq/observation/latLong/current/" + qs],
@@ -457,11 +458,14 @@ async function fetchAirNow(env) {
         continue;
       }
       const json = await r.json();
-      if (Array.isArray(json) && json.length > 0) {
+      if (hasUsableAqi(json)) {
         console.log(`AirNow served by ${label}`);
         return json;
       }
-      console.error(`AirNow ${label} returned empty`);
+      // Non-empty but no numeric AQI, or empty: log a sample for diagnosis
+      // and try the next endpoint.
+      const sample = Array.isArray(json) ? JSON.stringify(json[0] || null) : JSON.stringify(json);
+      console.error(`AirNow ${label} no usable AQI (rows=${Array.isArray(json) ? json.length : "n/a"}) sample=${(sample || "").slice(0, 400)}`);
     } catch (err) {
       console.error(`AirNow ${label} fetch failed:`, err.message);
     }
@@ -469,8 +473,58 @@ async function fetchAirNow(env) {
   return null;
 }
 
+// True only if the response is a non-empty array with at least one row
+// carrying a numeric AQI — the minimum airAdvisory() needs to report a value.
+function hasUsableAqi(json) {
+  return normalizeAirNow(json).length > 0;
+}
+
+// Normalize an AirNow observations array to a canonical row shape, tolerating
+// BOTH endpoint schemas:
+//   old /aq/observation/latLong/current/ : AQI, ParameterName ("O3"),
+//     Category.Name, ReportingArea, DateObserved, HourObserved (10), LocalTimeZone
+//   new /aq/observation/current/ziplatlong/ : nowcastAQI, parameterName ("OZONE"),
+//     aqiCategoryName, reportingAreaName, dateObserved, hourObserved ("11:00"),
+//     localTimeZone
+// Rows without a numeric AQI are dropped. Returns [] for null/non-array input.
+function normalizeAirNow(json) {
+  if (!Array.isArray(json)) return [];
+  return json
+    .map((o) => {
+      if (!o || typeof o !== "object") return null;
+      const aqi =
+        typeof o.AQI === "number" ? o.AQI
+        : typeof o.nowcastAQI === "number" ? o.nowcastAQI
+        : null;
+      if (aqi === null) return null;
+      let parameter = o.ParameterName || o.parameterName || null;
+      // New endpoint labels ozone "OZONE"/"Ozone"; old uses "O3". The docs and
+      // the live response also disagree on case (AQICategoryName vs
+      // aqiCategoryName), so match defensively.
+      if (parameter && /^ozone$/i.test(parameter)) parameter = "O3";
+      let hour = null;
+      if (typeof o.HourObserved === "number") hour = o.HourObserved;
+      else if (typeof o.hourObserved === "string") {
+        const m = o.hourObserved.match(/^(\d{1,2})/);
+        if (m) hour = parseInt(m[1], 10);
+      }
+      return {
+        aqi,
+        parameter,
+        categoryName:
+          (o.Category && o.Category.Name) || o.aqiCategoryName || o.AQICategoryName || null,
+        reportingArea: o.ReportingArea || o.reportingAreaName || null,
+        dateObserved: o.DateObserved || o.dateObserved || null,
+        hour,
+        tz: o.LocalTimeZone || o.localTimeZone || null,
+      };
+    })
+    .filter(Boolean);
+}
+
 function airAdvisory(observations) {
-  if (!observations) {
+  const rows = normalizeAirNow(observations);
+  if (rows.length === 0) {
     return {
       aqi: null,
       category: null,
@@ -487,39 +541,31 @@ function airAdvisory(observations) {
   // Pick the observation with the highest AQI — that's the dominant
   // pollutant driving the EPA category. Ties go to PM2.5 (more concerning
   // for short-term exertion).
-  const ranked = observations
-    .filter((o) => o && typeof o.AQI === "number")
-    .sort((a, b) => {
-      if (b.AQI !== a.AQI) return b.AQI - a.AQI;
-      // PM2.5 wins ties
-      const pm = (o) => (o.ParameterName === "PM2.5" ? 0 : 1);
-      return pm(a) - pm(b);
-    });
-  if (ranked.length === 0) {
-    return airAdvisory(null);
-  }
-  const top = ranked[0];
+  rows.sort((a, b) => {
+    if (b.aqi !== a.aqi) return b.aqi - a.aqi;
+    const pm = (r) => (r.parameter === "PM2.5" ? 0 : 1);
+    return pm(a) - pm(b);
+  });
+  const top = rows[0];
 
   let observedAt = null;
-  if (top.DateObserved && typeof top.HourObserved === "number") {
+  if (top.dateObserved && top.hour != null) {
     // AirNow returns local time; we just record what they reported.
-    const date = String(top.DateObserved).trim(); // "2026-05-07 "
-    const hour = String(top.HourObserved).padStart(2, "0");
-    observedAt = `${date} ${hour}:00 ${top.LocalTimeZone || ""}`.trim();
+    observedAt = `${String(top.dateObserved).trim()} ${String(top.hour).padStart(2, "0")}:00 ${top.tz || ""}`.trim();
   }
 
-  const closureRecommended = top.AQI > AQI_CLOSURE_THRESHOLD;
+  const closureRecommended = top.aqi > AQI_CLOSURE_THRESHOLD;
 
   return {
-    aqi: top.AQI,
-    category: (top.Category && top.Category.Name) || null,
-    dominantPollutant: top.ParameterName || null,
-    reportingArea: top.ReportingArea || null,
+    aqi: top.aqi,
+    category: top.categoryName,
+    dominantPollutant: top.parameter,
+    reportingArea: top.reportingArea,
     observedAt,
     thresholdAqi: AQI_CLOSURE_THRESHOLD,
     closureRecommended,
     reason: closureRecommended
-      ? `AQI ${top.AQI} (${(top.Category && top.Category.Name) || "Unhealthy"}) — above the ${AQI_CLOSURE_THRESHOLD} closure threshold`
+      ? `AQI ${top.aqi} (${top.categoryName || "Unhealthy"}) — above the ${AQI_CLOSURE_THRESHOLD} closure threshold`
       : null,
     source: "AirNow / EPA",
   };
@@ -725,4 +771,4 @@ function jsonError(status, message) {
 
 // Named exports for unit tests (Node). The Worker runtime uses the default
 // export above and ignores these.
-export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons };
+export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi };
