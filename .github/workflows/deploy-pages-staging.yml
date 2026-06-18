@@ -19,15 +19,19 @@ name: Deploy Staging (Pages Direct Upload)
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [staging]
-  #   paths:
-  #     - 'site/**'
-  #     - '.github/workflows/deploy-pages-staging.yml'
+  push:
+    branches: [staging]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy-pages-staging.yml'
 
 permissions:
   contents: read
 
+# Single group + cancel-in-progress = a newer staging push supersedes any
+# in-flight run, so builds never queue/back up; the latest content wins.
+# Combined with the debounce step below, a burst of rapid CMS edits coalesces
+# into ONE deploy ~60s after the last edit.
 concurrency:
   group: deploy-pages-staging
   cancel-in-progress: true
@@ -36,6 +40,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Debounce: coalesce a burst of rapid CMS edits into one deploy. This
+      # sleep is the first thing that runs, so when a newer staging push
+      # arrives within 60s, cancel-in-progress kills this run BEFORE any build
+      # work happens and the newer run restarts the timer. Only the run that
+      # survives 60s of quiet proceeds to build + deploy.
+      - name: Debounce rapid edits
+        run: sleep 60
+
       - uses: actions/checkout@v6
 
       - uses: actions/setup-node@v6
@@ -43,14 +55,6 @@ jobs:
           node-version: '22'
           cache: 'npm'
           cache-dependency-path: site/package-lock.json
-
-      # Cache the eleventy-img output so we don't re-encode every image each run.
-      - name: Cache image pipeline
-        uses: actions/cache@v4
-        with:
-          path: site/.cache
-          key: eleventy-img-${{ hashFiles('site/src/images/**') }}
-          restore-keys: eleventy-img-
 
       - name: Build
         working-directory: site
