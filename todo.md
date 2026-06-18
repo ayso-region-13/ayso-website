@@ -15,6 +15,12 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 ---
 
+## ⏰ Dated / deadline tasks
+
+- [ ] **Before 2026-09-30 — drop the AirNow OLD-endpoint fallback.** AirNow retires `/aq/observation/latLong/current/` on **2026-09-30**. We migrated `fetchAirNow()` (commit `0daaf79`) to prefer the new `/aq/observation/current/ziplatlong/` and temporarily fall back to the old one. New endpoint confirmed serving in prod (cron logged `AirNow served by ziplatlong(new)`, 2026-06-18). Once comfortable, remove the OLD entry from the `ENDPOINTS` array in `workers/weather-api/src/index.js` and redeploy. Low risk — if skipped, the fallback simply stops working on 2026-09-30 and only the new (already-working) endpoint remains.
+
+---
+
 ## Remaining Tasks
 
 ### Scheduled follow-ups
