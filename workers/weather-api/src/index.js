@@ -431,23 +431,42 @@ async function fetchAirNow(env) {
   }
   const lat = env.FORECAST_LAT;
   const lon = env.FORECAST_LON;
-  const url =
-    "https://www.airnowapi.org/aq/observation/latLong/current/" +
+  const qs =
     `?format=application/json&latitude=${lat}&longitude=${lon}` +
     `&distance=25&API_KEY=${key}`;
-  try {
-    const r = await fetch(url, { headers: { "User-Agent": env.USER_AGENT } });
-    if (!r.ok) {
-      console.error(`AirNow ${r.status}`);
-      return null;
+
+  // AirNow migration (announced 2026-06): the new "Current Observations by
+  // Latitude/Longitude or ZIP Code" service (/aq/observation/current/ziplatlong/,
+  // live 2026-06-17) replaces "…by Latitude/Longitude"
+  // (/aq/observation/latLong/current/), which RETIRES 2026-09-30.
+  // We prefer the new endpoint and fall back to the old one (still alive
+  // until retirement) so a new-endpoint hiccup can't blank AQI during the
+  // transition. Both return the same observation schema that airAdvisory()
+  // parses (DateObserved/HourObserved/LocalTimeZone/ParameterName/AQI/
+  // Category/ReportingArea). TODO(before 2026-09-30): once the new endpoint
+  // is confirmed stable in prod, drop the OLD fallback.
+  const ENDPOINTS = [
+    ["ziplatlong(new)", "https://www.airnowapi.org/aq/observation/current/ziplatlong/" + qs],
+    ["latLong(old)",    "https://www.airnowapi.org/aq/observation/latLong/current/" + qs],
+  ];
+  for (const [label, url] of ENDPOINTS) {
+    try {
+      const r = await fetch(url, { headers: { "User-Agent": env.USER_AGENT } });
+      if (!r.ok) {
+        console.error(`AirNow ${label} HTTP ${r.status}`);
+        continue;
+      }
+      const json = await r.json();
+      if (Array.isArray(json) && json.length > 0) {
+        console.log(`AirNow served by ${label}`);
+        return json;
+      }
+      console.error(`AirNow ${label} returned empty`);
+    } catch (err) {
+      console.error(`AirNow ${label} fetch failed:`, err.message);
     }
-    const json = await r.json();
-    if (!Array.isArray(json) || json.length === 0) return null;
-    return json;
-  } catch (err) {
-    console.error("AirNow fetch failed:", err.message);
-    return null;
   }
+  return null;
 }
 
 function airAdvisory(observations) {
