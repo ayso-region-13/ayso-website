@@ -67,6 +67,7 @@ jobs:
           npm run build
 
       - name: Deploy to Cloudflare Pages (staging) with retry
+        id: deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -82,3 +83,48 @@ jobs:
             echo "::endgroup::"; echo "attempt $attempt failed; retrying in 20s"; sleep 20
           done
           echo "::error::wrangler pages deploy failed after 3 attempts"; exit 1
+
+      # Slack notify (replaces the retired notify-staging-deploy.yml, which
+      # waited on the CF Git build that no longer happens). head_commit.message
+      # is passed via env and only used through jq --arg (no shell injection).
+      - name: Notify Slack — staging deploy live
+        if: success()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ github.sha }}
+          MSG: ${{ github.event.head_commit.message }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          SHORT="${SHA:0:7}"
+          SUBJECT=$(printf '%s' "$MSG" | head -1)
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg sha "$SHORT" --arg subj "$SUBJECT" --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Staging deploy live — \($sha)",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Staging deploy live* — `\($sha)` is serving on staging.ayso13.org.\($subj | if . == "" then "" else "\n" + . end)" } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+              ]
+            }')"
+
+      - name: Notify Slack — staging deploy failed
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ github.sha }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          SHORT="${SHA:0:7}"
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg sha "$SHORT" --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Staging deploy failed — \($sha)",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":x: *Staging deploy failed* — `\($sha)` did not deploy to staging.ayso13.org (build or upload failed)." } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run for details>" } ] }
+              ]
+            }')"

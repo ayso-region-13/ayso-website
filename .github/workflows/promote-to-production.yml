@@ -11,14 +11,21 @@ on:
 permissions:
   contents: write
 
+# Promote = merge staging → main, then BUILD in CI and deploy to the
+# ayso-website-prod Pages project via `wrangler pages deploy` (Direct Upload).
+# This replaced the old "wait for CF Git build" model: CF's Git-integration
+# pipeline was flaky (deploys stalled/failed in CF's initialize/deploy stages),
+# so we build here and upload only changed files (hash-deduped), with retry.
+# CF auto-deploy is DISABLED on ayso-website-prod, so CI is the sole deployer.
+# No debounce here (unlike staging) — promotes are infrequent and deliberate.
+# Triggered from Slack via `/ayso promote` (workflow_dispatch).
+
 jobs:
   promote:
-    name: Merge staging → main, wait for Cloudflare deploy
+    name: Merge staging → main, build, deploy to production
     runs-on: ubuntu-latest
     if: github.event.inputs.confirm == 'promote'
-    # 28 min: covers the wait-for-cf-deploy budget (FIND_TIMEOUT 180s +
-    # DEPLOY_TIMEOUT 1200s = ~23 min) plus merge/setup overhead.
-    timeout-minutes: 28
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
         with:
@@ -39,10 +46,8 @@ jobs:
           git merge origin/staging --no-edit --no-ff -X theirs
           git push origin main
 
-          # Extract titles of the commits being promoted (everything from
-          # MAIN_BEFORE up to the merge commit, excluding the merge commit
-          # itself via --no-merges). Capped at 10 lines for Slack; overflow
-          # gets a "...and N more" footer.
+          # Titles of the promoted commits (MAIN_BEFORE..HEAD, no merge commit),
+          # capped at 10 for Slack with a "...and N more" footer.
           FULL=$(git log "$MAIN_BEFORE..HEAD" --no-merges --pretty=format:'%s')
           COUNT=$(printf '%s\n' "$FULL" | grep -c . || true)
           LIST=$(printf '%s\n' "$FULL" | head -10 | sed 's/^/• /')
@@ -57,14 +62,13 @@ jobs:
 
           {
             echo "sha_short=$(git rev-parse --short HEAD)"
-            echo "sha_full=$(git rev-parse HEAD)"
             echo "commit_count=$COUNT"
             echo "commits<<COMMITS_EOF"
             echo "$LIST"
             echo "COMMITS_EOF"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Notify Slack — promotion merged, awaiting Cloudflare deploy
+      - name: Notify Slack — merged, building & deploying
         if: success()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -76,28 +80,75 @@ jobs:
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc \
-              --arg sha "$SHA" \
-              --arg run "$RUN_URL" \
-              --arg count "$COUNT" \
-              --arg commits "$COMMITS" '{
+            --data "$(jq -nc --arg sha "$SHA" --arg run "$RUN_URL" --arg count "$COUNT" --arg commits "$COMMITS" '{
               channel: "C0A024YGR9C",
-              text: "Promotion merged — Cloudflare deploying \($sha)…",
+              text: "Promotion merged — building & deploying \($sha)…",
               blocks: [
-                { type: "section", text: { type: "mrkdwn", text: ":hourglass_flowing_sand: *Promotion merged* — Cloudflare is now building `\($sha)` (\($count) commits). Slack will update when the deploy is live (~2 min)." } },
+                { type: "section", text: { type: "mrkdwn", text: ":hourglass_flowing_sand: *Promotion merged* — building `\($sha)` (\($count) commits) in CI and deploying to production. Slack will update when it is live (~2-3 min)." } },
                 { type: "section", text: { type: "mrkdwn", text: "*Promoting:*\n\($commits)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
               ]
             }')"
 
-      - name: Wait for Cloudflare Pages deploy
-        id: cf_wait
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: site/package-lock.json
+
+      - name: Build
+        id: build
+        working-directory: site
         env:
-          CLOUDFLARE_PAGES_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
+          # Prod build: emit allow-all robots + sitemap (NOT the staging block).
+          CF_PAGES_BRANCH: main
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Cloudflare Pages (production) with retry
+        id: deploy
+        working-directory: site
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          PROJECT: ayso-website-prod
-          SHA: ${{ steps.merge.outputs.sha_full }}
-        run: bash .github/scripts/wait-for-cf-deploy.sh
+        run: |
+          set -e
+          for attempt in 1 2 3; do
+            echo "::group::wrangler pages deploy (attempt $attempt)"
+            if npx --yes wrangler@4 pages deploy _site \
+                 --project-name=ayso-website-prod --branch=main; then
+              echo "::endgroup::"; echo "Deployed on attempt $attempt"; exit 0
+            fi
+            echo "::endgroup::"; echo "attempt $attempt failed; retrying in 20s"; sleep 20
+          done
+          echo "::error::wrangler pages deploy failed after 3 attempts"; exit 1
+
+      - name: Ping IndexNow (best-effort)
+        if: success()
+        continue-on-error: true
+        working-directory: site
+        env:
+          KEY: 61d4461c23b7dcda89290711860408d3
+          HOST: www.ayso13.org
+        run: |
+          # Submit prod URLs to IndexNow (Bing/Yandex/etc.) straight from the
+          # sitemap we just built — no CF-deploy wait or pages.dev WAF-bypass
+          # fetch needed anymore. Best-effort: a search-ping hiccup must not
+          # fail the promotion.
+          set -uo pipefail
+          SITEMAP=_site/sitemap.xml
+          if [ ! -f "$SITEMAP" ]; then echo "no sitemap built; skipping"; exit 0; fi
+          URLS_JSON=$(grep -oE '<loc>[^<]+' "$SITEMAP" | sed 's|<loc>||' | jq -R . | jq -s .)
+          COUNT=$(echo "$URLS_JSON" | jq 'length')
+          echo "Submitting $COUNT URLs to IndexNow"
+          if [ "$COUNT" -lt 1 ]; then echo "no <loc> entries; skipping"; exit 0; fi
+          PAYLOAD=$(jq -n --arg host "$HOST" --arg key "$KEY" \
+            --arg keyLocation "https://${HOST}/${KEY}.txt" --argjson urls "$URLS_JSON" \
+            '{host:$host, key:$key, keyLocation:$keyLocation, urlList:$urls}')
+          CODE=$(curl -sS -o /tmp/indexnow.body -w '%{http_code}' -X POST \
+            -H 'Content-Type: application/json' -d "$PAYLOAD" https://api.indexnow.org/IndexNow)
+          echo "IndexNow response: $CODE"; cat /tmp/indexnow.body 2>/dev/null || true
 
       - name: Notify Slack — deploy live
         if: success()
@@ -106,22 +157,16 @@ jobs:
           SHA: ${{ steps.merge.outputs.sha_short }}
           COUNT: ${{ steps.merge.outputs.commit_count }}
           COMMITS: ${{ steps.merge.outputs.commits }}
-          BUILD_SECONDS: ${{ steps.cf_wait.outputs.build_seconds }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc \
-              --arg sha "$SHA" \
-              --arg secs "$BUILD_SECONDS" \
-              --arg run "$RUN_URL" \
-              --arg count "$COUNT" \
-              --arg commits "$COMMITS" '{
+            --data "$(jq -nc --arg sha "$SHA" --arg run "$RUN_URL" --arg count "$COUNT" --arg commits "$COMMITS" '{
               channel: "C0A024YGR9C",
               text: "Production deploy live — \($sha)",
               blocks: [
-                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Production deploy live* — `\($sha)` is now serving on www.ayso13.org. Build took \($secs)s." } },
+                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Production deploy live* — `\($sha)` is now serving on www.ayso13.org." } },
                 { type: "section", text: { type: "mrkdwn", text: "*Promoted (\($count) commits):*\n\($commits)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
               ]
@@ -134,24 +179,18 @@ jobs:
           SHA: ${{ steps.merge.outputs.sha_short }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           MERGE_OUTCOME: ${{ steps.merge.outcome }}
-          CF_OUTCOME: ${{ steps.cf_wait.outcome }}
-          CF_STATUS: ${{ steps.cf_wait.outputs.final_status }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+          DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
         run: |
-          # Distinguish three cases so the Slack message is actionable and
-          # not a false alarm:
-          #   - merge failed            -> hard failure, nothing promoted
-          #   - CF reported a real fail -> hard failure, build broke
-          #   - CF wait timed out       -> SOFT: CF Pages was just slow to
-          #     leave the queue; the build very likely finishes on its own.
           if [ "$MERGE_OUTCOME" != "success" ]; then
             HEADLINE=":x: *Promotion failed*"
             REASON="Merge from staging to main failed. Staging was NOT promoted."
-          elif [ "$CF_STATUS" = "timeout" ]; then
-            HEADLINE=":hourglass_flowing_sand: *Production deploy still in progress*"
-            REASON="Merge to main succeeded, but Cloudflare Pages was still building \`$SHA\` when the wait window elapsed (CF queue is slow during busy periods). The build most likely completes on its own — check www.ayso13.org and the CF Pages dashboard before treating this as a failure."
-          elif [ "$CF_OUTCOME" != "success" ]; then
+          elif [ "$BUILD_OUTCOME" != "success" ]; then
+            HEADLINE=":x: *Production build failed*"
+            REASON="Merged to main, but the site build failed for \`$SHA\`. www.ayso13.org is still serving the previous version. Check the workflow logs."
+          elif [ "$DEPLOY_OUTCOME" != "success" ]; then
             HEADLINE=":x: *Production deploy failed*"
-            REASON="Merge succeeded but the Cloudflare Pages build FAILED for \`$SHA\`. Site is still serving the previous version. Check the CF Pages build log."
+            REASON="Merged + built, but the Cloudflare upload failed after 3 attempts for \`$SHA\`. www.ayso13.org is still serving the previous version — re-run \`/ayso promote\` to retry."
           else
             HEADLINE=":x: *Promotion workflow failed*"
             REASON="Workflow failed. See run logs."
