@@ -31,7 +31,7 @@ permissions:
 # Single group + cancel-in-progress = a newer staging push supersedes any
 # in-flight run, so builds never queue/back up; the latest content wins.
 # Combined with the debounce step below, a burst of rapid CMS edits coalesces
-# into ONE deploy ~60s after the last edit.
+# into ONE deploy ~45s after the last edit.
 concurrency:
   group: deploy-pages-staging
   cancel-in-progress: true
@@ -42,11 +42,11 @@ jobs:
     steps:
       # Debounce: coalesce a burst of rapid CMS edits into one deploy. This
       # sleep is the first thing that runs, so when a newer staging push
-      # arrives within 60s, cancel-in-progress kills this run BEFORE any build
+      # arrives within 45s, cancel-in-progress kills this run BEFORE any build
       # work happens and the newer run restarts the timer. Only the run that
-      # survives 60s of quiet proceeds to build + deploy.
+      # survives 45s of quiet proceeds to build + deploy.
       - name: Debounce rapid edits
-        run: sleep 60
+        run: sleep 45
 
       - uses: actions/checkout@v6
 
