@@ -1,0 +1,130 @@
+name: Deploy Staging (Pages Direct Upload)
+
+# Builds the Eleventy site in CI and deploys it to the ayso-website-staging
+# Cloudflare Pages project via `wrangler pages deploy` (Direct Upload).
+#
+# WHY: CF Pages' Git-integration build pipeline was flaky — deploys stalled
+# and failed in CF's `initialize`/`deploy` stages (not our build). Direct
+# Upload removes those stages: CI builds, then wrangler uploads only the
+# changed files (hash-deduped manifest) and reports success via exit code.
+#
+# CUTOVER: while CF's Git auto-deploy is still active this is dispatch-only
+# (to avoid double-building). Once automatic deployments are DISABLED on the
+# ayso-website-staging project (Pages → Settings → Builds & deployments),
+# uncomment the `push` trigger so CMS commits to `staging` auto-deploy here.
+#
+# Required repo secrets:
+#   CLOUDFLARE_PAGES_DEPLOY_TOKEN  - token with Account → Cloudflare Pages → Edit
+#   CLOUDFLARE_ACCOUNT_ID          - AYSO Region 13 account id
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [staging]
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy-pages-staging.yml'
+
+permissions:
+  contents: read
+
+# Single group + cancel-in-progress = a newer staging push supersedes any
+# in-flight run, so builds never queue/back up; the latest content wins.
+# Combined with the debounce step below, a burst of rapid CMS edits coalesces
+# into ONE deploy ~45s after the last edit.
+concurrency:
+  group: deploy-pages-staging
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Debounce: coalesce a burst of rapid CMS edits into one deploy. This
+      # sleep is the first thing that runs, so when a newer staging push
+      # arrives within 45s, cancel-in-progress kills this run BEFORE any build
+      # work happens and the newer run restarts the timer. Only the run that
+      # survives 45s of quiet proceeds to build + deploy.
+      - name: Debounce rapid edits
+        run: sleep 45
+
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: site/package-lock.json
+
+      - name: Build
+        working-directory: site
+        env:
+          # CF Git builds auto-set this; in CI we must set it so robots.njk /
+          # _headers.njk emit the staging crawl-block (Disallow + noindex).
+          CF_PAGES_BRANCH: staging
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Cloudflare Pages (staging) with retry
+        id: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        working-directory: site
+        run: |
+          set -e
+          for attempt in 1 2 3; do
+            echo "::group::wrangler pages deploy (attempt $attempt)"
+            if npx --yes wrangler@4 pages deploy _site \
+                 --project-name=ayso-website-staging --branch=staging; then
+              echo "::endgroup::"; echo "Deployed on attempt $attempt"; exit 0
+            fi
+            echo "::endgroup::"; echo "attempt $attempt failed; retrying in 20s"; sleep 20
+          done
+          echo "::error::wrangler pages deploy failed after 3 attempts"; exit 1
+
+      # Slack notify (replaces the retired notify-staging-deploy.yml, which
+      # waited on the CF Git build that no longer happens). head_commit.message
+      # is passed via env and only used through jq --arg (no shell injection).
+      - name: Notify Slack — staging deploy live
+        if: success()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ github.sha }}
+          MSG: ${{ github.event.head_commit.message }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          SHORT="${SHA:0:7}"
+          SUBJECT=$(printf '%s' "$MSG" | head -1)
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg sha "$SHORT" --arg subj "$SUBJECT" --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Staging deploy live — \($sha)",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Staging deploy live* — `\($sha)` is serving on staging.ayso13.org.\($subj | if . == "" then "" else "\n" + . end)" } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+              ]
+            }')"
+
+      - name: Notify Slack — staging deploy failed
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ github.sha }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          SHORT="${SHA:0:7}"
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg sha "$SHORT" --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Staging deploy failed — \($sha)",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":x: *Staging deploy failed* — `\($sha)` did not deploy to staging.ayso13.org (build or upload failed)." } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run for details>" } ] }
+              ]
+            }')"

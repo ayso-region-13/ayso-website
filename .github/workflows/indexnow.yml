@@ -1,20 +1,23 @@
-name: IndexNow URL submission
+name: IndexNow URL submission (manual)
 
-# Pings api.indexnow.org with every URL in the production sitemap whenever
-# main is updated. IndexNow is a free protocol supported by Bing, Yandex,
-# Naver, and Seznam — search engines pull the URLs and crawl them
-# (typically within minutes) instead of waiting for their own crawl cycle.
+# Pings api.indexnow.org with every URL in the production sitemap. IndexNow is
+# a free protocol supported by Bing, Yandex, Naver, and Seznam.
 #
-# Ownership of the key is verified via /61d4461c23b7dcda89290711860408d3.txt
-# served at the apex (Eleventy passthrough copy in .eleventy.js).
+# NORMAL PATH: the promote-to-production workflow now submits IndexNow itself
+# as a final step (straight from the sitemap it builds). This standalone
+# workflow is a MANUAL fallback (workflow_dispatch) for re-submitting URLs
+# without a full promote — it builds the site and submits from the local
+# sitemap, so it needs no CF-deploy wait. (The old push:[main] trigger +
+# wait-for-cf-deploy were removed when prod moved to CI Direct Upload — CF
+# Git auto-deploy is off, so there's no Git build to wait for.)
+#
+# Key ownership verified via /61d4461c23b7dcda89290711860408d3.txt at the apex.
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
-  group: indexnow-${{ github.ref }}
+  group: indexnow
   cancel-in-progress: true
 
 permissions:
@@ -22,98 +25,43 @@ permissions:
 
 jobs:
   submit:
-    name: Submit sitemap URLs to IndexNow
+    name: Build + submit sitemap URLs to IndexNow
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v6
 
-      - name: Wait for Cloudflare Pages deploy
-        # Polls the CF Pages API for a deployment matching the SHA we just
-        # pushed and waits until it reaches a terminal state. Replaces the
-        # earlier `sleep 150` guess so the URLs we submit are guaranteed to
-        # resolve when search engines fetch them. Also emits the
-        # deployment's pages.dev preview URL as `deployment_url`, which the
-        # next step uses to fetch the sitemap (CF's customer-zone WAF
-        # blocks the GH Actions runner IP on www.ayso13.org; the pages.dev
-        # origin URL bypasses that).
-        id: cf_wait
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: site/package-lock.json
+
+      - name: Build
+        working-directory: site
         env:
-          CLOUDFLARE_PAGES_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          PROJECT: ayso-website-prod
-          SHA: ${{ github.sha }}
-        run: bash .github/scripts/wait-for-cf-deploy.sh
+          CF_PAGES_BRANCH: main
+        run: |
+          npm ci
+          npm run build
 
       - name: Submit URLs to IndexNow
+        working-directory: site
         env:
           KEY: 61d4461c23b7dcda89290711860408d3
           HOST: www.ayso13.org
-          DEPLOY_URL: ${{ steps.cf_wait.outputs.deployment_url }}
         run: |
           set -uo pipefail
-
-          # Fetch sitemap from the CF Pages preview URL (bypasses
-          # customer-zone WAF on www.ayso13.org which blocks the GH
-          # Actions runner via Super Bot Fight Mode + edge-level IP
-          # reputation). The pages.dev origin serves the same content
-          # but isn't behind our zone-level rules. Fall back to the
-          # canonical hostname if the deploy_url output is unavailable.
-          FETCH_URL="${DEPLOY_URL:-https://${HOST}}/sitemap.xml"
-          echo "Fetching sitemap from: $FETCH_URL"
-
-          SITEMAP=/tmp/sitemap.xml
-          for attempt in 1 2 3; do
-            HTTP=$(curl -sSL -o "$SITEMAP" -w '%{http_code}' \
-              -H 'User-Agent: ayso13-indexnow/1.0' \
-              "$FETCH_URL" || echo "curl-failed")
-            BYTES=$(wc -c < "$SITEMAP" 2>/dev/null || echo 0)
-            echo "Attempt $attempt — sitemap fetch: HTTP=$HTTP, bytes=$BYTES"
-            if [ "$HTTP" = "200" ] && [ "$BYTES" -gt 100 ]; then
-              break
-            fi
-            if [ "$attempt" -lt 3 ]; then
-              echo "Retrying in 15s..."
-              sleep 15
-            fi
-          done
-          if [ "$HTTP" != "200" ] || [ "$BYTES" -lt 100 ]; then
-            echo "::error::Sitemap fetch failed after 3 attempts. Last response head:"
-            head -c 500 "$SITEMAP" || true
-            exit 1
-          fi
-
+          SITEMAP=_site/sitemap.xml
+          if [ ! -f "$SITEMAP" ]; then echo "::error::no sitemap built"; exit 1; fi
           URLS_JSON=$(grep -oE '<loc>[^<]+' "$SITEMAP" | sed 's|<loc>||' | jq -R . | jq -s .)
           COUNT=$(echo "$URLS_JSON" | jq 'length')
           echo "Sitemap parsed: $COUNT URLs"
-          if [ "$COUNT" -lt 1 ]; then
-            echo "::error::No <loc> entries found in sitemap"
-            head -c 500 "$SITEMAP"
-            exit 1
-          fi
-
-          PAYLOAD=$(jq -n \
-            --arg host "$HOST" \
-            --arg key "$KEY" \
-            --arg keyLocation "https://${HOST}/${KEY}.txt" \
-            --argjson urls "$URLS_JSON" \
-            '{host: $host, key: $key, keyLocation: $keyLocation, urlList: $urls}')
-
-          HTTP_CODE=$(curl -sS -o /tmp/indexnow.body -w '%{http_code}' \
-            -X POST \
-            -H 'Content-Type: application/json' \
-            -d "$PAYLOAD" \
-            https://api.indexnow.org/IndexNow)
-          echo "IndexNow response: $HTTP_CODE"
-          cat /tmp/indexnow.body || true
-          echo
-          # Per IndexNow docs:
-          #   200 OK = accepted
-          #   202 Accepted = queued
-          #   400 = bad request (malformed payload)
-          #   403 = key invalid (verification failed — check the key file is reachable)
-          #   422 = URLs not all valid
-          #   429 = too many requests (rate limited)
-          if [ "$HTTP_CODE" != "200" ] && [ "$HTTP_CODE" != "202" ]; then
-            exit 1
-          fi
+          if [ "$COUNT" -lt 1 ]; then echo "::error::no <loc> entries"; exit 1; fi
+          PAYLOAD=$(jq -n --arg host "$HOST" --arg key "$KEY" \
+            --arg keyLocation "https://${HOST}/${KEY}.txt" --argjson urls "$URLS_JSON" \
+            '{host:$host, key:$key, keyLocation:$keyLocation, urlList:$urls}')
+          CODE=$(curl -sS -o /tmp/indexnow.body -w '%{http_code}' -X POST \
+            -H 'Content-Type: application/json' -d "$PAYLOAD" https://api.indexnow.org/IndexNow)
+          echo "IndexNow response: $CODE"; cat /tmp/indexnow.body 2>/dev/null || true
+          [ "$CODE" = "200" ] || [ "$CODE" = "202" ]
