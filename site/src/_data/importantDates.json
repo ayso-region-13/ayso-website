@@ -2,38 +2,23 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-05-20",
-      "name": "Fall Season and Registration Q&A (on Zoom)",
-      "link": "/about/calendar/"
-    },
-    {
-      "date": "2026-06-04",
-      "name": "Region 13 Board Meeting",
-      "link": "/about/leadership/"
-    },
-    {
-      "date": "2026-06-06",
+      "date": "2026-06-23",
       "name": "10U EXTRA Tryouts",
       "link": "/programs/extra/"
     },
     {
-      "date": "2026-06-07",
-      "name": "End of Early Registration",
-      "link": "/register/"
-    },
-    {
-      "date": "2026-06-12",
-      "name": "World Cup Viewing Party",
-      "link": "/about/calendar/"
-    },
-    {
-      "date": "2026-06-13",
-      "name": "EXTRA Tryouts",
-      "link": "https://www.ayso13.org/programs/extra/"
-    },
-    {
       "date": "2026-06-25",
       "name": "World Cup Viewing at the Clubhouse"
+    },
+    {
+      "date": "2026-07-02",
+      "name": "Region 13 Board Meeting",
+      "link": "/about/leadership"
+    },
+    {
+      "date": "2026-08-29",
+      "name": "Region 13 Season Kickoff Festival",
+      "link": "/programs/fall-soccer"
     }
   ]
 }
