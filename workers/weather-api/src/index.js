@@ -422,6 +422,51 @@ function rainAdvisory(state) {
 
 const AQI_CLOSURE_THRESHOLD = 150;
 
+// ── PurpleAir AQI (local sensor composite) ─────────────────────────────
+// PurpleAir returns raw PM2.5 (no AQI). We apply the US EPA PurpleAir
+// correction (Barkjohn 2021) then the EPA AQI breakpoint table (2024).
+
+function epaCorrect(pmCf1, rh) {
+  if (typeof pmCf1 !== "number" || Number.isNaN(pmCf1)) return null;
+  if (typeof rh !== "number" || Number.isNaN(rh)) return null;
+  const corrected = pmCf1 < 343
+    ? 0.524 * pmCf1 - 0.0862 * rh + 5.75
+    : 0.46 * pmCf1 + 3.93e-4 * pmCf1 * pmCf1 + 2.97;
+  return Math.max(0, corrected);
+}
+
+// EPA PM2.5 → AQI, 2024 breakpoints (matches current AirNow).
+function pm25ToAqi(pm) {
+  if (typeof pm !== "number" || Number.isNaN(pm)) return null;
+  if (pm < 0) return 0;
+  const c = Math.trunc(pm * 10) / 10; // truncate to 0.1 µg/m³ per EPA
+  if (c > 325.4) return 500;
+  const bp = [
+    [0.0, 9.0, 0, 50],
+    [9.1, 35.4, 51, 100],
+    [35.5, 55.4, 101, 150],
+    [55.5, 125.4, 151, 200],
+    [125.5, 225.4, 201, 300],
+    [225.5, 325.4, 301, 500],
+  ];
+  for (const [cl, ch, al, ah] of bp) {
+    if (c >= cl && c <= ch) {
+      return Math.round(((ah - al) / (ch - cl)) * (c - cl) + al);
+    }
+  }
+  return 0;
+}
+
+function aqiCategory(aqi) {
+  if (aqi == null) return null;
+  if (aqi <= 50) return "Good";
+  if (aqi <= 100) return "Moderate";
+  if (aqi <= 150) return "Unhealthy for Sensitive Groups";
+  if (aqi <= 200) return "Unhealthy";
+  if (aqi <= 300) return "Very Unhealthy";
+  return "Hazardous";
+}
+
 async function fetchAirNow(env) {
   const key = env.AIRNOW_API_KEY;
   if (!key) {
@@ -771,4 +816,4 @@ function jsonError(status, message) {
 
 // Named exports for unit tests (Node). The Worker runtime uses the default
 // export above and ignores these.
-export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi };
+export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory };
