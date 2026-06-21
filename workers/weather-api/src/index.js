@@ -578,40 +578,29 @@ async function fetchAirNow(env) {
     `?format=application/json&latitude=${lat}&longitude=${lon}` +
     `&distance=25&API_KEY=${key}`;
 
-  // AirNow migration (announced 2026-06): the new "Current Observations by
-  // Latitude/Longitude or ZIP Code" service (/aq/observation/current/ziplatlong/,
-  // live 2026-06-17) replaces "…by Latitude/Longitude"
-  // (/aq/observation/latLong/current/), which RETIRES 2026-09-30.
-  // We prefer the new endpoint and fall back to the old one (still alive
-  // until retirement). A response is only ACCEPTED if it actually contains a
-  // usable numeric AQI — the new endpoint was observed returning a non-empty
-  // array with no numeric AQI (current-hour row pending), which would blank
-  // the card; in that case we log a sample and fall back to the old endpoint
-  // rather than accept unusable data. TODO(before 2026-09-30): once the new
-  // endpoint is confirmed consistently usable, drop the OLD fallback.
-  const ENDPOINTS = [
-    ["ziplatlong(new)", "https://www.airnowapi.org/aq/observation/current/ziplatlong/" + qs],
-    ["latLong(old)",    "https://www.airnowapi.org/aq/observation/latLong/current/" + qs],
-  ];
-  for (const [label, url] of ENDPOINTS) {
-    try {
-      const r = await fetch(url, { headers: { "User-Agent": env.USER_AGENT } });
-      if (!r.ok) {
-        console.error(`AirNow ${label} HTTP ${r.status}`);
-        continue;
-      }
-      const json = await r.json();
-      if (hasUsableAqi(json)) {
-        console.log(`AirNow served by ${label}`);
-        return json;
-      }
-      // Non-empty but no numeric AQI, or empty: log a sample for diagnosis
-      // and try the next endpoint.
-      const sample = Array.isArray(json) ? JSON.stringify(json[0] || null) : JSON.stringify(json);
-      console.error(`AirNow ${label} no usable AQI (rows=${Array.isArray(json) ? json.length : "n/a"}) sample=${(sample || "").slice(0, 400)}`);
-    } catch (err) {
-      console.error(`AirNow ${label} fetch failed:`, err.message);
+  // AirNow is the FALLBACK source for AQI (PurpleAir is primary). It uses the
+  // "Current Observations by Latitude/Longitude or ZIP Code" service
+  // (/aq/observation/current/ziplatlong/, live 2026-06-17). The older
+  // /aq/observation/latLong/current/ endpoint was dropped 2026-06-21 ahead of
+  // its 2026-09-30 retirement. A response is only ACCEPTED if it actually
+  // contains a usable numeric AQI (hasUsableAqi); otherwise we log a sample and
+  // return null so the card shows "unavailable" rather than blank/garbage.
+  const url = "https://www.airnowapi.org/aq/observation/current/ziplatlong/" + qs;
+  try {
+    const r = await fetch(url, { headers: { "User-Agent": env.USER_AGENT } });
+    if (!r.ok) {
+      console.error(`AirNow HTTP ${r.status}`);
+      return null;
     }
+    const json = await r.json();
+    if (hasUsableAqi(json)) {
+      console.log("AirNow served (ziplatlong)");
+      return json;
+    }
+    const sample = Array.isArray(json) ? JSON.stringify(json[0] || null) : JSON.stringify(json);
+    console.error(`AirNow no usable AQI (rows=${Array.isArray(json) ? json.length : "n/a"}) sample=${(sample || "").slice(0, 400)}`);
+  } catch (err) {
+    console.error("AirNow fetch failed:", err.message);
   }
   return null;
 }
