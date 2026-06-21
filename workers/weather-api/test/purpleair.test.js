@@ -74,3 +74,35 @@ test("compositePm25 returns null when no sensor is valid", () => {
   assert.equal(compositePm25(parsePurpleAir(SAMPLE), opts), null); // all stale
   assert.equal(compositePm25([], opts), null);
 });
+
+import { purpleAirAdvisory } from "../src/index.js";
+
+const OPTS = { minConfidence: 70, staleSeconds: 3600, nowSec: 1_000_500, thresholdAqi: 150 };
+const rowsGood = [
+  { sensorIndex: 1, name: "A", pmCf1: 12, humidity: 50, confidence: 100, lastSeen: 1_000_000 },
+  { sensorIndex: 2, name: "B", pmCf1: 18, humidity: 40, confidence: 95, lastSeen: 1_000_200 },
+];
+
+test("purpleAirAdvisory builds the airQuality envelope", () => {
+  const a = purpleAirAdvisory(rowsGood, OPTS);
+  assert.equal(a.dominantPollutant, "PM2.5");
+  assert.equal(a.thresholdAqi, 150);
+  assert.equal(a.closureRecommended, false);          // ~AQI 41 from pm 9.79
+  assert.equal(a.sensorCount, 2);
+  assert.match(a.source, /PurpleAir \(EPA-corrected, 2 sensors\)/);
+  assert.match(a.observedAt, /^\d{4}-\d{2}-\d{2} \d{2}:\d{2} PT$/); // page parser format
+  assert.equal(a.reason, null);
+});
+
+test("purpleAirAdvisory flags closure when AQI > 150", () => {
+  // pmCf1 ~120, RH 40 → corrected ~63 → AQI ~155 (Unhealthy) > 150
+  const rows = [{ sensorIndex: 1, name: "A", pmCf1: 120, humidity: 40, confidence: 100, lastSeen: 1_000_000 }];
+  const a = purpleAirAdvisory(rows, OPTS);
+  assert.ok(a.aqi > 150);
+  assert.equal(a.closureRecommended, true);
+  assert.match(a.reason, /above the 150 closure threshold/);
+});
+
+test("purpleAirAdvisory returns null when no valid sensors (→ caller falls back)", () => {
+  assert.equal(purpleAirAdvisory([], OPTS), null);
+});

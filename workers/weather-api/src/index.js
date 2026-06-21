@@ -511,6 +511,44 @@ function compositePm25(rows, opts) {
   return { pm: median(corrected), sensorCount: corrected.length, freshestSec };
 }
 
+// Format a unix-seconds timestamp as Pacific "YYYY-MM-DD HH:MM PT" — the
+// shape the weather page's formatAqiObserved() parses.
+function formatPacificStamp(epochSec) {
+  if (!epochSec) return null;
+  try {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Los_Angeles",
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", hour12: false,
+    }).formatToParts(new Date(epochSec * 1000))
+      .reduce((o, p) => { o[p.type] = p.value; return o; }, {});
+    return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute} PT`;
+  } catch (_) { return null; }
+}
+
+function purpleAirAdvisory(rows, opts) {
+  const comp = compositePm25(rows, opts);
+  if (!comp) return null;
+  const aqi = pm25ToAqi(comp.pm);
+  if (aqi == null) return null;
+  const category = aqiCategory(aqi);
+  const closureRecommended = aqi > opts.thresholdAqi;
+  return {
+    aqi,
+    category,
+    dominantPollutant: "PM2.5",
+    reportingArea: "Region 13 area (PurpleAir)",
+    observedAt: formatPacificStamp(comp.freshestSec),
+    thresholdAqi: opts.thresholdAqi,
+    closureRecommended,
+    reason: closureRecommended
+      ? `AQI ${aqi} (${category}) — above the ${opts.thresholdAqi} closure threshold`
+      : null,
+    source: `PurpleAir (EPA-corrected, ${comp.sensorCount} sensor${comp.sensorCount === 1 ? "" : "s"})`,
+    sensorCount: comp.sensorCount,
+  };
+}
+
 async function fetchAirNow(env) {
   const key = env.AIRNOW_API_KEY;
   if (!key) {
@@ -860,4 +898,4 @@ function jsonError(status, message) {
 
 // Named exports for unit tests (Node). The Worker runtime uses the default
 // export above and ignores these.
-export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25 };
+export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory };
