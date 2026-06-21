@@ -84,12 +84,21 @@ curl -sS http://localhost:8787/api/weather | jq .
 | `PURPLEAIR_SENSOR_IDS` | _(placeholder)_ | CSV of curated outdoor PurpleAir sensor indices |
 | `PURPLEAIR_MIN_CONFIDENCE` | `70` | Min PurpleAir channel-A/B confidence % to include a sensor (our quality filter) |
 | `PURPLEAIR_STALE_SECONDS` | `3600` | Max age (seconds) before a PurpleAir reading is considered stale |
+| `AQI_REFRESH_MINUTES` | `15` | How often AQI is re-fetched (independent of the 5-min weather cron) |
 
 Plus the `SLACK_BOT_TOKEN` and `PURPLEAIR_READ_KEY` **secrets** (see Slack notifications and PurpleAir). If Region 13 wants the forecast pinned to a specific field's coordinates, edit the lat/lon vars and redeploy.
 
 ### PurpleAir (primary AQI)
 
-PurpleAir is the primary AQI source; AirNow serves as a fallback. The Worker fetches one batched `GET /v1/sensors` request per cron tick over the CSV-list of outdoor sensor indices configured in `PURPLEAIR_SENSOR_IDS`, using the `X-API-Key: PURPLEAIR_READ_KEY` header. Readings must meet the `PURPLEAIR_MIN_CONFIDENCE` threshold (median of EPA-corrected PM2.5 across qualifying sensors → AQI); if none qualify, the Worker falls back to AirNow. The output envelope's `airQuality` block shows which source was used in the `source` field.
+PurpleAir is the primary AQI source; AirNow serves as a fallback. The Worker fetches one batched `GET /v1/sensors` request over the CSV-list of outdoor sensor indices configured in `PURPLEAIR_SENSOR_IDS`, using the `X-API-Key: PURPLEAIR_READ_KEY` header. Readings must meet the `PURPLEAIR_MIN_CONFIDENCE` threshold (median of EPA-corrected PM2.5 across qualifying sensors → 2024 EPA AQI breakpoints); if none qualify, the Worker falls back to AirNow. The output envelope's `airQuality` block shows which source was used in the `source` field (`PurpleAir (EPA-corrected, N sensors)` vs `AirNow / EPA`).
+
+#### AQI refresh throttle (15 min)
+
+AQI is **not** fetched on every 5-min cron tick — that burned ~1824 PurpleAir API points during the build-out. It refreshes once every `AQI_REFRESH_MINUTES` (default 15, ~96 fetches/day vs 288). `refresh()` reads the prior KV `current` payload; the pure, unit-tested `shouldRefreshAqi(prevAqiFetchedAt, now, intervalMin)` (1-min slack for cron jitter) decides whether to re-fetch. On in-between ticks it carries forward `prevPayload.airQuality` and the `aqiFetchedAt` stamp. A failed/null reading (`aqi == null`) is retried every tick so the feed recovers fast. Weather (Tempest/WBGT/rain) stays on the 5-min cron — only the AQI fetch is throttled.
+
+#### AirNow fallback endpoint
+
+`fetchAirNow` hits the `/aq/observation/current/ziplatlong/` service (live 2026-06-17); logs `AirNow served (ziplatlong)`. The old `/aq/observation/latLong/current/` endpoint (retiring 2026-09-30) was **dropped 2026-06-21** — single endpoint now. The ziplatlong schema differs from the retired one (`nowcastAQI` was `AQI`, `aqiCategoryName`/`AQICategoryName` casing varies, `parameterName "OZONE"/"Ozone"` was `ParameterName "O3"`, camelCase `dateObserved`/`localTimeZone`, `hourObserved "11:00"`; returns all pollutants — we pick the highest AQI). `normalizeAirNow()` maps to a canonical row and stays case-/legacy-tolerant by design (defensive cover for the new endpoint's own documented case inconsistencies; unit-tested as a regression guard). `fetchAirNow` accepts a response only if it has a numeric AQI (`hasUsableAqi`), else returns null (card shows "unavailable").
 
 Setup:
 
@@ -151,6 +160,22 @@ npx wrangler secret put PURPLEAIR_READ_KEY   # e.g., "api_key_here"
 - WBGT = 0.7·Tw + 0.2·Tg + 0.1·T
 
 Variance vs. ISO 7243 reference under typical Pasadena conditions is ~1°F. CIF alert levels span ~5°F so this is well within tolerance.
+
+## Deploy
+
+Auto-deploys via CI (`.github/workflows/deploy-workers.yml`) on push to `main` — so weather-api ships when staging is promoted. Single deployment serves both domains via routes (main-only, never staging).
+
+Manual deploy:
+```bash
+cd workers/weather-api && npm run deploy
+```
+Use the canonical **`ayso13-worker-deploy`** token (Workers Scripts:Edit + **Workers KV Storage:Edit** + Account Settings:Read + Zone Workers Routes:Edit), in `.envrc` `CLOUDFLARE_API_TOKEN` + the GitHub `CLOUDFLARE_API_TOKEN` secret. A token missing KV:Edit trips `code 10023` (this Worker binds `WEATHER_KV`). Never `wrangler login`.
+
+**Secrets** (set via `wrangler secret put`, not in git): `TEMPEST_TOKEN`, `AIRNOW_API_KEY`, `PURPLEAIR_READ_KEY`, `SLACK_BOT_TOKEN`, `WEATHER_SELFTEST_KEY` (the last also set identically on the slack-bot Worker).
+
+## Self-test
+
+A POST to `/api/weather` with header `X-Selftest-Key: <WEATHER_SELFTEST_KEY>` posts a test card to `#notify-weather` via the real `postSlack` (GET unaffected; wrong key → 403). Exposed to the board as **`/ayso test-weather`** (the slack-bot calls it and reports the result). The board also has **`/ayso weather`** for an ephemeral current-conditions readout.
 
 ## Logs
 

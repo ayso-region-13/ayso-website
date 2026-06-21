@@ -26,6 +26,14 @@ Board member ─(CF Access OTP)─▶ fields.ayso13.org (this Worker)
 4. Migration: when a field's new map lands, delete the old hand-made
    `![](/images/fields/…)` markdown from that field's `.md` so it isn't shown twice.
 
+## Editor extras
+
+### Unified PDF export ("📄 PDF")
+Builds one printable PDF (cover → Region Overview → per field: an info+map front page, then one full page per layout, ordered wayfinder→game→practice) entirely **client-side with pdf-lib** (CDN, SRI'd) — no Worker memory/size limits. Pulls each committed map image through a same-origin proxy `GET /api/img/:slug/:variant` (streams the PNG from the public repo's raw host on the editor branch — avoids the Contents API 1 MB cap + CORS); downscales to JPEG so the file stays ~10 MB. `/api/fields` returns the field address + facility frontmatter for the info pages. Code in `public/pdf.js`. Every page footered with brand (left) / page URL (center) / page number (right). For internal use (Access-gated).
+
+### Region Overview map ("🗺 Region Overview", `?overview=1`)
+The `/fields/` index hero is editor-generated too. Loads slug `overview` on a **streets** base (not satellite) at ~16 km frame, with one draggable `place` pin per field (green=game, red=practice; auto-laid-out from each field's `placeLat`/`placeLon`, with leader lines). Seeded by `scripts/seed-overview.js` (reads field frontmatter + the `/fields/` index table's Practice/Games columns; preserves manual pin nudges on re-run) → `_data/fieldmaps/overview.json`. Save commits `images/fields/overview-map.png`. Site render: `page.njk` shows the overview on `/fields/` once the PNG exists (`_data/overviewMap.js` `.ready` flag), else falls back to the legacy `map-overview-v2.jpg`. Re-run the seed script + commit whenever fields are added/removed.
+
 ## One-time setup
 
 ### 1. Mapbox account + URL-restricted public token
