@@ -25,7 +25,7 @@ The closure trigger is **AQI above 150**. This matches Pasadena Unified School D
 
 ## How we measure
 
-AQI readings come from the EPA's [AirNow](https://www.airnow.gov/) network of regulatory air monitors. The [Weather and Field Conditions](/resources/weather/) page shows the current AQI for our area, the dominant pollutant (typically ozone in summer or PM2.5 during wildfire smoke), and the EPA category. Readings update hourly.
+AQI readings come from a network of [PurpleAir](https://www2.purpleair.com/) air-quality sensors located near our fields — in Pasadena, Altadena, and La Cañada. We read the raw fine-particle (PM2.5) measurement from several sensors, apply the EPA's published correction for PurpleAir hardware, convert each to the AQI scale, and use the median across sensors. Taking the median keeps one noisy or off sensor from skewing the reading. If the PurpleAir sensors are unavailable, the page automatically falls back to the EPA's [AirNow](https://www.airnow.gov/) regulatory monitors. The [Weather and Field Conditions](/resources/weather/) page shows the current AQI for our area and the EPA category. Readings update every 15 minutes.
 
 The automated banner is advisory. As with heat and rain closures, a Region 13 board member confirms the call and posts the official closure to the home page banner via Slack. Notifications go out by 7 AM on game days or 4 PM on practice days when air-quality alerts are in effect.
 
