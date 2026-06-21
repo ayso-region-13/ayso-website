@@ -82,14 +82,14 @@ curl -sS http://localhost:8787/api/weather | jq .
 | `NOTIFY_WEATHER_CHANNEL_ID` | _(placeholder)_ | Slack channel id for #notify-weather (not secret) |
 | `POP_FORECAST_THRESHOLD` | `60` | Min forecast PoP % that triggers a rain heads-up |
 | `PURPLEAIR_SENSOR_IDS` | _(placeholder)_ | CSV of curated outdoor PurpleAir sensor indices |
-| `PURPLEAIR_MIN_CONFIDENCE` | `70` | Min confidence % for PurpleAir readings (EPA correction requires ≥ 70) |
+| `PURPLEAIR_MIN_CONFIDENCE` | `70` | Min PurpleAir channel-A/B confidence % to include a sensor (our quality filter) |
 | `PURPLEAIR_STALE_SECONDS` | `3600` | Max age (seconds) before a PurpleAir reading is considered stale |
 
 Plus the `SLACK_BOT_TOKEN` and `PURPLEAIR_READ_KEY` **secrets** (see Slack notifications and PurpleAir). If Region 13 wants the forecast pinned to a specific field's coordinates, edit the lat/lon vars and redeploy.
 
 ### PurpleAir (primary AQI)
 
-PurpleAir is the primary AQI source; AirNow serves as a fallback. The Worker fetches one batched `GET /v1/sensors` request per cron tick over the CSV-list of outdoor sensor indices configured in `PURPLEAIR_SENSOR_IDS`, using the `X-API-Key: PURPLEAIR_READ_KEY` header. Readings must meet the `PURPLEAIR_MIN_CONFIDENCE` threshold (EPA-corrected PM2.5 + PM10 composite); if none qualify, the Worker falls back to AirNow. The output envelope's `airQuality` block shows which source was used in the `source` field.
+PurpleAir is the primary AQI source; AirNow serves as a fallback. The Worker fetches one batched `GET /v1/sensors` request per cron tick over the CSV-list of outdoor sensor indices configured in `PURPLEAIR_SENSOR_IDS`, using the `X-API-Key: PURPLEAIR_READ_KEY` header. Readings must meet the `PURPLEAIR_MIN_CONFIDENCE` threshold (median of EPA-corrected PM2.5 across qualifying sensors → AQI); if none qualify, the Worker falls back to AirNow. The output envelope's `airQuality` block shows which source was used in the `source` field.
 
 Setup:
 
