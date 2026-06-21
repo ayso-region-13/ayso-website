@@ -81,8 +81,28 @@ curl -sS http://localhost:8787/api/weather | jq .
 | `USER_AGENT` | `(ayso13.org weather page, info@ayso13.org)` | NWS requires a contact email per their API policy |
 | `NOTIFY_WEATHER_CHANNEL_ID` | _(placeholder)_ | Slack channel id for #notify-weather (not secret) |
 | `POP_FORECAST_THRESHOLD` | `60` | Min forecast PoP % that triggers a rain heads-up |
+| `PURPLEAIR_SENSOR_IDS` | _(placeholder)_ | CSV of curated outdoor PurpleAir sensor indices |
+| `PURPLEAIR_MIN_CONFIDENCE` | `70` | Min confidence % for PurpleAir readings (EPA correction requires ≥ 70) |
+| `PURPLEAIR_STALE_SECONDS` | `3600` | Max age (seconds) before a PurpleAir reading is considered stale |
 
-Plus the `SLACK_BOT_TOKEN` **secret** (see Slack notifications). If Region 13 wants the forecast pinned to a specific field's coordinates, edit the lat/lon vars and redeploy.
+Plus the `SLACK_BOT_TOKEN` and `PURPLEAIR_READ_KEY` **secrets** (see Slack notifications and PurpleAir). If Region 13 wants the forecast pinned to a specific field's coordinates, edit the lat/lon vars and redeploy.
+
+### PurpleAir (primary AQI)
+
+PurpleAir is the primary AQI source; AirNow serves as a fallback. The Worker fetches one batched `GET /v1/sensors` request per cron tick over the CSV-list of outdoor sensor indices configured in `PURPLEAIR_SENSOR_IDS`, using the `X-API-Key: PURPLEAIR_READ_KEY` header. Readings must meet the `PURPLEAIR_MIN_CONFIDENCE` threshold (EPA-corrected PM2.5 + PM10 composite); if none qualify, the Worker falls back to AirNow. The output envelope's `airQuality` block shows which source was used in the `source` field.
+
+Setup:
+
+```bash
+# Create or copy your PurpleAir API read key (free account required; use an outdoor app key).
+# Paste it as a secret:
+npx wrangler secret put PURPLEAIR_READ_KEY   # e.g., "api_key_here"
+
+# Populate PURPLEAIR_SENSOR_IDS in wrangler.toml with a comma-separated list
+# of curated sensor indices near your fields (determined in Task 6).
+# Keep PURPLEAIR_MIN_CONFIDENCE and PURPLEAIR_STALE_SECONDS as defaults
+# unless EPA thresholds or staleness tolerance change.
+```
 
 ## Output envelope
 
