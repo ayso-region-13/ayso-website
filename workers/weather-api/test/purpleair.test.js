@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { epaCorrect, pm25ToAqi, aqiCategory } from "../src/index.js";
+import { epaCorrect, pm25ToAqi, aqiCategory, shouldRefreshAqi } from "../src/index.js";
 
 test("epaCorrect applies the low-range EPA formula + clamps to 0", () => {
   // 0.524*20 - 0.0862*50 + 5.75 = 11.92
@@ -105,4 +105,22 @@ test("purpleAirAdvisory flags closure when AQI > 150", () => {
 
 test("purpleAirAdvisory returns null when no valid sensors (→ caller falls back)", () => {
   assert.equal(purpleAirAdvisory([], OPTS), null);
+});
+
+test("shouldRefreshAqi: no prior reading always refreshes", () => {
+  assert.equal(shouldRefreshAqi(null, 1_000_000, 15), true);
+  assert.equal(shouldRefreshAqi(undefined, 1_000_000, 15), true);
+  assert.equal(shouldRefreshAqi(0, 1_000_000, 15), true);
+});
+
+test("shouldRefreshAqi: holds within the interval, refreshes past it", () => {
+  const base = 10_000_000;
+  // 5 min after last fetch (one cron tick) → still within 15-min interval, hold
+  assert.equal(shouldRefreshAqi(base, base + 5 * 60_000, 15), false);
+  // 10 min after → still hold
+  assert.equal(shouldRefreshAqi(base, base + 10 * 60_000, 15), false);
+  // 14 min after → within the 1-min slack (>= 14 min), refresh
+  assert.equal(shouldRefreshAqi(base, base + 14 * 60_000, 15), true);
+  // 15 min after → refresh
+  assert.equal(shouldRefreshAqi(base, base + 15 * 60_000, 15), true);
 });

@@ -53,3 +53,7 @@ POP_FORECAST_THRESHOLD = "60"
 PURPLEAIR_SENSOR_IDS = "80807,269172,268966,174491,46941"
 PURPLEAIR_MIN_CONFIDENCE = "70"
 PURPLEAIR_STALE_SECONDS = "3600"
+# AQI is refreshed on this cadence (minutes), independent of the 5-min weather
+# cron, to conserve PurpleAir API points. In-between cron ticks carry forward
+# the last good reading; a failed/null reading is retried every tick.
+AQI_REFRESH_MINUTES = "15"

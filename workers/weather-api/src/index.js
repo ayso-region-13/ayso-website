@@ -99,11 +99,11 @@ export default {
 };
 
 async function refresh(env) {
-  const [tempestObs, nwsForecast, prevRainState, airQuality] = await Promise.all([
+  const [tempestObs, nwsForecast, prevRainState, prevPayload] = await Promise.all([
     fetchTempest(env),
     fetchNwsForecast(env),
     env.WEATHER_KV.get("rain:state", { type: "json" }),
-    fetchAirQuality(env),
+    env.WEATHER_KV.get(KV_KEY, { type: "json" }),
   ]);
 
   const wbgt = computeWbgt(tempestObs);
@@ -113,8 +113,25 @@ async function refresh(env) {
   const rainState = await updateRainState(env, tempestObs, prevRainState);
   const rain = rainAdvisory(rainState);
 
+  // AQI refreshes less often than the 5-min weather cron to conserve PurpleAir
+  // API points (default every 15 min via AQI_REFRESH_MINUTES). On the in-between
+  // ticks we carry forward the last good reading from the cached payload; a
+  // failed/null reading is retried every tick so we recover quickly.
+  const nowMs = Date.now();
+  const prevAq = prevPayload && prevPayload.airQuality;
+  let airQuality, aqiFetchedAt;
+  if (prevAq && prevAq.aqi != null &&
+      !shouldRefreshAqi(prevPayload.aqiFetchedAt, nowMs, parseInt(env.AQI_REFRESH_MINUTES || "15", 10))) {
+    airQuality = prevAq;
+    aqiFetchedAt = prevPayload.aqiFetchedAt;
+  } else {
+    airQuality = await fetchAirQuality(env);
+    aqiFetchedAt = nowMs;
+  }
+
   const payload = {
     fetchedAt: new Date().toISOString(),
+    aqiFetchedAt,
     current: {
       tempF: round(celsiusToFahrenheit(tempestObs.temperatureC), 1),
       feelsLikeF: round(celsiusToFahrenheit(tempestObs.feelsLikeC), 1),
@@ -617,6 +634,15 @@ async function fetchPurpleAir(env) {
   }
 }
 
+// Decide whether the AQI reading is due for a refresh. AQI is fetched on a
+// slower cadence than the 5-min weather cron to conserve PurpleAir API points.
+// A 1-min slack absorbs cron jitter so a 15-min interval doesn't slip to 20.
+function shouldRefreshAqi(prevFetchedAtMs, nowMs, intervalMin) {
+  if (!prevFetchedAtMs) return true;
+  const slackMs = 60 * 1000;
+  return (nowMs - prevFetchedAtMs) >= (intervalMin * 60 * 1000 - slackMs);
+}
+
 // AQI source orchestrator: PurpleAir composite (primary) → AirNow (fallback).
 async function fetchAirQuality(env) {
   const opts = {
@@ -933,4 +959,4 @@ function jsonError(status, message) {
 
 // Named exports for unit tests (Node). The Worker runtime uses the default
 // export above and ignores these.
-export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory };
+export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory, shouldRefreshAqi };
