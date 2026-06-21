@@ -99,11 +99,11 @@ export default {
 };
 
 async function refresh(env) {
-  const [tempestObs, nwsForecast, prevRainState, airNowObs] = await Promise.all([
+  const [tempestObs, nwsForecast, prevRainState, airQuality] = await Promise.all([
     fetchTempest(env),
     fetchNwsForecast(env),
     env.WEATHER_KV.get("rain:state", { type: "json" }),
-    fetchAirNow(env),
+    fetchAirQuality(env),
   ]);
 
   const wbgt = computeWbgt(tempestObs);
@@ -112,7 +112,6 @@ async function refresh(env) {
 
   const rainState = await updateRainState(env, tempestObs, prevRainState);
   const rain = rainAdvisory(rainState);
-  const airQuality = airAdvisory(airNowObs);
 
   const payload = {
     fetchedAt: new Date().toISOString(),
@@ -598,6 +597,42 @@ async function fetchAirNow(env) {
     }
   }
   return null;
+}
+
+async function fetchPurpleAir(env) {
+  const key = env.PURPLEAIR_READ_KEY;
+  const ids = env.PURPLEAIR_SENSOR_IDS;
+  if (!key || !ids) return null; // not configured → caller falls back to AirNow
+  const url =
+    "https://api.purpleair.com/v1/sensors" +
+    "?fields=pm2.5_cf_1,humidity,confidence,last_seen,name" +
+    `&show_only=${encodeURIComponent(ids)}&location_type=0`;
+  try {
+    const r = await fetch(url, { headers: { "X-API-Key": key } });
+    if (!r.ok) { console.error(`PurpleAir HTTP ${r.status}`); return null; }
+    return parsePurpleAir(await r.json());
+  } catch (err) {
+    console.error("PurpleAir fetch failed:", err.message);
+    return null;
+  }
+}
+
+// AQI source orchestrator: PurpleAir composite (primary) → AirNow (fallback).
+async function fetchAirQuality(env) {
+  const opts = {
+    minConfidence: parseInt(env.PURPLEAIR_MIN_CONFIDENCE || "70", 10),
+    staleSeconds: parseInt(env.PURPLEAIR_STALE_SECONDS || "3600", 10),
+    nowSec: Math.floor(Date.now() / 1000),
+    thresholdAqi: AQI_CLOSURE_THRESHOLD,
+  };
+  const rows = await fetchPurpleAir(env);
+  if (rows) {
+    const adv = purpleAirAdvisory(rows, opts);
+    if (adv) { console.log(`AQI served by purpleair (${adv.sensorCount} sensors)`); return adv; }
+    console.error("PurpleAir returned no usable sensors; falling back to AirNow");
+  }
+  console.log("AQI served by airnow (fallback)");
+  return airAdvisory(await fetchAirNow(env));
 }
 
 // True only if the response is a non-empty array with at least one row
