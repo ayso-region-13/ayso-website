@@ -47,6 +47,9 @@ POP_FORECAST_THRESHOLD = "60"
 # docs/superpowers/specs/2026-06-21-purpleair-aqi-design.md.
 # PURPLEAIR_SENSOR_IDS: CSV of curated OUTDOOR sensor indices near our fields.
 # PURPLEAIR_READ_KEY is a SECRET — set with `npx wrangler secret put PURPLEAIR_READ_KEY`.
-PURPLEAIR_SENSOR_IDS = "REPLACE_WITH_CURATED_SENSOR_IDS"
+# Curated outdoor sensors (conf 100) spread across field clusters: Rose Bowl
+# 80807, Victory Park 269172, Washington Park 268966, Altadena 174491,
+# La Cañada (Fairview Dr) 46941. Median composite is robust to one offline.
+PURPLEAIR_SENSOR_IDS = "80807,269172,268966,174491,46941"
 PURPLEAIR_MIN_CONFIDENCE = "70"
 PURPLEAIR_STALE_SECONDS = "3600"
