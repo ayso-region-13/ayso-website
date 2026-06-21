@@ -71,6 +71,8 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
 
 Current conditions come from Region 13's on-site [Tempest WeatherFlow](https://weatherflow.com/tempest-home-weather-system/) station, polled every five minutes. Forecast data is from the [National Weather Service](https://www.weather.gov/) for Pasadena, California.
 
+Air quality (AQI) is a median composite of nearby [PurpleAir](https://www2.purpleair.com/) sensors in Pasadena, Altadena, and La Cañada, EPA-corrected and converted to the AQI scale, refreshed every 15 minutes; if those sensors are unavailable it falls back to the EPA's [AirNow](https://www.airnow.gov/) regulatory monitors. See the [Air Quality Policy](/resources/air-quality-policy/) for details.
+
 WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind speed, and solar irradiance using the Bernard 1999 simplified outdoor approximation. Variance versus the ISO 7243 reference is roughly ±1°F under typical Pasadena conditions, well within the ~5°F width of each CIF alert tier.
 
 The field-status bar at the top of this page is human-controlled. It reflects what Region 13 board members have set via Slack, and is the same status shown on the [home page](/). A high WBGT reading above does not automatically close fields; a board member still makes that call.

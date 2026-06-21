@@ -42,3 +42,18 @@ TEMPEST_STATION_ID = "33318"
 #   npx wrangler secret put SLACK_BOT_TOKEN   (same xoxb token as the slack-bot)
 NOTIFY_WEATHER_CHANNEL_ID = "C0BB7JJ0XRN"
 POP_FORECAST_THRESHOLD = "60"
+
+# PurpleAir AQI (primary AQI source; AirNow is the fallback). See
+# docs/superpowers/specs/2026-06-21-purpleair-aqi-design.md.
+# PURPLEAIR_SENSOR_IDS: CSV of curated OUTDOOR sensor indices near our fields.
+# PURPLEAIR_READ_KEY is a SECRET — set with `npx wrangler secret put PURPLEAIR_READ_KEY`.
+# Curated outdoor sensors (conf 100) spread across field clusters: Rose Bowl
+# 80807, Victory Park 269172, Washington Park 268966, Altadena 174491,
+# La Cañada (Fairview Dr) 46941. Median composite is robust to one offline.
+PURPLEAIR_SENSOR_IDS = "80807,269172,268966,174491,46941"
+PURPLEAIR_MIN_CONFIDENCE = "70"
+PURPLEAIR_STALE_SECONDS = "3600"
+# AQI is refreshed on this cadence (minutes), independent of the 5-min weather
+# cron, to conserve PurpleAir API points. In-between cron ticks carry forward
+# the last good reading; a failed/null reading is retried every tick.
+AQI_REFRESH_MINUTES = "15"

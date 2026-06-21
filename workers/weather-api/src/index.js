@@ -99,11 +99,11 @@ export default {
 };
 
 async function refresh(env) {
-  const [tempestObs, nwsForecast, prevRainState, airNowObs] = await Promise.all([
+  const [tempestObs, nwsForecast, prevRainState, prevPayload] = await Promise.all([
     fetchTempest(env),
     fetchNwsForecast(env),
     env.WEATHER_KV.get("rain:state", { type: "json" }),
-    fetchAirNow(env),
+    env.WEATHER_KV.get(KV_KEY, { type: "json" }),
   ]);
 
   const wbgt = computeWbgt(tempestObs);
@@ -112,10 +112,26 @@ async function refresh(env) {
 
   const rainState = await updateRainState(env, tempestObs, prevRainState);
   const rain = rainAdvisory(rainState);
-  const airQuality = airAdvisory(airNowObs);
+
+  // AQI refreshes less often than the 5-min weather cron to conserve PurpleAir
+  // API points (default every 15 min via AQI_REFRESH_MINUTES). On the in-between
+  // ticks we carry forward the last good reading from the cached payload; a
+  // failed/null reading is retried every tick so we recover quickly.
+  const nowMs = Date.now();
+  const prevAq = prevPayload && prevPayload.airQuality;
+  let airQuality, aqiFetchedAt;
+  if (prevAq && prevAq.aqi != null &&
+      !shouldRefreshAqi(prevPayload.aqiFetchedAt, nowMs, parseInt(env.AQI_REFRESH_MINUTES || "15", 10))) {
+    airQuality = prevAq;
+    aqiFetchedAt = prevPayload.aqiFetchedAt;
+  } else {
+    airQuality = await fetchAirQuality(env);
+    aqiFetchedAt = nowMs;
+  }
 
   const payload = {
     fetchedAt: new Date().toISOString(),
+    aqiFetchedAt,
     current: {
       tempF: round(celsiusToFahrenheit(tempestObs.temperatureC), 1),
       feelsLikeF: round(celsiusToFahrenheit(tempestObs.feelsLikeC), 1),
@@ -422,6 +438,133 @@ function rainAdvisory(state) {
 
 const AQI_CLOSURE_THRESHOLD = 150;
 
+// ── PurpleAir AQI (local sensor composite) ─────────────────────────────
+// PurpleAir returns raw PM2.5 (no AQI). We apply the US EPA PurpleAir
+// correction (Barkjohn 2021) then the EPA AQI breakpoint table (2024).
+
+function epaCorrect(pmCf1, rh) {
+  if (typeof pmCf1 !== "number" || Number.isNaN(pmCf1)) return null;
+  if (typeof rh !== "number" || Number.isNaN(rh)) return null;
+  const corrected = pmCf1 < 343
+    ? 0.524 * pmCf1 - 0.0862 * rh + 5.75
+    : 0.46 * pmCf1 + 3.93e-4 * pmCf1 * pmCf1 + 2.97;
+  return Math.max(0, corrected);
+}
+
+// EPA PM2.5 → AQI, 2024 breakpoints (matches current AirNow).
+function pm25ToAqi(pm) {
+  if (typeof pm !== "number" || Number.isNaN(pm)) return null;
+  if (pm < 0) return 0;
+  const c = Math.trunc(pm * 10) / 10; // truncate to 0.1 µg/m³ per EPA
+  if (c > 325.4) return 500;
+  const bp = [
+    [0.0, 9.0, 0, 50],
+    [9.1, 35.4, 51, 100],
+    [35.5, 55.4, 101, 150],
+    [55.5, 125.4, 151, 200],
+    [125.5, 225.4, 201, 300],
+    [225.5, 325.4, 301, 500],
+  ];
+  for (const [cl, ch, al, ah] of bp) {
+    if (c >= cl && c <= ch) {
+      return Math.round(((ah - al) / (ch - cl)) * (c - cl) + al);
+    }
+  }
+  return 0;
+}
+
+function aqiCategory(aqi) {
+  if (aqi == null) return null;
+  if (aqi <= 50) return "Good";
+  if (aqi <= 100) return "Moderate";
+  if (aqi <= 150) return "Unhealthy for Sensitive Groups";
+  if (aqi <= 200) return "Unhealthy";
+  if (aqi <= 300) return "Very Unhealthy";
+  return "Hazardous";
+}
+
+// ── PurpleAir parse + composite ────────────────────────────────────────
+
+function paNum(v) {
+  return typeof v === "number" && !Number.isNaN(v) ? v : null;
+}
+
+function parsePurpleAir(json) {
+  if (!json || !Array.isArray(json.fields) || !Array.isArray(json.data)) return [];
+  const idx = {};
+  json.fields.forEach((f, i) => { idx[f] = i; });
+  const at = (row, key) => (idx[key] != null ? row[idx[key]] : undefined);
+  return json.data.map((row) => ({
+    sensorIndex: at(row, "sensor_index"),
+    name: at(row, "name") ?? null,
+    pmCf1: paNum(at(row, "pm2.5_cf_1")),
+    humidity: paNum(at(row, "humidity")),
+    confidence: paNum(at(row, "confidence")),
+    lastSeen: paNum(at(row, "last_seen")),
+  }));
+}
+
+function median(arr) {
+  const s = [...arr].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+
+function compositePm25(rows, opts) {
+  const { minConfidence, staleSeconds, nowSec } = opts;
+  const corrected = [];
+  let freshestSec = 0;
+  for (const r of rows || []) {
+    if (r.pmCf1 == null || r.humidity == null) continue;
+    if (r.confidence == null || r.confidence < minConfidence) continue;
+    if (r.lastSeen == null || nowSec - r.lastSeen > staleSeconds) continue;
+    const c = epaCorrect(r.pmCf1, r.humidity);
+    if (c == null) continue;
+    corrected.push(c);
+    if (r.lastSeen > freshestSec) freshestSec = r.lastSeen;
+  }
+  if (corrected.length === 0) return null;
+  return { pm: median(corrected), sensorCount: corrected.length, freshestSec };
+}
+
+// Format a unix-seconds timestamp as Pacific "YYYY-MM-DD HH:MM PT" — the
+// shape the weather page's formatAqiObserved() parses.
+function formatPacificStamp(epochSec) {
+  if (!epochSec) return null;
+  try {
+    const parts = new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Los_Angeles",
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", hour12: false,
+    }).formatToParts(new Date(epochSec * 1000))
+      .reduce((o, p) => { o[p.type] = p.value; return o; }, {});
+    return `${parts.year}-${parts.month}-${parts.day} ${parts.hour}:${parts.minute} PT`;
+  } catch (_) { return null; }
+}
+
+function purpleAirAdvisory(rows, opts) {
+  const comp = compositePm25(rows, opts);
+  if (!comp) return null;
+  const aqi = pm25ToAqi(comp.pm);
+  if (aqi == null) return null;
+  const category = aqiCategory(aqi);
+  const closureRecommended = aqi > opts.thresholdAqi;
+  return {
+    aqi,
+    category,
+    dominantPollutant: "PM2.5",
+    reportingArea: "Region 13 area (PurpleAir)",
+    observedAt: formatPacificStamp(comp.freshestSec),
+    thresholdAqi: opts.thresholdAqi,
+    closureRecommended,
+    reason: closureRecommended
+      ? `AQI ${aqi} (${category}) — above the ${opts.thresholdAqi} closure threshold`
+      : null,
+    source: `PurpleAir (EPA-corrected, ${comp.sensorCount} sensor${comp.sensorCount === 1 ? "" : "s"})`,
+    sensorCount: comp.sensorCount,
+  };
+}
+
 async function fetchAirNow(env) {
   const key = env.AIRNOW_API_KEY;
   if (!key) {
@@ -435,42 +578,76 @@ async function fetchAirNow(env) {
     `?format=application/json&latitude=${lat}&longitude=${lon}` +
     `&distance=25&API_KEY=${key}`;
 
-  // AirNow migration (announced 2026-06): the new "Current Observations by
-  // Latitude/Longitude or ZIP Code" service (/aq/observation/current/ziplatlong/,
-  // live 2026-06-17) replaces "…by Latitude/Longitude"
-  // (/aq/observation/latLong/current/), which RETIRES 2026-09-30.
-  // We prefer the new endpoint and fall back to the old one (still alive
-  // until retirement). A response is only ACCEPTED if it actually contains a
-  // usable numeric AQI — the new endpoint was observed returning a non-empty
-  // array with no numeric AQI (current-hour row pending), which would blank
-  // the card; in that case we log a sample and fall back to the old endpoint
-  // rather than accept unusable data. TODO(before 2026-09-30): once the new
-  // endpoint is confirmed consistently usable, drop the OLD fallback.
-  const ENDPOINTS = [
-    ["ziplatlong(new)", "https://www.airnowapi.org/aq/observation/current/ziplatlong/" + qs],
-    ["latLong(old)",    "https://www.airnowapi.org/aq/observation/latLong/current/" + qs],
-  ];
-  for (const [label, url] of ENDPOINTS) {
-    try {
-      const r = await fetch(url, { headers: { "User-Agent": env.USER_AGENT } });
-      if (!r.ok) {
-        console.error(`AirNow ${label} HTTP ${r.status}`);
-        continue;
-      }
-      const json = await r.json();
-      if (hasUsableAqi(json)) {
-        console.log(`AirNow served by ${label}`);
-        return json;
-      }
-      // Non-empty but no numeric AQI, or empty: log a sample for diagnosis
-      // and try the next endpoint.
-      const sample = Array.isArray(json) ? JSON.stringify(json[0] || null) : JSON.stringify(json);
-      console.error(`AirNow ${label} no usable AQI (rows=${Array.isArray(json) ? json.length : "n/a"}) sample=${(sample || "").slice(0, 400)}`);
-    } catch (err) {
-      console.error(`AirNow ${label} fetch failed:`, err.message);
+  // AirNow is the FALLBACK source for AQI (PurpleAir is primary). It uses the
+  // "Current Observations by Latitude/Longitude or ZIP Code" service
+  // (/aq/observation/current/ziplatlong/, live 2026-06-17). The older
+  // /aq/observation/latLong/current/ endpoint was dropped 2026-06-21 ahead of
+  // its 2026-09-30 retirement. A response is only ACCEPTED if it actually
+  // contains a usable numeric AQI (hasUsableAqi); otherwise we log a sample and
+  // return null so the card shows "unavailable" rather than blank/garbage.
+  const url = "https://www.airnowapi.org/aq/observation/current/ziplatlong/" + qs;
+  try {
+    const r = await fetch(url, { headers: { "User-Agent": env.USER_AGENT } });
+    if (!r.ok) {
+      console.error(`AirNow HTTP ${r.status}`);
+      return null;
     }
+    const json = await r.json();
+    if (hasUsableAqi(json)) {
+      console.log("AirNow served (ziplatlong)");
+      return json;
+    }
+    const sample = Array.isArray(json) ? JSON.stringify(json[0] || null) : JSON.stringify(json);
+    console.error(`AirNow no usable AQI (rows=${Array.isArray(json) ? json.length : "n/a"}) sample=${(sample || "").slice(0, 400)}`);
+  } catch (err) {
+    console.error("AirNow fetch failed:", err.message);
   }
   return null;
+}
+
+async function fetchPurpleAir(env) {
+  const key = env.PURPLEAIR_READ_KEY;
+  const ids = env.PURPLEAIR_SENSOR_IDS;
+  if (!key || !ids) return null; // not configured → caller falls back to AirNow
+  const url =
+    "https://api.purpleair.com/v1/sensors" +
+    "?fields=pm2.5_cf_1,humidity,confidence,last_seen,name" +
+    `&show_only=${encodeURIComponent(ids)}&location_type=0`;
+  try {
+    const r = await fetch(url, { headers: { "X-API-Key": key } });
+    if (!r.ok) { console.error(`PurpleAir HTTP ${r.status}`); return null; }
+    return parsePurpleAir(await r.json());
+  } catch (err) {
+    console.error("PurpleAir fetch failed:", err.message);
+    return null;
+  }
+}
+
+// Decide whether the AQI reading is due for a refresh. AQI is fetched on a
+// slower cadence than the 5-min weather cron to conserve PurpleAir API points.
+// A 1-min slack absorbs cron jitter so a 15-min interval doesn't slip to 20.
+function shouldRefreshAqi(prevFetchedAtMs, nowMs, intervalMin) {
+  if (!prevFetchedAtMs) return true;
+  const slackMs = 60 * 1000;
+  return (nowMs - prevFetchedAtMs) >= (intervalMin * 60 * 1000 - slackMs);
+}
+
+// AQI source orchestrator: PurpleAir composite (primary) → AirNow (fallback).
+async function fetchAirQuality(env) {
+  const opts = {
+    minConfidence: parseInt(env.PURPLEAIR_MIN_CONFIDENCE || "70", 10),
+    staleSeconds: parseInt(env.PURPLEAIR_STALE_SECONDS || "3600", 10),
+    nowSec: Math.floor(Date.now() / 1000),
+    thresholdAqi: AQI_CLOSURE_THRESHOLD,
+  };
+  const rows = await fetchPurpleAir(env);
+  if (rows) {
+    const adv = purpleAirAdvisory(rows, opts);
+    if (adv) { console.log(`AQI served by purpleair (${adv.sensorCount} sensors)`); return adv; }
+    console.error("PurpleAir returned no usable sensors; falling back to AirNow");
+  }
+  console.log("AQI served by airnow (fallback)");
+  return airAdvisory(await fetchAirNow(env));
 }
 
 // True only if the response is a non-empty array with at least one row
@@ -771,4 +948,4 @@ function jsonError(status, message) {
 
 // Named exports for unit tests (Node). The Worker runtime uses the default
 // export above and ignores these.
-export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi };
+export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory, shouldRefreshAqi };
