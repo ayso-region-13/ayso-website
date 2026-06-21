@@ -467,6 +467,50 @@ function aqiCategory(aqi) {
   return "Hazardous";
 }
 
+// ── PurpleAir parse + composite ────────────────────────────────────────
+
+function paNum(v) {
+  return typeof v === "number" && !Number.isNaN(v) ? v : null;
+}
+
+function parsePurpleAir(json) {
+  if (!json || !Array.isArray(json.fields) || !Array.isArray(json.data)) return [];
+  const idx = {};
+  json.fields.forEach((f, i) => { idx[f] = i; });
+  const at = (row, key) => (idx[key] != null ? row[idx[key]] : undefined);
+  return json.data.map((row) => ({
+    sensorIndex: at(row, "sensor_index"),
+    name: at(row, "name") ?? null,
+    pmCf1: paNum(at(row, "pm2.5_cf_1")),
+    humidity: paNum(at(row, "humidity")),
+    confidence: paNum(at(row, "confidence")),
+    lastSeen: paNum(at(row, "last_seen")),
+  }));
+}
+
+function median(arr) {
+  const s = [...arr].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+}
+
+function compositePm25(rows, opts) {
+  const { minConfidence, staleSeconds, nowSec } = opts;
+  const corrected = [];
+  let freshestSec = 0;
+  for (const r of rows || []) {
+    if (r.pmCf1 == null || r.humidity == null) continue;
+    if (r.confidence == null || r.confidence < minConfidence) continue;
+    if (r.lastSeen == null || nowSec - r.lastSeen > staleSeconds) continue;
+    const c = epaCorrect(r.pmCf1, r.humidity);
+    if (c == null) continue;
+    corrected.push(c);
+    if (r.lastSeen > freshestSec) freshestSec = r.lastSeen;
+  }
+  if (corrected.length === 0) return null;
+  return { pm: median(corrected), sensorCount: corrected.length, freshestSec };
+}
+
 async function fetchAirNow(env) {
   const key = env.AIRNOW_API_KEY;
   if (!key) {
@@ -816,4 +860,4 @@ function jsonError(status, message) {
 
 // Named exports for unit tests (Node). The Worker runtime uses the default
 // export above and ignores these.
-export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory };
+export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25 };

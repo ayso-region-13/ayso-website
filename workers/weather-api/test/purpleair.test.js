@@ -35,3 +35,42 @@ test("aqiCategory bands", () => {
   assert.equal(aqiCategory(250), "Very Unhealthy");
   assert.equal(aqiCategory(400), "Hazardous");
 });
+
+import { parsePurpleAir, compositePm25 } from "../src/index.js";
+
+const SAMPLE = {
+  fields: ["sensor_index", "pm2.5_cf_1", "humidity", "confidence", "last_seen", "name"],
+  data: [
+    [101, 12.0, 50, 100, 1_000_000, "Rose Bowl"],
+    [102, 18.0, 40, 95, 1_000_000, "Central Pas"],
+    [103, 9000.0, 50, 20, 1_000_000, "Flaky"],     // low confidence → dropped
+    [104, 15.0, 45, 99, 1, "Stale"],               // ancient last_seen → dropped
+  ],
+};
+
+test("parsePurpleAir maps fields→rows by name (not column order)", () => {
+  const rows = parsePurpleAir(SAMPLE);
+  assert.equal(rows.length, 4);
+  assert.equal(rows[0].sensorIndex, 101);
+  assert.equal(rows[0].pmCf1, 12.0);
+  assert.equal(rows[0].humidity, 50);
+  assert.equal(rows[1].name, "Central Pas");
+  assert.deepEqual(parsePurpleAir({}), []);
+});
+
+test("compositePm25 filters bad sensors + medians the EPA-corrected values", () => {
+  const rows = parsePurpleAir(SAMPLE);
+  const opts = { minConfidence: 70, staleSeconds: 3600, nowSec: 1_000_500 };
+  const c = compositePm25(rows, opts);
+  // only 101 and 102 survive. corrected: 101→0.524*12-0.0862*50+5.75=7.748;
+  // 102→0.524*18-0.0862*40+5.75=11.834. median of 2 = mean = 9.791
+  assert.equal(c.sensorCount, 2);
+  assert.ok(Math.abs(c.pm - 9.791) < 0.07);
+  assert.equal(c.freshestSec, 1_000_000);
+});
+
+test("compositePm25 returns null when no sensor is valid", () => {
+  const opts = { minConfidence: 70, staleSeconds: 3600, nowSec: 9_999_999_999 };
+  assert.equal(compositePm25(parsePurpleAir(SAMPLE), opts), null); // all stale
+  assert.equal(compositePm25([], opts), null);
+});
