@@ -62,10 +62,10 @@ test("compositePm25 filters bad sensors + medians the EPA-corrected values", () 
   const rows = parsePurpleAir(SAMPLE);
   const opts = { minConfidence: 70, staleSeconds: 3600, nowSec: 1_000_500 };
   const c = compositePm25(rows, opts);
-  // only 101 and 102 survive. corrected: 101→0.524*12-0.0862*50+5.75=7.748;
-  // 102→0.524*18-0.0862*40+5.75=11.834. median of 2 = mean = 9.791
+  // only 101 and 102 survive. corrected: 101→0.524*12-0.0862*50+5.75=7.728;
+  // 102→0.524*18-0.0862*40+5.75=11.734. median of 2 = mean = 9.731
   assert.equal(c.sensorCount, 2);
-  assert.ok(Math.abs(c.pm - 9.791) < 0.07);
+  assert.ok(Math.abs(c.pm - 9.731) < 0.01);
   assert.equal(c.freshestSec, 1_000_000);
 });
 
