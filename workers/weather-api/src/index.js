@@ -174,12 +174,18 @@ async function refresh(env) {
 // tests; the functions here are the thin IO shells around them.
 
 async function notify(env, payload) {
-  // allSettled so one notifier failing can't suppress the others.
-  await Promise.allSettled([
+  const tasks = [
     notifyClosure(env, payload),
-    notifyNwsAlerts(env),
     notifyRainForecast(env, payload),
-  ]);
+  ];
+  // The NWS active-alert notifier is opt-in (disabled by default — it was too
+  // noisy in #notify-weather). Re-enable by setting NWS_ALERTS_ENABLED="true"
+  // in wrangler.toml [vars]. When off we skip the fetch entirely.
+  if (String(env.NWS_ALERTS_ENABLED || "").toLowerCase() === "true") {
+    tasks.push(notifyNwsAlerts(env));
+  }
+  // allSettled so one notifier failing can't suppress the others.
+  await Promise.allSettled(tasks);
 }
 
 async function postSlack(env, blocks, text) {

@@ -15,10 +15,10 @@ After each cron refresh, three independent notifiers post to **#notify-weather**
 | Notifier | Fires when | KV state |
 |---|---|---|
 | Closure threshold | `closureRecommended` transitions false→true (heat WBGT L5, rain >0.25"/48h or >1"/72h, or AQI > 150) and again true→false | `notify:closure` |
-| NWS active alerts | a new alert appears at `api.weather.gov/alerts/active?point=LAT,LON`, or a tracked one ends (dedup by alert id) | `notify:nwsAlerts` |
+| NWS active alerts **(OFF by default)** | a new alert appears at `api.weather.gov/alerts/active?point=LAT,LON`, or a tracked one ends (dedup by alert id) | `notify:nwsAlerts` |
 | Rain forecast heads-up | any forecast period in the next ~72h has PoP ≥ `POP_FORECAST_THRESHOLD` (default 60); throttled to once per 24h per period | `notify:rainForecast` |
 
-On first run with no baseline, the NWS-alerts notifier seeds its state silently so a deploy during an active alert doesn't dump pre-existing alerts into the channel. The pure decision logic (`closureTransition`, `diffAlertIds`, `rainForecastDecision`) is unit-tested — run `npm test`.
+The **NWS active-alert notifier is disabled by default** (`NWS_ALERTS_ENABLED="false"` in `wrangler.toml` — it was too noisy in `#notify-weather`); when off, its fetch is skipped entirely. Set `NWS_ALERTS_ENABLED="true"` to resume it. When enabled, on first run with no baseline it seeds its state silently so a deploy during an active alert doesn't dump pre-existing alerts into the channel. The pure decision logic (`closureTransition`, `diffAlertIds`, `rainForecastDecision`) is unit-tested — run `npm test`.
 
 **Setup:** create the `#notify-weather` channel, invite the AYSO bot, then set `NOTIFY_WEATHER_CHANNEL_ID` in `wrangler.toml [vars]` to the channel id and add the bot token as a secret:
 

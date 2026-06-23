@@ -42,6 +42,10 @@ TEMPEST_STATION_ID = "33318"
 #   npx wrangler secret put SLACK_BOT_TOKEN   (same xoxb token as the slack-bot)
 NOTIFY_WEATHER_CHANNEL_ID = "C0BB7JJ0XRN"
 POP_FORECAST_THRESHOLD = "60"
+# NWS active-alert Slack notifier — opt-in, OFF by default (too noisy in
+# #notify-weather). Set to "true" to resume new/ended-alert posts. The closure
+# and rain-forecast notifiers are unaffected.
+NWS_ALERTS_ENABLED = "false"
 
 # PurpleAir AQI (primary AQI source; AirNow is the fallback). See
 # docs/superpowers/specs/2026-06-21-purpleair-aqi-design.md.
