@@ -200,7 +200,7 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
   function fmtTemp(f) {
     if (f == null || f === "" || isNaN(Number(f))) return "—";
     var n = Number(f);
-    return TEMP_UNIT === "C" ? Math.round((n - 32) * 5 / 9) + "°C" : f + "°F";
+    return TEMP_UNIT === "C" ? (Math.round((n - 32) * 5 / 9 * 10) / 10) + "°C" : f + "°F";
   }
 
   function syncUnitToggle() {
