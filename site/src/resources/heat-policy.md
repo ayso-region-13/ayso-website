@@ -12,17 +12,19 @@ AYSO Region 13 follows California Interscholastic Federation (CIF) heat acclimat
 
 Wet Bulb Globe Temperature is a heat-stress measure that combines air temperature, humidity, wind, and solar radiation. It reflects how the human body actually experiences heat during outdoor exertion, which is why CIF and most major youth-sports organizations use it instead of plain air temperature.
 
-WBGT is always lower than air temperature in dry conditions and approaches air temperature in humid conditions. A WBGT of 85°F is roughly equivalent to a hot, sunny, humid afternoon, meaningfully more dangerous than a 90°F dry, breezy one.
+WBGT is always lower than air temperature in dry conditions and approaches air temperature in humid conditions. A WBGT of <span class="js-degf" data-f="85" data-u>85°F</span> is roughly equivalent to a hot, sunny, humid afternoon, meaningfully more dangerous than a <span class="js-degf" data-f="90" data-u>90°F</span> dry, breezy one.
 
 ## Alert levels
 
-| Level | WBGT (°F) | Required action |
+| Level | WBGT (<span id="wbgt-unit">°F</span>) | Required action |
 |:-----:|:----------|:----------------|
-| **1** | ≤ 79.7    | Normal activities. Provide ample water and unrestricted breaks. |
-| **2** | 79.8 – 84.6 | Frequent water breaks, every 30 minutes minimum. Watch carefully for heat illness. |
-| **3** | 84.7 – 87.5 | Maximum 2 hours of practice. Four 4-minute water breaks per hour. Lighter clothing. |
-| **4** | 87.6 – 89.7 | **Practice:** maximum 1 hour, four 4-minute water breaks per hour, no equipment.<br>**Games:** length reduced by one-third, with additional water breaks at the 1/8 marks. |
-| **5** | > 89.7    | **All outdoor activity suspended.** Practices and games are canceled. Region 13 closes fields until conditions cool. |
+| **1** | ≤ <span class="js-degf" data-f="79.7">79.7</span>    | Normal activities. Provide ample water and unrestricted breaks. |
+| **2** | <span class="js-degf" data-f="79.8">79.8</span> – <span class="js-degf" data-f="84.6">84.6</span> | Frequent water breaks, every 30 minutes minimum. Watch carefully for heat illness. |
+| **3** | <span class="js-degf" data-f="84.7">84.7</span> – <span class="js-degf" data-f="87.5">87.5</span> | Maximum 2 hours of practice. Four 4-minute water breaks per hour. Lighter clothing. |
+| **4** | <span class="js-degf" data-f="87.6">87.6</span> – <span class="js-degf" data-f="89.7">89.7</span> | **Practice:** maximum 1 hour, four 4-minute water breaks per hour, no equipment.<br>**Games:** length reduced by one-third, with additional water breaks at the 1/8 marks. |
+| **5** | > <span class="js-degf" data-f="89.7">89.7</span>    | **All outdoor activity suspended.** Practices and games are canceled. Region 13 closes fields until conditions cool. |
+
+<p class="not-prose text-sm mt-2"><a href="#" id="unit-toggle" class="text-brand-red-dark underline">Switch to °C</a></p>
 
 ## How we make the call
 
@@ -48,5 +50,48 @@ These thresholds and required actions follow the California Interscholastic Fede
 - [Rain Policy](/resources/rain-policy/): wet-field closure thresholds
 - [Air Quality Policy](/resources/air-quality-policy/): EPA AQI thresholds and required actions
 - [Safety](/resources/safety/): concussion, sudden cardiac arrest, incident reporting
+
+<script>
+(function () {
+  // Honor the °F/°C preference shared with /resources/weather/ and /temp
+  // (localStorage "tempUnit", default °F). The WBGT thresholds in the table
+  // are stored in °F on data-f; we convert for display only. The link below
+  // the table flips the preference for the whole site. WBGT thresholds are
+  // CIF values precise to 0.1°F, so we show one decimal in °C (integer
+  // rounding would collapse adjacent rows onto the same boundary number).
+  function unit() {
+    try { return localStorage.getItem("tempUnit") === "C" ? "C" : "F"; }
+    catch (_) { return "F"; }
+  }
+  function fmtC(f) { return String(Math.round((f - 32) * 5 / 9 * 10) / 10); }
+
+  function apply() {
+    var u = unit();
+    var els = document.querySelectorAll(".js-degf");
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      var f = parseFloat(el.getAttribute("data-f"));
+      if (isNaN(f)) continue;
+      var num = u === "C" ? fmtC(f) : el.getAttribute("data-f");
+      el.textContent = num + (el.hasAttribute("data-u") ? (u === "C" ? "°C" : "°F") : "");
+    }
+    var hdr = document.getElementById("wbgt-unit");
+    if (hdr) hdr.textContent = u === "C" ? "°C" : "°F";
+    var link = document.getElementById("unit-toggle");
+    if (link) link.textContent = u === "C" ? "Switch to °F" : "Switch to °C";
+  }
+
+  var link = document.getElementById("unit-toggle");
+  if (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      var next = unit() === "C" ? "F" : "C";
+      try { localStorage.setItem("tempUnit", next); } catch (_) {}
+      apply();
+    });
+  }
+  apply();
+})();
+</script>
 
 *Last updated: [DATE]*

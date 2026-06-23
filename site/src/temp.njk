@@ -128,6 +128,8 @@ eleventyExcludeFromCollections: true
     color: #888;
     margin-top: 1rem;
   }
+  .unit-toggle { margin-top: 0.6rem; font-size: 0.8rem; }
+  .unit-toggle a { color: #8e2929; text-decoration: underline; cursor: pointer; }
   .err {
     padding: 1rem;
     background: #ede8e2;
@@ -181,17 +183,18 @@ eleventyExcludeFromCollections: true
   <div class="stat">
     <div class="label">Temperature</div>
     <div class="value-row">
-      <span class="value"><span id="temp">—</span>°F</span>
+      <span class="value"><span id="temp">—</span></span>
     </div>
     <div class="secondary">
-      Feels like <span id="feels">—</span>°F · Humidity <span id="humidity">—</span>%
+      Feels like <span id="feels">—</span> · Humidity <span id="humidity">—</span>%
     </div>
+    <div class="unit-toggle"><a href="#" id="unit-toggle">Switch to °C</a></div>
   </div>
 
   <div class="stat">
     <div class="label">WBGT</div>
     <div class="value-row">
-      <span class="value"><span id="wbgt">—</span>°F</span>
+      <span class="value"><span id="wbgt">—</span></span>
     </div>
     <div class="secondary">
       <span id="cif-label">—</span>
@@ -232,6 +235,39 @@ eleventyExcludeFromCollections: true
   function show(id) { var el = $(id); if (el) el.hidden = false; }
   function hide(id) { var el = $(id); if (el) el.hidden = true; }
 
+  // Temperature unit (°F default; user can switch to °C, persisted in
+  // localStorage and shared with /resources/weather/). API always sends °F;
+  // we convert for display only. Toggling re-renders cached data — no re-fetch.
+  var TEMP_UNIT = (function () {
+    try { return localStorage.getItem("tempUnit") === "C" ? "C" : "F"; }
+    catch (_) { return "F"; }
+  })();
+  var lastData = null;
+
+  function fmtTemp(f) {
+    if (f == null || f === "" || isNaN(Number(f))) return "—";
+    var n = Number(f);
+    return TEMP_UNIT === "C" ? (Math.round((n - 32) * 5 / 9 * 10) / 10) + "°C" : f + "°F";
+  }
+
+  function syncUnitToggle() {
+    var t = $("unit-toggle");
+    if (t) t.textContent = TEMP_UNIT === "C" ? "Switch to °F" : "Switch to °C";
+  }
+
+  function bindUnitToggle() {
+    var t = $("unit-toggle");
+    if (!t) return;
+    t.addEventListener("click", function (e) {
+      e.preventDefault();
+      TEMP_UNIT = TEMP_UNIT === "C" ? "F" : "C";
+      try { localStorage.setItem("tempUnit", TEMP_UNIT); } catch (_) {}
+      syncUnitToggle();
+      if (lastData) render(lastData);
+    });
+    syncUnitToggle();
+  }
+
   function formatUpdated(iso) {
     if (!iso) return "—";
     try {
@@ -267,39 +303,44 @@ eleventyExcludeFromCollections: true
     return 6;
   }
 
+  function render(data) {
+    lastData = data;
+    var c = data.current || {};
+    var w = data.wbgt || {};
+    var a = data.airQuality || {};
+    setText("temp", fmtTemp(c.tempF));
+    setText("feels", fmtTemp(c.feelsLikeF));
+    setText("humidity", c.humidity);
+    setText("wbgt", fmtTemp(w.valueF));
+    setText("cif-label", w.levelLabel);
+    setText("cif-level", w.level);
+
+    if (w.level) {
+      var pill = $("cif-pill");
+      pill.classList.add("pill-" + w.level);
+      pill.hidden = false;
+    }
+
+    setText("aqi", a.aqi);
+    setText("aqi-category", a.category);
+    setText("aqi-pollutant", a.dominantPollutant);
+    var band = aqiBand(a.aqi);
+    if (band) {
+      var apill = $("aqi-pill");
+      // Reuse existing pill-1..pill-5 colors; band 6 maps to closed-tier red.
+      apill.classList.add("pill-" + Math.min(band, 5));
+      apill.hidden = false;
+    }
+
+    setText("updated", formatUpdated(c.stationTimestamp || data.fetchedAt));
+    setText("aqi-updated", formatAqiObserved(a.observedAt));
+  }
+
+  bindUnitToggle();
+
   fetch("/api/weather", { cache: "no-cache" })
     .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function (data) {
-      var c = data.current || {};
-      var w = data.wbgt || {};
-      var a = data.airQuality || {};
-      setText("temp", c.tempF);
-      setText("feels", c.feelsLikeF);
-      setText("humidity", c.humidity);
-      setText("wbgt", w.valueF);
-      setText("cif-label", w.levelLabel);
-      setText("cif-level", w.level);
-
-      if (w.level) {
-        var pill = $("cif-pill");
-        pill.classList.add("pill-" + w.level);
-        pill.hidden = false;
-      }
-
-      setText("aqi", a.aqi);
-      setText("aqi-category", a.category);
-      setText("aqi-pollutant", a.dominantPollutant);
-      var band = aqiBand(a.aqi);
-      if (band) {
-        var apill = $("aqi-pill");
-        // Reuse existing pill-1..pill-5 colors; band 6 maps to closed-tier red.
-        apill.classList.add("pill-" + Math.min(band, 5));
-        apill.hidden = false;
-      }
-
-      setText("updated", formatUpdated(c.stationTimestamp || data.fetchedAt));
-      setText("aqi-updated", formatAqiObserved(a.observedAt));
-    })
+    .then(render)
     .catch(function () {
       // Leave the content visible with — placeholders so the layout is
       // still readable; just surface the error notice above it.
