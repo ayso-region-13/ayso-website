@@ -34,15 +34,16 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 not-prose">
   <div class="bg-brand-cream p-4">
     <p class="text-sm uppercase tracking-wider text-brand-dark mb-1">Temperature</p>
-    <p class="text-4xl font-bold text-brand-dark leading-none mb-2"><span id="temp">—</span>°F</p>
-    <p class="text-sm text-gray-700 m-0">Feels like <span id="feels-like">—</span>°F</p>
+    <p class="text-4xl font-bold text-brand-dark leading-none mb-2"><span id="temp">—</span></p>
+    <p class="text-sm text-gray-700 m-0">Feels like <span id="feels-like">—</span></p>
     <p class="text-sm text-gray-700 m-0">Humidity <span id="humidity">—</span>%</p>
     <p class="text-sm text-gray-700 m-0">Wind <span id="wind">—</span> mph</p>
     <p class="text-xs text-gray-500 mt-2 m-0">Updated <span id="updated">—</span></p>
+    <p class="text-xs mt-1 m-0"><a href="#" id="unit-toggle" class="text-brand-red-dark underline">Switch to °C</a></p>
   </div>
   <div class="bg-brand-cream p-4">
     <p class="text-sm uppercase tracking-wider text-brand-dark mb-1">WBGT, CIF Level <span id="cif-level">—</span></p>
-    <p class="text-4xl font-bold text-brand-dark leading-none mb-2"><span id="wbgt">—</span>°F</p>
+    <p class="text-4xl font-bold text-brand-dark leading-none mb-2"><span id="wbgt">—</span></p>
     <p class="text-sm font-semibold text-brand-dark mb-1" id="cif-label">—</p>
     <p class="text-xs text-gray-500 mt-2 m-0">Updated <span id="wbgt-updated">—</span></p>
     <p class="text-xs text-gray-500 mt-1 m-0"><a href="/resources/heat-policy/" class="text-brand-red-dark underline">All alert levels →</a></p>
@@ -187,6 +188,39 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
   function show(id) { var el = document.getElementById(id); if (el) el.removeAttribute("hidden"); }
   function hide(id) { var el = document.getElementById(id); if (el) el.setAttribute("hidden", ""); }
 
+  // --- Temperature unit (°F default; user can switch to °C, persisted in
+  // localStorage and shared with /temp). The API always sends °F; we convert
+  // for display only. Toggling re-renders the cached payload — no re-fetch. ---
+  var TEMP_UNIT = (function () {
+    try { return localStorage.getItem("tempUnit") === "C" ? "C" : "F"; }
+    catch (_) { return "F"; }
+  })();
+  var lastData = null;
+
+  function fmtTemp(f) {
+    if (f == null || f === "" || isNaN(Number(f))) return "—";
+    var n = Number(f);
+    return TEMP_UNIT === "C" ? Math.round((n - 32) * 5 / 9) + "°C" : f + "°F";
+  }
+
+  function syncUnitToggle() {
+    var t = document.getElementById("unit-toggle");
+    if (t) t.textContent = TEMP_UNIT === "C" ? "Switch to °F" : "Switch to °C";
+  }
+
+  function bindUnitToggle() {
+    var t = document.getElementById("unit-toggle");
+    if (!t) return;
+    t.addEventListener("click", function (e) {
+      e.preventDefault();
+      TEMP_UNIT = TEMP_UNIT === "C" ? "F" : "C";
+      try { localStorage.setItem("tempUnit", TEMP_UNIT); } catch (_) {}
+      syncUnitToggle();
+      if (lastData) render(lastData);
+    });
+    syncUnitToggle();
+  }
+
   function formatUpdated(iso) {
     if (!iso) return "—";
     try {
@@ -238,7 +272,7 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
 
       var temp = document.createElement("p");
       temp.className = "font-bold text-brand-dark text-lg leading-none mb-1";
-      temp.textContent = (p.tempF != null ? p.tempF + "°" : "—");
+      temp.textContent = fmtTemp(p.tempF);
       card.appendChild(temp);
 
       var fc = document.createElement("p");
@@ -435,6 +469,7 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
   }
 
   function render(data) {
+    lastData = data;
     var simLevel = getSimulateLevel();
     var simRain  = getSimulateRain();
     var simAqi   = getSimulateAqi();
@@ -458,12 +493,12 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
     var c = data.current || {};
     var w = data.wbgt || {};
     var a = data.airQuality || {};
-    setText("temp",       c.tempF != null ? c.tempF : "—");
-    setText("feels-like", c.feelsLikeF != null ? c.feelsLikeF : "—");
+    setText("temp",       fmtTemp(c.tempF));
+    setText("feels-like", fmtTemp(c.feelsLikeF));
     setText("humidity",   c.humidity != null ? c.humidity : "—");
     setText("wind",       c.windMph != null ? c.windMph : "—");
     setText("updated",    formatUpdated(c.stationTimestamp || data.fetchedAt));
-    setText("wbgt",       w.valueF != null ? w.valueF : "—");
+    setText("wbgt",       fmtTemp(w.valueF));
     setText("cif-level",  w.level != null ? w.level : "—");
     setText("cif-label",  w.levelLabel || "—");
     setText("wbgt-updated", formatUpdated(c.stationTimestamp || data.fetchedAt));
@@ -492,6 +527,8 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
     hide("weather-loading");
     show("weather-error");
   }
+
+  bindUnitToggle();
 
   fetch("/api/weather", { cache: "no-cache" })
     .then(function (r) { if (!r.ok) throw new Error("status " + r.status); return r.json(); })
