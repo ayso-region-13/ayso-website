@@ -169,6 +169,28 @@ module.exports = function (eleventyConfig) {
     return str.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
   });
 
+  // Convert rendered HTML to readable plain text for /llms-full.txt:
+  // drop script/style, turn block elements into line breaks, bullet list
+  // items, strip remaining tags, decode common entities, collapse blank runs.
+  eleventyConfig.addFilter("plaintext", (html) => {
+    if (!html) return "";
+    let s = String(html);
+    s = s.replace(/<(script|style)[\s\S]*?<\/\1>/gi, " ");
+    s = s.replace(/<li[^>]*>/gi, "- ");
+    s = s.replace(/<br\s*\/?>/gi, "\n");
+    s = s.replace(/<\/(h[1-6]|p|li|tr|div|section|article|ul|ol|table|blockquote|figcaption)>/gi, "\n");
+    s = s.replace(/<[^>]+>/g, "");
+    s = s
+      .replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+      .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&#x27;/gi, "'")
+      .replace(/&nbsp;/g, " ").replace(/&mdash;/g, "—").replace(/&ndash;/g, "–")
+      .replace(/&hellip;/g, "…").replace(/&deg;/g, "°").replace(/&times;/g, "×")
+      .replace(/&rsquo;/g, "’").replace(/&lsquo;/g, "‘")
+      .replace(/&ldquo;/g, "“").replace(/&rdquo;/g, "”");
+    s = s.split("\n").map((l) => l.replace(/[ \t]+/g, " ").trim()).join("\n");
+    return s.replace(/\n{3,}/g, "\n\n").trim();
+  });
+
   // Slugify a string for use in URLs
   eleventyConfig.addFilter("slug", (str) => {
     return str
@@ -351,6 +373,48 @@ module.exports = function (eleventyConfig) {
       }
       return qLower(a).localeCompare(qLower(b));
     });
+  });
+
+  // Ordered, grouped content pages for /llms-full.txt — the full-text export.
+  // Substantive content only: skips the board-minutes PDF archive, photo
+  // galleries, search, forms, noindex utility pages, and non-page outputs.
+  // Returns [{ section, label, items: [templateObjects] }] so the template
+  // can emit one block per section without Nunjucks loop-scope gymnastics.
+  eleventyConfig.addCollection("llmsContent", function (collectionApi) {
+    const LABELS = {
+      about: "About AYSO Region 13",
+      programs: "Programs & Tournaments",
+      register: "Registration",
+      schedules: "Schedules & Calendar",
+      families: "For Families",
+      coaches: "Coaches",
+      referees: "Referees",
+      managers: "Team Managers",
+      volunteers: "Volunteers",
+      resources: "Resources & Policies",
+      fields: "Fields & Locations",
+      contact: "Contact",
+    };
+    const ORDER = Object.keys(LABELS);
+    const EXCLUDE = ["/about/board-minutes/", "/resources/gallery/", "/search/", "/forms/"];
+    const pages = collectionApi.getAll().filter((item) => {
+      const url = item.url;
+      if (!url || url === "/") return false;            // home: covered by the header summary
+      if (!url.endsWith("/")) return false;             // page outputs only (skip .txt/.xml/.json)
+      if (!item.data.title) return false;
+      if (item.data.noindex) return false;              // skip /temp and other noindex pages
+      if (EXCLUDE.some((p) => url === p || url.startsWith(p))) return false;
+      return ORDER.indexOf(item.data.section) !== -1;
+    });
+    return ORDER
+      .map((section) => ({
+        section,
+        label: LABELS[section],
+        items: pages
+          .filter((p) => p.data.section === section)
+          .sort((a, b) => a.url.localeCompare(b.url)),
+      }))
+      .filter((g) => g.items.length);
   });
 
   // --- Image optimization ---

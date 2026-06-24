@@ -1,0 +1,46 @@
+---
+permalink: /llms-full.txt
+eleventyExcludeFromCollections: true
+---
+# AYSO Region 13 — Full Site Content
+
+> AYSO Region 13 is a 501(c)(3) nonprofit youth soccer organization providing volunteer-run programs for players ages 4-19 in Pasadena, Altadena, La Canada Flintridge, and surrounding communities. Founded in {{ site.founded }}. Phone: {{ site.phone }}. Address: {{ site.address }}, {{ site.city }}.
+
+This file is the full text of the content pages on ayso13.org, concatenated into one document for AI/LLM ingestion. It is generated automatically at build time, so it reflects the current live site. For a concise link index, see {{ site.url }}/llms.txt.
+
+AYSO Region 13 is affiliated with AYSO National (American Youth Soccer Organization). Core philosophies: Everyone Plays (minimum 50% playing time), Balanced Teams, Open Registration (no tryouts), Positive Coaching, Good Sportsmanship, and Player Development.
+
+## Key facts
+
+- Organization: AYSO Region 13 (American Youth Soccer Organization, Region 13)
+- Status: 501(c)(3) nonprofit, Tax ID (EIN) 95-6205398
+- Founded: {{ site.founded }}
+- Serves: Pasadena, Altadena, and La Cañada Flintridge, California
+- Email: {{ site.email }} · Phone: {{ site.phone }}
+- Address: {{ site.address }}, {{ site.city }}
+- Registration: via InLeague; Fall registration typically opens May 1
+- Fall Soccer fees: {{ fees.fall.rangeShort }} (sibling discount available); EPIC fee {{ fees.epic }}
+- Online: {{ site.url }} · Instagram @aysoregion13 · Facebook /ayso13 · AYSO National https://www.ayso.org
+
+---
+{% for group in collections.llmsContent %}
+# {{ group.label | safe }}
+{% for item in group.items %}
+## {{ item.data.title | safe }}
+URL: {{ site.url }}{{ item.url }}
+{% if item.data.description %}
+{{ item.data.description | safe }}
+{% endif %}
+{{ item.templateContent | plaintext | safe }}
+
+{% endfor %}{% endfor %}
+# Ask the Referee — Laws of the Game Q&A
+
+Answered by Steve Hawkins, AYSO Region 13 Advisor on the Laws of the Game. Source page: {{ site.url }}/referees/ask-the-referee/
+{% for q in collections.qaAnswers %}
+## {{ q.data.question | safe }}
+{{ q.templateContent | plaintext | safe }}
+{% endfor %}
+---
+
+Content may be cited with attribution to AYSO Region 13, {{ site.url }}.
