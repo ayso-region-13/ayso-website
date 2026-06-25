@@ -60,6 +60,16 @@ _(No other dated/deadline tasks open.)_
 
 ## Completed ✓
 
+### Session 36 (2026-06-23) — NWS notifier off + °F/°C toggle
+- [x] **Disabled the NWS active-alert Slack notifier by default** — too noisy in `#notify-weather`. Gated `notifyNwsAlerts` behind `NWS_ALERTS_ENABLED` (wrangler var, default `"false"`); when off the alerts fetch is skipped. Closure + rain-forecast notifiers unaffected. Re-enable by setting the var `"true"` and redeploying. Deployed (worker `a8c705de`).
+- [x] **Front-end °F/°C temperature toggle** — added to `/resources/weather/`, `/temp`, and `/resources/heat-policy/`. "Switch to °C/°F" link converts all temps on the page; choice persists in shared `localStorage` key `tempUnit` (default °F) across all three pages. Display-only (API still °F); 1-decimal °C; no Worker/API change. Promoted to prod, verified live. See CLAUDE.md "Site-wide Templates / Patterns" → °F/°C toggle.
+
+### Session 35 (2026-06-21) — PurpleAir AQI primary + 15-min throttle
+- [x] **PurpleAir replaced AirNow as the primary AQI source** — median of EPA-corrected PM2.5 across 5 curated outdoor sensors; AirNow fallback. Spec/plan in `docs/superpowers/`, pure logic unit-tested.
+- [x] **AQI fetch throttled to every 15 min** (`AQI_REFRESH_MINUTES`, `shouldRefreshAqi`, carry-forward on in-between 5-min cron ticks) to conserve PurpleAir points (~3× reduction).
+- [x] **Dropped the retired AirNow `/aq/observation/latLong/current/` endpoint** — ziplatlong-only now (ahead of its 2026-09-30 retirement).
+- [x] **Documentation trim** — CLAUDE.md cut ~38%; feature detail → worker READMEs + `docs/`, history → `claude-history.md`.
+
 ### Session 33 (2026-05-30) — Field-map editor shipped + Region Overview
 - [x] **Field-map editor live in production** — `field-maps` branch (40+ commits) merged → staging → main; worker repointed `GITHUB_BRANCH` field-maps→staging and redeployed; two promote runs green. Board members now self-serve field maps at `fields.ayso13.org`.
 - [x] **All ~24 fields migrated** from hand-made Canva/PowerPoint maps to editor-generated maps (old `![](…)` images removed per field; orphaned image files deleted).
