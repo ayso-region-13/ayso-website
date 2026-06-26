@@ -60,6 +60,11 @@ _(No other dated/deadline tasks open.)_
 
 ## Completed ✓
 
+### Session 37 (2026-06-25) — llms.txt expansion + generated llms-full.txt
+- [x] **Expanded `/llms.txt`** — added Resources & Safety (live weather/conditions, heat/rain/air-quality policies, safety) + Tournaments + a link to the full-text file.
+- [x] **Added `/llms-full.txt`** — build-generated full-text export of all substantive content pages + the 35 Ask-the-Referee Q&As (`plaintext` filter + `llmsContent` collection in `.eleventy.js`; skips board-minutes/gallery/search/forms/noindex). ~281 KB, regenerates each build. Promoted to prod.
+- [x] **Out-of-area registration routing for LLMs** — both files state Region 13 plays in person in the Pasadena area only and direct families elsewhere to AYSO's national Region Locator, so AI assistants stop sending far-away registrants to our inbox.
+
 ### Session 36 (2026-06-23) — NWS notifier off + °F/°C toggle
 - [x] **Disabled the NWS active-alert Slack notifier by default** — too noisy in `#notify-weather`. Gated `notifyNwsAlerts` behind `NWS_ALERTS_ENABLED` (wrangler var, default `"false"`); when off the alerts fetch is skipped. Closure + rain-forecast notifiers unaffected. Re-enable by setting the var `"true"` and redeploying. Deployed (worker `a8c705de`).
 - [x] **Front-end °F/°C temperature toggle** — added to `/resources/weather/`, `/temp`, and `/resources/heat-policy/`. "Switch to °C/°F" link converts all temps on the page; choice persists in shared `localStorage` key `tempUnit` (default °F) across all three pages. Display-only (API still °F); 1-decimal °C; no Worker/API change. Promoted to prod, verified live. See CLAUDE.md "Site-wide Templates / Patterns" → °F/°C toggle.

@@ -2,15 +2,6 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-06-23",
-      "name": "10U EXTRA Tryouts - MOVED to JULY 7",
-      "link": "/programs/extra/"
-    },
-    {
-      "date": "2026-06-25",
-      "name": "World Cup Viewing at the Clubhouse"
-    },
-    {
       "date": "2026-07-02",
       "name": "Region 13 Board Meeting",
       "link": "/about/leadership"
@@ -22,7 +13,7 @@
     },
     {
       "date": "2026-07-07",
-      "name": "10U EXTRA Tryouts",
+      "name": "10U EXTRA Tryouts - Gwinn Park",
       "link": "/programs/extra/"
     }
   ]
