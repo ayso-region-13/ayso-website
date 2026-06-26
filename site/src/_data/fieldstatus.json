@@ -1,5 +1,5 @@
 {
   "enabled": true,
-  "status": "Monitoring",
-  "message": "The Air Quality is very poor. Outdoor practices are discouraged."
+  "status": "Open",
+  "message": "All fields are open."
 }
