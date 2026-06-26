@@ -37,8 +37,8 @@ B10U: 11:15am–12pm
 G10U: 10:15–11am  
 B10U: 11:15am–12pm
 - ~~6/23/2026~~ **changed to 07/07/26 (location: Gwinn Park)**  
-G10U: 6:00pm-7:00pm  
-B10U: 7:00pm-8:00pm
+G10U: 5:30pm-6:30pm  
+B10U: 6:45pm-7:45pm
 
 ## [RSVP for TRYOUTS](https://ayso13.typeform.com/extratryout2026)
 
