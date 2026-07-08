@@ -2,19 +2,14 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-07-02",
-      "name": "Region 13 Board Meeting - Canceled",
-      "link": "/about/leadership"
-    },
-    {
       "date": "2026-08-29",
       "name": "Region 13 Season Kickoff Festival",
       "link": "/programs/fall-soccer"
     },
     {
-      "date": "2026-07-07",
-      "name": "10U EXTRA Tryouts - Gwinn Park",
-      "link": "/programs/extra/"
+      "date": "2026-07-09",
+      "name": "Uniqlo Street Soccer Park Opening at St Elizabeth's Church",
+      "link": "https://www.eventcreate.com/e/uniqlo-street-soccer-park"
     }
   ]
 }
