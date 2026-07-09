@@ -5,7 +5,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import {
-  closureTransition,
+  closureNotifyDecision,
   diffAlertIds,
   rainForecastDecision,
   closureReasons,
@@ -87,23 +87,104 @@ test("airAdvisory / hasUsableAqi handle null + AQI-less responses", () => {
   assert.equal(hasUsableAqi([OLD_ROW]), true);
 });
 
-test("closureTransition posts only on edges", () => {
-  // false → true = tripped
-  let d = closureTransition(false, true, ["Heat"]);
+// Closure notifier: heat hysteresis + dwell debounce.
+const CFG = { tripF: 89.7, clearF: 88.0, dwellMs: 15 * 60 * 1000 };
+const MIN = 60 * 1000;
+const fresh = { posted: false, heatActive: false, candidate: null, since: 0 };
+
+test("closureNotifyDecision: sustained heat trip posts only after the dwell", () => {
+  // t=0: crosses Level 5 → candidate starts, no post yet
+  let d = closureNotifyDecision(fresh, { wbgtF: 90.0, reasons: ["Heat"] }, 0, CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.candidate, true);
+  assert.equal(d.state.heatActive, true);
+
+  // t=10min: still within dwell → no post
+  d = closureNotifyDecision(d.state, { wbgtF: 90.1, reasons: ["Heat"] }, 10 * MIN, CFG);
+  assert.equal(d.post, false);
+
+  // t=15min: dwell satisfied → tripped
+  d = closureNotifyDecision(d.state, { wbgtF: 90.0, reasons: ["Heat"] }, 15 * MIN, CFG);
   assert.equal(d.post, true);
   assert.equal(d.kind, "tripped");
   assert.deepEqual(d.reasons, ["Heat"]);
+  assert.equal(d.state.posted, true);
+});
 
-  // true → false = cleared
-  d = closureTransition(true, false, []);
+test("closureNotifyDecision: hysteresis holds active between clearF and tripF (no flap)", () => {
+  // Already posted/active and heat active.
+  const active = { posted: true, heatActive: true, candidate: null, since: 0 };
+  // 89.0 is below the 89.7 trip but above the 88.0 clear → stays active, no clear candidate.
+  const d = closureNotifyDecision(active, { wbgtF: 89.0, reasons: [] }, 100 * MIN, CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.heatActive, true);
+  assert.equal(d.state.candidate, null); // desired still true → no pending change
+});
+
+test("closureNotifyDecision: transient one-tick spike never posts", () => {
+  // t=0: spike to Level 5 → candidate
+  let d = closureNotifyDecision(fresh, { wbgtF: 90.0, reasons: ["Heat"] }, 0, CFG);
+  assert.equal(d.post, false);
+  // t=5min: drops below clearF → heat inactive, desired=false=posted → candidate cleared, no post
+  d = closureNotifyDecision(d.state, { wbgtF: 86.0, reasons: [] }, 5 * MIN, CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.candidate, null);
+  assert.equal(d.state.posted, false);
+});
+
+test("closureNotifyDecision: clear requires dropping to clearF AND holding the dwell", () => {
+  const active = { posted: true, heatActive: true, candidate: null, since: 0 };
+  // t=0: falls to 87.5 (≤ clearF) → heat inactive, clear candidate starts
+  let d = closureNotifyDecision(active, { wbgtF: 87.5, reasons: [] }, 0, CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.candidate, false);
+  // t=15min: still low → cleared
+  d = closureNotifyDecision(d.state, { wbgtF: 87.0, reasons: [] }, 15 * MIN, CFG);
   assert.equal(d.post, true);
   assert.equal(d.kind, "cleared");
+  assert.equal(d.state.posted, false);
+});
 
-  // unchanged (both true) = no post
-  assert.equal(closureTransition(true, true, ["Heat"]).post, false);
+test("closureNotifyDecision: rain closure trips (no hysteresis) but still respects dwell", () => {
+  let d = closureNotifyDecision(fresh, { wbgtF: 70, rain: true, reasons: ["Rain"] }, 0, CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.candidate, true);
+  d = closureNotifyDecision(d.state, { wbgtF: 70, rain: true, reasons: ["Rain"] }, 15 * MIN, CFG);
+  assert.equal(d.post, true);
+  assert.equal(d.kind, "tripped");
+});
 
-  // unchanged (both false) = no post
-  assert.equal(closureTransition(false, false, []).post, false);
+test("closureNotifyDecision: missing WBGT holds the prior heat state", () => {
+  const active = { posted: true, heatActive: true, candidate: null, since: 0 };
+  const d = closureNotifyDecision(active, { wbgtF: null, reasons: [] }, 50 * MIN, CFG);
+  assert.equal(d.state.heatActive, true); // held, not flipped
+  assert.equal(d.post, false);
+});
+
+test("closureNotifyDecision: trip boundary matches the site (strictly > 89.7)", () => {
+  // Exactly 89.7 is CIF Level 4 on the site → must NOT arm heat.
+  let d = closureNotifyDecision(fresh, { wbgtF: 89.7, reasons: [] }, 0, CFG);
+  assert.equal(d.state.heatActive, false);
+  assert.equal(d.state.candidate, null); // no pending trip
+  // 89.8 is Level 5 → arms and (after dwell) trips.
+  d = closureNotifyDecision(fresh, { wbgtF: 89.8, reasons: ["Heat"] }, 0, CFG);
+  assert.equal(d.state.heatActive, true);
+  d = closureNotifyDecision(d.state, { wbgtF: 89.8, reasons: ["Heat"] }, 15 * MIN, CFG);
+  assert.equal(d.post, true);
+  assert.equal(d.kind, "tripped");
+});
+
+test("closureNotifyDecision: migrated rain closure (heatActive seeded false) clears once rain ends", () => {
+  // Simulates post-upgrade state: old {active:true} (rain-caused) → posted:true,
+  // heatActive:false. Rain has ended; WBGT sits in the 88–89.7 deadband.
+  // heatActive must stay false (not latch), so the closure clears after dwell.
+  const migrated = { posted: true, heatActive: false, candidate: null, since: 0 };
+  let d = closureNotifyDecision(migrated, { wbgtF: 89.0, rain: false, aqi: false, reasons: [] }, 0, CFG);
+  assert.equal(d.state.heatActive, false);
+  assert.equal(d.state.candidate, false); // clear pending
+  d = closureNotifyDecision(d.state, { wbgtF: 89.0, rain: false, reasons: [] }, 15 * MIN, CFG);
+  assert.equal(d.post, true);
+  assert.equal(d.kind, "cleared");
 });
 
 test("diffAlertIds computes new and ended sets", () => {
