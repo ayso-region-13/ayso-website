@@ -42,6 +42,18 @@ TEMPEST_STATION_ID = "33318"
 #   npx wrangler secret put SLACK_BOT_TOKEN   (same xoxb token as the slack-bot)
 NOTIFY_WEATHER_CHANNEL_ID = "C0BB7JJ0XRN"
 POP_FORECAST_THRESHOLD = "60"
+
+# Closure-notifier debounce (Slack #notify-weather only; the live weather page
+# and /temp still show the true instantaneous WBGT/level). Stops the notice from
+# flapping when WBGT hovers at the CIF Level 5 boundary. Heat hysteresis: the
+# closure notice TRIPS at WBGT_TRIP_F (Level 5 = 89.7°F) and only CLEARS once
+# WBGT falls to WBGT_CLEAR_F (a deadband wider than the ~±1°F WBGT noise). Any
+# change (trip or clear) must also persist CLOSURE_DWELL_MINUTES before it posts,
+# which filters transient one-tick spikes. Rain/AQI closures aren't hysteretic
+# (they don't flap) but still respect the dwell.
+WBGT_TRIP_F = "89.7"
+WBGT_CLEAR_F = "88.0"
+CLOSURE_DWELL_MINUTES = "15"
 # NWS active-alert Slack notifier — opt-in, OFF by default (too noisy in
 # #notify-weather). Set to "true" to resume new/ended-alert posts. The closure
 # and rain-forecast notifiers are unaffected.

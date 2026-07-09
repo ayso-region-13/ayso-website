@@ -169,7 +169,7 @@ async function refresh(env) {
 //   2. notifyNwsAlerts     — new / ended NWS active alerts (dedup by id)
 //   3. notifyRainForecast  — heads-up when forecast PoP crosses a threshold
 //
-// The decision logic for each is a PURE function (closureTransition,
+// The decision logic for each is a PURE function (closureNotifyDecision,
 // diffAlertIds, rainForecastDecision) exported at the bottom for unit
 // tests; the functions here are the thin IO shells around them.
 
@@ -224,11 +224,35 @@ function closureReasons(payload) {
 }
 
 async function notifyClosure(env, payload) {
-  const prev = await env.WEATHER_KV.get("notify:closure", { type: "json" });
-  const prevActive = !!(prev && prev.active);
-  const nowActive = !!payload.closureRecommended;
-  const reasons = closureReasons(payload);
-  const decision = closureTransition(prevActive, nowActive, reasons);
+  const raw = (await env.WEATHER_KV.get("notify:closure", { type: "json" })) || {};
+  // Back-compat: old state was just { active: bool }. Carry `active` forward as
+  // `posted`, but do NOT seed `heatActive` from it — the old flag could have
+  // been set by a rain/AQI closure, and latching heatActive true from that
+  // (then holding it through a WBGT gap) would suppress the eventual "cleared"
+  // post. Seed heatActive false and let the first tick recompute it from the
+  // live WBGT (a genuine Level 5 re-arms it immediately; otherwise it clears).
+  const state = {
+    posted: raw.posted ?? raw.active ?? false,
+    heatActive: raw.heatActive ?? false,
+    candidate: raw.candidate,
+    since: raw.since || 0,
+  };
+  const input = {
+    wbgtF: payload.wbgt && typeof payload.wbgt.valueF === "number" ? payload.wbgt.valueF : null,
+    rain: !!(payload.rain && payload.rain.closureRecommended),
+    aqi: !!(payload.airQuality && payload.airQuality.closureRecommended),
+    reasons: closureReasons(payload),
+  };
+  const cfg = {
+    tripF: parseFloat(env.WBGT_TRIP_F || "89.7"),
+    clearF: parseFloat(env.WBGT_CLEAR_F || "88.0"),
+    dwellMs: parseInt(env.CLOSURE_DWELL_MINUTES || "15", 10) * 60 * 1000,
+  };
+  const decision = closureNotifyDecision(state, input, Date.now(), cfg);
+  const reasons = decision.reasons;
+  // Always persist the updated state (heat hysteresis + dwell timer advance),
+  // even on ticks that don't post.
+  await env.WEATHER_KV.put("notify:closure", JSON.stringify(decision.state));
   if (!decision.post) return;
 
   if (decision.kind === "tripped") {
@@ -243,7 +267,6 @@ async function notifyClosure(env, payload) {
       { type: "context", elements: [{ type: "mrkdwn", text: "<https://www.ayso13.org/resources/weather/|Weather & field conditions>" }] },
     ], "Conditions back below the closure threshold");
   }
-  await env.WEATHER_KV.put("notify:closure", JSON.stringify({ active: nowActive }));
 }
 
 async function notifyNwsAlerts(env) {
@@ -323,10 +346,59 @@ async function notifyRainForecast(env, payload) {
 //   false→true → {post:true, kind:"tripped"}
 //   true→false → {post:true, kind:"cleared"}
 //   unchanged  → {post:false}
-function closureTransition(prevActive, nowActive, reasons) {
-  if (nowActive && !prevActive) return { post: true, kind: "tripped", reasons: reasons || [] };
-  if (!nowActive && prevActive) return { post: true, kind: "cleared", reasons: [] };
-  return { post: false, kind: null, reasons: [] };
+// Debounced closure-notifier decision (Slack only). Two mechanisms stop the
+// notice flapping when WBGT sits at the CIF Level 5 boundary:
+//   1. Hysteresis on heat — once the heat closure is active it stays active
+//      until WBGT drops to cfg.clearF (a deadband below the trip point), so a
+//      reading bouncing 89.6↔89.8 doesn't clear-and-re-trip. Rain/AQI don't
+//      flap, so they pass through un-hysteresed.
+//   2. Dwell — any change to the combined state must persist cfg.dwellMs
+//      before it's announced, filtering transient one-tick spikes.
+// Pure + unit-tested. `state` carries { posted, heatActive, candidate, since }.
+// `input` = { wbgtF|null, rain, aqi, reasons }. Returns { post, kind, reasons, state }.
+function closureNotifyDecision(state, input, nowMs, cfg) {
+  const s = {
+    posted: !!state.posted,
+    heatActive: !!state.heatActive,
+    candidate: state.candidate === true || state.candidate === false ? state.candidate : null,
+    since: state.since || 0,
+  };
+
+  // Heat hysteresis.
+  // - Missing WBGT: hold the prior heat state rather than flipping on a data
+  //   gap. This is a deliberate fail-safe — while the sensor is blind we keep a
+  //   posted heat closure up rather than declaring "all clear" on no data. A
+  //   prolonged outage therefore holds the closure until valid WBGT returns; we
+  //   accept that over the alternative (a premature all-clear during a blackout).
+  // - Trip uses strict `> tripF` to match the site's closure flag, which is
+  //   `cif.level >= 5` and cifLevel() puts exactly 89.7°F in Level 4 (`<= max`),
+  //   so Level 5 is strictly `> 89.7`. Using `>=` here would post a closure at
+  //   89.7 while the live page still reads Level 4.
+  // - Clear only once WBGT falls to `<= clearF` (the deadband below the trip),
+  //   so a reading bouncing at the boundary can't clear-and-re-trip.
+  let heatActive;
+  if (typeof input.wbgtF !== "number") heatActive = s.heatActive;
+  else if (s.heatActive) heatActive = input.wbgtF > cfg.clearF;
+  else heatActive = input.wbgtF > cfg.tripF;
+
+  const desired = heatActive || !!input.rain || !!input.aqi;
+  const idle = { posted: s.posted, heatActive, candidate: null, since: 0 };
+
+  // No pending change → sync heat state, clear any candidate, don't post.
+  if (desired === s.posted) return { post: false, kind: null, reasons: [], state: idle };
+
+  // A change is pending. Start (or restart) the dwell timer for a new candidate.
+  if (s.candidate !== desired) {
+    return { post: false, kind: null, reasons: [], state: { posted: s.posted, heatActive, candidate: desired, since: nowMs } };
+  }
+
+  // Candidate unchanged — has it held long enough?
+  if (nowMs - s.since >= cfg.dwellMs) {
+    const kind = desired ? "tripped" : "cleared";
+    return { post: true, kind, reasons: desired ? input.reasons || [] : [], state: { posted: desired, heatActive, candidate: null, since: 0 } };
+  }
+  // Still waiting out the dwell.
+  return { post: false, kind: null, reasons: [], state: { posted: s.posted, heatActive, candidate: desired, since: s.since } };
 }
 
 // Set difference over alert id lists.
@@ -954,4 +1026,4 @@ function jsonError(status, message) {
 
 // Named exports for unit tests (Node). The Worker runtime uses the default
 // export above and ignores these.
-export { closureTransition, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory, shouldRefreshAqi };
+export { closureNotifyDecision, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory, shouldRefreshAqi };
