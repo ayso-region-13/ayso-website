@@ -66,6 +66,11 @@ _(No other dated/deadline tasks open.)_
 
 ## Completed ✓
 
+### Session 38 (2026-07-05 → 07-09) — closure-notice debounce + out-of-area re-check
+- [x] **Debounced the weather closure Slack notice** — stopped the boundary flapping. New pure `closureNotifyDecision`: heat hysteresis (trip WBGT `>89.7`, clear `<=88.0`) + 15-min dwell; Slack-only; missing-WBGT fail-safe hold; migrates old `{active}` KV. Vars `WBGT_TRIP_F`/`WBGT_CLEAR_F`/`CLOSURE_DWELL_MINUTES`. High-effort code review run; 2 real findings fixed, 2 accepted by-design; 32/32 tests. Deployed (`923e96c6`) + promoted.
+- [x] **Out-of-area flow re-check (2026-07-05)** — see the recorded findings in "Scheduled follow-ups" above; durable `site/scripts/ga4-outofarea.py`. Optional CTA-strengthening follow-up remains (low priority).
+- [x] **CSP FB/DoubleClick verification** — confirmed not loaded by our source; recurring SITE-HEALTH blocks are GA4 Google Signals + extension injection, correctly blocked. Memory `project_csp_fb_doubleclick_not_ours`.
+
 ### Session 37 (2026-06-25) — llms.txt expansion + generated llms-full.txt
 - [x] **Expanded `/llms.txt`** — added Resources & Safety (live weather/conditions, heat/rain/air-quality policies, safety) + Tournaments + a link to the full-text file.
 - [x] **Added `/llms-full.txt`** — build-generated full-text export of all substantive content pages + the 35 Ask-the-Referee Q&As (`plaintext` filter + `llmsContent` collection in `.eleventy.js`; skips board-minutes/gallery/search/forms/noindex). ~281 KB, regenerates each build. Promoted to prod.
