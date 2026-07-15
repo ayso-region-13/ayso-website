@@ -9,6 +9,7 @@ import {
   diffAlertIds,
   rainForecastDecision,
   closureReasons,
+  closureTrippedCard,
   normalizeAirNow,
   airAdvisory,
   hasUsableAqi,
@@ -185,6 +186,18 @@ test("closureNotifyDecision: migrated rain closure (heatActive seeded false) cle
   d = closureNotifyDecision(d.state, { wbgtF: 89.0, rain: false, reasons: [] }, 15 * MIN, CFG);
   assert.equal(d.post, true);
   assert.equal(d.kind, "cleared");
+});
+
+test("closureTrippedCard renders the reason bullets + fallback", () => {
+  const card = closureTrippedCard(["Heat: WBGT 90.4°F (CIF Level 5) — outdoor activity should be suspended"]);
+  assert.match(card.blocks[0].text.text, /:warning: \*Field-closure threshold reached\*/);
+  assert.match(card.blocks[0].text.text, /• Heat: WBGT 90\.4°F \(CIF Level 5\)/);
+  assert.match(card.text, /Field-closure threshold reached: Heat: WBGT 90\.4/);
+
+  // empty reasons → generic fallback bullet (never a bare header)
+  const fallback = closureTrippedCard([]);
+  assert.match(fallback.blocks[0].text.text, /• Weather closure threshold reached/);
+  assert.equal(fallback.text, "Field-closure threshold reached: weather");
 });
 
 test("diffAlertIds computes new and ended sets", () => {
