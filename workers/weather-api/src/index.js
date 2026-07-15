@@ -209,10 +209,25 @@ async function postSlack(env, blocks, text) {
 }
 
 // Build the human-readable reason list behind a closure recommendation.
-function closureReasons(payload) {
+// `heatActive` (optional) is the notifier's hysteresis-latched heat flag: when
+// supplied it decides the heat line instead of the raw live CIF level. This
+// matters because the notifier keeps a heat closure active across the 88–89.7°F
+// deadband (CIF Level 4 territory) — without it, a closure that tripped on heat
+// but whose WBGT dipped into that band before the notice posted would produce
+// an empty list and fall through to a generic "threshold reached" bullet.
+function closureReasons(payload, heatActive) {
   const reasons = [];
-  if (payload.wbgt && payload.wbgt.level >= 5) {
-    reasons.push("Heat: WBGT at CIF Level 5 — outdoor activity should be suspended");
+  const wbgt = payload.wbgt || {};
+  const level = typeof wbgt.level === "number" ? wbgt.level : null;
+  const heat = heatActive != null ? heatActive : (level != null && level >= 5);
+  if (heat) {
+    const value = typeof wbgt.valueF === "number"
+      ? `WBGT ${wbgt.valueF}°F`
+      : "WBGT";
+    // Only claim "CIF Level 5" when the live reading actually reads Level 5;
+    // in the hysteresis deadband the value is honest but the level label isn't.
+    const suffix = level != null && level >= 5 ? " (CIF Level 5)" : "";
+    reasons.push(`Heat: ${value}${suffix} — outdoor activity should be suspended`);
   }
   if (payload.rain && payload.rain.closureRecommended && payload.rain.reason) {
     reasons.push("Rain: " + payload.rain.reason);
@@ -241,7 +256,6 @@ async function notifyClosure(env, payload) {
     wbgtF: payload.wbgt && typeof payload.wbgt.valueF === "number" ? payload.wbgt.valueF : null,
     rain: !!(payload.rain && payload.rain.closureRecommended),
     aqi: !!(payload.airQuality && payload.airQuality.closureRecommended),
-    reasons: closureReasons(payload),
   };
   const cfg = {
     tripF: parseFloat(env.WBGT_TRIP_F || "89.7"),
@@ -249,13 +263,16 @@ async function notifyClosure(env, payload) {
     dwellMs: parseInt(env.CLOSURE_DWELL_MINUTES || "15", 10) * 60 * 1000,
   };
   const decision = closureNotifyDecision(state, input, Date.now(), cfg);
-  const reasons = decision.reasons;
   // Always persist the updated state (heat hysteresis + dwell timer advance),
   // even on ticks that don't post.
   await env.WEATHER_KV.put("notify:closure", JSON.stringify(decision.state));
   if (!decision.post) return;
 
   if (decision.kind === "tripped") {
+    // Build the reasons from the decision's hysteresis-latched heat flag (not the
+    // raw live level) so a heat closure that dipped into the 88–89.7°F deadband
+    // during the dwell still names heat instead of a generic bullet.
+    const reasons = closureReasons(payload, decision.state.heatActive);
     const bullets = reasons.length ? reasons.map((r) => "• " + r).join("\n") : "• Weather closure threshold reached";
     await postSlack(env, [
       { type: "section", text: { type: "mrkdwn", text: `:warning: *Field-closure threshold reached*\n${bullets}` } },

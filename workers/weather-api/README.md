@@ -14,7 +14,7 @@ After each cron refresh, three independent notifiers post to **#notify-weather**
 
 | Notifier | Fires when | KV state |
 |---|---|---|
-| Closure threshold | `closureRecommended` transitions false→true (heat WBGT L5, rain >0.25"/48h or >1"/72h, or AQI > 150) and again true→false | `notify:closure` |
+| Closure threshold | `closureRecommended` transitions false→true (heat WBGT L5, rain >0.25"/48h or >1"/72h, or AQI > 150) and again true→false. The tripped notice names the driver(s) via `closureReasons(payload, heatActive)` — the heat line is built from the notifier's hysteresis-latched `heatActive` flag and the live WBGT °F value, so a closure that dipped into the 88–89.7°F deadband during the dwell still reads e.g. "Heat: WBGT 89.1°F — outdoor activity should be suspended" instead of a generic bullet | `notify:closure` |
 | NWS active alerts **(OFF by default)** | a new alert appears at `api.weather.gov/alerts/active?point=LAT,LON`, or a tracked one ends (dedup by alert id) | `notify:nwsAlerts` |
 | Rain forecast heads-up | any forecast period in the next ~72h has PoP ≥ `POP_FORECAST_THRESHOLD` (default 60); throttled to once per 24h per period | `notify:rainForecast` |
 

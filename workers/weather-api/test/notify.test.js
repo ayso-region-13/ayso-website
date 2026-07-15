@@ -246,20 +246,42 @@ test("rainForecastDecision only scans the next ~72h (6 periods)", () => {
   assert.equal(rainForecastDecision(periods, null, 60, 0).post, false);
 });
 
-test("closureReasons assembles the active reasons", () => {
+test("closureReasons assembles the active reasons (with live WBGT value)", () => {
   const payload = {
-    wbgt: { level: 5 },
+    wbgt: { level: 5, valueF: 90.4 },
     rain: { closureRecommended: true, reason: "Heavy rain in past 48 hours (1.2\")" },
     airQuality: { closureRecommended: false, reason: null },
   };
   const reasons = closureReasons(payload);
   assert.equal(reasons.length, 2);
-  assert.match(reasons[0], /Heat: WBGT at CIF Level 5/);
+  assert.match(reasons[0], /Heat: WBGT 90\.4°F \(CIF Level 5\)/);
   assert.match(reasons[1], /Rain: Heavy rain/);
 
   // none active → empty
   assert.deepEqual(
     closureReasons({ wbgt: { level: 2 }, rain: { closureRecommended: false }, airQuality: { closureRecommended: false } }),
+    []
+  );
+});
+
+test("closureReasons names heat from the hysteresis flag when WBGT dipped into the deadband", () => {
+  // The closure tripped on heat, but the live WBGT has fallen to 89.0°F — CIF
+  // Level 4, inside the 88–89.7 deadband. Passing heatActive=true (the notifier's
+  // latched state) must still produce a heat reason (not an empty list), and must
+  // NOT falsely claim "CIF Level 5" since the live reading is Level 4.
+  const payload = {
+    wbgt: { level: 4, valueF: 89.1 },
+    rain: { closureRecommended: false },
+    airQuality: { closureRecommended: false },
+  };
+  const reasons = closureReasons(payload, true);
+  assert.equal(reasons.length, 1);
+  assert.match(reasons[0], /Heat: WBGT 89\.1°F — outdoor activity should be suspended/);
+  assert.doesNotMatch(reasons[0], /CIF Level 5/);
+
+  // heatActive=false overrides a raw Level 5 → no heat reason.
+  assert.deepEqual(
+    closureReasons({ wbgt: { level: 5, valueF: 90.0 }, rain: { closureRecommended: false }, airQuality: { closureRecommended: false } }, false),
     []
   );
 });
