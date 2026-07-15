@@ -177,6 +177,8 @@ Use the canonical **`ayso13-worker-deploy`** token (Workers Scripts:Edit + **Wor
 
 A POST to `/api/weather` with header `X-Selftest-Key: <WEATHER_SELFTEST_KEY>` posts a test card to `#notify-weather` via the real `postSlack` (GET unaffected; wrong key → 403). Exposed to the board as **`/ayso test-weather`** (the slack-bot calls it and reports the result). The board also has **`/ayso weather`** for an ephemeral current-conditions readout.
 
+The self-test card also **previews the exact closure wording**: below the connectivity line it renders the real `closureTrippedCard(closureReasons(livePayload, /*heatActive*/ true))` — the identical function `notifyClosure` uses for a live closure — with heat forced on so the live WBGT value shows even when conditions are calm. It's clearly labeled `:test_tube: Sample closure card (TEST — not a real closure)`. This lets the board verify the closure message renders correctly without waiting for real heat. (Sharing the `closureTrippedCard` renderer means the preview can never drift from the real notice.)
+
 ## Logs
 
 ```bash

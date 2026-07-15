@@ -47,8 +47,17 @@ export default {
       if (!env.WEATHER_SELFTEST_KEY || key !== env.WEATHER_SELFTEST_KEY) {
         return jsonError(403, "forbidden");
       }
+      // Also render the REAL closure card against the live payload so the
+      // self-test previews the exact wording a closure would post. Heat is
+      // forced on (heatActive=true) so the live WBGT value shows even when
+      // conditions are calm; the card is clearly labeled a drill.
+      const livePayload = (await env.WEATHER_KV.get(KV_KEY, { type: "json" })) || {};
+      const sample = closureTrippedCard(closureReasons(livePayload, true));
       const data = await postSlack(env, [
         { type: "section", text: { type: "mrkdwn", text: ":satellite: *Weather notifications test* — confirms the weather Worker can post here. Real closure / NWS-alert / rain-forecast notices arrive in this channel automatically." } },
+        { type: "divider" },
+        { type: "context", elements: [{ type: "mrkdwn", text: ":test_tube: *Sample closure card (TEST — not a real closure)* — this is the exact wording a heat closure would post:" }] },
+        ...sample.blocks,
       ], "Weather notifications connectivity test");
       return new Response(JSON.stringify({ ok: !!(data && data.ok), slack: data }), {
         status: data && data.ok ? 200 : 502,
@@ -238,6 +247,20 @@ function closureReasons(payload, heatActive) {
   return reasons;
 }
 
+// Render the "field-closure threshold reached" Slack card from a reason list.
+// Shared by notifyClosure (the real notice) and the self-test's sample preview
+// so the two can never drift in wording.
+function closureTrippedCard(reasons) {
+  const bullets = reasons.length ? reasons.map((r) => "• " + r).join("\n") : "• Weather closure threshold reached";
+  return {
+    blocks: [
+      { type: "section", text: { type: "mrkdwn", text: `:warning: *Field-closure threshold reached*\n${bullets}` } },
+      { type: "context", elements: [{ type: "mrkdwn", text: "Use `/ayso field` to set field status · <https://www.ayso13.org/resources/weather/|Weather & field conditions>" }] },
+    ],
+    text: `Field-closure threshold reached: ${reasons.join("; ") || "weather"}`,
+  };
+}
+
 async function notifyClosure(env, payload) {
   const raw = (await env.WEATHER_KV.get("notify:closure", { type: "json" })) || {};
   // Back-compat: old state was just { active: bool }. Carry `active` forward as
@@ -273,11 +296,8 @@ async function notifyClosure(env, payload) {
     // raw live level) so a heat closure that dipped into the 88–89.7°F deadband
     // during the dwell still names heat instead of a generic bullet.
     const reasons = closureReasons(payload, decision.state.heatActive);
-    const bullets = reasons.length ? reasons.map((r) => "• " + r).join("\n") : "• Weather closure threshold reached";
-    await postSlack(env, [
-      { type: "section", text: { type: "mrkdwn", text: `:warning: *Field-closure threshold reached*\n${bullets}` } },
-      { type: "context", elements: [{ type: "mrkdwn", text: "Use `/ayso field` to set field status · <https://www.ayso13.org/resources/weather/|Weather & field conditions>" }] },
-    ], `Field-closure threshold reached: ${reasons.join("; ") || "weather"}`);
+    const { blocks, text } = closureTrippedCard(reasons);
+    await postSlack(env, blocks, text);
   } else {
     await postSlack(env, [
       { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Conditions are back below the closure threshold.* No weather-driven closure is recommended right now." } },
@@ -1043,4 +1063,4 @@ function jsonError(status, message) {
 
 // Named exports for unit tests (Node). The Worker runtime uses the default
 // export above and ignores these.
-export { closureNotifyDecision, diffAlertIds, rainForecastDecision, closureReasons, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory, shouldRefreshAqi };
+export { closureNotifyDecision, diffAlertIds, rainForecastDecision, closureReasons, closureTrippedCard, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory, shouldRefreshAqi };
