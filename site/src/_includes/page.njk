@@ -90,10 +90,9 @@ layout: base.njk
       </div>
       {% endif %}
 
-      {# Field Maps — auto-rendered from site/src/_data/fieldmaps/<slug>.json,
-         which is produced by the field-map editor tool (workers/field-maps/).
-         Eleventy namespaces that directory as the `fieldmaps` global, keyed by
-         filename, so fieldmaps[page.fileSlug] is this field's doc. Degrades to
+      {# Field Maps — fetched at build time from the platform's public field-map
+         API (site/src/_data/fieldmaps.js -> lib/fetchFieldMaps.js), keyed by
+         venue slug, so fieldmaps[page.fileSlug] is this field's doc. Degrades to
          nothing when a field has no saved map (most, initially). Distinct
          wrapper classes keep it clear of the field-info-bottom transform. #}
       {# Maps render at the top of the article (after the TOC, before the prose),
@@ -111,7 +110,7 @@ layout: base.njk
       {% if page.url == "/fields/" and overviewMap.ready and fieldmaps.overview and fieldmaps.overview.variants and fieldmaps.overview.variants.map %}
       {% set ovm = fieldmaps.overview.variants.map %}
       <figure class="not-prose mb-6 max-w-3xl rounded-lg overflow-hidden border border-brand-cream">
-        <img src="{{ ovm.png }}" alt="{{ ovm.alt }}" sizes="(min-width: 768px) 760px, 100vw" class="w-full h-auto block">
+        {{ ovm.pictureHtml | safe }}
       </figure>
       {% endif %}
 
@@ -133,7 +132,7 @@ layout: base.njk
         <figure class="rounded-lg overflow-hidden border border-brand-cream">
           <a href="{{ v.png }}" class="gmap-lightbox block" data-gallery="fieldmaps-{{ page.fileSlug }}"
              data-title="{{ heading }}" aria-label="Enlarge {{ heading }}">
-            <img src="{{ v.png }}" alt="{{ v.alt }}" sizes="(min-width: 768px) 760px, 100vw" class="w-full h-auto block">
+            {{ v.pictureHtml | safe }}
           </a>
         </figure>
         <p class="text-xs text-brand-dark/60 mt-1">Tap to enlarge — scroll or pinch to zoom, drag to pan.</p>

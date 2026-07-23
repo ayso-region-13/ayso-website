@@ -326,9 +326,11 @@ module.exports = function (eleventyConfig) {
   // --- Collection: field complexes ---
   // Groups field pages that share a `complex` frontmatter slug (e.g. the three
   // FIS fields) so member pages can cross-link siblings and share one wayfinder.
-  // Each complex also resolves a shared wayfinder by reading the member
-  // fieldmaps JSON for the first member that has a `wayfinder` variant.
-  eleventyConfig.addCollection("complexes", function (collectionApi) {
+  // Each complex also resolves a shared wayfinder from the build-time platform
+  // fetch (fetchFieldMaps) for the first member that has a `wayfinder` variant.
+  const fetchFieldMaps = require("./src/_data/lib/fetchFieldMaps");
+  eleventyConfig.addCollection("complexes", async function (collectionApi) {
+    const fieldmaps = await fetchFieldMaps();
     const fields = collectionApi.getFilteredByGlob("src/fields/*.md");
     const map = {};
     fields.forEach((f) => {
@@ -340,13 +342,11 @@ module.exports = function (eleventyConfig) {
     });
     Object.keys(map).forEach((cx) => {
       for (const m of map[cx].members) {
-        try {
-          const doc = JSON.parse(fs.readFileSync(path.join(__dirname, "src/_data/fieldmaps", m.slug + ".json"), "utf8"));
-          if (doc.variants && doc.variants.wayfinder) {
-            map[cx].wayfinder = Object.assign({}, doc.variants.wayfinder, { hostSlug: m.slug });
-            break;
-          }
-        } catch (_) { /* member has no saved map yet */ }
+        const doc = fieldmaps[m.slug];
+        if (doc && doc.variants && doc.variants.wayfinder) {
+          map[cx].wayfinder = Object.assign({}, doc.variants.wayfinder, { hostSlug: m.slug });
+          break;
+        }
       }
     });
     return map;
@@ -441,6 +441,27 @@ module.exports = function (eleventyConfig) {
       sizes: "(min-width: 800px) 800px, 100vw",
     },
   });
+
+  // Field-map images (site/src/_data/lib/fetchFieldMaps.js) are pre-optimized
+  // at data-fetch time and marked `eleventy:ignore` so the transform above
+  // leaves them alone (it would otherwise try to re-process an already-local
+  // <img> and fail). For an <img> nested in a <picture>, eleventy-img's own
+  // ignore handling doesn't strip that marker attribute from the final
+  // output (only the bare-<img> ignore path does) -- so sweep it up here,
+  // one priority step after the image transform (which runs at -1; a plugin
+  // must run at -1 or below, since posthtml plugins run in descending
+  // priority order highest-first).
+  eleventyConfig.htmlTransformer.addPosthtmlPlugin(
+    "html",
+    () => (tree) => {
+      tree.match({ tag: "img", attrs: { "eleventy:ignore": "" } }, (node) => {
+        delete node.attrs["eleventy:ignore"];
+        return node;
+      });
+      return tree;
+    },
+    { priority: -2 }
+  );
 
   // --- Watch targets ---
   eleventyConfig.addWatchTarget("src/assets/css/style.css");
