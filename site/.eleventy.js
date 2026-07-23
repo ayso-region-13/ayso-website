@@ -326,9 +326,11 @@ module.exports = function (eleventyConfig) {
   // --- Collection: field complexes ---
   // Groups field pages that share a `complex` frontmatter slug (e.g. the three
   // FIS fields) so member pages can cross-link siblings and share one wayfinder.
-  // Each complex also resolves a shared wayfinder by reading the member
-  // fieldmaps JSON for the first member that has a `wayfinder` variant.
-  eleventyConfig.addCollection("complexes", function (collectionApi) {
+  // Each complex also resolves a shared wayfinder from the build-time platform
+  // fetch (fetchFieldMaps) for the first member that has a `wayfinder` variant.
+  const fetchFieldMaps = require("./src/_data/lib/fetchFieldMaps");
+  eleventyConfig.addCollection("complexes", async function (collectionApi) {
+    const fieldmaps = await fetchFieldMaps();
     const fields = collectionApi.getFilteredByGlob("src/fields/*.md");
     const map = {};
     fields.forEach((f) => {
@@ -340,13 +342,11 @@ module.exports = function (eleventyConfig) {
     });
     Object.keys(map).forEach((cx) => {
       for (const m of map[cx].members) {
-        try {
-          const doc = JSON.parse(fs.readFileSync(path.join(__dirname, "src/_data/fieldmaps", m.slug + ".json"), "utf8"));
-          if (doc.variants && doc.variants.wayfinder) {
-            map[cx].wayfinder = Object.assign({}, doc.variants.wayfinder, { hostSlug: m.slug });
-            break;
-          }
-        } catch (_) { /* member has no saved map yet */ }
+        const doc = fieldmaps[m.slug];
+        if (doc && doc.variants && doc.variants.wayfinder) {
+          map[cx].wayfinder = Object.assign({}, doc.variants.wayfinder, { hostSlug: m.slug });
+          break;
+        }
       }
     });
     return map;
