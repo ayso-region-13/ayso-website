@@ -1,3 +1,0 @@
-# Machine-managed: the field-map editor (workers/field-maps/) commits
-# <field-slug>.json files here. Each holds the re-editable annotation +
-# the rendered map paths that page.njk renders on the field page.
