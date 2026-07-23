@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-06-13T17:10:19.696Z
-// 632 exact rules + 9 splat rules = 641 total
+// Last generated: 2026-07-23T22:37:36.761Z
+// 633 exact rules + 9 splat rules = 642 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -2157,7 +2157,11 @@ export const EXACT = {
     "s": 301
   },
   "/wp-content/uploads/2022/07/Jefferson.jpg": {
-    "d": "/images/fields/jefferson-subfield-map.jpg",
+    "d": "https://fields.ayso13.org/field-images/jefferson-practice.png",
+    "s": 301
+  },
+  "/images/fields/jefferson-subfield-map.jpg": {
+    "d": "https://fields.ayso13.org/field-images/jefferson-practice.png",
     "s": 301
   },
   "/wp-content/uploads/2025/10/r13thanksgiving.jpg": {
