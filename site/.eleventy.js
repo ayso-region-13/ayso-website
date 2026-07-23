@@ -442,6 +442,27 @@ module.exports = function (eleventyConfig) {
     },
   });
 
+  // Field-map images (site/src/_data/lib/fetchFieldMaps.js) are pre-optimized
+  // at data-fetch time and marked `eleventy:ignore` so the transform above
+  // leaves them alone (it would otherwise try to re-process an already-local
+  // <img> and fail). For an <img> nested in a <picture>, eleventy-img's own
+  // ignore handling doesn't strip that marker attribute from the final
+  // output (only the bare-<img> ignore path does) -- so sweep it up here,
+  // one priority step after the image transform (which runs at -1; a plugin
+  // must run at -1 or below, since posthtml plugins run in descending
+  // priority order highest-first).
+  eleventyConfig.htmlTransformer.addPosthtmlPlugin(
+    "html",
+    () => (tree) => {
+      tree.match({ tag: "img", attrs: { "eleventy:ignore": "" } }, (node) => {
+        delete node.attrs["eleventy:ignore"];
+        return node;
+      });
+      return tree;
+    },
+    { priority: -2 }
+  );
+
   // --- Watch targets ---
   eleventyConfig.addWatchTarget("src/assets/css/style.css");
 
