@@ -9,7 +9,18 @@ const Image = require("@11ty/eleventy-img");
 const path = require("path");
 
 const BASE = process.env.FIELDS_API_BASE || "https://fields-staging.ayso13.org";
-const FETCH_OPTS = { duration: "1d", type: "json" };
+
+// CI builds run on GitHub Actions (Azure IPs); Cloudflare's bot protection on
+// the ayso13.org zone 403s those datacenter requests, so a build fetching the
+// platform's own public API gets "Bad response ... (403): Forbidden" even
+// though the endpoint is public. Same problem the IndexNow bot had -- the fix
+// is the same: send a distinctive User-Agent and add a Cloudflare "Skip"
+// security rule that matches it (User Agent contains "ayso13-fieldmaps").
+// Applied to BOTH the JSON fetch AND the eleventy-img image fetches (via
+// cacheOptions, since eleventy-img fetches remote images through eleventy-fetch).
+const BUILD_UA = "ayso13-fieldmaps-build";
+const FETCH_OPTS = { duration: "1d", type: "json", fetchOptions: { headers: { "User-Agent": BUILD_UA } } };
+const IMAGE_CACHE_OPTS = { fetchOptions: { headers: { "User-Agent": BUILD_UA } } };
 
 // Field-map images are optimized HERE, at data-fetch time, instead of relying
 // on the sitewide `eleventyImageTransformPlugin` (.eleventy.js). That plugin
@@ -45,6 +56,7 @@ async function optimizeVariantImage(absoluteUrl, alt) {
     formats: IMAGE_FORMATS,
     outputDir: IMAGE_OUTPUT_DIR,
     urlPath: IMAGE_URL_PATH,
+    cacheOptions: IMAGE_CACHE_OPTS,
   });
   const pngEntries = metadata.png || [];
   const pngLarge = pngEntries.length ? pngEntries[pngEntries.length - 1].url : absoluteUrl;
