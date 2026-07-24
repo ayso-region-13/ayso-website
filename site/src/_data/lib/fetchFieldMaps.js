@@ -2,13 +2,17 @@
 // Build-time fetch of the platform's public field-map API. Replaces the old
 // committed site/src/_data/fieldmaps/*.json. Cached on disk by eleventy-fetch so
 // a transient platform outage serves the last-good copy instead of failing the
-// build. Base URL is env-driven (FIELDS_API_BASE) so staging builds read
-// fields-staging and the Phase 3 cutover flips it to fields.ayso13.org.
+// build. Base URL is env-driven (FIELDS_API_BASE): the staging deploy workflow
+// sets fields-staging so unpromoted map edits can be reviewed on
+// staging.ayso13.org; promote sets the platform's prod instance.
 const EleventyFetch = require("@11ty/eleventy-fetch");
 const Image = require("@11ty/eleventy-img");
 const path = require("path");
 
-const BASE = process.env.FIELDS_API_BASE || "https://fields-staging.ayso13.org";
+// Default is the PROD platform instance, deliberately: an unset env (local
+// `npm start`, a new workflow that forgets it) should read published maps, not
+// staging's work-in-progress.
+const BASE = process.env.FIELDS_API_BASE || "https://fields.ayso13.org";
 
 // CI builds run on GitHub Actions (Azure IPs); Cloudflare's bot protection on
 // the ayso13.org zone 403s those datacenter requests, so a build fetching the
