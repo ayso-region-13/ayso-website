@@ -27,7 +27,7 @@ name: Deploy Workers
 #   CLOUDFLARE_ACCOUNT_ID — AYSO Region 13 account id
 #
 # Existing wrangler secrets on each Worker (TEMPEST_TOKEN, AIRNOW_API_KEY,
-# SLACK_BOT_TOKEN, MAPBOX_TOKEN_PUBLIC, GITHUB_TOKEN, …) are NOT touched by
+# SLACK_BOT_TOKEN, PURPLEAIR_READ_KEY, ADMIN_KEY, …) are NOT touched by
 # `wrangler deploy` — they persist across deployments.
 
 on:
