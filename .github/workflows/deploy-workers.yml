@@ -2,7 +2,7 @@ name: Deploy Workers
 
 # Auto-deploys the single-deployment Cloudflare Workers on push to main.
 #
-# These three Workers each have ONE deployment that serves both prod and
+# These two Workers each have ONE deployment that serves both prod and
 # staging via routes (no wrangler prod/staging env split). So they must
 # deploy ONLY from main — never from staging — otherwise staging worker
 # code would reach the shared deployment that also serves www.ayso13.org.
@@ -10,7 +10,12 @@ name: Deploy Workers
 #
 #   - weather-api  (KV: WEATHER_KV) — /api/weather + Slack notifiers
 #   - csp-report   (KV: CSP_REPORTS) — CSP violation collector
-#   - field-maps   — Access-gated map editor at fields.ayso13.org
+#
+# The field-maps Worker was retired 2026-07-23: the map editor moved to the
+# ayso-platform admin console (fields.ayso13.org is served from there now),
+# and this site reads the platform's public API at build time. Leaving it in
+# the deploy list failed this workflow on the promote that deleted the dir
+# ("cd: workers/field-maps: No such file or directory").
 #
 # The redirects Worker is NOT here: it has real prod/staging environments
 # and its own deploy-redirects-worker.yml that deploys on both branches.
@@ -31,7 +36,6 @@ on:
     paths:
       - 'workers/weather-api/**'
       - 'workers/csp-report/**'
-      - 'workers/field-maps/**'
       - '.github/workflows/deploy-workers.yml'
   workflow_dispatch:
     inputs:
@@ -39,7 +43,7 @@ on:
         description: 'Which worker to deploy'
         type: choice
         default: all
-        options: [all, weather-api, csp-report, field-maps]
+        options: [all, weather-api, csp-report]
 
 permissions:
   contents: read
@@ -66,14 +70,14 @@ jobs:
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             # WORKER_INPUT is a constrained choice, but validate anyway.
             case "$WORKER_INPUT" in
-              all) sel="weather-api csp-report field-maps" ;;
-              weather-api|csp-report|field-maps) sel="$WORKER_INPUT" ;;
+              all) sel="weather-api csp-report" ;;
+              weather-api|csp-report) sel="$WORKER_INPUT" ;;
               *) echo "::error::Unexpected worker input: $WORKER_INPUT"; exit 1 ;;
             esac
             echo "list=$sel" >> "$GITHUB_OUTPUT"
           else
             changed=""
-            for w in weather-api csp-report field-maps; do
+            for w in weather-api csp-report; do
               if git diff --name-only HEAD^ HEAD | grep -q "^workers/$w/"; then
                 changed="$changed $w"
               fi

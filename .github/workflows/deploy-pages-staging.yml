@@ -62,6 +62,9 @@ jobs:
           # CF Git builds auto-set this; in CI we must set it so robots.njk /
           # _headers.njk emit the staging crawl-block (Disallow + noindex).
           CF_PAGES_BRANCH: staging
+          # Staging reads the platform's staging instance, so unreleased field
+          # maps can be reviewed on staging.ayso13.org before a promote.
+          FIELDS_API_BASE: https://fields-staging.ayso13.org
         run: |
           npm ci
           npm run build

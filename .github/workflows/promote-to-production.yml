@@ -102,6 +102,9 @@ jobs:
         env:
           # Prod build: emit allow-all robots + sitemap (NOT the staging block).
           CF_PAGES_BRANCH: main
+          # Field maps come from the platform's public API at build time. Prod
+          # reads the platform's prod instance (Phase 3 cutover, 2026-07-24).
+          FIELDS_API_BASE: https://fields.ayso13.org
         run: |
           npm ci
           npm run build
