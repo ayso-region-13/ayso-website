@@ -14,3 +14,13 @@ cps*.json
 
 # auto-generated site health report
 SITE-HEALTH.md
+
+# SDD subagent workspace (scratch: ledger, briefs, review packages)
+.superpowers/
+
+# Backups of the gitignored direnv secrets file
+.envrc.bak*
+
+# Wrangler local dev secrets (never commit)
+.dev.vars
+**/.dev.vars

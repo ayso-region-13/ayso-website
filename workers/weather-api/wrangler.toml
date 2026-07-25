@@ -23,12 +23,17 @@ zone_name = "ayso13.org"
 pattern = "staging.ayso13.org/api/weather"
 zone_name = "ayso13.org"
 
-# Environment defaults — Pasadena City Hall as the NWS forecast point.
-# Override with `wrangler deploy --var FORECAST_LAT=... FORECAST_LON=...`
-# if Region 13 wants a primary-field-specific forecast.
+# Environment defaults — Victory Park, the primary 6U-12U game location,
+# as the NWS forecast point (~4.4 km east of the old Pasadena City Hall point).
+# Coordinates are Victory Park's placeLat/placeLon from site/src/fields/victory.md,
+# truncated to 4 decimal places because api.weather.gov rejects higher precision
+# with HTTP 301 "Adjusting Precision Of Point Coordinate". Four decimals resolve
+# directly to the same gridpoint (LOX/161,49); the ~12 m difference is irrelevant
+# against an NWS grid cell of roughly 2.5 km. The forecast-URL KV cache is keyed
+# by lat/lon and re-resolves automatically on coordinate changes.
 [vars]
-FORECAST_LAT = "34.1478"
-FORECAST_LON = "-118.1445"
+FORECAST_LAT = "34.1594"
+FORECAST_LON = "-118.0983"
 USER_AGENT = "(ayso13.org weather page, info@ayso13.org)"
 TEMPEST_STATION_ID = "33318"
 
@@ -73,3 +78,4 @@ PURPLEAIR_STALE_SECONDS = "3600"
 # cron, to conserve PurpleAir API points. In-between cron ticks carry forward
 # the last good reading; a failed/null reading is retried every tick.
 AQI_REFRESH_MINUTES = "15"
+
