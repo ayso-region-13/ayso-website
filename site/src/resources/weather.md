@@ -3,12 +3,12 @@
 title: "Weather and Field Conditions"
 layout: page.njk
 section: resources
-description: "Current conditions, Wet Bulb Globe Temperature (WBGT), and 7-day forecast for AYSO Region 13 fields in Pasadena. Live data from our on-site weather station."
+description: "Current conditions, Wet Bulb Globe Temperature (WBGT), and 7-day forecast for AYSO Region 13 fields in Pasadena. Live data from our Tempest weather station."
 heroImage: /images/action-04.jpg
 showFieldStatus: true
 ---
 
-Live conditions from Region 13's on-site Tempest weather station, plus the current Wet Bulb Globe Temperature (WBGT) and the corresponding California CIF heat-policy alert level. For what each level means, see the [Heat Policy](/resources/heat-policy/) page.
+Live conditions from Region 13's Tempest weather station, plus the current Wet Bulb Globe Temperature (WBGT) and the corresponding California CIF heat-policy alert level. For what each level means, see the [Heat Policy](/resources/heat-policy/) page.
 
 <div id="simulate-banner" class="bg-brand-cream border-l-4 border-brand-red-dark p-3 mb-6 not-prose" hidden></div>
 
@@ -70,11 +70,11 @@ Live conditions from Region 13's on-site Tempest weather station, plus the curre
 
 ## About this data
 
-Current conditions come from Region 13's on-site [Tempest WeatherFlow](https://weatherflow.com/tempest-home-weather-system/) station, polled every five minutes. Forecast data is from the [National Weather Service](https://www.weather.gov/) for Pasadena, California.
+Current conditions come from Region 13's [Tempest WeatherFlow](https://weatherflow.com/tempest-home-weather-system/) station, polled every five minutes. Forecast data is from the [National Weather Service](https://www.weather.gov/) for Pasadena, California.
 
 Air quality (AQI) is a median composite of nearby [PurpleAir](https://www2.purpleair.com/) sensors in Pasadena, Altadena, and La Cañada, EPA-corrected and converted to the AQI scale, refreshed every 15 minutes; if those sensors are unavailable it falls back to the EPA's [AirNow](https://www.airnow.gov/) regulatory monitors. See the [Air Quality Policy](/resources/air-quality-policy/) for details.
 
-WBGT (Wet Bulb Globe Temperature) is computed from temperature, humidity, wind speed, and solar irradiance using the Bernard 1999 simplified outdoor approximation. Variance versus the ISO 7243 reference is roughly ±1°F under typical Pasadena conditions, well within the ~5°F width of each CIF alert tier.
+WBGT (Wet Bulb Globe Temperature) combines air temperature, humidity, wind speed, and solar radiation into a single heat-stress measure. The value shown here is calculated by our Tempest weather station from its own sensor readings. Because WBGT varies with shade, surface, and microclimate, a reading from the station may differ from conditions at a specific field.
 
 The field-status bar at the top of this page is human-controlled. It reflects what Region 13 board members have set via Slack, and is the same status shown on the [home page](/). A high WBGT reading above does not automatically close fields; a board member still makes that call.
 

@@ -115,8 +115,7 @@ async function refresh(env) {
     env.WEATHER_KV.get(KV_KEY, { type: "json" }),
   ]);
 
-  const wbgt = computeWbgt(tempestObs);
-  const wbgtF = celsiusToFahrenheit(wbgt);
+  const wbgtF = celsiusToFahrenheit(tempestObs.wbgtC);
   const cif = cifLevel(wbgtF);
 
   const rainState = await updateRainState(env, tempestObs, prevRainState);
@@ -906,13 +905,23 @@ async function fetchTempest(env) {
     throw new Error("Tempest: no current observation in response");
   }
 
+  // WBGT comes from the station's own derived field. Guard it the same way as
+  // the observation itself: cifLevel(null) would return Level 1 ("normal
+  // activities") because null coerces to 0, i.e. a missing sensor would publish
+  // an all-clear. Fail loudly instead so KV keeps the last-good payload.
+  if (obs.wet_bulb_globe_temperature == null) {
+    throw new Error("Tempest: no wet_bulb_globe_temperature in response");
+  }
+
   // Tempest payload shape (selected fields, all SI units due to query):
   //   air_temperature, relative_humidity, wind_avg, wind_gust,
   //   solar_radiation, feels_like, conditions, timestamp (epoch s),
+  //   wet_bulb_globe_temperature (station-derived WBGT),
   //   precip_accum_local_day (mm since local midnight),
   //   precip_accum_local_yesterday (mm, yesterday's full-day total).
   return {
     temperatureC: obs.air_temperature,
+    wbgtC: obs.wet_bulb_globe_temperature,
     feelsLikeC: obs.feels_like ?? obs.air_temperature,
     humidity: obs.relative_humidity,
     windMs: obs.wind_avg ?? 0,
@@ -928,41 +937,14 @@ async function fetchTempest(env) {
 
 // ── WBGT ───────────────────────────────────────────────────────────────
 //
-// Bernard 1999 simplified outdoor WBGT. Inputs: air temp °C, RH %, wind
-// m/s, solar W/m². Returns WBGT °C. Variance vs. ISO 7243 reference:
-// ~1°F under typical Pasadena conditions, well within the noise of CIF
-// thresholds (each level is ~5°F wide).
-//
-//   Tw = T*atan(0.151977*sqrt(RH+8.313659))
-//        + atan(T+RH) - atan(RH-1.676331)
-//        + 0.00391838*RH^1.5*atan(0.023101*RH) - 4.686035   (Stull 2011)
-//   Tg = T + (S/(R*W^0.58)) for sun-exposed black globe (R≈37.5, simplified)
-//   WBGT_outdoor = 0.7*Tw + 0.2*Tg + 0.1*T
-
-function computeWbgt({ temperatureC: T, humidity: RH, windMs: W, solarWm2: S }) {
-  const Tw = stullWetBulb(T, RH);
-  const Tg = approxGlobeTemp(T, S, W);
-  return 0.7 * Tw + 0.2 * Tg + 0.1 * T;
-}
-
-function stullWetBulb(T, RH) {
-  return (
-    T * Math.atan(0.151977 * Math.sqrt(RH + 8.313659)) +
-    Math.atan(T + RH) -
-    Math.atan(RH - 1.676331) +
-    0.00391838 * Math.pow(RH, 1.5) * Math.atan(0.023101 * RH) -
-    4.686035
-  );
-}
-
-function approxGlobeTemp(T, S, W) {
-  // Bernard simplified: globe temp rises above air temp with solar load,
-  // moderated by wind. Floor wind to 0.1 m/s to avoid divide-by-zero on
-  // dead-calm days.
-  const wind = Math.max(W, 0.1);
-  const delta = (1.1e8 * S) / (Math.pow(wind, 0.58) * 5.67e8);
-  return T + Math.min(delta, 25); // cap delta at 25°C — sanity bound
-}
+// WBGT is read from the Tempest station's own `wet_bulb_globe_temperature`
+// field, not derived here. We previously computed it locally, but that
+// implementation clamped its globe-temperature term to a constant +25°C, and
+// the clamp bound above ~86 W/m² of solar at calm wind — every daylight hour.
+// Solar and wind therefore had no effect on the published value, which read
+// 2 to 8.5°F too hot against the station's own figure and repeatedly reported
+// CIF Level 5 ("outdoor activity suspended") where the station read Level 2-3.
+// See docs/superpowers/specs/2026-07-24-wbgt-source-design.md.
 
 // ── NWS forecast ───────────────────────────────────────────────────────
 

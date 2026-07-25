@@ -1,6 +1,6 @@
 # ayso13-weather-api
 
-Cloudflare Worker that powers the live data on `/resources/weather/`. Polls the Region 13 Tempest WeatherFlow station every 5 minutes, derives Wet Bulb Globe Temperature (WBGT) and the corresponding California CIF heat-policy alert level (1–5), pulls a 7-day forecast from NWS for Pasadena, and serves a single normalized JSON envelope at `https://www.ayso13.org/api/weather`.
+Cloudflare Worker that powers the live data on `/resources/weather/`. Polls the Region 13 Tempest WeatherFlow station every 5 minutes, reads Wet Bulb Globe Temperature (WBGT) from the station's own `wet_bulb_globe_temperature` field and derives the corresponding California CIF heat-policy alert level (1–5), pulls a 7-day forecast from NWS for Victory Park, and serves a single normalized JSON envelope at `https://www.ayso13.org/api/weather`. See [WBGT](#wbgt) for why it is read rather than derived.
 
 ## Architecture
 
@@ -10,7 +10,7 @@ Cloudflare Worker that powers the live data on `/resources/weather/`. Polls the 
 
 ## Slack notifications
 
-After each cron refresh, three independent notifiers post to **#notify-weather** via the shared AYSO Slack bot (`chat.postMessage`). Each keeps its own KV state so it posts only on a *change*, never every tick. A Slack failure is logged but can never break the weather feed (notifications run after the cache write, under `Promise.allSettled`).
+After each cron refresh, four independent notifiers post to **#notify-weather** via the shared AYSO Slack bot (`chat.postMessage`). Each keeps its own KV state so it posts only on a *change*, never every tick. A Slack failure is logged but can never break the weather feed (notifications run after the cache write, under `Promise.allSettled`).
 
 | Notifier | Fires when | KV state |
 |---|---|---|
@@ -76,8 +76,8 @@ curl -sS http://localhost:8787/api/weather | jq .
 
 | Var | Default | Purpose |
 |---|---|---|
-| `FORECAST_LAT` | `34.1478` | Latitude for NWS forecast (Pasadena City Hall) |
-| `FORECAST_LON` | `-118.1445` | Longitude for NWS forecast |
+| `FORECAST_LAT` | `34.1594` | Latitude for NWS forecast (Victory Park) |
+| `FORECAST_LON` | `-118.0983` | Longitude for NWS forecast |
 | `USER_AGENT` | `(ayso13.org weather page, info@ayso13.org)` | NWS requires a contact email per their API policy |
 | `NOTIFY_WEATHER_CHANNEL_ID` | _(placeholder)_ | Slack channel id for #notify-weather (not secret) |
 | `POP_FORECAST_THRESHOLD` | `60` | Min forecast PoP % that triggers a rain heads-up |
@@ -86,7 +86,7 @@ curl -sS http://localhost:8787/api/weather | jq .
 | `PURPLEAIR_STALE_SECONDS` | `3600` | Max age (seconds) before a PurpleAir reading is considered stale |
 | `AQI_REFRESH_MINUTES` | `15` | How often AQI is re-fetched (independent of the 5-min weather cron) |
 
-Plus the `SLACK_BOT_TOKEN` and `PURPLEAIR_READ_KEY` **secrets** (see Slack notifications and PurpleAir). If Region 13 wants the forecast pinned to a specific field's coordinates, edit the lat/lon vars and redeploy.
+Plus the `SLACK_BOT_TOKEN` and `PURPLEAIR_READ_KEY` **secrets** (see Slack notifications and PurpleAir). If Region 13 wants the forecast pinned to a specific field's coordinates, edit the lat/lon vars and redeploy — coordinates are deliberately kept to 4 decimal places (~11m precision) because `api.weather.gov` returns HTTP 301 for finer-precision points. `FORECAST_LAT`/`FORECAST_LON` moved to Victory Park, the primary 6U–12U game location, on 2026-07-24 (previously a different Pasadena point); see the spec linked under [WBGT formula](#wbgt-formula) — the move shipped alongside the WBGT change but is otherwise unrelated to it.
 
 ### PurpleAir (primary AQI)
 
@@ -151,15 +151,13 @@ npx wrangler secret put PURPLEAIR_READ_KEY   # e.g., "api_key_here"
 }
 ```
 
-## WBGT formula
+## WBGT
 
-`computeWbgt` uses the Bernard 1999 simplified outdoor approximation:
+WBGT is read from the Tempest station's own `wet_bulb_globe_temperature` field, not derived here. The station measures air temperature, humidity, wind and solar radiation and computes WBGT from its own sensors, which is the same source this Worker already trusts for every other reading it serves.
 
-- Wet-bulb temp via Stull 2011 closed-form (function of dry-bulb + RH).
-- Globe temp via the simplified Bernard formula (function of dry-bulb + solar irradiance + wind speed).
-- WBGT = 0.7·Tw + 0.2·Tg + 0.1·T
+The Worker used to derive WBGT itself (`computeWbgt` → `approxGlobeTemp`, since deleted). That implementation clamped its globe-temperature term to a constant +25°C, and the clamp bound above roughly 86 W/m² of solar at calm wind — in practice every daylight hour. So measured solar and wind had no effect on the published value, and it reduced algebraically to `0.7·Tw + 0.3·T + 5°C`: the shade formula plus a flat +9°F. Sampled live against the station's own figure across 20 observations, ours read +2.0 to +8.5°F too hot, worst as solar fell, repeatedly reporting CIF Level 5 ("outdoor activity suspended") where the station read Level 2 or 3. The wet-bulb half was fine; the globe term was the whole defect. Investigation and raw data: `docs/superpowers/specs/2026-07-24-wbgt-source-design.md`.
 
-Variance vs. ISO 7243 reference under typical Pasadena conditions is ~1°F. CIF alert levels span ~5°F so this is well within tolerance.
+If the station omits `wet_bulb_globe_temperature`, `fetchTempest` throws and KV keeps the last-good payload, the same way it already handles a missing observation. That guard matters because `cifLevel(null)` returns Level 1 (null coerces to 0), so publishing a null would announce "normal activities" when the sensor is actually down.
 
 ## Deploy
 
