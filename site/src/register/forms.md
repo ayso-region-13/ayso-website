@@ -3,7 +3,7 @@
 title: "Required Forms"
 layout: page.njk
 section: register
-description: "Volunteer registration requirements for AYSO Region 13 coaches, referees, and team managers."
+description: "Forms for AYSO Region 13 families and volunteers: concussion and sudden cardiac arrest acknowledgments, the form upload portal, reimbursement requests, and player withdrawal."
 ---
 
 Families complete required forms during registration and at the start of each season.
@@ -43,7 +43,7 @@ To withdraw from a program and request a refund (if eligible), complete the with
 
 [Withdrawal Form](https://docs.google.com/forms/d/e/1FAIpQLSfDm6c5f0ApchEegAIQdZTNWQImX_n6K3jBf11SVwaXoSqihg/viewform)
 
-See [Registration](/register) for the refund policy.
+See [Refunds and Withdrawals](/register/#refunds-and-withdrawals) for the refund schedule.
 
 ## Contact
 

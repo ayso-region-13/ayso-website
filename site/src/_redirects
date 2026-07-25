@@ -35,8 +35,12 @@
 /register/volunteer                 /volunteers/                             301
 /lc/                                /register/                               301
 /lc                                 /register/                               301
-/refund                             /register/                               301
-/refund/                            /register/                               301
+/refund                             /register/#refunds-and-withdrawals       301
+/refund/                            /register/#refunds-and-withdrawals       301
+/withdraw                           /register/#refunds-and-withdrawals       301
+/withdraw/                          /register/#refunds-and-withdrawals       301
+/withdrawal                         /register/#refunds-and-withdrawals       301
+/withdrawal/                        /register/#refunds-and-withdrawals       301
 /play/                              /families/                               301
 /play                               /families/                               301
 /pen/                               /register/                               301

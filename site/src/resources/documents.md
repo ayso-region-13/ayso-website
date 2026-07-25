@@ -41,18 +41,12 @@ See [Team Manager Resources](/managers/) — orientation, task checklist, and pi
 
 ## Financial Forms
 
-- Reimbursement request form
-- Sponsorship form
-
-[Reimbursement Request Form](https://docs.google.com/forms/d/e/1FAIpQLScn2XeFjLX0-e9dmWWLu6DeyRYUq7V-1KKLSkjmyqo2NFRQUw/viewform)
-
-[Team Sponsor Form ($250)](https://donate.stripe.com/dR6eYg9Em9oF6icfZ5)
+- [Reimbursement Request Form](https://docs.google.com/forms/d/e/1FAIpQLScn2XeFjLX0-e9dmWWLu6DeyRYUq7V-1KKLSkjmyqo2NFRQUw/viewform) — request reimbursement for approved volunteer expenses
+- [Team Sponsor Form ($250)](https://donate.stripe.com/dR6eYg9Em9oF6icfZ5) — sponsor a team for the season
 
 ## Registration
 
-- Withdrawal/refund request form
-
-[Withdrawal Form](https://docs.google.com/forms/d/e/1FAIpQLSfDm6c5f0ApchEegAIQdZTNWQImX_n6K3jBf11SVwaXoSqihg/viewform)
+- [Withdrawal Form](https://docs.google.com/forms/d/e/1FAIpQLSfDm6c5f0ApchEegAIQdZTNWQImX_n6K3jBf11SVwaXoSqihg/viewform) — withdraw a player and request a refund; see [Refunds and Withdrawals](/register/#refunds-and-withdrawals) for the refund schedule
 
 ## Contact
 
