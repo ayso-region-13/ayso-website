@@ -23,6 +23,9 @@ Sometimes, if space is available. Contact [registrar@ayso13.org](mailto:registra
 ### My child turns 5 (or 7, or 9) mid-season. What division do they play in?
 Age is determined as of July 31 of the current year. If your child turns 7 on August 15, they play in 6U (for 6-year-olds) for that season.
 
+### How do I withdraw my player and request a refund?
+Complete the [Withdrawal Form](https://docs.google.com/forms/d/e/1FAIpQLSfDm6c5f0ApchEegAIQdZTNWQImX_n6K3jBf11SVwaXoSqihg/viewform). Refund amounts depend on the date you withdraw; see [Refunds and Withdrawals](/register/#refunds-and-withdrawals) for the schedule. Questions go to [registrar@ayso13.org](mailto:registrar@ayso13.org).
+
 ## Teams and Placement
 
 ### Can my child play with their friend?

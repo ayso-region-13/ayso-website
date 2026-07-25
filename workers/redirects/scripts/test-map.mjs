@@ -31,6 +31,13 @@ const cases = [
   { path: "/board",                d: "/about/leadership/" },
   // 2026-05-18 additions from CF 404 log
   { path: "/contactus",            d: "/contact/" },
+  // 2026-07-25 — short slugs for the withdrawal/refund section on /register/
+  { path: "/refund",               d: "/register/#refunds-and-withdrawals" },
+  { path: "/refund/",              d: "/register/#refunds-and-withdrawals" },
+  { path: "/withdraw",             d: "/register/#refunds-and-withdrawals" },
+  { path: "/withdraw/",            d: "/register/#refunds-and-withdrawals" },
+  { path: "/withdrawal",           d: "/register/#refunds-and-withdrawals" },
+  { path: "/withdrawal/",          d: "/register/#refunds-and-withdrawals" },
   { path: "/wp-content/uploads/2022/03/January_2016.pdf",  d: "/about/board-minutes/" },
   { path: "/wp-content/uploads/2022/03/20211007-AYSO-Board-Meeting.pdf",  d: "/about/board-minutes/" },
   { path: "/tournament-volunteer-signup/",  d: "/volunteers/" },

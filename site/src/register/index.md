@@ -74,7 +74,7 @@ You provide:
 
 A free used shoe exchange is held in August.
 
-## Refund Policy
+## Refunds and Withdrawals
 
 ### Fall Soccer (6U-14U)
 

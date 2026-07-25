@@ -32,6 +32,7 @@ module.exports = [
     topNav: true,
     children: [
       { label: "Player Registration",    url: "/register/" },
+      { label: "Required Forms",         url: "/register/forms/" },
       { label: "Age Chart & Divisions",  url: "/register/age-chart/" },
       { label: "Find Your Local AYSO",   url: "/register/find-your-region/" },
       { label: "Volunteer",              url: "/volunteers/" },
@@ -97,6 +98,7 @@ module.exports = [
       { label: "Team Info",                   url: "/families/team/" },
       { label: "Equipment & Uniforms",        url: "/families/equipment/" },
       { label: "Kids Zone",                   url: "/families/pledge/" },
+      { label: "Required Forms",              url: "/register/forms/" },
       { label: "Frequently Asked Questions",  url: "/families/faqs/" },
       { label: "Sideline Behavior",           url: "/families/support/" },
       // Role sections — most families have someone who's also a coach, ref, or volunteer
