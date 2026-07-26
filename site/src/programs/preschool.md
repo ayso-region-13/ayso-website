@@ -1,15 +1,14 @@
 ---
-
-title: "Preschool Soccer (4U/5U)"
+title: Preschool Soccer (4U/5U)
+description: Preschool soccer for children ages 3–5 (4U and 5U). A fun,
+  age-appropriate introduction to the game for the youngest players.
 layout: page.njk
 section: programs
-heroImage: "/images/action-04.jpg"
-description: "Preschool soccer for children ages 3–5 (4U and 5U). A fun, age-appropriate introduction to the game for the youngest players."
-eventName: "AYSO Region 13 Preschool Soccer 2026"
-eventStartDate: "2026-09-12"
-eventEndDate: "2026-11-14"
+heroImage: /images/action-04.jpg
+eventName: AYSO Region 13 Preschool Soccer 2026
+eventStartDate: 2026-09-12
+eventEndDate: 2026-11-14
 ---
-
 The Preschool program introduces children ages 4-5 to soccer through play and motor skill development.
 
 ![Young players in the preschool program](/images/preschool-interior.jpg)
@@ -18,7 +17,7 @@ The Preschool program introduces children ages 4-5 to soccer through play and mo
 
 - Ages: 4U (age 4) and 5U (age 5)
 - When: Saturday mornings, one hour per week
-- Season: First weekend after Labor Day through two weeks before Thanksgiving (~10 weeks)
+- Season: First weekend after Labor Day into November (about 8 sessions)
 - Location: [Victory Park](/fields/victory/)
 - Format: Jamboree style — no formal teams or games
 
@@ -29,7 +28,9 @@ This is not traditional soccer. Sessions focus on helping children develop basic
 Children are grouped by age (4U or 5U) and meet once per week for one hour. There are no formal teams, no scores, and no standings.
 
 ### Session Times
+
 Sessions typically run at:
+
 - 8-9am
 - 9-10am
 - 10-11am
