@@ -17,7 +17,7 @@ Grad Series helps players transitioning from 8U to 10U prepare for the changes i
 - When: Saturdays, January through late February
 - Duration: 8 weeks
 - Format: 35-minute practice + 50-minute game each session
-- Location: Arroyo Park (South Pasadena) and Marshall Field (Pasadena)
+- Location: Arroyo Park (South Pasadena) and Thurgood Marshall Secondary School (Pasadena)
 
 ## What's Different in 10U?
 

@@ -114,3 +114,16 @@ Root causes and fixes:
 Deliberately **not** done: no home-page or announcement-bar placement. Withdrawal is a low-frequency, high-intent action; making it prominent to everyone reads as an invitation to leave.
 
 Note: the Drive URL supplied with the request (`/drive/folders/1XTshlg3nIA08WTibMnsJ8XsPSvNbhak3`) is a folder titled "Portfolio Summaries", unrelated to AYSO. The canonical form remains the Google Form already linked site-wide (`…/forms/d/e/1FAIpQLSfDm6c5f0Ap…/viewform`); it was not changed.
+
+---
+
+## Session 43 (2026-07-30) — Marshall Fundamental renamed to Thurgood Marshall Secondary School
+
+The school renamed. The field page title and description were already updated in the CMS (`site/src/fields/marshall.md`, `site/src/fields/index.md`); this session swept the references the CMS cannot reach.
+
+- **Fields sidebar menu label** — `site/src/_data/navigation.js` said "Marshall Fundamental". Navigation is code-only (not exposed in Pages CMS, which is why an editor can't find it). Now the short label **"Marshall"**, matching the other short field labels.
+- **Program pages** — `/programs/winter-stars/` (two places: Quick Facts + 2026 Schedule) and `/programs/grad-series/` (which said "Marshall Field") now read "Thurgood Marshall Secondary School".
+- **`site/scripts/add-descriptions.js`** — the one-off description seeder had a "Thursgood" typo in its updated marshall entry; corrected to "Thurgood".
+- Left alone: `proposed-site-structure.md` and `todo.md` are historical records; `/marshall/` → `/fields/marshall/` redirects (2 rules, both worker + `_redirects`) are URL-only and unaffected.
+
+**Remaining latent reference lives in the platform, not this repo.** After a full build the only "Marshall Fundamental" strings left in `_site/` are the two field-map image `alt` attributes on `/fields/marshall/` ("Marshall Fundamental game field map", "Marshall Fundamental games-10u field map"). Those come from the ayso-platform public API at build time. Fixing them is platform work: the venue display title lives in the `ayso_fields` D1 table (seeded from `web/apps/workers/src/data/ayso-fields.json`), and each variant's `alt` is stored on its `field_maps` row, defaulted at save time from the venue title (`web/apps/fields/editor/app.js`) — so renaming the venue does not retroactively rewrite existing alts. Both prod and staging D1 need it.

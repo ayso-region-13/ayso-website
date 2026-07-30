@@ -76,7 +76,7 @@ module.exports = [
       { label: "La Cañada High School", url: "/fields/lchs/" },
       { label: "La Salle High School",  url: "/fields/la-salle/" },
       { label: "LC LDS",                url: "/fields/lc-lds/" },
-      { label: "Marshall Fundamental",  url: "/fields/marshall/" },
+      { label: "Marshall",              url: "/fields/marshall/" },
       { label: "McDonald Park",         url: "/fields/mcdonald/" },
       { label: "McKinley School",       url: "/fields/mckinley/" },
       { label: "Muir North",            url: "/fields/muir/" },
