@@ -17,7 +17,7 @@ permalink: /fields/
 
 
 | Field | City | Practice | Games | Ages |
-| ----------------------------------------------------- | --------- | -------- | ----- | -------- |
+| ------------------------------------------------------ | --------- | -------- | ----- | -------- |
 | [Allendale Park](/fields/allendale) | Pasadena | ✓ |  |  |
 | [Blair Lower](/fields/blair-lower) | Pasadena |  | ✓ | 14U, UD |
 | [Blair Upper](/fields/blair-upper) | Pasadena |  | ✓ | 10U |
@@ -25,7 +25,7 @@ permalink: /fields/
 | [Butler Middle School](/fields/butler) | Pasadena | ✓ |  |  |
 | [Jefferson Park](/fields/jefferson) | Pasadena | ✓ |  |  |
 | [La Salle High School](/fields/la-salle) | Pasadena |  | ✓ |  |
-| [Marshall Fundamental](/fields/marshall) | Pasadena |  | ✓ | 10U, 14U |
+| [Thurgood Marshall Secondary School](/fields/marshall) | Pasadena |  | ✓ | 10U, 14U |
 | [McDonald Park](/fields/mcdonald) | Pasadena | ✓ |  |  |
 | [McKinley](/fields/mckinley) | Pasadena |  | ✓ | 12U |
 | [Rose Bowl Area H](/fields/area-h) | Pasadena | ✓ |  |  |

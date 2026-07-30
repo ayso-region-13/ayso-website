@@ -193,7 +193,7 @@ const DESCRIPTIONS = {
   "fields/brookside.md":
     "Brookside Park fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions.",
   "fields/marshall.md":
-    "Marshall Fundamental School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions.",
+    "Thurgood Marshall Secondary School fields — AYSO Region 13 game location in Pasadena. Address, parking, and directions.",
   "fields/paradise.md":
     "Paradise Canyon School fields — AYSO Region 13 game location in La Cañada. Address, parking, and directions.",
   "fields/oak-grove.md":

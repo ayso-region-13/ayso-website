@@ -20,7 +20,7 @@ Winter Stars is an 8-week program offering skills training and small-sided games
 - When: Sundays, 3:30-5pm
 - Season: January through February (~8 weeks)
 - Cost: $125
-- Location: Marshall Fundamental School, Pasadena
+- Location: Thurgood Marshall Secondary School, Pasadena
 
 ## Program Format
 
@@ -38,7 +38,7 @@ This program welcomes players of all skill levels.
 
 - Season: January 11 through March 1, 2026
 - Day/Time: Every Sunday, 3:30-5pm
-- Location: Marshall Fundamental School (990 Allen Ave., Pasadena, CA 91104)
+- Location: Thurgood Marshall Secondary School (990 Allen Ave., Pasadena, CA 91104)
 
 ## Registration
 
