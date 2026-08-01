@@ -22,39 +22,11 @@ Region 13 is launching 10U EXTRA™ this Fall for both girls and boys **born bet
 
 ---
 
-## Tryouts
-
-**Tryouts will be held at [Blair High School.](https://www.ayso13.org/fields/blair/)**  
-*Players must attend at least 2 of the dates to be considered for a team:*
-
-- **5/16/2026**  
-G10U: 10:15–11am  
-B10U: 11:15am–12pm
-- **6/6/2026**  
-G10U: 10:15–11am  
-B10U: 11:15am–12pm
-- **6/13/2026**  
-G10U: 10:15–11am  
-B10U: 11:15am–12pm
-- ~~6/23/2026~~ **changed to 07/07/26 (location: Gwinn Park)**  
-G10U: 5:30pm-6:30pm  
-B10U: 6:45pm-7:45pm
-
-## [RSVP for TRYOUTS](https://ayso13.typeform.com/extratryout2026)
-
-What to bring to tryouts:
-
-- cleats
-- shin guards
-- water
-- generic athletic attire
-- positive attitude!
-
 ---
 
 ## Program Details
 
-- Teams will have 10 players per roster, with 7 players on the field during games
+- Teams will have 11 players per roster, with 7 players on the field during games
 - Practices are typically held twice per week
 - All players are guaranteed to play at least 50% of each game
 - Teams will travel locally to compete against other EXTRA™ teams
