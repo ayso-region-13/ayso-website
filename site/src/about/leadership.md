@@ -30,7 +30,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Position | Name | Email |
 | ------------------------------------ | --------------------- | ------------------------------------------------------------- |
 | Communications | Bret Nicely | [communications@ayso13.org](mailto:communications@ayso13.org) |
-| Website | Matthew Goldman | [webmaster@ayso13.org](mailto:webmaster@ayso13.org) |
+| Website / Technology | Matthew Goldman | [webmaster@ayso13.org](mailto:webmaster@ayso13.org) |
 | Fields | Jessica Ferree | [fields@ayso13.org](mailto:fields@ayso13.org) |
 | Practice Field Coordinator | Rolf Mauermann | [rolf@ayso13.org](mailto:rolf@ayso13.org) |
 | Uniforms & Equipment | Ron Johnson | [equipment@ayso13.org](mailto:equipment@ayso13.org) |
@@ -38,7 +38,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | Special Events | Bicky Law | [bicky@ayso13.org](mailto:bicky@ayso13.org) |
 | Sisterhood of Soccer | Open | [sisterhood@ayso13.org](mailto:sisterhood@ayso13.org) |
 | WCA (Women's Coaching Alliance) | Brandi Lane | [wca@ayso13.org](mailto:wca@ayso13.org) |
-| USWL/MLS Liaison | Open | — |
+| NWSL/MLS Liaison | Open | — |
 | EPIC Coordinator | Tony D'Angelo | [epic@ayso13.org](mailto:epic@ayso13.org) |
 | Tournament Director | Patrick Shopbell | [td@ayso13.org](mailto:td@ayso13.org) |
 | Tournament Coordinator | Ben Hernandez-Stern | — |
@@ -79,11 +79,11 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 
 
 | Position | Name | Email |
-| -------------------------------------------------- | ------------- | --------------------------------------------------------- |
+| -------------------------------------------------- | -------------------------------------------- | --------------------------------------------------------- |
 | Director of Referee Instruction | Mark Windsor | [dri@ayso13.org](mailto:dri@ayso13.org) |
 | Uniforms | Manny Morales | [ref-uniforms@ayso13.org](mailto:ref-uniforms@ayso13.org) |
 | Director of Referee Assessment | Bruce Hancock | [ref-assessor@ayso13.org](mailto:ref-assessor@ayso13.org) |
-| PRO Referee Administrators (Youth Referee Program) | Open | [proref@ayso13.org](mailto:proref@ayso13.org) |
+| PRO Referee Administrators (Youth Referee Program) | Paolo Calchi Novati & Federico Calchi Novati | [proref@ayso13.org](mailto:proref@ayso13.org) |
 | Tournament Referee Director | Brian Bonham | [tra@ayso13.org](mailto:tra@ayso13.org) |
 | Advisor on the Laws of the Game | Steve Hawkins | [refsteve@eyry.org](mailto:refsteve@eyry.org) |
 
