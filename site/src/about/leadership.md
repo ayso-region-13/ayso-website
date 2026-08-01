@@ -79,11 +79,11 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 
 
 | Position | Name | Email |
-| -------------------------------------------------- | ------------------------------------------ | --------------------------------------------------------- |
+| -------------------------------------------------- | -------------------------------------------- | --------------------------------------------------------- |
 | Director of Referee Instruction | Mark Windsor | [dri@ayso13.org](mailto:dri@ayso13.org) |
 | Uniforms | Manny Morales | [ref-uniforms@ayso13.org](mailto:ref-uniforms@ayso13.org) |
 | Director of Referee Assessment | Bruce Hancock | [ref-assessor@ayso13.org](mailto:ref-assessor@ayso13.org) |
-| PRO Referee Administrators (Youth Referee Program) | Paolo Calchi Novati Federico Calchi Novati | [proref@ayso13.org](mailto:proref@ayso13.org) |
+| PRO Referee Administrators (Youth Referee Program) | Paolo Calchi Novati & Federico Calchi Novati | [proref@ayso13.org](mailto:proref@ayso13.org) |
 | Tournament Referee Director | Brian Bonham | [tra@ayso13.org](mailto:tra@ayso13.org) |
 | Advisor on the Laws of the Game | Steve Hawkins | [refsteve@eyry.org](mailto:refsteve@eyry.org) |
 
