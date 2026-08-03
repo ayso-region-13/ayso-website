@@ -17,8 +17,18 @@ permissions:
 # pipeline was flaky (deploys stalled/failed in CF's initialize/deploy stages),
 # so we build here and upload only changed files (hash-deduped), with retry.
 # CF auto-deploy is DISABLED on ayso-website-prod, so CI is the sole deployer.
+# (A CF Pages *deploy hook* was still an explicit exception to that — the fields
+# editor's "Publish Site" button fired one, which built on CF and so reported
+# nothing to Slack. That button now dispatches rebuild-production.yml instead.)
 # No debounce here (unlike staging) — promotes are infrequent and deliberate.
 # Triggered from Slack via `/ayso promote` (workflow_dispatch).
+
+# Shared with rebuild-production.yml so a field-map "Publish Site" rebuild can
+# never race a promote into the same Pages project. NOT cancel-in-progress — a
+# promote that is already merging or uploading must run to completion.
+concurrency:
+  group: deploy-pages-prod
+  cancel-in-progress: false
 
 jobs:
   promote:

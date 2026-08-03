@@ -1,0 +1,192 @@
+name: Rebuild Production (no promote)
+
+# Rebuilds `main` as-is and redeploys it to the ayso-website-prod Pages project.
+# It does NOT merge staging → main, so it ships nothing new beyond what is
+# already on main — only a fresh build. That matters because the field maps are
+# fetched from the platform's public API AT BUILD TIME
+# (site/src/_data/lib/fetchFieldMaps.js), so a map edited in the platform's
+# fields editor only reaches www.ayso13.org when the site is rebuilt.
+#
+# WHY THIS EXISTS: the fields editor's "Publish Site" button used to POST a
+# Cloudflare Pages deploy hook, which fired CF's own Git build. That build works,
+# but it never touches GitHub Actions — and every Slack deploy notification in
+# this repo is a workflow step, so a publish was completely silent. It also
+# skipped the retry loop and the IndexNow ping that the promote path has. The
+# button now fires `repository_dispatch` here instead, so a publish is reported
+# in Slack with its real outcome and takes the same reliable Direct Upload path
+# as every other deploy.
+#
+# ⚠️ `repository_dispatch` ONLY triggers a workflow when the workflow file is on
+# the repository's DEFAULT branch, which here is `staging` (set so Pages CMS
+# opens there). This file must stay on `staging` or the button silently does
+# nothing — the dispatch API still answers 204. It checks out `main` explicitly
+# for the same reason: the dispatched ref is the default branch, not main.
+#
+# Required repo secrets (all already present, used by the promote workflow):
+#   SLACK_BOT_TOKEN                - Region 13 Slack app bot token
+#   CLOUDFLARE_PAGES_DEPLOY_TOKEN  - token with Account → Cloudflare Pages → Edit
+#   CLOUDFLARE_ACCOUNT_ID          - AYSO Region 13 account id
+
+on:
+  repository_dispatch:
+    types: [fields-publish]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Shared with promote-to-production.yml so a publish can never race a promote
+# into the same Pages project. NOT cancel-in-progress: a second publish click
+# should queue behind the first, not abandon a deploy that is already uploading.
+concurrency:
+  group: deploy-pages-prod
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    name: Rebuild main, deploy to production
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+
+      - name: Resolve commit
+        id: rev
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+      # `client_payload.actor` is supplied by whoever called the dispatch API, so
+      # it is untrusted input. It reaches Slack only through env → `jq --arg`,
+      # never interpolated into a shell string.
+      - name: Notify Slack — rebuilding
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ steps.rev.outputs.sha_short }}
+          ACTOR: ${{ github.event.client_payload.actor }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg sha "$SHA" --arg actor "$ACTOR" --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Rebuilding production — \($sha)…",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":hourglass_flowing_sand: *Rebuilding production* — building `\($sha)` and deploying to www.ayso13.org with the current field maps. Slack will update when it is live (~2-3 min).\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+              ]
+            }')"
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: site/package-lock.json
+
+      - name: Build
+        id: build
+        working-directory: site
+        env:
+          # Prod build: emit allow-all robots + sitemap (NOT the staging block).
+          CF_PAGES_BRANCH: main
+          # Field maps come from the platform's public API at build time. Prod
+          # reads the platform's prod instance.
+          FIELDS_API_BASE: https://fields.ayso13.org
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Cloudflare Pages (production) with retry
+        id: deploy
+        working-directory: site
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_PAGES_DEPLOY_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -e
+          for attempt in 1 2 3; do
+            echo "::group::wrangler pages deploy (attempt $attempt)"
+            if npx --yes wrangler@4 pages deploy _site \
+                 --project-name=ayso-website-prod --branch=main; then
+              echo "::endgroup::"; echo "Deployed on attempt $attempt"; exit 0
+            fi
+            echo "::endgroup::"; echo "attempt $attempt failed; retrying in 20s"; sleep 20
+          done
+          echo "::error::wrangler pages deploy failed after 3 attempts"; exit 1
+
+      - name: Ping IndexNow (best-effort)
+        if: success()
+        continue-on-error: true
+        working-directory: site
+        env:
+          KEY: 61d4461c23b7dcda89290711860408d3
+          HOST: www.ayso13.org
+        run: |
+          # Submit prod URLs to IndexNow (Bing/Yandex/etc.) straight from the
+          # sitemap we just built. Best-effort: a search-ping hiccup must not
+          # fail the rebuild.
+          set -uo pipefail
+          SITEMAP=_site/sitemap.xml
+          if [ ! -f "$SITEMAP" ]; then echo "no sitemap built; skipping"; exit 0; fi
+          URLS_JSON=$(grep -oE '<loc>[^<]+' "$SITEMAP" | sed 's|<loc>||' | jq -R . | jq -s .)
+          COUNT=$(echo "$URLS_JSON" | jq 'length')
+          echo "Submitting $COUNT URLs to IndexNow"
+          if [ "$COUNT" -lt 1 ]; then echo "no <loc> entries; skipping"; exit 0; fi
+          PAYLOAD=$(jq -n --arg host "$HOST" --arg key "$KEY" \
+            --arg keyLocation "https://${HOST}/${KEY}.txt" --argjson urls "$URLS_JSON" \
+            '{host:$host, key:$key, keyLocation:$keyLocation, urlList:$urls}')
+          CODE=$(curl -sS -o /tmp/indexnow.body -w '%{http_code}' -X POST \
+            -H 'Content-Type: application/json' -d "$PAYLOAD" https://api.indexnow.org/IndexNow)
+          echo "IndexNow response: $CODE"; cat /tmp/indexnow.body 2>/dev/null || true
+
+      - name: Notify Slack — rebuild live
+        if: success()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ steps.rev.outputs.sha_short }}
+          ACTOR: ${{ github.event.client_payload.actor }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg sha "$SHA" --arg actor "$ACTOR" --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Production rebuild live — \($sha)",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Production rebuild live* — `\($sha)` is serving on www.ayso13.org with the current field maps.\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+              ]
+            }')"
+
+      - name: Notify Slack — failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SHA: ${{ steps.rev.outputs.sha_short }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+          DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
+        run: |
+          if [ "$BUILD_OUTCOME" != "success" ]; then
+            HEADLINE=":x: *Production rebuild failed*"
+            REASON="The site build failed for \`$SHA\`. www.ayso13.org is still serving the previous version. Check the workflow logs."
+          elif [ "$DEPLOY_OUTCOME" != "success" ]; then
+            HEADLINE=":x: *Production rebuild failed*"
+            REASON="Built, but the Cloudflare upload failed after 3 attempts for \`$SHA\`. www.ayso13.org is still serving the previous version — click Publish Site again to retry."
+          else
+            HEADLINE=":x: *Production rebuild workflow failed*"
+            REASON="Workflow failed for \`$SHA\`. See run logs."
+          fi
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg head "$HEADLINE" --arg reason "$REASON" --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Production rebuild notice",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: "\($head) — \($reason)" } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run for details>" } ] }
+              ]
+            }')"
