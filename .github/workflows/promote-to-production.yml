@@ -26,8 +26,22 @@ permissions:
 # Shared with rebuild-production.yml so a field-map "Publish Site" rebuild can
 # never race a promote into the same Pages project. NOT cancel-in-progress — a
 # promote that is already merging or uploading must run to completion.
+#
+# The group is conditional on the confirmation because `concurrency` is
+# workflow-level and evaluated BEFORE the job's `if:`. A mistyped confirmation
+# would otherwise enter the shared group, evict whatever was pending there, and
+# then skip its own job — cancelling a real promote to do nothing. A run that
+# will not promote gets a throwaway per-run group instead.
+#
+# ⚠️ GitHub keeps only ONE pending run per group and cancels the older one, so a
+# queued promote CAN still be superseded by a later publish. A run cancelled
+# before any job starts runs no steps, so nothing reports it — not even an
+# `always()` step. If `/ayso promote` posts nothing to Slack within ~60s, it was
+# superseded: just run it again. Accepted deliberately (2026-08-03) — correct
+# production content matters more than promote-notification reliability, and a
+# dropped publish is self-healing because the next prod build refetches the maps.
 concurrency:
-  group: deploy-pages-prod
+  group: ${{ github.event.inputs.confirm == 'promote' && 'deploy-pages-prod' || format('promote-noop-{0}', github.run_id) }}
   cancel-in-progress: false
 
 jobs:
