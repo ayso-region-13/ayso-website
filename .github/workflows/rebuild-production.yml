@@ -48,6 +48,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      # A staging worker must never rebuild the PUBLIC site. The fields worker
+      # already refuses to send `fields-publish` unless its own ENVIRONMENT is
+      # production, and this is the matching assert on the receiving side, so a
+      # misconfigured dispatcher fails VISIBLY here instead of silently shipping.
+      # `workflow_dispatch` carries no client_payload, so empty is allowed.
+      - name: Reject a non-production dispatch
+        env:
+          PAYLOAD_ENV: ${{ github.event.client_payload.environment }}
+        run: |
+          if [ -n "$PAYLOAD_ENV" ] && [ "$PAYLOAD_ENV" != "production" ]; then
+            echo "::error::refusing a production rebuild dispatched with environment='$PAYLOAD_ENV'"
+            exit 1
+          fi
+
       - uses: actions/checkout@v6
         with:
           ref: main
@@ -58,7 +72,17 @@ jobs:
 
       # `client_payload.actor` is supplied by whoever called the dispatch API, so
       # it is untrusted input. It reaches Slack only through env → `jq --arg`,
-      # never interpolated into a shell string.
+      # never interpolated into a shell string. Newlines are stripped and the
+      # length capped so it cannot forge extra Slack lines (e.g. a fake "deploy
+      # live") inside this message; the fields worker can only ever send a
+      # validated email, but this workflow trusts no caller.
+      #
+      # ⚠️ Slack answers HTTP 200 with {"ok":false} for a bad token, bad channel
+      # or invalid blocks, so `curl -sS` alone reports success while the message
+      # silently never arrives — which is the exact failure this whole change set
+      # exists to eliminate. Every notify step below checks `.ok`. It annotates
+      # rather than exiting non-zero: a Slack outage must not make a successful
+      # deploy report as failed.
       - name: Notify Slack — rebuilding
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
@@ -66,17 +90,20 @@ jobs:
           ACTOR: ${{ github.event.client_payload.actor }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          curl -sS -X POST https://slack.com/api/chat.postMessage \
+          WHO=$(printf '%s' "$ACTOR" | tr -d '\n\r' | head -c 100)
+          RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHA" --arg actor "$ACTOR" --arg run "$RUN_URL" '{
+            --data "$(jq -nc --arg sha "$SHA" --arg actor "$WHO" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
               text: "Rebuilding production — \($sha)…",
               blocks: [
                 { type: "section", text: { type: "mrkdwn", text: ":hourglass_flowing_sand: *Rebuilding production* — building `\($sha)` and deploying to www.ayso13.org with the current field maps. Slack will update when it is live (~2-3 min).\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
               ]
-            }')"
+            }')")
+          printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
+            || echo "::error::Slack post failed: $(printf '%s' "$RESP" | jq -r '.error // "unparseable response"')"
 
       - uses: actions/setup-node@v6
         with:
@@ -148,28 +175,39 @@ jobs:
           ACTOR: ${{ github.event.client_payload.actor }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          curl -sS -X POST https://slack.com/api/chat.postMessage \
+          WHO=$(printf '%s' "$ACTOR" | tr -d '\n\r' | head -c 100)
+          RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHA" --arg actor "$ACTOR" --arg run "$RUN_URL" '{
+            --data "$(jq -nc --arg sha "$SHA" --arg actor "$WHO" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
               text: "Production rebuild live — \($sha)",
               blocks: [
                 { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Production rebuild live* — `\($sha)` is serving on www.ayso13.org with the current field maps.\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
               ]
-            }')"
+            }')")
+          printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
+            || echo "::error::Slack post failed: $(printf '%s' "$RESP" | jq -r '.error // "unparseable response"')"
 
       - name: Notify Slack — failure
         if: failure()
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SHA: ${{ steps.rev.outputs.sha_short }}
+          ACTOR: ${{ github.event.client_payload.actor }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           BUILD_OUTCOME: ${{ steps.build.outcome }}
           DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
         run: |
-          if [ "$BUILD_OUTCOME" != "success" ]; then
+          WHO=$(printf '%s' "$ACTOR" | tr -d '\n\r' | head -c 100)
+          # An outcome is the EMPTY STRING for a step that never ran, which also
+          # satisfies `!= "success"` — so check "never ran" FIRST, or a failed
+          # checkout gets reported as a build failure with a blank SHA.
+          if [ -z "$BUILD_OUTCOME" ]; then
+            HEADLINE=":x: *Production rebuild failed before building*"
+            REASON="Failed during checkout or setup, so nothing was built or deployed. www.ayso13.org is unchanged. Check the workflow logs."
+          elif [ "$BUILD_OUTCOME" != "success" ]; then
             HEADLINE=":x: *Production rebuild failed*"
             REASON="The site build failed for \`$SHA\`. www.ayso13.org is still serving the previous version. Check the workflow logs."
           elif [ "$DEPLOY_OUTCOME" != "success" ]; then
@@ -179,14 +217,16 @@ jobs:
             HEADLINE=":x: *Production rebuild workflow failed*"
             REASON="Workflow failed for \`$SHA\`. See run logs."
           fi
-          curl -sS -X POST https://slack.com/api/chat.postMessage \
+          RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg head "$HEADLINE" --arg reason "$REASON" --arg run "$RUN_URL" '{
+            --data "$(jq -nc --arg head "$HEADLINE" --arg reason "$REASON" --arg actor "$WHO" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
               text: "Production rebuild notice",
               blocks: [
-                { type: "section", text: { type: "mrkdwn", text: "\($head) — \($reason)" } },
+                { type: "section", text: { type: "mrkdwn", text: "\($head) — \($reason)\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
                 { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run for details>" } ] }
               ]
-            }')"
+            }')")
+          printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
+            || echo "::error::Slack post failed: $(printf '%s' "$RESP" | jq -r '.error // "unparseable response"')"

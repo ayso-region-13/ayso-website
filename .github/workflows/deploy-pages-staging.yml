@@ -8,10 +8,8 @@ name: Deploy Staging (Pages Direct Upload)
 # Upload removes those stages: CI builds, then wrangler uploads only the
 # changed files (hash-deduped manifest) and reports success via exit code.
 #
-# CUTOVER: while CF's Git auto-deploy is still active this is dispatch-only
-# (to avoid double-building). Once automatic deployments are DISABLED on the
-# ayso-website-staging project (Pages → Settings → Builds & deployments),
-# uncomment the `push` trigger so CMS commits to `staging` auto-deploy here.
+# CUTOVER: DONE — CF's Git auto-deploy is off for this project and the `push`
+# trigger below is live, so CMS commits to `staging` auto-deploy here.
 #
 # Required repo secrets:
 #   CLOUDFLARE_PAGES_DEPLOY_TOKEN  - token with Account → Cloudflare Pages → Edit
@@ -52,7 +50,17 @@ jobs:
       # arrives within 45s, cancel-in-progress kills this run BEFORE any build
       # work happens and the newer run restarts the timer. Only the run that
       # survives 45s of quiet proceeds to build + deploy.
+      #
+      # SKIPPED for a fields "Publish Site" dispatch. The debounce exists for
+      # bursts of CMS edits, and a publish is a deliberate single click whose only
+      # gain from waiting is latency. It also shrinks the window in which a CMS
+      # push cancels the publish run: a CANCELLED run fires neither the success
+      # nor the `if: failure()` notify, so the publisher would get no Slack
+      # message at all — the exact silent publish this trigger was added to fix.
+      # (No content is lost either way; whichever run survives rebuilds and
+      # refetches the field maps.)
       - name: Debounce rapid edits
+        if: github.event_name != 'repository_dispatch'
         run: sleep 45
 
       - uses: actions/checkout@v6
