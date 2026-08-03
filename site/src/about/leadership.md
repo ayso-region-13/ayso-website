@@ -40,7 +40,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | WCA (Women's Coaching Alliance) | Brandi Lane | [wca@ayso13.org](mailto:wca@ayso13.org) |
 | NWSL/MLS Liaison | Open | — |
 | EPIC Coordinator | Tony D'Angelo | [epic@ayso13.org](mailto:epic@ayso13.org) |
-| Tournament Director | Patrick Shopbell | [td@ayso13.org](mailto:td@ayso13.org) |
+| Tournament Director | Joshua Shaw | [td@ayso13.org](mailto:td@ayso13.org) |
 | Tournament Coordinator | Ben Hernandez-Stern | — |
 | Picture Day Coordinator | Amandeep Singh | [pictures@ayso13.org](mailto:pictures@ayso13.org) |
 | Volunteer & Team Manager Coordinator | Jonelle Kelly | [teams@ayso13.org](mailto:teams@ayso13.org) |
