@@ -4,6 +4,8 @@ description: The Region 13 Thanksgiving Tournament is an annual AYSO soccer
   tournament held over Thanksgiving weekend in Pasadena.
 layout: page.njk
 section: programs
+eventStartDate: 2026-11-27
+eventEndDate: 2026-11-29
 ---
 The Thanksgiving Tournament is a three-day competition held the weekend after Thanksgiving for 10U, 12U, and 14U teams.
 
@@ -13,7 +15,7 @@ The Thanksgiving Tournament is a three-day competition held the weekend after Th
 
 - When: Friday through Sunday following Thanksgiving
 - Ages: 10U, 12U, 14U
-- Location: Rose Bowl Area H (primary), plus Victory Park and Villa Parke
+- Location: Rose Bowl Area H (primary), Victory Park, and other locations in Pasadena
 - Format: Three guaranteed pool games plus playoff rounds
 - Open to: All interested teams (not limited to Region 13)
 
@@ -27,11 +29,11 @@ The Thanksgiving Tournament is a three-day competition held the weekend after Th
 | 14U | 11v11 | 16 | $500 | $300 |
 
 
-## Schedule (2025)
+## Schedule (2026)
 
-- Dates: November 28-30, 2025
-- Friday: Games at Victory Park, Robinson Park, and Villa Parke
-- Saturday-Sunday: Games at Rose Bowl Area H
+- Dates: November 27-29, 2026
+- Registration should open in mid-October
+- Location: Victory Park and other locations for 14U
 
 ## Registration
 
