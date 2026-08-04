@@ -95,6 +95,7 @@ module.exports = [
     topNav: true,
     children: [
       { label: "Getting Started",             url: "/families/" },
+      { label: "Region 13 Rollout",           url: "/families/rollout/" },
       { label: "Team Info",                   url: "/families/team/" },
       { label: "Equipment & Uniforms",        url: "/families/equipment/" },
       { label: "Kids Zone",                   url: "/families/pledge/" },

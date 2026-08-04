@@ -1,11 +1,11 @@
 ---
-
-title: "Your Child's Team"
+title: Your Child's Team
+description: Information for Region 13 families about your child's team —
+  rosters, practice schedules, and communicating with your coach and team
+  manager.
 layout: page.njk
 section: families
-description: "Information for Region 13 families about your child's team — rosters, practice schedules, and communicating with your coach and team manager."
 ---
-
 ![Region 13 team with coach](/images/team-interior.jpg)
 
 ## How You'll Find Out Your Team
@@ -34,11 +34,13 @@ Every team has a volunteer team manager who handles logistics. They'll contact y
 
 Most teams use one of these methods:
 
+
 | Method | What to Expect |
-|--------|----------------|
+| ------------------------------- | ---------------------------------------- |
 | Email | Official announcements, schedule changes |
 | Team app (TeamSnap, Band, etc.) | Game reminders, RSVP, quick updates |
 | Group text | Last-minute changes, cancellations |
+
 
 Your coach or team manager will let you know which method your team uses.
 
@@ -53,44 +55,49 @@ Add your coach and team manager to your phone contacts so their messages reach y
 You can also check the [weekly schedule](/schedules/) posted each week.
 
 Game times are typically Saturday mornings. Exact times vary by division:
+
 - Younger divisions (6U-8U): Usually earlier morning slots
 - Older divisions (10U+): Throughout the morning
 
 ### What to Bring
 
-- [ ] Your child in their full uniform
-- [ ] Water bottle
-- [ ] Snacks for after the game
-- [ ] Folding chair or blanket for family members
-- [ ] Weather gear (sunscreen, hat, jacket depending on conditions)
+- Your child in their full uniform
+- Water bottle
+- Snacks for after the game
+- Folding chair or blanket for family members
+- Weather gear (sunscreen, hat, jacket depending on conditions)
 
 ### Arrival Time
 
 Plan to arrive 15-20 minutes before game time. This gives your child time to:
+
 - Find their team
 - Warm up with the coach
 - Use the restroom
 
 ### Game Length
 
+
 | Division | Game Length | Halves |
-|----------|-------------|--------|
+| -------- | ----------- | -------------------- |
 | 6U-8U | 40 minutes | Two 20-minute halves |
 | 10U | 50 minutes | Two 25-minute halves |
 | 12U | 60 minutes | Two 30-minute halves |
 | 14U | 70 minutes | Two 35-minute halves |
 
+
 ## Practice
 
 ### When and Where
 
-Practice is typically once per week on a weeknight (Monday-Thursday). Your coach sets the day and time based on field availability and team schedules.
+Practice is typically once per week on a weeknight (Monday-Friday). 
 
 Practice locations may be at a different field than where games are held. See the [field map](/fields) to find your practice location.
 
 ### What Happens at Practice
 
 Practices usually run 60-75 minutes and include:
+
 - Warm-up activities
 - Skill-building drills
 - Scrimmages (practice games)
@@ -143,13 +150,15 @@ Most teams organize an end-of-season party to celebrate the season and receive p
 
 ## Questions and Contacts
 
+
 | Question About | Who to Contact |
-|----------------|----------------|
+| --------------------------- | --------------------------------------------------- |
 | Your child's team placement | [registrar@ayso13.org](mailto:registrar@ayso13.org) |
 | Team manager questions | [team@ayso13.org](mailto:team@ayso13.org) |
 | Practice field issues | [practice@ayso13.org](mailto:practice@ayso13.org) |
-| Game schedule questions | [schedule@ayso13.org](mailto:schedule@ayso13.org) |
+| Game schedule questions | [scheduler@ayso13.org](mailto:schedule@ayso13.org) |
 | General questions | [Contact us](/contact) |
+
 
 ## Related Pages
 
