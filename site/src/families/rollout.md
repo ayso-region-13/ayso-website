@@ -1,7 +1,7 @@
 ---
 title: Region 13 RollOut
-description: Region 13 RollOut — our season kick-off event on August 29th at
-  Victory Park. Schedule, what to bring, and what to expect.
+description: "Region 13 RollOut — our season kick-off event on August 29th at
+  Victory Park. "
 layout: page.njk
 section: families
 heroImage: /images/RC_ROLLOUT-HEAD-1.jpg
@@ -23,7 +23,7 @@ Our season kick-off event on August 29th at [Victory Park](/fields/victory/).
 ## What's Happening?
 
 We are starting off the season a brand new way this year! The Rose City Rollout is a day-long bonanza featuring everything Region 13 families need to be ready for the season ahead. It’s also a day of soccer fun celebrating all the volunteers and families who make soccer happen.  
-  
+
 **HERE'S THE LINEUP:**
 
 - Food trucks! Music!
