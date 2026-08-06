@@ -16,29 +16,33 @@ Our season kick-off event on August 29th at [Victory Park](/fields/victory/).
 |  |  |
 | -------- | ---------------------------------------------------------- |
 | Date | Saturday, August 29 |
-| Time | *[time to be added]* |
+| Time | *9am - 2pm* |
 | Location | [Victory Park](/fields/victory/), 2575 Paloma St, Pasadena |
 
 
-## What Happens at Rollout
+## What's Happening?
 
-*[Add a short description of the event here: what families do, what's handed out, and roughly how long it takes.]*
+We are starting off the season a brand new way this year! The Rose City Rollout is a day-long bonanza featuring everything Region 13 families need to be ready for the season ahead. It’s also a day of soccer fun celebrating all the volunteers and families who make soccer happen.  
+  
+**HERE'S THE LINEUP:**
 
-## Who Should Attend
+- Food trucks! Music!
+- Walk-up Q&A with coach and referee admins
+- LA Galaxy Star Squad!
+- On-field fun with AYSO Play!
+- Fall team meetups — meet your new coach and teammates!
+- Team uniform pickup
+- Coach equipment pickup
+- Painting Robot demo and naming contest
+- Referee equipment and uniform pickup
+- On-field refresher training for refs and coaches
+- Eaton Fire lost trophy replacements
+- Gear swap, cleat swap, giveaways
+- ... and so much more!
 
-*[Add which divisions or families need to come, and whether players should attend.]*
+Mark your calendars: this is THE way to start the season strong. See you at the park!
 
-## What to Bring
-
-*[Add the list of what families should bring, such as paperwork, forms, or payment.]*
-
-## What You'll Pick Up
-
-*[Add what families receive at rollout, such as uniforms, schedules, or team assignments.]*
-
-## Parking
-
-*[Add parking guidance for Victory Park on event day, or link to the field page.]*
+![:soccer:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/apple-medium/26bd.png)
 
 ## Questions and Contacts
 
