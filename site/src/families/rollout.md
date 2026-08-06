@@ -1,23 +1,24 @@
 ---
-
-title: "Region 13 Rollout"
+title: Region 13 RollOut
+description: Region 13 RollOut — our season kick-off event on August 29th at
+  Victory Park. Schedule, what to bring, and what to expect.
 layout: page.njk
 section: families
-description: "Region 13 Rollout — a season kick-off event on August 29th at Victory Park. Schedule, what to bring, and what to expect."
-heroImage: /images/families-interior.jpg
+heroImage: /images/RC_ROLLOUT-HEAD-1.jpg
 ---
+![RC_ROLLOUT-HEAD.jpg](/images/RC_ROLLOUT-HEAD.jpg)
 
-![Region 13 families at Victory Park](/images/families-interior.jpg)
-
-A season kick-off event on August 29th at [Victory Park](/fields/victory/).
+Our season kick-off event on August 29th at [Victory Park](/fields/victory/).
 
 ## When and Where
 
-| | |
-|---|---|
+
+|  |  |
+| -------- | ---------------------------------------------------------- |
 | Date | Saturday, August 29 |
 | Time | *[time to be added]* |
 | Location | [Victory Park](/fields/victory/), 2575 Paloma St, Pasadena |
+
 
 ## What Happens at Rollout
 
@@ -41,11 +42,13 @@ A season kick-off event on August 29th at [Victory Park](/fields/victory/).
 
 ## Questions and Contacts
 
+
 | Question About | Who to Contact |
-|----------------|----------------|
+| --------------------------- | --------------------------------------------------- |
 | Rollout logistics | [Contact us](/contact) |
 | Registration status | [registrar@ayso13.org](mailto:registrar@ayso13.org) |
 | Your child's team placement | [registrar@ayso13.org](mailto:registrar@ayso13.org) |
+
 
 ## Related Pages
 
