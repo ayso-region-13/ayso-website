@@ -51,16 +51,17 @@ jobs:
       # work happens and the newer run restarts the timer. Only the run that
       # survives 45s of quiet proceeds to build + deploy.
       #
-      # SKIPPED for a fields "Publish Site" dispatch. The debounce exists for
-      # bursts of CMS edits, and a publish is a deliberate single click whose only
-      # gain from waiting is latency. It also shrinks the window in which a CMS
-      # push cancels the publish run: a CANCELLED run fires neither the success
-      # nor the `if: failure()` notify, so the publisher would get no Slack
-      # message at all — the exact silent publish this trigger was added to fix.
-      # (No content is lost either way; whichever run survives rebuilds and
-      # refetches the field maps.)
+      # SKIPPED for anything that isn't a push — a fields "Publish Site"
+      # dispatch, a `/ayso staging` rebuild, or a hand-run from the Actions tab.
+      # The debounce exists for bursts of CMS edits; those are all deliberate
+      # single actions whose only gain from waiting is latency. Skipping also
+      # shrinks the window in which a CMS push cancels the run: a CANCELLED run
+      # fires neither the success nor the `if: failure()` notify, so the operator
+      # would get no Slack message at all — the exact silent deploy these
+      # triggers exist to avoid. (No content is lost either way; whichever run
+      # survives rebuilds and refetches the field maps.)
       - name: Debounce rapid edits
-        if: github.event_name != 'repository_dispatch'
+        if: github.event_name == 'push'
         run: sleep 45
 
       - uses: actions/checkout@v6
