@@ -57,10 +57,23 @@ jobs:
           WF_NAME: ${{ github.event.workflow_run.name }}
           CONCLUSION: ${{ github.event.workflow_run.conclusion }}
         run: |
+          # `steps` is an OPTIONAL property on the REST job object, and a job that
+          # never acquired a runner is exactly where it can be absent, so the `?`
+          # operators make an absent list read as zero rather than throwing.
+          #
+          # If the lookup itself fails we must NOT guess: a step count of 0 would
+          # misread an ordinary build failure as a silent one, and letting the step
+          # die would skip the notify and silence the watchdog. So an unreadable
+          # run gets its own `unknown` verdict and its own honest message.
           STEP_COUNT=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/jobs" \
-            --jq '[.jobs[].steps[]] | length')
-          echo "run ${RUN_ID} (${WF_NAME}): conclusion=${CONCLUSION} steps=${STEP_COUNT}"
-          VERDICT=$(STEP_COUNT="$STEP_COUNT" bash .github/scripts/classify-silent-run.sh)
+            --jq '[.jobs[]?.steps[]?] | length' 2>/dev/null) || STEP_COUNT=""
+          echo "run ${RUN_ID} (${WF_NAME}): conclusion=${CONCLUSION} steps=${STEP_COUNT:-<unreadable>}"
+
+          if [ -z "$STEP_COUNT" ]; then
+            VERDICT="unknown"
+          else
+            VERDICT=$(STEP_COUNT="$STEP_COUNT" bash .github/scripts/classify-silent-run.sh)
+          fi
           echo "verdict=${VERDICT}" >> "$GITHUB_OUTPUT"
           echo "verdict: ${VERDICT}"
 
@@ -80,12 +93,23 @@ jobs:
       # The retry rebuilds from the tip of `staging`, not the original commit,
       # which matches the debounce philosophy already in the staging workflow:
       # latest content wins.
+      #
+      # `continue-on-error` matters: a dispatch can fail for reasons outside this
+      # repo (org-level Actions restrictions, a transient 5xx). Without it, a
+      # failed retry would skip the notify step and the deploy would go silent
+      # anyway -- the exact outcome this workflow exists to prevent.
+      #
+      # The guard is an ALLOWLIST rather than `!= workflow_dispatch`: adding any
+      # future trigger to the staging workflow would otherwise silently become
+      # retryable.
       - name: Re-dispatch the staging deploy
         id: retry
+        continue-on-error: true
         if: >-
           steps.classify.outputs.verdict == 'silent-runner' &&
           github.event.workflow_run.name == 'Deploy Staging (Pages Direct Upload)' &&
-          github.event.workflow_run.event != 'workflow_dispatch'
+          (github.event.workflow_run.event == 'push' ||
+           github.event.workflow_run.event == 'repository_dispatch')
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -94,8 +118,18 @@ jobs:
 
       # head_commit.message and the workflow name are untrusted input; they only
       # ever reach Slack through `jq --arg`, never through the shell.
+      # `always()` is load-bearing. A bare `if:` gets an implicit `success()`
+      # ANDed in, so any earlier step failing would skip this notify — the
+      # watchdog would go silent about a silent deploy. The verdicts are matched
+      # explicitly rather than `!= 'none'` so that an EMPTY output (classify step
+      # died before writing one) cannot fall through and post the wrong message.
       - name: Notify Slack — a deploy went silent
-        if: steps.classify.outputs.verdict != 'none'
+        if: >-
+          always() && (
+            steps.classify.outputs.verdict == 'silent-runner' ||
+            steps.classify.outputs.verdict == 'silent-superseded' ||
+            steps.classify.outputs.verdict == 'unknown'
+          )
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           VERDICT: ${{ steps.classify.outputs.verdict }}
@@ -108,7 +142,10 @@ jobs:
           SHORT="${SHA:0:7}"
           SUBJECT=$(printf '%s' "$MSG" | head -1)
 
-          if [ "$VERDICT" = "silent-superseded" ]; then
+          if [ "$VERDICT" = "unknown" ]; then
+            HEADLINE=":grey_question: *Could not tell whether a deploy reported itself*"
+            DETAIL="The watchdog could not read the jobs of *${WF_NAME}*, so it cannot say whether that run notified anyone. Check the run — it may have deployed nothing without saying so."
+          elif [ "$VERDICT" = "silent-superseded" ]; then
             HEADLINE=":warning: *Promote was dropped before it ran*"
             DETAIL="A later fields \`Publish Site\` click evicted this promote from the \`deploy-pages-prod\` queue, so production was not updated and no other message was sent. Re-run \`/ayso promote\`."
           elif [ "$RETRIED" = "true" ]; then
