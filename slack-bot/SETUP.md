@@ -4,11 +4,18 @@ Lets any authorized Slack user update field status or the announcement bar direc
 
 ## Commands
 
-| Command | Opens |
+| Command | Does |
 |---|---|
 | `/ayso` | Choose between Field Status or Announcement |
 | `/ayso field` | Field Status modal directly |
 | `/ayso announce` | Announcement modal directly |
+| `/ayso promote` | Merge `staging` → `main` and deploy production |
+| `/ayso staging` | Rebuild + redeploy staging.ayso13.org from `staging` (alias: `rebuild-staging`) |
+| `/ayso weather` | Current conditions, ephemeral reply to you only |
+| `/ayso test-weather` | Post a connectivity test to #notify-weather (alias: `weather-test`) |
+
+`promote` and `staging` both fire a `workflow_dispatch`, so the bot's
+`GITHUB_TOKEN` needs **Actions: write** in addition to Contents: read+write.
 
 ---
 

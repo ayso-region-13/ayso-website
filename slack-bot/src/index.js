@@ -5,6 +5,7 @@
  * /ayso field         → Field Status modal directly
  * /ayso announce      → Announcement modal directly
  * /ayso promote       → trigger staging → production promotion
+ * /ayso staging       → rebuild + redeploy staging.ayso13.org from `staging`
  * /ayso weather       → show current conditions (private/ephemeral reply)
  * /ayso test-weather  → post a connectivity test to #notify-weather via the
  *                       weather-api Worker (verifies its Slack notifier path)
@@ -100,6 +101,18 @@ async function handleCommand(rawBody, env, ctx) {
     ctx.waitUntil(triggerPromotion(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
     return new Response(
       JSON.stringify({ response_type: 'ephemeral', text: '🚀 Promotion triggered — staging → production. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  // Manual staging rebuild. Useful when a staging deploy went silent (GitHub
+  // failed to allocate a runner) or when a field-map edit needs re-fetching
+  // without touching content. Unlike `promote` this deploys nothing to
+  // production, so it needs no confirmation step.
+  if (text === 'staging' || text === 'rebuild-staging') {
+    ctx.waitUntil(triggerStagingDeploy(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
+    return new Response(
+      JSON.stringify({ response_type: 'ephemeral', text: '🔧 Staging rebuild triggered. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   }
@@ -250,15 +263,47 @@ async function putFile(token, path, branch, content, message, sha) {
   );
 }
 
-async function triggerPromotion(githubToken, slackToken, userId, userName) {
-  const res = await fetch(
-    `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/promote-to-production.yml/dispatches`,
+// Fires a workflow_dispatch. `ref` decides WHICH COPY of the workflow file runs,
+// not just what gets built — promote reads from `main` deliberately (see the
+// promote notes in CLAUDE.md), staging reads from `staging`.
+async function dispatchWorkflow(githubToken, workflowFile, ref, inputs) {
+  return fetch(
+    `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`,
     {
       method: 'POST',
       headers: { ...githubHeaders(githubToken), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ref: 'main', inputs: { confirm: 'promote' } })
+      body: JSON.stringify(inputs ? { ref, inputs } : { ref })
     }
   );
+}
+
+async function triggerStagingDeploy(githubToken, slackToken, userId, userName) {
+  const res = await dispatchWorkflow(githubToken, 'deploy-pages-staging.yml', 'staging');
+  const user = userName || userId;
+
+  if (res.status === 204) {
+    await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: '🔧 *Staging rebuild*\nDeploy workflow started. staging.ayso13.org will be rebuilt from the `staging` branch in ~2 minutes.' }
+      },
+      {
+        type: 'context',
+        elements: [{ type: 'mrkdwn', text: `_Triggered by @${user} — ${pacificTimestamp()}_ · <https://github.com/${GITHUB_REPO}/actions|View Actions>` }]
+      }
+    ], `Staging rebuild started by @${user}`);
+  } else {
+    await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `⚠️ *Staging rebuild failed to start* — GitHub API returned ${res.status}. <https://github.com/${GITHUB_REPO}/actions|Check Actions>.` }
+      }
+    ], 'Staging rebuild failed to start');
+  }
+}
+
+async function triggerPromotion(githubToken, slackToken, userId, userName) {
+  const res = await dispatchWorkflow(githubToken, 'promote-to-production.yml', 'main', { confirm: 'promote' });
 
   const user = userName || userId;
   if (res.status === 204) {
