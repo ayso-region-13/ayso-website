@@ -127,3 +127,36 @@ The school renamed. The field page title and description were already updated in
 - Left alone: `proposed-site-structure.md` and `todo.md` are historical records; `/marshall/` → `/fields/marshall/` redirects (2 rules, both worker + `_redirects`) are URL-only and unaffected.
 
 **Remaining latent reference lives in the platform, not this repo.** After a full build the only "Marshall Fundamental" strings left in `_site/` are the two field-map image `alt` attributes on `/fields/marshall/` ("Marshall Fundamental game field map", "Marshall Fundamental games-10u field map"). Those come from the ayso-platform public API at build time. Fixing them is platform work: the venue display title lives in the `ayso_fields` D1 table (seeded from `web/apps/workers/src/data/ayso-fields.json`), and each variant's `alt` is stored on its `field_maps` row, defaulted at save time from the venue title (`web/apps/fields/editor/app.js`) — so renaming the venue does not retroactively rewrite existing alts. Both prod and staging D1 need it.
+
+---
+
+## Session 44 (2026-08-06) — staging deploys failing: three causes, one real
+
+**Symptom reported:** recent deploys failing, some "skipped", one manual run worked. Three distinct phenomena, only one of them a bug in this repo.
+
+**1. The real failure — a missing map asset kills the whole build.** Both Slack-reported failures (runs `31130443147`, `31130648494`) died in Eleventy, not in the deploy:
+
+```
+[11ty] Cannot read properties of undefined (reading 'png')
+  at optimizeVariantImage (site/src/_data/lib/fetchFieldMaps.js:65)
+```
+
+Traced to the storage layer. Staging's platform D1 advertised 39 field-map variants; three of their PNGs were absent from the `region13-uploads-staging` R2 bucket — `allendale-game`, `cornishon-practice`, `fis-upper-practice` — so `/field-images/<slug>-<variant>.png` returned `404 text/plain`. **eleventy-img returns `undefined` for a failed remote fetch rather than throwing**, so `metadata.png` threw a TypeError and 11ty died at the global-data stage, taking down every staging deploy including unrelated CMS content edits.
+
+Prod was complete (39/39), which is exactly why the manual run worked: staging builds set `FIELDS_API_BASE=fields-staging.ayso13.org`, while promote and rebuild-production read `fields.ayso13.org`. The D1 rows were byte-identical between instances (same view, zoom, elements) — only the rendered PNGs were gone, so the prod objects were the correct bytes to restore. Restored by copying them into the staging bucket via the Cloudflare dashboard; the canonical `ayso13-worker-deploy` token has no R2 permission, and an earlier `wrangler r2 object get` that appeared to confirm the absence was actually reading wrangler's **local** store — the remote call 403s. The HTTP 404 sweep was the real evidence. **Cause of the disappearance was never established** (could not read lifecycle rules without R2 access); tracked in `todo.md`.
+
+Verified after restore: 39/39 variants fetch and optimize, full staging-mode `npm run build` exits 0, Pagefind indexes 120 pages.
+
+**2. The two "skipped" runs were the debounce working.** Runs `31124271824` / `31124270318` were `cancelled` by `cancel-in-progress` when a newer CMS push superseded them. By design, no change.
+
+**3. One failure was GitHub's, not ours.** Run `31124662160`: "The job was not acquired by Runner of type hosted even after multiple attempts." Zero steps executed, so neither the success nor the `if: failure()` notifier could fire — a CMS edit silently never deployed and nobody was told.
+
+**Fix for (3): the deploy watchdog** (`.github/workflows/deploy-watchdog.yml`). A `workflow_run: completed` watcher on a fresh runner, counting executed steps across the finished run's jobs. Zero executed steps is the precise test for "no in-job notifier could have fired". **The discriminator needs the RUN-level conclusion as well as the step count, and run-level differs from job-level** — verified against real runs: the runner-allocation failure reports job `cancelled` but run `failure`, while a debounce supersede is `cancelled` at both levels. Staging `failure`+0 → Slack plus one auto re-dispatch; staging `cancelled`+0 → silent (debounce, or editors learn to ignore the channel); promote `cancelled`+0 → Slack only, because production is deliberately never auto-promoted. This also closes the superseded-promote gap CLAUDE.md had documented as an accepted cost whose mitigation was "notice the missing message and re-run by hand".
+
+Loop guard needs no persisted state: only retry a run whose event was `push` or `repository_dispatch`. The retry is itself a `workflow_dispatch`, so a retry that also fails to acquire a runner cannot spawn another. `GITHUB_TOKEN` can start it — `workflow_dispatch` and `repository_dispatch` are the two documented exceptions to the rule that token-created events do not trigger workflow runs.
+
+Classification lives in `.github/scripts/classify-silent-run.sh` (pure: three env vars in, verdict out) so it is testable off-CI; `.github/scripts/test-classify-silent-run.sh` covers 12 cases including the real values from the four runs above. **Residual risk:** whether `workflow_run: completed` fires at all for a run that never acquired a runner cannot be simulated — it needs the next real occurrence to confirm. Tracked in `todo.md` with a scheduled-drift-check fallback. Design: `docs/superpowers/specs/2026-08-06-deploy-watchdog-design.md`.
+
+**Also added: `/ayso staging`** (alias `rebuild-staging`) — dispatches `deploy-pages-staging.yml` on `staging` for a manual rebuild, mirroring `/ayso promote` but needing no confirmation since it touches nothing in production. The shared dispatch call was extracted to `dispatchWorkflow()` rather than duplicated. The bot's `GITHUB_TOKEN` already carries Actions: write (promote depends on it). The staging workflow's **debounce now applies to pushes only** (`github.event_name == 'push'`, was `!= 'repository_dispatch'`): a manual dispatch is as deliberate as a publish click, and waiting 45s only bought latency plus a wider window for a CMS push to cancel it.
+
+**Stranded content shipped by this session's push:** 7 CMS commits had accumulated on `origin/staging` without ever deploying (last successful staging deploy was 2026-08-04 13:32) — the rollout page and both `RC_ROLLOUT-HEAD` images among them.
