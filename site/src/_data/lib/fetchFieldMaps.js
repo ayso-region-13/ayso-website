@@ -83,7 +83,25 @@ async function optimizeVariantImage(absoluteUrl, alt) {
 async function reshape(detail) {
   const variants = {};
   for (const v of detail.variants || []) {
-    const absoluteUrl = v.image_url && v.image_url.startsWith("http") ? v.image_url : `${BASE}${v.image_url}`;
+    // `image_url` is typed `string | null` by the platform, and it is null
+    // exactly when that variant's `png_ref` is unset -- the platform's way of
+    // saying "no map has been generated for this variant". A field legitimately
+    // may have a practice map but no game map (or the reverse), and which maps
+    // exist changes over time, so this is a NORMAL state, not an error: skip the
+    // variant and let the field page render without that section (every variant
+    // in page.njk is `{% if %}`-guarded, so absence renders nothing).
+    //
+    // Without this, `${BASE}${null}` built the URL ".../null", eleventy-img
+    // returned undefined for the 404, and `metadata.png` threw
+    // "Cannot read properties of undefined (reading 'png')" -- an ungenerated
+    // map took down the whole site build.
+    //
+    // NOTE the deliberate asymmetry: a variant that advertises an image_url
+    // whose object is MISSING still fails the build, loudly. That is corruption
+    // (png_ref points at a vanished R2 object, as happened 2026-08-06), not an
+    // editorial choice, and it should not ship silently.
+    if (!v.image_url) continue;
+    const absoluteUrl = v.image_url.startsWith("http") ? v.image_url : `${BASE}${v.image_url}`;
     const { pngLarge, pictureHtml } = await optimizeVariantImage(absoluteUrl, v.alt);
     variants[v.name] = {
       label: v.label,
