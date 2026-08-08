@@ -127,3 +127,77 @@ The school renamed. The field page title and description were already updated in
 - Left alone: `proposed-site-structure.md` and `todo.md` are historical records; `/marshall/` → `/fields/marshall/` redirects (2 rules, both worker + `_redirects`) are URL-only and unaffected.
 
 **Remaining latent reference lives in the platform, not this repo.** After a full build the only "Marshall Fundamental" strings left in `_site/` are the two field-map image `alt` attributes on `/fields/marshall/` ("Marshall Fundamental game field map", "Marshall Fundamental games-10u field map"). Those come from the ayso-platform public API at build time. Fixing them is platform work: the venue display title lives in the `ayso_fields` D1 table (seeded from `web/apps/workers/src/data/ayso-fields.json`), and each variant's `alt` is stored on its `field_maps` row, defaulted at save time from the venue title (`web/apps/fields/editor/app.js`) — so renaming the venue does not retroactively rewrite existing alts. Both prod and staging D1 need it.
+
+---
+
+## Session 44 (2026-08-06) — staging deploys failing: three causes, one real
+
+**Symptom reported:** recent deploys failing, some "skipped", one manual run worked. Three distinct phenomena, only one of them a bug in this repo.
+
+**1. The real failure — a missing map asset kills the whole build.** Both Slack-reported failures (runs `31130443147`, `31130648494`) died in Eleventy, not in the deploy:
+
+```
+[11ty] Cannot read properties of undefined (reading 'png')
+  at optimizeVariantImage (site/src/_data/lib/fetchFieldMaps.js:65)
+```
+
+Traced to the storage layer. Staging's platform D1 advertised 39 field-map variants; three of their PNGs were absent from the `region13-uploads-staging` R2 bucket — `allendale-game`, `cornishon-practice`, `fis-upper-practice` — so `/field-images/<slug>-<variant>.png` returned `404 text/plain`. **eleventy-img returns `undefined` for a failed remote fetch rather than throwing**, so `metadata.png` threw a TypeError and 11ty died at the global-data stage, taking down every staging deploy including unrelated CMS content edits.
+
+Prod was complete (39/39), which is exactly why the manual run worked: staging builds set `FIELDS_API_BASE=fields-staging.ayso13.org`, while promote and rebuild-production read `fields.ayso13.org`. The D1 rows were byte-identical between instances (same view, zoom, elements) — only the rendered PNGs were gone, so the prod objects were the correct bytes to restore. Restored by copying them into the staging bucket via the Cloudflare dashboard; the canonical `ayso13-worker-deploy` token has no R2 permission, and an earlier `wrangler r2 object get` that appeared to confirm the absence was actually reading wrangler's **local** store — the remote call 403s. The HTTP 404 sweep was the real evidence. **Cause of the disappearance was never established** (could not read lifecycle rules without R2 access); tracked in `todo.md`.
+
+Verified after restore: 39/39 variants fetch and optimize, full staging-mode `npm run build` exits 0, Pagefind indexes 120 pages.
+
+**2. The two "skipped" runs were the debounce working.** Runs `31124271824` / `31124270318` were `cancelled` by `cancel-in-progress` when a newer CMS push superseded them. By design, no change.
+
+**3. One failure was GitHub's, not ours.** Run `31124662160`: "The job was not acquired by Runner of type hosted even after multiple attempts." Zero steps executed, so neither the success nor the `if: failure()` notifier could fire — a CMS edit silently never deployed and nobody was told.
+
+**Fix for (3): the deploy watchdog** (`.github/workflows/deploy-watchdog.yml`). A `workflow_run: completed` watcher on a fresh runner, counting executed steps across the finished run's jobs. Zero executed steps is the precise test for "no in-job notifier could have fired". **The discriminator needs the RUN-level conclusion as well as the step count, and run-level differs from job-level** — verified against real runs: the runner-allocation failure reports job `cancelled` but run `failure`, while a debounce supersede is `cancelled` at both levels. Staging `failure`+0 → Slack plus one auto re-dispatch; staging `cancelled`+0 → silent (debounce, or editors learn to ignore the channel); promote `cancelled`+0 → Slack only, because production is deliberately never auto-promoted. This also closes the superseded-promote gap CLAUDE.md had documented as an accepted cost whose mitigation was "notice the missing message and re-run by hand".
+
+Loop guard needs no persisted state: only retry a run whose event was `push` or `repository_dispatch`. The retry is itself a `workflow_dispatch`, so a retry that also fails to acquire a runner cannot spawn another. `GITHUB_TOKEN` can start it — `workflow_dispatch` and `repository_dispatch` are the two documented exceptions to the rule that token-created events do not trigger workflow runs.
+
+Classification lives in `.github/scripts/classify-silent-run.sh` (pure: three env vars in, verdict out) so it is testable off-CI; `.github/scripts/test-classify-silent-run.sh` covers 12 cases including the real values from the four runs above. **Residual risk:** whether `workflow_run: completed` fires at all for a run that never acquired a runner cannot be simulated — it needs the next real occurrence to confirm. Tracked in `todo.md` with a scheduled-drift-check fallback. Design: `docs/superpowers/specs/2026-08-06-deploy-watchdog-design.md`.
+
+**Also added: `/ayso staging`** (alias `rebuild-staging`) — dispatches `deploy-pages-staging.yml` on `staging` for a manual rebuild, mirroring `/ayso promote` but needing no confirmation since it touches nothing in production. The shared dispatch call was extracted to `dispatchWorkflow()` rather than duplicated. The bot's `GITHUB_TOKEN` already carries Actions: write (promote depends on it). The staging workflow's **debounce now applies to pushes only** (`github.event_name == 'push'`, was `!= 'repository_dispatch'`): a manual dispatch is as deliberate as a publish click, and waiting 45s only bought latency plus a wider window for a CMS push to cancel it.
+
+**Stranded content shipped by this session's push:** 7 CMS commits had accumulated on `origin/staging` without ever deploying (last successful staging deploy was 2026-08-04 13:32) — the rollout page and both `RC_ROLLOUT-HEAD` images among them.
+
+**Follow-ups within session 44**, after review and a question about field semantics:
+
+- **The watchdog could silence itself** — caught by security review of `cc45af7`. `if: verdict != 'none'` gets an implicit `success()` ANDed in, so any earlier step failing skipped the Slack notify; `jq '[.jobs[].steps[]]'` throws on a null `steps` (optional on the REST job object, absent exactly when a job never acquired a runner) and `set -e` then killed the step; and a failed `gh workflow run` did the same. Fixed in `0042216`: `always()` on the notify with verdicts matched explicitly (so an empty output can't post the wrong message), `[.jobs[]?.steps[]?]`, `continue-on-error` on the retry, and an unreadable run gets its own `unknown` verdict rather than a guess — defaulting the step count to 0 would misread an ordinary build failure as a silent one. Retry guard also became an allowlist (`push` or `repository_dispatch`) so a future trigger can't silently become retryable.
+
+- **An ungenerated map killed the build** (`f6d6127`). Prompted by asking why Allendale had a game map at all: it has no game field. The platform types `image_url` as `string | null` and returns null when `png_ref` is unset — "no map generated for this variant" — but `reshape()` didn't handle null, building `https://fields.ayso13.orgnull`, 404ing, and dying with the same `metadata.png` TypeError. So "this field has a practice map but no game map" *crashed the site build*, when it should be a non-event. Now skipped; `page.njk` already `{% if %}`-guards every variant, so absence renders nothing. The asymmetry is deliberate: an advertised-but-missing object still fails loudly, because that's corruption.
+
+  **Allendale's `game` variant was deleted from both instances the same day.** Querying D1 corrected an earlier wrong theory: it was *not* legacy import data. The row read `elements_json = "[]"`, `updated_at 2026-08-05T15:52:07.649Z`, `updated_by matthew@ayso13.org` — a save in the *current* editor with nothing drawn, the day before the breakage. (The `b4c084b` old-editor map, imported in session 40, was a red herring; the Aug 5 timestamp disproves it. Recorded because the wrong theory was stated first.) Deleted the `field_maps` row from `region13-scheduler-staging` then `region13-scheduler` (1 row each) plus both orphaned R2 objects; verified both `/public/fields/allendale` list `["practice"]` only, both PNGs 404, and a full sweep shows 0 missing of 38 variants on each. The restore of `cornishon/practice` and `fis-upper/practice` was correct (real maps, 706 and 1195 chars of elements); only `allendale-game.png` was the wrong call. Record + what's still open: `~/dev/ayso-platform/docs/handoff-allendale-game-map.md`.
+
+  **Credentials gotcha:** `ayso13-worker-deploy` has neither D1 nor R2 permission (`Authentication error [code: 10000]`), so these ran under the interactive `wrangler login` OAuth session (Super Administrator). And `d1 execute` / `r2 object` default to **local** storage — without `--remote` a local miss reads exactly like a real absence, which produced a false claim earlier in the session.
+
+  **New evidence on the still-unexplained missing objects:** the three affected rows carry **millisecond-identical `updated_at` values across both D1 instances**, which looks more like a row-level copy between instances than independent saves — and a copy that moves rows without moving R2 objects would produce exactly the observed symptom. Suggestive, not confirmed; the cause remains open.
+
+- **The Slack bot's authorization failed open** (`d336617`), found by the same review. `getAllowedUsers` caught every error and returned `[]`, which the gate read as allow-all; `getFile` returned `res.json()` regardless of status, and the contents API answers 401/403/404 with a valid body that just has no `content`, making a failed lookup indistinguishable from a successful empty one. An expired PAT would have opened `/ayso promote` — a production deploy — to every workspace member. Now `getFile` returns `{status, data}`, an absent file (404) still means unrestricted, a readable file is enforced, an explicitly empty list means nobody, and anything else denies while naming the likely cause. `commitToBothBranches` checks the read status too — it had been passing `sha: undefined` into a PUT that GitHub rejected while `putFile` ignored the response, so a field-status update could fail and still report success to Slack. 14 stubbed-API cases verified.
+
+**Session 44 closing verification (live, not simulated):** `/ayso staging` was run from Slack and dispatched run `31142501362` on `fbc168a` — which exercises the whole new path at once: the bot's fail-closed authorization gate resolved the allowlist with the real PAT and admitted the caller, the dispatch reached `deploy-pages-staging.yml`, the debounce step was **skipped** (confirming the narrowing to `github.event_name == 'push'`), and the deploy succeeded. Post-deploy checks: `/fields/allendale/` renders `field-map-practices` only, `/fields/victory/` still renders both `field-map-games` and `field-map-practices`, `/families/rollout/` is 200, and the Deploy Watchdog fired and **skipped** on the successful run. Both staging and prod field APIs sit at 0 missing of 38 variants.
+
+Everything in session 44 is verified on staging. **Production was left behind deliberately** — the 7 stranded CMS commits plus all of the above sit on `staging` only, so the next promote ships them together; review `git log origin/main..origin/staging` first.
+
+---
+
+## Session 45 (2026-08-07) — clubhouse request form surfaced
+
+Coaches request use of the Region 13 clubhouse (711 W. Woodbury Rd., Unit E, Altadena) through a Typeform at `https://ayso13.typeform.com/to/xCIGB2TA` ("Clubhouse Form"). The clubhouse was named in five places on the site — the contact page photo/address, the board-meeting location on `/volunteers/roles/`, a training venue on `/volunteers/classes/` and `/referees/training/`, and "key and alarm codes" on `/volunteers/onboarding/` — but nothing said how to request it.
+
+Shipped (`5c6d4fc`, `c071c2b`):
+
+- `/coaches/` — one bullet in **Coaching Resources**.
+- `/volunteers/` — a short `## Using the Clubhouse` section above Contact.
+- `/clubhouse` + `/clubhouse/` → the Typeform, 301. Map is now **639 exact + 9 splat = 648**.
+- `llms.txt` — listed under Volunteers, pointing at the `/clubhouse` slug so the entry stays an ayso13.org URL.
+
+**Deliberately not added to `/register/forms/`.** That page is titled "Required Forms" and renders in both the Register and Families sidebars; a volunteer facility request is neither required nor a family concern, and it would land two headings below the refund schedule. (The reimbursement form arguably has the same problem already. Regrouping that page into Family / Volunteer sections is a separate decision, not a drive-by.) No dedicated `/volunteers/clubhouse/` page and no `navigation.js` change either — the form's questions aren't visible without submitting it (Typeform renders client-side), so there was nothing to write a procedure page from. If the approval path, lead time, and permitted uses ever get documented, that page becomes worth adding and these two links repoint to it.
+
+**Gotcha hit: `workers/redirects/src/map.js` is generated, and its first line says so.** The rules went into `map.js` directly on the first pass. Local `npm test` passed (32/32, 639 exact) because the tests read the same hand-edited file — but `deploy:staging` runs `npm run build` first, so `scripts/generate-map.js` rebuilt the map from `site/src/_redirects` and dropped both rules. The staging Worker deployed green and `/clubhouse` 404'd while the `/mentor` control still redirected. **Source of truth is `site/src/_redirects`**; the regenerated map came out byte-identical to the hand edit apart from the header timestamp, which is exactly why the mistake was invisible until deploy.
+
+Second-guessing worth recording: after the corrected deploy, `/clubhouse` still 404'd on two consecutive checks with a cache-buster, which looked like a config fault. It was **Worker version propagation** — roughly a minute later it returned 301, unchanged. Same shape as the `feedback_cache_bust_when_verifying_deploys` note but for Workers rather than Pages: a fresh Worker version is not instantly live on every edge, and a cache-buster does not help because the miss is not a cache. Give it a minute before diagnosing.
+
+Verified on staging: `/clubhouse` and `/clubhouse/` → 301 to the Typeform; `/coaches/` and `/volunteers/` both carry the link; `staging.ayso13.org/llms.txt` has the Clubhouse Request line. Redirect Worker run `31237441827` and Pages run `31237441836` both succeeded.
+
+**Production not touched.** The `/clubhouse` slug only reaches www.ayso13.org when `deploy-redirects-worker.yml` runs on `main`, which happens on promote. These commits sit on `staging` alongside session 44's backlog.

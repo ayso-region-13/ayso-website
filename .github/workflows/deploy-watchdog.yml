@@ -1,0 +1,174 @@
+name: Deploy Watchdog
+
+# Reports the deploys that report NOTHING.
+#
+# Every Slack notifier in the deploy workflows lives inside the deploy job
+# (`if: success()` / `if: failure()`). A run whose job never executes a single
+# step therefore tells nobody it happened -- not even via an `always()` step.
+# Two real cases, both previously invisible:
+#
+#   1. "The job was not acquired by Runner of type hosted even after multiple
+#      attempts" (run 31124662160, a CMS push to staging that silently never
+#      deployed).
+#   2. A queued `/ayso promote` evicted from the shared `deploy-pages-prod`
+#      concurrency group by a later fields "Publish Site" click -- the cost
+#      accepted in CLAUDE.md, whose mitigation was a note telling the operator
+#      to notice the missing Slack message and re-run by hand.
+#
+# This workflow runs on its own fresh runner AFTER the watched run finishes, so
+# it survives the watched job never starting.
+#
+# Design + the verified conclusion/step-count truth table:
+#   docs/superpowers/specs/2026-08-06-deploy-watchdog-design.md
+#
+# NOTE: `workflow_run` only triggers from the repository's DEFAULT branch. That
+# is `staging` here (set 2026-06-08 so Pages CMS opens on staging), so this file
+# is live from `staging` and does NOT need to reach `main` -- unlike the promote
+# workflow, which Slack dispatches with `ref: main`.
+
+on:
+  workflow_run:
+    workflows:
+      - "Deploy Staging (Pages Direct Upload)"
+      - "Promote Staging to Production"
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: write # read the run's jobs + re-dispatch the staging deploy
+
+jobs:
+  watch:
+    # Cheap gate: only a non-success run can have gone silent. Keeps the
+    # watchdog from spending a runner on every green deploy.
+    if: github.event.workflow_run.conclusion != 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      # Zero executed steps across every job == no in-job notifier could have
+      # fired. That is the whole detection; the classifier turns it plus the
+      # RUN-level conclusion into a verdict.
+      - name: Classify the finished run
+        id: classify
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          WF_NAME: ${{ github.event.workflow_run.name }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: |
+          # `steps` is an OPTIONAL property on the REST job object, and a job that
+          # never acquired a runner is exactly where it can be absent, so the `?`
+          # operators make an absent list read as zero rather than throwing.
+          #
+          # If the lookup itself fails we must NOT guess: a step count of 0 would
+          # misread an ordinary build failure as a silent one, and letting the step
+          # die would skip the notify and silence the watchdog. So an unreadable
+          # run gets its own `unknown` verdict and its own honest message.
+          STEP_COUNT=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${RUN_ID}/jobs" \
+            --jq '[.jobs[]?.steps[]?] | length' 2>/dev/null) || STEP_COUNT=""
+          echo "run ${RUN_ID} (${WF_NAME}): conclusion=${CONCLUSION} steps=${STEP_COUNT:-<unreadable>}"
+
+          if [ -z "$STEP_COUNT" ]; then
+            VERDICT="unknown"
+          else
+            VERDICT=$(STEP_COUNT="$STEP_COUNT" bash .github/scripts/classify-silent-run.sh)
+          fi
+          echo "verdict=${VERDICT}" >> "$GITHUB_OUTPUT"
+          echo "verdict: ${VERDICT}"
+
+      # Staging only, and at most once. Production is never auto-promoted: a
+      # promote is an outward-facing deploy that stays a human decision, so the
+      # operator just gets told theirs was dropped.
+      #
+      # Loop guard needs no persisted state -- only retry a run whose event was
+      # `push` or `repository_dispatch`. The retry below is itself a
+      # `workflow_dispatch`, so a retry that also fails to acquire a runner
+      # cannot spawn another one.
+      #
+      # (`GITHUB_TOKEN` can start this: `workflow_dispatch` and
+      # `repository_dispatch` are the two documented exceptions to the rule that
+      # token-created events do not trigger workflow runs.)
+      #
+      # The retry rebuilds from the tip of `staging`, not the original commit,
+      # which matches the debounce philosophy already in the staging workflow:
+      # latest content wins.
+      #
+      # `continue-on-error` matters: a dispatch can fail for reasons outside this
+      # repo (org-level Actions restrictions, a transient 5xx). Without it, a
+      # failed retry would skip the notify step and the deploy would go silent
+      # anyway -- the exact outcome this workflow exists to prevent.
+      #
+      # The guard is an ALLOWLIST rather than `!= workflow_dispatch`: adding any
+      # future trigger to the staging workflow would otherwise silently become
+      # retryable.
+      - name: Re-dispatch the staging deploy
+        id: retry
+        continue-on-error: true
+        if: >-
+          steps.classify.outputs.verdict == 'silent-runner' &&
+          github.event.workflow_run.name == 'Deploy Staging (Pages Direct Upload)' &&
+          (github.event.workflow_run.event == 'push' ||
+           github.event.workflow_run.event == 'repository_dispatch')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run "Deploy Staging (Pages Direct Upload)" --ref staging
+          echo "retried=true" >> "$GITHUB_OUTPUT"
+
+      # head_commit.message and the workflow name are untrusted input; they only
+      # ever reach Slack through `jq --arg`, never through the shell.
+      # `always()` is load-bearing. A bare `if:` gets an implicit `success()`
+      # ANDed in, so any earlier step failing would skip this notify — the
+      # watchdog would go silent about a silent deploy. The verdicts are matched
+      # explicitly rather than `!= 'none'` so that an EMPTY output (classify step
+      # died before writing one) cannot fall through and post the wrong message.
+      - name: Notify Slack — a deploy went silent
+        if: >-
+          always() && (
+            steps.classify.outputs.verdict == 'silent-runner' ||
+            steps.classify.outputs.verdict == 'silent-superseded' ||
+            steps.classify.outputs.verdict == 'unknown'
+          )
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          VERDICT: ${{ steps.classify.outputs.verdict }}
+          RETRIED: ${{ steps.retry.outputs.retried }}
+          WF_NAME: ${{ github.event.workflow_run.name }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+          MSG: ${{ github.event.workflow_run.head_commit.message }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          SHORT="${SHA:0:7}"
+          SUBJECT=$(printf '%s' "$MSG" | head -1)
+
+          if [ "$VERDICT" = "unknown" ]; then
+            HEADLINE=":grey_question: *Could not tell whether a deploy reported itself*"
+            DETAIL="The watchdog could not read the jobs of *${WF_NAME}*, so it cannot say whether that run notified anyone. Check the run — it may have deployed nothing without saying so."
+          elif [ "$VERDICT" = "silent-superseded" ]; then
+            HEADLINE=":warning: *Promote was dropped before it ran*"
+            DETAIL="A later fields \`Publish Site\` click evicted this promote from the \`deploy-pages-prod\` queue, so production was not updated and no other message was sent. Re-run \`/ayso promote\`."
+          elif [ "$RETRIED" = "true" ]; then
+            HEADLINE=":arrows_counterclockwise: *Staging deploy never started — retried automatically*"
+            DETAIL="GitHub could not allocate a runner, so the job ran no steps and reported nothing. A fresh staging deploy has been dispatched from the tip of \`staging\`."
+          else
+            HEADLINE=":warning: *A deploy never started*"
+            DETAIL="GitHub could not allocate a runner for *${WF_NAME}*, so the job ran no steps and reported nothing. Nothing was deployed; re-run it when convenient."
+          fi
+
+          curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc \
+              --arg head "$HEADLINE" \
+              --arg detail "$DETAIL" \
+              --arg sha "$SHORT" \
+              --arg subj "$SUBJECT" \
+              --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "A deploy went silent — \($sha)",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: "\($head) — `\($sha)`\n\($detail)\($subj | if . == "" then "" else "\n" + . end)" } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View the run that went silent>" } ] }
+              ]
+            }')"

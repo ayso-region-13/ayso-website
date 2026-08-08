@@ -5,6 +5,7 @@
  * /ayso field         → Field Status modal directly
  * /ayso announce      → Announcement modal directly
  * /ayso promote       → trigger staging → production promotion
+ * /ayso staging       → rebuild + redeploy staging.ayso13.org from `staging`
  * /ayso weather       → show current conditions (private/ephemeral reply)
  * /ayso test-weather  → post a connectivity test to #notify-weather via the
  *                       weather-api Worker (verifies its Slack notifier path)
@@ -88,8 +89,17 @@ async function handleCommand(rawBody, env, ctx) {
   const triggerId = params.get('trigger_id');
   const userId    = params.get('user_id');
 
-  const allowedIds = await getAllowedUsers(env.GITHUB_TOKEN);
-  if (allowedIds.length > 0 && !allowedIds.includes(userId)) {
+  // Deny when the allowlist cannot be read, rather than assuming it is empty —
+  // every command below this gate can change the live site, and two of them
+  // deploy.
+  const auth = await getAllowedUsers(env.GITHUB_TOKEN);
+  if (!auth.ok) {
+    return new Response(
+      JSON.stringify({ response_type: 'ephemeral', text: "Couldn't verify who's authorized to run this (the allowlist lookup failed), so nothing was run. If this persists, the bot's GitHub token has probably expired." }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+  if (auth.ids && !auth.ids.includes(userId)) {
     return new Response(
       JSON.stringify({ response_type: 'ephemeral', text: "Sorry, you're not authorized to use this command." }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
@@ -100,6 +110,18 @@ async function handleCommand(rawBody, env, ctx) {
     ctx.waitUntil(triggerPromotion(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
     return new Response(
       JSON.stringify({ response_type: 'ephemeral', text: '🚀 Promotion triggered — staging → production. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  // Manual staging rebuild. Useful when a staging deploy went silent (GitHub
+  // failed to allocate a runner) or when a field-map edit needs re-fetching
+  // without touching content. Unlike `promote` this deploys nothing to
+  // production, so it needs no confirmation step.
+  if (text === 'staging' || text === 'rebuild-staging') {
+    ctx.waitUntil(triggerStagingDeploy(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
+    return new Response(
+      JSON.stringify({ response_type: 'ephemeral', text: '🔧 Staging rebuild triggered. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   }
@@ -224,17 +246,27 @@ async function processAnnouncement(values, user, env) {
 
 async function commitToBothBranches(token, path, content, message) {
   for (const branch of BRANCHES) {
-    const file = await getFile(token, path, branch);
-    await putFile(token, path, branch, content, message, file.sha);
+    const { status, data } = await getFile(token, path, branch);
+    // Without this the read's failure body would supply `sha: undefined`, the
+    // PUT would be rejected, and the caller would still report success to Slack.
+    if (status !== 200 || !data || !data.sha) {
+      throw new Error(`GitHub contents read failed for ${path}@${branch}: ${status}`);
+    }
+    await putFile(token, path, branch, content, message, data.sha);
   }
 }
 
+// Returns { status, data }. Callers MUST check the status: the contents API
+// answers 401 / 403 / 404 with a perfectly valid JSON body that simply has no
+// `content` or `sha` field, so a bare `res.json()` makes a FAILED lookup
+// indistinguishable from a successful empty one. That ambiguity is what made the
+// authorization check below fail open.
 async function getFile(token, path, branch) {
   const res = await fetch(
     `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}?ref=${branch}`,
     { headers: githubHeaders(token) }
   );
-  return res.json();
+  return { status: res.status, data: await res.json().catch(() => null) };
 }
 
 async function putFile(token, path, branch, content, message, sha) {
@@ -250,15 +282,47 @@ async function putFile(token, path, branch, content, message, sha) {
   );
 }
 
-async function triggerPromotion(githubToken, slackToken, userId, userName) {
-  const res = await fetch(
-    `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/promote-to-production.yml/dispatches`,
+// Fires a workflow_dispatch. `ref` decides WHICH COPY of the workflow file runs,
+// not just what gets built — promote reads from `main` deliberately (see the
+// promote notes in CLAUDE.md), staging reads from `staging`.
+async function dispatchWorkflow(githubToken, workflowFile, ref, inputs) {
+  return fetch(
+    `https://api.github.com/repos/${GITHUB_REPO}/actions/workflows/${workflowFile}/dispatches`,
     {
       method: 'POST',
       headers: { ...githubHeaders(githubToken), 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ref: 'main', inputs: { confirm: 'promote' } })
+      body: JSON.stringify(inputs ? { ref, inputs } : { ref })
     }
   );
+}
+
+async function triggerStagingDeploy(githubToken, slackToken, userId, userName) {
+  const res = await dispatchWorkflow(githubToken, 'deploy-pages-staging.yml', 'staging');
+  const user = userName || userId;
+
+  if (res.status === 204) {
+    await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: '🔧 *Staging rebuild*\nDeploy workflow started. staging.ayso13.org will be rebuilt from the `staging` branch in ~2 minutes.' }
+      },
+      {
+        type: 'context',
+        elements: [{ type: 'mrkdwn', text: `_Triggered by @${user} — ${pacificTimestamp()}_ · <https://github.com/${GITHUB_REPO}/actions|View Actions>` }]
+      }
+    ], `Staging rebuild started by @${user}`);
+  } else {
+    await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
+      {
+        type: 'section',
+        text: { type: 'mrkdwn', text: `⚠️ *Staging rebuild failed to start* — GitHub API returned ${res.status}. <https://github.com/${GITHUB_REPO}/actions|Check Actions>.` }
+      }
+    ], 'Staging rebuild failed to start');
+  }
+}
+
+async function triggerPromotion(githubToken, slackToken, userId, userName) {
+  const res = await dispatchWorkflow(githubToken, 'promote-to-production.yml', 'main', { confirm: 'promote' });
 
   const user = userName || userId;
   if (res.status === 204) {
@@ -534,13 +598,32 @@ function buildAnnouncementModal() {
 
 // ── Utilities ─────────────────────────────────────────────────────────────
 
+// Resolves the allowlist, distinguishing "no allowlist is configured" from
+// "could not find out" — and FAILS CLOSED on the latter.
+//
+// The old version caught every error and returned `[]`, which the caller read as
+// allow-all. So an expired PAT, a 403, or a GitHub 5xx silently opened `/ayso
+// promote` — a production deploy — to every member of the workspace. Slack
+// signature verification proves a request came from Slack; it says nothing about
+// who is allowed to deploy.
+//
+//   { ok: true,  ids: [...] }  enforce this list
+//   { ok: true,  ids: null  }  no allowlist file exists → unrestricted, as documented
+//   { ok: false }              lookup or parse failed → deny, and say so
 async function getAllowedUsers(token) {
+  const { status, data } = await getFile(token, 'slack-bot/allowed-users.json', 'main');
+  if (status === 404) return { ok: true, ids: null };
+  if (status !== 200 || !data || typeof data.content !== 'string') return { ok: false };
+
   try {
-    const file = await getFile(token, 'slack-bot/allowed-users.json', 'main');
-    const json = JSON.parse(atob(file.content.replace(/\n/g, '')));
-    return json.allowed_user_ids || [];
+    const json = JSON.parse(atob(data.content.replace(/\n/g, '')));
+    // An explicitly empty list means nobody, not everybody. Only an ABSENT file
+    // grants open access.
+    return Array.isArray(json.allowed_user_ids)
+      ? { ok: true, ids: json.allowed_user_ids }
+      : { ok: false };
   } catch {
-    return []; // if file missing or unreadable, allow all
+    return { ok: false };
   }
 }
 

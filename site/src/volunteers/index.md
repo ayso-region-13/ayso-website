@@ -53,6 +53,12 @@ Classes are scheduled nearly every weekend in August before the fall season, wit
 
 [Training Calendar on eTrainU](https://ayso13.inleague.com/app/eTrainU)
 
+## Using the Clubhouse
+
+To request use of the Region 13 clubhouse in Altadena, complete the clubhouse request form.
+
+[Clubhouse Request Form](https://ayso13.typeform.com/to/xCIGB2TA)
+
 ## Contact
 
 - General questions: [info@ayso13.org](mailto:info@ayso13.org)

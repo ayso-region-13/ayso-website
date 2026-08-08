@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-07-25T18:43:17.369Z
-// 637 exact rules + 9 splat rules = 646 total
+// Last generated: 2026-08-08T03:32:33.231Z
+// 639 exact rules + 9 splat rules = 648 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -2026,6 +2026,14 @@ export const EXACT = {
   },
   "/signup/": {
     "d": "https://www.wejoinin.com/AYSORegion13",
+    "s": 301
+  },
+  "/clubhouse": {
+    "d": "https://ayso13.typeform.com/to/xCIGB2TA",
+    "s": 301
+  },
+  "/clubhouse/": {
+    "d": "https://ayso13.typeform.com/to/xCIGB2TA",
     "s": 301
   },
   "/mentor": {
