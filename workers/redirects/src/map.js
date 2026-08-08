@@ -2028,6 +2028,14 @@ export const EXACT = {
     "d": "https://www.wejoinin.com/AYSORegion13",
     "s": 301
   },
+  "/clubhouse": {
+    "d": "https://ayso13.typeform.com/to/xCIGB2TA",
+    "s": 301
+  },
+  "/clubhouse/": {
+    "d": "https://ayso13.typeform.com/to/xCIGB2TA",
+    "s": 301
+  },
   "/mentor": {
     "d": "https://ayso13.typeform.com/mentor",
     "s": 301
