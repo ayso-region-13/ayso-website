@@ -178,3 +178,26 @@ Classification lives in `.github/scripts/classify-silent-run.sh` (pure: three en
 **Session 44 closing verification (live, not simulated):** `/ayso staging` was run from Slack and dispatched run `31142501362` on `fbc168a` — which exercises the whole new path at once: the bot's fail-closed authorization gate resolved the allowlist with the real PAT and admitted the caller, the dispatch reached `deploy-pages-staging.yml`, the debounce step was **skipped** (confirming the narrowing to `github.event_name == 'push'`), and the deploy succeeded. Post-deploy checks: `/fields/allendale/` renders `field-map-practices` only, `/fields/victory/` still renders both `field-map-games` and `field-map-practices`, `/families/rollout/` is 200, and the Deploy Watchdog fired and **skipped** on the successful run. Both staging and prod field APIs sit at 0 missing of 38 variants.
 
 Everything in session 44 is verified on staging. **Production was left behind deliberately** — the 7 stranded CMS commits plus all of the above sit on `staging` only, so the next promote ships them together; review `git log origin/main..origin/staging` first.
+
+---
+
+## Session 45 (2026-08-07) — clubhouse request form surfaced
+
+Coaches request use of the Region 13 clubhouse (711 W. Woodbury Rd., Unit E, Altadena) through a Typeform at `https://ayso13.typeform.com/to/xCIGB2TA` ("Clubhouse Form"). The clubhouse was named in five places on the site — the contact page photo/address, the board-meeting location on `/volunteers/roles/`, a training venue on `/volunteers/classes/` and `/referees/training/`, and "key and alarm codes" on `/volunteers/onboarding/` — but nothing said how to request it.
+
+Shipped (`5c6d4fc`, `c071c2b`):
+
+- `/coaches/` — one bullet in **Coaching Resources**.
+- `/volunteers/` — a short `## Using the Clubhouse` section above Contact.
+- `/clubhouse` + `/clubhouse/` → the Typeform, 301. Map is now **639 exact + 9 splat = 648**.
+- `llms.txt` — listed under Volunteers, pointing at the `/clubhouse` slug so the entry stays an ayso13.org URL.
+
+**Deliberately not added to `/register/forms/`.** That page is titled "Required Forms" and renders in both the Register and Families sidebars; a volunteer facility request is neither required nor a family concern, and it would land two headings below the refund schedule. (The reimbursement form arguably has the same problem already. Regrouping that page into Family / Volunteer sections is a separate decision, not a drive-by.) No dedicated `/volunteers/clubhouse/` page and no `navigation.js` change either — the form's questions aren't visible without submitting it (Typeform renders client-side), so there was nothing to write a procedure page from. If the approval path, lead time, and permitted uses ever get documented, that page becomes worth adding and these two links repoint to it.
+
+**Gotcha hit: `workers/redirects/src/map.js` is generated, and its first line says so.** The rules went into `map.js` directly on the first pass. Local `npm test` passed (32/32, 639 exact) because the tests read the same hand-edited file — but `deploy:staging` runs `npm run build` first, so `scripts/generate-map.js` rebuilt the map from `site/src/_redirects` and dropped both rules. The staging Worker deployed green and `/clubhouse` 404'd while the `/mentor` control still redirected. **Source of truth is `site/src/_redirects`**; the regenerated map came out byte-identical to the hand edit apart from the header timestamp, which is exactly why the mistake was invisible until deploy.
+
+Second-guessing worth recording: after the corrected deploy, `/clubhouse` still 404'd on two consecutive checks with a cache-buster, which looked like a config fault. It was **Worker version propagation** — roughly a minute later it returned 301, unchanged. Same shape as the `feedback_cache_bust_when_verifying_deploys` note but for Workers rather than Pages: a fresh Worker version is not instantly live on every edge, and a cache-buster does not help because the miss is not a cache. Give it a minute before diagnosing.
+
+Verified on staging: `/clubhouse` and `/clubhouse/` → 301 to the Typeform; `/coaches/` and `/volunteers/` both carry the link; `staging.ayso13.org/llms.txt` has the Clubhouse Request line. Redirect Worker run `31237441827` and Pages run `31237441836` both succeeded.
+
+**Production not touched.** The `/clubhouse` slug only reaches www.ayso13.org when `deploy-redirects-worker.yml` runs on `main`, which happens on promote. These commits sit on `staging` alongside session 44's backlog.
