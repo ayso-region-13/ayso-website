@@ -200,4 +200,4 @@ Second-guessing worth recording: after the corrected deploy, `/clubhouse` still 
 
 Verified on staging: `/clubhouse` and `/clubhouse/` → 301 to the Typeform; `/coaches/` and `/volunteers/` both carry the link; `staging.ayso13.org/llms.txt` has the Clubhouse Request line. Redirect Worker run `31237441827` and Pages run `31237441836` both succeeded.
 
-**Production not touched.** The `/clubhouse` slug only reaches www.ayso13.org when `deploy-redirects-worker.yml` runs on `main`, which happens on promote. These commits sit on `staging` alongside session 44's backlog.
+**Promoted to production the same day** (merge `9f80edb`, promote run `31237693646`, redirect-Worker-on-main run `31237710032`, both green). This promote also swept session 44's stranded backlog into `main`, as intended. Verified on www.ayso13.org: `/clubhouse` and `/clubhouse/` → 301 to the Typeform, both page links render, and `llms.txt` carries the entry. `git log origin/main..origin/staging` is empty.
