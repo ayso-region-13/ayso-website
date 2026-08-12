@@ -93,8 +93,12 @@ layout: base.njk
            itself still being computed — so it counts as zero, the box
            sizes to the bare text, and the text overflows its background. #}
         <div class="bg-black/45 group-hover:bg-black/60 transition-colors px-4 py-4 md:px-[min(1.875vw,3rem)] md:py-[min(1.25vw,2rem)]">
-          {# nowrap above md: the box shrink-to-fits, and without this the
-             date breaks onto a second line at tablet widths. #}
+          {# nowrap above md is a guard, not a fix. The tablet-width wrap it
+             was added for in session 46 was a symptom of the percentage-
+             padding bug described above; with that cured the wrap no longer
+             reproduces without this class (verified at 768/1024/1280). Kept
+             because the box shrink-to-fits, so a longer `headline` would
+             wrap — but do not treat it as load-bearing for "Saturday, Aug 29". #}
           <h1 class="font-extrabold uppercase leading-[1.05] tracking-tight text-white md:whitespace-nowrap">
             <span class="sr-only">{{ homeHero.eventName }}: </span>
             <span class="block text-[clamp(1.5rem,5.5vw,2.75rem)] md:text-[min(3vw,4.8rem)] group-hover:underline decoration-brand-red decoration-4 underline-offset-4">{{ homeHero.headline }}</span>
@@ -102,7 +106,7 @@ layout: base.njk
           </h1>
         </div>
         {# Brand two-tone signature strip — same proportional rule #}
-        <div class="h-1.5 md:h-[min(0.469vw,0.75rem)] bg-brand-red"></div>
+        <div class="h-1.5 md:h-[min(0.46875vw,0.75rem)] bg-brand-red"></div>
       </div>
     </a>
   </div>

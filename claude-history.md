@@ -284,7 +284,7 @@ Session 46 shipped the Rose City RollOut banner from a 1399×544 master and clos
 | subhead | `min(2.45vw,2.1rem)` | `min(2.45vw,3.92rem)` | 31.4px, unchanged |
 | padding X | `px-6` (24px) | `min(1.875vw,3rem)` | 24px, unchanged |
 | padding Y | `py-4` (16px) | `min(1.25vw,2rem)` | 16px, unchanged |
-| accent strip | `h-1.5` (6px) | `min(0.469vw,0.75rem)` | 6px, unchanged |
+| accent strip | `h-1.5` (6px) | `min(0.46875vw,0.75rem)` | 6px, unchanged |
 
 Session 46's trap #2 still applies and is why these are `vw` and not `%`: percentage padding inside a shrink-to-fit absolutely-positioned box resolves against a width still being computed and counts as zero. `vw` is a real length, so it is safe. Trap #1 also still applies — no floors, only ceilings.
 
