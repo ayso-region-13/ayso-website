@@ -42,6 +42,58 @@ layout: base.njk
 {% endif %}
 
 {# ── Hero ────────────────────────────────────────────────────────── #}
+{% if homeHero.showEvent %}
+
+{# ── TEMPORARY event banner hero ──────────────────────────────────────
+     Shown instead of the 5-photo rotation while _data/homeHero.js has
+     mode: "event". The standard hero lives in the else branch below,
+     unchanged — flip `mode` to "rotation" to bring it back.
+
+     The artwork is 1399×544 (2.57:1), far wider than the standard hero
+     box, so it is NOT cropped to fill: the container caps at 1280px so
+     the image never upscales past its native width, and the section
+     height simply follows the image. Below `md` the image is too short
+     for a legible overlay, so the date/location block stops being
+     absolutely positioned and flows underneath instead. #}
+<section class="bg-brand-maroon-dark">
+  <div class="max-w-screen-xl mx-auto">
+    <a href="{{ homeHero.link }}" class="group relative block">
+      <img src="{{ homeHero.image }}"
+           alt="{{ homeHero.alt }}"
+           width="1399" height="544"
+           sizes="(min-width: 1280px) 1280px, 100vw"
+           class="w-full h-auto"
+           loading="eager" fetchpriority="high">
+
+      {# Date / location block. Percentage offsets keep it pinned to the
+         empty lower-left of the artwork as the image scales. #}
+      <div class="md:absolute md:bottom-[8%] md:left-[5.5%]">
+        {# Type scales with the container above `md` rather than clamping to
+           a floor — a floor would hold the box at a fixed px width while the
+           artwork shrank, pushing it over the rose.
+
+           Padding must be a fixed length, NOT a percentage: this box sizes
+           by shrink-to-fit inside an absolutely-positioned parent, and CSS
+           resolves percentage padding against a width that is itself still
+           being computed — so it counts as zero, the box sizes to the bare
+           text, and the text then overflows its own background. #}
+        <div class="bg-black/45 group-hover:bg-black/60 transition-colors px-4 py-4 md:px-6 md:py-4">
+          {# nowrap above md: the box shrink-to-fits, and without this the
+             date breaks onto a second line at tablet widths. #}
+          <h1 class="font-extrabold uppercase leading-[1.05] tracking-tight text-white md:whitespace-nowrap">
+            <span class="sr-only">{{ homeHero.eventName }}: </span>
+            <span class="block text-[clamp(1.5rem,5.5vw,2.75rem)] md:text-[min(3vw,2.6rem)] group-hover:underline decoration-brand-red decoration-4 underline-offset-4">{{ homeHero.headline }}</span>
+            <span class="block font-light text-[clamp(1.25rem,4.5vw,2.25rem)] md:text-[min(2.45vw,2.1rem)]">{{ homeHero.subhead }}</span>
+          </h1>
+        </div>
+        {# Brand two-tone signature strip #}
+        <div class="h-1.5 bg-brand-red"></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+{% else %}
 <section class="relative overflow-hidden bg-brand-dark min-h-[560px]">
 
   {# Background images — `heroes` is shuffled at build time in
@@ -183,6 +235,7 @@ layout: base.njk
     setTimeout(start, 3000);
   })();
 </script>
+{% endif %}
 
 {# ── Field status widget ─────────────────────────────────────────── #}
 {% if fieldstatus.enabled %}
