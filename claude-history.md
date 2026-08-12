@@ -97,6 +97,20 @@ The field-map editor left this repo. It now lives in the **ayso-platform** admin
 
 ---
 
+## Session 41 (2026-07-24) — WBGT read from the station instead of derived locally
+
+Ported here from CLAUDE.md in session 48; this was the one session whose only narrative lived in the auto-loaded summary line.
+
+WBGT is now read from the Tempest station's own `wet_bulb_globe_temperature` field instead of derived locally. The old `computeWbgt`/`approxGlobeTemp` clamped its globe-temperature term to a constant +25°C, and **that clamp bound above ~86 W/m² of solar at calm wind, i.e. every daylight hour** — so measured solar and wind had NO effect on the published value, which reduced to the shade formula plus a flat +9°F. Against the station's own figure across 20 samples it ran +2.0 to +8.5°F too hot, repeatedly reporting CIF Level 5 "outdoor activity suspended" where the station read Level 2-3. Verified post-deploy: near-identical inputs, 86.6°F/L3 → 79.2°F/L1.
+
+`computeWbgt`, `stullWetBulb` and `approxGlobeTemp` were deleted. **`fetchTempest` throws if the field is absent**, because `cifLevel(null)` returns Level 1 and would otherwise announce an all-clear with the sensor down.
+
+Also repointed the NWS forecast to Victory Park (4dp — `api.weather.gov` 301s on finer precision) and removed a false claim from `/resources/weather/` that WBGT came from the Bernard 1999 approximation within ~1°F of ISO 7243. tomorrow.io was evaluated and rejected (its free plan 403s both `solarGHI` and `wetBulbGlobeTemperature`).
+
+Investigation + dataset: `docs/superpowers/specs/2026-07-24-wbgt-source-design.md`.
+
+---
+
 ## Session 42 (2026-07-25) — surfaced the Withdrawal Form
 
 Reported problem: the Withdrawal Form is hard to find even though it is on `/register/`. Audit found the form already linked from three pages (`/register/` under "Refund Policy", `/register/forms/`, `/resources/documents/`), so the gap was reachability, not coverage.
@@ -301,3 +315,22 @@ So `width="1399"` had overridden the sitewide `widths: [600, 1200, "auto"]` ladd
 Resulting WebP payloads: 20 KB at 600w, 41 KB at 1000w, 64 KB at 1400w, 95 KB at 1920w, 139 KB at 2560w. A 390px phone went from 100 KB+ to 20 KB on the LCP element.
 
 **Verified** with headless Chromium at 390 / 768 / 1280 / 1920 / 2560, checking rendered geometry and the actually-selected candidate at each: section heights 236 (overlay flows beneath) / 299 / 498 / 747 / 996, candidates 600w / 1000w / 1400w / 1920w / 2560w — all as predicted. All six new arbitrary Tailwind values confirmed present in both `src/assets/css/style.css` and `_site/assets/css/style.css` (session 46 trap #3). Overlay stays clear of the rose and the "RollOut" lettering at every width, and holds the same proportion at 1920 and 2560.
+
+### Session 48 addendum — documentation cost cleanup
+
+CLAUDE.md is auto-loaded into every session, so its size is a per-session tax. It had grown to 48.6 KB (~13.1k tokens), and 20% of that was a single 9.7 KB `*Last updated:*` line that had accreted a summary of every session from 38 to 48 — all of it already written up in this file. Cut to ~10.2k tokens by moving duplicated narrative out and leaving pointers.
+
+**What moved rather than being deleted.** Session 41 (the WBGT change) had never been written up here; its only narrative was inside that summary line, so it was ported to its proper slot above before the line was collapsed. The weather Worker's two load-bearing gotchas — the dashboard-level cache bypass on `/temp` and `/resources/weather`, and the closure-notice debounce thresholds — were absent from `workers/weather-api/README.md` despite CLAUDE.md naming that README canonical, so they were added there first. The field-map missing-asset entry kept its durable diagnosis (sweep both instances; the deploy token has neither R2 nor D1) and handed the 2026-08-06 incident narrative to session 44.
+
+**Stale claims found while trimming**, each of which would have misled a future session:
+
+- **The CMS section still said edits "commit directly to `main` and trigger a Cloudflare Pages rebuild."** Both halves wrong since 2026-06-08 and 2026-06-18 respectively, and it contradicted the Staging Environment section three screens below.
+- **`/parents/` had been renamed to `/families/`** (12 redirect rules, and the top nav reads "Families"), but CLAUDE.md still documented the old section, the old nav label, and pointed the `fees.json` note at a `site/src/parents/index.md` that no longer exists.
+- **`_headers.njk` / `robots.njk` were documented as living in `_includes/`.** They are at the root of `src/`.
+- **"36 `[INLEAGUE:]` placeholders remaining."** Zero remain; the only matches left are a CSS comment for the callout style that renders them.
+- **Ask the Referee was "30-Q&A" in one place and 35 in another.** Disk says 35.
+- The Platform Decision table gave staging as `ayso13.pages.dev`, and `scripts/generate-map.js` was cited without its `workers/redirects/` prefix.
+
+**Per-section page counts were removed, not corrected.** The table had drifted in 7 of 14 rows; `ls site/src/<section>/*.md` is authoritative and free, so tracking counts by hand only ever manufactures staleness. What replaced it is the part that *isn't* obvious from the tree: that `families/` is the old `parents/`, and that `referees/qa/*.md` are 35 data fragments rather than pages.
+
+**`todo.md` split 104 KB → 7.2 KB.** It was 326 completed items against 10 open ones, duplicating this file's job. Completed items moved verbatim to `todo-archive.md`, verified lossless by diffing every content line of the original against the new pair (one line differed: a "no dated tasks open" note, deliberately rewritten). Two items needed judgment rather than mechanical moving: an open item was stranded *inside* the Completed section under a session-45 heading (rescued into a new "Content gaps" section), and the session-42 "deploy the redirects Worker" item turned out to be satisfied by today's promote — `/withdraw`, `/withdrawal` and `/refund` all 301 correctly on prod, so it was closed. Worth recording why it lingered: the standing note that redirects "need their own deploy" means they don't ship from a *Pages* deploy, not that the step is manual. `deploy-redirects-worker.yml` is branch-scoped and fires on any push to `main`.
