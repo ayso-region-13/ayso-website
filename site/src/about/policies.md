@@ -58,6 +58,10 @@ Coaches and families must model good sportsmanship and avoid disparaging volunte
 
 Coaches initial game cards confirming they understand this policy. See the full [Respect the Referee policy (PDF)](/assets/docs/respect-the-referee.pdf) for details.
 
+### Referee Abuse Prevention
+
+From Fall 2026, Area 1C enforces the AYSO Referee Abuse Prevention Program (RAPP), built on U.S. Soccer Policy 531-9. Abuse of a referee is handled by an Area disciplinary panel rather than by Region 13, and a verified violation carries an automatic suspension pending a hearing. See [Referee Abuse Prevention](/referees/abuse/).
+
 ## Disputes and Concerns
 
 For concerns about conduct or policy violations, use the incident reporting process. See [Safety](/resources/safety) for details.

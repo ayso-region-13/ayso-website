@@ -41,6 +41,10 @@
 /withdraw/                          /register/#refunds-and-withdrawals       301
 /withdrawal                         /register/#refunds-and-withdrawals       301
 /withdrawal/                        /register/#refunds-and-withdrawals       301
+/rapp                               /referees/abuse/                         301
+/rapp/                              /referees/abuse/                         301
+/referee-abuse                      /referees/abuse/                         301
+/referee-abuse/                     /referees/abuse/                         301
 /play/                              /families/                               301
 /play                               /families/                               301
 /pen/                               /register/                               301

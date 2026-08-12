@@ -168,6 +168,7 @@ module.exports = [
       { label: "Training Requirements",      url: "/volunteers/training-matrix/" },
       { label: "Referee Scheduling",         url: "/referees/scheduling/" },
       { label: "Laws of the Game",           url: "/referees/laws/" },
+      { label: "Referee Abuse Prevention",   url: "/referees/abuse/" },
       { label: "Youth Referee Program (PRO)",url: "/referees/pro/" },
       { label: "Referee Resources",          url: "/referees/resources/" },
       { label: "Upgrades",                   url: "/referees/upgrades/" },

@@ -11,6 +11,7 @@ description: "Resources for AYSO Region 13 referees — documents, forms, traini
 - [Referee Scheduler](https://ayso13.inleague.com/app/referee-scheduler) — Sign up for games
 - [eTrainU](https://ayso13.inleague.com/app/eTrainU) — Training and certification
 - [Incident Reporting](https://ayso13.typeform.com/to/GjC4Pyed) — Document issues
+- [Referee Abuse Prevention](/referees/abuse/) — What counts as abuse and how to report it
 
 ## Document Library
 
@@ -23,7 +24,16 @@ Age-group specific rules and modifications:
 - [12U Referee Guidelines (2023)](/assets/docs/12u-referee-guidelines.pdf)
 - [Penalty Kick Guidelines (2023)](/assets/docs/penalty-kick-guidelines.pdf)
 - [Referee Quick-Reference Card](/assets/docs/referee-quick-reference-card.pdf) — pocket-sized rules and signals summary
-- [Respect the Referee Policy](/assets/docs/respect-the-referee.pdf) — Region 13's expectations for coaches, parents, and spectators
+
+### Referee Abuse Prevention (RAPP)
+
+In effect across Area 1C from Fall 2026. See [Referee Abuse Prevention](/referees/abuse/) for the summary and reporting steps.
+
+- [Respecting Our Referees (2026)](/assets/docs/respecting-our-referees-2026.pdf) — AYSO standards, abuse levels, and consequences
+- [Area 1C RAPP Implementation Protocols (2026)](/assets/docs/area-1c-rapp-implementation-protocols-2026.pdf) — how the program runs, including the disciplinary panel and appeals
+- [Area 1C RAPP Flow Chart (2026)](/assets/docs/area-1c-rapp-flow-chart-2026.pdf) — one-page diagram of the reporting process
+- [U.S. Soccer Policy 531-9 (2026)](/assets/docs/ussf-referee-abuse-prevention-policy-531-9.pdf) — the federation policy behind the program, with the Penalties Matrix
+- [Region 13 Respect the Referee Policy (2022)](/assets/docs/respect-the-referee.pdf) — Region 13's own zero-tolerance policy and coach responsibilities, still in effect
 
 ### National and International Rules
 

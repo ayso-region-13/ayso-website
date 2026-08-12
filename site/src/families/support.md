@@ -66,6 +66,8 @@ Referees — especially at younger levels — are often teens learning the job. 
 - Save concerns about calls for after the game, away from other families
 - If there's a real concern, let your coach handle it
 
+Starting in Fall 2026, abuse of a referee carries suspensions set by U.S. Soccer rather than by Region 13. See [Referee Abuse Prevention](/referees/abuse/) for what crosses that line.
+
 ## After the Game
 
 ### Right After the Whistle

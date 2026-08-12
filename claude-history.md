@@ -200,4 +200,104 @@ Second-guessing worth recording: after the corrected deploy, `/clubhouse` still 
 
 Verified on staging: `/clubhouse` and `/clubhouse/` → 301 to the Typeform; `/coaches/` and `/volunteers/` both carry the link; `staging.ayso13.org/llms.txt` has the Clubhouse Request line. Redirect Worker run `31237441827` and Pages run `31237441836` both succeeded.
 
-**Production not touched.** The `/clubhouse` slug only reaches www.ayso13.org when `deploy-redirects-worker.yml` runs on `main`, which happens on promote. These commits sit on `staging` alongside session 44's backlog.
+**Stale branches deleted (local + remote):** `feat/fields-publish-dispatch` (tip `b8d81c62fd3f9797b972fb8fcc42c506ddf3d4bb`, fully merged into `main`) and `wbgt-source` (tip `bb351a52eb458d97ca95c3f3aec9f5bd2a53ef84`). `wbgt-source` read as 20 unmerged commits but was squashed on merge in session 41 — `wet_bulb_globe_temperature` is in `main` and `computeWbgt` is gone, so nothing was lost content-wise, though those 20 individual commits and their spec history are now only reachable by SHA. Recover either with `git fetch origin <sha>` while GitHub still holds the objects. `origin` is down to `main` + `staging`.
+
+**Promoted to production the same day** (merge `9f80edb`, promote run `31237693646`, redirect-Worker-on-main run `31237710032`, both green). This promote also swept session 44's stranded backlog into `main`, as intended. Verified on www.ayso13.org: `/clubhouse` and `/clubhouse/` → 301 to the Typeform, both page links render, and `llms.txt` carries the entry. `git log origin/main..origin/staging` is empty.
+
+---
+
+## Session 46 (2026-08-11) — temporary Rose City RollOut hero on the home page
+
+Swapped the home page's 5-photo shuffled hero for a single wide event banner promoting the Rose City RollOut on Saturday, August 29 at Victory Park. **Temporary by design** — the whole point was to make reverting a one-word edit rather than a code change.
+
+**The switch is `site/src/_data/homeHero.js`.** `mode: "event"` shows the banner; `mode: "rotation"` restores the photo hero. `home.njk` carries both paths in an `{% if homeHero.showEvent %}` / `{% else %}` pair, so the entire original hero — markup, gradient overlay, `SOCCER / FOR EVERYONE` H1, buttons, and the decode-before-show rotation script — sits untouched in the else branch. `_data/heroes.js` was not modified at all. There is also an `endDate` (2026-08-29, inclusive) that closes the gate automatically, but it is a **safety net, not a timer**: nothing rebuilds this site on a schedule, so a stale banner survives until the next deploy. Flipping `mode` is the reliable revert.
+
+**Why the hero changed shape rather than just its contents.** The artwork is 1399×544 (2.57:1), far wider and shorter than the existing `min-h-[560px]` full-bleed hero. Cropping it to fill that box with `object-cover` clips ~90px off the top and bottom at 1920px wide (cutting the "ROSE CITY" arc) and shows only about a quarter of the width on a phone, losing the logo entirely. So the banner is contained instead: `max-w-screen-xl` (1280px) on a `bg-brand-maroon-dark` band, height following the image's own ratio, nothing ever cropped and no upscaling past the native 1399px. Below `md` the image is only ~150px tall, too short for a legible overlay, so the date/location block stops being absolutely positioned and flows underneath.
+
+**Three CSS traps hit while positioning the overlay, all worth remembering:**
+
+1. **`clamp()` with a floor breaks proportional overlays.** `md:text-[clamp(1.75rem,3.2vw,2.75rem)]` held the type at its 28px floor while the artwork shrank, so at 768px the box grew proportionally wider than the artwork's clear zone and covered the rose and the "RollOut" lettering. Replaced with `min(3vw,2.6rem)` — no floor, so the box stays a constant fraction of the image at every width.
+2. **Percentage padding is treated as zero inside a shrink-to-fit absolutely-positioned box.** `md:px-[2.1%]` on the overlay resolved against a width that was itself still being computed, so the box sized to the bare text and the text then overflowed its own background by exactly the padding. Fixed lengths (`md:px-6 md:py-4`) are required here. The same root cause first showed up as the headline wrapping to two lines at tablet widths, which `md:whitespace-nowrap` masked without curing.
+3. **`--incremental` does not re-copy passthrough CSS.** `npm start` runs Eleventy with `--incremental`, and `_site/assets/css/style.css` went stale (its mtime was three weeks old) while the Tailwind watcher kept updating the source. Every local screenshot was rendering against an old stylesheet, which made a fix that had already worked look like it had failed twice. **When a Tailwind class change appears to have no effect in local dev, check `_site/assets/css/style.css` against `src/assets/css/style.css` before touching the markup.** Restart `npm start`, or `cp` the file across.
+
+**Also changed:** the gold announcement bar is disabled (`announcements.json` `enabled: false`) so it does not compete with the banner directly beneath it — the "Registration is still open for fall season!" body text is left in the file to re-enable later. Note an emptied `body` does **not** hide the bar; only `enabled` does. The `Register for Soccer` / `View Programs` buttons were initially kept in a strip below the banner and then removed at the editor's request, so the banner now stands alone above the field-status widget.
+
+**Accessibility and SEO:** the page keeps a real H1 — `Rose City RollOut: Saturday, Aug 29, Victory Park`, with the event name `sr-only` because the logo carries it visually. The whole banner links to `/families/rollout/`, which already holds the schedule, lineup, and contacts. The image is the LCP element and keeps the old hero's `loading="eager"` + `fetchpriority="high"`.
+
+**Image quality note (open):** the source is 1399px wide, but the container caps at 1280 CSS px and effectively every current display is 2×, so the ideal master is **2560×996** at the same ratio. The artwork is mostly hard-edged vector (the "RollOut" script, the logo outline, the rose), which is what softens first at sub-2× density. Dropping a 2560px file at the same path needs no code change — `eleventy-img` is configured `widths: [600, 1200, "auto"]` and emits 600/1200/2560 in WebP + JPEG. **[Wrong — see session 48. The `width="1399"` attribute on the `<img>` was overriding that ladder and collapsing the srcset to a single candidate, so a 2560px drop-in would have served the full-size file to phones.]** A squarer mobile crop served via `<source media="(max-width: 767px)">` would also help the phone layout, where the logo is small; neither is required.
+
+**Verified before push:** flipping the gate closed restores all five `hero-pic-wrapper`s, the `FOR EVERYONE` H1, the rotation script, and the five `region13_home` images; a full `npm run build` passes (162 files, Pagefind indexed 120 pages); overlay checked at 500/768/1024/1440px with no collision, no wrap, and no text overflow.
+
+---
+
+## Session 47 (2026-08-11) — Referee Abuse Prevention Program page
+
+New page at `/referees/abuse/` covering the AYSO / Area 1C **Referee Abuse Prevention Program (RAPP)**, which Area 1C enforces across all nine regions starting Fall 2026. Design spec: `docs/superpowers/specs/2026-08-11-referee-abuse-page-design.md`.
+
+**The content decision that mattered: dissent and abuse are two tracks, not one escalation.** The draft copy merged them, but the Area 1C protocols are explicit that RAPP covers only language or behavior that is "extreme and deliberate" and that "causes significant harm" or "demonstrates a material lack of respect", while common dissent "will continue to be addressed by way of warnings, Cautions and/or Send-Offs of players and coaches, and ejections of spectators." Collapsing the two produces either over-reporting of ordinary sideline grumbling or under-reporting of real abuse, so the page keeps the on-field dissent ladder and the RAPP reporting path as separate adjacent sections.
+
+**The 2022 `respect-the-referee.pdf` is NOT superseded by the new "Respecting Our Referees" (v6-1-2026), despite the near-identical titles.** The new file is a two-page AYSO/USSF standards summary: four verbal abuse levels, three physical abuse levels, and a pointer at the U.S. Soccer Penalties Matrix. The 2022 file is a four-page **Region 13** policy covering different ground — zero tolerance, coach accountability for their own sideline, the Law 5 "referee decides the facts" principle, and how to route referee-*performance* concerns. Both are now listed with dates and scope on `/referees/abuse/` and `/referees/resources/`. Do not repoint the 2022 links at the new PDF.
+
+**Four PDFs imported** from the AYSO national CDN (`dt5602vnjxv0c.cloudfront.net/portals/14092/docs/referees/rapp/`), renamed from filenames containing spaces into `site/src/assets/docs/`:
+
+| New filename | Source |
+|---|---|
+| `respecting-our-referees-2026.pdf` | `respecting_our_referees_6-1-2026.pdf` |
+| `area-1c-rapp-implementation-protocols-2026.pdf` | `area 1c rapp implementation protocols approved 2026-07-06.pdf` |
+| `area-1c-rapp-flow-chart-2026.pdf` | `area 1c rapp flow chart approved 2026-07-06.pdf` |
+| `ussf-referee-abuse-prevention-policy-531-9.pdf` | `ussf rap policy 531-9 2026-05-15.pdf` |
+
+Year kept on the three Area 1C revises annually; the USSF policy is identified by its number.
+
+**Contact routing is `referee@ayso13.org`, deliberately not a named RRA** — the protocol assigns real annual roles (RAPP Administrator, ARA, RRA) and the alias survives turnover. The U.S. Soccer Penalties Matrix is linked at `ussoccer.com/rap` rather than reproduced, since U.S. Soccer's Technical Development Committee can amend it at any time.
+
+**Cross-links added** (RAPP requires each region to explain the program to referees, coaches, players, and parents, so the page is reachable from all three audiences): referee sidebar in `navigation.js` after Laws of the Game; `/referees/` Related Pages; `/referees/resources/` Quick Links plus a new "Referee Abuse Prevention (RAPP)" document block; `/contact/feedback/` under the Referee Incident Form; `/about/policies/` under Sideline Conduct; `/coaches/` Coaching Resources; `/families/pledge/` guideline 6; `/families/support/` under "When Calls Don't Go Your Way"; and an `llms.txt` entry.
+
+**Redirects: 648 → 652 rules.** `/rapp`, `/rapp/`, `/referee-abuse`, `/referee-abuse/` added to `site/src/_redirects` (the source of truth — `workers/redirects/src/map.js` is generated by `workers/redirects/scripts/generate-map.js`, so never hand-edit it). Regenerated and `npm test` in `workers/redirects` passes 32/32 at 643 exact + 9 splat. **The redirects Worker needs its own deploy** (`deploy-redirects-worker.yml`) — it does not ship with a Pages deploy.
+
+No `.pages.yml` change needed: the `referees` collection globs the whole directory, so the page is CMS-editable immediately.
+
+**Verified locally:** full `npm run build` clean (Pagefind indexed 121 pages, up from 120); `node scripts/check-links.js` reports no broken internal links; both abuse-level tables and the BreadcrumbList JSON-LD render; all 11 PDF hrefs across the three touched pages resolve to real files in `_site/`; no exclamation points and no em dashes outside the repo's existing link-list separator convention.
+
+**Fact-check pass against the four source PDFs found 19 issues; all were verified by hand against the sources and the page was revised.** The two that mattered:
+
+1. **"lightly slapping" had lost its qualifier.** The page listed plain "slapping" under physical Level 2. The source says "lightly slapping". Level 2 carries a 10-game minimum; non-light striking is Level 3, 12 months to lifetime. A single dropped adverb moved conduct across that boundary.
+2. **The automatic-suspension claim was applied too broadly.** "Where abuse or assault is verified, the person is automatically suspended pending a hearing" is a fair reading of USSF 531-9 §4.1(B) on its own, but it sat directly under the four verbal levels and so read as covering all of them. USSF §3.4 reserves *abuse* for **non-contact** behavior causing significant harm and *assault* for deliberate physical action; §3.5 routes the Level 1–2 style conduct ("yelling insults, taunting … belittling remarks") into the separate **gross mistreatment** framework, which carries no automatic suspension. The page now states the distinction explicitly. Root cause worth remembering: **AYSO's "Respecting Our Referees" labels its physical section "PHYSICAL ABUSE", while USSF 531-9 defines "abuse" as non-contact and calls physical action "assault".** The page had inherited AYSO's looser usage and then applied a USSF rule keyed to USSF definitions.
+
+Also corrected: the Penalties Matrix sets *minimums* that the Area panel may exceed at the Area Executive Board's direction, rather than "setting consequences"; physical Level 3 restored "any part of the body in a striking manner" (the page had only "striking with an object", dropping the commoner case); verbal Level 4 restored the "discriminatory or derogatory" qualifier; USSF protection extends to **later times directly related to a match** (without it, the page told a doxed referee they were outside the protected window) and to a referee's **household**, not just family who attended; reporting is by **phone, text, or email immediately after the match**, not email only; the preliminary determination is the **RRA for intra-region and the ARA for inter-region** games; the written **Referee Report** (players/coaches) or **Incident Report** (spectators) is requested after that determination and is emailed **by the referee** to the RAPP Administrator, RRA and ARA together — the page had implied the Region 13 Typeform satisfied this and that the RRA relayed it, so the Typeform is now positioned as the Region 13 record and explicitly noted as not satisfying the Area 1C requirement; appeals moved to the USSF 531-9 blurb where they actually live.
+
+Two additions came out of the same pass. **The dissent ladder is no longer presented as a required sequence** — Region 13's own 2022 policy says "There is no requirement that a warning or caution be given before a coach is dismissed." And a new section covers what the page had left out entirely: a dismissed coach or ejected spectator **must leave the sight and sound of the field, the game does not restart until they do, and the referee terminates the match if they refuse**. The page previously said "then finish the match", which under-authorized the referee against Region 13's standing policy. The unsourced "abuse is a top-two reason officials leave" opener was replaced with AYSO's own wording, and the protocols' loop-closing commitment (the RRA tells the reporter the panel's conclusion, and a youth referee's parent or guardian) was added, since for a page whose purpose is to get referees to report, that is the most persuasive thing in the protocols.
+
+---
+
+## Session 48 (2026-08-12) — RollOut hero re-exported at 2× and taken full-bleed
+
+Session 46 shipped the Rose City RollOut banner from a 1399×544 master and closed with an open item: re-export at 2560×996 for 2× displays, "needs no code change." A better master arrived. The note was wrong on both counts.
+
+**The banner is now full-bleed.** The `max-w-screen-xl` (1280px) cap existed for exactly one reason — a 1399px source would have upscaled past it — so once the master was 2560 wide the constraint was gone. Per the editor's call the cap moved to `max-w-[2560px]` and the section now spans the viewport like the rotation hero it replaced, with `bg-brand-maroon-dark` filling the remainder only on wider-than-2560 displays. The artwork is still never cropped, so height follows width: 498px at 1280 (identical to session 46), 747px at 1920, 996px at 2560.
+
+**The overlay is now proportional all the way up.** Session 46's `min()` ceilings were tuned to a box that stopped growing at 1280 — above that the artwork froze while `3vw` kept climbing, so the type crept larger relative to the image it sat on, and the fixed `px-6`/`py-4`/`h-1.5` shrank relative to it. With the artwork tracking the viewport, every value in the box is now a `vw` ratio whose `min()` ceiling is that same ratio resolved at 2560px — the exact width where the image stops growing, so the box freezes precisely when the artwork does:
+
+| | session 46 | session 48 | at 1280 |
+|---|---|---|---|
+| headline | `min(3vw,2.6rem)` | `min(3vw,4.8rem)` | 38.4px, unchanged |
+| subhead | `min(2.45vw,2.1rem)` | `min(2.45vw,3.92rem)` | 31.4px, unchanged |
+| padding X | `px-6` (24px) | `min(1.875vw,3rem)` | 24px, unchanged |
+| padding Y | `py-4` (16px) | `min(1.25vw,2rem)` | 16px, unchanged |
+| accent strip | `h-1.5` (6px) | `min(0.46875vw,0.75rem)` | 6px, unchanged |
+
+Session 46's trap #2 still applies and is why these are `vw` and not `%`: percentage padding inside a shrink-to-fit absolutely-positioned box resolves against a width still being computed and counts as zero. `vw` is a real length, so it is safe. Trap #1 also still applies — no floors, only ceilings.
+
+**The load-bearing find: the banner had been shipping a single-candidate srcset since session 46.** In `@11ty/eleventy-img` 6.0.4, `src/image-attrs-to-posthtml-node.js` lines 76-82 check a plain `width` attribute *before* `eleventy:widths` and read it as "generate exactly this one size":
+
+```js
+if(attributes.width && isValidSimpleWidthAttribute(attributes.width)) {
+  instanceOptions.widths = [ parseInt(attributes.width, 10) ];   // wins
+} else if(attributes[ATTR.WIDTHS] && ...) {
+```
+
+So `width="1399"` had overridden the sitewide `widths: [600, 1200, "auto"]` ladder, and every phone had been downloading the full-size file. That is also why session 46's "drop a 2560px file at the same path, no code change needed" would have made things worse rather than better: it would have served a 237 KB 2560px JPEG to a 390px phone. **Never put a plain `width` on an `<img>` you want a responsive srcset from.** Removing `width`/`height` and adding `eleventy:widths="600,1000,1400,1920,2560"` (the sitewide ladder leaves a 1200→2560 gap that every laptop viewport would fall into) restored a real ladder. eleventy-img emits its own intrinsic `width`/`height` from the largest candidate, so CLS stays covered without authoring them.
+
+Resulting WebP payloads: 20 KB at 600w, 41 KB at 1000w, 64 KB at 1400w, 95 KB at 1920w, 139 KB at 2560w. A 390px phone went from 100 KB+ to 20 KB on the LCP element.
+
+**Verified** with headless Chromium at 390 / 768 / 1280 / 1920 / 2560, checking rendered geometry and the actually-selected candidate at each: section heights 236 (overlay flows beneath) / 299 / 498 / 747 / 996, candidates 600w / 1000w / 1400w / 1920w / 2560w — all as predicted. All six new arbitrary Tailwind values confirmed present in both `src/assets/css/style.css` and `_site/assets/css/style.css` (session 46 trap #3). Overlay stays clear of the rose and the "RollOut" lettering at every width, and holds the same proportion at 1920 and 2560.
