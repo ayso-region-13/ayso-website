@@ -28,6 +28,8 @@ Referees, provide incident reports here (e.g., injuries, misconduct, etc.)
 
 Or email: [referee@ayso13.org](mailto:referee@ayso13.org)
 
+For abuse of a referee, also contact the Regional Referee Administrator the same day. See [Referee Abuse Prevention](/referees/abuse/) for the full reporting steps.
+
 ## Incident Reporting
 
 Report injuries, near misses, misconduct, and other incidents.

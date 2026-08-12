@@ -69,6 +69,7 @@ Players ages 10 and older can become certified referees through the PRO (Player 
 ## Related Pages
 
 - [Referee Training](/referees/training) — Certification requirements
+- [Referee Abuse Prevention](/referees/abuse/) — What counts as abuse and how to report it
 - [Referee Scheduling](/referees/scheduling) — Signing up for games
 - [Laws of the Game](/referees/laws) — Official rules
 - [Referee FAQs](/referees/faqs) — Common questions

@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-08-08T03:32:33.231Z
-// 639 exact rules + 9 splat rules = 648 total
+// Last generated: 2026-08-12T00:54:22.465Z
+// 643 exact rules + 9 splat rules = 652 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -106,6 +106,22 @@ export const EXACT = {
   },
   "/withdrawal/": {
     "d": "/register/#refunds-and-withdrawals",
+    "s": 301
+  },
+  "/rapp": {
+    "d": "/referees/abuse/",
+    "s": 301
+  },
+  "/rapp/": {
+    "d": "/referees/abuse/",
+    "s": 301
+  },
+  "/referee-abuse": {
+    "d": "/referees/abuse/",
+    "s": 301
+  },
+  "/referee-abuse/": {
+    "d": "/referees/abuse/",
     "s": 301
   },
   "/play/": {

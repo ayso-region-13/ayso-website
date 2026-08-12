@@ -71,6 +71,7 @@ Division Coach Administrators oversee specific age groups and can answer divisio
 - [Practice Resources](/coaches/practice) — Planning practices
 - [Game Day Guide](/coaches/game-day) — Running games
 - [PIE Philosophy](/coaches/pie) — Positive coaching approach
+- [Referee Abuse Prevention](/referees/abuse/) — What the program requires of coaches and their sidelines
 - [Clubhouse Request Form](https://ayso13.typeform.com/to/xCIGB2TA) — Request use of the Region 13 clubhouse
 
 ## Inclusive Coaching Reference
