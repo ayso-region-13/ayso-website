@@ -224,7 +224,7 @@ Swapped the home page's 5-photo shuffled hero for a single wide event banner pro
 
 **Accessibility and SEO:** the page keeps a real H1 — `Rose City RollOut: Saturday, Aug 29, Victory Park`, with the event name `sr-only` because the logo carries it visually. The whole banner links to `/families/rollout/`, which already holds the schedule, lineup, and contacts. The image is the LCP element and keeps the old hero's `loading="eager"` + `fetchpriority="high"`.
 
-**Image quality note (open):** the source is 1399px wide, but the container caps at 1280 CSS px and effectively every current display is 2×, so the ideal master is **2560×996** at the same ratio. The artwork is mostly hard-edged vector (the "RollOut" script, the logo outline, the rose), which is what softens first at sub-2× density. Dropping a 2560px file at the same path needs no code change — `eleventy-img` is configured `widths: [600, 1200, "auto"]` and emits 600/1200/2560 in WebP + JPEG. A squarer mobile crop served via `<source media="(max-width: 767px)">` would also help the phone layout, where the logo is small; neither is required.
+**Image quality note (open):** the source is 1399px wide, but the container caps at 1280 CSS px and effectively every current display is 2×, so the ideal master is **2560×996** at the same ratio. The artwork is mostly hard-edged vector (the "RollOut" script, the logo outline, the rose), which is what softens first at sub-2× density. Dropping a 2560px file at the same path needs no code change — `eleventy-img` is configured `widths: [600, 1200, "auto"]` and emits 600/1200/2560 in WebP + JPEG. **[Wrong — see session 48. The `width="1399"` attribute on the `<img>` was overriding that ladder and collapsing the srcset to a single candidate, so a 2560px drop-in would have served the full-size file to phones.]** A squarer mobile crop served via `<source media="(max-width: 767px)">` would also help the phone layout, where the logo is small; neither is required.
 
 **Verified before push:** flipping the gate closed restores all five `hero-pic-wrapper`s, the `FOR EVERYONE` H1, the rotation script, and the five `region13_home` images; a full `npm run build` passes (162 files, Pagefind indexed 120 pages); overlay checked at 500/768/1024/1440px with no collision, no wrap, and no text overflow.
 
@@ -267,3 +267,37 @@ No `.pages.yml` change needed: the `referees` collection globs the whole directo
 Also corrected: the Penalties Matrix sets *minimums* that the Area panel may exceed at the Area Executive Board's direction, rather than "setting consequences"; physical Level 3 restored "any part of the body in a striking manner" (the page had only "striking with an object", dropping the commoner case); verbal Level 4 restored the "discriminatory or derogatory" qualifier; USSF protection extends to **later times directly related to a match** (without it, the page told a doxed referee they were outside the protected window) and to a referee's **household**, not just family who attended; reporting is by **phone, text, or email immediately after the match**, not email only; the preliminary determination is the **RRA for intra-region and the ARA for inter-region** games; the written **Referee Report** (players/coaches) or **Incident Report** (spectators) is requested after that determination and is emailed **by the referee** to the RAPP Administrator, RRA and ARA together — the page had implied the Region 13 Typeform satisfied this and that the RRA relayed it, so the Typeform is now positioned as the Region 13 record and explicitly noted as not satisfying the Area 1C requirement; appeals moved to the USSF 531-9 blurb where they actually live.
 
 Two additions came out of the same pass. **The dissent ladder is no longer presented as a required sequence** — Region 13's own 2022 policy says "There is no requirement that a warning or caution be given before a coach is dismissed." And a new section covers what the page had left out entirely: a dismissed coach or ejected spectator **must leave the sight and sound of the field, the game does not restart until they do, and the referee terminates the match if they refuse**. The page previously said "then finish the match", which under-authorized the referee against Region 13's standing policy. The unsourced "abuse is a top-two reason officials leave" opener was replaced with AYSO's own wording, and the protocols' loop-closing commitment (the RRA tells the reporter the panel's conclusion, and a youth referee's parent or guardian) was added, since for a page whose purpose is to get referees to report, that is the most persuasive thing in the protocols.
+
+---
+
+## Session 48 (2026-08-12) — RollOut hero re-exported at 2× and taken full-bleed
+
+Session 46 shipped the Rose City RollOut banner from a 1399×544 master and closed with an open item: re-export at 2560×996 for 2× displays, "needs no code change." A better master arrived. The note was wrong on both counts.
+
+**The banner is now full-bleed.** The `max-w-screen-xl` (1280px) cap existed for exactly one reason — a 1399px source would have upscaled past it — so once the master was 2560 wide the constraint was gone. Per the editor's call the cap moved to `max-w-[2560px]` and the section now spans the viewport like the rotation hero it replaced, with `bg-brand-maroon-dark` filling the remainder only on wider-than-2560 displays. The artwork is still never cropped, so height follows width: 498px at 1280 (identical to session 46), 747px at 1920, 996px at 2560.
+
+**The overlay is now proportional all the way up.** Session 46's `min()` ceilings were tuned to a box that stopped growing at 1280 — above that the artwork froze while `3vw` kept climbing, so the type crept larger relative to the image it sat on, and the fixed `px-6`/`py-4`/`h-1.5` shrank relative to it. With the artwork tracking the viewport, every value in the box is now a `vw` ratio whose `min()` ceiling is that same ratio resolved at 2560px — the exact width where the image stops growing, so the box freezes precisely when the artwork does:
+
+| | session 46 | session 48 | at 1280 |
+|---|---|---|---|
+| headline | `min(3vw,2.6rem)` | `min(3vw,4.8rem)` | 38.4px, unchanged |
+| subhead | `min(2.45vw,2.1rem)` | `min(2.45vw,3.92rem)` | 31.4px, unchanged |
+| padding X | `px-6` (24px) | `min(1.875vw,3rem)` | 24px, unchanged |
+| padding Y | `py-4` (16px) | `min(1.25vw,2rem)` | 16px, unchanged |
+| accent strip | `h-1.5` (6px) | `min(0.469vw,0.75rem)` | 6px, unchanged |
+
+Session 46's trap #2 still applies and is why these are `vw` and not `%`: percentage padding inside a shrink-to-fit absolutely-positioned box resolves against a width still being computed and counts as zero. `vw` is a real length, so it is safe. Trap #1 also still applies — no floors, only ceilings.
+
+**The load-bearing find: the banner had been shipping a single-candidate srcset since session 46.** In `@11ty/eleventy-img` 6.0.4, `src/image-attrs-to-posthtml-node.js` lines 76-82 check a plain `width` attribute *before* `eleventy:widths` and read it as "generate exactly this one size":
+
+```js
+if(attributes.width && isValidSimpleWidthAttribute(attributes.width)) {
+  instanceOptions.widths = [ parseInt(attributes.width, 10) ];   // wins
+} else if(attributes[ATTR.WIDTHS] && ...) {
+```
+
+So `width="1399"` had overridden the sitewide `widths: [600, 1200, "auto"]` ladder, and every phone had been downloading the full-size file. That is also why session 46's "drop a 2560px file at the same path, no code change needed" would have made things worse rather than better: it would have served a 237 KB 2560px JPEG to a 390px phone. **Never put a plain `width` on an `<img>` you want a responsive srcset from.** Removing `width`/`height` and adding `eleventy:widths="600,1000,1400,1920,2560"` (the sitewide ladder leaves a 1200→2560 gap that every laptop viewport would fall into) restored a real ladder. eleventy-img emits its own intrinsic `width`/`height` from the largest candidate, so CLS stays covered without authoring them.
+
+Resulting WebP payloads: 20 KB at 600w, 41 KB at 1000w, 64 KB at 1400w, 95 KB at 1920w, 139 KB at 2560w. A 390px phone went from 100 KB+ to 20 KB on the LCP element.
+
+**Verified** with headless Chromium at 390 / 768 / 1280 / 1920 / 2560, checking rendered geometry and the actually-selected candidate at each: section heights 236 (overlay flows beneath) / 299 / 498 / 747 / 996, candidates 600w / 1000w / 1400w / 1920w / 2560w — all as predicted. All six new arbitrary Tailwind values confirmed present in both `src/assets/css/style.css` and `_site/assets/css/style.css` (session 46 trap #3). Overlay stays clear of the rose and the "RollOut" lettering at every width, and holds the same proportion at 1920 and 2560.

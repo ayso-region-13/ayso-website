@@ -49,45 +49,60 @@ layout: base.njk
      mode: "event". The standard hero lives in the else branch below,
      unchanged — flip `mode` to "rotation" to bring it back.
 
-     The artwork is 1399×544 (2.57:1), far wider than the standard hero
-     box, so it is NOT cropped to fill: the container caps at 1280px so
-     the image never upscales past its native width, and the section
-     height simply follows the image. Below `md` the image is too short
-     for a legible overlay, so the date/location block stops being
-     absolutely positioned and flows underneath instead. #}
+     The artwork is 2560×996 (2.57:1), far wider than the standard hero
+     box, so it is NOT cropped to fill — the section height simply follows
+     the image. It runs full-bleed like the rotation hero, capped at the
+     native 2560px so it never upscales; the maroon-dark section fills the
+     remainder on wider-than-2560 displays. Below `md` the image is too
+     short for a legible overlay, so the date/location block stops being
+     absolutely positioned and flows underneath instead.
+
+     Widths are overridden per-image: the sitewide 600/1200/auto ladder
+     left a 1200→2560 gap, so every laptop viewport pulled the full 2560.
+
+     Do NOT add width/height here. A plain `width` attribute takes
+     precedence over `eleventy:widths` in eleventy-img and is read as
+     "generate exactly this one size", collapsing the srcset to a single
+     candidate — which is what the earlier 1399px version did, shipping
+     the full-size file to phones. eleventy-img emits its own intrinsic
+     width/height from the largest candidate, so CLS is still covered. #}
 <section class="bg-brand-maroon-dark">
-  <div class="max-w-screen-xl mx-auto">
+  <div class="max-w-[2560px] mx-auto">
     <a href="{{ homeHero.link }}" class="group relative block">
       <img src="{{ homeHero.image }}"
            alt="{{ homeHero.alt }}"
-           width="1399" height="544"
-           sizes="(min-width: 1280px) 1280px, 100vw"
+           sizes="(min-width: 2560px) 2560px, 100vw"
+           eleventy:widths="600,1000,1400,1920,2560"
            class="w-full h-auto"
            loading="eager" fetchpriority="high">
 
       {# Date / location block. Percentage offsets keep it pinned to the
          empty lower-left of the artwork as the image scales. #}
       <div class="md:absolute md:bottom-[8%] md:left-[5.5%]">
-        {# Type scales with the container above `md` rather than clamping to
-           a floor — a floor would hold the box at a fixed px width while the
-           artwork shrank, pushing it over the rose.
+        {# Above `md` the artwork width now tracks the viewport, so the box
+           is sized in `vw` throughout and holds its proportion against the
+           artwork at every width. Each `min()` ceiling is that same ratio
+           resolved at 2560px — the point where the image stops growing —
+           so the box freezes exactly when the artwork does. Do not add a
+           floor: a floor holds the box at a fixed px width while the
+           artwork shrinks, pushing it over the rose.
 
-           Padding must be a fixed length, NOT a percentage: this box sizes
-           by shrink-to-fit inside an absolutely-positioned parent, and CSS
-           resolves percentage padding against a width that is itself still
-           being computed — so it counts as zero, the box sizes to the bare
-           text, and the text then overflows its own background. #}
-        <div class="bg-black/45 group-hover:bg-black/60 transition-colors px-4 py-4 md:px-6 md:py-4">
+           Padding must be a real length (`vw`), NOT a percentage: this box
+           sizes by shrink-to-fit inside an absolutely-positioned parent,
+           and CSS resolves percentage padding against a width that is
+           itself still being computed — so it counts as zero, the box
+           sizes to the bare text, and the text overflows its background. #}
+        <div class="bg-black/45 group-hover:bg-black/60 transition-colors px-4 py-4 md:px-[min(1.875vw,3rem)] md:py-[min(1.25vw,2rem)]">
           {# nowrap above md: the box shrink-to-fits, and without this the
              date breaks onto a second line at tablet widths. #}
           <h1 class="font-extrabold uppercase leading-[1.05] tracking-tight text-white md:whitespace-nowrap">
             <span class="sr-only">{{ homeHero.eventName }}: </span>
-            <span class="block text-[clamp(1.5rem,5.5vw,2.75rem)] md:text-[min(3vw,2.6rem)] group-hover:underline decoration-brand-red decoration-4 underline-offset-4">{{ homeHero.headline }}</span>
-            <span class="block font-light text-[clamp(1.25rem,4.5vw,2.25rem)] md:text-[min(2.45vw,2.1rem)]">{{ homeHero.subhead }}</span>
+            <span class="block text-[clamp(1.5rem,5.5vw,2.75rem)] md:text-[min(3vw,4.8rem)] group-hover:underline decoration-brand-red decoration-4 underline-offset-4">{{ homeHero.headline }}</span>
+            <span class="block font-light text-[clamp(1.25rem,4.5vw,2.25rem)] md:text-[min(2.45vw,3.92rem)]">{{ homeHero.subhead }}</span>
           </h1>
         </div>
-        {# Brand two-tone signature strip #}
-        <div class="h-1.5 bg-brand-red"></div>
+        {# Brand two-tone signature strip — same proportional rule #}
+        <div class="h-1.5 md:h-[min(0.469vw,0.75rem)] bg-brand-red"></div>
       </div>
     </a>
   </div>
