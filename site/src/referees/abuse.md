@@ -1,11 +1,11 @@
 ---
-
-title: "Referee Abuse Prevention Program"
+title: Referee Abuse Prevention Program
+description: AYSO Region 13 Referee Abuse Prevention Program (RAPP). What counts
+  as referee abuse, how referees handle dissent on the field, and how to report
+  an incident.
 layout: page.njk
 section: referees
-description: "AYSO Region 13 Referee Abuse Prevention Program (RAPP). What counts as referee abuse, how referees handle dissent on the field, and how to report an incident."
 ---
-
 Nearly every referee in Region 13 is a volunteer, and many are children. Taking anger out on them, as AYSO puts it, affects everyone and the future of the game. When referees walk away, games do not get played.
 
 AYSO adopted the U.S. Soccer Referee Abuse Prevention standards into national policy effective March 2025. Area 1C approved its implementation protocols in July 2026 and enforces them across all nine regions, including Region 13, beginning with the Fall 2026 season. The program is known as RAPP.
@@ -24,20 +24,24 @@ RAPP is narrower than general misconduct. It covers language and behavior that i
 
 Verbal abuse falls into four levels:
 
+
 | Level | Behavior |
-|---|---|
+| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1 | Verbal taunting: insulting, belittling, insinuating, or taunting that undermines referee authority |
 | 2 | Harassment or intimidation: retaliation, abusive or threatening language |
 | 3 | Threats or derogatory language: aggression, attacking, cyberbullying, doxing, threats of violence |
 | 4 | Offensive or discriminatory act: discriminatory or derogatory words or actions based on race, skin color, ethnicity, nationality, social origin, gender, disability, sexual orientation, language, or religion |
 
+
 Physical abuse falls into three levels:
 
+
 | Level | Behavior |
-|---|---|
+| ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1 | Minor or slight deliberate touching: tapping a shoulder, touching the chest, bumping, pulling on a jersey |
 | 2 | Intentional confrontation: pushing, grabbing, pulling, squeezing, pinching, lightly slapping, using an object in a non-striking manner, damaging property |
 | 3 | Violent contact: hitting, punching, elbowing, kicking, biting, spitting, choking, tackling, throwing or using an object, or using any part of the body in a striking manner |
+
 
 The U.S. Soccer Penalties Matrix sets minimum sanctions for each level, in games or in time. It is a floor, not the final word: repeat offenses multiply, offenses against a minor carry more weight, and the Area disciplinary panel may go beyond the minimum at the direction of the Area Executive Board. Region 13 sets none of it.
 
@@ -75,7 +79,7 @@ Region 13 cannot address this problem without knowing where and when it is happe
 
 **Also file the [Referee Incident Form](https://ayso13.typeform.com/to/GjC4Pyed)** so Region 13 has its own record. This is a Region 13 form and does not by itself satisfy the Area 1C reporting requirement above.
 
-From there the RAPP Administrator investigates and decides whether to refer the matter to the RAPP Disciplinary Panel, which determines sanctions. Appeals go to the U.S. Soccer Appeals Committee within 14 days. The full sequence is in the [flow chart](/assets/docs/area-1c-rapp-flow-chart-2026.pdf).
+From there the RAPP Administrator investigates and decides whether to refer the matter to the RAPP Disciplinary Panel, which determines sanctions.
 
 **You will hear how it ended.** The RRA notifies whoever made the report of the panel's conclusion, and for a youth referee, notifies their parent or guardian. Reports do not disappear into a process.
 
@@ -88,10 +92,8 @@ Reports about a referee's *performance* rather than someone's conduct toward a r
 - [Respecting Our Referees (2026)](/assets/docs/respecting-our-referees-2026.pdf) — AYSO summary of the standards, abuse levels, and consequences
 - [Area 1C RAPP Implementation Protocols (2026)](/assets/docs/area-1c-rapp-implementation-protocols-2026.pdf) — how the program runs across Area 1C, including the disciplinary panel and the reporting steps
 - [Area 1C RAPP Flow Chart (2026)](/assets/docs/area-1c-rapp-flow-chart-2026.pdf) — one-page diagram of the reporting process
-- [U.S. Soccer Policy 531-9 (2026)](/assets/docs/ussf-referee-abuse-prevention-policy-531-9.pdf) — the federation policy the program is built on, with the Penalties Matrix and the appeals process
+- [U.S. Soccer Policy 531-9 (2026)](/assets/docs/ussf-referee-abuse-prevention-policy-531-9.pdf) — the overall framework nationally
 - [Region 13 Respect the Referee Policy (2022)](/assets/docs/respect-the-referee.pdf) — Region 13's own zero-tolerance policy and coach responsibilities, still in effect
-
-The current Penalties Matrix and national materials are at [ussoccer.com/rap](https://www.ussoccer.com/rap).
 
 ## Contact
 
