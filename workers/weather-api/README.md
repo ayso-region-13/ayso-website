@@ -20,6 +20,22 @@ After each cron refresh, four independent notifiers post to **#notify-weather** 
 
 The **NWS active-alert notifier is disabled by default** (`NWS_ALERTS_ENABLED="false"` in `wrangler.toml` — it was too noisy in `#notify-weather`); when off, its fetch is skipped entirely. Set `NWS_ALERTS_ENABLED="true"` to resume it. When enabled, on first run with no baseline it seeds its state silently so a deploy during an active alert doesn't dump pre-existing alerts into the channel. The pure decision logic (`closureTransition`, `diffAlertIds`, `rainForecastDecision`) is unit-tested — run `npm test`.
 
+### Closure-notice debounce (Slack only)
+
+The closure notice is debounced by `closureNotifyDecision` (pure, unit-tested). **This affects Slack only — `/resources/weather/` and `/temp` always show the true live level.** Two mechanisms, both needed:
+
+- **Heat hysteresis.** Trips at WBGT `> WBGT_TRIP_F` (89.7, chosen to match `cif.level >= 5`) and clears only at `<= WBGT_CLEAR_F` (88.0). The 88.0–89.7 deadband is why `closureReasons` takes the latched `heatActive` flag rather than the live level.
+- **Dwell.** `CLOSURE_DWELL_MINUTES` (15) must elapse before a transition posts, so a WBGT hovering on the boundary cannot flap the channel.
+
+Without both, a reading oscillating around the threshold posts a closure and an all-clear every 5-minute tick.
+
+## Caching
+
+Two independent layers, and the first one is invisible from this repo:
+
+- **Cloudflare caching is DISABLED on `https://www.ayso13.org/temp` and `https://www.ayso13.org/resources/weather`**, set 2026-07-25 **in the Cloudflare dashboard, not in this repo**. It will never appear in git or in `site/src/_headers.njk`, so *the absence of a header is not evidence the bypass isn't configured*. Check the dashboard before adding one.
+- **The JSON feed has its own cache.** The Worker sends `Cache-Control: public, max-age=300` on `/api/weather` (`CACHE_TTL_SECONDS`, matched to the 5-minute cron), so even a hard-refreshed page can receive a payload up to 5 minutes old. Bypassing that means changing the Worker header — not the page, and not the dashboard.
+
 **Setup:** create the `#notify-weather` channel, invite the AYSO bot, then set `NOTIFY_WEATHER_CHANNEL_ID` in `wrangler.toml [vars]` to the channel id and add the bot token as a secret:
 
 ```bash
