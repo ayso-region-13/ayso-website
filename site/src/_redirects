@@ -605,10 +605,15 @@
 /pog/                               https://ayso13.typeform.com/SSreg        301
 /gctt                               https://form.typeform.com/to/VIFJoyJ4    301
 /gctt/                              https://form.typeform.com/to/VIFJoyJ4    301
-/r                                  https://ayso13.typeform.com/to/Ah0JFeOp  301
-/r/                                 https://ayso13.typeform.com/to/Ah0JFeOp  301
+# /r is the QR code printed on every game card. The card encodes this URL and
+# nothing else, deliberately, so the intake surface can move without reprinting
+# a card. 302, not 301: the indirection is worthless if a browser caches the
+# hop, and the 301 that used to live here is why anyone who scanned a card last
+# season still lands on the Typeform until they clear their cache.
+/r                                  https://stats.ayso13.org/submit          302
+/r/                                 https://stats.ayso13.org/submit          302
 
-/r/*                                https://ayso13.typeform.com/to/Ah0JFeOp  301
+/r/*                                https://stats.ayso13.org/submit          302
 
 # ======================================================================
 # Short links -- new site pages
