@@ -1,6 +1,6 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-08-12T00:54:22.465Z
+// Last generated: 2026-08-17T03:05:04.467Z
 // 643 exact rules + 9 splat rules = 652 total
 
 export const EXACT = {
@@ -2093,12 +2093,12 @@ export const EXACT = {
     "s": 301
   },
   "/r": {
-    "d": "https://ayso13.typeform.com/to/Ah0JFeOp",
-    "s": 301
+    "d": "https://stats.ayso13.org/submit",
+    "s": 302
   },
   "/r/": {
-    "d": "https://ayso13.typeform.com/to/Ah0JFeOp",
-    "s": 301
+    "d": "https://stats.ayso13.org/submit",
+    "s": 302
   },
   "/archive": {
     "d": "/",
@@ -2606,8 +2606,8 @@ export const SPLAT = [
   },
   {
     "re": "^/r/(.*)$",
-    "d": "https://ayso13.typeform.com/to/Ah0JFeOp",
-    "s": 301
+    "d": "https://stats.ayso13.org/submit",
+    "s": 302
   },
   {
     "re": "^/author/(.*)$",
