@@ -26,6 +26,10 @@ As the Photographer, you’ll help capture the moments that make the season memo
 
 As the Grants & Sponsors lead, you'll help secure resources that support the region's programs. You'll build relationships with local businesses, sponsors, and community partners. Every year we apply for about a dozen grants and work with a similar number of interested sponsors. This role includes identifying these opportunities and coordinating outreach efforts. If you enjoy relationship-building and strategic thinking, this is a rewarding way to contribute.
 
+## Field Permit Coordinator
+
+As the Field Permit Coordinator, you will interface between AYSO Region 13 and the various groups from which we permit fields. This includes the cities of Pasadena and La Cañada, as well as the Pasadena Unified School District. This role involves almost entirely e-mail and digital communication. As part of this position, you will gain an understanding of how Region 13 uses our fields, and you will play an important role in maintaining our relationships with the field owners.
+
 ## Google Workspace Admin
 
 As the Google Workspace Admin, you'll support the region's digital infrastructure and collaboration tools. You'll manage accounts, permissions, and shared resources for board members and volunteers. This includes Google Docs as well as a slew of other online tools, such as Zoom, Jotform, and SignUp Genius. This role helps ensure information is organized, secure, and accessible. If you're comfortable with technology and enjoy supporting others, this is a valuable role on the team.

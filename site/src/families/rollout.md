@@ -30,6 +30,7 @@ We are starting off the season a brand new way this year! The Rose City Rollout 
 - Walk-up Q&A with coach and referee admins
 - LA Galaxy Star Squad!
 - On-field fun with AYSO Play!
+- Women's Coaching Alliance (WCA) and the Women's Referee Network (WRN)
 - Fall team meetups — meet your new coach and teammates!
 - Team uniform pickup
 - Coach equipment pickup
