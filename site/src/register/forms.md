@@ -16,7 +16,7 @@ The following are required for each player at registration:
 
 Region 13 follows AYSO's Kids Zone — ten standards for behavior at games and events. See [/families/pledge/](/families/pledge/).
 
-[Download the Kids Zone Pledge](/docs/kids-zone-parent-pledge.pdf) to sign and return to your coach here.
+[Download the Kids Zone Pledge](/assets/docs/kids-zone-parent-pledge.pdf) to sign and return to your coach here.
 
 ### Concussion Information Sheet
 
