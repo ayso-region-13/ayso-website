@@ -52,7 +52,7 @@ export default {
       // forced on (heatActive=true) so the live WBGT value shows even when
       // conditions are calm; the card is clearly labeled a drill.
       const livePayload = (await env.WEATHER_KV.get(KV_KEY, { type: "json" })) || {};
-      const sample = closureTrippedCard(closureReasons(livePayload, true));
+      const sample = closureTrippedCard(closureReasons(livePayload, true), payloadAsOf(livePayload));
       const data = await postSlack(env, [
         { type: "section", text: { type: "mrkdwn", text: ":satellite: *Weather notifications test* — confirms the weather Worker can post here. Real closure / NWS-alert / rain-forecast notices arrive in this channel automatically." } },
         { type: "divider" },
@@ -165,7 +165,54 @@ async function refresh(env) {
   await env.WEATHER_KV.put(KV_KEY, JSON.stringify(payload), {
     expirationTtl: 60 * 60 * 24, // 24 h safety net if the cron stalls
   });
+  await logObservation(env, payload);
   return payload;
+}
+
+// ── Observation log (D1) ───────────────────────────────────────────────
+//
+// KV holds only the latest reading, so without this table the site had no
+// history: "how many hours were we in Level 4 last week" was unanswerable.
+// It cannot be backfilled — Tempest exposes wet_bulb_globe_temperature only on
+// the CURRENT observation (time_start / day_offset / bucket are silently ignored
+// on that endpoint, the device-level history carries raw sensor fields with no
+// WBGT, and the stats endpoint has none either), so history starts here.
+//
+// Written from refresh(), which means the fetch() cold-start path logs too. That
+// is safe because observed_at is the primary key and the insert ignores
+// conflicts. A D1 failure must never break the weather feed, hence the catch:
+// the log is analytics, the feed is the product.
+async function logObservation(env, payload) {
+  if (!env.WEATHER_DB) return; // binding not configured yet
+  const c = payload.current || {};
+  const w = payload.wbgt || {};
+  const a = payload.airQuality || {};
+  const r = payload.rain || {};
+  const observedMs = new Date(c.stationTimestamp || payload.fetchedAt).getTime();
+  if (!Number.isFinite(observedMs)) return;
+  try {
+    await env.WEATHER_DB.prepare(
+      `INSERT INTO observations
+         (observed_at, wbgt_f, cif_level, temp_f, feels_like_f, humidity,
+          wind_mph, solar_wm2, aqi, rain_48h_in, closure)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+       ON CONFLICT(observed_at) DO NOTHING`
+    ).bind(
+      Math.floor(observedMs / 1000),
+      w.valueF ?? null,
+      w.level ?? null,
+      c.tempF ?? null,
+      c.feelsLikeF ?? null,
+      c.humidity ?? null,
+      c.windMph ?? null,
+      c.solarWm2 ?? null,
+      a.aqi ?? null,
+      r.last48hInches ?? null,
+      payload.closureRecommended ? 1 : 0
+    ).run();
+  } catch (err) {
+    console.error("observation log write failed:", err.message);
+  }
 }
 
 // ── Slack notifications ────────────────────────────────────────────────
@@ -183,6 +230,7 @@ async function refresh(env) {
 
 async function notify(env, payload) {
   const tasks = [
+    notifyHeatWarning(env, payload),
     notifyClosure(env, payload),
     notifyRainForecast(env, payload),
   ];
@@ -249,19 +297,47 @@ function closureReasons(payload, heatActive) {
 // Render the "field-closure threshold reached" Slack card from a reason list.
 // Shared by notifyClosure (the real notice) and the self-test's sample preview
 // so the two can never drift in wording.
-function closureTrippedCard(reasons) {
+// `asOf` is the reading's own timestamp, preformatted Pacific ("11:15 AM PT").
+// It matters more than it looks: the card is a frozen snapshot posted up to
+// CLOSURE_DWELL_MINUTES after the threshold was crossed, and on a hot morning
+// WBGT keeps climbing after that, so an unstamped number reads as though it
+// disagrees with the live page. Stamped, the two reconcile.
+function closureTrippedCard(reasons, asOf) {
   const bullets = reasons.length ? reasons.map((r) => "• " + r).join("\n") : "• Weather closure threshold reached";
   return {
     blocks: [
       { type: "section", text: { type: "mrkdwn", text: `:warning: *Field-closure threshold reached*\n${bullets}` } },
-      { type: "context", elements: [{ type: "mrkdwn", text: "Use `/ayso field` to set field status · <https://www.ayso13.org/resources/weather/|Weather & field conditions>" }] },
+      { type: "context", elements: [{ type: "mrkdwn", text: contextLine(asOf, "Use `/ayso field` to set field status", "<https://www.ayso13.org/resources/weather/|Weather & field conditions>") }] },
     ],
     text: `Field-closure threshold reached: ${reasons.join("; ") || "weather"}`,
   };
 }
 
+// Join a Slack context line, dropping the "as of" segment when no usable
+// timestamp was available rather than printing a half-empty stamp.
+function contextLine(asOf, ...rest) {
+  return [asOf ? `Reading as of ${asOf}` : null, ...rest].filter(Boolean).join(" · ");
+}
+
+// Notifier state is identical on the vast majority of ticks (nothing is
+// changing), and KV writes are metered. Read the raw string alongside the
+// parsed object so the caller can skip the put when the serialized state is
+// unchanged; a corrupt value parses to {} and gets rewritten on the next tick.
+async function readNotifyState(env, key) {
+  const text = await env.WEATHER_KV.get(key);
+  let parsed = {};
+  try { parsed = text ? JSON.parse(text) : {}; } catch (_) { parsed = {}; }
+  return { parsed, text };
+}
+
+async function writeNotifyState(env, key, state, prevText) {
+  const next = JSON.stringify(state);
+  if (next === prevText) return;
+  await env.WEATHER_KV.put(key, next);
+}
+
 async function notifyClosure(env, payload) {
-  const raw = (await env.WEATHER_KV.get("notify:closure", { type: "json" })) || {};
+  const { parsed: raw, text: prevText } = await readNotifyState(env, "notify:closure");
   // Back-compat: old state was just { active: bool }. Carry `active` forward as
   // `posted`, but do NOT seed `heatActive` from it — the old flag could have
   // been set by a rain/AQI closure, and latching heatActive true from that
@@ -286,8 +362,8 @@ async function notifyClosure(env, payload) {
   };
   const decision = closureNotifyDecision(state, input, Date.now(), cfg);
   // Always persist the updated state (heat hysteresis + dwell timer advance),
-  // even on ticks that don't post.
-  await env.WEATHER_KV.put("notify:closure", JSON.stringify(decision.state));
+  // even on ticks that don't post — but only when it actually changed.
+  await writeNotifyState(env, "notify:closure", decision.state, prevText);
   if (!decision.post) return;
 
   if (decision.kind === "tripped") {
@@ -295,13 +371,89 @@ async function notifyClosure(env, payload) {
     // raw live level) so a heat closure that dipped into the 88–89.7°F deadband
     // during the dwell still names heat instead of a generic bullet.
     const reasons = closureReasons(payload, decision.state.heatActive);
-    const { blocks, text } = closureTrippedCard(reasons);
+    const { blocks, text } = closureTrippedCard(reasons, payloadAsOf(payload));
     await postSlack(env, blocks, text);
   } else {
     await postSlack(env, [
       { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Conditions are back below the closure threshold.* No weather-driven closure is recommended right now." } },
-      { type: "context", elements: [{ type: "mrkdwn", text: "<https://www.ayso13.org/resources/weather/|Weather & field conditions>" }] },
+      { type: "context", elements: [{ type: "mrkdwn", text: contextLine(payloadAsOf(payload), "<https://www.ayso13.org/resources/weather/|Weather & field conditions>") }] },
     ], "Conditions back below the closure threshold");
+  }
+}
+
+// Render the Level-4 heat-advisory card. Copy mirrors the site's own Level 4
+// banner (WBGT_BANNERS[4] in site/src/resources/weather.md) and the heat-policy
+// table, so Slack and the page say the same thing.
+function heatWarnCard(wbgtF, level, asOf) {
+  const value = typeof wbgtF === "number" ? `WBGT ${wbgtF}\u00b0F` : "WBGT";
+  const limits = [
+    "• Practice: maximum 1 hour, four 4-minute water breaks per hour, no equipment",
+    "• Games: length reduced by one-third, with additional water breaks at the 1/8 marks",
+  ].join("\n");
+  // The advisory is always about the Level 4 threshold — that is what was
+  // crossed. But WBGT can climb past Level 5 during the 15-minute dwell (today's
+  // 09:00–09:30 ramp was 4.5°F), and printing Level 4 limits beside a Level 5
+  // reading would be wrong. Name the escalation instead; notifyClosure owns the
+  // suspension notice itself.
+  const escalated = typeof level === "number" && level >= 5
+    ? "\nWBGT has since reached CIF Level 5; a closure notice follows."
+    : "";
+  return {
+    blocks: [
+      { type: "section", text: { type: "mrkdwn", text: `:thermometer: *Heat advisory \u2014 CIF Level 4*\n${value}. Strict limits on practice; games are shortened with extra water breaks.\n${limits}${escalated}` } },
+      { type: "context", elements: [{ type: "mrkdwn", text: contextLine(asOf, "<https://www.ayso13.org/resources/heat-policy/|Heat policy>", "<https://www.ayso13.org/resources/weather/|Weather & field conditions>") }] },
+    ],
+    text: `Heat advisory \u2014 CIF Level 4: ${value}`,
+  };
+}
+
+// Level-4 heads-up. Fires ahead of the closure notice so coaches get warning
+// before WBGT reaches the Level 5 suspension threshold, and clears when the
+// heat backs off. Independent of notifyClosure by design (see heatWarnDecision):
+// on a fast jump straight past Level 4 into Level 5 both post, which is honest
+// rather than redundant.
+async function notifyHeatWarning(env, payload) {
+  const { parsed: raw, text: prevText } = await readNotifyState(env, "notify:heatWarn");
+  const state = {
+    posted: raw.posted ?? false,
+    active: raw.active ?? false,
+    candidate: raw.candidate,
+    since: raw.since || 0,
+  };
+  const wbgtF = payload.wbgt && typeof payload.wbgt.valueF === "number" ? payload.wbgt.valueF : null;
+  const cfg = {
+    tripF: parseFloat(env.WBGT_WARN_TRIP_F || "87.5"),
+    clearF: parseFloat(env.WBGT_WARN_CLEAR_F || "86.0"),
+    dwellMs: parseInt(env.CLOSURE_DWELL_MINUTES || "15", 10) * 60 * 1000,
+  };
+  const decision = heatWarnDecision(state, wbgtF, Date.now(), cfg);
+
+  // First run (no state key yet): seed silently, the same way notifyNwsAlerts
+  // does. Without this, a deploy on a hot afternoon posts an advisory 15 min
+  // later for heat that has been going for hours — and its escalation line
+  // would promise a closure notice that already fired long before. Seeding
+  // `posted` from the latch means the eventual "dropped below Level 4" still
+  // lands, which is the part worth hearing.
+  if (prevText == null) {
+    await env.WEATHER_KV.put("notify:heatWarn", JSON.stringify({
+      posted: decision.state.active, candidate: null, since: 0, active: decision.state.active,
+    }));
+    return;
+  }
+
+  await writeNotifyState(env, "notify:heatWarn", decision.state, prevText);
+  if (!decision.post) return;
+
+  const asOf = payloadAsOf(payload);
+  if (decision.kind === "tripped") {
+    const level = payload.wbgt && typeof payload.wbgt.level === "number" ? payload.wbgt.level : 4;
+    const { blocks, text } = heatWarnCard(wbgtF, level, asOf);
+    await postSlack(env, blocks, text);
+  } else {
+    await postSlack(env, [
+      { type: "section", text: { type: "mrkdwn", text: `:sunny: *Heat has dropped below CIF Level 4.*${typeof wbgtF === "number" ? ` WBGT ${wbgtF}\u00b0F.` : ""} Normal practice and game limits apply.` } },
+      { type: "context", elements: [{ type: "mrkdwn", text: contextLine(asOf, "<https://www.ayso13.org/resources/heat-policy/|Heat policy>") }] },
+    ], "Heat has dropped below CIF Level 4");
   }
 }
 
@@ -378,63 +530,78 @@ async function notifyRainForecast(env, payload) {
 
 // ── Pure decision logic (unit-tested) ──────────────────────────────────
 
+// Shared notifier primitives ------------------------------------------------
+//
+// Both heat notifiers (Level 4 advisory, Level 5 closure) need the same two
+// mechanisms, so they live here once:
+//
+//   heatLatch — hysteresis. Once active it stays active until WBGT falls to
+//     clearF, so a reading bouncing at the boundary can't clear-and-re-trip.
+//     A missing WBGT holds the prior state: a deliberate fail-safe, because
+//     while the sensor is blind we would rather keep a posted notice up than
+//     declare an all-clear on no data. A prolonged outage therefore holds the
+//     notice until valid WBGT returns.
+//
+//   dwellGate — any change must persist dwellMs before it is announced, which
+//     filters transient one-tick spikes.
+//
+// Trips use strict `> tripF` to match the site, whose level comes from
+// cifLevel() and puts a value exactly equal to a tier max in the LOWER tier
+// (`<= max`). Using `>=` here would announce a level the live page doesn't show.
+function heatLatch(prevActive, wbgtF, tripF, clearF) {
+  if (typeof wbgtF !== "number") return !!prevActive;
+  return prevActive ? wbgtF > clearF : wbgtF > tripF;
+}
+
+// `state` carries { posted, candidate, since }; the caller merges its own
+// extra fields (heatActive/active) into the returned `next`.
+function dwellGate(state, desired, nowMs, dwellMs) {
+  const posted = !!state.posted;
+  const candidate = state.candidate === true || state.candidate === false ? state.candidate : null;
+  const since = state.since || 0;
+
+  // No pending change → clear any candidate, don't post.
+  if (desired === posted) return { post: false, kind: null, next: { posted, candidate: null, since: 0 } };
+  // A change is pending. Start (or restart) the dwell timer for a new candidate.
+  if (candidate !== desired) return { post: false, kind: null, next: { posted, candidate: desired, since: nowMs } };
+  // Candidate unchanged — has it held long enough?
+  if (nowMs - since >= dwellMs) {
+    return { post: true, kind: desired ? "tripped" : "cleared", next: { posted: desired, candidate: null, since: 0 } };
+  }
+  // Still waiting out the dwell.
+  return { post: false, kind: null, next: { posted, candidate: desired, since } };
+}
+
 // Closure state machine: post only on a transition.
 //   false→true → {post:true, kind:"tripped"}
 //   true→false → {post:true, kind:"cleared"}
 //   unchanged  → {post:false}
-// Debounced closure-notifier decision (Slack only). Two mechanisms stop the
-// notice flapping when WBGT sits at the CIF Level 5 boundary:
-//   1. Hysteresis on heat — once the heat closure is active it stays active
-//      until WBGT drops to cfg.clearF (a deadband below the trip point), so a
-//      reading bouncing 89.6↔89.8 doesn't clear-and-re-trip. Rain/AQI don't
-//      flap, so they pass through un-hysteresed.
-//   2. Dwell — any change to the combined state must persist cfg.dwellMs
-//      before it's announced, filtering transient one-tick spikes.
+// Heat is hysteresed and dwelled (see above). Rain/AQI don't flap, so they pass
+// through un-hysteresed but still respect the dwell.
 // Pure + unit-tested. `state` carries { posted, heatActive, candidate, since }.
 // `input` = { wbgtF|null, rain, aqi, reasons }. Returns { post, kind, reasons, state }.
 function closureNotifyDecision(state, input, nowMs, cfg) {
-  const s = {
-    posted: !!state.posted,
-    heatActive: !!state.heatActive,
-    candidate: state.candidate === true || state.candidate === false ? state.candidate : null,
-    since: state.since || 0,
-  };
-
-  // Heat hysteresis.
-  // - Missing WBGT: hold the prior heat state rather than flipping on a data
-  //   gap. This is a deliberate fail-safe — while the sensor is blind we keep a
-  //   posted heat closure up rather than declaring "all clear" on no data. A
-  //   prolonged outage therefore holds the closure until valid WBGT returns; we
-  //   accept that over the alternative (a premature all-clear during a blackout).
-  // - Trip uses strict `> tripF` to match the site's closure flag, which is
-  //   `cif.level >= 5` and cifLevel() puts exactly 89.7°F in Level 4 (`<= max`),
-  //   so Level 5 is strictly `> 89.7`. Using `>=` here would post a closure at
-  //   89.7 while the live page still reads Level 4.
-  // - Clear only once WBGT falls to `<= clearF` (the deadband below the trip),
-  //   so a reading bouncing at the boundary can't clear-and-re-trip.
-  let heatActive;
-  if (typeof input.wbgtF !== "number") heatActive = s.heatActive;
-  else if (s.heatActive) heatActive = input.wbgtF > cfg.clearF;
-  else heatActive = input.wbgtF > cfg.tripF;
-
+  const heatActive = heatLatch(state.heatActive, input.wbgtF, cfg.tripF, cfg.clearF);
   const desired = heatActive || !!input.rain || !!input.aqi;
-  const idle = { posted: s.posted, heatActive, candidate: null, since: 0 };
+  const gate = dwellGate(state, desired, nowMs, cfg.dwellMs);
+  return {
+    post: gate.post,
+    kind: gate.kind,
+    reasons: gate.post && desired ? input.reasons || [] : [],
+    state: { ...gate.next, heatActive },
+  };
+}
 
-  // No pending change → sync heat state, clear any candidate, don't post.
-  if (desired === s.posted) return { post: false, kind: null, reasons: [], state: idle };
-
-  // A change is pending. Start (or restart) the dwell timer for a new candidate.
-  if (s.candidate !== desired) {
-    return { post: false, kind: null, reasons: [], state: { posted: s.posted, heatActive, candidate: desired, since: nowMs } };
-  }
-
-  // Candidate unchanged — has it held long enough?
-  if (nowMs - s.since >= cfg.dwellMs) {
-    const kind = desired ? "tripped" : "cleared";
-    return { post: true, kind, reasons: desired ? input.reasons || [] : [], state: { posted: desired, heatActive, candidate: null, since: 0 } };
-  }
-  // Still waiting out the dwell.
-  return { post: false, kind: null, reasons: [], state: { posted: s.posted, heatActive, candidate: desired, since: s.since } };
+// Level-4 heat-advisory state machine. Same primitives at the Level 4 boundary,
+// and deliberately INDEPENDENT of the closure notifier: the advisory stays
+// latched through Level 5, so an escalation posts the closure notice without
+// re-posting the advisory, and a drop from 5 back to 4 stays quiet because the
+// advisory never cleared. It clears only when WBGT falls under clearF.
+// Pure + unit-tested. `state` carries { posted, active, candidate, since }.
+function heatWarnDecision(state, wbgtF, nowMs, cfg) {
+  const active = heatLatch(state.active, wbgtF, cfg.tripF, cfg.clearF);
+  const gate = dwellGate(state, active, nowMs, cfg.dwellMs);
+  return { post: gate.post, kind: gate.kind, state: { ...gate.next, active } };
 }
 
 // Set difference over alert id lists.
@@ -862,6 +1029,26 @@ function airAdvisory(observations) {
   };
 }
 
+// "11:15 AM PT" in Pacific for an ISO timestamp — how the Slack cards stamp
+// the reading they were built from. Returns null for a missing or unparseable
+// input so callers can drop the segment instead of printing "Invalid Date".
+function pacificClock(iso) {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  try {
+    return d.toLocaleString("en-US", { timeZone: "America/Los_Angeles", hour: "numeric", minute: "2-digit" }) + " PT";
+  } catch (_) { return null; }
+}
+
+// The "as of" stamp for a payload: the station's own observation time, falling
+// back to when we fetched it. Prefer the station time — that is when the sensor
+// actually read the value the card is about.
+function payloadAsOf(payload) {
+  const c = (payload && payload.current) || {};
+  return pacificClock(c.stationTimestamp || (payload && payload.fetchedAt));
+}
+
 // YYYY-MM-DD in America/Los_Angeles for a given ISO timestamp.
 function pacificDate(iso) {
   const d = new Date(iso);
@@ -1045,4 +1232,4 @@ function jsonError(status, message) {
 
 // Named exports for unit tests (Node). The Worker runtime uses the default
 // export above and ignores these.
-export { closureNotifyDecision, diffAlertIds, rainForecastDecision, closureReasons, closureTrippedCard, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory, shouldRefreshAqi };
+export { closureNotifyDecision, heatWarnDecision, heatLatch, dwellGate, heatWarnCard, pacificClock, payloadAsOf, contextLine, diffAlertIds, rainForecastDecision, closureReasons, closureTrippedCard, normalizeAirNow, airAdvisory, hasUsableAqi, epaCorrect, pm25ToAqi, aqiCategory, parsePurpleAir, compositePm25, purpleAirAdvisory, shouldRefreshAqi };

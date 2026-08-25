@@ -6,6 +6,10 @@ import assert from "node:assert/strict";
 
 import {
   closureNotifyDecision,
+  heatWarnDecision,
+  heatWarnCard,
+  pacificClock,
+  payloadAsOf,
   diffAlertIds,
   rainForecastDecision,
   closureReasons,
@@ -297,4 +301,136 @@ test("closureReasons names heat from the hysteresis flag when WBGT dipped into t
     closureReasons({ wbgt: { level: 5, valueF: 90.0 }, rain: { closureRecommended: false }, airQuality: { closureRecommended: false } }, false),
     []
   );
+});
+
+// ── Level-4 heat advisory ─────────────────────────────────────────────────
+const WARN_CFG = { tripF: 87.5, clearF: 86.0, dwellMs: 15 * MIN };
+const warnFresh = { posted: false, active: false, candidate: null, since: 0 };
+
+test("heatWarnDecision: sustained Level 4 posts only after the dwell", () => {
+  let d = heatWarnDecision(warnFresh, 88.0, 0, WARN_CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.active, true);
+  assert.equal(d.state.candidate, true);
+
+  d = heatWarnDecision(d.state, 88.2, 10 * MIN, WARN_CFG);
+  assert.equal(d.post, false);
+
+  d = heatWarnDecision(d.state, 88.4, 15 * MIN, WARN_CFG);
+  assert.equal(d.post, true);
+  assert.equal(d.kind, "tripped");
+  assert.equal(d.state.posted, true);
+});
+
+test("heatWarnDecision: trip boundary matches the site (strictly > 87.5)", () => {
+  // 87.5 exactly is CIF Level 3 (cifLevel uses `<= max`), so it must not trip.
+  let d = heatWarnDecision(warnFresh, 87.5, 0, WARN_CFG);
+  assert.equal(d.state.active, false);
+  assert.equal(d.state.candidate, null);
+
+  d = heatWarnDecision(warnFresh, 87.6, 0, WARN_CFG);
+  assert.equal(d.state.active, true);
+});
+
+test("heatWarnDecision: stays latched through Level 5 (no re-post, no clear)", () => {
+  const posted = { posted: true, active: true, candidate: null, since: 0 };
+  // WBGT escalates well past the closure threshold — the advisory is already
+  // out, so it must stay quiet and let notifyClosure own the escalation.
+  let d = heatWarnDecision(posted, 92.5, 100 * MIN, WARN_CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.active, true);
+  assert.equal(d.state.posted, true);
+
+  // Falling back from Level 5 into Level 4 is still above clearF → still quiet.
+  d = heatWarnDecision(d.state, 88.5, 200 * MIN, WARN_CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.posted, true);
+});
+
+test("heatWarnDecision: clears only below clearF, and only after the dwell", () => {
+  const posted = { posted: true, active: true, candidate: null, since: 0 };
+  // 86.5 is below the Level 4 trip but inside the deadband → holds.
+  let d = heatWarnDecision(posted, 86.5, 0, WARN_CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.active, true);
+
+  // 85.9 clears the latch, but the dwell has to elapse first.
+  d = heatWarnDecision(posted, 85.9, 0, WARN_CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.active, false);
+  assert.equal(d.state.candidate, false);
+
+  d = heatWarnDecision(d.state, 85.5, 15 * MIN, WARN_CFG);
+  assert.equal(d.post, true);
+  assert.equal(d.kind, "cleared");
+  assert.equal(d.state.posted, false);
+});
+
+test("heatWarnDecision: transient one-tick spike never posts", () => {
+  let d = heatWarnDecision(warnFresh, 88.0, 0, WARN_CFG);
+  assert.equal(d.post, false);
+  d = heatWarnDecision(d.state, 84.0, 5 * MIN, WARN_CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.candidate, null);
+  assert.equal(d.state.posted, false);
+});
+
+test("heatWarnDecision: missing WBGT holds the prior latch", () => {
+  const posted = { posted: true, active: true, candidate: null, since: 0 };
+  const d = heatWarnDecision(posted, null, 50 * MIN, WARN_CFG);
+  assert.equal(d.post, false);
+  assert.equal(d.state.active, true);
+});
+
+test("heatWarnCard titles Level 4 even when WBGT escalated during the dwell", () => {
+  // WBGT crossed 87.5, then ran past the Level 5 threshold before the dwell
+  // elapsed. The advisory is still about Level 4, but it must not print Level 4
+  // limits beside a Level 5 reading without saying so.
+  const card = heatWarnCard(90.2, 5, "10:15 AM PT");
+  const body = card.blocks[0].text.text;
+  assert.match(body, /Heat advisory — CIF Level 4/);
+  assert.doesNotMatch(body, /advisory — CIF Level 5/);
+  assert.match(body, /has since reached CIF Level 5; a closure notice follows/);
+  assert.match(card.text, /Heat advisory — CIF Level 4: WBGT 90\.2°F/);
+
+  // The ordinary case says nothing about escalation.
+  assert.doesNotMatch(heatWarnCard(88.2, 4, null).blocks[0].text.text, /since reached/);
+});
+
+test("heatWarnCard names the value, the level, and the policy limits", () => {
+  const card = heatWarnCard(88.2, 4, "10:15 AM PT");
+  const body = card.blocks[0].text.text;
+  assert.match(body, /Heat advisory — CIF Level 4/);
+  assert.match(body, /WBGT 88\.2°F/);
+  assert.match(body, /maximum 1 hour/);
+  assert.match(card.blocks[1].elements[0].text, /Reading as of 10:15 AM PT/);
+  assert.match(card.text, /Heat advisory — CIF Level 4/);
+});
+
+// ── "As of" stamps ────────────────────────────────────────────────────────
+
+test("pacificClock formats an ISO stamp in Pacific, and rejects junk", () => {
+  // 2026-08-25T18:15:00Z = 11:15 AM PDT
+  assert.equal(pacificClock("2026-08-25T18:15:00Z"), "11:15 AM PT");
+  assert.equal(pacificClock(null), null);
+  assert.equal(pacificClock("not a date"), null);
+});
+
+test("payloadAsOf prefers the station timestamp over our fetch time", () => {
+  assert.equal(
+    payloadAsOf({ current: { stationTimestamp: "2026-08-25T18:15:00Z" }, fetchedAt: "2026-08-25T19:00:00Z" }),
+    "11:15 AM PT"
+  );
+  // No station timestamp → fall back to fetchedAt.
+  assert.equal(payloadAsOf({ current: {}, fetchedAt: "2026-08-25T19:00:00Z" }), "12:00 PM PT");
+  assert.equal(payloadAsOf({}), null);
+});
+
+test("closureTrippedCard stamps the reading, and omits the segment without one", () => {
+  const stamped = closureTrippedCard(["Heat: WBGT 90.4°F"], "10:15 AM PT");
+  assert.match(stamped.blocks[1].elements[0].text, /^Reading as of 10:15 AM PT · Use `\/ayso field`/);
+
+  const unstamped = closureTrippedCard(["Heat: WBGT 90.4°F"]);
+  assert.doesNotMatch(unstamped.blocks[1].elements[0].text, /Reading as of/);
+  assert.match(unstamped.blocks[1].elements[0].text, /^Use `\/ayso field`/);
 });

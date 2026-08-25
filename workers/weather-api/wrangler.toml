@@ -12,6 +12,18 @@ crons = ["*/5 * * * *"]
 binding = "WEATHER_KV"
 id = "3a591305dddf4644903b97201292a989"
 
+# Observation log. One row per 5-min reading (WBGT, CIF level, temp, AQI, rain)
+# so time-in-level questions are answerable — KV only ever holds "now". Schema
+# in schema.sql; queries in README.md ("Observation log").
+#
+# Created 2026-08-25 in region WNAM. Reading/writing it needs D1 on the
+# canonical ayso13-worker-deploy token (added 2026-08-25); before that it had
+# none and every d1 call returned code 10000.
+[[d1_databases]]
+binding = "WEATHER_DB"
+database_name = "ayso13-weather-log"
+database_id = "7d5fa6f1-a18b-41af-b626-67947c4f8d48"
+
 # Mount the Worker on the prod + staging domains at /api/weather.
 # Same-origin so the browser fetch from /resources/weather/ doesn't
 # need CORS on either environment.
@@ -59,6 +71,13 @@ POP_FORECAST_THRESHOLD = "60"
 WBGT_TRIP_F = "89.7"
 WBGT_CLEAR_F = "88.0"
 CLOSURE_DWELL_MINUTES = "15"
+# Level-4 heat advisory (posts ahead of a closure so coaches get warning before
+# WBGT reaches the Level 5 suspension threshold). Same hysteresis + dwell
+# machinery as the closure notice, one tier lower: trips strictly above 87.5
+# (the top of CIF Level 3, so the trip matches the level the live page shows)
+# and clears at 86.0. Shares CLOSURE_DWELL_MINUTES.
+WBGT_WARN_TRIP_F = "87.5"
+WBGT_WARN_CLEAR_F = "86.0"
 # NWS active-alert Slack notifier — opt-in, OFF by default (too noisy in
 # #notify-weather). Set to "true" to resume new/ended-alert posts. The closure
 # and rain-forecast notifiers are unaffected.
