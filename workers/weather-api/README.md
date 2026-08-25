@@ -6,19 +6,20 @@ Cloudflare Worker that powers the live data on `/resources/weather/`. Polls the 
 
 - **Cron trigger** (`*/5 * * * *`): refreshes the cached payload regardless of page traffic, then runs the Slack notifiers (below).
 - **HTTP route** (`www.ayso13.org/api/weather`): serves the cached payload from KV. Cold-start safety: if KV is empty (first deploy or eviction), the fetch handler refreshes synchronously before responding so the page never sees a 404 / empty response. (The fetch path never sends Slack notifications — only the cron path does — so concurrent page loads can't double-post.)
-- **KV namespace** (`WEATHER_KV`): single key `current` holds the latest envelope. A second key caches the resolved NWS forecast URL for the configured lat/lon. The notifiers keep their own state under `notify:closure`, `notify:nwsAlerts`, and `notify:rainForecast`.
+- **KV namespace** (`WEATHER_KV`): single key `current` holds the latest envelope. A second key caches the resolved NWS forecast URL for the configured lat/lon. The notifiers keep their own state under `notify:heatWarn`, `notify:closure`, `notify:nwsAlerts`, and `notify:rainForecast`. The heat notifiers write those keys through `writeNotifyState()`, which skips the put when the serialized state is unchanged. That matters: their state is identical on almost every tick, KV writes are metered, and writing both unconditionally would have cost 576 no-op writes a day.
 
 ## Slack notifications
 
-After each cron refresh, four independent notifiers post to **#notify-weather** via the shared AYSO Slack bot (`chat.postMessage`). Each keeps its own KV state so it posts only on a *change*, never every tick. A Slack failure is logged but can never break the weather feed (notifications run after the cache write, under `Promise.allSettled`).
+After each cron refresh, five independent notifiers post to **#notify-weather** via the shared AYSO Slack bot (`chat.postMessage`). Each keeps its own KV state so it posts only on a *change*, never every tick. A Slack failure is logged but can never break the weather feed (notifications run after the cache write, under `Promise.allSettled`).
 
 | Notifier | Fires when | KV state |
 |---|---|---|
+| Level-4 heat advisory | WBGT crosses into CIF Level 4 (`> WBGT_WARN_TRIP_F`, 87.5) and again when it falls back under `WBGT_WARN_CLEAR_F` (86.0). Posts ahead of a closure so coaches get warning before the Level 5 suspension threshold. Same hysteresis + dwell machinery as the closure notice, one tier lower, and deliberately independent of it: the advisory stays latched through Level 5, so an escalation posts the closure notice without re-posting the advisory, and a drop from 5 back to 4 stays quiet. Seeds silently on first run (no state key), so a deploy during a hot afternoon does not announce heat that has been going for hours | `notify:heatWarn` |
 | Closure threshold | `closureRecommended` transitions false→true (heat WBGT L5, rain >0.25"/48h or >1"/72h, or AQI > 150) and again true→false. The tripped notice names the driver(s) via `closureReasons(payload, heatActive)` — the heat line is built from the notifier's hysteresis-latched `heatActive` flag and the live WBGT °F value, so a closure that dipped into the 88–89.7°F deadband during the dwell still reads e.g. "Heat: WBGT 89.1°F — outdoor activity should be suspended" instead of a generic bullet | `notify:closure` |
 | NWS active alerts **(OFF by default)** | a new alert appears at `api.weather.gov/alerts/active?point=LAT,LON`, or a tracked one ends (dedup by alert id) | `notify:nwsAlerts` |
 | Rain forecast heads-up | any forecast period in the next ~72h has PoP ≥ `POP_FORECAST_THRESHOLD` (default 60); throttled to once per 24h per period | `notify:rainForecast` |
 
-The **NWS active-alert notifier is disabled by default** (`NWS_ALERTS_ENABLED="false"` in `wrangler.toml` — it was too noisy in `#notify-weather`); when off, its fetch is skipped entirely. Set `NWS_ALERTS_ENABLED="true"` to resume it. When enabled, on first run with no baseline it seeds its state silently so a deploy during an active alert doesn't dump pre-existing alerts into the channel. The pure decision logic (`closureTransition`, `diffAlertIds`, `rainForecastDecision`) is unit-tested — run `npm test`.
+The **NWS active-alert notifier is disabled by default** (`NWS_ALERTS_ENABLED="false"` in `wrangler.toml` — it was too noisy in `#notify-weather`); when off, its fetch is skipped entirely. Set `NWS_ALERTS_ENABLED="true"` to resume it. When enabled, on first run with no baseline it seeds its state silently so a deploy during an active alert doesn't dump pre-existing alerts into the channel. The pure decision logic (`closureNotifyDecision`, `heatWarnDecision`, `diffAlertIds`, `rainForecastDecision`) is unit-tested — run `npm test`.
 
 ### Closure-notice debounce (Slack only)
 
@@ -28,6 +29,115 @@ The closure notice is debounced by `closureNotifyDecision` (pure, unit-tested). 
 - **Dwell.** `CLOSURE_DWELL_MINUTES` (15) must elapse before a transition posts, so a WBGT hovering on the boundary cannot flap the channel.
 
 Without both, a reading oscillating around the threshold posts a closure and an all-clear every 5-minute tick.
+
+### Why every card carries a "Reading as of" stamp
+
+A closure card is a frozen snapshot, and it is not even the crossing value: the dwell means it posts up to `CLOSURE_DWELL_MINUTES` after the threshold was crossed, rendered from *that* tick's payload. On a hot morning WBGT can climb several degrees an hour (25 Aug 2026: air temp went 82.9°F at 09:00 to 92.5°F at 11:00), so by the time anyone reads the message the live page shows a different number. It looks like the two disagree; they don't, they are minutes apart.
+
+So `contextLine()` prefixes every card's context row with `Reading as of 2:25 PM PT`, taken from the station's own observation time (`payloadAsOf` → `current.stationTimestamp`, falling back to `fetchedAt`). The segment is dropped rather than half-printed if no usable timestamp exists.
+
+Two lesser contributors to the same confusion, both by design: the feed itself is up to 5 minutes old (5-min cron plus `max-age=300`), and neither `/resources/weather/` nor `/temp` auto-refreshes, so a tab left open freezes at whatever it loaded.
+
+## Observation log (D1)
+
+KV only ever holds "now" (a single `current` key, overwritten every tick), so
+until this table existed the site had no history and "how many hours were we in
+Level 4 last week" was unanswerable. `logObservation()` writes one row per
+reading from `refresh()`.
+
+**It cannot be backfilled.** Tempest exposes `wet_bulb_globe_temperature` only
+on the *current* observation. Verified 25 Aug 2026:
+
+- `observations/station/{id}` silently ignores `time_start` / `time_end` /
+  `day_offset` / `bucket` and returns the current obs regardless.
+- `observations/device/{id}` does honour a time range (1-minute resolution, at
+  least 30 days back) but carries raw sensor fields only, no WBGT.
+- `stats/station/{id}` has daily aggregates back years, with no WBGT at all.
+- `better_forecast` gives current conditions only, rounded to whole °C.
+- The Tempest site's own CSV export omits WBGT as well.
+
+Deriving it is the one remaining route, and that is exactly the calculation
+removed in July 2026 for reading 2 to 8.5°F too hot (see [WBGT](#wbgt)), so
+backfilled levels would not match what the site published. History starts the
+day this shipped.
+
+`observed_at` is the station's own observation time in unix seconds and is the
+primary key, with `ON CONFLICT DO NOTHING`, so a double cron fire or a
+cold-start `fetch()` refresh in the same window is idempotent rather than a
+duplicate row. A D1 failure is caught and logged: the log is analytics, the feed
+is the product.
+
+Volume is negligible: 288 rows/day, about 105k/year.
+
+### Setup (done 2026-08-25)
+
+Database `ayso13-weather-log`, id `7d5fa6f1-a18b-41af-b626-67947c4f8d48`, region
+WNAM, bound as `WEATHER_DB` in `wrangler.toml`. Schema applied remotely from
+`schema.sql`.
+
+**D1:Edit was added to the canonical `ayso13-worker-deploy` token** on the same
+day to make that possible — before it, every `wrangler d1` call returned
+`code: 10000`. Editing a token's permissions does not change its value, so
+`.envrc` and the `CLOUDFLARE_API_TOKEN` GitHub secret were untouched. The grant
+is account-scoped (D1 has no per-database scoping), so it also covers the
+ayso-platform databases in this account; that is the same shape as the token's
+existing KV Storage:Edit.
+
+Two things to know when working on this locally:
+
+- **`wrangler dev` binds the LOCAL D1**, which is a separate empty database.
+  Apply the schema there too (`--local --file=schema.sql`) or every tick logs
+  `observation log write failed: no such table: observations`. The feed keeps
+  serving either way, which is the catch in `logObservation()` doing its job.
+- **`--remote` is not the default** on any `d1 execute`. Without it you query
+  local state, where an empty table reads exactly like a production problem.
+
+### Queries
+
+Time in each CIF level over the past week (one row = 5 minutes):
+
+```sql
+SELECT cif_level,
+       COUNT(*) * 5 AS minutes,
+       ROUND(COUNT(*) * 5 / 60.0, 1) AS hours
+FROM observations
+WHERE observed_at >= unixepoch('now', '-7 days')
+GROUP BY cif_level
+ORDER BY cif_level;
+```
+
+Level 4 vs Level 5 by day, Pacific:
+
+```sql
+SELECT date(observed_at, 'unixepoch', '-7 hours') AS day,
+       SUM(CASE WHEN cif_level = 4 THEN 5 ELSE 0 END) AS level4_min,
+       SUM(CASE WHEN cif_level = 5 THEN 5 ELSE 0 END) AS level5_min
+FROM observations
+WHERE observed_at >= unixepoch('now', '-7 days')
+GROUP BY day
+ORDER BY day;
+```
+
+The `-7 hours` is PDT. Use `-8 hours` for PST, or split on the transition if a
+range straddles it.
+
+Daily peak WBGT and when it hit:
+
+```sql
+SELECT date(observed_at, 'unixepoch', '-7 hours') AS day,
+       MAX(wbgt_f) AS peak_wbgt_f,
+       time(observed_at, 'unixepoch', '-7 hours') AS at_time
+FROM observations
+GROUP BY day
+ORDER BY day DESC
+LIMIT 14;
+```
+
+That last one leans on a SQLite-specific rule: with a bare `MAX()` as the only
+aggregate, the un-aggregated columns come from the row that produced the
+maximum, so `at_time` is when the peak occurred rather than the last reading of
+the day. All three queries above were run against `schema.sql` with three days of
+synthetic 5-minute data before being written down.
 
 ## Caching
 
@@ -97,6 +207,8 @@ curl -sS http://localhost:8787/api/weather | jq .
 | `USER_AGENT` | `(ayso13.org weather page, info@ayso13.org)` | NWS requires a contact email per their API policy |
 | `NOTIFY_WEATHER_CHANNEL_ID` | _(placeholder)_ | Slack channel id for #notify-weather (not secret) |
 | `POP_FORECAST_THRESHOLD` | `60` | Min forecast PoP % that triggers a rain heads-up |
+| `WBGT_WARN_TRIP_F` | `87.5` | Level-4 advisory trips strictly above this (top of CIF Level 3) |
+| `WBGT_WARN_CLEAR_F` | `86.0` | Level-4 advisory clears at or below this |
 | `PURPLEAIR_SENSOR_IDS` | _(placeholder)_ | CSV of curated outdoor PurpleAir sensor indices |
 | `PURPLEAIR_MIN_CONFIDENCE` | `70` | Min PurpleAir channel-A/B confidence % to include a sensor (our quality filter) |
 | `PURPLEAIR_STALE_SECONDS` | `3600` | Max age (seconds) before a PurpleAir reading is considered stale |
