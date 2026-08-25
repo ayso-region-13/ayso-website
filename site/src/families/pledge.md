@@ -55,7 +55,7 @@ Cheer effort, growth, and good plays from both teams. Final scores fade quickly;
 
 ## Kid Zone Pledge Form
 
-All parents are requested to download, sign, and return the [Kid Zone Pledge](/docs/kids-zone-parent-pledge.pdf) to their coach each season.
+All parents are requested to download, sign, and return the [Kid Zone Pledge](/assets/docs/kids-zone-parent-pledge.pdf) to their coach each season.
 
 ## What "Players Play, Fans Cheer" Looks Like in Practice
 
