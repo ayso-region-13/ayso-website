@@ -92,52 +92,21 @@ Two things to know when working on this locally:
 - **`--remote` is not the default** on any `d1 execute`. Without it you query
   local state, where an empty table reads exactly like a production problem.
 
-### Queries
+### Queries and CSV export
 
-Time in each CIF level over the past week (one row = 5 minutes):
+Recipes live in **`docs/weather-data-pulls.md`**: a one-command CSV export
+(`./scripts/export-log.sh 24`), the time-in-level and daily Level 4 versus
+Level 5 queries, peak-WBGT-and-when, window lookups for reconstructing a past
+Saturday, and a `LAG()` query listing every level crossing. Kept there rather
+than here so there is one copy to keep correct. Every query in it has been run
+against this schema.
 
-```sql
-SELECT cif_level,
-       COUNT(*) * 5 AS minutes,
-       ROUND(COUNT(*) * 5 / 60.0, 1) AS hours
-FROM observations
-WHERE observed_at >= unixepoch('now', '-7 days')
-GROUP BY cif_level
-ORDER BY cif_level;
+The one you will reach for most:
+
+```bash
+cd workers/weather-api
+./scripts/export-log.sh 24 > ~/Downloads/wbgt-24h.csv
 ```
-
-Level 4 vs Level 5 by day, Pacific:
-
-```sql
-SELECT date(observed_at, 'unixepoch', '-7 hours') AS day,
-       SUM(CASE WHEN cif_level = 4 THEN 5 ELSE 0 END) AS level4_min,
-       SUM(CASE WHEN cif_level = 5 THEN 5 ELSE 0 END) AS level5_min
-FROM observations
-WHERE observed_at >= unixepoch('now', '-7 days')
-GROUP BY day
-ORDER BY day;
-```
-
-The `-7 hours` is PDT. Use `-8 hours` for PST, or split on the transition if a
-range straddles it.
-
-Daily peak WBGT and when it hit:
-
-```sql
-SELECT date(observed_at, 'unixepoch', '-7 hours') AS day,
-       MAX(wbgt_f) AS peak_wbgt_f,
-       time(observed_at, 'unixepoch', '-7 hours') AS at_time
-FROM observations
-GROUP BY day
-ORDER BY day DESC
-LIMIT 14;
-```
-
-That last one leans on a SQLite-specific rule: with a bare `MAX()` as the only
-aggregate, the un-aggregated columns come from the row that produced the
-maximum, so `at_time` is when the peak occurred rather than the last reading of
-the day. All three queries above were run against `schema.sql` with three days of
-synthetic 5-minute data before being written down.
 
 ## Caching
 
