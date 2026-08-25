@@ -1,11 +1,11 @@
 ---
-
-title: "Required Forms"
+title: Required Forms
+description: "Forms for AYSO Region 13 families and volunteers: concussion and
+  sudden cardiac arrest acknowledgments, the form upload portal, reimbursement
+  requests, and player withdrawal."
 layout: page.njk
 section: register
-description: "Forms for AYSO Region 13 families and volunteers: concussion and sudden cardiac arrest acknowledgments, the form upload portal, reimbursement requests, and player withdrawal."
 ---
-
 Families complete required forms during registration and at the start of each season.
 
 ## Required Acknowledgments
@@ -13,12 +13,17 @@ Families complete required forms during registration and at the start of each se
 The following are required for each player at registration:
 
 ### Kids Zone
+
 Region 13 follows AYSO's Kids Zone — ten standards for behavior at games and events. See [/families/pledge/](/families/pledge/).
 
+[Download the Kids Zone Pledge](/assets/docs/kids-zone-parent-pledge.pdf) to sign and return to your coach here.
+
 ### Concussion Information Sheet
+
 Concussion risks and removal protocols. Required by California law.
 
 ### Sudden Cardiac Arrest Information Sheet
+
 SCA risks and warning signs. Required by California law.
 
 Download the state-required forms:
