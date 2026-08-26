@@ -70,6 +70,11 @@ POP_FORECAST_THRESHOLD = "60"
 # (they don't flap) but still respect the dwell.
 WBGT_TRIP_F = "89.7"
 WBGT_CLEAR_F = "88.0"
+# NOTE: this behaves as 20 minutes, not 15. `since` is stamped a beat after the
+# cron fires (refresh() fetches first), so the third tick lands ~1.4 s short of
+# the boundary and a fourth is needed. Measured 2026-08-25; see the timing note
+# in README.md. Raising this number is not the fix; a jitter slack in
+# dwellGate() is.
 CLOSURE_DWELL_MINUTES = "15"
 # Level-4 heat advisory (posts ahead of a closure so coaches get warning before
 # WBGT reaches the Level 5 suspension threshold). Same hysteresis + dwell

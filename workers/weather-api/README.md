@@ -28,11 +28,24 @@ The closure notice is debounced by `closureNotifyDecision` (pure, unit-tested). 
 - **Heat hysteresis.** Trips at WBGT `> WBGT_TRIP_F` (89.7, chosen to match `cif.level >= 5`) and clears only at `<= WBGT_CLEAR_F` (88.0). The 88.0–89.7 deadband is why `closureReasons` takes the latched `heatActive` flag rather than the live level.
 - **Dwell.** `CLOSURE_DWELL_MINUTES` (15) must elapse before a transition posts, so a WBGT hovering on the boundary cannot flap the channel.
 
+**The dwell is really 20 minutes, and the config lies.** Measured on the 2026-08-25 all-clear: the candidate anchored at 16:50:57.351 PT, and each following cron tick fired at about :56, roughly 1.4 seconds *earlier in the minute* than the anchor.
+
+```
+tick 16:55:56   elapsed  4.98 min   wait
+tick 17:00:56   elapsed  9.98 min   wait
+tick 17:05:56   elapsed 14.98 min   wait   <- misses by 1.4 s
+tick 17:10:56   elapsed 19.98 min   POST
+```
+
+`since` is stamped when the notifier runs, a beat after the cron fires because `refresh()` does its Tempest and NWS fetches first, and those take a slightly different amount of time on every tick. So `nowMs - since >= dwellMs` lands just short at the third tick and waits a fourth. This is not specific to that day: any drift in the wrong direction turns three tick-intervals into four, so 15 behaves as 20 for the closure notice and the Level 4 advisory alike.
+
+Not yet fixed. The one-line treatment is the same slack `shouldRefreshAqi` already allows for cron jitter — compare against `dwellMs - 60_000` in `dwellGate()` — plus a test pinning the 14.98-minute case. Left alone for now because the current behavior is correct, only slower than advertised.
+
 Without both, a reading oscillating around the threshold posts a closure and an all-clear every 5-minute tick.
 
 ### Why every card carries a "Reading as of" stamp
 
-A closure card is a frozen snapshot, and it is not even the crossing value: the dwell means it posts up to `CLOSURE_DWELL_MINUTES` after the threshold was crossed, rendered from *that* tick's payload. On a hot morning WBGT can climb several degrees an hour (25 Aug 2026: air temp went 82.9°F at 09:00 to 92.5°F at 11:00), so by the time anyone reads the message the live page shows a different number. It looks like the two disagree; they don't, they are minutes apart.
+A closure card is a frozen snapshot, and it is not even the crossing value: the dwell means it posts one to two `CLOSURE_DWELL_MINUTES` after the threshold was crossed (see the timing note above: 15 behaves as 20), rendered from *that* tick's payload. On a hot morning WBGT can climb several degrees an hour (25 Aug 2026: air temp went 82.9°F at 09:00 to 92.5°F at 11:00), so by the time anyone reads the message the live page shows a different number. It looks like the two disagree; they don't, they are minutes apart.
 
 So `contextLine()` prefixes every card's context row with `Reading as of 2:25 PM PT`, taken from the station's own observation time (`payloadAsOf` → `current.stationTimestamp`, falling back to `fetchedAt`). The segment is dropped rather than half-printed if no usable timestamp exists.
 
