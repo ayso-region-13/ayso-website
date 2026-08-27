@@ -115,7 +115,7 @@ WHERE prev IS NOT NULL AND cif_level != prev
 ORDER BY observed_at;
 ```
 
-Useful for checking a Slack notice against the data: the advisory and closure notices post up to 15 minutes after the crossing because of the dwell, so the timestamps will not line up exactly, and shouldn't.
+Useful for checking a Slack notice against the data: the advisory and closure notices post 15 to 20 minutes after the crossing because of the dwell (in practice always 20 — see the timing note in `workers/weather-api/README.md`), so the timestamps will not line up exactly, and shouldn't.
 
 ## Timezone
 

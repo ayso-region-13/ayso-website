@@ -27,7 +27,7 @@ function showApp() {
   document.getElementById('loadstatus').textContent = 'Loading … please wait';
   var ifr = document.getElementById('ifr');
   ifr.style.display = '';
-  ifr.src = "https://script.google.com/macros/s/AKfycbywfio7_E5iU08UdKTlpp2h7xGCsqba4IKGULEUY_MjqBeIu26qWBJS-wHSnmFSifS2Lg/exec" + window.location.search;
+  ifr.src = "https://script.google.com/macros/s/AKfycbw6MNfegAGqUpELmvz5jKHtcaX0GM55mw0xO3waO17p1n6uEcU44OfJ0x72MgeuklNs/exec" + window.location.search;
 }
 if (window.location.search.indexOf('go=1') !== -1) showApp();
 if (window.location.search.indexOf('go=2') !== -1) showApp();
