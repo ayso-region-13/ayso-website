@@ -9,7 +9,8 @@
     "test": "node --test",
     "dev": "npm run preflight && wrangler dev",
     "deploy": "npm run preflight && wrangler deploy",
-    "tail": "wrangler tail"
+    "tail": "wrangler tail",
+    "export-log": "bash scripts/export-log.sh"
   },
   "devDependencies": {
     "wrangler": "^4.87.0"

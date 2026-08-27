@@ -203,6 +203,7 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `claude-history.md` — Detailed session-by-session changelog (offloaded to keep the auto-loaded memory tight). NOT auto-loaded; read when historical detail matters. Also holds the retired CF-Pages blob-hash-poisoning gotcha.
 - `docs/seo-data-pulls.md` — GSC/GA4 query commands + `.seo-creds/` layout + clobbering defense
 - `docs/weather-preview-urls.md` — weather/AQI simulate-preview URLs
+- `docs/weather-data-pulls.md` — pulling WBGT/heat history out of the D1 observation log: CSV export script, query cookbook, the `--remote` trap, and why it can't be backfilled
 - `workers/*/README.md` — canonical per-Worker docs (weather-api, redirects, csp-report)
 - `todo.md` — **Active** task list only (9 open items, ~7 KB). Completed items live in `todo-archive.md`; neither is auto-loaded.
 - `todo-archive.md` — 326 completed backlog items, verbatim, split out of `todo.md` on 2026-08-12. Reference only; `claude-history.md` carries the narrative for the same work.
