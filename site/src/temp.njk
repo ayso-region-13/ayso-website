@@ -39,7 +39,14 @@ eleventyExcludeFromCollections: true
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', '{{ site.gaId }}');
+  // Pinned page_location: the permalink is /temp.html but the public URL is
+  // /temp, and without this GA4 reports whichever one the visitor happened to
+  // hit as a separate row. origin (not a hardcoded site.url) so staging still
+  // reports as staging instead of masquerading as production. No query string
+  // to preserve -- the simulate preview modes are /resources/weather/ only.
+  gtag('config', '{{ site.gaId }}', {
+    page_location: window.location.origin + '/temp'
+  });
 </script>
 {% endif %}
 <style>
