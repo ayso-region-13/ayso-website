@@ -28,6 +28,20 @@ eleventyExcludeFromCollections: true
 <meta name="twitter:image" content="{{ site.url }}/images/about-interior.jpg">
 
 <link rel="canonical" href="{{ site.url }}/temp">
+
+{% if site.gaId %}
+<!-- Google Analytics — this page has its own <head> rather than base.njk, so the
+     snippet is duplicated here on purpose; keep it in sync with base.njk.
+     data-cfasync="false" opts out of Cloudflare Rocket Loader, which was
+     rewriting type="text/javascript" and breaking pageview reporting. -->
+<script async data-cfasync="false" src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+<script data-cfasync="false">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ site.gaId }}');
+</script>
+{% endif %}
 <style>
   *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-text-size-adjust: 100%; }
