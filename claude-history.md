@@ -363,4 +363,18 @@ The closure machine was refactored into two shared primitives, `heatLatch` and `
 
 One trap found the hard way: **`wrangler dev` binds the LOCAL D1**, a separate empty database. The first end-to-end test logged `observation log write failed: no such table: observations` on every tick while the feed served normally, which at least proved the catch works. Apply the schema locally too, and remember `--remote` is never the default on `d1 execute`.
 
+**Verified live the same evening, and the debounce earned its keep.** WBGT peaked at 93.6°F, then sawed across the Level 5 boundary for half an hour: 89.4 (L4), 89.6 (L4), 91.0 (L5), 89.1 (L4). Undebounced that would have posted an all-clear, a fresh closure, and another all-clear inside fifteen minutes. It posted none of them, because `heatActive` only releases at 88.0, not at the 89.7 level boundary. WBGT crossed 88.0 at 16:52, the all-clear posted at the 17:10 tick, and the Level 4 advisory cleared a tick or two behind it. Both carried the new stamp. Worth noting the site and Slack legitimately disagreed throughout that window: the feed reported `closureRecommended: false` at Level 4 while Slack still held the closure, which is exactly what the deadband is for.
+
+**The dwell is really 20 minutes.** Caught while timing that all-clear, and it is systematic rather than jitter:
+
+```
+candidate anchored 16:50:57.351 PT
+tick 16:55:56   elapsed  4.98 min   wait
+tick 17:00:56   elapsed  9.98 min   wait
+tick 17:05:56   elapsed 14.98 min   wait   <- misses by 1.4 s
+tick 17:10:56   elapsed 19.98 min   POST
+```
+
+`since` is stamped when the notifier runs, a beat after the cron fires because `refresh()` does its Tempest and NWS fetches first, and those take a slightly different amount of time each tick. So the third tick lands just short of `dwellMs` and a fourth is needed. Any drift in the wrong direction does this, so `CLOSURE_DWELL_MINUTES = 15` behaves as 20 for both heat notifiers. The number appears in three places and all three now say so. **Not fixed:** the treatment is the one-minute jitter slack `shouldRefreshAqi` already allows, applied in `dwellGate()`, plus a test at 14.98 minutes. Left for a deliberate change because the current behavior is correct, only slower than the config claims.
+
 Time-in-level SQL, along with a daily Level 4 versus Level 5 breakdown and a daily-peak query, lives in the "Observation log" section of `workers/weather-api/README.md`. All three were run against the schema with three days of synthetic 5-minute data before being written down; the peak query leans on the SQLite rule that a bare `MAX()` pulls its un-aggregated columns from the winning row.
