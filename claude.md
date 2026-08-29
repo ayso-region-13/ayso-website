@@ -18,7 +18,7 @@ ayso13.org, rebuilt from WordPress as a static **Eleventy (11ty) + Tailwind CSS*
 - **Performance**: image pipeline = WebP + original-format only (AVIF intentionally disabled — see note below), hero LCP via eager-load + post-LCP rotation, Pagefind search.
 - **Live features**: field pages w/ platform-sourced maps (game/practice/tournament/wayfinder) + Field Info callouts; Rose Bowl / FIS / Muir / Blair grouped as complexes with shared wayfinders. Live weather/heat/rain at `/resources/`. 12 programs incl. EXTRA™. 35-Q&A Ask the Referee. CMS-editable Important Dates widget on home. EmailOctopus newsletter signup. Photo gallery (62 photos, GLightbox SRI'd).
 - **Image pipeline note (sticky)**: `@11ty/eleventy-img` formats are `["webp","auto"]` only. AVIF disabled because Cloudflare Pages build cache won't engage for this project ("Skipping build output cache..." despite preset = Eleventy / V3 / toggle on). AVIF encoding is 60%+ of build time. Build dropped ~4:14 → ~1:30 without it. DO NOT re-enable unless CF cache is fixed first.
-- **SEO + analytics**: GA4 `G-9YM9ZDW1J9`, GSC `sc-domain:ayso13.org`, GA4 property `307558725`. Per-project Google creds in `.seo-creds/` (gitignored, direnv-symlinked to `~/.config/claude-seo`). Query commands + creds gotchas → **`docs/seo-data-pulls.md`**.
+- **SEO + analytics**: GA4 `G-9YM9ZDW1J9`, GSC `sc-domain:ayso13.org`, GA4 property `307558725`. Per-project Google creds in `.seo-creds/` (gitignored, direnv-symlinked to `~/.config/claude-seo`). Query commands + creds gotchas → **`docs/seo-data-pulls.md`**. The tag is the **`gtag/js`** snippet, not a Tag Manager `gtm.js` container, and there is no GTM container anywhere in this repo — so the Google Ads "update your gtag installation before October 02, 2026" notice (received 2026-08-27) **does not apply**; verified against source and eight live pages, don't re-investigate. **`base.njk` is not the only place the snippet lives**: `temp.njk` has its own `<head>` and carries a second copy, pinned to `page_location: origin + '/temp'` because its permalink is `/temp.html` but its public URL is `/temp`. Edit the GA block in one and you must edit the other.
 - **Retired gotcha** (moved to `claude-history.md`): CF Pages blob-hash poisoning — MOOT since the 2026-06-18 switch to CI Direct Upload. Read it there if a Pages deploy ever serves `HTTP 500` empty-body on specific URLs.
 
 ## Branched / staged for later
@@ -231,7 +231,7 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
   - **Deep-linkable map images**: `/field-images/<slug>-<variant>.png` on the platform is slug-keyed and survives map edits, unlike a content-hashed `/img/` filename. The Jefferson legacy redirects point there for that reason.
 
 ---
-*Last updated: 2026-08-25 — session 49 (weather: CIF Level 4 Slack advisory, `Reading as of` stamps on every card, and a D1 observation log so time-in-level is answerable).*
+*Last updated: 2026-08-27 — session 50 (forms upload portal repointed at the live Apps Script deployment; analytics added to `/temp`; the Google `gtm.js` notice ruled not applicable).*
 
 **The session-by-session changelog lives in `claude-history.md`** — sessions 36-49 plus dated milestones back to 2026-04. It is deliberately NOT auto-loaded; read it when historical detail matters. Load-bearing gotchas are kept inline in the sections above rather than in the changelog, so this file stays a description of current state and not a history of how it got here.
 
