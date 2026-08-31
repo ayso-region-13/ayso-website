@@ -49,6 +49,10 @@ eleventyExcludeFromCollections: true
   });
 </script>
 {% endif %}
+
+{# Same /temp URL pin the gtag block above applies, for the same reason. #}
+{% set posthogPinnedPath = "/temp" %}
+{% include "posthog.njk" %}
 <style>
   *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { -webkit-text-size-adjust: 100%; }
