@@ -6,6 +6,8 @@
 //     Browsers POST violation reports here (matches the CSP `report-uri`
 //     directive in site/src/_headers.njk). Each report is stored in KV
 //     under a timestamp-keyed entry with 30-day TTL. Returns 204.
+//     Known-benign violations are dropped before the KV write — see
+//     src/ignore.js. They are still visible via `wrangler tail`.
 //
 //   GET /api/csp-report?admin_key=<secret>&limit=100
 //     Admin view of recent reports (newest first), JSON. The secret
@@ -24,6 +26,8 @@
 // would block in production — useful both for the initial enforce
 // switch (to catch breakage we missed in the static audit) and for
 // future policy tightening (e.g., removing 'unsafe-inline').
+
+import { shouldIgnoreReport } from "./ignore.js";
 
 const MAX_BODY_BYTES = 32 * 1024;     // reject >32KB reports as junk
 const REPORT_TTL_SECS = 60 * 60 * 24 * 30; // 30 days
@@ -61,6 +65,15 @@ async function handleReport(request, env) {
     parsed = JSON.parse(body);
   } catch (_) {
     // Some browsers POST as text/plain or with weird quoting; keep raw.
+  }
+
+  // Drop known-benign violations before they reach KV. See src/ignore.js for
+  // the list and the evidence behind each entry. Volume, not content, is the
+  // problem: ~500 identical reports a day buried everything else and nearly
+  // produced a false clean verdict on 2026-08-31.
+  if (shouldIgnoreReport(parsed)) {
+    console.log("CSP violation (ignored):", parsed?.["csp-report"]?.["blocked-uri"]);
+    return new Response(null, { status: 204 });
   }
 
   const reportedAt = new Date().toISOString();
