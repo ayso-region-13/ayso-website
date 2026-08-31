@@ -1,0 +1,51 @@
+{#
+  PostHog analytics. Runs ALONGSIDE GA4 (base.njk / temp.njk), it does not
+  replace it: GA4 still feeds Search Console, SITE-HEALTH.md and the
+  scripts/ga4-*.py pulls.
+
+  PRODUCTION ONLY. Gated on `isProduction`, which is CF_PAGES_BRANCH === "main"
+  and nothing else. Note this is deliberately NOT `not isStaging`: isStaging is
+  false when CF_PAGES_BRANCH is unset, which makes local `npm start` count as
+  production — fine for robots/headers, but it would have sent real localhost
+  events to PostHog.
+
+  Shared by base.njk and temp.njk so the two can't drift the way the gtag
+  blocks did. temp.njk sets `posthogPinnedPath` before including this: its
+  permalink is /temp.html but its public URL is /temp, and without the pin
+  PostHog reports whichever one the visitor happened to hit as a separate URL.
+  origin (not site.url) so a future non-prod build reports itself honestly.
+
+  Config, all deliberate:
+    autocapture: false        — pageviews only. No automatic DOM event stream.
+                                Costs the per-element clickmap, which is the one
+                                heatmap type that requires autocapture.
+    capture_heatmaps: true    — the mousemove/click/rageclick heatmap and the
+                                scrollmap both work without autocapture.
+    capture_pageleave         — left at its default (true). The scrollmap needs it.
+    disable_session_recording — replay off in code as well as in project settings.
+    person_profiles           — anonymous marketing site, nobody is ever
+                                identified; avoids creating person profiles.
+
+  data-cfasync="false" opts out of Cloudflare Rocket Loader, which broke the
+  gtag snippet by rewriting type="text/javascript". Same exposure here.
+
+  Loading direct from us.i.posthog.com, no reverse proxy — see todo.md for the
+  decision point on revisiting that if ad-blocker loss turns out to be material.
+#}
+{% if isProduction and site.posthogKey %}
+<script data-cfasync="false">
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagResult isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('{{ site.posthogKey }}', {
+    api_host: '{{ site.posthogHost }}',
+    defaults: '2026-05-30',
+    autocapture: false,
+    capture_heatmaps: true,
+    disable_session_recording: true,
+    person_profiles: 'identified_only'{% if posthogPinnedPath %},
+    capture_pageview: false{% endif %}
+  });
+{% if posthogPinnedPath %}
+  posthog.capture('$pageview', { $current_url: window.location.origin + '{{ posthogPinnedPath }}' });
+{% endif %}
+</script>
+{% endif %}

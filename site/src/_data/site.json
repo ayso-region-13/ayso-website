@@ -10,5 +10,7 @@
   "city": "Altadena, CA 91001",
   "founded": "1972",
   "inleagueUrl": "https://ayso13.inleague.com/",
-  "gaId": "G-9YM9ZDW1J9"
+  "gaId": "G-9YM9ZDW1J9",
+  "posthogKey": "phc_zpnqGMHbdxBkGwh2JesM6sHZhLKpvBacDhV7ygQAgKfQ",
+  "posthogHost": "https://us.i.posthog.com"
 }

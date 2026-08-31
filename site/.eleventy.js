@@ -214,6 +214,16 @@ module.exports = function (eleventyConfig) {
     return !!branch && branch !== "main";
   });
 
+  // True ONLY for the production Cloudflare Pages build (the `main` branch).
+  // Deliberately NOT the inverse of isStaging: isStaging treats an unset
+  // CF_PAGES_BRANCH (local `npm start`) as production, which is correct for
+  // robots/headers but would have fired real analytics from localhost. Used by
+  // _includes/posthog.njk so PostHog runs on www.ayso13.org and nowhere else.
+  eleventyConfig.addGlobalData(
+    "isProduction",
+    () => process.env.CF_PAGES_BRANCH === "main"
+  );
+
   // --- Transform: auto-style InLeague Register links as big yellow buttons ---
   // Editors save plain markdown via Pages CMS (which mangles raw HTML) — this
   // post-processes the built HTML so any anchor pointing at the InLeague
