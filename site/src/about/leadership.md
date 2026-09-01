@@ -64,7 +64,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | B7U Division Coach Administrator | Mary Cholko & Lauren Stevenson | [coachb7u@ayso13.org](mailto:coachb7u@ayso13.org) |
 | G7U Division Coach Administrator | Jonathan Lui | [coachg7u@ayso13.org](mailto:coachg7u@ayso13.org) |
 | B8U Division Coach Administrator | Lauren Cross | [coachb8u@ayso13.org](mailto:coachb8u@ayso13.org) |
-| G8U Division Coach Administrator | Nancy Duong | [coachg8u@ayso13.org](mailto:coachg8u@ayso13.org) |
+| G8U Division Coach Administrator | Brandi Lane | [coachg8u@ayso13.org](mailto:coachg8u@ayso13.org) |
 | B10U Division Coach Administrator | Tona Rodriguez | [coachb10u@ayso13.org](mailto:coachb10u@ayso13.org) |
 | G10U Division Coach Administrator | Yliana Johansen-Méndez | [coachg10u@ayso13.org](mailto:coachg10u@ayso13.org) |
 | B12U Division Coach Administrator | Samir Singh | [coachb12u@ayso13.org](mailto:coachb12u@ayso13.org) |
