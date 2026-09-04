@@ -70,6 +70,7 @@ Division Coach Administrators oversee specific age groups and can answer divisio
 - [Training](/coaches/training) — Certification requirements
 - [Practice Resources](/coaches/practice) — Planning practices
 - [Game Day Guide](/coaches/game-day) — Running games
+- [Player Medical Forms](/coaches/player-medical-forms) — Downloading and printing medical releases
 - [PIE Philosophy](/coaches/pie) — Positive coaching approach
 - [Referee Abuse Prevention](/referees/abuse/) — What the program requires of coaches and their sidelines
 - [Clubhouse Request Form](https://ayso13.typeform.com/to/xCIGB2TA) — Request use of the Region 13 clubhouse
