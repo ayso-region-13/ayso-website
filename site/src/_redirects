@@ -524,8 +524,8 @@
 /news                               /resources/newsletters/                  301
 /report/                            /resources/documents/                    301
 /report                             /resources/documents/                    301
-/coach-training/medical-forms/      /resources/safety/                       301
-/coach-training/medical-forms       /resources/safety/                       301
+/coach-training/medical-forms/      /coaches/player-medical-forms/           301
+/coach-training/medical-forms       /coaches/player-medical-forms/           301
 /resources/newsletter/              /resources/newsletters/                  301
 /resources/newsletter               /resources/newsletters/                  301
 /photos-u10/                        /resources/gallery/                      301

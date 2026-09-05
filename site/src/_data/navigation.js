@@ -147,6 +147,7 @@ module.exports = [
       { label: "Practice Resources",        url: "/coaches/practice/" },
       { label: "Game Day Guide",            url: "/coaches/game-day/" },
       { label: "Game Cards",                url: "/coaches/game-cards/" },
+      { label: "Player Medical Forms",      url: "/coaches/player-medical-forms/" },
       { label: "Skills & Drills",           url: "/coaches/drills/" },
       { label: "PIE Philosophy",            url: "/coaches/pie/" },
       { label: "Shootout Guide",            url: "/coaches/shootout/" },
