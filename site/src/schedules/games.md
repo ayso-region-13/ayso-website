@@ -21,7 +21,7 @@ To browse the season instead of searching, the site has four views:
 - By division — one division's games, by coach or by week
 - By team — a sortable table of every team
 
-Practice schedules are not on the schedule site. Your coach sets practice day and time, and will let the team know directly.
+Region 13 does not publish practice schedules publicly, so they are not on the schedule site. Your coach will pass along your team's practice day, time, and field, and you can also see it in your [InLeague dashboard](https://ayso13.inleague.com/app).
 
 ## Reading the Schedule
 

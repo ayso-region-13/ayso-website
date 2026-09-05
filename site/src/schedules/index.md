@@ -20,7 +20,9 @@ Games are held on Saturdays during the fall and spring seasons. The full season 
 
 ## Practice Schedule
 
-Practice day and time are set by your coach, who will let the team know directly. Practice fields are assigned by division and coach availability, and practice begins the day after Labor Day for the fall season.
+Teams are assigned practice fields and times based on division and coach availability. Practice begins the day after Labor Day for the fall season.
+
+Practice schedules are not published publicly. Your coach will pass along your team's practice day, time, and field, and you can also see it in your [InLeague dashboard](https://ayso13.inleague.com/app).
 
 [Practice Information](/coaches/practice)
 
