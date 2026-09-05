@@ -12,12 +12,13 @@ Region 13 follows AYSO national policies along with local rules specific to our 
 
 Our policies follow this hierarchy:
 
-1. IFAB Laws of the Game (international football rules)
-2. AYSO National Rules and Regulations
-3. AYSO Standard Policies & Procedures
-4. Region 13 Policies and Procedures — [Region 13 Policies & Protocols (PDF)](/assets/docs/region-13-policies-protocols.pdf) covers refund schedule, conduct standards, and local addendums
-5. AYSO Section 1 Rules of Competition
-6. AYSO Area 1-C Combined Rules
+1. [IFAB Laws of the Game](https://www.theifab.com/laws-of-the-game-documents/?language=all&year=2026%2F27) — international football rules
+2. [AYSO National Rules and Regulations](https://ayso.io/8Ocn)
+3. [AYSO Standard Regional Policies & Procedures](https://ayso.io/x3ho)
+4. [Region 13 Policies and Procedures](/assets/docs/region-13-policies-protocols.pdf) — covers refund schedule, conduct standards, and local addendums
+5. [2026-2027 AYSO Section 1 Rules and Regulations](https://drive.google.com/file/d/1EBC98gKBmyVYFDYzbruMsLKc9sG_jJJI/view?usp=drive_link)
+6. [2025 AYSO Section 1 Championship Games Rules of Competition](https://drive.google.com/file/d/1eMv5XSNzLIFWaqG0nUrTXdshBfgH0Gcq/view?usp=drive_link)
+7. [AYSO Area 1-C Combined Rules](https://dt5602vnjxv0c.cloudfront.net/portals/14092/docs/combined_rules/combined%20rules%20approved%202026-07-30.pdf)
 
 ## Player Safety
 
