@@ -9,7 +9,7 @@ section: schedules
 
 The live Region 13 calendar lives on its own page: [**Region 13 Calendar**](/about/calendar/). It shows coach and referee trainings, board meetings, picture days, tournaments, and other region-wide events, and you can subscribe to it from your own Google Calendar, Apple Calendar, or Outlook.
 
-For individual team game schedules, log in to [InLeague](https://ayso13.inleague.com/app).
+For individual team game schedules, see [schedule.ayso13.org](https://schedule.ayso13.org/).
 
 ## Fall Season Overview
 

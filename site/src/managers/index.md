@@ -33,7 +33,7 @@ The key to success is delegation. Many tasks can be shared with other families o
 
 ## Support Available
 
-- Weekly schedules and field maps online
+- [Game schedules](https://schedule.ayso13.org/) and [field maps](/fields/) online
 - Volunteer Slack channel for questions
 - Team Manager Coordinator for guidance
 - Practice FAQ for common situations

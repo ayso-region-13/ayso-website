@@ -50,9 +50,7 @@ Add your coach and team manager to your phone contacts so their messages reach y
 
 ### Finding Your Game
 
-[InLeague schedule](https://ayso13.inleague.com/app/schedule)
-
-You can also check the [weekly schedule](/schedules/) posted each week.
+Game times and fields are published at [schedule.ayso13.org](https://schedule.ayso13.org/). Search by team name, team code, or coach name to open your team's games, then add them to your phone's calendar.
 
 Game times are typically Saturday mornings. Exact times vary by division:
 
@@ -115,26 +113,26 @@ Let your coach know in advance if your child will miss practice.
 
 Before heading to a game or practice, check the field status:
 
-[InLeague](https://ayso13.inleague.com/app)
+[Weather and Field Conditions](/resources/weather/)
 
 You can also check our [homepage](/) for weather alerts.
 
 ### How Cancellations Work
 
-- Games: The region decides by early Saturday morning. Check email and the field status page.
+- Games: The region decides by early Saturday morning. Check email and [Weather and Field Conditions](/resources/weather/).
 - Practices: Your coach decides and will notify the team directly.
 
-If conditions look bad, check the website before leaving home.
+If conditions look bad, check [Weather and Field Conditions](/resources/weather/) before leaving home.
 
 ## Standings and Schedules
 
 ### Game Schedule
 
-[InLeague schedule](https://ayso13.inleague.com/app/schedule)
+[Game schedule](https://schedule.ayso13.org/)
 
 ### Season Standings
 
-[standings on InLeague](https://ayso13.inleague.com/app/schedule)
+Standings will be published after Week 3.
 
 AYSO emphasizes development over winning. Standings are available, but there's no elimination — every team plays a full season, and every player receives equal playing time.
 
@@ -156,7 +154,7 @@ Most teams organize an end-of-season party to celebrate the season and receive p
 | Your child's team placement | [registrar@ayso13.org](mailto:registrar@ayso13.org) |
 | Team manager questions | [team@ayso13.org](mailto:team@ayso13.org) |
 | Practice field issues | [practice@ayso13.org](mailto:practice@ayso13.org) |
-| Game schedule questions | [scheduler@ayso13.org](mailto:schedule@ayso13.org) |
+| Game schedule questions | [scheduler@ayso13.org](mailto:scheduler@ayso13.org) |
 | General questions | [Contact us](/contact) |
 
 

@@ -66,6 +66,7 @@ A fully certified coach must be present for all practices. If you cannot attend,
 ## Related Pages
 
 - [Fields](/fields) — Field locations and details
+- [Game Schedule](https://schedule.ayso13.org/) — Game times and fields
 - [Game Day Guide](/coaches/game-day) — Running games
 - [PIE Philosophy](/coaches/pie) — Positive coaching approach
 

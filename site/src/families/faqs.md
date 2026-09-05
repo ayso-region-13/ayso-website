@@ -60,14 +60,17 @@ Other roles include team manager, field host, and snack coordinator. See [Volunt
 ### What day are games?
 Games are on Saturdays. Times vary by division.
 
+### Where do I find my team's game schedule?
+At [schedule.ayso13.org](https://schedule.ayso13.org/). Search by team name, team code, or coach name, and you can add the games to your phone's calendar from there.
+
 ### What day is practice?
-Your coach sets the practice day — usually one weeknight (Monday-Thursday), once per week.
+Usually one weeknight (Monday-Thursday), once per week. Practice schedules are not published publicly. Your coach will pass along your team's practice day, time, and field, and you can also see it in your [InLeague dashboard](https://ayso13.inleague.com/app).
 
 ### How long are games?
 40-70 minutes depending on age group. See [Your Child's Team](/families/team) for game lengths by division.
 
 ### What happens if it rains?
-Check the [field status page](/schedules) and your email Saturday morning.
+Check [Weather and Field Conditions](/resources/weather/) and your email Saturday morning.
 
 ### My child will miss a game for vacation/event. Is that okay?
 Yes. Let your coach know in advance.

@@ -10,6 +10,8 @@
   "city": "Altadena, CA 91001",
   "founded": "1972",
   "inleagueUrl": "https://ayso13.inleague.com/",
+  "scheduleUrl": "https://schedule.ayso13.org/",
+  "refereeSchedulerUrl": "https://referee.ayso13.org/",
   "gaId": "G-9YM9ZDW1J9",
   "posthogKey": "phc_zpnqGMHbdxBkGwh2JesM6sHZhLKpvBacDhV7ygQAgKfQ",
   "posthogHost": "https://p.ayso13.org",
