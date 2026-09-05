@@ -8,7 +8,7 @@ description: "Resources for AYSO Region 13 referees — documents, forms, traini
 
 ## Quick Links
 
-- [Referee Scheduler](https://ayso13.inleague.com/app/referee-scheduler) — Sign up for games
+- [Referee Scheduler](https://referee.ayso13.org/) — Sign up for games
 - [eTrainU](https://ayso13.inleague.com/app/eTrainU) — Training and certification
 - [Incident Reporting](https://ayso13.typeform.com/to/GjC4Pyed) — Document issues
 - [Referee Abuse Prevention](/referees/abuse/) — What counts as abuse and how to report it

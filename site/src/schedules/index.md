@@ -4,24 +4,23 @@ title: "Schedules"
 layout: page.njk
 section: schedules
 permalink: "/schedules/"
-description: "AYSO Region 13 game schedules, standings, and season calendar. Check InLeague for current game times and field assignments."
+description: "AYSO Region 13 game schedules, standings, and season calendar. Find your team's game times and fields at schedule.ayso13.org."
 ---
 
 ## Quick Links
 
-- [Game Schedule](https://ayso13.inleague.com/app/schedule) — View your team's games
-- [Practice Schedule](https://ayso13.inleague.com/app/schedule) — View practice field assignments
-- [Referee Scheduler](https://ayso13.inleague.com/app/referee-scheduler) — Sign up for referee assignments
+- [Game Schedule](https://schedule.ayso13.org/) — Find your team's games
+- [Referee Scheduler](https://referee.ayso13.org/) — Sign up for referee assignments
 
 ## Game Schedule
 
-Games are held on Saturdays during the fall and spring seasons. The schedule is available through InLeague and as downloadable documents.
+Games are held on Saturdays during the fall and spring seasons. The full season schedule is published at [schedule.ayso13.org](https://schedule.ayso13.org/), where you can search for your team or browse every game by field, division, or week.
 
 [Game Schedule](/schedules/games)
 
 ## Practice Schedule
 
-Teams are assigned practice fields and times based on division and coach availability. Practice begins the day after Labor Day for the fall season.
+Practice day and time are set by your coach, who will let the team know directly. Practice fields are assigned by division and coach availability, and practice begins the day after Labor Day for the fall season.
 
 [Practice Information](/coaches/practice)
 
@@ -35,7 +34,7 @@ Standings are tracked for 10U, 12U, 14U, and 16U divisions. View current standin
 
 Key dates for the current season are published on the calendar.
 
-[InLeague](https://ayso13.inleague.com/app)
+[Season Calendar](/schedules/calendar/)
 
 ## Contact
 

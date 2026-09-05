@@ -10,6 +10,8 @@ Standings are tracked for 10U, 12U, 14U, and 16U House League divisions.
 
 ## Current Standings
 
+Standings begin once pool play is under way. For game times and fields, see the [game schedule](https://schedule.ayso13.org/).
+
 [Current standings on InLeague](https://ayso13.inleague.com/app/schedule)
 
 ## How Standings Work

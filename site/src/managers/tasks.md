@@ -64,7 +64,8 @@ Designate someone to collect personalized trophies, verify accuracy, and distrib
 
 - WeJoinIn for volunteer signups
 - Spond for team communication
-- InLeague for schedules and forms
+- [schedule.ayso13.org](https://schedule.ayso13.org/) for game times and fields
+- InLeague for rosters and forms
 
 ## Related Pages
 

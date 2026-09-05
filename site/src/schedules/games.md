@@ -3,26 +3,25 @@
 title: "Game Schedule"
 layout: page.njk
 section: schedules
-description: "View AYSO Region 13 game schedules for all divisions. Current schedules are available through InLeague."
+description: "View AYSO Region 13 game schedules for all divisions. The full season schedule is published at schedule.ayso13.org."
 ---
 
 Games are held on Saturdays during the fall and spring seasons.
 
 ## View the Schedule
 
-The schedule is available in multiple formats:
+The full season schedule is at [schedule.ayso13.org](https://schedule.ayso13.org/).
 
-**InLeague** — Interactive schedule with team filters
+Search for your team by team name, team code (like B10-04), or coach name to open that team's games. From there you can also add the games to Google Calendar, Apple Calendar, or Outlook.
 
-[View on InLeague](https://ayso13.inleague.com/app/schedule)
+To browse the season instead of searching, the site has four views:
 
-**Unified Schedule** — Complete schedule document
+- Complete — every game in the season, all divisions
+- By field — every game at one field, week by week
+- By division — one division's games, by coach or by week
+- By team — a sortable table of every team
 
-[Unified Schedule (Google Drive)](https://drive.google.com/file/d/1MvE0UzSW_ugX6e0p6Q3sdQJmEnWUPdG2/view)
-
-**Field-Based Schedules** — Games organized by field location
-
-[Field Schedules (Google Drive)](https://drive.google.com/open?id=1Mt_5WxzIBdhzWGje0S2VJ8G5S8LudVj6)
+Practice schedules are not on the schedule site. Your coach sets practice day and time, and will let the team know directly.
 
 ## Reading the Schedule
 

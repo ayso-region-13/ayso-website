@@ -51,6 +51,7 @@ Practice day and time are set by your coach based on field availability.
 - All divisions play on Saturdays
 - Game times vary by division and field availability
 - Season includes 8-10 games
+- Game times and fields are published at [schedule.ayso13.org](https://schedule.ayso13.org/)
 
 ### Season Timeline
 
