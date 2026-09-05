@@ -12,5 +12,6 @@
   "inleagueUrl": "https://ayso13.inleague.com/",
   "gaId": "G-9YM9ZDW1J9",
   "posthogKey": "phc_zpnqGMHbdxBkGwh2JesM6sHZhLKpvBacDhV7ygQAgKfQ",
-  "posthogHost": "https://us.i.posthog.com"
+  "posthogHost": "https://p.ayso13.org",
+  "posthogUiHost": "https://us.posthog.com"
 }
