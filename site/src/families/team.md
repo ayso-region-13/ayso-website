@@ -132,9 +132,7 @@ If conditions look bad, check [Weather and Field Conditions](/resources/weather/
 
 ### Season Standings
 
-Standings begin once pool play is under way.
-
-[Standings on InLeague](https://ayso13.inleague.com/app/schedule)
+Standings will be published after Week 3.
 
 AYSO emphasizes development over winning. Standings are available, but there's no elimination — every team plays a full season, and every player receives equal playing time.
 

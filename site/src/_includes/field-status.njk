@@ -1,0 +1,27 @@
+{# ── Field status bar ────────────────────────────────────────────────
+   ONE definition, included by home.njk and page.njk, so the two cannot
+   drift (the gtag blocks in base.njk/temp.njk are the cautionary tale).
+   Callers gate on their own condition — page.njk on `showFieldStatus`
+   frontmatter, home.njk unconditionally — and this file owns the
+   `fieldstatus.enabled` check plus all the markup.
+
+   The whole bar links to /resources/weather/, which is where the status
+   and the live conditions behind it live. The one exception is that page
+   itself: a bar that links to the page you are already on is noise, so
+   there it renders as a plain div. #}
+{% if fieldstatus.enabled %}
+{% set fsHref = "/resources/weather/" %}
+{% set fsBg = "bg-brand-red-dark" if fieldstatus.status | lower == "closed" else ("bg-brand-gold" if fieldstatus.status | lower == "monitoring" else "bg-brand-green") %}
+{% set fsText = "text-white" if fieldstatus.status | lower == "closed" else "text-brand-dark" %}
+{% set fsInner = "max-w-screen-xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3" %}
+<div class="{{ fsBg }}" role="status">
+  {% if page.url != fsHref %}<a href="{{ fsHref }}" class="{{ fsInner }} hover:bg-black/10 transition-colors">{% else %}<div class="{{ fsInner }}">{% endif %}
+    <span class="text-xl" aria-hidden="true">⚽</span>
+    <span class="{{ fsText }} text-sm font-bold uppercase tracking-wider">
+      Field Status: {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
+      {% if page.url != fsHref %}<span class="sr-only">. See weather and field conditions.</span>{% endif %}
+    </span>
+    <span class="text-xl" aria-hidden="true">⚽</span>
+  {% if page.url != fsHref %}</a>{% else %}</div>{% endif %}
+</div>
+{% endif %}

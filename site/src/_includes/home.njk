@@ -257,18 +257,7 @@ layout: base.njk
 {% endif %}
 
 {# ── Field status widget ─────────────────────────────────────────── #}
-{% if fieldstatus.enabled %}
-<div class="{% if fieldstatus.status | lower == 'closed' %}bg-brand-red-dark{% elif fieldstatus.status | lower == 'monitoring' %}bg-brand-gold{% else %}bg-brand-green{% endif %}">
-  <a href="/resources/weather/" class="max-w-screen-xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3 hover:bg-black/10 transition-colors">
-    <span class="text-xl" aria-hidden="true">⚽</span>
-    <span class="{% if fieldstatus.status | lower == 'closed' %}text-white{% else %}text-brand-dark{% endif %} text-sm font-bold uppercase tracking-wider">
-      Field Status: {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
-      <span class="sr-only">. See weather and field conditions.</span>
-    </span>
-    <span class="text-xl" aria-hidden="true">⚽</span>
-  </a>
-</div>
-{% endif %}
+{% include "field-status.njk" %}
 
 {# ── Cream-background sections ────────────────────────────────────── #}
 <div class="bg-brand-cream">
