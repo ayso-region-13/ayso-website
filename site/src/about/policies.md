@@ -78,7 +78,7 @@ For concerns about conduct or policy violations, use the incident reporting proc
 
 ## Privacy
 
-Personal data is handled according to AYSO National Board-approved privacy policies. Credit and debit card information is not stored. Background check data is encrypted and restricted to Risk Management personnel.
+Personal data is handled according to the [AYSO National Privacy Policy](https://ayso.org/privacy-policy/), approved by the AYSO National Board. Credit and debit card information is not stored. Background check data is encrypted and restricted to Risk Management personnel.
 
 ## Related Pages
 
