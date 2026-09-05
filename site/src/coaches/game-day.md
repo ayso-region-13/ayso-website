@@ -11,6 +11,7 @@ This guide covers what coaches need to know for game days, with specific informa
 ## Before the Game
 
 ### Preparation
+- Check your game time and field at [schedule.ayso13.org](https://schedule.ayso13.org/)
 - Review your roster and know who's attending
 - Bring completed game cards (10U+)
 - Bring equipment: balls, first aid kit, pinnies
@@ -69,6 +70,7 @@ See [Game Cards](/coaches/game-cards) for details.
 
 ## Related Pages
 
+- [Game Schedule](https://schedule.ayso13.org/) — Game times and fields
 - [Game Cards](/coaches/game-cards) — Game card instructions
 - [Practice Resources](/coaches/practice) — Planning practices
 - [PIE Philosophy](/coaches/pie) — Positive coaching approach

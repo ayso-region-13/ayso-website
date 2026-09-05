@@ -44,13 +44,14 @@ Age is determined as of July 31. See [age chart](/register/age-chart/) for exact
 - 10U-12U: Once per week, typically 6-7:30pm
 - 14U: Once per week, typically 7-8:30pm
 
-Practice day and time are set by your coach based on field availability.
+Practice schedules are not published publicly. Your coach will pass along your team's practice day, time, and field, and you can also see it in your [InLeague dashboard](https://ayso13.inleague.com/app).
 
 ### Games
 
 - All divisions play on Saturdays
 - Game times vary by division and field availability
 - Season includes 8-10 games
+- Game times and fields are published at [schedule.ayso13.org](https://schedule.ayso13.org/)
 
 ### Season Timeline
 

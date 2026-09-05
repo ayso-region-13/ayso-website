@@ -11,8 +11,9 @@ AYSO Region 13's resource hub pulls together the materials families, coaches, an
 
 ## Quick Links
 
+- [Game Schedule](https://schedule.ayso13.org/) — Game times and fields
 - [Registration](https://ayso13.inleague.com/app) — Register for programs
-- [InLeague Portal](https://ayso13.inleague.com/) — Schedules and team information
+- [InLeague Portal](https://ayso13.inleague.com/) — Rosters, forms, and team information
 - [Required Forms](/register/forms) — Family pledge and safety forms
 
 ## Safety

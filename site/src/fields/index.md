@@ -9,6 +9,8 @@ permalink: /fields/
 ---
 ## Game Day Basics
 
+Game times and field assignments are published at [schedule.ayso13.org](https://schedule.ayso13.org/). Its "By field" view lists every game at one location, week by week.
+
 - Home team (listed first on the schedule) sits on the north or west side of the field
 - Arrive at least 15 minutes before game time
 - For first games of the day, arrive 30 minutes early to help with goal setup

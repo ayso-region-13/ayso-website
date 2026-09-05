@@ -7,7 +7,7 @@ layout: base.njk
 <div class="bg-brand-maroon">
   <div class="max-w-screen-xl mx-auto px-4">
     <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
-      <a href="/schedules/games/" class="flex flex-col items-center gap-1 py-4 px-3 text-white hover:bg-black/20 transition-colors text-center">
+      <a href="{{ site.scheduleUrl }}" class="flex flex-col items-center gap-1 py-4 px-3 text-white hover:bg-black/20 transition-colors text-center">
         <svg class="w-6 h-6 opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
         <span class="text-xs font-bold uppercase tracking-wider">Game Schedule</span>
       </a>
@@ -259,13 +259,14 @@ layout: base.njk
 {# ── Field status widget ─────────────────────────────────────────── #}
 {% if fieldstatus.enabled %}
 <div class="{% if fieldstatus.status | lower == 'closed' %}bg-brand-red-dark{% elif fieldstatus.status | lower == 'monitoring' %}bg-brand-gold{% else %}bg-brand-green{% endif %}">
-  <div class="max-w-screen-xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3">
+  <a href="/resources/weather/" class="max-w-screen-xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3 hover:bg-black/10 transition-colors">
     <span class="text-xl" aria-hidden="true">⚽</span>
-    <p class="{% if fieldstatus.status | lower == 'closed' %}text-white{% else %}text-brand-dark{% endif %} text-sm font-bold uppercase tracking-wider">
+    <span class="{% if fieldstatus.status | lower == 'closed' %}text-white{% else %}text-brand-dark{% endif %} text-sm font-bold uppercase tracking-wider">
       Field Status: {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
-    </p>
+      <span class="sr-only">. See weather and field conditions.</span>
+    </span>
     <span class="text-xl" aria-hidden="true">⚽</span>
-  </div>
+  </a>
 </div>
 {% endif %}
 
