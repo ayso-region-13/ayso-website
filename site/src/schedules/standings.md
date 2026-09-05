@@ -36,12 +36,6 @@ Regular season pool champions represent Region 13 in the Area 1-C League Playoff
 ### Rose City Cup
 Standings determine tournament flights for the Rose City Cup, a single-elimination playoff held in December. See [Rose City Cup](/programs/tournaments/rose-city-cup).
 
-## Historical Standings
-
-Previous season standings are archived and available through InLeague.
-
-[Historical Standings on InLeague](https://ayso13.inleague.com/app/standings)
-
 ## Contact
 
 - Standings questions: [info@ayso13.org](mailto:info@ayso13.org)
