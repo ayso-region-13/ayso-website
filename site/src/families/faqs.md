@@ -64,7 +64,7 @@ Games are on Saturdays. Times vary by division.
 At [schedule.ayso13.org](https://schedule.ayso13.org/). Search by team name, team code, or coach name, and you can add the games to your phone's calendar from there.
 
 ### What day is practice?
-Usually one weeknight (Monday-Thursday), once per week. Practice schedules are not published publicly: your coach will tell you the day, time, and field, and it also appears in your [InLeague dashboard](https://ayso13.inleague.com/app).
+Usually one weeknight (Monday-Thursday), once per week. Practice schedules are not published publicly. Your coach will pass along your team's practice day, time, and field, and you can also see it in your [InLeague dashboard](https://ayso13.inleague.com/app).
 
 ### How long are games?
 40-70 minutes depending on age group. See [Your Child's Team](/families/team) for game lengths by division.

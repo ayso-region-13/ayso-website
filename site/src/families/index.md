@@ -99,7 +99,7 @@ You can request that your child be placed with a specific friend or carpool part
 
 ### During the Season
 
-- Practices: One weeknight per week (day/time set by your coach)
+- Practices: One weeknight per week; your coach will tell you the day, time, and field
 - Games: Saturday mornings at one of our [local fields](/fields)
 - Season length: 8-10 weeks
 
