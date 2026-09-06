@@ -9,6 +9,7 @@ placeLon: -118.0884919
 description: "Gwinn Park — AYSO Region 13 practice location in Pasadena. Address, parking, and field notes."
 surface: "Grass"
 lighting: "No"
+restrooms: "Yes (Viña Vieja Park, next door)"
 
 ---
 
@@ -19,6 +20,10 @@ Gwinn Park is a practice location in east Pasadena.
 [3000 E. Orange Grove Blvd, Pasadena CA](https://maps.google.com/?q=3000+E+Orange+Grove+Blvd,+Pasadena,+CA)
 
 <iframe src="https://maps.google.com/maps?q=3000+E+Orange+Grove+Blvd,+Pasadena,+CA&output=embed" width="100%" height="350" style="border:0;border-radius:0.5rem;display:block;margin-bottom:1.5rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+## Restrooms
+
+Restrooms are at [Viña Vieja Park](https://www.cityofpasadena.net/parks-and-rec/parks/vina-vieja-park/), next door at 3026 E. Orange Grove Blvd.
 
 ## Problems & Contact
 
