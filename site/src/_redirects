@@ -422,8 +422,17 @@
 /maps                               /fields/                                 301
 /fields/blair/                      /fields/blair-lower/                     301
 /fields/blair                       /fields/blair-lower/                     301
+# Archived venues. When a field is archived on the platform (fields.ayso13.org),
+# delete its site/src/fields/<slug>.md and add BOTH lines here. Leaving the page
+# up advertises a venue that is out of service, and deleting it without a
+# redirect 404s a URL families have bookmarked and search engines still rank.
+# Also repoint any rule that pointed AT the deleted page, or you leave a
+# two-hop chain (/mcdonald/ -> /fields/mcdonald/ -> /fields/), which search
+# engines follow but discount.
 /fields/pasadena-hs/                /fields/                                  301
 /fields/pasadena-hs                 /fields/                                  301
+/fields/mcdonald/                   /fields/                                  301
+/fields/mcdonald                    /fields/                                  301
 /blair/                             /fields/blair-lower/                     301
 /blair                              /fields/blair-lower/                     301
 /muir/                              /fields/muir/                            301
@@ -436,8 +445,8 @@
 /jefferson                          /fields/jefferson/                       301
 /mckinley/                          /fields/mckinley/                        301
 /mckinley                           /fields/mckinley/                        301
-/mcdonald/                          /fields/mcdonald/                        301
-/mcdonald                           /fields/mcdonald/                        301
+/mcdonald/                          /fields/                                  301
+/mcdonald                           /fields/                                  301
 /wilson/                            /fields/wilson/                          301
 /wilson                             /fields/wilson/                          301
 /marshall/                          /fields/marshall/                        301

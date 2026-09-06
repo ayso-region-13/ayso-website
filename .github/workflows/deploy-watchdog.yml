@@ -31,6 +31,11 @@ on:
     workflows:
       - "Deploy Staging (Pages Direct Upload)"
       - "Promote Staging to Production"
+      # Added 2026-09-06, when this workflow stopped being only the fields
+      # "Publish Site" button. It now also fires on a push to `main` touching
+      # fieldstatus/announcements, which is how a Slack field closure reaches
+      # www — so a silent one strands a closure that Slack already announced.
+      - "Rebuild Production (no promote)"
     types: [completed]
 
 permissions:
@@ -128,6 +133,7 @@ jobs:
           always() && (
             steps.classify.outputs.verdict == 'silent-runner' ||
             steps.classify.outputs.verdict == 'silent-superseded' ||
+            steps.classify.outputs.verdict == 'silent-superseded-rebuild' ||
             steps.classify.outputs.verdict == 'unknown'
           )
         env:
@@ -148,6 +154,11 @@ jobs:
           elif [ "$VERDICT" = "silent-superseded" ]; then
             HEADLINE=":warning: *Promote was dropped before it ran*"
             DETAIL="A later fields \`Publish Site\` click evicted this promote from the \`deploy-pages-prod\` queue, so production was not updated and no other message was sent. Re-run \`/ayso promote\`."
+          elif [ "$VERDICT" = "silent-superseded-rebuild" ]; then
+            # The urgent case: Slack has already told everyone the fields are
+            # closed, and www is the one place still saying otherwise.
+            HEADLINE=":warning: *A field status or announcement never reached www*"
+            DETAIL="This production rebuild was evicted from the \`deploy-pages-prod\` queue before it ran, so the change is live on staging and on \`main\` but NOT on www.ayso13.org. Nothing else reported it. Re-run *Rebuild Production (no promote)* from the Actions tab, or run \`/ayso promote\`."
           elif [ "$RETRIED" = "true" ]; then
             HEADLINE=":arrows_counterclockwise: *Staging deploy never started — retried automatically*"
             DETAIL="GitHub could not allocate a runner, so the job ran no steps and reported nothing. A fresh staging deploy has been dispatched from the tip of \`staging\`."
