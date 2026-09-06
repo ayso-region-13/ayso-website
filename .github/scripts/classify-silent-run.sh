@@ -16,13 +16,21 @@
 #   STEP_COUNT  total executed steps across all jobs in the run
 #
 # Verdicts (stdout):
-#   silent-runner      job never started; nobody was told
-#   silent-superseded  promote dropped from the shared prod concurrency group
-#   none               the run reported its own outcome, or silence is by design
+#   silent-runner              job never started; nobody was told
+#   silent-superseded          promote dropped from the shared prod group
+#   silent-superseded-rebuild  prod rebuild dropped from that same group
+#   none                       the run reported its own outcome, or silence is
+#                              by design
+#
+# The two supersede verdicts are separate because the RECOVERY differs, and the
+# recovery is the whole point of the message: a dropped promote means re-run
+# `/ayso promote`, while a dropped rebuild means a field status or announcement
+# never reached www and the Rebuild Production workflow is what to re-run.
 set -euo pipefail
 
 STAGING_WF="Deploy Staging (Pages Direct Upload)"
 PROMOTE_WF="Promote Staging to Production"
+REBUILD_WF="Rebuild Production (no promote)"
 
 # A run with executed steps reached its own notifier, whatever the outcome was.
 if [ "${STEP_COUNT:-0}" -gt 0 ]; then
@@ -49,8 +57,17 @@ case "${WF_NAME:-}|${CONCLUSION:-}" in
     # Promote has no debounce, so a cancel before any step means this promote
     # was evicted from the `deploy-pages-prod` group by a later publish click.
     echo "silent-superseded" ;;
+  "$REBUILD_WF|failure")
+    echo "silent-runner" ;;
+  "$REBUILD_WF|cancelled")
+    # Same eviction as the promote case, and it matters MORE here: since
+    # 2026-09-06 this workflow is how a Slack field closure reaches production
+    # (it triggers on a push to `main` touching fieldstatus/announcements). A
+    # dropped rebuild means the closure is live on staging and on `main` but is
+    # NOT on www, with nothing else to say so.
+    echo "silent-superseded-rebuild" ;;
   *)
-    # success, skipped (mistyped promote confirm -> job `if:` false), or a
-    # workflow this watchdog does not cover.
+    # success, skipped (mistyped promote confirm, or the rebuild's own job `if:`
+    # skipping a promote's merge commit), or a workflow outside this remit.
     echo "none" ;;
 esac

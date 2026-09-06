@@ -7,6 +7,7 @@ HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SUT="$HERE/classify-silent-run.sh"
 STAGING_WF="Deploy Staging (Pages Direct Upload)"
 PROMOTE_WF="Promote Staging to Production"
+REBUILD_WF="Rebuild Production (no promote)"
 
 pass=0
 fail=0
@@ -30,6 +31,10 @@ check "promote superseded in deploy-pages-prod group" \
   "$PROMOTE_WF" cancelled 0 silent-superseded
 check "promote, runner not acquired" \
   "$PROMOTE_WF" failure 0 silent-runner
+check "prod rebuild superseded in deploy-pages-prod group" \
+  "$REBUILD_WF" cancelled 0 silent-superseded-rebuild
+check "prod rebuild, runner not acquired" \
+  "$REBUILD_WF" failure 0 silent-runner
 
 # --- silence that is correct: the run already told someone ----------------
 check "[real 31130648494] staging build failed (11 steps ran)" \
@@ -46,6 +51,15 @@ check "[real 31124270318] staging debounce supersede (3s in)" \
   "$STAGING_WF" cancelled 0 none
 check "promote skipped, confirmation mistyped" \
   "$PROMOTE_WF" skipped 0 none
+# The rebuild's job `if:` skips a promote's merge commit, so a promote that
+# happens to touch fieldstatus/announcements now leaves a skipped rebuild run
+# behind. Expected and silent — the promote reported its own outcome.
+check "prod rebuild skipped, promote merge commit" \
+  "$REBUILD_WF" skipped 0 none
+check "[real 34049461658] prod rebuild succeeded (14 steps ran)" \
+  "$REBUILD_WF" success 14 none
+check "prod rebuild build failed (10 steps ran)" \
+  "$REBUILD_WF" failure 10 none
 check "cancelled build that had already started steps" \
   "$STAGING_WF" cancelled 6 none
 
