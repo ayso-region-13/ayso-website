@@ -31,6 +31,35 @@ on:
   repository_dispatch:
     types: [fields-publish]
   workflow_dispatch:
+  # The Slack bot writes field status and announcements to BOTH `staging` and
+  # `main` (slack-bot/src/index.js, `commitToBothBranches`). That design is from
+  # April 2026, when Cloudflare's own Git integration watched `main` and built it
+  # automatically. The 2026-06-18 move to CI Direct Upload disabled CF
+  # auto-deploy on both Pages projects and nothing replaced it on a push to
+  # `main`, so from then until 2026-09-06 the bot's write to `main` was a no-op
+  # for production: a rain closure posted from Slack went live on staging and
+  # then sat invisible on www until somebody ran `/ayso promote` by hand.
+  #
+  # This trigger closes that gap. It is deliberately narrow — only the two files
+  # the bot writes, NOT `site/**` — because every other route to production stays
+  # deliberate. Ordinary content still reaches www only via a promote.
+  #
+  # Two things this depends on, both verified 2026-09-06:
+  #   1. The bot commits through the Contents API with a fine-grained PAT, and a
+  #      PAT-authored commit DOES fire push workflows. (Actions' own built-in
+  #      GITHUB_TOKEN does not, to prevent recursion — that is not what the bot
+  #      uses.) Proof: run 34041148674, event `push`, "Field status: Closed (via
+  #      Slack — @pshopbell)", fired the staging deploy from exactly this path.
+  #   2. ⚠️ A push trigger runs the copy of THIS FILE that is on the pushed
+  #      branch — `main`. So this trigger is inert until it has been promoted to
+  #      main, and the first Slack field update after it lands on staging still
+  #      needs a manual `/ayso promote`. Same bootstrap wrinkle as the promote
+  #      workflow's own `ref: main`.
+  push:
+    branches: [main]
+    paths:
+      - 'site/src/_data/fieldstatus.json'
+      - 'site/src/_data/announcements.json'
 
 permissions:
   contents: read
@@ -46,6 +75,19 @@ jobs:
   rebuild:
     name: Rebuild main, deploy to production
     runs-on: ubuntu-latest
+    # A promote merges staging → main and deploys production itself, so the merge
+    # commit it pushes must not fire a second, redundant prod deploy behind it.
+    # Promote always merges `--no-ff --no-edit`, so its head commit is always
+    # "Merge remote-tracking branch 'origin/staging'"; the bot writes
+    # "Field status: …" / "Announcement updated …" and Pages CMS writes
+    # "Update <path> (via Pages CMS)". Both ways this test can be wrong are
+    # harmless: a missed skip costs one idempotent re-deploy, a wrong skip leaves
+    # exactly the status quo that existed before this trigger. Evaluated as an
+    # expression, never interpolated into a shell — see the Slack steps below for
+    # how untrusted strings reach `run:`.
+    if: >-
+      github.event_name != 'push' ||
+      !startsWith(github.event.head_commit.message, 'Merge ')
     timeout-minutes: 20
     steps:
       # A staging worker must never rebuild the PUBLIC site. The fields worker
@@ -68,7 +110,13 @@ jobs:
 
       - name: Resolve commit
         id: rev
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+          # Read the subject from git rather than github.event.head_commit.message:
+          # the same string, but it can never be an attacker-chosen payload field,
+          # and `%s` is the first line only, so it cannot forge a second
+          # key=value pair in $GITHUB_OUTPUT. Still sanitized again before Slack.
+          echo "subject=$(git log -1 --pretty=%s)" >> "$GITHUB_OUTPUT"
 
       # `client_payload.actor` is supplied by whoever called the dispatch API, so
       # it is untrusted input. It reaches Slack only through env → `jq --arg`,
@@ -88,18 +136,20 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SHA: ${{ steps.rev.outputs.sha_short }}
           ACTOR: ${{ github.event.client_payload.actor }}
+          SUBJECT: ${{ steps.rev.outputs.subject }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           WHO=$(printf '%s' "$ACTOR" | tr -d '\n\r' | head -c 100)
+          WHAT=$(printf '%s' "$SUBJECT" | tr -d '\n\r' | head -c 200)
           RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHA" --arg actor "$WHO" --arg run "$RUN_URL" '{
+            --data "$(jq -nc --arg sha "$SHA" --arg actor "$WHO" --arg what "$WHAT" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
               text: "Rebuilding production — \($sha)…",
               blocks: [
-                { type: "section", text: { type: "mrkdwn", text: ":hourglass_flowing_sand: *Rebuilding production* — building `\($sha)` and deploying to www.ayso13.org with the current field maps. Slack will update when it is live (~2-3 min).\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
-                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+                { type: "section", text: { type: "mrkdwn", text: ":hourglass_flowing_sand: *Rebuilding production* — building `\($sha)` and deploying to www.ayso13.org with the current field maps and site data. Slack will update when it is live (~2-3 min).\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "\($what | if . == "" then "" else . + " · " end)<\($run)|View workflow run>" } ] }
               ]
             }')")
           printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
@@ -173,18 +223,20 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SHA: ${{ steps.rev.outputs.sha_short }}
           ACTOR: ${{ github.event.client_payload.actor }}
+          SUBJECT: ${{ steps.rev.outputs.subject }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           WHO=$(printf '%s' "$ACTOR" | tr -d '\n\r' | head -c 100)
+          WHAT=$(printf '%s' "$SUBJECT" | tr -d '\n\r' | head -c 200)
           RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg sha "$SHA" --arg actor "$WHO" --arg run "$RUN_URL" '{
+            --data "$(jq -nc --arg sha "$SHA" --arg actor "$WHO" --arg what "$WHAT" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
               text: "Production rebuild live — \($sha)",
               blocks: [
-                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Production rebuild live* — `\($sha)` is serving on www.ayso13.org with the current field maps.\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
-                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+                { type: "section", text: { type: "mrkdwn", text: ":white_check_mark: *Production rebuild live* — `\($sha)` is serving on www.ayso13.org with the current field maps and site data.\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "\($what | if . == "" then "" else . + " · " end)<\($run)|View workflow run>" } ] }
               ]
             }')")
           printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
@@ -196,11 +248,22 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SHA: ${{ steps.rev.outputs.sha_short }}
           ACTOR: ${{ github.event.client_payload.actor }}
+          SUBJECT: ${{ steps.rev.outputs.subject }}
+          EVENT: ${{ github.event_name }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           BUILD_OUTCOME: ${{ steps.build.outcome }}
           DEPLOY_OUTCOME: ${{ steps.deploy.outcome }}
         run: |
           WHO=$(printf '%s' "$ACTOR" | tr -d '\n\r' | head -c 100)
+          WHAT=$(printf '%s' "$SUBJECT" | tr -d '\n\r' | head -c 200)
+          # A push-triggered run is a field-status or announcement change from
+          # Slack, not a map publish, so "click Publish Site again" would send the
+          # reader to the wrong button at the worst possible moment.
+          if [ "$EVENT" = "push" ]; then
+            RETRY="Re-run this workflow from the Actions tab to retry."
+          else
+            RETRY="Click Publish Site again to retry."
+          fi
           # An outcome is the EMPTY STRING for a step that never ran, which also
           # satisfies `!= "success"` — so check "never ran" FIRST, or a failed
           # checkout gets reported as a build failure with a blank SHA.
@@ -212,7 +275,7 @@ jobs:
             REASON="The site build failed for \`$SHA\`. www.ayso13.org is still serving the previous version. Check the workflow logs."
           elif [ "$DEPLOY_OUTCOME" != "success" ]; then
             HEADLINE=":x: *Production rebuild failed*"
-            REASON="Built, but the Cloudflare upload failed after 3 attempts for \`$SHA\`. www.ayso13.org is still serving the previous version — click Publish Site again to retry."
+            REASON="Built, but the Cloudflare upload failed after 3 attempts for \`$SHA\`. www.ayso13.org is still serving the previous version. $RETRY"
           else
             HEADLINE=":x: *Production rebuild workflow failed*"
             REASON="Workflow failed for \`$SHA\`. See run logs."
@@ -220,12 +283,12 @@ jobs:
           RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
-            --data "$(jq -nc --arg head "$HEADLINE" --arg reason "$REASON" --arg actor "$WHO" --arg run "$RUN_URL" '{
+            --data "$(jq -nc --arg head "$HEADLINE" --arg reason "$REASON" --arg actor "$WHO" --arg what "$WHAT" --arg run "$RUN_URL" '{
               channel: "C0A024YGR9C",
               text: "Production rebuild notice",
               blocks: [
                 { type: "section", text: { type: "mrkdwn", text: "\($head) — \($reason)\($actor | if . == "" then "" else "\nRequested by " + . end)" } },
-                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run for details>" } ] }
+                { type: "context", elements: [ { type: "mrkdwn", text: "\($what | if . == "" then "" else . + " · " end)<\($run)|View workflow run for details>" } ] }
               ]
             }')")
           printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
