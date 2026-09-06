@@ -25,10 +25,10 @@ Game times and field assignments are published at [schedule.ayso13.org](https://
 | [Blair Upper](/fields/blair-upper) | Pasadena |  | ✓ | 10U |
 | [Brookside Park](/fields/brookside) | Pasadena | ✓ |  |  |
 | [Butler Middle School](/fields/butler) | Pasadena | ✓ |  |  |
+| [Gwinn Park](/fields/gwinn) | Pasadena | ✓ |  |  |
 | [Jefferson Park](/fields/jefferson) | Pasadena | ✓ |  |  |
 | [La Salle High School](/fields/la-salle) | Pasadena |  | ✓ |  |
 | [Thurgood Marshall Secondary School](/fields/marshall) | Pasadena |  | ✓ | 10U, 14U |
-| [McDonald Park](/fields/mcdonald) | Pasadena | ✓ |  |  |
 | [McKinley](/fields/mckinley) | Pasadena |  | ✓ | 12U |
 | [Rose Bowl Area H](/fields/area-h) | Pasadena | ✓ |  |  |
 | [Victory Park](/fields/victory) | Pasadena | ✓ | ✓ | 4U–14U |
