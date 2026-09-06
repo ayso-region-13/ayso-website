@@ -25,24 +25,24 @@ Game times and field assignments are published at [schedule.ayso13.org](https://
 | [Blair Upper](/fields/blair-upper) | Pasadena |  | ✓ | 10U |
 | [Brookside Park](/fields/brookside) | Pasadena | ✓ |  |  |
 | [Butler Middle School](/fields/butler) | Pasadena | ✓ |  |  |
-| [Gwinn Park](/fields/gwinn) | Pasadena | ✓ |  |  |
-| [Jefferson Park](/fields/jefferson) | Pasadena | ✓ |  |  |
-| [La Salle High School](/fields/la-salle) | Pasadena |  | ✓ |  |
-| [Thurgood Marshall Secondary School](/fields/marshall) | Pasadena |  | ✓ | 10U, 14U |
-| [McKinley](/fields/mckinley) | Pasadena |  | ✓ | 12U |
-| [Rose Bowl Area H](/fields/area-h) | Pasadena | ✓ |  |  |
-| [Victory Park](/fields/victory) | Pasadena | ✓ | ✓ | 4U–14U |
-| [Wilson MS](/fields/wilson) | Pasadena |  | ✓ |  |
-| [Muir North](/fields/muir) | Altadena |  | ✓ | 10U, 12U |
-| [Muir South](/fields/muir-south) | Altadena | ✓ |  |  |
 | [Cornishon](/fields/cornishon) | La Cañada |  | ✓ | 7U, 8U |
 | [FIS Lower](/fields/fis-lower/) | La Cañada | ✓ | ✓ | 12U |
 | [FIS Upper](/fields/fis-upper/) | La Cañada | ✓ | ✓ | 6U |
+| [Gwinn Park](/fields/gwinn) | Pasadena | ✓ |  |  |
+| [Jefferson Park](/fields/jefferson) | Pasadena | ✓ |  |  |
 | [La Cañada Elementary](/fields/la-canada-elementary/) | La Cañada | ✓ |  |  |
 | [La Cañada High School (LCHS)](/fields/lchs) | La Cañada | ✓ | ✓ | 10U, 12U |
+| [La Salle High School](/fields/la-salle) | Pasadena |  | ✓ |  |
 | [LC LDS](/fields/lc-lds) | La Cañada | ✓ | ✓ | 7U, 8U |
+| [Marshall Secondary](/fields/marshall) | Pasadena |  | ✓ | 10U, 14U |
+| [McKinley](/fields/mckinley) | Pasadena |  | ✓ | 12U |
+| [Muir North](/fields/muir) | Altadena |  | ✓ | 10U, 12U |
+| [Muir South](/fields/muir-south) | Altadena | ✓ |  |  |
 | [Oak Grove](/fields/oak-grove) | La Cañada | ✓ |  |  |
 | [Paradise Canyon](/fields/paradise) | La Cañada | ✓ |  |  |
+| [Rose Bowl Area H](/fields/area-h) | Pasadena | ✓ |  |  |
+| [Victory Park](/fields/victory) | Pasadena | ✓ | ✓ | 4U–14U |
+| [Wilson MS](/fields/wilson) | Pasadena |  | ✓ |  |
 
 
 ## Contacts
