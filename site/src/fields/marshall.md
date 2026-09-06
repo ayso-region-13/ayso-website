@@ -1,7 +1,7 @@
 ---
-title: Thurgood Marshall Secondary School
-description: Thurgood Marshall Secondary School fields — AYSO Region 13 game
-  location in Pasadena. Address, parking, and directions.
+title: Marshall Secondary
+description: Marshall Secondary (Thurgood Marshall Secondary School) fields — AYSO
+  Region 13 game location in Pasadena. Address, parking, and directions.
 layout: page.njk
 section: fields
 placeAddress: 990 Allen Ave
