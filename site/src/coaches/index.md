@@ -46,11 +46,9 @@ Teams need a Head Coach. An Assistant Coach is recommended but not required.
 
 Every coach receives:
 
-- Coach bag with balls, pump, cones, pinnies
+- Coach bag with balls, ball bag, pump, cones, pinnies, goalie gloves and jersey if age appropriate
 - First aid kit
-- Laws of the Game booklet
-- Duffel bag
-- Age-specific coaching manual ([6U](/assets/docs/6u-coach.pdf), [8U](/assets/docs/8u-coach.pdf), [10U](/assets/docs/10u-coach.pdf), [12U](/assets/docs/12u-coach.pdf), [Intermediate](/assets/docs/intermediate-coach.pdf))
+- Age-specific coaching guidance ([6U](/assets/docs/6u-coach.pdf), [8U](/assets/docs/8u-coach.pdf), [10U](/assets/docs/10u-coach.pdf), [12U](/assets/docs/12u-coach.pdf), [Intermediate](/assets/docs/intermediate-coach.pdf))
 - Training and certification
 
 ## Key Contacts

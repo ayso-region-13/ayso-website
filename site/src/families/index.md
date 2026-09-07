@@ -54,9 +54,9 @@ Children are placed in divisions based on their age as of July 31 of the current
 | Division | Ages | Format |
 | ----------------- | ----- | --------------------------------------------------------- |
 | 4U/5U (Preschool) | 3-4 | Small-sided games, learning basics |
-| 6U | 5 | 4v4, no goalkeepers |
-| 7U | 6 | 4v4, no goalkeepers |
-| 8U | 7 | 4v4, no goalkeepers |
+| 6U | 5 | 5v5, no goalkeepers |
+| 7U | 6 | 5x5, no goalkeepers |
+| 8U | 7 | 5v5, no goalkeepers |
 | 10U | 8-9 | 7v7 with goalkeepers |
 | 12U | 10-11 | 9v9 |
 | 14U | 12-13 | 11v11 (full field) |
