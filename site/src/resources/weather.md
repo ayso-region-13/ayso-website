@@ -375,18 +375,14 @@ The field-status bar at the top of this page is human-controlled. It reflects wh
       : "Recent heavy rain has saturated the fields.";
     box.appendChild(lead);
 
-    var list = document.createElement("ul");
-    list.className = "text-sm list-disc pl-5 m-0 space-y-1";
-    [
-      "Games and practices should be canceled",
-      "Fields should close until conditions improve",
-      "Final closure call comes from Region 13 staff via the home-page status bar"
-    ].forEach(function (text) {
-      var li = document.createElement("li");
-      li.textContent = text;
-      list.appendChild(li);
-    });
-    box.appendChild(list);
+    // Rain deliberately does not tell anyone to cancel or close: wet fields
+    // are the field owner's call, and Region 13's is the status bar. Heat
+    // (level 5) and air quality still list their own actions.
+    var note = document.createElement("p");
+    note.className = "text-sm m-0";
+    note.textContent =
+      "Final closure call comes from Region 13 staff via the home-page status bar";
+    box.appendChild(note);
 
     host.appendChild(box);
     host.removeAttribute("hidden");

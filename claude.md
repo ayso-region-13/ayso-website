@@ -145,6 +145,25 @@ The CSP report Worker admin key is exported by `.envrc` as `CSP_ADMIN_KEY` (see 
 8. **Programs:** Separate page per program for direct linking
 9. **Fields:** Separate page per field for direct linking
 
+## Review Depth (overrides the global quality gates)
+
+The global CLAUDE.md quality gates are written for application code. This is a
+static Eleventy marketing site, so they are scaled down here. **Match the review
+to the change; do not run the full gate on every diff.**
+
+- **Templates, markdown copy, CSS, data files, Tailwind classes** — no review
+  agents. Run `npm run build`, read the rendered HTML in `_site/`, and show the
+  diff. That IS the review. A four-agent `/simplify` fan-out on a copy edit is
+  the wrong tool, and Matthew has said so.
+- **Where the full gates still apply**: `workers/` (weather-api, redirects,
+  csp-report), `slack-bot/`, `.github/workflows/`, `.eleventy.js` build logic,
+  and anything touching auth, secrets, or external input. These have hidden
+  surface that a rendered-page check cannot reach.
+- `/simplify` on a small diff means an inline pass, not parallel agents.
+- Brainstorm-to-spec-to-plan still applies to genuinely new features. It does
+  not apply to a copy change, a new field on an existing page, or a style tweak
+  — for those, classify the work bounded, agree the approach in chat, and build.
+
 ## Content Writing Guidelines
 The global brand/voice rules (no em dashes, no exclamation points, no editorializing or sarcasm, minimal bolding) apply. Project-specific additions:
 
@@ -196,7 +215,7 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
 - `fileDates.json` — auto-generated per-file last-modified dates (keys are `src/...` paths)
 - `homeHero.js` — **home page hero mode switch.** `mode: "event"` renders a single wide event banner (currently the Rose City RollOut, linking to `/families/rollout/`); `mode: "rotation"` renders the standard 5-photo hero from `heroes.js`. Both code paths live in `home.njk` behind an `if`/`else`, and `heroes.js` is untouched while the banner shows, so **reverting is a one-word edit**. `endDate` closes the gate automatically but is a safety net, not a timer — nothing rebuilds this site on a schedule, so flip `mode` to be sure. The banner runs **full-bleed** capped at the artwork's native 2560px (session 48); the overlay is sized entirely in `vw` with `min()` ceilings resolved at 2560px so it holds its proportion against the artwork and freezes exactly when the artwork does. Overlay-positioning gotchas (clamp floors, percentage padding in shrink-to-fit boxes, and **a plain `width` attribute silently collapsing the srcset to one candidate**) → `claude-history.md` sessions 46 + 48
 - `announcements.json` — home page announcement bar (`enabled` boolean + `body` markdown). **Currently `enabled: false`** so it doesn't compete with the event banner directly beneath it. Note an emptied `body` does NOT hide the bar; only `enabled` does; rendered via `markdownify` filter in `home.njk`, so the `body` supports inline links (e.g. `[Register Today for Fall 2026](/register/)` makes the whole bar text a link — styled by the existing `[&_a]:underline`). Sits **above** the hero on the home page.
-- `fieldstatus.json` — home page field status widget (`enabled` boolean + `status` string + `message` string); color-coded Open/Monitoring/Closed; last-updated timestamp from `git log` at build time (Pacific time). Sits **below** the hero (swapped with the announcement bar 2026-06-16).
+- `fieldstatus.json` — home page field status widget (`enabled` boolean + `status` string + `message` string); color-coded Open/Monitoring/Closed. Sits **below** the hero (swapped with the announcement bar 2026-06-16). A "Last Updated at Sep 6, 3:42 PM PDT" line sits under the status text, from the `fieldStatusDate` global in `.eleventy.js` (`git log` date of this file, `Intl` at `America/Los_Angeles`, so DST is free). **It depends on full git history**: every workflow that builds the site checks out with `fetch-depth: 0`, because a depth-1 clone makes that `git log` return nothing and the line silently vanishes (the same shallow-clone trap hits `generate-file-dates.js` and the `[DATE]` placeholder). The bar's markup is `_includes/field-status.njk`, shared by home and `/resources/weather/`, **plus a second hand-rolled copy in `temp.njk`** — edit both or they drift.
 - `sponsors.js` — sponsor logos, URLs, and tier definitions
 - `fees.json` — Fall Soccer registration fee schedule (rangeShort + per-tier amounts + sibling discount). Used by `/register/`, `/programs/fall-soccer/`, and `/llms.txt`. Note: `site/src/families/index.md` is hardcoded because Pages CMS round-trips break Nunjucks template syntax in CMS-edited markdown bodies — when fees change, edit both
 - `og.js` — Per-section default OG image fallbacks. When a page has no `heroImage` frontmatter, `base.njk` picks the section default; otherwise the global fallback
@@ -244,7 +263,7 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
   - **Deep-linkable map images**: `/field-images/<slug>-<variant>.png` on the platform is slug-keyed and survives map edits, unlike a content-hashed `/img/` filename. The Jefferson legacy redirects point there for that reason.
 
 ---
-*Last updated: 2026-09-06 — Slack field-status and announcement updates now deploy to production on their own; www links out to `schedule.ayso13.org`.*
+*Last updated: 2026-09-08 — field status bar gained a "Last Updated at" line on home, `/temp` and `/resources/weather/`; rain advisory no longer tells anyone to cancel or close.*
 
 **The session-by-session changelog lives in `claude-history.md`** — sessions 36-49 plus dated milestones back to 2026-04. It is deliberately NOT auto-loaded; read it when historical detail matters. Load-bearing gotchas are kept inline in the sections above rather than in the changelog, so this file stays a description of current state and not a history of how it got here.
 

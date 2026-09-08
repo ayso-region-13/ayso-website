@@ -135,11 +135,14 @@ module.exports = function (eleventyConfig) {
         { cwd: path.join(__dirname, "..") }
       ).toString().trim();
       if (!raw) return null;
+      // Short form ("Sep 6, 3:42 PM PDT") — this renders inside the field
+      // status bar, so it has to stay subordinate to the status itself.
+      // timeZone pins it to Pacific and timeZoneName picks up PDT vs PST
+      // from the date, so DST needs no handling of our own.
       return new Intl.DateTimeFormat("en-US", {
         timeZone: "America/Los_Angeles",
-        month:    "long",
+        month:    "short",
         day:      "numeric",
-        year:     "numeric",
         hour:     "numeric",
         minute:   "2-digit",
         timeZoneName: "short",

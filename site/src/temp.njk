@@ -197,6 +197,9 @@ eleventyExcludeFromCollections: true
 <div class="field-status {{ fieldstatus.status | lower }}" role="status">
   ⚽ Fields are {{ fieldstatus.status }} ⚽
   {% if fieldstatus.message %}<span class="msg">{{ fieldstatus.message }}</span>{% endif %}
+  {# Mirrors the line in _includes/field-status.njk. This page has its own
+     copy of the bar, so the two have to be edited together. #}
+  {% if fieldStatusDate %}<span class="msg">Last Updated at {{ fieldStatusDate }}</span>{% endif %}
 </div>
 {% endif %}
 
