@@ -65,6 +65,11 @@ jobs:
         run: sleep 45
 
       - uses: actions/checkout@v6
+        with:
+          # Full history: the build reads `git log` for the field-status
+          # "Last Updated" line and for fileDates.json. A depth-1 clone has no
+          # commit that touched those files, so both silently fall back.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v6
         with:

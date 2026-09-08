@@ -17,9 +17,13 @@
 <div class="{{ fsBg }}" role="status">
   {% if page.url != fsHref %}<a href="{{ fsHref }}" class="{{ fsInner }} hover:bg-black/10 transition-colors">{% else %}<div class="{{ fsInner }}">{% endif %}
     <span class="text-xl" aria-hidden="true">⚽</span>
-    <span class="{{ fsText }} text-sm font-bold uppercase tracking-wider">
+    <span class="{{ fsText }} text-sm font-bold uppercase tracking-wider text-center">
       Field Status: {{ fieldstatus.status }}{% if fieldstatus.message %} — {{ fieldstatus.message }}{% endif %}
       {% if page.url != fsHref %}<span class="sr-only">. See weather and field conditions.</span>{% endif %}
+      {# Build-time git date of fieldstatus.json, already Pacific. Null when
+         git can't answer (shallow clone, no repo), in which case say nothing
+         rather than show a stale or empty time. #}
+      {% if fieldStatusDate %}<span class="block text-xs font-normal normal-case tracking-normal opacity-80">Last Updated at {{ fieldStatusDate }}</span>{% endif %}
     </span>
     <span class="text-xl" aria-hidden="true">⚽</span>
   {% if page.url != fsHref %}</a>{% else %}</div>{% endif %}
