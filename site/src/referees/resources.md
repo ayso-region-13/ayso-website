@@ -1,11 +1,10 @@
 ---
-
-title: "Referee Resources"
+title: Referee Resources
+description: Resources for AYSO Region 13 referees — documents, forms, training
+  materials, and referee handbook.
 layout: page.njk
 section: referees
-description: "Resources for AYSO Region 13 referees — documents, forms, training materials, and referee handbook."
 ---
-
 ## Quick Links
 
 - [Referee Scheduler](https://referee.ayso13.org/) — Sign up for games
@@ -19,7 +18,7 @@ description: "Resources for AYSO Region 13 referees — documents, forms, traini
 
 Age-group specific rules and modifications:
 
-- [6U / 7U / 8U Modifications (2024)](/assets/docs/6u-7u-8u-modifications.pdf) — kick-ins, build-out lines, no goalkeeper, etc.
+- [6U / 7U / 8U Modifications (2026)](/assets/docs/6u-7u-8u-modifications-2026.pdf) — kick-ins, build-out lines, no goalkeeper, etc.
 - [10U Referee Guidelines (2023)](/assets/docs/10u-referee-guidelines.pdf)
 - [12U Referee Guidelines (2023)](/assets/docs/12u-referee-guidelines.pdf)
 - [Penalty Kick Guidelines (2023)](/assets/docs/penalty-kick-guidelines.pdf)
@@ -75,5 +74,3 @@ Referee uniforms are available through the region. For uniform issues, contact [
 
 *Last updated: [DATE]*
 
-
-<!-- v2 hash-bust -->
