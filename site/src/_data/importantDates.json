@@ -2,14 +2,6 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-09-08",
-      "name": "Beyond the Ball! Coaching workshop - clubhouse 7pm - dinner will be provided"
-    },
-    {
-      "date": "2026-09-09",
-      "name": "8U Official Referee Class - clubhouse"
-    },
-    {
       "date": "2026-09-17",
       "name": "Beyond the Ball! Coaching workshop - clubhouse 7pm - dinner will be provided"
     },
@@ -18,12 +10,12 @@
       "name": "Team Manager Orientation on Zoom"
     },
     {
-      "date": "2026-09-12",
-      "name": "Opening Day - first soccer games!"
+      "date": "2026-09-19",
+      "name": "Weekend #2 soccer games!"
     },
     {
-      "date": "2026-09-08",
-      "name": "Referee Pre-Season Orientation on Zoom"
+      "date": "2026-09-20",
+      "name": "Final Regional Referee course (for 10U and up)."
     }
   ]
 }
