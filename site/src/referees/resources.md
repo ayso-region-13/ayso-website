@@ -23,6 +23,7 @@ Age-group specific rules and modifications:
 - [12U Referee Guidelines (2023)](/assets/docs/12u-referee-guidelines.pdf)
 - [Penalty Kick Guidelines (2023)](/assets/docs/penalty-kick-guidelines.pdf)
 - [Referee Quick-Reference Card](/assets/docs/referee-quick-reference-card.pdf) — pocket-sized rules and signals summary
+- [8U Official Referee Course Presentation](/assets/docs/8U_Official_Course_2026-small.pdf)
 
 ### Referee Abuse Prevention (RAPP)
 
