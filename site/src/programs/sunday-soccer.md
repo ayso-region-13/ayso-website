@@ -1,6 +1,6 @@
 ---
 title: Sunday Soccer Lab
-description: Sunday Soccer  Lab offers weekly skills training and a goalkeeper
+description: Sunday Soccer Lab offers weekly skills training and a goalkeeper
   academy for Region 13 players. Open to all ages.
 layout: page.njk
 section: programs
