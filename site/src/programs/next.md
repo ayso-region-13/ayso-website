@@ -20,7 +20,7 @@ at La Cañada High School JV Fields
 
 - Girls 10U | *coming soon*
 - Boys 10U | 11:45am–1pm — [JOIN SPOND](https://spond.com/invite/QZPJQ)
-- Girls 12U | 1–2:15pm — [JOIN SPOND](JOIN SPOND)
+- Girls 12U | 1–2:15pm — [JOIN SPOND](https://spond.com/invite/LZXZX)
 - Boys 12U | 10:30am–11:45am — [JOIN SPOND](https://spond.com/invite/AXGWO)
 - Girls 14U | 2:15–3:45pm — [JOIN SPOND](https://spond.com/invite/XKKGG)
 - Boys 14U | 3:45–5pm —  [JOIN SPOND](https://spond.com/invite/IPLHQ)
