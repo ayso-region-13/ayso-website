@@ -6,7 +6,7 @@ layout: page.njk
 section: programs
 heroImage: /images/game-01.jpg
 ---
-![Sunday Soccer session at Region 13](/images/sunday-soccer-interior.jpg)
+![Sunday Soccer session at Region 13](/images/SundaySoccerLab.jpg)
 
 Does your kiddo practically sleep in their cleats? Powered by **[BPU Academy](https://www.instagram.com/bpuacademy)**, our brand-new Sunday Soccer Lab gives young players the extra ball touches, footwork magic, and game-day confidence they’re craving. Designed to fit right alongside their regular team practices and games, it’s packed with the extra technical reps they want in a fast, fun, high-energy atmosphere.
 
@@ -17,8 +17,6 @@ Does your kiddo practically sleep in their cleats? Powered by **[BPU Academy](ht
 - Location: La Cañada High School JV Fields
 
 ## [Join Spond Here](https://spond.com/invite/TBUTJ) to RSVP
-
-
 
 ## Contact
 
