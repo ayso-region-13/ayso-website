@@ -9,10 +9,11 @@ eventName: AYSO Region 13 NEXT 2026/27
 eventStartDate: 2026-09-01
 eventEndDate: 2027-07-31
 ---
-## **Sundays Starting September 27**  
+## **Sundays Starting September 27**
+
 at La Cañada High School JV Fields
 
-![NEXT program players in training](/images/next-interior.jpg)
+![NEXT program players in training](/images/next-interior26.jpg)
 
 **Want to level up after game day?** NEXT delivers weekly training and scrimmage sessions designed for players to push their limits and try new skills in a fun, relaxed environment. Region 13 coaches lead every session with a focus on maximizing touches through open play.
 
