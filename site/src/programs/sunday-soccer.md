@@ -1,44 +1,24 @@
 ---
-
-title: "Sunday Soccer"
+title: Sunday Soccer Lab
+description: Sunday Soccer Lab offers weekly skills training and a goalkeeper
+  academy for Region 13 players. Open to all ages.
 layout: page.njk
 section: programs
-heroImage: "/images/game-01.jpg"
-description: "Sunday Soccer offers weekly skills training and a goalkeeper academy for Region 13 players. Open to all skill levels."
+heroImage: /images/game-01.jpg
 ---
-
 ![Sunday Soccer session at Region 13](/images/sunday-soccer-interior.jpg)
 
-## Quick Facts
+Does your kiddo practically sleep in their cleats? Powered by **[BPU Academy](https://www.instagram.com/bpuacademy)**, our brand-new Sunday Soccer Lab gives young players the extra ball touches, footwork magic, and game-day confidence they’re craving. Designed to fit right alongside their regular team practices and games, it’s packed with the extra technical reps they want in a fast, fun, high-energy atmosphere.
 
 - Ages: 6U and older
-- When: Sundays, 3:30-5pm
+- When: Sundays, 9-10:30am
 - Season: Fall (runs alongside Fall Soccer)
 - Cost: Included with Fall Soccer registration
 - Location: La Cañada High School JV Fields
 
-## Program Options
+## [Join Spond Here](https://spond.com/invite/TBUTJ) to RSVP
 
-### Goalkeeper Academy
-Small-group goalkeeper instruction for 30-60 minutes. Players receive targeted training on positioning, diving, distribution, and game situations.
 
-### Skills & Scrimmages
-Small-sided games throughout the 3:30-5pm session. Players can arrive and leave at flexible times within the window.
-
-## Schedule (Fall 2025)
-
-- Start date: September 14, 2025
-- Time: 3:30-5pm
-- Duration: Minimum 3 weeks, with potential continuation throughout fall season
-- Location: La Cañada High School JV Fields
-
-## Who Leads Sessions
-
-Professional coaches from Launch Sports provide instruction. Family volunteers help with check-in and logistics.
-
-## How to Participate
-
-Sunday Soccer is included with Fall Soccer registration for all players in 6U or above. No additional registration or fee required.
 
 ## Contact
 
