@@ -1,7 +1,7 @@
 ---
 title: NEXT
-description: NEXT is an advanced training program for skilled players ages
-  10–14. Runs September through July each year.
+description: NEXT is a training program for skilled players ages 10–14. Runs
+  September through July each year.
 layout: page.njk
 section: programs
 heroImage: /images/action-05.jpg
