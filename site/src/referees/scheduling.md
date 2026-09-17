@@ -42,7 +42,7 @@ CGI-Sports handles assignments for upper divisions, managed by Area 1C.
 
 ## Confirmation Process
 
-The Referee Staff confirms pending assignments on Fridays via email notification.
+The referee scheduling software sends an automated e-mail confirming your assignment (possibly following approval for certain positions and divisions).
 
 If you cannot make your assigned game:
 
