@@ -9,7 +9,7 @@ eventName: AYSO Region 13 NEXT 2026/27
 eventStartDate: 2026-09-01
 eventEndDate: 2027-07-31
 ---
-### **Sundays Starting September 27**  
+## **Sundays Starting September 27**  
 at La Cañada High School JV Fields
 
 ![NEXT program players in training](/images/next-interior.jpg)
