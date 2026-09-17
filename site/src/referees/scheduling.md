@@ -46,9 +46,10 @@ The Referee Staff confirms pending assignments on Fridays via email notification
 
 If you cannot make your assigned game:
 
-1. First, coordinate with your team's volunteers
-2. Then contact the opposing team
-3. If still unresolved, contact your Division Referee Administrator
+1. First, coordinate with your team's volunteers to see if someone else can cover your assignment.
+2. If unresolved, ask your team's coach to contact the opposing team's coach to see if their volunteers can cover both assignments.
+3. If you are refereeing for 6U-8U, send e-mail to proref@ayso13.org, to see if an At-Large youth referee can cover your assignment. Include the game time and location in your e-mail.
+4. If you are refereeing for 10U-14U, other referees will be able to sign up for your open assignments starting Thursdays at noon. Of course, your team will not get the referee points. You might want to pick up an open assignment on another day to make up your referee points.
 
 ## Referee Points
 
