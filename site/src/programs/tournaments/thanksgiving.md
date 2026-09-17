@@ -15,7 +15,7 @@ The Thanksgiving Tournament is a three-day competition held the weekend after Th
 
 - When: Friday through Sunday following Thanksgiving
 - Ages: 10U, 12U, 14U
-- Location: Rose Bowl Area H (primary), Victory Park, and other locations in Pasadena
+- Location: [Victory Park](/fields/victory/) (primary), and other locations in Pasadena
 - Format: Three guaranteed pool games plus playoff rounds
 - Open to: All interested teams (not limited to Region 13)
 
@@ -25,14 +25,14 @@ The Thanksgiving Tournament is a three-day competition held the weekend after Th
 | Division | Format | Max Players | Registration Fee | Referee Deposit |
 | -------- | ------ | ----------- | ---------------- | --------------- |
 | 10U | 7v7 | 11 | $450 | $300 |
-| 12U | 9v9 | 14 | $475 | $300 |
-| 14U | 11v11 | 16 | $500 | $300 |
+| 12U | 9v9 | 14 | $550 | $300 |
+| 14U | 11v11 | 16 | $650 | $300 |
 
 
 ## Schedule (2026)
 
 - Dates: November 27-29, 2026
-- Registration should open in mid-October
+- Registration will open on September 25th
 - Location: Victory Park and other locations for 14U
 
 ## Registration
@@ -57,13 +57,11 @@ The tournament needs volunteers for:
 - Scorekeeping
 - General assistance
 
-Sign up through the tournament portal.
+[Sign up through the tournament portal.](https://ayso13.inleague.com/app/tournaments/teams/create)
 
 ## Contact
 
-Tournament Director
-Email: [td@ayso13.org](mailto:td@ayso13.org)
-Phone: 626-316-6900
+Tournament Director Email: [td@ayso13.org](mailto:td@ayso13.org)
 
 ## Related Pages
 
