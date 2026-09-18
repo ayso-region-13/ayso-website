@@ -38,31 +38,22 @@ Referees work their own child's games. Each field pair typically has two officia
 
 ### 10U-12U
 
-Each team provides:
+Usually, each team provides:
 
 - One Assistant Referee for their game
 - One Center Referee for the preceding game on the same field (except first game of the day)
 
-The visiting team from the second-to-last game covers the final game.
+The visiting team from the second-to-last game covers the final game. 
+
+Check your "My Teams" page for your team's assignments each week: Some field configurations may require special situations and you may have (or not have) an assignment that doesn't align with the general guidance above.
 
 ### 14U
 
-Region 13 assigns center referees from experienced officials. Teams provide Assistant Referees for the previous game on their field (or the last game if playing first). On occasion, we may use special rules, check the referee scheduler.
+Region 13 assigns center referees from experienced officials. Teams provide Assistant Referees for the previous game on their field (or the last game if playing first). On occasion, we may use special rules, check the referee scheduler. (For example, we are using paired game scheduling on certain fields in 2026.
 
 ### 16U-19U
 
 CGI-Sports handles assignments for upper divisions, managed by Area 1C.
-
-## Confirmation Process
-
-The referee scheduling software sends an automated e-mail confirming your assignment (possibly following approval for certain positions and divisions).
-
-If you cannot make your assigned game:
-
-1. First, coordinate with your team's volunteers to see if someone else can cover your assignment.
-2. If unresolved, ask your team's coach to contact the opposing team's coach to see if their volunteers can cover both assignments.
-3. If you are refereeing for 6U-8U, send e-mail to [proref@ayso13.org](mailto:proref@ayso13.org), to see if an At-Large youth referee can cover your assignment. Include the game time and location in your e-mail.
-4. If you are refereeing for 10U-14U, other referees will be able to sign up for your open assignments starting Thursdays at noon. Of course, your team will not get the referee points. You might want to pick up an open assignment on another day to make up your referee points.
 
 ## Referee Points
 
