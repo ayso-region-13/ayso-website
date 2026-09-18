@@ -9,13 +9,26 @@ Referees sign up for game assignments each week through the [Region 13 Referee S
 
 ## Weekly Sign-Up Process
 
-1. Log in to the [Referee Scheduler](https://referee.ayso13.org/)
-2. If you are a team referee, your team assignments will be displayed.
-3. Confirm you will attend
+Each week, your team has one or more team assignments
+
+1. Logon to the referee scheduler at [referee.ayso13.org](http://referee.ayso13.org)
+2. Click on "My Teams" to see open assignments for your team (or teams)
+3. Claim the assignment you will referee with the "claim" button
+
+Most slots will be automatically approved and you will receive an email confirmation.
+
+*Some slots (such as 14U Referees or Extra games) require Referee Admin approval. You will receive a confirmation of your claim and a follow-up when your claim is approved.*  
 
 **Deadline:** Sign up by Thursday at noon each week (Sunday through Thursday).
 
 At-large volunteers (those without team assignments) can claim open spots starting Thursday at noon.
+
+**If you cannot make your assigned game:**  
+
+1. First, coordinate with your team’s volunteers to see if someone else can cover your assignment.
+2. If unresolved, ask your team’s coach to contact the opposing team’s coach to see if their volunteers can cover both assignments.
+3. If you are refereeing for 6U-8U, send e-mail to [proref@ayso13.org](mailto:proref@ayso13.org), to see if an at-large youth referee can cover your assignment. Include the game time and location in your e-mail, along with your team ID (e.g., G6-01)
+4. If you are refereeing for 10U-14U, other referees will be able to sign up for your open assignments starting Thursdays at noon. Of course, your team will not get the referee points. You might want to pick up an open assignment on another day to make up your referee points.
 
 ## Division Requirements
 
@@ -48,7 +61,7 @@ If you cannot make your assigned game:
 
 1. First, coordinate with your team's volunteers to see if someone else can cover your assignment.
 2. If unresolved, ask your team's coach to contact the opposing team's coach to see if their volunteers can cover both assignments.
-3. If you are refereeing for 6U-8U, send e-mail to proref@ayso13.org, to see if an At-Large youth referee can cover your assignment. Include the game time and location in your e-mail.
+3. If you are refereeing for 6U-8U, send e-mail to [proref@ayso13.org](mailto:proref@ayso13.org), to see if an At-Large youth referee can cover your assignment. Include the game time and location in your e-mail.
 4. If you are refereeing for 10U-14U, other referees will be able to sign up for your open assignments starting Thursdays at noon. Of course, your team will not get the referee points. You might want to pick up an open assignment on another day to make up your referee points.
 
 ## Referee Points
