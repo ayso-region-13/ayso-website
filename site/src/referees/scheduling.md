@@ -51,9 +51,9 @@ Check your "My Teams" page for your team's assignments each week: Some field con
 
 Region 13 assigns center referees from experienced officials. Teams provide Assistant Referees for the previous game on their field (or the last game if playing first). On occasion, we may use special rules, check the referee scheduler. (For example, we are using paired game scheduling on certain fields in 2026.
 
-### 16U-19U
+### Upper Division
 
-CGI-Sports handles assignments for upper divisions, managed by Area 1C.
+For Area 1C Upper Division, CGI-Sports handles assignments for upper divisions. For other leagues, we may partner with other regions.
 
 ## Referee Points
 
