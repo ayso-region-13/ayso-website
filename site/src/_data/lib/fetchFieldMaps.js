@@ -6,7 +6,9 @@
 // sets fields-staging so unpromoted map edits can be reviewed on
 // staging.ayso13.org; promote sets the platform's prod instance.
 const EleventyFetch = require("@11ty/eleventy-fetch");
-const Image = require("@11ty/eleventy-img");
+// eleventy-img 7 is ESM; require() returns the module namespace, and the
+// callable Image() (with Image.generateHTML) is its default export.
+const Image = require("@11ty/eleventy-img").default;
 const path = require("path");
 
 // Default is the PROD platform instance, deliberately: an unset env (local
