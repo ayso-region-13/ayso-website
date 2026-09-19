@@ -13,7 +13,7 @@ Referees sign up for game assignments each week through the Region 13 Referee Sc
 
 Each week, your team has one or more team assignments
 
-1. Logon to the referee scheduler at [referee.ayso13.org](http://referee.ayso13.org)
+1. Logon to the referee scheduler at [referee.ayso13.org](https://referee.ayso13.org/)
 2. Click on "My Teams" to see open assignments for your team (or teams)
 3. Claim the assignment you will referee with the "claim" button
 
