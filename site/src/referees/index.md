@@ -11,6 +11,12 @@ AYSO depends on family volunteers to referee games. Without referees, games cann
 
 ![Referee at Region 13](/images/referees-interior.jpg)
 
+## Referee Scheduler
+
+Sign up for games and confirm your assignments each week in the Referee Scheduler.
+
+[Open the Referee Scheduler](https://referee.ayso13.org/)
+
 ## Why Referee
 
 Referees make youth soccer possible. As a referee, you:
@@ -46,7 +52,7 @@ Most volunteer referees start as 8U Officials or Regional Referees, depending on
 
 ## Game Scheduling
 
-Referees sign up for games through InLeague each week. The process varies by division:
+Referees sign up for games each week in the [Referee Scheduler](https://referee.ayso13.org/). The process varies by division:
 
 - 6U-8U: Referees work their own child's games
 - 10U-12U: Teams provide assistant referees and share center referee duties

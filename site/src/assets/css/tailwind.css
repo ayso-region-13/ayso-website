@@ -153,6 +153,11 @@
     @apply inline-flex items-center gap-2 bg-white text-brand-red font-semibold px-6 py-3 rounded-lg
            border-2 border-brand-red hover:bg-red-50 transition-colors;
   }
+  /* Coach App / Referee Scheduler: burgundy body + coral underline strip */
+  .btn-portal {
+    @apply inline-flex items-center justify-center gap-2 bg-brand-red-dark text-white font-semibold px-6 py-3 rounded-lg
+           border-b-4 border-brand-red no-underline hover:bg-brand-maroon transition-colors shadow-sm;
+  }
   .btn-gold {
     @apply inline-flex items-center gap-2 bg-brand-gold text-brand-dark font-semibold px-6 py-3 rounded-lg
            hover:bg-yellow-300 transition-colors shadow-sm;

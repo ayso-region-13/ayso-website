@@ -1,0 +1,9 @@
+{# Sidebar button for the section's web app (Coach App / Referee Scheduler).
+   Keyed by `section`; sections without an entry in site.portals render nothing. #}
+{% set portal = site.portals[section] %}
+{% if portal %}
+<div class="bg-brand-cream rounded-xl border border-gray-200 p-4 mb-4">
+  <p class="text-sm text-gray-700 mb-3">{{ portal.blurb }}</p>
+  <a href="{{ portal.url }}" class="btn-portal w-full" target="_blank" rel="noopener">{{ portal.label }} ↗</a>
+</div>
+{% endif %}

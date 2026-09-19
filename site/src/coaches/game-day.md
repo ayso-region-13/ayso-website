@@ -91,7 +91,9 @@ For 10U+ divisions, bring completed game cards to each match:
 - Do no prefill positions/substitutions; things can change
 - Referees use cards for tracking scores, infractions, and behavior
 
-See [Game Cards](/coaches/game-cards) for details.
+See [Game Cards](/coaches/game-cards) for details. The Coach App prints a card with your roster already filled in.
+
+[Open the Coach App](https://coach.ayso13.org/)
 
 ## Related Pages
 

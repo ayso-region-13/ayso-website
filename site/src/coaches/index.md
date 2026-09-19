@@ -8,6 +8,12 @@ permalink: /coaches/
 ---
 ![Coach working with players at Region 13](/images/coaches-interior.jpg)
 
+## Coach App
+
+Check your team's game schedule and referee points, and print pre-filled game cards, in the Coach App.
+
+[Open the Coach App](https://coach.ayso13.org/)
+
 ## Why Coach?
 
 - Make a difference in kids' lives

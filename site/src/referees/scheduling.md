@@ -5,7 +5,9 @@ description: How referee scheduling works in AYSO Region 13. Self-scheduling
 layout: page.njk
 section: referees
 ---
-Referees sign up for game assignments each week through the [Region 13 Referee Scheduler](https://referee.ayso13.org/).
+Referees sign up for game assignments each week through the Region 13 Referee Scheduler.
+
+[Open the Referee Scheduler](https://referee.ayso13.org/)
 
 ## Weekly Sign-Up Process
 
@@ -57,7 +59,7 @@ For Area 1C Upper Division, CGI-Sports handles assignments for upper divisions. 
 
 ## Referee Points
 
-The region tracks referee points for accountability. Teams need minimum points to participate in postseason competitions like the Rose City Cup.
+The region tracks referee points for accountability. Teams need minimum points to participate in postseason competitions like the Rose City Cup. Coaches can see their team's points in the [Coach App](https://coach.ayso13.org/).
 
 ## Contact
 

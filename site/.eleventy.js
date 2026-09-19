@@ -242,6 +242,25 @@ module.exports = function (eleventyConfig) {
     );
   });
 
+  // --- Transform: portal links on their own line become buttons ---
+  // Same CMS-safe idea as the InLeague button: an editor puts a plain link to
+  // the Coach App or Referee Scheduler in a paragraph by itself and it renders
+  // as a .btn-portal. A portal link inside a sentence stays an ordinary link.
+  const portalUrls = Object.values(require("./src/_data/site.json").portals)
+    .map((p) => p.url.replace(/\/$/, ""));
+  const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const standalonePortalLink = new RegExp(
+    `<p><a href="((?:${portalUrls.map(escapeRe).join("|")})/?)"[^>]*>([^<]*)</a></p>`,
+    "g"
+  );
+  eleventyConfig.addTransform("portal-buttons", function (content) {
+    if (typeof this.page?.outputPath !== "string" || !this.page.outputPath.endsWith(".html")) return content;
+    return content.replace(
+      standalonePortalLink,
+      (match, url, text) => `<p><a href="${url}" class="btn-portal" target="_blank" rel="noopener">${text} ↗</a></p>`
+    );
+  });
+
   // --- Transform: move Field Info callout to just above "Last updated:" ---
   // page.njk renders the Field Info cream box at the top of <article> (so the
   // CMS rendering preview shows it inline). For the public page we want it at
