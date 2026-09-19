@@ -63,6 +63,12 @@ For your first practice:
 - Establish team culture
 - Keep it simple
 
+## Coach App
+
+Once the season starts, the Coach App has your team's game schedule, referee points, and pre-filled game cards.
+
+[Open the Coach App](https://coach.ayso13.org/)
+
 ## Resources
 
 - [Coach Training](/coaches/training) — Certification details

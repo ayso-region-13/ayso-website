@@ -343,6 +343,9 @@
                 InLeague Login ↗
               </a>
             </li>
+            {% for key, portal in site.portals %}
+            <li><a href="{{ portal.url }}" class="hover:text-white transition-colors" rel="noopener" target="_blank">{{ portal.label }} ↗</a></li>
+            {% endfor %}
           </ul>
           <a href="/register/" class="btn-gold text-center justify-center text-sm py-2.5 w-full">Register Now</a>
           <a href="/volunteers/" class="block text-center text-sm py-2.5 mt-2 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-dark transition-colors rounded">Volunteer</a>

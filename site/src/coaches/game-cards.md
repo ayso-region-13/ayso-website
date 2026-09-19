@@ -40,9 +40,11 @@ Cards are submitted to the region by referees.
 
 ## Where to Get Current Cards
 
-1. After August 31, you can login to [coach.ayso13.org](http://coach.ayso13.org) to get a pre-filled game card
+1. After August 31, you can log in to the [Coach App](https://coach.ayso13.org/) to get a pre-filled game card
 2. [Google Sheet](https://docs.google.com/spreadsheets/d/1nqpNoL_-1_geyYkTaPO59CWAPHawVh4tX6I7t6eOMBI/edit?usp=sharing)
 3. [PDF](/assets/docs/game_card_2026.pdf)
+
+[Get a pre-filled card in the Coach App](https://coach.ayso13.org/)
 
 ## Tips
 
