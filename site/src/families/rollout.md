@@ -41,9 +41,7 @@ We are starting off the season a brand new way this year! The Rose City Rollout 
 - Gear swap, cleat swap, giveaways
 - ... and so much more!
 
-Mark your calendars: this is THE way to start the season strong. See you at the park!
-
-![:soccer:](https://a.slack-edge.com/production-standard-emoji-assets/16.0/apple-medium/26bd.png)
+Mark your calendars: this is THE way to start the season strong. See you at the park! ⚽
 
 ## Questions and Contacts
 
