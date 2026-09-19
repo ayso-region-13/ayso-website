@@ -60,12 +60,13 @@ layout: base.njk
      Widths are overridden per-image: the sitewide 600/1200/auto ladder
      left a 1200→2560 gap, so every laptop viewport pulled the full 2560.
 
-     Do NOT add width/height here. A plain `width` attribute takes
-     precedence over `eleventy:widths` in eleventy-img and is read as
-     "generate exactly this one size", collapsing the srcset to a single
-     candidate — which is what the earlier 1399px version did, shipping
-     the full-size file to phones. eleventy-img emits its own intrinsic
-     width/height from the largest candidate, so CLS is still covered. #}
+     No width/height here. Under eleventy-img 6 a plain `width` attribute
+     beat `eleventy:widths` and was read as "generate exactly this one
+     size", collapsing the srcset to a single candidate — which is what the
+     earlier 1399px version did, shipping the full-size file to phones.
+     eleventy-img 7 gives `eleventy:widths` priority, but the attributes are
+     still unneeded: eleventy-img emits its own intrinsic width/height from
+     the largest candidate, so CLS is covered. #}
 <section class="bg-brand-maroon-dark">
   <div class="max-w-[2560px] mx-auto">
     <a href="{{ homeHero.link }}" class="group relative block">
