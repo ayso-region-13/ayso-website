@@ -2,15 +2,6 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-09-20",
-      "name": "Final Regional Referee course (for 10U and up)."
-    },
-    {
-      "date": "2026-09-20",
-      "name": "Sunday Soccer Lab",
-      "link": "https://staging.ayso13.org/programs/sunday-soccer/"
-    },
-    {
       "date": "2026-09-26",
       "name": "Weekend #3 soccer games - Silent Saturday!"
     },
@@ -32,6 +23,11 @@
     {
       "date": "2026-10-03",
       "name": "Weekend #4 soccer games - first Picture Day"
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Sunday Soccer Lab",
+      "link": "https://staging.ayso13.org/programs/sunday-soccer/"
     }
   ]
 }
