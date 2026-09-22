@@ -7,6 +7,11 @@
     },
     {
       "date": "2026-09-27",
+      "name": "Sunday Soccer Lab",
+      "link": "https://staging.ayso13.org/programs/sunday-soccer/"
+    },
+    {
+      "date": "2026-09-27",
       "name": "NEXT Scrimmages 10U, 12U, 14U",
       "link": "https://staging.ayso13.org/programs/next"
     },
@@ -23,11 +28,6 @@
     {
       "date": "2026-10-03",
       "name": "Weekend #4 soccer games - first Picture Day"
-    },
-    {
-      "date": "2026-09-27",
-      "name": "Sunday Soccer Lab",
-      "link": "https://staging.ayso13.org/programs/sunday-soccer/"
     }
   ]
 }
