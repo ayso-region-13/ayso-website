@@ -31,7 +31,7 @@ AYSO Region 13 is led entirely by volunteers. Our board oversees all aspects of 
 | ------------------------------------ | --------------------- | ------------------------------------------------------------- |
 | Communications | Bret Nicely | [communications@ayso13.org](mailto:communications@ayso13.org) |
 | Website / Technology | Matthew Goldman | [webmaster@ayso13.org](mailto:webmaster@ayso13.org) |
-| Fields | Jessica Ferree | [fields@ayso13.org](mailto:fields@ayso13.org) |
+| Fields | Cara Meyer | [fields@ayso13.org](mailto:fields@ayso13.org) |
 | Practice Field Coordinator | Rolf Mauermann | [rolf@ayso13.org](mailto:rolf@ayso13.org) |
 | Uniforms & Equipment | Ron Johnson | [equipment@ayso13.org](mailto:equipment@ayso13.org) |
 | At-Large Board Members | Gus Razo | [gus@ayso13.org](mailto:gusrazo@gmail.com) |
