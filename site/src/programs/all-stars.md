@@ -35,7 +35,7 @@ The program requires a significant time commitment:
 ## Tryout Schedule (2026)
 
 ### First Tryout — October 25  
-Second Tryout — November 1
+### Second Tryout — November 1
 
 ## Key Dates
 
