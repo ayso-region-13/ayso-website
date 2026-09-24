@@ -9,7 +9,6 @@ eventName: AYSO Region 13 All-Stars 2027
 eventStartDate: 2027-01-01
 eventEndDate: 2027-02-28
 ---
-
 All-Stars is a competitive winter program for advanced players in 10U, 12U, and 14U. Teams represent Region 13 in tournaments against other AYSO regions.
 
 ![](/images/all-stars-interior.jpg)
@@ -33,11 +32,10 @@ The program requires a significant time commitment:
 - Games on Saturdays and Sundays
 - Attendance at all practices and games expected
 
-## Tryout Schedule (2025)
+## Tryout Schedule (2026)
 
-### First Tryout — October 26
+### First Tryout — October 25
 
-Location: Rose Bowl Area H
 
 | Division | Time |
 | -------------- | ------------ |
@@ -47,7 +45,8 @@ Location: Rose Bowl Area H
 | Boys 12U | 1:30-3pm |
 | Girls/Boys 14U | 3-4:30pm |
 
-### Second Tryout — November 2-16
+
+### Second Tryout — November 1
 
 Multiple locations with staggered times by age group.
 
