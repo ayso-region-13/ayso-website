@@ -159,7 +159,12 @@ layout: base.njk
         <style>
           article .prose > h1:first-child { display: none; }
         </style>
-        {{ content | safe }}
+        {% if "<p>[SPONSOR TIERS]</p>" in content %}
+          {% set sponsorTiersHtml %}{% include "sponsor-tiers.njk" %}{% endset %}
+          {{ content | replace("<p>[SPONSOR TIERS]</p>", sponsorTiersHtml) | safe }}
+        {% else %}
+          {{ content | safe }}
+        {% endif %}
       </div>
     </article>
 

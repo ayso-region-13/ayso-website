@@ -24,6 +24,7 @@ AYSO Region 13 is affiliated with AYSO National (American Youth Soccer Organizat
 - Online: {{ site.url }} · Instagram @aysoregion13 · Facebook /ayso13 · AYSO National https://www.ayso.org
 
 ---
+{% set sponsorTiersHtml %}{% include "sponsor-tiers.njk" %}{% endset %}
 {% for group in collections.llmsContent %}
 # {{ group.label | safe }}
 {% for item in group.items %}
@@ -32,7 +33,7 @@ URL: {{ site.url }}{{ item.url }}
 {% if item.data.description %}
 {{ item.data.description | safe }}
 {% endif %}
-{{ item.templateContent | plaintext | safe }}
+{{ item.templateContent | replace("<p>[SPONSOR TIERS]</p>", sponsorTiersHtml) | plaintext | safe }}
 
 {% endfor %}{% endfor %}
 # Ask the Referee — Laws of the Game Q&A
