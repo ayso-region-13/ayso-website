@@ -74,6 +74,23 @@ content:
           - { name: name, label: "Event Name",       type: string }
           - { name: link, label: "Link (optional)",  type: string, required: false, description: "Internal path (e.g. /programs/fall-soccer/) or full external URL." }
 
+  - name: sponsorTiers
+    label: Sponsorship Tiers
+    type: file
+    path: site/src/_data/sponsorTiers.json
+    fields:
+      - name: tiers
+        label: "Tiers"
+        type: object
+        list:
+          min: 0
+          max: 12
+        description: "The tier cards on the Become a Sponsor page (/volunteers/sponsors/), shown in this order. The page text is edited under Volunteers → sponsors; the cards appear wherever that page has [SPONSOR TIERS] on a line by itself."
+        fields:
+          - { name: name,        label: "Tier Name",   type: string }
+          - { name: amount,      label: "Amount",      type: string, description: "Shown as typed, e.g. $250, $500+, or Any amount." }
+          - { name: description, label: "Description", type: text }
+
   # ── Single pages ─────────────────────────────────────────────────────────
 
   - name: home

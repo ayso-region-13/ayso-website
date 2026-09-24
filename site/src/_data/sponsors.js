@@ -38,28 +38,4 @@ module.exports = {
     { name: "Twilio",           logo: "sponsor-twilio.png",           url: "https://www.twilio.com" },
     { name: "Campaign Monitor", logo: "sponsor-campaignmonitor.png",  url: "https://www.campaignmonitor.com" },
   ],
-
-  // Sponsorship tiers for the opportunity page
-  tiers: [
-    {
-      name: "Child Athlete Sponsorship",
-      amount: "Any amount",
-      description: "Supports equipment and assists 200–250 children annually who need financial help to participate.",
-    },
-    {
-      name: "Team Sponsor",
-      amount: "$250",
-      description: "Logo on team banner displayed at all season games. Sponsors may designate a specific team.",
-    },
-    {
-      name: "Field Sponsor",
-      amount: "$500+",
-      description: "Recognition on Victory Park banners, season t-shirts, and newsletter. Funds field maintenance and equipment.",
-    },
-    {
-      name: "League Sponsor",
-      amount: "$5,000",
-      description: "Supports major infrastructure: new goals, field-painting equipment, and clubhouse improvements.",
-    },
-  ],
 };

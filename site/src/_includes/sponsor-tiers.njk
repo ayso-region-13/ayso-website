@@ -1,0 +1,13 @@
+{# Sponsorship tier cards. Data: _data/sponsorTiers.json (CMS-editable).
+   page.njk swaps this in wherever a page body has [SPONSOR TIERS] on a line by itself. #}
+<div class="not-prose grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+  {% for tier in sponsorTiers.tiers %}
+  <div class="border border-gray-200 rounded-xl p-5">
+    <div class="flex items-baseline justify-between mb-2">
+      <h3 class="font-semibold text-gray-900">{{ tier.name }}</h3>
+      <span class="text-brand-red-dark font-bold text-sm">{{ tier.amount }}</span>
+    </div>
+    <p class="text-sm text-gray-600 leading-relaxed">{{ tier.description }}</p>
+  </div>
+  {% endfor %}
+</div>
