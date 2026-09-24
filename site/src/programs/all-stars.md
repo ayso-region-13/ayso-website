@@ -34,21 +34,8 @@ The program requires a significant time commitment:
 
 ## Tryout Schedule (2026)
 
-### First Tryout — October 25
-
-
-| Division | Time |
-| -------------- | ------------ |
-| Girls 10U | 9-10:30am |
-| Boys 10U | 10:30am-12pm |
-| Girls 12U | 12-1:30pm |
-| Boys 12U | 1:30-3pm |
-| Girls/Boys 14U | 3-4:30pm |
-
-
-### Second Tryout — November 1
-
-Multiple locations with staggered times by age group.
+### First Tryout — October 25  
+Second Tryout — November 1
 
 ## Key Dates
 
