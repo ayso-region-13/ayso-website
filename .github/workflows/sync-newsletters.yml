@@ -122,7 +122,7 @@ jobs:
             -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
             -H "Content-Type: application/json; charset=utf-8" \
             --data "$(jq -c --arg run "$RUN_URL" --arg main_only "$MAIN_ONLY" '
-              def lines(xs): xs | map("• " + (.[0:150] | gsub("[\r\n]"; " "))) | join("\n");
+              def lines(xs): xs | map("• " + (.[0:150] | gsub("[\r\n]"; " ") | gsub("&"; "&amp;") | gsub("<"; "&lt;") | gsub(">"; "&gt;"))) | join("\n");
               def header_text: if $main_only == "true" then ":newspaper: *Newsletter archive updated.* Staging was ahead of main; main has been caught up. www rebuilds in ~3 min. <https://www.ayso13.org/resources/newsletters/|View the archive>" else ":newspaper: *Newsletter archive updated.* Committed to staging and main; www rebuilds in ~3 min. <https://www.ayso13.org/resources/newsletters/|View the archive>" end;
               {
                 channel: "C0A024YGR9C",
