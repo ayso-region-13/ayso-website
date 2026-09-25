@@ -265,7 +265,7 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
   - **Deep-linkable map images**: `/field-images/<slug>-<variant>.png` on the platform is slug-keyed and survives map edits, unlike a content-hashed `/img/` filename. The Jefferson legacy redirects point there for that reason.
 
 ---
-*Last updated: 2026-09-08 — field status bar gained a "Last Updated at" line on home, `/temp` and `/resources/weather/`; rain advisory no longer tells anyone to cancel or close.*
+*Last updated: 2026-09-24 — referees submit game cards online at stats.ayso13.org/submit (tent no longer collects them); new `site.json` `buttonLinks` for standalone-link buttons; feedback/incident links added for coaches and families.*
 
 **The session-by-session changelog lives in `claude-history.md`** — sessions 36-49 plus dated milestones back to 2026-04. It is deliberately NOT auto-loaded; read it when historical detail matters. Load-bearing gotchas are kept inline in the sections above rather than in the changelog, so this file stays a description of current state and not a history of how it got here.
 
