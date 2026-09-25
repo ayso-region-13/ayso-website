@@ -75,9 +75,10 @@ const FOOTER_MARKER = "<!-- Footer -->";
 const LEFTOVER_TAG = /\{\{[\s\S]*?\}\}|\{%[\s\S]*?%\}/;
 // Cleaned email HTML reaches production unreviewed and the CSP on these pages
 // allows inline scripts, so any of this must fail the sync rather than
-// publish. Plain `<meta charset>` / `<meta name=viewport>` in the email head
-// are fine, which is why only `meta http-equiv` is matched.
-const ACTIVE_CONTENT = /<(script|iframe|form|object|embed|base|meta\s+http-equiv)\b|\son[a-z]+\s*=|javascript:/i;
+// publish. Of the <meta> tags only http-equiv="refresh" is matched (it can
+// redirect the page): every real email carries a harmless
+// http-equiv="Content-Type" or "X-UA-Compatible" meta.
+const ACTIVE_CONTENT = /<(script|iframe|form|object|embed|base)\b|<meta\b[^>]*http-equiv\s*=\s*["']?\s*refresh|\son[a-z]+\s*=|javascript:/i;
 
 // Index just past the element that opens at `start`, counting nested tags.
 function elementEnd(html, start, tag) {
