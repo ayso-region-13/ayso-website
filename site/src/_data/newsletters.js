@@ -27,7 +27,10 @@ function splitEmail(html) {
   // these emails don't carry. Same precedent as fetchFieldMaps.js. Do not
   // invent alt text.
   const taggedBody = body[2].replace(/<img\b/gi, "<img eleventy:ignore");
-  return { styles, bodyStyle, body: taggedBody };
+  // Legacy emails have no class="document" wrapper table and run full
+  // desktop width without it; newsletter.njk constrains them using this flag.
+  const legacy = !/class="document"/.test(body[2]);
+  return { styles, bodyStyle, body: taggedBody, legacy };
 }
 
 function loadNewsletters() {

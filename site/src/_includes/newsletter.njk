@@ -43,17 +43,24 @@
     .nl-bar__home { display: flex; align-items: center; gap: 8px; text-decoration: none !important; }
     .nl-bar__home img { width: 32px; height: 32px; display: block; background: #fff; border-radius: 50%; }
     .nl-bar__date { flex: 1 1 auto; }
+    {# Legacy and modern emails alike: a 620-648px image from the original
+       send otherwise overflows a 375px viewport. #}
+    main img { max-width: 100% !important; height: auto !important; }
+    {# Legacy emails have no class="document" wrapper table of their own, so
+       they render at full desktop width without this. #}
+    main.nl-legacy { max-width: 680px; margin: 0 auto; padding: 16px; background: #fff; box-sizing: border-box; }
   </style>
 </head>
 <body style="margin: 0; {{ newsletter.bodyStyle | safe }}">
   <header class="nl-bar">
     <div class="nl-bar__inner">
-      <a class="nl-bar__home" href="/"><img src="/images/logo.svg" alt="" width="32" height="32">AYSO Region 13</a>
+      <a class="nl-bar__home" href="/"><img src="/images/logo.svg" eleventy:ignore alt="" width="32" height="32">AYSO Region 13</a>
       <span class="nl-bar__date">Newsletter sent {{ newsletter.displayDate }}</span>
       <a href="/resources/newsletters/">All newsletters</a>
     </div>
   </header>
-  <main data-pagefind-body data-pagefind-meta="title:{{ newsletter.title }}">
+  <main data-pagefind-body{% if newsletter.legacy %} class="nl-legacy"{% endif %}>
+    <span data-pagefind-meta="title" hidden>{{ newsletter.title }}</span>
     {{ newsletter.body | safe }}
   </main>
 </body>

@@ -53,6 +53,14 @@ test("splitEmail tags every <img> in the body with eleventy:ignore (legacy fixtu
   assert.equal(ignoredCount, imgCount);
 });
 
+test("splitEmail flags legacy as false for the modern fixture (has class=\"document\")", () => {
+  assert.equal(splitEmail(SAMPLE).legacy, false);
+});
+
+test("splitEmail flags legacy as true for the legacy fixture (no class=\"document\" wrapper)", () => {
+  assert.equal(splitEmail(LEGACY).legacy, true);
+});
+
 test("loader returns the committed snapshot with display dates", () => {
   const list = loadNewsletters();
   assert.ok(Array.isArray(list));
