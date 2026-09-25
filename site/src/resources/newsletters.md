@@ -24,8 +24,7 @@ Also follow Region 13 on [Instagram](https://www.instagram.com/aysoregion13) and
 
 ## Contact
 
-- Newsletter questions: [info@ayso13.org](mailto:info@ayso13.org)
-- Communication Director: [webmaster@ayso13.org](mailto:webmaster@ayso13.org)
+- Communications: [communications@ayso13.org](mailto:communications@ayso13.org)
 
 ## Related Pages
 
