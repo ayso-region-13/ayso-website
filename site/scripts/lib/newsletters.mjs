@@ -44,7 +44,7 @@ export function slugify(title) {
   const slug = title
     .normalize("NFKD").replace(/[̀-ͯ]/g, "")
     .toLowerCase()
-    .replace(/['']/g, "")
+    .replace(/['’]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 60)

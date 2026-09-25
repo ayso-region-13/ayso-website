@@ -46,6 +46,7 @@ test("slugify is lowercase ascii, never empty, capped at 60 chars", () => {
   assert.equal(slugify("Café Día"), "cafe-dia");
   assert.equal(slugify("Newsletter"), "newsletter");
   assert.equal(slugify("!!!"), "newsletter");
+  assert.equal(slugify("Coach’s Corner"), "coachs-corner");
   const long = slugify("a".repeat(40) + " " + "b".repeat(40));
   assert.ok(long.length <= 60 && !long.endsWith("-"));
 });
