@@ -39,6 +39,8 @@ test("cleanTitle strips emoji and flags but keeps trademark symbols", () => {
   assert.equal(cleanTitle("Sunday EXTRA™ Skills ©2026 ®"), "Sunday EXTRA™ Skills ©2026 ®");
   assert.equal(cleanTitle("  ⚽  "), "Newsletter");
   assert.equal(cleanTitle(undefined), "Newsletter");
+  assert.equal(cleanTitle("FIVE DAYS until ⚽!"), "FIVE DAYS until ⚽!");
+  assert.equal(cleanTitle("⚽ Week 3 is Silent Saturday 🤫"), "Week 3 is Silent Saturday 🤫");
 });
 
 test("slugify is lowercase ascii, never empty, capped at 60 chars", () => {

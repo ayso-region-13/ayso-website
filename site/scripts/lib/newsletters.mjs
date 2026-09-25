@@ -34,9 +34,12 @@ export function isArchived(campaign, cutoff) {
 // ™ © ® are Extended_Pictographic in Unicode, but they are text here
 // ("EXTRA™"), so they are exempt from the emoji strip.
 const EMOJI = /(?![©®™])\p{Extended_Pictographic}|\p{Regional_Indicator}|[\u{FE0F}\u{200D}\u{20E3}]/gu;
+// Only the subject's lede emoji (and surrounding whitespace) is decorative;
+// one appearing mid-sentence ("FIVE DAYS until ⚽!") is part of the text.
+const LEADING_EMOJI = new RegExp(`^(?:\\s|${EMOJI.source})+`, "u");
 
 export function cleanTitle(subject) {
-  const title = String(subject ?? "").replace(EMOJI, "").replace(/\s+/g, " ").trim();
+  const title = String(subject ?? "").replace(LEADING_EMOJI, "").replace(/\s+/g, " ").trim();
   return title || "Newsletter";
 }
 
