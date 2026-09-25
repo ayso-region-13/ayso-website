@@ -84,6 +84,10 @@ function elementEnd(html, start, tag) {
   throw new Error(`unbalanced <${tag}>`);
 }
 
+// Legacy preheader: a bare display:none div holding {{PreviewText}} plus
+// tracking <img> tag(s), with no surrounding comment markers at all.
+const LEGACY_PREHEADER = /<div\b[^>]*display:\s*none[^>]*>(?:(?!<\/?div\b)[\s\S])*?\{\{PreviewText\}\}(?:(?!<\/?div\b)[\s\S])*?<\/div>/g;
+
 // Template A ("new editor"): a standalone eo-block="text" table holding the
 // "View this email in your browser" link. Loops because more than one can
 // appear on a page.
@@ -116,7 +120,7 @@ function stripLegacyFooter(html) {
 // unsubscribe footer, rewards badge). Fails rather than publishing a literal
 // merge tag: a tag that survives here would render as "{{FirstName}}" on www.
 export function cleanHtml(html) {
-  let out = html.replace(PREHEADER, "");
+  let out = html.replace(PREHEADER, "").replace(LEGACY_PREHEADER, "");
   const marker = out.indexOf(FOOTER_MARKER);
   if (marker !== -1) {
     const trStart = out.indexOf("<tr", marker);

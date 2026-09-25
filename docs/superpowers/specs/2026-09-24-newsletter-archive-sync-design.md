@@ -35,7 +35,7 @@ So each newsletter gets its own page on ayso13.org, built from `content.html`.
 
 Node, no new dependencies. It reads `EMAILOCTOPUS_API_KEY` from the environment.
 
-- Pages through `GET /campaigns`, stopping once `sent_at` falls before the retention cutoff.
+- Pages through all of `GET /campaigns` (about 2 pages). It doesn't stop early at the cutoff: the sort order isn't documented and a draft sits mid-list in real data.
 - Keeps campaigns with `status == "sent"`, `to` containing the Soccer News list ID, and `sent_at` inside the window.
 - Cleans each `content.html`:
   - removes the footer block holding "You received this email because you subscribed" (the `{{UnsubscribeURL}}` and `{{SenderInfo}}` block)

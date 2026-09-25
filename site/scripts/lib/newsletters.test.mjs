@@ -89,6 +89,13 @@ test("cleanHtml throws when the footer marker is missing", () => {
   assert.throws(() => cleanHtml(html), /UnsubscribeURL/);
 });
 
+test("cleanHtml removes the legacy preheader div", () => {
+  const out = cleanHtml(LEGACY);
+  assert.ok(!out.includes("{{PreviewText}}"));
+  assert.ok(!out.includes("spring-soccer.jpg"));
+  assert.ok(out.includes("LEGACY CONTENT"));
+});
+
 test("cleanHtml removes the legacy footer and sender line", () => {
   const out = cleanHtml(LEGACY);
   assert.ok(out.includes("LEGACY CONTENT"));
