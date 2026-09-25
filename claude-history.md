@@ -462,4 +462,4 @@ Titles strip only the subject's **leading** emoji, so "⚽ Week 2 News & Info" b
 
 Along the way, pulled the GA4 snippet (previously duplicated between `base.njk` and `temp.njk`) into a shared `_includes/ga4.njk`, since a newsletter layout would otherwise have made it three copies.
 
-Built and tested locally on branch `newsletter-archive` (14 newsletters synced, pages render, `npm test` green). **Not yet merged into `staging`, and nothing has been pushed.** Pending: merge, add the `EMAILOCTOPUS_API_KEY` GitHub secret, push, promote once so `main` has the templates and the widened `rebuild-production.yml` filter, then run the workflow by hand. Spec: `docs/superpowers/specs/2026-09-24-newsletter-archive-sync-design.md`.
+Built and tested on branch `newsletter-archive` (14 newsletters synced, pages render, `npm test` green). **Merged to `staging`; not pushed at time of writing.** Pending: add the `EMAILOCTOPUS_API_KEY` GitHub secret, push, promote once so `main` has the templates and the widened `rebuild-production.yml` filter, then run the workflow by hand. Spec: `docs/superpowers/specs/2026-09-24-newsletter-archive-sync-design.md`.
