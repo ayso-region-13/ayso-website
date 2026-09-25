@@ -157,7 +157,7 @@ jobs:
           elif [ "$VERDICT" = "silent-superseded-rebuild" ]; then
             # The urgent case: Slack has already told everyone the fields are
             # closed, and www is the one place still saying otherwise.
-            HEADLINE=":warning: *A field status or announcement never reached www*"
+            HEADLINE=":warning: *A field status, announcement or newsletter never reached www*"
             DETAIL="This production rebuild was evicted from the \`deploy-pages-prod\` queue before it ran, so the change is live on staging and on \`main\` but NOT on www.ayso13.org. Nothing else reported it. Re-run *Rebuild Production (no promote)* from the Actions tab, or run \`/ayso promote\`."
           elif [ "$RETRIED" = "true" ]; then
             HEADLINE=":arrows_counterclockwise: *Staging deploy never started — retried automatically*"

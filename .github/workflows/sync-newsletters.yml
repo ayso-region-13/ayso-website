@@ -1,0 +1,158 @@
+name: Sync Newsletter Archive
+
+# Daily snapshot of the Soccer News newsletters from EmailOctopus into
+# site/newsletters/ (scripts/sync-newsletters.mjs). When anything changed it
+# commits to BOTH staging and main, like Slack field status: the main push
+# fires rebuild-production.yml (narrow paths filter), so a new newsletter
+# reaches www without a promote and without dragging other staging work along.
+#
+# ⚠️ `schedule` only fires from the DEFAULT branch, which is `staging`. This
+# file must stay on staging.
+#
+# ⚠️ Pushes use PROMOTE_TOKEN (a PAT), not GITHUB_TOKEN: a push made with
+# GITHUB_TOKEN starts no workflows, so neither the staging deploy nor the prod
+# rebuild would run. The PAT also bypasses the `main` ruleset.
+#
+# Spec: docs/superpowers/specs/2026-09-24-newsletter-archive-sync-design.md
+
+on:
+  schedule:
+    - cron: '0 13 * * *' # 6am PDT / 5am PST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-newsletters
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: staging
+          token: ${{ secrets.PROMOTE_TOKEN }}
+          path: staging
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Sync from EmailOctopus
+        id: sync
+        working-directory: staging/site
+        env:
+          EMAILOCTOPUS_API_KEY: ${{ secrets.EMAILOCTOPUS_API_KEY }}
+          NEWSLETTER_SYNC_SUMMARY: ${{ runner.temp }}/newsletter-sync.json
+        run: |
+          node scripts/sync-newsletters.mjs
+          if [ -z "$(git status --porcelain -- newsletters)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No newsletter changes."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit message
+        id: msg
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          SUMMARY: ${{ runner.temp }}/newsletter-sync.json
+        run: |
+          A=$(jq '.added | length' "$SUMMARY"); R=$(jq '.removed | length' "$SUMMARY")
+          echo "subject=Newsletters: sync from EmailOctopus ($A added, $R removed)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push to staging
+        id: push_staging
+        if: steps.sync.outputs.changed == 'true'
+        working-directory: staging
+        env:
+          SUBJECT: ${{ steps.msg.outputs.subject }}
+        run: |
+          git config user.name "ayso13-newsletter-sync"
+          git config user.email "webmaster@ayso13.org"
+          git add site/newsletters
+          git commit -m "$SUBJECT"
+          # A CMS edit can land between checkout and push; rebase once.
+          git push origin HEAD:staging || { git pull --rebase origin staging && git push origin HEAD:staging; }
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v6
+        if: success()
+        with:
+          ref: main
+          token: ${{ secrets.PROMOTE_TOKEN }}
+          path: main
+
+      # Copy the exact snapshot rather than re-running the sync, so staging and
+      # main can never disagree because a newsletter went out in between calls.
+      - name: Commit and push to main
+        id: push_main
+        if: success()
+        working-directory: main
+        env:
+          SUBJECT: "${{ steps.msg.outputs.subject || 'Newsletters: sync from EmailOctopus (catch up main)' }}"
+        run: |
+          mkdir -p site/newsletters
+          rsync -a --delete ../staging/site/newsletters/ site/newsletters/
+          git config user.name "ayso13-newsletter-sync"
+          git config user.email "webmaster@ayso13.org"
+          git add -A site/newsletters
+          if git diff --cached --quiet; then echo "main already current"; exit 0; fi
+          git commit -m "$SUBJECT"
+          git push origin HEAD:main || { git pull --rebase origin main && git push origin HEAD:main; }
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Subjects are sender-controlled text: they reach Slack only via a file →
+      # jq, never interpolated into the shell. Slack answers 200 with ok:false on
+      # a bad token, so `.ok` is checked (annotate, don't fail the job).
+      - name: Notify Slack — published
+        if: success() && (steps.push_staging.outputs.pushed == 'true' || steps.push_main.outputs.pushed == 'true')
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SUMMARY: ${{ runner.temp }}/newsletter-sync.json
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          MAIN_ONLY: ${{ steps.push_staging.outputs.pushed != 'true' && steps.push_main.outputs.pushed == 'true' }}
+        run: |
+          RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -c --arg run "$RUN_URL" --arg main_only "$MAIN_ONLY" '
+              def lines(xs): xs | map("• " + (.[0:150] | gsub("[\r\n]"; " ") | gsub("&"; "&amp;") | gsub("<"; "&lt;") | gsub(">"; "&gt;"))) | join("\n");
+              def header_text: if $main_only == "true" then ":newspaper: *Newsletter archive updated.* Staging was ahead of main; main has been caught up. www rebuilds in ~3 min. <https://www.ayso13.org/resources/newsletters/|View the archive>" else ":newspaper: *Newsletter archive updated.* Committed to staging and main; www rebuilds in ~3 min. <https://www.ayso13.org/resources/newsletters/|View the archive>" end;
+              {
+                channel: "C0A024YGR9C",
+                text: "Newsletter archive updated",
+                blocks: ([
+                  { type: "section", text: { type: "mrkdwn", text: header_text } }
+                ]
+                + (if (.added | length) > 0 then [{ type: "section", text: { type: "mrkdwn", text: ("*Added*\n" + lines(.added)) } }] else [] end)
+                + (if (.removed | length) > 0 then [{ type: "section", text: { type: "mrkdwn", text: ("*Removed (older than the retention window)*\n" + lines(.removed)) } }] else [] end)
+                + [{ type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }])
+              }' "$SUMMARY")")
+          printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
+            || echo "::error::Slack post failed: $(printf '%s' "$RESP" | jq -r '.error // "unparseable response"')"
+
+      - name: Notify Slack — failure
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Newsletter sync failed",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":x: *Newsletter sync failed.* Check the run log: if the staging push succeeded but the main push failed, the newsletter is live on staging only; the next daily run retries main automatically. Common causes: an expired EmailOctopus API key (401), or a newsletter with an unfilled merge tag such as {{FirstName}} (the log names it)." } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+              ]
+            }')")
+          printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
+            || echo "::error::Slack post failed: $(printf '%s' "$RESP" | jq -r '.error // "unparseable response"')"

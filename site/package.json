@@ -11,7 +11,8 @@
     "build:11ty": "npx @11ty/eleventy",
     "migrate": "node scripts/migrate-content.js",
     "photos": "bash scripts/process-photos.sh",
-    "check-links": "node scripts/check-links.js"
+    "check-links": "node scripts/check-links.js",
+    "test": "node --test \"scripts/**/*.test.mjs\""
   },
   "dependencies": {
     "@11ty/eleventy": "^3.0.0",

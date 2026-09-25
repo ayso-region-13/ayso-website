@@ -6,7 +6,9 @@ eleventyExcludeFromCollections: true
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {%- for page in collections.all | sort(false, false, "url") %}
   {%- if not page.data.noindex and page.url %}
-  {%- set lastmod = page.inputPath | lastModDate %}
+  {#- Paginated newsletters share one template, so its git date would stamp
+      them all alike; use each one's send date instead. #}
+  {%- set lastmod = page.data.newsletter.sentAt if page.data.newsletter else (page.inputPath | lastModDate) %}
   <url>
     <loc>{{ site.url }}{{ page.url }}</loc>
     {% if lastmod %}<lastmod>{{ lastmod | date('yyyy-MM-dd') }}</lastmod>{% endif %}

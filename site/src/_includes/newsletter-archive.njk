@@ -1,0 +1,15 @@
+{%- if newsletters.length %}
+<div class="newsletter-archive">
+{%- for n in newsletters %}
+  {%- if loop.first or n.year != newsletters[loop.index0 - 1].year %}
+  {%- if not loop.first %}</ul>{% endif %}
+  <h3>{{ n.year }}</h3>
+  <ul>
+  {%- endif %}
+    <li><a href="/resources/newsletters/{{ n.slug }}/">{{ n.title }}</a> <span class="text-gray-600">({{ n.shortDate }})</span></li>
+  {%- if loop.last %}</ul>{% endif %}
+{%- endfor %}
+</div>
+{%- else %}
+<p>New newsletters will be listed here after they are sent.</p>
+{%- endif %}
