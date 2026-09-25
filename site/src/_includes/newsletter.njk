@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {%- set nlTitle = newsletter.title + " · Region 13 Newsletter" %}
+  {%- set nlDescription = "Region 13 Soccer News newsletter sent " + newsletter.displayDate + ": " + newsletter.title + "." %}
+  <title>{{ nlTitle }} | {{ site.title }}</title>
+  <meta name="description" content="{{ nlDescription }}">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ nlTitle }}">
+  <meta property="og:description" content="{{ nlDescription }}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="{{ site.url }}{{ og.sectionDefaults.resources or og.fallback }}">
+  <meta property="og:image:alt" content="AYSO Region 13">
+  <meta property="article:published_time" content="{{ newsletter.sentAt }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ nlTitle }}">
+  <meta name="twitter:description" content="{{ nlDescription }}">
+  <meta name="twitter:image" content="{{ site.url }}{{ og.sectionDefaults.resources or og.fallback }}">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/images/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
+
+  {% include "ga4.njk" %}
+  {% include "posthog.njk" %}
+
+  {# The email's own CSS, lifted from its <head> by _data/newsletters.js #}
+  {{ newsletter.styles | safe }}
+  <style>
+    .nl-bar { background: #8e2929; color: #fff; font-family: Raleway, Arial, sans-serif; font-size: 15px; line-height: 1.4; }
+    .nl-bar__inner { max-width: 640px; margin: 0 auto; padding: 10px 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+    .nl-bar a { color: #fff !important; text-decoration: underline; font-weight: 700; }
+    .nl-bar__home { display: flex; align-items: center; gap: 8px; text-decoration: none !important; }
+    .nl-bar__home img { width: 32px; height: 32px; display: block; background: #fff; border-radius: 50%; }
+    .nl-bar__date { flex: 1 1 auto; }
+  </style>
+</head>
+<body style="margin: 0; {{ newsletter.bodyStyle | safe }}">
+  <header class="nl-bar">
+    <div class="nl-bar__inner">
+      <a class="nl-bar__home" href="/"><img src="/images/logo.svg" alt="" width="32" height="32">AYSO Region 13</a>
+      <span class="nl-bar__date">Newsletter sent {{ newsletter.displayDate }}</span>
+      <a href="/resources/newsletters/">All newsletters</a>
+    </div>
+  </header>
+  <main data-pagefind-body data-pagefind-meta="title:{{ newsletter.title }}">
+    {{ newsletter.body | safe }}
+  </main>
+</body>
+</html>
