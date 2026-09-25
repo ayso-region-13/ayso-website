@@ -435,3 +435,13 @@ That host is now dropped before the KV write (`workers/csp-report/src/ignore.js`
 
 `connect.facebook.net` was deliberately left reporting. It carried the same "probably extensions" assumption, and unlike doubleclick nobody has checked. The bar for that ignore list is verified-benign with the evidence written down, not plausible-sounding.
 
+
+## 2026-09-24 — Online game card submission, and feedback links per audience
+
+Referees now submit game cards at `https://stats.ayso13.org/submit` (date, field, game, then photos of both sides). The field tent no longer collects paper cards, so "Collect game cards from referees" came off `/volunteers/tent/`. The tent's setup still stocks blank cards, since coaches may need a spare. The submit link went onto `/referees/` (new "After the Game" section), `/referees/resources/` (Quick Links, plus a rewritten Game Materials paragraph that had still said cards were "distributed at division meetings"), a new `/referees/faqs/` answer, and the Related Pages on `/referees/scheduling/` and `/coaches/game-cards/`. The coach-facing game card page now says the referee submits the card and coaches do nothing after the game.
+
+**Button, not a portal.** The user wanted the link to render as a button. Adding it to `site.json` `portals` would also have created a sidebar card and a footer link, so instead a new `site.json` `buttonLinks` array feeds the existing `portal-buttons` transform. Same rule as the portals: a link alone in its paragraph becomes a `.btn-portal`, while one in a sentence or list stays plain. A CMS editor gets the button by putting the link on its own line.
+
+Feedback links, per audience: `/coaches/` gained a "Feedback and Incident Reports" section (referee feedback form, incident report PDF + upload form, RAPP page), and `/coaches/game-day/`'s "proper channels" line now links to it. `/families/` and `/families/team/` point to `/contact/feedback/`. There is no general-feedback form, only coach and referee forms, so families get the whole page. The referee resources "Incident Reporting" entry was renamed "Referee Incident Form" to match the other pages.
+
+Pushed to staging (`98da2d0`, deploy run `36089391172` green, button verified on staging.ayso13.org with a cache-bust), then promoted by the user.
