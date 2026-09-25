@@ -27,7 +27,6 @@ Volunteer through WeJoinIn.
 - Staff the information station
 - Assist visitors with questions
 - Direct people to teams using field maps and schedules
-- Collect game cards from referees
 
 ### Breakdown
 - Put away all items by 3:30 PM after the final game

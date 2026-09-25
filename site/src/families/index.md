@@ -150,6 +150,9 @@ Yes. No child is turned away. Contact [registrar@ayso13.org](mailto:registrar@ay
 **What's the difference between AYSO and club soccer?**
 AYSO is recreational and inclusive: everyone plays, teams are balanced. Club soccer is more competitive with tryouts and travel.
 
+**How do I give feedback about a coach, referee, or the season?**
+Use our [feedback page](/contact/feedback/). It has separate forms for coaches and referees, and you can also write to [coach@ayso13.org](mailto:coach@ayso13.org) or [referee@ayso13.org](mailto:referee@ayso13.org).
+
 ## Ready to Register?
 
 [Register on InLeague](https://ayso13.inleague.com/app)
@@ -163,5 +166,6 @@ Questions? Contact us at [registrar@ayso13.org](mailto:registrar@ayso13.org) or 
 - [Field Map](/fields): Where we play
 - [Volunteer Training](/volunteers/classes): Coach and referee certification
 - [Kids Zone](/families/pledge/): How families show up at Region 13 games
+- [Feedback](/contact/feedback/): Share feedback about coaches, referees, or the season
 
 *Last updated: [DATE]*

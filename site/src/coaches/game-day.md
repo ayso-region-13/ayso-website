@@ -80,7 +80,7 @@ In 6U-8U, each team splits in half and plays on two fields simultaneously:
 
 - Team huddle: celebrate the game, win or lose, keep talks brief
 - Thank referees and opposing coaches and players
-- Address any issues through proper channels
+- Address any issues through proper channels ([feedback and incident forms](/coaches/#feedback-and-incident-reports))
 
 ## Game Cards
 

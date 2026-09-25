@@ -39,6 +39,9 @@ Players can become certified referees at age 10. Youth referees work games for a
 
 Uniforms are available through the region. Contact [ref-uniforms@ayso13.org](mailto:ref-uniforms@ayso13.org) for uniform issues.
 
+### What do I do with the game card after the game?
+Submit it online at [stats.ayso13.org/submit](https://stats.ayso13.org/submit). You'll photograph both sides of the card. Cards are no longer collected at the tent.
+
 ### Who do I contact on game day?
 - Game-day emergencies: 626-702-AYSO
 - Field issues: Rolf at 818-636-5395
