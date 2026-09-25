@@ -159,12 +159,18 @@ layout: base.njk
         <style>
           article .prose > h1:first-child { display: none; }
         </style>
-        {% if "<p>[SPONSOR TIERS]</p>" in content %}
+        {#- Placeholder paragraphs editors can place in CMS markdown; each is
+            swapped for a generated block. #}
+        {% set body = content %}
+        {% if "<p>[SPONSOR TIERS]</p>" in body %}
           {% set sponsorTiersHtml %}{% include "sponsor-tiers.njk" %}{% endset %}
-          {{ content | replace("<p>[SPONSOR TIERS]</p>", sponsorTiersHtml) | safe }}
-        {% else %}
-          {{ content | safe }}
+          {% set body = body | replace("<p>[SPONSOR TIERS]</p>", sponsorTiersHtml) %}
         {% endif %}
+        {% if "<p>[NEWSLETTER ARCHIVE]</p>" in body %}
+          {% set newsletterArchiveHtml %}{% include "newsletter-archive.njk" %}{% endset %}
+          {% set body = body | replace("<p>[NEWSLETTER ARCHIVE]</p>", newsletterArchiveHtml) %}
+        {% endif %}
+        {{ body | safe }}
       </div>
     </article>
 
