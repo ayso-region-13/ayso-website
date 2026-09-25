@@ -1,6 +1,7 @@
 ---
 title: Silent Saturday
-description: "September 26 is Silent Saturday. Coaches and parents stay quiet on the sidelines so kids can play their own game. Clapping and signs are welcome."
+description: September 26 is Silent Saturday. Coaches and parents stay quiet on
+  the sidelines so kids can play their own game. Clapping and signs are welcome.
 heroImage: /images/silent-saturday.jpg
 ---
 ![This week is Silent Saturday. No: voices, noise-makers, distractions. Yes: signs, clapping, joy and fun.](/images/silent-saturday.jpg)
@@ -25,7 +26,10 @@ The reasons we do this are:
 
 While coaches and family members are asked to remain silent… clapping is allowed! Be creative in how you choose to cheer your child’s team. There are lots of ways to cheer other than verbally; applaud/clap, but please no horns, whistles, or noise-makers. We’ll be hosting a special sign-making station at [Victory Park](/fields/victory/) to help soccer families show their silent appreciation for all the players doing their best on the fields.
 
+Learn more about [AYSO National's Silent Saturday program](https://wiki.ayso.org/wiki/Silent_Saturdays).
+
 ## Related Pages
 
 - [Sideline Behavior](/families/support/) — How to support players, coaches, and referees
 - [Your Child's Team](/families/team/) — Rosters, practices, and game days
+
