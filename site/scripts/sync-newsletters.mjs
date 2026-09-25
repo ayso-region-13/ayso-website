@@ -62,6 +62,15 @@ async function readIndex(dir) {
   }
 }
 
+// Guards against a bad API response (e.g. an auth scope change or an empty
+// page mistaken for the whole list) being read as "delete everything": going
+// from some newsletters to none is never a legitimate daily sync result.
+export function assertNotEmptying(previousCount, nextCount) {
+  if (previousCount > 0 && nextCount === 0) {
+    throw new Error("refusing to delete every newsletter: the API returned none in the retention window");
+  }
+}
+
 export async function writeSnapshot(dir, entries) {
   const previous = await readIndex(dir);
   await fs.mkdir(dir, { recursive: true });
@@ -90,7 +99,10 @@ async function main() {
   // Fetch and clean everything before touching disk, so any failure leaves
   // the last good snapshot exactly as it was.
   const entries = buildEntries(await fetchCampaigns({ apiKey }), cutoff);
-  const summary = await writeSnapshot(process.env.NEWSLETTER_DIR || DEFAULT_DIR, entries);
+  const dir = process.env.NEWSLETTER_DIR || DEFAULT_DIR;
+  const previousCount = (await readIndex(dir)).length;
+  assertNotEmptying(previousCount, entries.length);
+  const summary = await writeSnapshot(dir, entries);
   console.log(`newsletters: ${entries.length} in window (since ${cutoff}); +${summary.added.length} -${summary.removed.length}`);
   if (process.env.NEWSLETTER_SYNC_SUMMARY) {
     await fs.writeFile(process.env.NEWSLETTER_SYNC_SUMMARY, JSON.stringify(summary));

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
-import { fetchCampaigns, buildEntries, writeSnapshot } from "./sync-newsletters.mjs";
+import { fetchCampaigns, buildEntries, writeSnapshot, assertNotEmptying } from "./sync-newsletters.mjs";
 import { SOCCER_NEWS_LIST_ID } from "./lib/newsletters.mjs";
 
 const SAMPLE = await fs.readFile(new URL("./lib/fixtures/newsletter-sample.html", import.meta.url), "utf8");
@@ -65,6 +65,21 @@ test("writeSnapshot writes index + html, removes stale files, reports the diff",
   const index = await fs.readFile(path.join(dir, "index.json"), "utf8");
   assert.ok(index.endsWith("\n"));
   assert.deepEqual(JSON.parse(index), [{ id: "new", slug: "2026-09-16-new", title: "New one", sentAt: "2026-09-16T19:00:00+00:00", date: "2026-09-16" }]);
+});
+
+test("assertNotEmptying throws when a non-empty archive would go to zero", () => {
+  assert.throws(
+    () => assertNotEmptying(5, 0),
+    /refusing to delete every newsletter: the API returned none in the retention window/,
+  );
+});
+
+test("assertNotEmptying allows staying empty", () => {
+  assert.doesNotThrow(() => assertNotEmptying(0, 0));
+});
+
+test("assertNotEmptying allows a partial drop", () => {
+  assert.doesNotThrow(() => assertNotEmptying(5, 3));
 });
 
 test("writeSnapshot works on a missing directory", async () => {
