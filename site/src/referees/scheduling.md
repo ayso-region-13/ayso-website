@@ -72,5 +72,6 @@ The region tracks referee points for accountability. Teams need minimum points t
 - [Refereeing Overview](/referees) — Getting started
 - [Referee Resources](/referees/resources) — Tools and guides
 - [Game Cards](/coaches/game-cards) — Recording game information
+- [Submit a Game Card](https://stats.ayso13.org/submit) — After the game
 
 *Last updated: [DATE]*

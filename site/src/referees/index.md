@@ -17,6 +17,14 @@ Sign up for games and confirm your assignments each week in the Referee Schedule
 
 [Open the Referee Scheduler](https://referee.ayso13.org/)
 
+## After the Game
+
+Submit the game card online. You'll pick the date, field and game, then photograph both sides of the card.
+
+[Submit a Game Card](https://stats.ayso13.org/submit)
+
+If anything happened during the game (an injury, a send-off, abuse from a sideline), also file the [Referee Incident Form](https://ayso13.typeform.com/to/GjC4Pyed).
+
 ## Why Referee
 
 Referees make youth soccer possible. As a referee, you:

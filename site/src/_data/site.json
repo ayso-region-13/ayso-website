@@ -23,6 +23,9 @@
       "blurb": "Sign up for games and confirm your assignments."
     }
   },
+  "buttonLinks": [
+    "https://stats.ayso13.org/submit"
+  ],
   "gaId": "G-9YM9ZDW1J9",
   "posthogKey": "phc_zpnqGMHbdxBkGwh2JesM6sHZhLKpvBacDhV7ygQAgKfQ",
   "posthogHost": "https://p.ayso13.org",

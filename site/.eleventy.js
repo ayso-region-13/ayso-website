@@ -252,10 +252,12 @@ module.exports = function (eleventyConfig) {
 
   // --- Transform: portal links on their own line become buttons ---
   // Same CMS-safe idea as the InLeague button: an editor puts a plain link to
-  // the Coach App or Referee Scheduler in a paragraph by itself and it renders
-  // as a .btn-portal. A portal link inside a sentence stays an ordinary link.
-  const portalUrls = Object.values(require("./src/_data/site.json").portals)
-    .map((p) => p.url.replace(/\/$/, ""));
+  // the Coach App, Referee Scheduler, or a `buttonLinks` URL (e.g. game card
+  // submission) in a paragraph by itself and it renders as a .btn-portal.
+  // A link inside a sentence stays an ordinary link.
+  const siteData = require("./src/_data/site.json");
+  const portalUrls = [...Object.values(siteData.portals).map((p) => p.url), ...siteData.buttonLinks]
+    .map((u) => u.replace(/\/$/, ""));
   const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const standalonePortalLink = new RegExp(
     `<p><a href="((?:${portalUrls.map(escapeRe).join("|")})/?)"[^>]*>([^<]*)</a></p>`,

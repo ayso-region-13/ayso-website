@@ -36,7 +36,7 @@ The referee team uses the card to track scoring, playing time, and sportsmanship
 
 ### After the Game
 
-Cards are submitted to the region by referees.
+The referee submits the card online at [stats.ayso13.org/submit](https://stats.ayso13.org/submit). Coaches don't need to do anything with it after the game.
 
 ## Where to Get Current Cards
 
@@ -57,5 +57,6 @@ Cards are submitted to the region by referees.
 
 - [Game Day Guide](/coaches/game-day) — Running games
 - [Practice Resources](/coaches/practice) — Planning practices
+- [Submit a Game Card](https://stats.ayso13.org/submit) — For referees, after the game
 
 *Last updated: [DATE]*

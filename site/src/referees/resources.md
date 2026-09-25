@@ -8,8 +8,9 @@ section: referees
 ## Quick Links
 
 - [Referee Scheduler](https://referee.ayso13.org/) — Sign up for games
+- [Submit a Game Card](https://stats.ayso13.org/submit) — Send photos of the card after each game
 - [eTrainU](https://ayso13.inleague.com/app/eTrainU) — Training and certification
-- [Incident Reporting](https://ayso13.typeform.com/to/GjC4Pyed) — Document issues
+- [Referee Incident Form](https://ayso13.typeform.com/to/GjC4Pyed) — Injuries, misconduct, and other incidents from your game
 - [Referee Abuse Prevention](/referees/abuse/) — What counts as abuse and how to report it
 
 ## Document Library
@@ -48,7 +49,9 @@ For current pre-season meeting materials, contact [referee@ayso13.org](mailto:re
 
 ## Game Materials
 
-Current-season game cards are distributed at division meetings each year. See [Game Cards](/coaches/game-cards/) for usage instructions, or contact [referee@ayso13.org](mailto:referee@ayso13.org) for a digital copy.
+Coaches bring a completed game card to every 10U and older game. After the game, submit it online: pick the date, field and game, then photograph both sides of the card. See [Game Cards](/coaches/game-cards/) for what goes on the card.
+
+[Submit a Game Card](https://stats.ayso13.org/submit)
 
 ## Newsletters
 
