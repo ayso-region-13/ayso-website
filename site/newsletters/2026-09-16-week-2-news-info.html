@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="UTF-8">
+<!-- Sets size and scale of the viewport. -->
+<meta name="viewport" content="width=device-width" initial-scale="1">
+<!-- IE=Edge makes good things happen on Windows Phones. -->
+<!--[if !mso]>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<![endif]-->
+<!-- Disables auto-scaling in iOS Mail 10. -->
+<meta name="x-apple-disable-message-reformatting">
+<!-- Will display in auto-preview area in some clients. -->
+<title></title>
+<!-- Desktop Outlook defaults to Times New Roman. Forces a less obscene fallback font. -->
+<!--[if mso]>
+<style>
+* { font-family: sans-serif !important; }
+</style>
+<![endif]-->
+<style>
+/* Box sizing. Gets decent support. */
+*,
+*:after,
+*:before {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+/* Prevents small text resizing. */
+* {
+-ms-text-size-adjust: 100%;
+-webkit-text-size-adjust: 100%;
+}
+/* Basic reset. Removes default spacing around emails in various clients. */
+html,
+body,
+.document {
+width: 100% !important;
+height: 100% !important;
+margin: 0;
+padding: 0;
+}
+/* Improves text rendering when supported. */
+body {
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+text-rendering: optimizeLegibility;
+}
+/* Centers email to device width in Android 4.4. */
+div[style*="margin: 16px 0"] {
+margin: 0 !important;
+}
+/* Removes added spacing within tables in Outlook. */
+table,
+td {
+mso-table-lspace: 0pt;
+mso-table-rspace: 0pt;
+padding: 0;
+}
+/* Removes added spacing within tables in WebKit. */
+table {
+border-spacing: 0;
+border-collapse: collapse;
+table-layout: fixed;
+margin: 0 auto;
+}
+/* Responsive images. Improves rendering of scaled images in IE. */
+img {
+-ms-interpolation-mode: bicubic;
+max-width: 100%;
+border: 0;
+}
+/* Overrules triggered links in iOS. */
+*[x-apple-data-detectors] {
+color: inherit !important;
+text-decoration: none !important;
+}
+/* Overrules triggered links in Gmail. */
+.x-gmail-data-detectors,
+.x-gmail-data-detectors *,
+.aBn {
+border-bottom: 0 !important;
+cursor: default !important;
+}
+/* Define font */
+body,
+html,
+td {
+font-family: Arial, "Helvetica Neue", Helvetica, sans-serif; /* Font family */
+color: rgb(0, 0, 0); /* Font color */
+}
+a, .container a {
+color: #f74b4b; /* Link color */
+text-decoration: underline; /* Link decoration */
+}
+/* Froala specific styling to make the link take wrapper styling */
+span > a {
+color: inherit !important;
+}
+/* Media queries o' doom. */
+@media screen and (max-width: 450px) {
+/* Transitions container to a fluid layout. */
+.container {
+width: 100%;
+margin: auto;
+}
+/* Collapses table cells into full-width rows. */
+.stack {
+display: block!important;
+width: 100%!important;
+max-width: 100%!important;
+}
+/* Centers and expands CTA. */
+.eo-button{
+width: 100%!important;
+text-align: center;
+margin: auto!important;
+}
+.eo-button td, .eo-button tr {
+display: block!important;
+}
+}
+</style>
+<style id="v3-editor-styles">
+.emoji {
+font-family: EmojiMart, 'Segoe UI Emoji', 'Segoe UI Symbol', 'Segoe UI', 'Apple Color Emoji', 'Twemoji Mozilla', 'Noto Color Emoji', 'Android Emoji';
+}
+.text-block li {
+/* The web Gmail client will add 0.6em of bottom padding to each list item. */
+/* This overrides that, so the list is rendered as in the editor. */
+padding-bottom: 0!important;
+}
+.text-block ul[data-position='inside'] li > div,
+.text-block ol[data-position='inside'] li > div {
+display: inline;
+}
+.text-block ul[data-position='inside'] li > div ~ div,
+.text-block ol[data-position='inside'] li > div ~ div {
+display: block;
+}
+.text-block {
+word-wrap: break-word;
+}
+</style>
+<!--[if (gte mso 9)|(IE)]><!--><link href="https://fonts.googleapis.com/css2?family=Raleway&amp;display=swap" rel="stylesheet"><!--<![endif]--></head>
+<body bgcolor="#e8e9eb" style="color: rgb(0, 0, 0); font-family: Arial, &quot;Helvetica Neue&quot;, Helvetica, sans-serif; font-size: 16px; background-color: #e8e9eb;" eo-background="" class="">
+
+<table role="presentation" class="document" align="center">
+<tbody>
+<tr>
+<td valign="top">
+<!-- Main -->
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" class="container" eo-background-container="" style="margin: 0px auto;">
+<tbody>
+<tr class="inner-body">
+<td>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
+<!-- Header!-->
+<tbody>
+<tr class="header">
+<td class="container" style="background-color: #ffffff;" eo-header="" bgcolor="#ffffff">
+<table role="presentation" width="100%">
+<tbody>
+<tr>
+<td class="container" eo-row-container="">
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<!--Main body-->
+<tr bgcolor="#ffffff" style="background-color: #ffffff;" eo-body="">
+<td class="container" eo-row-container="">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-row="one-column" style="position: static;" bgcolor="">
+<tbody>
+<tr>
+<td style="padding: 0px;" eo-block-container="">
+<table border="0" class="container" align="center" cellpadding="0" cellspacing="0" width="100%" eo-block="image" role="presentation" bgcolor="">
+<tbody>
+<tr>
+<td align="center" class="hero" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 5px;" valign="top">
+<img src="https://gallery.eomail4.com/0e854005-7557-11eb-a3d0-06b4694bee2a%2F01a0aac8-86ea-76b5-aae6-11523af26f54.gif" width="600" style="
+width: 100%;
+max-width: 100%;
+object-fit: cover;
+padding: 0;
+outline: none;
+border: none;
+display: block;
+" alt="Rose City ROLLOUT!">
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 10px 5px;">
+<div class="text-block fr-inner" style="line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 24px;"><strong>Week 1 In the Books!</strong></span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">From our energetic preschool, 6U, and 8U players to the fast-paced competition in 10U, 12U, and 14U, fields across Pasadena and La Cañada were alive with action for Week 1! Huge thanks to the amazing volunteer coaches, referees, and team managers who made opening weekend go.</span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>Massive Shout-Out:</strong> To our Youth Refs taking charge on the field! Stepping up to ref takes real confidence, focus, and a serious passion for the sport. If you see one of our youth refs on the fields this season, take five seconds after the match to tell them what an awesome job they’re doing.</span></div><div><br></div></div>
+</td>
+</tr>
+</tbody>
+</table><table width="100%" style="table-layout: fixed; width: 100%;" eo-block="divider" role="presentation" aria="hidden" bgcolor="">
+<tbody>
+<tr>
+<td style="min-width: 100%; padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="border-top: 3px solid rgb(247, 75, 75); border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td>
+<span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table><table border="0" class="container" align="center" cellpadding="0" cellspacing="0" width="100%" eo-block="image" role="presentation" bgcolor="">
+<tbody>
+<tr>
+<td align="center" class="hero" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 5px;" valign="top">
+<img src="https://gallery.eomail4.com/0e854005-7557-11eb-a3d0-06b4694bee2a%2F01a0ab03-a21d-7d1c-bf2c-2cc7be634401.jpg" width="600" style="
+width: 100%;
+max-width: 100%;
+object-fit: cover;
+padding: 0;
+outline: none;
+border: none;
+display: block;
+">
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 10px 5px;">
+<div class="text-block fr-inner" style="line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 24px;"><strong>Silent Saturday Ahead…</strong></span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">On <strong>September 26</strong>, Silent Saturday gives kids a chance to play a purer form of soccer, free from coaches' and spectators' direction from the sidelines.&nbsp;</span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>The goals of Silent Saturday are:</strong></span></div><ul type="disc" data-position="outside" style="list-style-position: outside; list-style-type: disc;"><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">To emphasize that the game is about letting the kids <strong>have fun and play.</strong></span></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">To show that kids can play well <strong>on their own&nbsp;</strong>with limited instruction.</span></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">To <strong>help the few parents and coaches</strong> who feel they must provide constant direction, understand how disruptive it can be.</span></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">To give players the chance to trust their skills and instincts <strong>without sideline input.</strong></span></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">To encourage <strong>leadership skills</strong> among the individual players as they have the unique opportunity of giving their own instruction on the field.</span></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">To encourage<strong>&nbsp;a sense of true teamwork</strong> as the players must learn to rely upon one another and communicate with each other accordingly.</span></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">To support our volunteer referees, both youth and adult, by <strong>eliminating sideline interference and comments.</strong></span></div></li></ul><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">While coaches and family members are asked to remain silent… c<em>lapping is allowed! </em>Be creative in how you choose to cheer your child’s team – make signs to hold up or bring a rally towel in the team’s color and wave it wildly. <strong>We’ll be hosting a poster-making station at Victory Park</strong> to get your arts and crafts on! There are lots of ways to cheer other than verbally – applaud/clap, but please no horns, whistles, or noise-makers.</span></div></div>
+</td>
+</tr>
+</tbody>
+</table><table width="100%" style="table-layout: fixed; width: 100%;" eo-block="divider" role="presentation" aria="hidden" bgcolor="">
+<tbody>
+<tr>
+<td style="min-width: 100%; padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="border-top: 3px solid rgb(247, 75, 75); border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td>
+<span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 10px 5px;">
+<div class="text-block fr-inner" style="line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 24px;"><strong>More Reminders for the Weeks Ahead</strong></span></div><div><a target="_blank" rel="noopener noreferrer nofollow" href="https://schedule.ayso13.org/season/season-432217c2-1937-4799-be95-1e717052360e" style="color: rgb(247, 75, 75);"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>The full season of games is posted&nbsp;</strong></span></a><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">and sortable by team or coach name, field, and division. Did you know you can easily also add all those games to your calendar? After arriving at your team’s schedule, click the <strong>Subscribe to this schedule button</strong> to automatically subscribe via your Apple, Google, iCal, 365, or Outlook calendar.&nbsp;</span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 24px;"><strong>What About Weather?</strong></span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">Between recent heat and predicted wetter-than-usual months ahead, you’ve probably wondered if practices and games are still on. We’ve created an easy all-in-one resource that shows current field status and complete weather conditions.</span></div></div>
+</td>
+</tr>
+</tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="container" eo-block="button" eo-block-version="3" role="presentation" bgcolor="">
+<tbody><tr>
+<td valign="top" align="center" style="padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="left" style="border-radius: 3px; background-color: rgb(142, 41, 41); width: 70%; text-size-adjust: 100%; border-collapse: separate !important;" role="presentation" class="eo-button" width="420" bgcolor="rgb(142, 41, 41)">
+<tbody>
+<tr>
+<td align="center" valign="middle" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+<a href="https://www.ayso13.org/temp" target="_blank" style="font-weight: bold; font-size: 18px; padding: 18px; letter-spacing: -0.5px; line-height: 100%; text-align: center; text-decoration: none; color: rgb(255, 255, 255); text-size-adjust: 100%; display: block; font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;" title="Region 13 Weather &amp; Field Status">Region 13 Weather &amp; Field Status</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 10px 5px;">
+<div class="text-block fr-inner" style="line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">And for even more on Region 13 weather, policies, and safety guidelines, </span><a target="_blank" rel="noopener noreferrer nofollow" href="https://www.ayso13.org/resources/weather/" style="color: rgb(247, 75, 75);"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;"><strong>visit our website.</strong></span></a></div></div>
+</td>
+</tr>
+</tbody>
+</table><table width="100%" style="table-layout: fixed; width: 100%;" eo-block="divider" role="presentation" aria="hidden" bgcolor="">
+<tbody>
+<tr>
+<td style="min-width: 100%; padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="border-top: 3px solid rgb(247, 75, 75); border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td>
+<span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table role="presentation" border="0" class="container" align="center" cellpadding="0" cellspacing="0" style="margin-bottom: 0px; position: static;" eo-row="one-column" bgcolor="" width="100%">
+<tbody>
+<tr>
+<td width="100%" class="container" style="padding: 5px 15px 20px 15px;" eo-block-container="">
+<table border="0" class="container" align="center" cellpadding="0" cellspacing="0" width="100%" eo-block="image" role="presentation" bgcolor="">
+<tbody>
+<tr>
+<td align="center" class="hero" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 5px;" valign="top">
+<a href="https://drive.google.com/file/d/1L2Pk6f7XiS-YffbdaXZxhG602QFCkSo5/view?usp=sharing" target="_blank"><img src="https://gallery.eomail4.com/0e854005-7557-11eb-a3d0-06b4694bee2a%2F01a07ca2-fa39-7cf3-ae62-98d03350f93a.jpg" width="570" style="
+width: 100%;
+max-width: 100%;
+object-fit: cover;
+padding: 0;
+outline: none;
+border: none;
+display: block;
+" alt="Family Field Pass"></a>
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" style="position: static; margin-top: 9px; margin-bottom: 4px;" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 9px 4px 24px;">
+<div class="text-block fr-inner" style="color: rgb(49, 54, 56); line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 24px;"><strong>How to Show Up Next Week</strong></span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">With many weeks of soccer ahead, don’t forget to review these helpful rules and reminders families need to know:&nbsp;<strong>Leave Pets at Home</strong>,&nbsp;<strong>No Earrings</strong>,&nbsp;<strong>Remember Shin Guards</strong>,&nbsp;<strong>Sit in Designated Areas</strong>,&nbsp;<strong>Pick Up Your Trash</strong>,&nbsp;<strong>Respect Referees</strong>, and, most importantly,&nbsp;<strong>good sportsmanship from everyone!</strong></span></div><div><br></div><div><a target="_blank" rel="noopener noreferrer nofollow" href="https://drive.google.com/file/d/1L2Pk6f7XiS-YffbdaXZxhG602QFCkSo5/view?usp=sharing" style="color: rgb(247, 75, 75);"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 18px;"><strong>Click Here to download our Family Field Pass</strong></span></a></div></div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table><table border="0" class="container" align="center" cellpadding="0" cellspacing="0" style="margin-bottom: 0; position: static;" eo-row="one-column" bgcolor="" width="100%" role="presentation">
+<tbody>
+<tr>
+<td width="100%" class="container" style="padding: 10px;" eo-block-container=""><table width="100%" style="table-layout: fixed; width: 100%;" eo-block="divider" role="presentation" aria="hidden" bgcolor="">
+<tbody>
+<tr>
+<td style="min-width: 100%; padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="border-top: 3px solid rgb(247, 75, 75); border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td>
+<span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table><table border="0" class="container" align="center" cellpadding="0" cellspacing="0" width="100%" eo-block="image" role="presentation" bgcolor="">
+<tbody>
+<tr>
+<td align="center" class="hero" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 5px;" valign="top">
+<img src="https://gallery.eomail4.com/0e854005-7557-11eb-a3d0-06b4694bee2a%2F01a0aad0-d094-7eeb-b398-9ec225f14b14.jpg" width="580" style="
+width: 100%;
+max-width: 100%;
+object-fit: cover;
+padding: 0;
+outline: none;
+border: none;
+display: block;
+">
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 10px 5px;">
+<div class="text-block fr-inner" style="line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 24px;"><strong>Sunday Soccer Lab is Here! ⚽🔥</strong></span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">Does your kiddo practically sleep in their cleats? Powered by </span><a target="_blank" rel="noopener noreferrer nofollow" href="https://www.instagram.com/bpuacademy"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>BPU Academy</strong></span></a><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">, our brand-new Sunday Soccer Lab gives young players the extra ball touches, footwork magic, and game-day confidence they’re craving. Designed to fit right alongside their regular team practices and games, it’s packed with the extra technical reps they want in a fast, fun, high-energy atmosphere.</span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 18px;"><strong>Every Sunday, starting September 20, 9–10:30am</strong></span></div><div><a target="_blank" rel="noopener noreferrer nofollow" href="https://www.ayso13.org/fields/lchs/"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">La Cañada High School JV Fields</span></a></div></div>
+</td>
+</tr>
+</tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="container" eo-block="button" eo-block-version="3" role="presentation" bgcolor="">
+<tbody><tr>
+<td valign="top" align="center" style="padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="left" style="border-radius: 3px; background-color: rgb(142, 41, 41); width: 70%; text-size-adjust: 100%; border-collapse: separate !important;" role="presentation" class="eo-button" width="406" bgcolor="rgb(142, 41, 41)">
+<tbody>
+<tr>
+<td align="center" valign="middle" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+<a href="https://spond.com/invite/TBUTJ" target="_blank" style="font-weight: bold; font-size: 18px; padding: 18px; letter-spacing: -0.5px; line-height: 100%; text-align: center; text-decoration: none; color: rgb(255, 255, 255); text-size-adjust: 100%; display: block; font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;" title="RSVP HERE on SPOND">RSVP HERE on SPOND</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table><table width="100%" style="table-layout: fixed; width: 100%;" eo-block="divider" role="presentation" aria="hidden" bgcolor="">
+<tbody>
+<tr>
+<td style="min-width: 100%; padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="border-top: 3px solid rgb(247, 75, 75); border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td>
+<span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table><table border="0" class="container" align="center" cellpadding="0" cellspacing="0" width="100%" eo-block="image" role="presentation" bgcolor="">
+<tbody>
+<tr>
+<td align="center" class="hero" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 5px;" valign="top">
+<img src="https://gallery.eomail4.com/0e854005-7557-11eb-a3d0-06b4694bee2a%2F01a0aad9-174f-7762-b75a-87626d795e4a.jpg" width="580" style="
+width: 100%;
+max-width: 100%;
+object-fit: cover;
+padding: 0;
+outline: none;
+border: none;
+display: block;
+">
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 10px 5px;">
+<div class="text-block fr-inner" style="line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 24px;"><strong>NEXT is MORE SOCCER ⚽<span class="emoji" emoji="🌹" data-type="emoji">🌹</span> for 10U, 12U, 14U</strong></span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 20px;"><strong>Sundays Starting September 27</strong></span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 20px;"><strong>at La Cañada High School JV Fields</strong></span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;">Want to level up after game day? NEXT delivers weekly training and scrimmage sessions designed for players to push their limits and try new skills in a fun, relaxed environment. Region 13 coaches lead every session with a focus on maximizing touches through open play.</span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><em><strong>To attend, check the schedule and join the Spond groups below.</strong></em></span></div></div>
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" bgcolor="#ffe5e5" style="background-color: #ffe5e5;">
+<tbody>
+<tr>
+<td class="container" style="padding: 5px;">
+<div class="text-block fr-inner" style="line-height: 2;"><ul type="disc" data-position="outside" style="list-style-position: outside; list-style-type: disc;"><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>Girls 10U: </strong><em>coming soon</em></span></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>Boys 10U:&nbsp;</strong>11:45am–1pm - </span><a target="_blank" rel="noopener noreferrer nofollow" href="https://spond.com/invite/QZPJQ"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>JOIN SPOND</strong></span></a></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>Girls 12U:&nbsp;</strong>1–2:15pm - </span><a target="_blank" rel="noopener noreferrer nofollow" href="https://spond.com/invite/LZXZX"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>JOIN SPOND</strong></span></a></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>Boys 12U:&nbsp;</strong>10:30am–11:45am - </span><a target="_blank" rel="noopener noreferrer nofollow" href="https://spond.com/invite/AXGWO"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>JOIN SPOND</strong></span></a></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>Girls 14U:&nbsp;</strong>2:15–3:45pm - </span><a target="_blank" rel="noopener noreferrer nofollow" href="https://spond.com/invite/XKKGG"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>JOIN SPOND</strong></span></a></div></li><li><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>Boys 14U:&nbsp;</strong>3:45–5pm - </span><a target="_blank" rel="noopener noreferrer nofollow" href="https://spond.com/invite/IPLHQ"><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 16px;"><strong>JOIN SPOND</strong></span></a></div></li></ul></div>
+</td>
+</tr>
+</tbody>
+</table><table width="100%" style="table-layout: fixed; width: 100%;" eo-block="divider" role="presentation" aria="hidden" bgcolor="">
+<tbody>
+<tr>
+<td style="min-width: 100%; padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="border-top: 3px solid rgb(247, 75, 75); border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td>
+<span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table><table border="0" class="container" align="center" cellpadding="0" cellspacing="0" width="100%" eo-block="image" role="presentation" bgcolor="">
+<tbody>
+<tr>
+<td align="center" class="hero" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 5px;" valign="top">
+<a href="https://ayso13.typeform.com/to/VceZZXia" target="_blank"><img src="https://gallery.eomail4.com/0e854005-7557-11eb-a3d0-06b4694bee2a%2F01a078ca-3c25-765b-9457-f65dfb120922.png" width="580" style="
+width: 100%;
+max-width: 100%;
+object-fit: cover;
+padding: 0;
+outline: none;
+border: none;
+display: block;
+"></a>
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" style="position: static; margin-top: 9px; margin-bottom: 4px;" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 9px 4px 24px;">
+<div class="text-block fr-inner" style="color: rgb(49, 54, 56); line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 24px;">WORKSHOP for COACHES</span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); font-size: 24px;"><strong>Beyond the Ball: The Moments That Make Players Want to Come Back</strong></span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">A great AYSO experience is about more than learning to pass, defend, or score. Coaches help shape how children experience confidence, belonging, challenge, and even themselves. Sometimes the smallest coaching routine makes the biggest impact.</span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">Join us as we explore how common coaching strategies help children develop confidence, resilience, belonging, teamwork, and joy. We’ll dig into real coaching situations, practice routines, player interactions, and communication strategies you can use right away. Come ready to talk soccer, share ideas, and add a few new tools to your coaching bag.</span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; font-size: 20px;"><strong><span class="emoji" emoji="🍽️" data-type="emoji">🍽️</span>&nbsp;Free dinner is included!</strong></span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;"><strong>Thursday, September 17</strong></span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">7pm</span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">AYSO Region 13 Clubhouse</span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">711 W. Woodbury Rd., Unit E</span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">Altadena, CA 91001</span></div></div>
+</td>
+</tr>
+</tbody>
+</table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="container" eo-block="button" eo-block-version="3" role="presentation" bgcolor="">
+<tbody><tr>
+<td valign="top" align="center" style="padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="left" style="border-radius: 3px; background-color: rgb(142, 41, 41); width: 70%; text-size-adjust: 100%; border-collapse: separate !important;" role="presentation" class="eo-button" width="406" bgcolor="rgb(142, 41, 41)">
+<tbody>
+<tr>
+<td align="center" valign="middle" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+<a href="https://ayso13.typeform.com/to/VceZZXia" target="_blank" style="font-weight: bold; font-size: 18px; padding: 18px; letter-spacing: -0.5px; line-height: 100%; text-align: center; text-decoration: none; color: rgb(255, 255, 255); text-size-adjust: 100%; display: block; font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;" title="RSVP HERE">RSVP HERE</a>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody></table><table width="100%" style="table-layout: fixed; width: 100%;" eo-block="divider" role="presentation" aria="hidden" bgcolor="">
+<tbody>
+<tr>
+<td style="min-width: 100%; padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="border-top: 3px solid rgb(247, 75, 75); border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td>
+<span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table><table border="0" class="container" align="center" cellpadding="0" cellspacing="0" width="100%" eo-block="image" role="presentation" bgcolor="">
+<tbody>
+<tr>
+<td align="center" class="hero" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 5px;" valign="top">
+<img src="https://gallery.eomail4.com/0e854005-7557-11eb-a3d0-06b4694bee2a%2F01a0aae3-c88a-7bda-92a5-e0f7850f3d03.jpg" width="580" style="
+width: 100%;
+max-width: 100%;
+object-fit: cover;
+padding: 0;
+outline: none;
+border: none;
+display: block;
+">
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" style="position: static; margin-top: 9px; margin-bottom: 4px;" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 9px 4px 24px;">
+<div class="text-block fr-inner" style="color: rgb(49, 54, 56); line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); background-color: rgb(255, 255, 255); font-size: 24px;"><strong>Volunteer Salute&nbsp;</strong></span><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;"><br>We send a hearty salute to <strong>BSA Scouting America Troop 501 of La Cañada</strong> for spending a steamy day on the fields assembling goals. Huge thanks to Assistant Scoutmaster <strong>Joshua Shaw</strong> and the boys; <strong>Kyle, Remy, George, Milan, Leo and Everett</strong>- for helping to make soccer happen.</span></div></div>
+</td>
+</tr>
+</tbody>
+</table><table width="100%" style="table-layout: fixed; width: 100%;" eo-block="divider" role="presentation" aria="hidden" bgcolor="">
+<tbody>
+<tr>
+<td style="min-width: 100%; padding: 10px 0px;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" style="border-top: 3px solid rgb(247, 75, 75); border-collapse: collapse; width: 100%;">
+<tbody>
+<tr>
+<td>
+<span></span>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" style="position: static; margin-top: 9px; margin-bottom: 4px;" bgcolor="">
+<tbody>
+<tr>
+<td class="container" style="padding: 9px 4px 24px;">
+<div class="text-block fr-inner" style="color: rgb(49, 54, 56); line-height: 1.5;"><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif; color: rgb(142, 41, 41); background-color: rgb(255, 255, 255); font-size: 24px;"><strong>Letter from the Commissioner</strong></span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">Hello everyone,</span></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">As you probably know by now, AYSO is guided by six philosophies. This week, I want us to think about one of these: <strong>Good Sportsmanship.</strong></span><br><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">Good sportsmanship is critical for every single one of us to display at all times. Whether we are volunteer coaches or referees, players in the game, parents watching, or simply observers at the park or practice field. AYSO emphasizes Good Sportsmanship over winning in all of our games and activities. I firmly believe that is what keeps families and players coming back year after year. When you are on that field cheering on your team, remember that some of the parents and kids on the other team are probably going to be on your team next year. Supporting everyone helps all of us to enjoy the beautiful game.</span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;"><strong>And remember: our kids are watching everything we do.</strong> If they see us criticizing the coach or blaming a referee for what happens on that field, how do they incorporate that into their concept of practicing hard and playing as a team? Part of Good Sportsmanship is recognizing that everyone makes mistakes, and that is part of learning and growing—which is exactly what we are trying to do with our children every day.</span></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">Thank you to each of you for sharing that journey with AYSO and Region 13.</span></div><div><br></div><div><br></div><div><span style="font-family: Raleway, &quot;Trebuchet MS&quot;, Avenir, &quot;Segoe UI&quot;, sans-serif;">—<strong>Patrick Shopbell</strong>, your volunteer RC</span></div></div>
+</td>
+</tr>
+</tbody>
+</table><table border="0" class="container" align="center" cellpadding="0" cellspacing="0" width="100%" eo-block="image" role="presentation" bgcolor="">
+<tbody>
+<tr>
+<td align="center" class="hero" style="border-collapse: collapse; border-spacing: 0; margin: 0; padding: 5px;" valign="top">
+<a href="http://ayso13.org" target="_blank"><img src="https://gallery.eousercontent.com/0e854005-7557-11eb-a3d0-06b4694bee2a%2Fmedia-manager%2F1778112071961-ayso_footerlogo.png" width="214" style="width: 37%; max-width: 100%; object-fit: cover; padding: 0px; outline: none; border-width: medium; border-style: none; border-color: currentcolor; border-image: initial; display: block;" alt="AYSO Region 13"></a>
+</td>
+</tr>
+</tbody>
+</table><table role="presentation" aria-hidden="true" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="social-follow" bgcolor="">
+<tbody>
+<tr>
+<td align="center" valign="top" style="padding: 10px 5px;">
+<table class="social-links-container" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;" role="presentation">
+<tbody>
+<tr class="social-links-row"><td class="social-link-container" align="center" valign="middle" width="48" style="padding: 0 5px;">
+<a href="https://www.instagram.com/aysoregion13" target="_blank">
+<img src="https://gallery.eousercontent.com/tentacles/icons/v1/social-block/square/color/instagram.png" style="display: block; border: 0; height: auto; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;" height="48" width="48" alt="instagram social link">
+</a>
+</td><td class="social-link-container" align="center" valign="middle" width="48" style="padding: 0 5px;">
+<a href="https://www.facebook.com/ayso13/" target="_blank">
+<img src="https://gallery.eousercontent.com/tentacles/icons/v1/social-block/square/color/facebook.png" style="display: block; border: 0; height: auto; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;" height="48" width="48" alt="facebook social link">
+</a>
+</td></tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</body></html>
