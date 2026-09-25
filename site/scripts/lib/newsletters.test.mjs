@@ -116,6 +116,29 @@ test('cleanHtml throws on a href="javascript:…"', () => {
   assert.throws(() => cleanHtml(html), /active content in email:.*javascript:/i);
 });
 
+test("cleanHtml throws on a meta refresh redirect", () => {
+  const html = SAMPLE.replace("WEEK 2 SAMPLE CONTENT", '<meta http-equiv="refresh" content="0;url=https://example.com/">');
+  assert.throws(() => cleanHtml(html), /active content in email:.*refresh/i);
+});
+
+test("cleanHtml allows the harmless http-equiv metas real EmailOctopus emails carry", () => {
+  assert.match(SAMPLE, /http-equiv="X-UA-Compatible"/);
+  assert.match(LEGACY, /http-equiv="Content-Type"/);
+  assert.doesNotThrow(() => cleanHtml(SAMPLE));
+  assert.doesNotThrow(() => cleanHtml(LEGACY));
+});
+
+// Every committed snapshot file is real EmailOctopus output that already
+// passed the sync, so the active-content rule must accept all of them.
+test("cleanHtml accepts every committed newsletter snapshot", () => {
+  const dir = new URL("../../newsletters/", import.meta.url);
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".html"));
+  assert.ok(files.length > 0);
+  for (const f of files) {
+    assert.doesNotThrow(() => cleanHtml(fs.readFileSync(new URL(f, dir), "utf8")), f);
+  }
+});
+
 test("cleanHtml does not throw on the real-template fixtures (no active content)", () => {
   assert.doesNotThrow(() => cleanHtml(SAMPLE));
   assert.doesNotThrow(() => cleanHtml(LEGACY));
