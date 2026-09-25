@@ -91,6 +91,36 @@ test("cleanHtml throws when the footer marker is missing", () => {
   assert.throws(() => cleanHtml(html), /UnsubscribeURL/);
 });
 
+test("cleanHtml throws on a <script> tag in the body", () => {
+  const html = SAMPLE.replace("WEEK 2 SAMPLE CONTENT", "<script>alert(1)</script>WEEK 2 SAMPLE CONTENT");
+  assert.throws(() => cleanHtml(html), /active content in email:.*<script/i);
+});
+
+test("cleanHtml throws on an onclick= attribute", () => {
+  const html = SAMPLE.replace('<td valign="top">', '<td valign="top" onclick="alert(1)">');
+  assert.throws(() => cleanHtml(html), /active content in email:.*onclick/i);
+});
+
+test("cleanHtml throws on an <iframe>", () => {
+  const html = SAMPLE.replace("WEEK 2 SAMPLE CONTENT", '<iframe src="https://evil.example"></iframe>WEEK 2 SAMPLE CONTENT');
+  assert.throws(() => cleanHtml(html), /active content in email:.*<iframe/i);
+});
+
+test("cleanHtml throws on a <form>", () => {
+  const html = SAMPLE.replace("WEEK 2 SAMPLE CONTENT", "<form></form>WEEK 2 SAMPLE CONTENT");
+  assert.throws(() => cleanHtml(html), /active content in email:.*<form/i);
+});
+
+test('cleanHtml throws on a href="javascript:…"', () => {
+  const html = SAMPLE.replace("WEEK 2 SAMPLE CONTENT", '<a href="javascript:alert(1)">WEEK 2 SAMPLE CONTENT</a>');
+  assert.throws(() => cleanHtml(html), /active content in email:.*javascript:/i);
+});
+
+test("cleanHtml does not throw on the real-template fixtures (no active content)", () => {
+  assert.doesNotThrow(() => cleanHtml(SAMPLE));
+  assert.doesNotThrow(() => cleanHtml(LEGACY));
+});
+
 test("cleanHtml removes the legacy preheader div", () => {
   const out = cleanHtml(LEGACY);
   assert.ok(!out.includes("{{PreviewText}}"));

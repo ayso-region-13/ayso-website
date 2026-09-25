@@ -73,6 +73,11 @@ export function assignSlugs(entries) {
 const PREHEADER = /<!-- Preheader text[\s\S]*?<!-- Hack to manage presentation of preheader text\. -->\s*<div[^>]*>[\s\S]*?<\/div>/;
 const FOOTER_MARKER = "<!-- Footer -->";
 const LEFTOVER_TAG = /\{\{[\s\S]*?\}\}|\{%[\s\S]*?%\}/;
+// Cleaned email HTML reaches production unreviewed and the CSP on these pages
+// allows inline scripts, so any of this must fail the sync rather than
+// publish. Plain `<meta charset>` / `<meta name=viewport>` in the email head
+// are fine, which is why only `meta http-equiv` is matched.
+const ACTIVE_CONTENT = /<(script|iframe|form|object|embed|base|meta\s+http-equiv)\b|\son[a-z]+\s*=|javascript:/i;
 
 // Index just past the element that opens at `start`, counting nested tags.
 function elementEnd(html, start, tag) {
@@ -134,5 +139,7 @@ export function cleanHtml(html) {
   out = stripLegacyFooter(out);
   const leftover = out.match(LEFTOVER_TAG);
   if (leftover) throw new Error(`unfilled merge tag ${leftover[0]}`);
+  const active = out.match(ACTIVE_CONTENT);
+  if (active) throw new Error(`active content in email: ${active[0]}`);
   return out;
 }
