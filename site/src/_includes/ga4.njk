@@ -1,0 +1,24 @@
+{#- GA4 gtag snippet, shared by every template that owns its own <head>
+    (base.njk, temp.njk, newsletter.njk). Set `gaPinnedPath` before including
+    to pin page_location, for pages whose permalink differs from the public
+    URL (temp.njk: /temp.html is served as /temp). -#}
+{% if site.gaId %}
+<!-- Google Analytics — data-cfasync="false" opts out of Cloudflare Rocket Loader,
+     which was rewriting type="text/javascript" and breaking pageview reporting. -->
+<script async data-cfasync="false" src="https://www.googletagmanager.com/gtag/js?id={{ site.gaId }}"></script>
+<script data-cfasync="false">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+{%- if gaPinnedPath %}
+  // Pinned page_location: without it GA4 reports the permalink and the public
+  // URL as separate rows. origin (not a hardcoded site.url) so staging still
+  // reports as staging.
+  gtag('config', '{{ site.gaId }}', {
+    page_location: window.location.origin + '{{ gaPinnedPath }}'
+  });
+{%- else %}
+  gtag('config', '{{ site.gaId }}');
+{%- endif %}
+</script>
+{% endif %}
