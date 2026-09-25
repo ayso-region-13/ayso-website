@@ -7,6 +7,7 @@ import {
 } from "./newsletters.mjs";
 
 const SAMPLE = fs.readFileSync(new URL("./fixtures/newsletter-sample.html", import.meta.url), "utf8");
+const LEGACY = fs.readFileSync(new URL("./fixtures/newsletter-legacy.html", import.meta.url), "utf8");
 
 test("pacificDate uses the Pacific calendar day, not UTC", () => {
   assert.equal(pacificDate("2026-01-01T05:30:00+00:00"), "2025-12-31");
@@ -86,4 +87,38 @@ test("cleanHtml throws on an unfilled personalization tag", () => {
 test("cleanHtml throws when the footer marker is missing", () => {
   const html = SAMPLE.replace("<!-- Footer -->", "");
   assert.throws(() => cleanHtml(html), /UnsubscribeURL/);
+});
+
+test("cleanHtml removes the legacy footer and sender line", () => {
+  const out = cleanHtml(LEGACY);
+  assert.ok(out.includes("LEGACY CONTENT"));
+  assert.ok(!/\{\{|\{%/.test(out));
+  assert.ok(!out.includes("View in browser"));
+  assert.ok(!out.includes("You are receiving"));
+  assert.ok(out.trimEnd().endsWith("</body></html>"));
+});
+
+test("cleanHtml removes the legacy footer and sender line (sentence wrapped in <p>)", () => {
+  const html = LEGACY.replace(
+    '<br><p><br></p>You are receiving this message because of your involvement with AYSO Region 13, {{SenderInfoLine}} <p></p>',
+    '<p>You are receiving this message because of your involvement with AYSO Region 13, {{SenderInfoLine}} </p>',
+  );
+  const out = cleanHtml(html);
+  assert.ok(out.includes("LEGACY CONTENT"));
+  assert.ok(!/\{\{|\{%/.test(out));
+  assert.ok(!out.includes("View in browser"));
+  assert.ok(!out.includes("You are receiving"));
+  assert.ok(out.trimEnd().endsWith("</body></html>"));
+});
+
+test('cleanHtml removes the "view in browser" block', () => {
+  const WEB_VERSION_BLOCK = '<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="100%" eo-block="text" bgcolor=""> <tbody> <tr> <td class="container" style="padding: 10px 5px;"> <div class="text-block fr-inner" style="line-height: 1.25;"><div style="text-align: center;"><a target="_blank" rel="noopener noreferrer nofollow" href="{{WebVersionURL}}"><span style="font-size: 12px;"><strong>View this email in your browser</strong></span></a></div></div> </td> </tr> </tbody> </table>';
+  const html = SAMPLE.replace('<td valign="top">', `<td valign="top">${WEB_VERSION_BLOCK}`);
+  const out = cleanHtml(html);
+  assert.ok(!/\{\{|\{%/.test(out));
+  assert.ok(!out.includes("View this email in your browser"));
+  assert.ok(out.includes("WEEK 2 SAMPLE CONTENT"));
+  const opens = (out.match(/<table\b/g) || []).length;
+  const closes = (out.match(/<\/table>/g) || []).length;
+  assert.equal(opens, closes);
 });

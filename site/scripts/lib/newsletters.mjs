@@ -81,7 +81,35 @@ function elementEnd(html, start, tag) {
     depth += m[1] ? -1 : 1;
     if (depth === 0) return re.lastIndex;
   }
-  throw new Error(`unbalanced <${tag}> after "${FOOTER_MARKER}"`);
+  throw new Error(`unbalanced <${tag}>`);
+}
+
+// Template A ("new editor"): a standalone eo-block="text" table holding the
+// "View this email in your browser" link. Loops because more than one can
+// appear on a page.
+function stripWebVersionBlocks(html) {
+  let out = html;
+  while (true) {
+    const tagIndex = out.indexOf("{{WebVersionURL}}");
+    if (tagIndex === -1) return out;
+    const tableStart = out.lastIndexOf("<table", tagIndex);
+    if (tableStart === -1) return out;
+    const openTagEnd = out.indexOf(">", tableStart);
+    const openTag = out.slice(tableStart, openTagEnd === -1 ? tagIndex : openTagEnd + 1);
+    if (!/eo-block\s*=\s*"text"/.test(openTag)) return out;
+    const end = elementEnd(out, tableStart, "table");
+    if (tagIndex >= end) return out; // the tag isn't actually inside this table
+    out = out.slice(0, tableStart) + out.slice(end);
+  }
+}
+
+// Template B ("legacy"): the footer paragraph(s) and sender-info sentence sit
+// as plain body text, not inside a marked footer row.
+const LEGACY_FOOTER_PARAGRAPH = /<p\b[^>]*>(?:(?!<\/?p\b)[\s\S])*?\{\{(?:WebVersionURL|UnsubscribeURL|RewardsURL)\}\}(?:(?!<\/?p\b)[\s\S])*?<\/p>/g;
+const LEGACY_SENDER_LINE = /You are receiving this message because[^<]*\{\{SenderInfoLine\}\}/g;
+
+function stripLegacyFooter(html) {
+  return html.replace(LEGACY_FOOTER_PARAGRAPH, "").replace(LEGACY_SENDER_LINE, "");
 }
 
 // Strips the per-recipient parts of an EmailOctopus email (preheader,
@@ -95,6 +123,8 @@ export function cleanHtml(html) {
     if (trStart === -1) throw new Error(`no <tr> after "${FOOTER_MARKER}"`);
     out = out.slice(0, marker) + out.slice(elementEnd(out, trStart, "tr"));
   }
+  out = stripWebVersionBlocks(out);
+  out = stripLegacyFooter(out);
   const leftover = out.match(LEFTOVER_TAG);
   if (leftover) throw new Error(`unfilled merge tag ${leftover[0]}`);
   return out;
