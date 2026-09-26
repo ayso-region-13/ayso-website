@@ -463,3 +463,20 @@ Titles strip only the subject's **leading** emoji, so "⚽ Week 2 News & Info" b
 Along the way, pulled the GA4 snippet (previously duplicated between `base.njk` and `temp.njk`) into a shared `_includes/ga4.njk`, since a newsletter layout would otherwise have made it three copies.
 
 Built and tested on branch `newsletter-archive` (14 newsletters synced, pages render, `npm test` green). **Merged to `staging`; not pushed at time of writing.** Pending: add the `EMAILOCTOPUS_API_KEY` GitHub secret, push, promote once so `main` has the templates and the widened `rebuild-production.yml` filter, then run the workflow by hand. Spec: `docs/superpowers/specs/2026-09-24-newsletter-archive-sync-design.md`.
+
+## 2026-09-25 — Newsletter archive rollout and first-run fix
+
+**Shipped.** PR #23 (`newsletter-archive`) was squash-merged into `staging` as `d2251a0` and promoted to production (promote run `36152815046`). Verified on www: `/resources/newsletters/` lists all 14 newsletters, the Sep 24 and Feb 7 pages return 200, all 14 are in `sitemap.xml`, and the pages carry no `X-Robots-Tag`. The `EMAILOCTOPUS_API_KEY` repo secret was set with `gh secret set`, piped from `.envrc` so the key never printed.
+
+The final whole-branch review had found five problems before merge, all fixed in the PR:
+- Only 1 of the 14 newsletter pages reached the sitemap. Eleventy puts only the first paginated page in collections unless `addAllPagesToCollections: true` is set in `newsletter-pages.njk`.
+- Cleaned email HTML goes to production with nobody reviewing it, so `cleanHtml` now also fails on active content (script, iframe, form, object, embed, base, `on*=` handlers, `javascript:` URLs).
+- The Feb–Apr legacy emails had no centered container, and their 620–648px images overflowed a phone screen. `splitEmail` now flags them `legacy` (no `class="document"` wrapper), the layout centers them at 680px, and every email image gets `max-width: 100%`. Checked in Chrome at 375px.
+- The sync refuses to go from a non-empty snapshot to an empty one (`assertNotEmptying`), so an API that suddenly returns nothing can't wipe the archive.
+- Smaller items: Slack mrkdwn escaping of titles, a Pagefind title span instead of the comma-splitting `data-pagefind-meta` attribute, `eleventy:ignore` on the bar's logo, and the watchdog's rebuild-evicted message now names newsletters.
+
+**Contact line.** The newsletters page's two contacts ("Newsletter questions: info@", "Communication Director: webmaster@") became one: "Communications: communications@ayso13.org" (`0ef6e9a`). Cloudflare's email obfuscation rewrites the `mailto:` on the live page, so grep the source markdown, not the served HTML, when checking an address.
+
+**First CI run failed, then fixed.** The first manual run of the sync workflow (`36164513616`) failed on every newsletter with `active content in email: <meta http-equiv`. The active-content check matched any `http-equiv` meta, but every real EmailOctopus email carries a harmless one: `Content-Type` in the legacy template, `X-UA-Compatible` inside an `<!--[if !mso]>` comment in the current one. The tests passed because the fixtures lacked those tags, and the pre-merge grep over the real snapshot had left `meta` out of its pattern. Fix (`e578bee`): match only `http-equiv="refresh"`, the one that can redirect a page; give both fixtures their real meta tags; and add a test that runs the check over every committed `site/newsletters/*.html`, so a rule that rejects real data now fails `npm test` rather than the first CI run. The failed run changed nothing, because the sync validates everything before writing and posted its failure to Slack.
+
+Reruns `36164798737` and `36165349315` are green: `14 in window; +0 -0`, `main already current`. A local run against the live API also produced a byte-identical snapshot, so EmailOctopus returns stable `content.html` and the daily run won't make empty commits. The first scheduled run is 2026-09-26 at 6am PT.
