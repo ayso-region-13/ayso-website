@@ -2,20 +2,6 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-09-26",
-      "name": "Weekend #3 soccer games - Silent Saturday!"
-    },
-    {
-      "date": "2026-09-27",
-      "name": "Sunday Soccer Lab",
-      "link": "https://www.ayso13.org/programs/sunday-soccer/"
-    },
-    {
-      "date": "2026-09-27",
-      "name": "NEXT Scrimmages 10U, 12U, 14U",
-      "link": "https://www.ayso13.org/programs/next"
-    },
-    {
       "date": "2026-10-04",
       "name": "Sunday Soccer Lab",
       "link": "https://www.ayso13.org/programs/sunday-soccer/"
@@ -30,8 +16,8 @@
       "name": "Weekend #4 soccer games - first Picture Day"
     },
     {
-      "date": "2026-09-27",
-      "name": "Youth Referee Game Management Workshop - 2pm at the clubhouse"
+      "date": "2026-10-06",
+      "name": "Region 13 Board Meeting - Clubhouse @7pm"
     }
   ]
 }
