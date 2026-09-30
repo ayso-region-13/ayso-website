@@ -8,7 +8,9 @@ Standings are tracked for 10U, 12U, 14U, and 16U House League divisions.
 
 ## Current Standings
 
-Standings will be published after Week 3. For game times and fields, see the [game schedule](https://schedule.ayso13.org/).
+To view current standings, sportsmanship points, and referee points, visit the [Region 13 Stats Site.](https://stats.ayso13.org/)
+
+For game times and fields, see the [game schedule](https://schedule.ayso13.org/).
 
 ## How Standings Work
 
@@ -39,7 +41,7 @@ Standings determine tournament flights for the Rose City Cup, a single-eliminati
 
 ## Contact
 
-- Standings questions: [info@ayso13.org](mailto:info@ayso13.org)
+- Standings questions: [stats@ayso13.org](mailto:stats@ayso13.org)
 
 ## Related Pages
 
