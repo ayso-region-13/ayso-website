@@ -136,6 +136,23 @@ eleventyExcludeFromCollections: true
     margin-top: 1rem;
   }
   .unit-toggle { margin-top: 0.6rem; font-size: 0.8rem; }
+  /* Heat-alert actions under the WBGT card. Same two tiers and colors as the
+     field-status bar above: gold for levels 2-3, burgundy for 4-5. */
+  .heat-alert { margin-top: 0.85rem; padding: 0.85rem 1rem; font-size: 0.875rem; }
+  .heat-alert.tier-watch { background: #f4bd4d; color: #221f1f; }
+  .heat-alert.tier-limit { background: #83312d; color: #fff; }
+  .heat-alert .title {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.8rem;
+    margin-bottom: 0.35rem;
+  }
+  .heat-alert .lead { font-weight: 600; margin-bottom: 0.5rem; }
+  .heat-alert ul { padding-left: 1.2rem; }
+  .heat-alert li + li { margin-top: 0.25rem; }
+  .heat-alert a { color: inherit; text-decoration: underline; }
+  .heat-alert .more { margin-top: 0.6rem; font-size: 0.8rem; }
   .unit-toggle a { color: #8e2929; text-decoration: underline; cursor: pointer; }
   .err {
     padding: 1rem;
@@ -210,6 +227,7 @@ eleventyExcludeFromCollections: true
       <span id="cif-label">—</span>
       <span class="pill" id="cif-pill" hidden>Level <span id="cif-level">—</span></span>
     </div>
+    <div id="heat-alert" aria-live="assertive" hidden></div>
   </div>
 
   <div class="stat">
@@ -313,6 +331,95 @@ eleventyExcludeFromCollections: true
     return 6;
   }
 
+  // Required actions per CIF level. Text mirrors WBGT_BANNERS in
+  // resources/weather.md; the two pages have their own copies, so edit both.
+  // Level 1 shows nothing.
+  var HEAT_ACTIONS = {
+    2: {
+      tier:  "tier-watch",
+      title: "Heat Alert: CIF Level 2",
+      lead:  "Frequent water breaks. Watch for heat illness.",
+      limits: [
+        "Water breaks every 30 minutes minimum",
+        "Watch carefully for heat-illness signs"
+      ]
+    },
+    3: {
+      tier:  "tier-watch",
+      title: "Heat Alert: CIF Level 3",
+      lead:  "Activity reduced. Practice limited to two hours.",
+      limits: [
+        "Maximum 2 hours of practice",
+        "Four 4-minute water breaks per hour",
+        "Lighter clothing"
+      ]
+    },
+    4: {
+      tier:  "tier-limit",
+      title: "Heat Alert: CIF Level 4",
+      lead:  "Strict limits on practice. Games are shortened with extra water breaks.",
+      limits: [
+        "Practice: maximum 1 hour, four 4-minute water breaks per hour, no equipment",
+        "Games: length reduced by one-third, with additional water breaks at the 1/8 marks"
+      ]
+    },
+    5: {
+      tier:  "tier-limit",
+      title: "Advisory: Outdoor Activity Should Be Suspended (Level 5)",
+      lead:  "WBGT has crossed the CIF closure threshold. Watch the home-page status bar for the official call by Region 13 staff.",
+      limits: [
+        "Games and practices should be canceled",
+        "Fields should close until conditions cool",
+        "Final closure call comes from Region 13 staff via the home-page status bar"
+      ]
+    }
+  };
+
+  function renderHeatAlert(level) {
+    var host = $("heat-alert");
+    if (!host) return;
+    while (host.firstChild) host.removeChild(host.firstChild);
+    host.hidden = true;
+
+    var b = HEAT_ACTIONS[level];
+    if (!b) return;
+
+    // role="alert" on the inner box: an alert role on an empty hidden
+    // container won't re-announce when content arrives.
+    var box = document.createElement("div");
+    box.className = "heat-alert " + b.tier;
+    box.setAttribute("role", "alert");
+
+    var title = document.createElement("p");
+    title.className = "title";
+    title.textContent = b.title;
+    box.appendChild(title);
+
+    var lead = document.createElement("p");
+    lead.className = "lead";
+    lead.textContent = b.lead;
+    box.appendChild(lead);
+
+    var list = document.createElement("ul");
+    b.limits.forEach(function (limit) {
+      var li = document.createElement("li");
+      li.textContent = limit;
+      list.appendChild(li);
+    });
+    box.appendChild(list);
+
+    var more = document.createElement("p");
+    more.className = "more";
+    var link = document.createElement("a");
+    link.href = "/resources/heat-policy/";
+    link.textContent = "Full heat policy";
+    more.appendChild(link);
+    box.appendChild(more);
+
+    host.appendChild(box);
+    host.hidden = false;
+  }
+
   function render(data) {
     lastData = data;
     var c = data.current || {};
@@ -330,6 +437,7 @@ eleventyExcludeFromCollections: true
       pill.classList.add("pill-" + w.level);
       pill.hidden = false;
     }
+    renderHeatAlert(w.level);
 
     setText("aqi", a.aqi);
     setText("aqi-category", a.category);
