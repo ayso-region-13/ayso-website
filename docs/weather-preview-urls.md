@@ -6,7 +6,7 @@ These query-string "simulate" modes let you **see exactly what the weather page 
 
 A yellow "preview mode" notice appears at the top whenever a simulate parameter is active, so it's obvious you're not looking at live readings.
 
-> Note: these preview modes work on `/resources/weather/` only — not on the `/temp` quick-view page.
+> Note: the `/temp` quick-view page supports the heat preview only (`?simulate=1`…`5`, e.g. <https://www.ayso13.org/temp?simulate=4>). The rain and AQI previews work on `/resources/weather/` only.
 
 ## 🌡 Heat (WBGT / CIF level) — `?simulate=1`…`5`
 
