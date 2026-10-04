@@ -41,6 +41,10 @@ Teams representing Region 13 must display exemplary AYSO behavior, including:
 
 Teams that do not meet these standards may lose regional approval for future tournaments.
 
+## Rules
+
+All-Stars and Upper Division games follow the [Area 1C Combined Rules (PDF)](https://dt5602vnjxv0c.cloudfront.net/portals/14092/docs/combined_rules/combined%20rules%20approved%202026-07-30.pdf). Other tournaments publish their own rules.
+
 ## Region 13 Tournaments
 
 - [Thanksgiving Tournament](/programs/tournaments/thanksgiving) — November

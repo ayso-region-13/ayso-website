@@ -61,6 +61,11 @@ Register online through InLeague before attending tryouts.
 
 [Register on InLeague](https://ayso13.inleague.com/app)
 
+## Area 1C Resources
+
+- [Area 1C All-Stars page](https://www.ayso1c.org/Default.aspx?tabid=849809)
+- [Area 1C Combined Rules (PDF)](https://dt5602vnjxv0c.cloudfront.net/portals/14092/docs/combined_rules/combined%20rules%20approved%202026-07-30.pdf)
+
 ## Contact
 
 Advanced Play Coordinator: Samir Singh
