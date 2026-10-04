@@ -132,7 +132,7 @@ If conditions look bad, check [Weather and Field Conditions](/resources/weather/
 
 ### Season Standings
 
-Standings will be published after Week 3.
+Current standings are on the [Region 13 Stats Site](https://stats.ayso13.org/).
 
 AYSO emphasizes development over winning. Standings are available, but there's no elimination — every team plays a full season, and every player receives equal playing time.
 
