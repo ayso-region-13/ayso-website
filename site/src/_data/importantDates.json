@@ -2,22 +2,18 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-10-04",
+      "date": "2026-10-11",
       "name": "Sunday Soccer Lab",
       "link": "https://www.ayso13.org/programs/sunday-soccer/"
     },
     {
-      "date": "2026-10-04",
+      "date": "2026-10-11",
       "name": "NEXT Scrimmages 10U, 12U, 14U",
       "link": "https://staging.ayso13.org/programs/next"
     },
     {
-      "date": "2026-10-03",
-      "name": "Weekend #4 soccer games - first Picture Day"
-    },
-    {
-      "date": "2026-10-06",
-      "name": "Region 13 Board Meeting - Clubhouse @7pm"
+      "date": "2026-10-10",
+      "name": "Weekend #5 soccer games"
     }
   ]
 }
