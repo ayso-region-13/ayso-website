@@ -8,6 +8,7 @@ Board meetings are held on the first Thursday of every month at 7:15pm. Everyone
 
 ## Recent meeting minutes
 
+- [October 6, 2026](/assets/docs/minutes/ayso-executive-board-meeting-2026-10-06.pdf)
 - [September 3, 2026](/assets/docs/minutes/ayso-executive-board-meeting-2026-09-03.pdf)
 - [May 7, 2026](/assets/docs/minutes/ayso-executive-board-meeting-2026-05-07.pdf)
 - [February 5, 2026](/assets/docs/minutes/ayso-executive-board-meeting-2026-02-05.pdf)
