@@ -77,7 +77,7 @@ Region 13 cannot address this problem without knowing where and when it is happe
 
 **A preliminary determination follows**, made by the RRA for games inside Region 13 and by the ARA for games between regions. If it looks like a RAPP violation, they will ask you for a written report: a **Referee Report** if the person was a player or coach, an **Incident Report** if a spectator. You email that report to the Area 1C RAPP Administrator, the RRA, and the ARA together. It needs the specific language or actions, the name of the person responsible, and enough match detail to make sense of the situation. Sending it is your step, not the RRA's.
 
-**Also file the [Referee Incident Form](https://ayso13.typeform.com/to/GjC4Pyed)** so Region 13 has its own record. This is a Region 13 form and does not by itself satisfy the Area 1C reporting requirement above.
+**Also file the [Referee Incident Form](https://stats.ayso13.org/report/referee-incident)** so Region 13 has its own record. This is a Region 13 form and does not by itself satisfy the Area 1C reporting requirement above.
 
 From there the RAPP Administrator investigates and decides whether to refer the matter to the RAPP Disciplinary Panel, which determines sanctions.
 
@@ -85,7 +85,7 @@ From there the RAPP Administrator investigates and decides whether to refer the 
 
 Anyone can report an incident: assistant referees, coaches, players, and spectators. It does not have to come from the center referee. That said, when abuse happens during a match the center referee is the one primarily responsible for recording and reporting the facts.
 
-Reports about a referee's *performance* rather than someone's conduct toward a referee go to the [Referee Feedback Form](https://ayso13.typeform.com/referee-fb) instead.
+Reports about a referee's *performance* rather than someone's conduct toward a referee go to the [Referee Feedback Form](https://stats.ayso13.org/report/referee-feedback) instead.
 
 ## Documents
 

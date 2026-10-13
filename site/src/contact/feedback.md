@@ -12,7 +12,7 @@ Submit feedback about coaches, referees, or general concerns. Region 13 welcomes
 
 Provide feedback about coaching staff.
 
-<a href="https://form.jotform.com/82564401768159" class="btn-gold">Coach Feedback Form</a>
+<a href="https://stats.ayso13.org/report/coach-feedback" class="btn-gold">Coach Feedback Form</a>
 
 Or email: [coach@ayso13.org](mailto:coach@ayso13.org)
 
@@ -20,11 +20,11 @@ Or email: [coach@ayso13.org](mailto:coach@ayso13.org)
 
 Provide feedback about referee performance.
 
-<a href="https://ayso13.typeform.com/referee-fb" class="btn-gold">Referee Feedback Form</a>
+<a href="https://stats.ayso13.org/report/referee-feedback" class="btn-gold">Referee Feedback Form</a>
 
 Referees, provide incident reports here (e.g., injuries, misconduct, etc.)
 
-<a href="https://ayso13.typeform.com/to/GjC4Pyed" class="btn-gold">Referee Incident Form</a>
+<a href="https://stats.ayso13.org/report/referee-incident" class="btn-gold">Referee Incident Form</a>
 
 Or email: [referee@ayso13.org](mailto:referee@ayso13.org)
 
@@ -36,12 +36,11 @@ Report injuries, near misses, misconduct, and other incidents.
 
 Injuries, risks, stray dogs, and other concerns can be reported here.
 
-1. Coach, [fill out this form](https://aysovolunteers.org/wp-content/uploads/2021/10/Incident_Report_Form_with_Instr_rev09102021.pdf).
-2. [Upload it here](https://docs.google.com/forms/d/e/1FAIpQLScMSiIVlcBH9MkLgaFOLKbGYP-4bn2uli-DO0x0bnWZ1Hiq2w/viewform) or email to safety@ayso13.org
+[File an incident report online](https://stats.ayso13.org/report/incident).
 
-Feedback: Provide [feedback to coach staff](https://form.jotform.com/82564401768159) or write to coach@ayso13.org
+Feedback: Provide [feedback to coach staff](https://stats.ayso13.org/report/coach-feedback) or write to coach@ayso13.org
 
-Provide [feedback to the referee staff](https://ayso13.typeform.com/referee-fb) or write to referee@ayso13.org
+Provide [feedback to the referee staff](https://stats.ayso13.org/report/referee-feedback) or write to referee@ayso13.org
 
 Or email: [safety@ayso13.org](mailto:safety@ayso13.org)
 
