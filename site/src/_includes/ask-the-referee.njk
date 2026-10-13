@@ -98,7 +98,7 @@ layout: base.njk
 
           <div class="divide-y divide-gray-200 border border-gray-200 rounded-xl overflow-hidden">
             {% for item in catItems %}
-            <details class="group">
+            <details class="group scroll-mt-24" id="qa-{{ item.page.fileSlug }}">
               <summary class="flex items-start justify-between gap-4 px-5 py-4 cursor-pointer list-none hover:bg-brand-cream transition-colors">
                 <span class="font-medium text-brand-dark group-open:text-brand-red-dark transition-colors">
                   {{ item.data.question }}
