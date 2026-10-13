@@ -8,6 +8,9 @@
       <button type="button" data-ask-close class="text-gray-500 hover:text-brand-dark" aria-label="Close">✕</button>
     </div>
 
+    {# Outside the step containers so an interactive challenge is visible on every screen. #}
+    <div id="ask-turnstile" class="mb-4"></div>
+
     <form id="ask-step-1" novalidate>
       <label for="ask-question" class="block font-semibold text-brand-dark">Your question</label>
       <p id="ask-question-help" class="text-sm text-gray-600 mb-1">Include the age group (for example, 10U) if it matters. Some rules differ by age.</p>
@@ -19,7 +22,6 @@
       <input id="ask-email" type="email" autocomplete="email" required aria-describedby="ask-email-help"
              class="w-full border border-gray-300 rounded-lg p-2 mb-4">
 
-      <div id="ask-turnstile" class="mb-4"></div>
       <p id="ask-error" role="alert" class="text-sm text-brand-red-dark mb-3" hidden></p>
       <button type="submit" id="ask-continue" class="btn-primary">Continue</button>
     </form>
@@ -47,12 +49,6 @@
   var SITE_KEY = {{ askConfig.turnstileSiteKey | dump | safe }};
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   var $ = function (id) { return document.getElementById(id); };
-  var dlg = $('ask-dialog'), openBtn = $('ask-open');
-  if (!dlg || !openBtn || typeof dlg.showModal !== 'function' || !window.crypto || typeof crypto.randomUUID !== 'function') return;
-
-  var widgetId = null, token = null, waiters = [], tsFailed = false;
-  var state = null; // { id, question, email, suggestStatus, slugs }
-  var lastAttempt = null; // { id, question, email }: reused so a retry cannot send twice
 
   // ── Deep links: #qa-<slug> opens that answer ──
   function openHash() {
@@ -61,6 +57,13 @@
   }
   window.addEventListener('hashchange', openHash);
   openHash();
+
+  var dlg = $('ask-dialog'), openBtn = $('ask-open');
+  if (!dlg || !openBtn || typeof dlg.showModal !== 'function' || !window.crypto || typeof crypto.randomUUID !== 'function') return;
+
+  var widgetId = null, token = null, waiters = [], tsFailed = false;
+  var state = null; // { id, deflectId, question, email, suggestStatus, slugs }
+  var lastAttempt = null; // { id, question, email }: reused so a retry cannot send twice
 
   // ── Turnstile (loaded on first open; tokens are single-use) ──
   // A token is handed to a queued waiter or stored, never both. Consuming one
@@ -123,7 +126,7 @@
     state = null; lastAttempt = null; show(1);
   }
 
-  openBtn.hidden = false;
+  openBtn.classList.add('inline-block'); openBtn.hidden = false;
   openBtn.addEventListener('click', function () { loadTurnstile(); if (!state) reset(); dlg.showModal(); $('ask-question').focus(); });
   dlg.addEventListener('click', function (e) { if (e.target === dlg || e.target.hasAttribute('data-ask-close')) dlg.close(); });
 
@@ -136,7 +139,7 @@
     if (!EMAIL_RE.test(email)) return error('ask-error', 'Please enter a valid email address so Steve can reply.');
     error('ask-error'); busy(true);
     var same = lastAttempt && lastAttempt.question === question && lastAttempt.email === email;
-    state = { id: same ? lastAttempt.id : crypto.randomUUID(), question: question, email: email, suggestStatus: 'skipped_error', slugs: [] };
+    state = { id: same ? lastAttempt.id : crypto.randomUUID(), deflectId: null, question: question, email: email, suggestStatus: 'skipped_error', slugs: [] };
     lastAttempt = { id: state.id, question: question, email: email };
     takeToken()
       .then(function (t) { return post('/public/ask/suggest', { question: question, turnstile: t }, 7000); })
@@ -156,6 +159,7 @@
         state.suggestStatus = slugs.length ? res.status : (res.status === 'matched' ? 'none' : res.status);
         state.slugs = slugs;
         if (!slugs.length) return submit('submitted');
+        state.deflectId = crypto.randomUUID(); // its own id, so a later "send anyway" is not a server no-op
         renderMatches(slugs); show(2); busy(false);
       })
       .catch(function (err) {
@@ -192,7 +196,7 @@
     var errId = outcome === 'deflected' || !$('ask-step-2').hidden ? 'ask-error-2' : 'ask-error';
     return takeToken().then(function (t) {
       return post('/public/ask/submit', {
-        id: state.id, question: state.question, email: state.email, turnstile: t,
+        id: outcome === 'deflected' ? state.deflectId : state.id, question: state.question, email: state.email, turnstile: t,
         outcome: outcome, answeredBy: answeredBy || null,
         suggestedSlugs: state.slugs, suggestStatus: state.suggestStatus,
       }, 15000);
