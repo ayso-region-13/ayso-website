@@ -2,18 +2,18 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-10-11",
+      "date": "2026-10-18",
       "name": "Sunday Soccer Lab",
       "link": "https://www.ayso13.org/programs/sunday-soccer/"
     },
     {
-      "date": "2026-10-11",
+      "date": "2026-10-18",
       "name": "NEXT Scrimmages 10U, 12U, 14U",
       "link": "https://staging.ayso13.org/programs/next"
     },
     {
-      "date": "2026-10-10",
-      "name": "Weekend #5 soccer games"
+      "date": "2026-10-17",
+      "name": "Weekend #6 soccer games - Picture Day #1"
     }
   ]
 }
