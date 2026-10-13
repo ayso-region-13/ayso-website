@@ -65,12 +65,9 @@ Notifications are sent by 7 AM on game days or 4 PM on practice days when heat, 
 
 Report injuries, near misses, misconduct, and other concerns, such as field hazards or stray dogs.
 
-Coaches report an incident in two steps:
+Coaches [file an incident report online](https://stats.ayso13.org/report/incident).
 
-1. Download the [Incident Report Form (PDF)](https://aysovolunteers.org/wp-content/uploads/2021/10/Incident_Report_Form_with_Instr_rev09102021.pdf) and fill it out.
-2. Send us the completed form. [Upload it here](https://docs.google.com/forms/d/e/1FAIpQLScMSiIVlcBH9MkLgaFOLKbGYP-4bn2uli-DO0x0bnWZ1Hiq2w/viewform) or email it to [safety@ayso13.org](mailto:safety@ayso13.org).
-
-Referees use a separate form: [Referee Incident Form](https://ayso13.typeform.com/to/GjC4Pyed).
+Referees use a separate form: [Referee Incident Form](https://stats.ayso13.org/report/referee-incident).
 
 ## Injury Prevention
 

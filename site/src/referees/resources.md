@@ -10,7 +10,7 @@ section: referees
 - [Referee Scheduler](https://referee.ayso13.org/) — Sign up for games
 - [Submit a Game Card](https://stats.ayso13.org/submit) — Send photos of the card after each game
 - [eTrainU](https://ayso13.inleague.com/app/eTrainU) — Training and certification
-- [Referee Incident Form](https://ayso13.typeform.com/to/GjC4Pyed) — Injuries, misconduct, and other incidents from your game
+- [Referee Incident Form](https://stats.ayso13.org/report/referee-incident): injuries, misconduct, and other incidents from your game
 - [Referee Abuse Prevention](/referees/abuse/) — What counts as abuse and how to report it
 
 ## Document Library
