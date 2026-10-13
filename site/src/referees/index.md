@@ -23,7 +23,7 @@ Submit the game card online. You'll pick the date, field and game, then photogra
 
 [Submit a Game Card](https://stats.ayso13.org/submit)
 
-If anything happened during the game (an injury, a send-off, abuse from a sideline), also file the [Referee Incident Form](https://ayso13.typeform.com/to/GjC4Pyed).
+If anything happened during the game (an injury, a send-off, abuse from a sideline), also file the [Referee Incident Form](https://stats.ayso13.org/report/referee-incident).
 
 ## Why Referee
 

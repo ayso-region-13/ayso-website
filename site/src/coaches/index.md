@@ -70,8 +70,8 @@ Division Coach Administrators oversee specific age groups and can answer divisio
 
 ## Feedback and Incident Reports
 
-- [Referee Feedback Form](https://ayso13.typeform.com/referee-fb): feedback on a referee's performance
-- [Incident Report Form (PDF)](https://aysovolunteers.org/wp-content/uploads/2021/10/Incident_Report_Form_with_Instr_rev09102021.pdf): for injuries, near misses and other incidents at your game or practice. Fill it out, then [upload it](https://docs.google.com/forms/d/e/1FAIpQLScMSiIVlcBH9MkLgaFOLKbGYP-4bn2uli-DO0x0bnWZ1Hiq2w/viewform) or email it to [safety@ayso13.org](mailto:safety@ayso13.org)
+- [Referee Feedback Form](https://stats.ayso13.org/report/referee-feedback): feedback on a referee's performance
+- [File an incident report online](https://stats.ayso13.org/report/incident): for injuries, near misses and other incidents at your game or practice
 - Abuse of a referee: see [Referee Abuse Prevention](/referees/abuse/) for who to contact and when
 
 ## Coaching Resources
