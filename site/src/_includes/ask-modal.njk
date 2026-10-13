@@ -1,0 +1,206 @@
+{# Ask the Referee modal (spec 2026-10-13). Plain <dialog> + inline script.
+   Every visitor-typed value is written with textContent, never innerHTML. #}
+<dialog id="ask-dialog" aria-labelledby="ask-title"
+        class="w-[min(40rem,calc(100vw-2rem))] max-h-[90vh] rounded-xl p-0 backdrop:bg-black/50">
+  <div class="p-6">
+    <div class="flex items-start justify-between gap-4 mb-4">
+      <h2 id="ask-title" class="text-xl font-bold text-brand-red-dark">Ask the Referee</h2>
+      <button type="button" data-ask-close class="text-gray-500 hover:text-brand-dark" aria-label="Close">✕</button>
+    </div>
+
+    <form id="ask-step-1" novalidate>
+      <label for="ask-question" class="block font-semibold text-brand-dark">Your question</label>
+      <p id="ask-question-help" class="text-sm text-gray-600 mb-1">Include the age group (for example, 10U) if it matters. Some rules differ by age.</p>
+      <textarea id="ask-question" rows="5" maxlength="2000" required aria-describedby="ask-question-help"
+                class="w-full border border-gray-300 rounded-lg p-2 mb-4"></textarea>
+
+      <label for="ask-email" class="block font-semibold text-brand-dark">Your email</label>
+      <p id="ask-email-help" class="text-sm text-gray-600 mb-1">Steve will reply to this address.</p>
+      <input id="ask-email" type="email" autocomplete="email" required aria-describedby="ask-email-help"
+             class="w-full border border-gray-300 rounded-lg p-2 mb-4">
+
+      <div id="ask-turnstile" class="mb-4"></div>
+      <p id="ask-error" role="alert" class="text-sm text-brand-red-dark mb-3" hidden></p>
+      <button type="submit" id="ask-continue" class="btn-primary">Continue</button>
+    </form>
+
+    <div id="ask-step-2" hidden>
+      <p class="font-semibold text-brand-dark mb-3">These answers may cover your question</p>
+      <div id="ask-matches" class="divide-y divide-gray-200 border border-gray-200 rounded-xl overflow-hidden mb-4"></div>
+      <p id="ask-error-2" role="alert" class="text-sm text-brand-red-dark mb-3" hidden></p>
+      <div class="flex flex-wrap gap-3">
+        <button type="button" id="ask-answered" class="btn-primary">That answers it</button>
+        <button type="button" id="ask-send-anyway" class="px-4 py-2 rounded-lg border border-brand-red-dark text-brand-red-dark">Send my question anyway</button>
+      </div>
+    </div>
+
+    <div id="ask-step-3" hidden>
+      <p id="ask-done" class="text-brand-dark mb-4"></p>
+      <button type="button" id="ask-again" class="px-4 py-2 rounded-lg border border-brand-red-dark text-brand-red-dark" hidden>Ask another question</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var API = {{ askConfig.apiBase | dump | safe }};
+  var SITE_KEY = {{ askConfig.turnstileSiteKey | dump | safe }};
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var $ = function (id) { return document.getElementById(id); };
+  var dlg = $('ask-dialog'), openBtn = $('ask-open');
+  if (!dlg || !openBtn || typeof dlg.showModal !== 'function') return;
+
+  var widgetId = null, token = null, waiters = [];
+  var state = null; // { id, question, email, suggestStatus, slugs }
+
+  // ── Deep links: #qa-<slug> opens that answer ──
+  function openHash() {
+    var el = location.hash && document.getElementById(location.hash.slice(1));
+    if (el && el.tagName === 'DETAILS') { el.open = true; el.scrollIntoView(); }
+  }
+  window.addEventListener('hashchange', openHash);
+  openHash();
+
+  // ── Turnstile (loaded on first open; tokens are single-use) ──
+  function loadTurnstile() {
+    if (window.turnstile || document.getElementById('ask-ts-script')) return;
+    window.askTsReady = function () {
+      widgetId = window.turnstile.render('#ask-turnstile', {
+        sitekey: SITE_KEY, appearance: 'interaction-only',
+        callback: function (t) { token = t; waiters.splice(0).forEach(function (w) { w(t); }); },
+        'expired-callback': function () { token = null; },
+      });
+    };
+    var s = document.createElement('script');
+    s.id = 'ask-ts-script'; s.async = true;
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=askTsReady';
+    document.head.appendChild(s);
+  }
+  function takeToken() {
+    if (token) { var t = token; token = null; return Promise.resolve(t); }
+    return new Promise(function (resolve) {
+      waiters.push(resolve);
+      setTimeout(function () { resolve(null); }, 30000);
+    });
+  }
+  function freshToken() {
+    token = null;
+    if (window.turnstile && widgetId !== null) window.turnstile.reset(widgetId);
+    return takeToken().then(function (t) { token = null; return t; });
+  }
+
+  function post(path, body, ms) {
+    var ctrl = new AbortController();
+    var timer = setTimeout(function () { ctrl.abort(); }, ms);
+    return fetch(API + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), signal: ctrl.signal })
+      .finally(function () { clearTimeout(timer); });
+  }
+
+  function show(step) {
+    ['ask-step-1', 'ask-step-2', 'ask-step-3'].forEach(function (id) { $(id).hidden = id !== 'ask-step-' + step; });
+  }
+  function error(id, msg) { var p = $(id); p.textContent = msg || ''; p.hidden = !msg; }
+  function busy(on) { ['ask-continue', 'ask-answered', 'ask-send-anyway'].forEach(function (id) { $(id).disabled = on; }); }
+
+  function reset() {
+    $('ask-question').value = ''; error('ask-error'); error('ask-error-2');
+    state = null; show(1);
+  }
+
+  openBtn.hidden = false;
+  openBtn.addEventListener('click', function () { loadTurnstile(); if (!state) reset(); dlg.showModal(); $('ask-question').focus(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg || e.target.hasAttribute('data-ask-close')) dlg.close(); });
+
+  // ── Step 1 → suggest ──
+  $('ask-step-1').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var question = $('ask-question').value.trim();
+    var email = $('ask-email').value.trim().toLowerCase();
+    if (question.length < 10) return error('ask-error', 'Please write a little more about your question.');
+    if (!EMAIL_RE.test(email)) return error('ask-error', 'Please enter a valid email address so Steve can reply.');
+    error('ask-error'); busy(true);
+    state = { id: crypto.randomUUID(), question: question, email: email, suggestStatus: 'skipped_error', slugs: [] };
+    takeToken()
+      .then(function (t) { return post('/public/ask/suggest', { question: question, turnstile: t }, 4500); })
+      .then(function (r) {
+        if (r.status === 400) throw { show: 'Please check your question and try again.' };
+        if (r.status === 403) throw { show: 'Please try again.', resetTs: true };
+        return r.ok ? r.json() : { status: 'skipped_error', matches: [] };
+      })
+      .catch(function (err) {
+        if (err && err.show) throw err;
+        return { status: 'skipped_error', matches: [] }; // network, timeout: never block
+      })
+      .then(function (res) {
+        // Review Focus 4: keep only answers that exist on this page.
+        var slugs = (res.matches || []).map(function (m) { return m.slug; })
+          .filter(function (s) { return document.getElementById('qa-' + s); });
+        state.suggestStatus = slugs.length ? res.status : (res.status === 'matched' ? 'none' : res.status);
+        state.slugs = slugs;
+        if (!slugs.length) return submit('submitted');
+        renderMatches(slugs); show(2); busy(false);
+      })
+      .catch(function (err) {
+        busy(false);
+        if (err && err.resetTs && window.turnstile && widgetId !== null) window.turnstile.reset(widgetId);
+        error('ask-error', (err && err.show) || 'Something went wrong. Please try again in a few minutes.');
+      });
+  });
+
+  function renderMatches(slugs) {
+    var box = $('ask-matches'); box.textContent = '';
+    slugs.forEach(function (slug) {
+      var src = document.getElementById('qa-' + slug);
+      var d = document.createElement('details');
+      var s = document.createElement('summary');
+      s.className = 'px-5 py-3 cursor-pointer font-medium text-brand-dark hover:bg-brand-cream';
+      s.textContent = src.querySelector('summary span').textContent.trim();
+      var body = src.querySelector('summary').nextElementSibling.cloneNode(true); // our own published answer
+      d.appendChild(s); d.appendChild(body); d.dataset.slug = slug;
+      box.appendChild(d);
+    });
+  }
+
+  // ── Step 2 buttons ──
+  $('ask-answered').addEventListener('click', function () {
+    var open = $('ask-matches').querySelector('details[open]');
+    submit('deflected', (open || $('ask-matches').querySelector('details')).dataset.slug);
+  });
+  $('ask-send-anyway').addEventListener('click', function () { submit('submitted'); });
+
+  // ── Submit (fresh token; one retry on 403, Review Focus 3) ──
+  function submit(outcome, answeredBy, retried) {
+    busy(true);
+    var errId = outcome === 'deflected' || !$('ask-step-2').hidden ? 'ask-error-2' : 'ask-error';
+    return freshToken().then(function (t) {
+      return post('/public/ask/submit', {
+        id: state.id, question: state.question, email: state.email, turnstile: t,
+        outcome: outcome, answeredBy: answeredBy || null,
+        suggestedSlugs: state.slugs, suggestStatus: state.suggestStatus,
+      }, 15000);
+    }).then(function (r) {
+      if (r.ok) return done(outcome);
+      if (r.status === 403 && !retried) return submit(outcome, answeredBy, true);
+      busy(false);
+      if (r.status === 429) return error(errId, 'You have sent several questions in the last hour. Please try again later.');
+      if (r.status === 400) return error(errId, 'Please check your question and email and try again.');
+      error(errId, 'Something went wrong. Please try again in a few minutes.');
+    }).catch(function () {
+      busy(false); error(errId, 'Something went wrong. Please try again in a few minutes.');
+    });
+  }
+
+  function done(outcome) {
+    busy(false);
+    var p = $('ask-done');
+    if (outcome === 'submitted') {
+      p.textContent = 'Your question is on its way to Steve Hawkins. He’ll reply to ' + state.email + '.';
+    } else {
+      p.textContent = 'Thanks for checking. If you have another question, you can ask it here.';
+    }
+    $('ask-again').hidden = false;
+    state = null; show(3);
+  }
+  $('ask-again').addEventListener('click', function () { reset(); $('ask-question').focus(); });
+})();
+</script>

@@ -61,10 +61,11 @@ layout: base.njk
         <p class="text-brand-dark mb-3">
           <strong>Steve Hawkins</strong> serves as Region 13's Advisor on the Laws of the Game. He answers rules questions submitted by families, coaches, and referees, drawing on decades of refereeing experience. In 2016, the Region honored him with the <a href="/about/hall-of-fame/" class="text-brand-red-dark hover:underline">Michael Walizer Award</a> for lifetime service as a referee.
         </p>
-        <a href="https://ayso13.typeform.com/to/Ax4Bm7HD" target="_blank" rel="noopener"
+        <button type="button" id="ask-open" hidden
            class="inline-block bg-brand-gold text-brand-dark font-semibold px-5 py-2.5 rounded-lg hover:bg-yellow-400 transition-colors">
-          Submit a Question
-        </a>
+          Ask a question
+        </button>
+        <noscript><p class="text-brand-dark">Please enable JavaScript to send a question.</p></noscript>
       </div>
 
       {# Section jump links #}
@@ -124,6 +125,8 @@ layout: base.njk
         </section>
         {% endif %}
       {% endfor %}
+
+      {% include "ask-modal.njk" %}
 
       {# Become-a-referee CTA — for visitors landing here from
          "AYSO referee training Pasadena" or post-registration emails #}
