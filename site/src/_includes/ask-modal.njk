@@ -1,6 +1,6 @@
 {# Ask the Referee modal (spec 2026-10-13). Plain <dialog> + inline script.
    Every visitor-typed value is written with textContent, never innerHTML. #}
-<dialog id="ask-dialog" aria-labelledby="ask-title"
+<dialog id="ask-dialog" data-pagefind-ignore aria-labelledby="ask-title"
         class="w-[min(40rem,calc(100vw-2rem))] max-h-[90vh] rounded-xl p-0 backdrop:bg-black/50">
   <div class="p-6">
     <div class="flex items-start justify-between gap-4 mb-4">
@@ -48,10 +48,11 @@
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   var $ = function (id) { return document.getElementById(id); };
   var dlg = $('ask-dialog'), openBtn = $('ask-open');
-  if (!dlg || !openBtn || typeof dlg.showModal !== 'function') return;
+  if (!dlg || !openBtn || typeof dlg.showModal !== 'function' || !window.crypto || typeof crypto.randomUUID !== 'function') return;
 
-  var widgetId = null, token = null, waiters = [];
+  var widgetId = null, token = null, waiters = [], tsFailed = false;
   var state = null; // { id, question, email, suggestStatus, slugs }
+  var lastAttempt = null; // { id, question, email }: reused so a retry cannot send twice
 
   // ── Deep links: #qa-<slug> opens that answer ──
   function openHash() {
@@ -62,31 +63,46 @@
   openHash();
 
   // ── Turnstile (loaded on first open; tokens are single-use) ──
+  // A token is handed to a queued waiter or stored, never both. Consuming one
+  // resets the widget so the next request gets a fresh token.
   function loadTurnstile() {
+    if (tsFailed) {
+      var old = document.getElementById('ask-ts-script');
+      if (old) old.remove();
+      tsFailed = false;
+    }
     if (window.turnstile || document.getElementById('ask-ts-script')) return;
     window.askTsReady = function () {
       widgetId = window.turnstile.render('#ask-turnstile', {
         sitekey: SITE_KEY, appearance: 'interaction-only',
-        callback: function (t) { token = t; waiters.splice(0).forEach(function (w) { w(t); }); },
+        callback: function (t) {
+          if (waiters.length) { waiters.splice(0).forEach(function (w) { w.resolve(t); }); resetWidget(); }
+          else token = t;
+        },
         'expired-callback': function () { token = null; },
       });
     };
     var s = document.createElement('script');
     s.id = 'ask-ts-script'; s.async = true;
+    s.onerror = function () { tsFailed = true; waiters.splice(0).forEach(function (w) { w.reject(new Error('turnstile')); }); };
     s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=askTsReady';
     document.head.appendChild(s);
   }
-  function takeToken() {
-    if (token) { var t = token; token = null; return Promise.resolve(t); }
-    return new Promise(function (resolve) {
-      waiters.push(resolve);
-      setTimeout(function () { resolve(null); }, 30000);
-    });
-  }
-  function freshToken() {
+  function resetWidget() {
     token = null;
     if (window.turnstile && widgetId !== null) window.turnstile.reset(widgetId);
-    return takeToken().then(function (t) { token = null; return t; });
+  }
+  function takeToken() {
+    if (tsFailed) return Promise.reject(new Error('turnstile'));
+    if (token) { var t = token; resetWidget(); return Promise.resolve(t); }
+    return new Promise(function (resolve, reject) {
+      var w = { resolve: resolve, reject: reject };
+      waiters.push(w);
+      setTimeout(function () {
+        var i = waiters.indexOf(w);
+        if (i >= 0) { waiters.splice(i, 1); resolve(null); }
+      }, 30000);
+    });
   }
 
   function post(path, body, ms) {
@@ -104,7 +120,7 @@
 
   function reset() {
     $('ask-question').value = ''; error('ask-error'); error('ask-error-2');
-    state = null; show(1);
+    state = null; lastAttempt = null; show(1);
   }
 
   openBtn.hidden = false;
@@ -119,9 +135,11 @@
     if (question.length < 10) return error('ask-error', 'Please write a little more about your question.');
     if (!EMAIL_RE.test(email)) return error('ask-error', 'Please enter a valid email address so Steve can reply.');
     error('ask-error'); busy(true);
-    state = { id: crypto.randomUUID(), question: question, email: email, suggestStatus: 'skipped_error', slugs: [] };
+    var same = lastAttempt && lastAttempt.question === question && lastAttempt.email === email;
+    state = { id: same ? lastAttempt.id : crypto.randomUUID(), question: question, email: email, suggestStatus: 'skipped_error', slugs: [] };
+    lastAttempt = { id: state.id, question: question, email: email };
     takeToken()
-      .then(function (t) { return post('/public/ask/suggest', { question: question, turnstile: t }, 4500); })
+      .then(function (t) { return post('/public/ask/suggest', { question: question, turnstile: t }, 7000); })
       .then(function (r) {
         if (r.status === 400) throw { show: 'Please check your question and try again.' };
         if (r.status === 403) throw { show: 'Please try again.', resetTs: true };
@@ -172,7 +190,7 @@
   function submit(outcome, answeredBy, retried) {
     busy(true);
     var errId = outcome === 'deflected' || !$('ask-step-2').hidden ? 'ask-error-2' : 'ask-error';
-    return freshToken().then(function (t) {
+    return takeToken().then(function (t) {
       return post('/public/ask/submit', {
         id: state.id, question: state.question, email: state.email, turnstile: t,
         outcome: outcome, answeredBy: answeredBy || null,
