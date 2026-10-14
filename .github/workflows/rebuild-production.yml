@@ -176,6 +176,7 @@ jobs:
           # Field maps come from the platform's public API at build time. Prod
           # reads the platform's prod instance.
           FIELDS_API_BASE: https://fields.ayso13.org
+          ASK_API_BASE: https://referee.ayso13.org
         run: |
           npm ci
           npm run build
