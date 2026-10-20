@@ -13,6 +13,16 @@ All-Stars is a competitive winter program for advanced players in 10U, 12U, and 
 
 ![](/images/all-stars-interior.jpg)
 
+## Tryouts: October 25 & November 1
+
+### [Rose Bowl Area H](https://www.ayso13.org/fields/area-h/)
+
+- **Girls 10U:** 9–10:30am
+- **Boys 10U:** 10:30am–12pm
+- **Girls 12U:** 12–1:30pm
+- **Boys 12U:** 1:30–3pm
+- **Girls & Boys 14U:** 3–4:30pm
+
 ## Quick Facts
 
 - Ages: 10U, 12U, 14U
@@ -31,11 +41,6 @@ The program requires a significant time commitment:
 - Two practices per week
 - Games on Saturdays and Sundays
 - Attendance at all practices and games expected
-
-## Tryout Schedule (2026)
-
-### First Tryout — October 25  
-### Second Tryout — November 1
 
 ## Key Dates
 
