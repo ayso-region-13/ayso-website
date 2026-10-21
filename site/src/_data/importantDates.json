@@ -2,7 +2,7 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-10-18",
+      "date": "2026-10-25",
       "name": "Sunday Soccer Lab",
       "link": "https://www.ayso13.org/programs/sunday-soccer/"
     },
@@ -13,7 +13,11 @@
     },
     {
       "date": "2026-10-17",
-      "name": "Weekend #6 soccer games - Picture Day #1"
+      "name": "Weekend #7 soccer games"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "Beyond the Ball Coach Workshop - dinner provided!"
     }
   ]
 }
