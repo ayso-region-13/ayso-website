@@ -1,7 +1,7 @@
 // AUTO-GENERATED from site/src/_redirects.
 // Do NOT edit by hand -- run `npm run build` in workers/redirects/.
-// Last generated: 2026-09-06T19:54:39.313Z
-// 645 exact rules + 9 splat rules = 654 total
+// Last generated: 2026-10-22T17:18:00.026Z
+// 647 exact rules + 9 splat rules = 656 total
 
 export const EXACT = {
   "/age-chart-2025/": {
@@ -2394,6 +2394,14 @@ export const EXACT = {
   },
   "/wp-content/uploads/2023/03/Game-Card.pdf": {
     "d": "/coaches/game-cards/",
+    "s": 301
+  },
+  "/wp-content/uploads/2022/06/Referee-cards.pdf": {
+    "d": "/assets/docs/game_card_2026.pdf",
+    "s": 301
+  },
+  "/wp-content/uploads/2026/02/Referee-cards.pdf": {
+    "d": "/assets/docs/game_card_2026.pdf",
     "s": 301
   },
   "/wp-content/uploads/2024/09/prts01-v03.pdf": {
