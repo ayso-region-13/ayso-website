@@ -41,6 +41,10 @@ test("firstLink makes ayso13 links relative", () => {
   assert.equal(firstLink("https://staging.ayso13.org/programs/next"), "https://staging.ayso13.org/programs/next");
 });
 
+test("firstLink keeps a double-slash ayso13 path absolute", () => {
+  assert.equal(firstLink("https://www.ayso13.org//evil.example/x"), "https://www.ayso13.org//evil.example/x");
+});
+
 test("firstLink decodes entities and trims trailing punctuation", () => {
   assert.equal(firstLink("https://x.example/a?b=1&amp;c=2."), "https://x.example/a?b=1&c=2");
 });
@@ -90,6 +94,12 @@ test("toEntries drops entries whose last day is before today and sorts by date t
     occ({ uid: "d", start: "2026-11-02", lastDay: "2026-11-02", summary: "Alpha" }),
   ], "2026-10-23");
   assert.deepEqual(out.map((e) => e.name), ["Spans today", "Alpha", "Zed"]);
+});
+
+test("toEntries output does not depend on feed order for tied entries", () => {
+  const a = occ({ uid: "a", summary: "Same", description: '#website https://a.example/' });
+  const b = occ({ uid: "b", summary: "Same", description: '#website https://b.example/' });
+  assert.deepEqual(toEntries([a, b], "2026-10-23"), toEntries([b, a], "2026-10-23"));
 });
 
 test("toEntries includes the link when present", () => {

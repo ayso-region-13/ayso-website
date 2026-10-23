@@ -52,7 +52,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: staging/site
-        run: npm ci --omit=dev
+        run: npm ci --omit=dev --ignore-scripts
 
       # On a feed or parse error the runner exits non-zero and leaves the data
       # file untouched, so the home page keeps the last good dates.

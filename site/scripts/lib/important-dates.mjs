@@ -47,6 +47,8 @@ function normalizeLink(raw) {
   }
   if (url.protocol !== "http:" && url.protocol !== "https:") return undefined;
   if (url.hostname === "www.ayso13.org" || url.hostname === "ayso13.org") {
+    // "//host/x" would read as protocol-relative, so leave that one absolute.
+    if (url.pathname.startsWith("//")) return text;
     return url.pathname + url.search + url.hash;
   }
   return text;
@@ -65,8 +67,11 @@ function plainText(s) {
   return decodeEntities(s.replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
 }
 
+// Every field participates, so feed order can never change the output bytes.
 const byDateThenName = (a, b) =>
-  a.date.localeCompare(b.date) || a.name.localeCompare(b.name);
+  a.date.localeCompare(b.date) || a.name.localeCompare(b.name) ||
+  (a.link ?? "").localeCompare(b.link ?? "") ||
+  (a.endDate ?? "").localeCompare(b.endDate ?? "");
 
 export function toEntries(occurrences, today) {
   const earliest = new Map();
