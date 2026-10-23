@@ -1,0 +1,217 @@
+name: Sync Important Dates
+
+# Hourly sync of the home-page Important Dates widget from Region 13's public
+# Google Calendar (scripts/sync-important-dates.mjs). Events whose description
+# carries #website become entries in site/src/_data/importantDates.json. When
+# the file changed it commits to BOTH staging and main, like the newsletter
+# sync: the main push fires rebuild-production.yml (narrow paths filter), so a
+# calendar change reaches www without a promote and without dragging other
+# staging work along.
+#
+# The file also changes when nobody touched the calendar (a past event drops
+# off, a weekly series rolls forward). Those changes commit and rebuild www but
+# do not post to Slack; the runner's summary sets `notify` only for changes the
+# date alone does not explain.
+#
+# ⚠️ `schedule` only fires from the DEFAULT branch, which is `staging`. This
+# file must stay on staging.
+#
+# ⚠️ Pushes use PROMOTE_TOKEN (a PAT), not GITHUB_TOKEN: a push made with
+# GITHUB_TOKEN starts no workflows, so neither the staging deploy nor the prod
+# rebuild would run. The PAT also bypasses the `main` ruleset.
+#
+# Spec: docs/superpowers/specs/2026-10-23-calendar-important-dates-design.md
+
+on:
+  schedule:
+    - cron: '17 * * * *' # hourly, off the top of the hour
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read # the promote guard and the failure step list workflow runs
+
+concurrency:
+  group: sync-important-dates
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: staging
+          token: ${{ secrets.PROMOTE_TOKEN }}
+          path: staging
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        working-directory: staging/site
+        run: npm ci --omit=dev
+
+      # On a feed or parse error the runner exits non-zero and leaves the data
+      # file untouched, so the home page keeps the last good dates.
+      - name: Sync from Google Calendar
+        id: sync
+        working-directory: staging/site
+        env:
+          IMPORTANT_DATES_SYNC_SUMMARY: ${{ runner.temp }}/imp.json
+        run: |
+          node scripts/sync-important-dates.mjs
+          if [ -z "$(git status --porcelain -- src/_data/importantDates.json)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No important-dates changes."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit message
+        id: msg
+        if: steps.sync.outputs.changed == 'true'
+        env:
+          SUMMARY: ${{ runner.temp }}/imp.json
+        run: |
+          A=$(jq '.added | length' "$SUMMARY"); R=$(jq '.removed | length' "$SUMMARY")
+          echo "subject=Important dates: sync from Google Calendar ($A added, $R removed)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push to staging
+        id: push_staging
+        if: steps.sync.outputs.changed == 'true'
+        working-directory: staging
+        env:
+          SUBJECT: ${{ steps.msg.outputs.subject }}
+        run: |
+          git config user.name "ayso13-calendar-sync"
+          git config user.email "webmaster@ayso13.org"
+          git add site/src/_data/importantDates.json
+          git commit -m "$SUBJECT"
+          # A CMS edit can land between checkout and push; rebase once.
+          git push origin HEAD:staging || { git pull --rebase origin staging && git push origin HEAD:staging; }
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # rebuild-production.yml shares the deploy-pages-prod concurrency group
+      # with promote-to-production.yml, and GitHub keeps only one pending run
+      # per group, so a main push here could evict a queued /ayso promote. If a
+      # promote is queued or running, skip main this hour; the next run catches
+      # it up. A failed lookup counts as "promote active": skipping an hour costs
+      # nothing, evicting a promote does. (A promote dispatched in the seconds
+      # between this check and the push can still collide; the deploy watchdog
+      # reports that case.)
+      - name: Check for an active promote
+        id: guard
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! ACTIVE=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow promote-to-production.yml \
+                --json status --jq '[.[] | select(.status != "completed")] | length'); then
+            echo "::warning::Could not check for an active promote; skipping the main push this hour."
+            echo "promote_active=true" >> "$GITHUB_OUTPUT"
+          elif [ "$ACTIVE" != "0" ]; then
+            echo "::notice::A promote is queued or running; skipped the main push this hour. The next hourly run catches main up."
+            echo "promote_active=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "promote_active=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v6
+        if: success() && steps.guard.outputs.promote_active != 'true'
+        with:
+          ref: main
+          token: ${{ secrets.PROMOTE_TOKEN }}
+          path: main
+
+      # Copy the exact file rather than re-running the sync, so staging and main
+      # can never disagree because the calendar changed in between calls. Runs
+      # on every successful sync, so a failed or skipped main push heals on the
+      # next run.
+      - name: Commit and push to main
+        id: push_main
+        if: success() && steps.guard.outputs.promote_active != 'true'
+        working-directory: main
+        env:
+          SUBJECT: "${{ steps.msg.outputs.subject || 'Important dates: sync from Google Calendar (catch up main)' }}"
+        run: |
+          cp ../staging/site/src/_data/importantDates.json site/src/_data/importantDates.json
+          git config user.name "ayso13-calendar-sync"
+          git config user.email "webmaster@ayso13.org"
+          git add site/src/_data/importantDates.json
+          if git diff --cached --quiet; then echo "main already current"; exit 0; fi
+          git commit -m "$SUBJECT"
+          git push origin HEAD:main || { git pull --rebase origin main && git push origin HEAD:main; }
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Event names and links are calendar-controlled text: they reach Slack
+      # only via a file → jq, never interpolated into the shell. Slack answers
+      # 200 with ok:false on a bad token, so `.ok` is checked (annotate, don't
+      # fail the job). Quiet roll-forwards (`notify` false) post nothing.
+      - name: Notify Slack — published
+        if: success() && (steps.push_staging.outputs.pushed == 'true' || steps.push_main.outputs.pushed == 'true')
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SUMMARY: ${{ runner.temp }}/imp.json
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if ! jq -e '.notify' "$SUMMARY" >/dev/null; then
+            echo "Date-only change (past event dropped or series rolled forward); no Slack post."
+            exit 0
+          fi
+          RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -c --arg run "$RUN_URL" '
+              def esc: .[0:150] | gsub("[\r\n]"; " ") | gsub("&"; "&amp;") | gsub("<"; "&lt;") | gsub(">"; "&gt;");
+              def when: if .endDate then "\(.date) to \(.endDate)" else .date end;
+              def lines(xs): xs | map("• " + (.name | esc) + " (" + (when | esc) + ")") | join("\n");
+              {
+                channel: "C0A024YGR9C",
+                text: "Important Dates updated",
+                blocks: ([
+                  { type: "section", text: { type: "mrkdwn", text: ":calendar: *Important Dates updated from the Google Calendar.* www rebuilds in a few minutes. <https://www.ayso13.org/|View the home page>" } }
+                ]
+                + (if (.added | length) > 0 then [{ type: "section", text: { type: "mrkdwn", text: ("*Added*\n" + lines(.added)) } }] else [] end)
+                + (if (.removed | length) > 0 then [{ type: "section", text: { type: "mrkdwn", text: ("*Removed*\n" + lines(.removed)) } }] else [] end)
+                + [{ type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }])
+              }' "$SUMMARY")")
+          printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
+            || echo "::error::Slack post failed: $(printf '%s' "$RESP" | jq -r '.error // "unparseable response"')"
+
+      # Post only when the previous run succeeded, so an hour-long Google outage
+      # produces one message, not one per hour. Any error in that lookup posts
+      # anyway: better a duplicate than silence.
+      - name: Notify Slack — failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if PREV=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow sync-important-dates.yml \
+                --status completed --limit 5 --json conclusion,databaseId \
+                --jq "[.[] | select(.databaseId != $RUN_ID)][0].conclusion // \"\""); then
+            if [ -n "$PREV" ] && [ "$PREV" != "success" ]; then
+              echo "Previous run also ended '$PREV'; already reported, not posting again."
+              exit 0
+            fi
+          else
+            echo "::warning::Could not look up the previous run; posting anyway."
+          fi
+          RESP=$(curl -sS -X POST https://slack.com/api/chat.postMessage \
+            -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+            -H "Content-Type: application/json; charset=utf-8" \
+            --data "$(jq -nc --arg run "$RUN_URL" '{
+              channel: "C0A024YGR9C",
+              text: "Important Dates sync failed",
+              blocks: [
+                { type: "section", text: { type: "mrkdwn", text: ":x: *Important Dates sync failed.* The home page keeps the last good dates. The most likely causes are the Google Calendar feed being unreachable, or the feed returning something that is not a calendar (the log says which). If the staging push succeeded but the main push failed, the change is on staging only; the next hourly run retries main automatically. This message posts once per outage, not every hour." } },
+                { type: "context", elements: [ { type: "mrkdwn", text: "<\($run)|View workflow run>" } ] }
+              ]
+            }')")
+          printf '%s' "$RESP" | jq -e '.ok' >/dev/null \
+            || echo "::error::Slack post failed: $(printf '%s' "$RESP" | jq -r '.error // "unparseable response"')"

@@ -1,8 +1,8 @@
 {# ── Important Dates column ───────────────────────────────────────────
    Used inside the About + Roles section on the home page as the middle
    column. Renders up to 5 upcoming events from _data/importantDates.json
-   (CMS-edited). Inline script re-checks each card's data-date against
-   today (Pacific time) and hides events whose last day (data-end-date, the
+   (synced hourly from the Google Calendar). Inline script re-checks each
+   card's data-date against today (Pacific time) and hides events whose last day (data-end-date, the
    start date for single-day events) has passed — so the widget never shows
    stale dates between publishes. Without JS, the build-time filter is
    accurate as of the last publish.

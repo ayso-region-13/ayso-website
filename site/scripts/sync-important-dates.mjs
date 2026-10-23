@@ -5,8 +5,8 @@
 // .github/workflows/sync-important-dates.yml; safe to run locally, but point
 // IMPORTANT_DATES_PATH at a scratch file unless you mean to rewrite the data.
 //
-// The `enabled` switch belongs to the CMS editors, so it is read back from the
-// existing file and never changed here. Spec:
+// The `enabled` switch is a hand edit to the data file (the CMS editor was
+// retired), so it is read back from the existing file and never changed here. Spec:
 // docs/superpowers/specs/2026-10-23-calendar-important-dates-design.md
 import fs from "node:fs/promises";
 import path from "node:path";
