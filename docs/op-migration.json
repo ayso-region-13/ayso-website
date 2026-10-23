@@ -1,0 +1,33 @@
+{
+  "account": "my.1password.com",
+  "vault": "Dev",
+  "search_vaults": [
+    {
+      "account": "my.1password.com",
+      "vault": "Dev"
+    }
+  ],
+  "files": [
+    {
+      "plain": "site/.env",
+      "template": "site/.check-404s.op.env",
+      "use": "run"
+    }
+  ],
+  "items": {
+    "ayso13-website-healthcheck": {
+      "tags": [
+        "ayso-website",
+        "cloudflare"
+      ],
+      "notes": "Cloudflare token ayso13-website-healthcheck (Zone Analytics: Read, ayso13.org). Used by ayso-website site/scripts/check-404s.sh via op run (site/.check-404s.op.env), and by site-healthcheck (secrets/ayso.yml), which references this item.",
+      "fields": {
+        "credential": "CF_API_TOKEN",
+        "zone_id": "CF_ZONE_ID"
+      },
+      "plain": [
+        "zone_id"
+      ]
+    }
+  }
+}

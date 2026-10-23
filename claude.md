@@ -124,10 +124,10 @@ npm run build      # Production build to _site/ (includes Pagefind indexing)
 node scripts/migrate-content.js  # Re-sync /content/ → site/src/
 bash scripts/process-photos.sh   # Optimize new photos
 node scripts/check-links.js      # Check internal links
-./scripts/check-404s.sh          # Pull last-24h 404s from CF GraphQL Analytics (needs CF_ZONE_ID + CF_API_TOKEN in site/.env)
+./scripts/check-404s.sh          # Pull last-24h 404s from CF GraphQL Analytics (reads its Cloudflare token from 1Password via `op run`)
 ```
 
-**Cloudflare API tokens (consolidated 2026-06-13):** `ayso13-worker-deploy` (Workers Scripts + KV Storage + Account Settings + Zone Workers Routes) deploys all four workers — in `.envrc` `CLOUDFLARE_API_TOKEN` + the GitHub `CLOUDFLARE_API_TOKEN` secret. `ayso13-pages-deploy` (Account · Cloudflare Pages · Edit) = GitHub `CLOUDFLARE_PAGES_DEPLOY_TOKEN`, used by the CI Direct-Upload deploys (staging + promote). `ayso13-pages-deploy-read` (Pages: Read) = GitHub `CLOUDFLARE_PAGES_API_TOKEN` — was the promote status poll; now effectively unused (kept; `wait-for-cf-deploy.sh` is retired). `ayso13-website-healthcheck` (Zone Analytics: Read) backs BOTH the totavi healthcheck and `check-404s.sh` (`site/.env CF_API_TOKEN`) — value lives in `~/dev/site-healthcheck/secrets/ayso.yml`. Don't create per-tool deploy tokens; reuse these.
+**Cloudflare API tokens (consolidated 2026-06-13):** `ayso13-worker-deploy` (Workers Scripts + KV Storage + Account Settings + Zone Workers Routes) deploys all four workers — in `.envrc` `CLOUDFLARE_API_TOKEN` + the GitHub `CLOUDFLARE_API_TOKEN` secret. `ayso13-pages-deploy` (Account · Cloudflare Pages · Edit) = GitHub `CLOUDFLARE_PAGES_DEPLOY_TOKEN`, used by the CI Direct-Upload deploys (staging + promote). `ayso13-pages-deploy-read` (Pages: Read) = GitHub `CLOUDFLARE_PAGES_API_TOKEN` — was the promote status poll; now effectively unused (kept; `wait-for-cf-deploy.sh` is retired). `ayso13-website-healthcheck` (Zone Analytics: Read) backs BOTH the totavi healthcheck and `check-404s.sh` (`site/.env CF_API_TOKEN`) — value lives in 1Password (`my.1password.com` → `Dev` → `ayso13-website-healthcheck`); `check-404s.sh` re-runs itself under `op run` with the committed `site/.check-404s.op.env` (op:// references only), so no plaintext copy exists. Spec: `docs/op-migration.json`. Don't create per-tool deploy tokens; reuse these.
 
 Note: Search (`/search/`) only works after a full `npm run build` — not in dev server.
 
