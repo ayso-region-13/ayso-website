@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "ical.js": "2.2.1",
     "markdown-it": "^14.1.0",
     "markdown-it-anchor": "^9.2.0"
   },
