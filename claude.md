@@ -36,7 +36,7 @@ ayso13.org, rebuilt from WordPress as a static **Eleventy (11ty) + Tailwind CSS*
 
 ## Branched / staged for later
 
-- _(none currently)_
+- **`calendar-important-dates`** (parked 2026-10-23, waiting on league approval; issue https://github.com/ayso-region-13/ayso-website/issues/27). Adds an hourly sync that rebuilds `importantDates.json` from Google Calendar events tagged `#website` and retires the Pages CMS editor. Built and tested (76/76), previewed at https://calendar-important-dates.ayso-website-staging.pages.dev. **Before merging, delete `.github/workflows/preview-calendar-important-dates.yml`** (a temporary commit on the branch). Merging to `staging` starts the hourly schedule, and the first run drops every untagged entry, so admins tag what should stay first. Then promote once, run "Sync Important Dates" by hand, check www, and close the issue. The branch's own CLAUDE.md already describes the feature as shipped.
 
 ## Stack
 Eleventy 3.0 + Tailwind CSS 3.4, Nunjucks (`.njk`) templates, built from `site/` to `site/_site/`, hosted on Cloudflare Pages. `npm start` → http://localhost:8080.
