@@ -14,12 +14,9 @@
       "use": "run"
     },
     {
-      "plain": ".envrc.plaintext",
-      "template": ".envrc.tpl",
-      "use": "inject",
-      "plain_ok": [
-        "GLOBAL_SEO"
-      ]
+      "plain": ".ayso.env",
+      "template": ".ayso.op.env",
+      "use": "run"
     },
     {
       "plain": "workers/weather-api/.dev.vars",
@@ -55,13 +52,13 @@
       "plain": [
         "account_id"
       ],
-      "source": ".envrc.plaintext"
+      "source": ".ayso.env"
     },
     "ayso13-healthcheck-csp-admin": {
       "fields": {
         "credential": "CSP_ADMIN_KEY"
       },
-      "source": ".envrc.plaintext"
+      "source": ".ayso.env"
     },
     "ayso-website-weatherflow": {
       "tags": [
@@ -74,7 +71,7 @@
         "tempest_token": "TEMPEST_TOKEN"
       },
       "source": [
-        ".envrc.plaintext",
+        ".ayso.env",
         "workers/weather-api/.dev.vars"
       ]
     },
@@ -87,10 +84,10 @@
       "fields": {
         "credential": "EMAILOCTOPUS_API_KEY"
       },
-      "source": ".envrc.plaintext"
+      "source": ".ayso.env"
     }
   },
-  "_status": "phase 2 done 2026-10-25. .envrc is now a direnv shim that runs op inject on .envrc.tpl, so its spec entry points at .envrc.plaintext (never exists) to stop template/verify from reading the shim as plaintext.",
+  "_status": "phase 2 done 2026-10-25. The .envrc secrets moved to .ayso.op.env (op run, per command); .envrc keeps only the claude-seo symlink. .ayso.env never exists: the template is the source of truth.",
   "documents": [
     {
       "path": ".seo-creds/oauth-token.json",

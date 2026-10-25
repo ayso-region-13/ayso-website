@@ -2,6 +2,10 @@ name = "ayso13-weather-api"
 main = "src/index.js"
 compatibility_date = "2025-01-01"
 
+# AYSO Region 13 Cloudflare account. A public ID, pinned so wrangler can
+# never deploy to another account on a machine that has several.
+account_id = "c8b7868978b797422fdba27a744e8d43"
+
 # Cron triggers refresh every 5 min so the cached payload stays fresh
 # regardless of page traffic.
 [triggers]
