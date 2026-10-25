@@ -2,6 +2,10 @@ name = "ayso13-csp-report"
 main = "src/index.js"
 compatibility_date = "2025-05-18"
 
+# AYSO Region 13 Cloudflare account. A public ID, pinned so wrangler can
+# never deploy to another account on a machine that has several.
+account_id = "c8b7868978b797422fdba27a744e8d43"
+
 # Mount on /api/csp-report on both prod + staging. The more-specific
 # route here means it takes precedence over the redirect Worker's
 # /* and won't try to fetch(request) for these POSTs.

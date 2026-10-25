@@ -2,6 +2,10 @@ name = "ayso13-redirects"
 main = "src/index.js"
 compatibility_date = "2025-05-18"
 
+# AYSO Region 13 Cloudflare account. A public ID, pinned so wrangler can
+# never deploy to another account on a machine that has several.
+account_id = "c8b7868978b797422fdba27a744e8d43"
+
 # Two environments: production (mounted on www.ayso13.org) and
 # staging (mounted on staging.ayso13.org). Deploy with one of the
 # npm scripts (deploy:prod / deploy:staging) so the --env flag is

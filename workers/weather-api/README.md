@@ -277,7 +277,7 @@ Manual deploy:
 ```bash
 cd workers/weather-api && npm run deploy
 ```
-Use the canonical **`ayso13-worker-deploy`** token (Workers Scripts:Edit + **Workers KV Storage:Edit** + Account Settings:Read + Zone Workers Routes:Edit), in `.envrc` `CLOUDFLARE_API_TOKEN` + the GitHub `CLOUDFLARE_API_TOKEN` secret. A token missing KV:Edit trips `code 10023` (this Worker binds `WEATHER_KV`). Never `wrangler login`.
+Use the canonical **`ayso13-worker-deploy`** token (Workers Scripts:Edit + **Workers KV Storage:Edit** + Account Settings:Read + Zone Workers Routes:Edit), in 1Password `Dev/ayso13-worker-deploy` (`CLOUDFLARE_API_TOKEN` in the repo-root `.ayso.op.env`; `npm run deploy:op` uses it) + the GitHub `CLOUDFLARE_API_TOKEN` secret. A token missing KV:Edit trips `code 10023` (this Worker binds `WEATHER_KV`). Never `wrangler login`.
 
 **Secrets** (set via `wrangler secret put`, not in git): `TEMPEST_TOKEN`, `AIRNOW_API_KEY`, `PURPLEAIR_READ_KEY`, `SLACK_BOT_TOKEN`, `WEATHER_SELFTEST_KEY` (the last also set identically on the slack-bot Worker).
 

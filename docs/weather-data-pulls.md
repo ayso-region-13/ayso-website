@@ -8,7 +8,7 @@ How to get WBGT and heat-level history out of the D1 observation log. Referenced
 - **Written by:** `logObservation()` in the Worker's `refresh()`, one row per 5-minute cron tick
 - **History starts:** 2026-08-25 14:50 PT. There is nothing before that, and there never will be (see [Why it can't be backfilled](#why-it-cant-be-backfilled))
 
-Every query below needs `CLOUDFLARE_API_TOKEN` with D1 access. Direnv supplies it inside the repo; otherwise `source .envrc` first.
+Every query below needs `CLOUDFLARE_API_TOKEN` with D1 access. It comes from 1Password: run `npm run export-log:op` in `workers/weather-api/`, or prefix a one-off command with `op run --account=my.1password.com --env-file=.ayso.op.env --` from the repo root (adjust the path from a subdirectory).
 
 ## ⚠️ `--remote` is not the default
 

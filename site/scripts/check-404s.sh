@@ -4,14 +4,12 @@
 # Free plan retention is ~24h, so run this daily if you want a rolling log.
 #
 # Setup (one-time):
-#   1. Get a zone-scoped API token:
-#        dash.cloudflare.com → My Profile → API Tokens → Create Token
-#        → "Read analytics and logs" template → Zone: ayso13.org → Create
-#   2. Get the zone ID:
-#        dash.cloudflare.com → ayso13.org → Overview page, right sidebar
-#   3. Save credentials to site/.env (already gitignored):
-#        CF_ZONE_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-#        CF_API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+#   The token (ayso13-website-healthcheck, Zone Analytics: Read) and zone ID
+#   live in 1Password: my.1password.com → Dev → ayso13-website-healthcheck.
+#   When CF_ZONE_ID / CF_API_TOKEN aren't already set, the script re-runs
+#   itself under `op run` with site/.check-404s.op.env, the committed
+#   template of op:// references. No plaintext copy is kept on disk.
+#   Needs the 1Password CLI signed in to my.1password.com (Touch ID prompt).
 #
 # Usage:
 #   ./scripts/check-404s.sh                # last 24h
@@ -21,14 +19,9 @@
 
 set -euo pipefail
 
+SELF="$(cd "$(dirname "$0")" && pwd)/$(basename "$0")"
+ARGS=("$@")
 cd "$(dirname "$0")/.."
-
-if [[ -f .env ]]; then
-  set -a
-  # shellcheck disable=SC1091
-  source .env
-  set +a
-fi
 
 HOURS=24
 LIMIT=25
@@ -39,14 +32,20 @@ while [[ $# -gt 0 ]]; do
     --limit) LIMIT="$2"; shift 2 ;;
     --raw)   RAW=1; shift ;;
     -h|--help)
-      sed -n '2,/^$/p' "$0" | sed 's/^# \{0,1\}//'
+      sed -n '2,/^$/p' "$SELF" | sed 's/^# \{0,1\}//'
       exit 0 ;;
     *) echo "unknown arg: $1" >&2; exit 1 ;;
   esac
 done
 
+if [[ -z "${CF_ZONE_ID:-}" || -z "${CF_API_TOKEN:-}" ]] && [[ -z "${CHECK_404S_VIA_OP:-}" ]] \
+  && command -v op >/dev/null 2>&1; then
+  CHECK_404S_VIA_OP=1 exec op run --account my.1password.com \
+    --env-file=.check-404s.op.env -- "$SELF" ${ARGS[@]+"${ARGS[@]}"}
+fi
+
 if [[ -z "${CF_ZONE_ID:-}" || -z "${CF_API_TOKEN:-}" ]]; then
-  echo "error: CF_ZONE_ID and CF_API_TOKEN must be set (in env or site/.env)" >&2
+  echo "error: CF_ZONE_ID and CF_API_TOKEN must be set (in env, or via 1Password: install op and sign in)" >&2
   echo "see header of $0 for setup instructions, or run with --help" >&2
   exit 1
 fi
@@ -90,7 +89,7 @@ if echo "$RESPONSE" | jq -e '.errors' >/dev/null 2>&1; then
     *Authentication*|*authentication*|*Invalid*|*invalid*|*[Tt]oken*|*[Uu]nauthorized*)
       echo "" >&2
       echo "Check your CF_API_TOKEN — common fixes:" >&2
-      echo "  - Confirm token is in site/.env (no quotes around the value)" >&2
+      echo "  - Confirm the 1Password item Dev/ayso13-website-healthcheck holds the current token" >&2
       echo "  - Verify token still exists at https://dash.cloudflare.com/profile/api-tokens" >&2
       echo "  - Confirm token has 'Read analytics and logs' template scoped to ayso13.org zone" >&2
       ;;

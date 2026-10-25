@@ -35,57 +35,39 @@ The more-specific `www.ayso13.org/api/weather` route (handled by the
 sees everything else. Real pages and static assets pass through via
 `fetch(request)`.
 
-## Cloudflare account guard
+## Cloudflare account and token
 
-This repo's `package.json` scripts (`dev`, `deploy`) run a `preflight`
-step that errors out if **`CLOUDFLARE_ACCOUNT_ID`** is not set. This
-exists because some maintainers have multiple Cloudflare accounts on
-their machine and an un-pinned `wrangler` could push to the wrong one.
+`wrangler.toml` pins `account_id` (a public ID), so wrangler always
+targets the AYSO Region 13 account, even on a machine with several.
+The same pin is in the weather-api and csp-report Workers.
 
-### Recommended setup: direnv
-
-The repo ships a `.envrc.example` at the root. Copy it to `.envrc`,
-fill in the AYSO Region 13 account ID, and `direnv allow`:
+The deploy token lives in 1Password (`my.1password.com`, item
+`Dev/ayso13-worker-deploy`). The `:op` scripts load it for that one
+command through `op run` and the repo-root `.ayso.op.env`:
 
 ```bash
-cd /path/to/ayso-website
-cp .envrc.example .envrc        # the real .envrc is gitignored
-$EDITOR .envrc                  # paste the account ID
-direnv allow
+npm run deploy:prod:op      # or deploy:staging:op, tail:op
 ```
 
-After that, `CLOUDFLARE_ACCOUNT_ID` is exported whenever you're inside
-the repo. `cd` out and it unloads.
-
-### Alternative: shell rc
-
-If you don't use direnv, export it per-shell:
-
-```bash
-export CLOUDFLARE_ACCOUNT_ID=<ayso13-account-id>
-```
-
-Find the AYSO Region 13 account ID in the Cloudflare dashboard
-sidebar (or under any zone's Overview → API → Account ID).
-
-The same guard is in `workers/weather-api/package.json`.
+The plain `deploy:prod` / `deploy:staging` scripts are what CI runs,
+with the token from GitHub secrets.
 
 ## Local dev
 
 ```bash
 npm install
 npm run build       # regenerate src/map.js from _redirects
-npm run dev         # preflight + wrangler dev (local Worker on :8787)
+npm run dev         # wrangler dev (local Worker on :8787)
 ```
 
 ## Deploy
 
 ```bash
-npm run deploy
+npm run deploy:prod:op
 ```
 
-`npm run deploy` runs preflight (account-ID check) → `build` (refresh
-`src/map.js`) → `test` (smoke tests) → `wrangler deploy`.
+`deploy:prod` runs `build` (refresh `src/map.js`) → `test` (smoke
+tests) → `wrangler deploy --env production`.
 
 The first deploy will need the routes bound. If the `[[routes]]`
 blocks in `wrangler.toml` don't auto-create the routes, bind them in

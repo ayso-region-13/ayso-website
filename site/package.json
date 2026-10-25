@@ -12,7 +12,8 @@
     "migrate": "node scripts/migrate-content.js",
     "photos": "bash scripts/process-photos.sh",
     "check-links": "node scripts/check-links.js",
-    "test": "node --test \"scripts/**/*.test.mjs\""
+    "test": "node --test \"scripts/**/*.test.mjs\"",
+    "sync-newsletters:op": "op run --account=my.1password.com --env-file=../.ayso.op.env -- node scripts/sync-newsletters.mjs"
   },
   "dependencies": {
     "@11ty/eleventy": "^3.0.0",

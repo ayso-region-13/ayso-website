@@ -1,0 +1,114 @@
+{
+  "account": "my.1password.com",
+  "vault": "Dev",
+  "search_vaults": [
+    {
+      "account": "my.1password.com",
+      "vault": "Dev"
+    }
+  ],
+  "files": [
+    {
+      "plain": "site/.env",
+      "template": "site/.check-404s.op.env",
+      "use": "run"
+    },
+    {
+      "plain": ".ayso.env",
+      "template": ".ayso.op.env",
+      "use": "run"
+    },
+    {
+      "plain": "workers/weather-api/.dev.vars",
+      "template": "workers/weather-api/.dev.vars.tpl",
+      "use": "inject"
+    }
+  ],
+  "items": {
+    "ayso13-website-healthcheck": {
+      "tags": [
+        "ayso-website",
+        "cloudflare"
+      ],
+      "notes": "Cloudflare token ayso13-website-healthcheck (Zone Analytics: Read, ayso13.org). Used by ayso-website site/scripts/check-404s.sh via op run (site/.check-404s.op.env), and by site-healthcheck (secrets/ayso.yml), which references this item.",
+      "fields": {
+        "credential": "CF_API_TOKEN",
+        "zone_id": "CF_ZONE_ID"
+      },
+      "plain": [
+        "zone_id"
+      ]
+    },
+    "ayso13-worker-deploy": {
+      "tags": [
+        "ayso-website",
+        "cloudflare"
+      ],
+      "notes": "Cloudflare token ayso13-worker-deploy (Workers Scripts + KV Storage + D1 + Account Settings + Zone Workers Routes). Canonical worker deploy token; .envrc CLOUDFLARE_API_TOKEN. Same value as the CLOUDFLARE_API_TOKEN GitHub secret.",
+      "fields": {
+        "credential": "CLOUDFLARE_API_TOKEN",
+        "account_id": "CLOUDFLARE_ACCOUNT_ID"
+      },
+      "plain": [
+        "account_id"
+      ],
+      "source": ".ayso.env"
+    },
+    "ayso13-healthcheck-csp-admin": {
+      "fields": {
+        "credential": "CSP_ADMIN_KEY"
+      },
+      "source": ".ayso.env"
+    },
+    "ayso-website-weatherflow": {
+      "tags": [
+        "ayso-website",
+        "weatherflow"
+      ],
+      "notes": "WeatherFlow/Tempest token; .envrc WEATHERFLOW_API and the weather worker's TEMPEST_TOKEN are the same value.",
+      "fields": {
+        "credential": "WEATHERFLOW_API",
+        "tempest_token": "TEMPEST_TOKEN"
+      },
+      "source": [
+        ".ayso.env",
+        "workers/weather-api/.dev.vars"
+      ]
+    },
+    "ayso-website-emailoctopus": {
+      "tags": [
+        "ayso-website",
+        "emailoctopus"
+      ],
+      "notes": "EmailOctopus API key.",
+      "fields": {
+        "credential": "EMAILOCTOPUS_API_KEY"
+      },
+      "source": ".ayso.env"
+    }
+  },
+  "_status": "phase 2 done 2026-10-25. The .envrc secrets moved to .ayso.op.env (op run, per command); .envrc keeps only the claude-seo symlink. .ayso.env never exists: the template is the source of truth.",
+  "documents": [
+    {
+      "path": ".seo-creds/oauth-token.json",
+      "title": "ayso-website-google-seo-oauth",
+      "tags": [
+        "ayso-website",
+        "google"
+      ],
+      "ignore_keys": [
+        "access_token",
+        "expires_in",
+        "expires_at"
+      ]
+    },
+    {
+      "path": ".seo-creds/client_secret.json",
+      "title": "ayso-website-google-oauth-client",
+      "tags": [
+        "ayso-website",
+        "google"
+      ]
+    }
+  ]
+}

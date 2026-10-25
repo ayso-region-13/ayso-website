@@ -5,12 +5,15 @@
   "description": "Cloudflare Worker that fetches Tempest + NWS data, computes WBGT, and serves /api/weather for the AYSO Region 13 weather page.",
   "type": "module",
   "scripts": {
-    "preflight": "node -e 'if(!process.env.CLOUDFLARE_ACCOUNT_ID){console.error(\"\\n\\u2717 CLOUDFLARE_ACCOUNT_ID is not set.\\n\\nWrangler may deploy to the wrong Cloudflare account on this machine.\\nExport the AYSO Region 13 account ID first, e.g.:\\n\\n  export CLOUDFLARE_ACCOUNT_ID=<ayso13-account-id>\\n\\nFind it in the Cloudflare dashboard sidebar.\\n\");process.exit(1)}else{console.log(\"\\u2713 CLOUDFLARE_ACCOUNT_ID is set\")}'",
     "test": "node --test",
-    "dev": "npm run preflight && wrangler dev",
-    "deploy": "npm run preflight && wrangler deploy",
+    "dev": "wrangler dev",
+    "secrets:dev-vars": "op inject --account=my.1password.com -f -i .dev.vars.tpl -o .dev.vars",
+    "deploy": "wrangler deploy",
+    "deploy:op": "op run --account=my.1password.com --env-file=../../.ayso.op.env -- npm run deploy",
     "tail": "wrangler tail",
-    "export-log": "bash scripts/export-log.sh"
+    "tail:op": "op run --account=my.1password.com --env-file=../../.ayso.op.env -- npm run tail",
+    "export-log": "bash scripts/export-log.sh",
+    "export-log:op": "op run --account=my.1password.com --env-file=../../.ayso.op.env -- npm run export-log"
   },
   "devDependencies": {
     "wrangler": "^4.87.0"

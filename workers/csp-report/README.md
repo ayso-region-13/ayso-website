@@ -116,23 +116,26 @@ echo "$ADMIN_KEY" | wrangler secret put ADMIN_KEY
 
 ```bash
 npm install
-npm run dev    # preflight + wrangler dev (http://localhost:8787)
+npm run dev    # wrangler dev (http://localhost:8787)
 ```
 
 ## Deploy
 
 ```bash
-npm run deploy
+npm run deploy:op
 ```
 
-Same preflight as the other Workers — requires `CLOUDFLARE_ACCOUNT_ID`
-exported (via direnv `.envrc` or shell rc).
+`account_id` is pinned in `wrangler.toml`. `deploy:op` loads the deploy
+token from 1Password through `op run` and the repo-root `.ayso.op.env`;
+plain `deploy` is what CI runs.
 
 ## Reviewing reports
 
 ```bash
-# From your local machine, with the admin key from setup:
-curl "https://www.ayso13.org/api/csp-report?admin_key=$ADMIN_KEY&limit=50" | jq .
+# From the repo root. The key comes from 1Password (CSP_ADMIN_KEY in
+# .ayso.op.env) and goes to curl on stdin, so it never shows in `ps`.
+op run --account=my.1password.com --env-file=.ayso.op.env -- sh -c \
+  'printf "url = \"https://www.ayso13.org/api/csp-report?admin_key=%s&limit=50\"\n" "$CSP_ADMIN_KEY" | curl -s -K -' | jq .
 
 # Or watch reports live as they come in:
 npm run tail
