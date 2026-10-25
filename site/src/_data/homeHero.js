@@ -11,7 +11,7 @@
 // first build AFTER that date. Nothing rebuilds this site on a schedule, so
 // a stale banner survives until the next deploy. Flip `mode` to be sure.
 const config = {
-  mode: "event",
+  mode: "rotation",
   endDate: "2026-08-29", // inclusive — the banner still shows on this date
   image: "/images/home/rc-rollout-web-hero.jpg", // 2560×996 (2.57:1)
   alt: "Region 13 players, referees and families at the Rose City RollOut",

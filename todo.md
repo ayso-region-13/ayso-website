@@ -19,8 +19,6 @@ Edit in CMS or GitHub → commits to staging → staging.ayso13.org
 
 _(None open.)_ The one dated item — dropping the AirNow OLD-endpoint fallback ahead of its 2026-09-30 retirement — was done 2026-06-21.
 
-⚠️ **Not a deadline, but time-bound:** the Rose City RollOut home banner has `endDate: 2026-08-29` in `site/src/_data/homeHero.js`. Nothing rebuilds this site on a schedule, so it will not retire itself — flip `mode` to `"rotation"` and promote.
-
 ---
 
 ## Remaining Tasks
