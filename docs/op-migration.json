@@ -12,6 +12,19 @@
       "plain": "site/.env",
       "template": "site/.check-404s.op.env",
       "use": "run"
+    },
+    {
+      "plain": ".envrc.plaintext",
+      "template": ".envrc.tpl",
+      "use": "inject",
+      "plain_ok": [
+        "GLOBAL_SEO"
+      ]
+    },
+    {
+      "plain": "workers/weather-api/.dev.vars",
+      "template": "workers/weather-api/.dev.vars.tpl",
+      "use": "inject"
     }
   ],
   "items": {
@@ -28,6 +41,77 @@
       "plain": [
         "zone_id"
       ]
+    },
+    "ayso13-worker-deploy": {
+      "tags": [
+        "ayso-website",
+        "cloudflare"
+      ],
+      "notes": "Cloudflare token ayso13-worker-deploy (Workers Scripts + KV Storage + D1 + Account Settings + Zone Workers Routes). Canonical worker deploy token; .envrc CLOUDFLARE_API_TOKEN. Same value as the CLOUDFLARE_API_TOKEN GitHub secret.",
+      "fields": {
+        "credential": "CLOUDFLARE_API_TOKEN",
+        "account_id": "CLOUDFLARE_ACCOUNT_ID"
+      },
+      "plain": [
+        "account_id"
+      ],
+      "source": ".envrc.plaintext"
+    },
+    "ayso13-healthcheck-csp-admin": {
+      "fields": {
+        "credential": "CSP_ADMIN_KEY"
+      },
+      "source": ".envrc.plaintext"
+    },
+    "ayso-website-weatherflow": {
+      "tags": [
+        "ayso-website",
+        "weatherflow"
+      ],
+      "notes": "WeatherFlow/Tempest token; .envrc WEATHERFLOW_API and the weather worker's TEMPEST_TOKEN are the same value.",
+      "fields": {
+        "credential": "WEATHERFLOW_API",
+        "tempest_token": "TEMPEST_TOKEN"
+      },
+      "source": [
+        ".envrc.plaintext",
+        "workers/weather-api/.dev.vars"
+      ]
+    },
+    "ayso-website-emailoctopus": {
+      "tags": [
+        "ayso-website",
+        "emailoctopus"
+      ],
+      "notes": "EmailOctopus API key.",
+      "fields": {
+        "credential": "EMAILOCTOPUS_API_KEY"
+      },
+      "source": ".envrc.plaintext"
     }
-  }
+  },
+  "_status": "phase 2 done 2026-10-25. .envrc is now a direnv shim that runs op inject on .envrc.tpl, so its spec entry points at .envrc.plaintext (never exists) to stop template/verify from reading the shim as plaintext.",
+  "documents": [
+    {
+      "path": ".seo-creds/oauth-token.json",
+      "title": "ayso-website-google-seo-oauth",
+      "tags": [
+        "ayso-website",
+        "google"
+      ],
+      "ignore_keys": [
+        "access_token",
+        "expires_in",
+        "expires_at"
+      ]
+    },
+    {
+      "path": ".seo-creds/client_secret.json",
+      "title": "ayso-website-google-oauth-client",
+      "tags": [
+        "ayso-website",
+        "google"
+      ]
+    }
+  ]
 }

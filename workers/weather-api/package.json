@@ -8,6 +8,7 @@
     "preflight": "node -e 'if(!process.env.CLOUDFLARE_ACCOUNT_ID){console.error(\"\\n\\u2717 CLOUDFLARE_ACCOUNT_ID is not set.\\n\\nWrangler may deploy to the wrong Cloudflare account on this machine.\\nExport the AYSO Region 13 account ID first, e.g.:\\n\\n  export CLOUDFLARE_ACCOUNT_ID=<ayso13-account-id>\\n\\nFind it in the Cloudflare dashboard sidebar.\\n\");process.exit(1)}else{console.log(\"\\u2713 CLOUDFLARE_ACCOUNT_ID is set\")}'",
     "test": "node --test",
     "dev": "npm run preflight && wrangler dev",
+    "secrets:dev-vars": "op inject --account=my.1password.com -f -i .dev.vars.tpl -o .dev.vars",
     "deploy": "npm run preflight && wrangler deploy",
     "tail": "wrangler tail",
     "export-log": "bash scripts/export-log.sh"
