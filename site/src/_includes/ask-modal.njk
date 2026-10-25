@@ -50,7 +50,8 @@
 (function () {
   var API = {{ askConfig.apiBase | dump | safe }};
   var SITE_KEY = {{ askConfig.turnstileSiteKey | dump | safe }};
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  // Same pattern as the server's EMAIL_RE (ayso-platform referee askValidate.ts).
+  var EMAIL_RE = /^[^\s@.,;:<>()[\]"\\]+(?:\.[^\s@.,;:<>()[\]"\\]+)*@[^\s@.,;:<>()[\]"\\]+(?:\.[^\s@.,;:<>()[\]"\\]+)*\.[^\s@.,;:<>()[\]"\\]{2,}$/;
   var $ = function (id) { return document.getElementById(id); };
 
   // ── Deep links: #qa-<slug> opens that answer ──

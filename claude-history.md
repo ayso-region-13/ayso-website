@@ -480,3 +480,20 @@ The final whole-branch review had found five problems before merge, all fixed in
 **First CI run failed, then fixed.** The first manual run of the sync workflow (`36164513616`) failed on every newsletter with `active content in email: <meta http-equiv`. The active-content check matched any `http-equiv` meta, but every real EmailOctopus email carries a harmless one: `Content-Type` in the legacy template, `X-UA-Compatible` inside an `<!--[if !mso]>` comment in the current one. The tests passed because the fixtures lacked those tags, and the pre-merge grep over the real snapshot had left `meta` out of its pattern. Fix (`e578bee`): match only `http-equiv="refresh"`, the one that can redirect a page; give both fixtures their real meta tags; and add a test that runs the check over every committed `site/newsletters/*.html`, so a rule that rejects real data now fails `npm test` rather than the first CI run. The failed run changed nothing, because the sync validates everything before writing and posted its failure to Slack.
 
 Reruns `36164798737` and `36165349315` are green: `14 in window; +0 -0`, `main already current`. A local run against the live API also produced a byte-identical snapshot, so EmailOctopus returns stable `content.html` and the daily run won't make empty commits. The first scheduled run is 2026-09-26 at 6am PT.
+
+## 2026-10-25 — Local secrets move to 1Password; hero back to rotation
+
+**1Password, phase 2.** The 2026-10-23 secrets scan found more plaintext keys than phase 1 (`920ae68`, the 404-report token) had covered: `.envrc`, `workers/weather-api/.dev.vars`, and the two Google OAuth files in `.seo-creds/`. They are now in `my.1password.com`, vault `Dev`. The worker-deploy token keeps its Cloudflare name, `ayso13-worker-deploy`. The WeatherFlow and Tempest tokens turned out to be the same value, so they share one item, `ayso-website-weatherflow`. The CSP admin key references the existing `ayso13-healthcheck-csp-admin` item rather than being copied. `verify` printed MATCH for every file before any plaintext was deleted.
+
+The first cut (`8607be2`) turned `.envrc` into a direnv shim that ran `op inject` on load. That removed the plaintext from disk but still exported every key into every shell in the repo, so `52facf4` replaced it. Now:
+
+- The committed `.ayso.op.env` holds only `op://` references, and a key reaches only the command that needs it: each worker's `deploy:op` and `tail:op` scripts, the weather worker's `export-log:op`, and site's `sync-newsletters:op`. The plain `deploy` scripts that CI runs did not change.
+- `account_id` is pinned in all three `wrangler.toml` files (it's a public ID), so `CLOUDFLARE_ACCOUNT_ID` and the `preflight` check are gone.
+- `.envrc` holds no secrets. It only keeps `~/.config/claude-seo` pointed at `.seo-creds/`, which stays on disk because the claude-seo plugin reads it there. 1Password keeps a backup copy.
+- `WEATHERFLOW_API` is no longer exported, since only an old sample script under `docs/superpowers/specs/` read it. `.dev.vars` is regenerated on demand with `npm run secrets:dev-vars`.
+
+Verified through `op run`: a read-only remote D1 query, `export-log:op`, a CSP admin read (HTTP 200), dry-run deploys of all three workers, and their test suites. Promoted the same day. Deploy Workers run `40219667002` was the first CI deploy with the pinned `account_id`, and it was green. Brief and spec: `docs/1password-migration.md`, `docs/op-migration.json`.
+
+**Home hero.** `homeHero.js` went back to `mode: "rotation"`. The RollOut banner had already stopped showing after its 2026-08-29 `endDate`, but the flag still said `event`.
+
+**Housekeeping.** A scan for the retired incident-report Typeform (`GjC4Pyed`) found no links in source, on `origin/main`, or on any of the 143 live sitemap URLs. The `report-links-to-stats` branch, whose PR #24 was merged, was deleted. Its tip was `813308d`.
