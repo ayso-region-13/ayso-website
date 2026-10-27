@@ -34,7 +34,7 @@ Moving from 8U to 10U involves significant changes:
 
 Grad Series gives players hands-on experience with these changes before the fall season.
 
-## Schedule (Winter 2026)
+## Schedule (2027)
 
 - Season: January 10 through February 28
 - Day: Saturdays only
@@ -60,7 +60,7 @@ Grad Series gives players hands-on experience with these changes before the fall
 
 ## Registration
 
-Registration is not yet open for the 2026 season.
+Registration is not yet open for the 2027 season.
 
 For questions: [gradseries@ayso13.org](mailto:gradseries@ayso13.org)
 
