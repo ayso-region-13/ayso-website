@@ -1,19 +1,18 @@
 ---
-
-title: "Grad Series"
+title: Grad Series
+description: Grad Series helps 8U players transition to 10U soccer with
+  additional coaching, game experience, and skill development.
 layout: page.njk
 section: programs
-heroImage: "/images/grad-series-02.jpg"
-description: "Grad Series helps 8U players transition to 10U soccer with additional coaching, game experience, and skill development."
+heroImage: /images/grad-series-02.jpg
 ---
-
 Grad Series helps players transitioning from 8U to 10U prepare for the changes in format, including larger fields, goalkeepers, and offside rules.
 
 ![Grad Series players at Region 13](/images/grad-series-interior.jpg)
 
 ## Quick Facts
 
-- Who: Players who just finished 8U (born August 1, 2017 - July 31, 2018)
+- Who: Players who just finished 8U (born August 1, 2018 - July 31, 2019)
 - When: Saturdays, January through late February
 - Duration: 8 weeks
 - Format: 35-minute practice + 50-minute game each session
@@ -23,19 +22,21 @@ Grad Series helps players transitioning from 8U to 10U prepare for the changes i
 
 Moving from 8U to 10U involves significant changes:
 
+
 | 8U | 10U |
-|----|-----|
+| -------------- | --------------------- |
 | 4v4 | 7v7 |
 | No goalkeepers | Goalkeepers |
 | Size 3 ball | Size 4 ball |
 | No offside | Offside rule enforced |
 | Smaller field | Larger field |
 
+
 Grad Series gives players hands-on experience with these changes before the fall season.
 
-## Schedule (2026)
+## Schedule (2027)
 
-- Season: January 10 through February 28
+- Season: January 9 through February 27
 - Day: Saturdays only
 - Format: 35-minute practice followed by 50-minute game (two 25-minute halves)
 
@@ -59,7 +60,7 @@ Grad Series gives players hands-on experience with these changes before the fall
 
 ## Registration
 
-Registration is currently closed for the 2026 season.
+Registration is not yet open for the 2027 season.
 
 For questions: [gradseries@ayso13.org](mailto:gradseries@ayso13.org)
 
