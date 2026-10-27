@@ -36,7 +36,7 @@ Grad Series gives players hands-on experience with these changes before the fall
 
 ## Schedule (2027)
 
-- Season: January 10 through February 28
+- Season: January 9 through February 27
 - Day: Saturdays only
 - Format: 35-minute practice followed by 50-minute game (two 25-minute halves)
 
