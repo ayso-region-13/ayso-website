@@ -1,15 +1,14 @@
 ---
-
-title: "Winter Stars"
+title: Winter Stars
+description: Winter Stars is Region 13's winter soccer program for returning
+  Fall Soccer players. Games run January through February.
 layout: page.njk
 section: programs
-heroImage: "/images/grad-series-01.jpg"
-description: "Winter Stars is Region 13's winter soccer program for returning Fall Soccer players. Games run January through February."
-eventName: "AYSO Region 13 Winter Stars 2027"
-eventStartDate: "2027-01-01"
-eventEndDate: "2027-02-28"
+heroImage: /images/grad-series-01.jpg
+eventName: AYSO Region 13 Winter Stars 2027
+eventStartDate: 2027-01-01
+eventEndDate: 2027-02-28
 ---
-
 Winter Stars is an 8-week program offering skills training and small-sided games for players ages 6 and up during the winter months.
 
 ![Winter Stars practice session](/images/winter-stars-interior.jpg)
@@ -34,32 +33,41 @@ Winter Stars is designed to be casual and low-commitment:
 
 This program welcomes players of all skill levels.
 
-## Schedule (2026)
+## Schedule (2027)
 
-- Season: January 11 through March 1, 2026
+- Season: January 10 through February 28, 2027
 - Day/Time: Every Sunday, 3:30-5pm
 - Location: Thurgood Marshall Secondary School (990 Allen Ave., Pasadena, CA 91104)
 
 ## Registration
 
 ### Cost
+
 $125 per player
 
 Includes:
+
 - Program shirt
 - Weekly skills training
 - Small-sided games
 
 ### Scholarships
+
 Financial assistance is available for families facing hardship. Contact [registrar@ayso13.org](mailto:registrar@ayso13.org).
 
 ### Refunds
+
 Partial refunds are available for cancellations until January 4.
 
 ### All-Stars Transfer
+
 If you register for Winter Stars and are later selected for All-Stars, your registration transfers and payment is credited toward All-Stars.
 
-[Register on InLeague](https://ayso13.inleague.com/app)
+### Registration
+
+Registration is not yet open for the 2027 season.
+
+For questions: [winterstars@ayso13.org](mailto:winterstars@ayso13.org)
 
 ## What to Bring
 
