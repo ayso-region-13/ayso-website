@@ -2,7 +2,7 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-10-25",
+      "date": "2026-11-01",
       "name": "Sunday Soccer Lab",
       "link": "https://www.ayso13.org/programs/sunday-soccer/"
     },
@@ -12,17 +12,12 @@
       "link": "https://staging.ayso13.org/programs/next"
     },
     {
-      "date": "2026-10-24",
-      "name": "Weekend #7 soccer games"
+      "date": "2026-10-31",
+      "name": "Weekend #8 soccer games and Picture Day!"
     },
     {
       "date": "2026-11-02",
       "name": "Beyond the Ball Coach Workshop - dinner provided!"
-    },
-    {
-      "date": "2026-10-25",
-      "name": "All Star Tryouts at Area H",
-      "link": "/programs/all-stars/"
     },
     {
       "date": "2026-11-01",
