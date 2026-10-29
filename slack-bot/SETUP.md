@@ -11,10 +11,11 @@ Lets any authorized Slack user update field status or the announcement bar direc
 | `/ayso announce` | Announcement modal directly |
 | `/ayso promote` | Merge `staging` → `main` and deploy production |
 | `/ayso staging` | Rebuild + redeploy staging.ayso13.org from `staging` (alias: `rebuild-staging`) |
+| `/ayso calendar` | Run the Important Dates sync from Google Calendar now (alias: `sync-calendar`) |
 | `/ayso weather` | Current conditions, ephemeral reply to you only |
 | `/ayso test-weather` | Post a connectivity test to #notify-weather (alias: `weather-test`) |
 
-`promote` and `staging` both fire a `workflow_dispatch`, so the bot's
+`promote`, `staging`, and `calendar` all fire a `workflow_dispatch`, so the bot's
 `GITHUB_TOKEN` needs **Actions: write** in addition to Contents: read+write.
 
 ---
