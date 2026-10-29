@@ -1,8 +1,9 @@
 {# ── Important Dates column ───────────────────────────────────────────
    Used inside the About + Roles section on the home page as the middle
    column. Renders up to 5 upcoming events from _data/importantDates.json
-   (CMS-edited). Inline script re-checks each card's data-date against
-   today and hides past events on the client — so the widget never shows
+   (synced hourly from the Google Calendar). Inline script re-checks each
+   card's data-date against today (Pacific time) and hides events whose last day (data-end-date, the
+   start date for single-day events) has passed — so the widget never shows
    stale dates between publishes. Without JS, the build-time filter is
    accurate as of the last publish.
 
@@ -19,7 +20,7 @@
 
   <ul class="space-y-2">
     {% for ev in upcoming %}
-    <li class="date-card" data-date="{{ ev.date }}">
+    <li class="date-card" data-date="{{ ev.date }}" data-end-date="{{ ev.endDate or ev.date }}">
       {% if ev.link %}
       <a href="{{ ev.link }}" class="block bg-brand-cream border-l-4 border-brand-red-dark px-4 py-3 hover:bg-brand-cream/70 transition-colors">
         <div class="text-xs font-bold uppercase tracking-wider text-brand-red-dark">{{ ev.date | shortDate }}</div>
@@ -39,17 +40,17 @@
 </div>
 <script>
   (function () {
-    var today = new Date();
-    today.setHours(0, 0, 0, 0);
+    var today = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).format(new Date());
     var section = document.getElementById('important-dates');
     if (!section) return;
     var cards = section.querySelectorAll('.date-card');
     var visible = 0;
     cards.forEach(function (c) {
-      var iso = c.dataset.date;
-      if (!iso) return;
-      var d = new Date(iso + 'T00:00:00');
-      if (d < today) {
+      var end = c.dataset.endDate || c.dataset.date;
+      if (!end) return;
+      if (end < today) {
         c.hidden = true;
       } else {
         visible++;
