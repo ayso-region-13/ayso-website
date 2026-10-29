@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  pacificToday, hasTag, firstLink, toEntries, diffEntries, serialize,
+  pacificToday, hasTag, firstLink, toEntries, diffEntries, serialize, calendarEventLink,
 } from "./important-dates.mjs";
 
 const occ = (o) => ({ uid: "u1", start: "2026-11-01", lastDay: "2026-11-01", summary: "Event", description: "#website", ...o });
@@ -140,4 +140,38 @@ test("serialize is stable", () => {
   const e = JSON.parse(a).dates[0];
   assert.deepEqual(Object.keys(e), ["date", "endDate", "name", "link"]);
   assert.equal(JSON.parse(a).enabled, true);
+});
+
+const CAL = "cal-1@group.calendar.google.com";
+const eidOf = (link) => Buffer.from(new URL(link).searchParams.get("eid"), "base64url").toString();
+
+test("calendarEventLink builds Google's public event URL", () => {
+  const link = calendarEventLink("abc123@google.com", CAL);
+  assert.match(link, /^https:\/\/www\.google\.com\/calendar\/event\?eid=[\w-]+$/);
+  assert.equal(eidOf(link), `abc123 ${CAL}`);
+  // A split series keeps its "_R<start>" suffix; that is part of Google's id.
+  assert.equal(eidOf(calendarEventLink("_abc_R20260403T021500@google.com", CAL)),
+    `_abc_R20260403T021500 ${CAL}`);
+});
+
+test("calendarEventLink matches a link Google serves publicly", () => {
+  // Opened without a sign-in on 2026-10-29: the Beyond the Ball Coach Workshop.
+  assert.equal(
+    calendarEventLink("4vgtio1qt7ua9n0hsfpto53dej@google.com", "g60lvbvlhbucts84e1ft40mlpk@group.calendar.google.com"),
+    "https://www.google.com/calendar/event?eid=NHZndGlvMXF0N3VhOW4waHNmcHRvNTNkZWogZzYwbHZidmxoYnVjdHM4NGUxZnQ0MG1scGtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ");
+});
+
+test("calendarEventLink skips UIDs Google did not issue", () => {
+  assert.equal(calendarEventLink("B712E22B-6F14-4AD4", CAL), undefined);
+  assert.equal(calendarEventLink("abc@google.com", undefined), undefined);
+});
+
+test("toEntries links to the calendar event only when the description has no link", () => {
+  const [plain] = toEntries([occ({ uid: "abc@google.com" })], "2026-10-23", { calendarId: CAL });
+  assert.equal(eidOf(plain.link), `abc ${CAL}`);
+  const [own] = toEntries([occ({ uid: "abc@google.com", description: "#website https://x.example" })],
+    "2026-10-23", { calendarId: CAL });
+  assert.equal(own.link, "https://x.example");
+  const [none] = toEntries([occ({ uid: "abc@google.com" })], "2026-10-23");
+  assert.equal(none.link, undefined);
 });

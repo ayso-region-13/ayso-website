@@ -97,6 +97,7 @@ module.exports = [
       { label: "Getting Started",             url: "/families/" },
       { label: "Silent Saturday",             url: "/families/silent-saturday/" },
       { label: "Region 13 Rollout",           url: "/families/rollout/" },
+      { label: "Angel City FC Clinic",        url: "/families/acfc-clinic/" },
       { label: "Team Info",                   url: "/families/team/" },
       { label: "Equipment & Uniforms",        url: "/families/equipment/" },
       { label: "Kids Zone",                   url: "/families/pledge/" },

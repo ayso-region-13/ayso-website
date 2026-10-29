@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
-import { fetchFeed, syncImportantDates } from "./sync-important-dates.mjs";
+import { fetchFeed, syncImportantDates, calendarIdOf } from "./sync-important-dates.mjs";
 
 const FIXTURE = await fs.readFile(new URL("./lib/fixtures/calendar-sample.ics", import.meta.url), "utf8");
 // The fixture has no #website events, so graft two onto it before END:VCALENDAR.
@@ -67,4 +67,11 @@ test("unchanged calendar is not a change", () => {
 
 test("feed errors propagate", () => {
   assert.throws(() => syncImportantDates({ icsText: "<html>", existingJson: undefined, now: NOW }), /not an iCalendar feed/);
+});
+
+test("calendarIdOf reads the id from a public feed URL", () => {
+  assert.equal(
+    calendarIdOf("https://calendar.google.com/calendar/ical/abc%40group.calendar.google.com/public/basic.ics"),
+    "abc@group.calendar.google.com");
+  assert.equal(calendarIdOf("https://example.test/x.ics"), undefined);
 });

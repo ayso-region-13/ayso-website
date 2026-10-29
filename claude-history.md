@@ -497,3 +497,27 @@ Verified through `op run`: a read-only remote D1 query, `export-log:op`, a CSP a
 **Home hero.** `homeHero.js` went back to `mode: "rotation"`. The RollOut banner had already stopped showing after its 2026-08-29 `endDate`, but the flag still said `event`.
 
 **Housekeeping.** A scan for the retired incident-report Typeform (`GjC4Pyed`) found no links in source, on `origin/main`, or on any of the 143 live sitemap URLs. The `report-links-to-stats` branch, whose PR #24 was merged, was deleted. Its tip was `813308d`.
+
+## 2026-10-29 — Important Dates from the Google Calendar goes live; `/ayso calendar`
+
+**Rollout of the parked branch (issue #27).** Before merging, a dry run of the sync against the live calendar showed the admins had already tagged everything worth keeping. Every current home-page item survived, reworded to the calendar's titles, and only the past Oct 18 NEXT scrimmage dropped. The temporary preview workflow was deleted (`d242780`) and the branch merged to `staging` (`029e3e9`). The one conflict was the CLAUDE.md "Last updated" line.
+
+A promote dispatched at 22:14:10 UTC landed four seconds before the first hand-run sync. The sync's promote guard saw it and skipped `main`, as designed, so www briefly had the new code with the old CMS dates. A second sync after the promote caught `main` up (`68ecbef`), `rebuild-production.yml` deployed it, and both sites then showed the calendar entries. Issue #27 was closed and the branch deleted.
+
+**`/ayso calendar`** (alias `sync-calendar`, `f6a113f`) dispatches `sync-important-dates.yml` on `staging`, so an admin who just tagged an event doesn't wait for the :17 run. The three dispatch commands (`staging`, `promote`, `calendar`) now share one `triggerWorkflow` helper, which also posts a failure card when the GitHub request throws. Before, that error was dropped. The bot was redeployed by hand (`npx wrangler deploy`, version `12063f8f`). Nothing in CI deploys it.
+
+**Calendar event links** (`02c273d`). An entry whose description has no link now links to the event's public Google Calendar page: `https://www.google.com/calendar/event?eid=` plus base64url of `<event id> <calendar id>`, where the event id is the UID before `@google.com`. Checked live on 2026-10-29: all 19 upcoming events with Google-issued UIDs opened the right page without a sign-in. Two limits, both deliberate:
+
+- **Recurring events link to the series**, not the date shown. Google's per-instance ids (`<id>_<YYYYMMDD>` and `<id>_<YYYYMMDDTHHMMSSZ>`) sent the public to a sign-in page in every form tried, including future instances. Split series keep their `_R<start>` suffix, which is part of Google's id.
+- **Imported events** (UIDs like `B712E22B-…`, no `@google.com`) get no link. Google stores them under a different id, so a constructed link would be broken.
+
+**Review fixes** (`77aa02a`, from a `/code-review` pass):
+
+- A hand-run sync (`workflow_dispatch`) always posts its failure. The once-per-outage suppression otherwise made a failed `/ayso calendar` look like "nothing changed."
+- The bot's "started" card no longer promises www within minutes, since a running promote defers `main` to the next hourly sync.
+- The calendar id comes from the feed URL actually fetched (`calendarIdOf`), not from a constant.
+- Off-site widget links open in a new tab.
+- Dispatch error text is escaped for Slack.
+- The eid encoding is pinned in a test to a link Google served publicly.
+
+Known and accepted: the first sync after the links shipped posts one Slack card listing every entry under both Added and Removed, because adding a link changes each entry's diff key.

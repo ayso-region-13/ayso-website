@@ -63,6 +63,21 @@ export function firstLink(description) {
   return normalizeLink(m[1] ?? m[2] ?? m[3]);
 }
 
+// Google's public page for an event, used when the description carries no link
+// of its own. The eid is base64url of "<event id> <calendar id>", and the event
+// id is the UID before "@google.com". A recurring event links to its series:
+// Google's per-instance ids ("<id>_<start>") send the public to a sign-in page
+// (checked 2026-10-29). Events imported from elsewhere keep a foreign UID that
+// Google stores under a different id, so those get no link rather than a
+// broken one.
+const GOOGLE_UID = /^([a-z0-9_]+)@google\.com$/i;
+
+export function calendarEventLink(uid, calendarId) {
+  const m = GOOGLE_UID.exec(uid ?? "");
+  if (!m || !calendarId) return undefined;
+  return `https://www.google.com/calendar/event?eid=${Buffer.from(`${m[1]} ${calendarId}`).toString("base64url")}`;
+}
+
 function plainText(s) {
   return decodeEntities(s.replace(/<[^>]*>/g, " ")).replace(/\s+/g, " ").trim();
 }
@@ -73,7 +88,7 @@ const byDateThenName = (a, b) =>
   (a.link ?? "").localeCompare(b.link ?? "") ||
   (a.endDate ?? "").localeCompare(b.endDate ?? "");
 
-export function toEntries(occurrences, today) {
+export function toEntries(occurrences, today, { calendarId } = {}) {
   const earliest = new Map();
   for (const o of occurrences) {
     if (!hasTag(o.description) || o.lastDay < today) continue;
@@ -84,7 +99,7 @@ export function toEntries(occurrences, today) {
     const entry = { date: o.start };
     if (o.lastDay !== o.start) entry.endDate = o.lastDay;
     entry.name = plainText(o.summary ?? "");
-    const link = firstLink(o.description);
+    const link = firstLink(o.description) ?? calendarEventLink(o.uid, calendarId);
     if (link) entry.link = link;
     return entry;
   }).sort(byDateThenName);
