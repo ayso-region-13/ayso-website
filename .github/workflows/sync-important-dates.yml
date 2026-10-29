@@ -183,7 +183,9 @@ jobs:
 
       # Post only when the previous run succeeded, so an hour-long Google outage
       # produces one message, not one per hour. Any error in that lookup posts
-      # anyway: better a duplicate than silence.
+      # anyway: better a duplicate than silence. A hand-run sync (`/ayso
+      # calendar` or the Actions button) always posts, since someone is waiting
+      # on that specific run and its silence would read as "nothing changed".
       - name: Notify Slack — failure
         if: failure()
         env:
@@ -192,7 +194,9 @@ jobs:
           RUN_ID: ${{ github.run_id }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          if PREV=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow sync-important-dates.yml \
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "Run by hand; posting regardless of the previous run."
+          elif PREV=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow sync-important-dates.yml \
                 --status completed --limit 5 --json conclusion,databaseId \
                 --jq "[.[] | select(.databaseId != $RUN_ID)][0].conclusion // \"\""); then
             if [ -n "$PREV" ] && [ "$PREV" != "success" ]; then

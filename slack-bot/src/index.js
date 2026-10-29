@@ -6,6 +6,7 @@
  * /ayso announce      → Announcement modal directly
  * /ayso promote       → trigger staging → production promotion
  * /ayso staging       → rebuild + redeploy staging.ayso13.org from `staging`
+ * /ayso calendar      → run the Important Dates sync from Google Calendar now
  * /ayso weather       → show current conditions (private/ephemeral reply)
  * /ayso test-weather  → post a connectivity test to #notify-weather via the
  *                       weather-api Worker (verifies its Slack notifier path)
@@ -107,7 +108,7 @@ async function handleCommand(rawBody, env, ctx) {
   }
 
   if (text === 'promote') {
-    ctx.waitUntil(triggerPromotion(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
+    ctx.waitUntil(triggerWorkflow('promote', env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
     return new Response(
       JSON.stringify({ response_type: 'ephemeral', text: '🚀 Promotion triggered — staging → production. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
@@ -119,9 +120,21 @@ async function handleCommand(rawBody, env, ctx) {
   // without touching content. Unlike `promote` this deploys nothing to
   // production, so it needs no confirmation step.
   if (text === 'staging' || text === 'rebuild-staging') {
-    ctx.waitUntil(triggerStagingDeploy(env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
+    ctx.waitUntil(triggerWorkflow('staging', env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
     return new Response(
       JSON.stringify({ response_type: 'ephemeral', text: '🔧 Staging rebuild triggered. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  // Force the hourly Important Dates sync to run now, e.g. right after an
+  // admin tags a calendar event #website. The sync writes both branches, so a
+  // change reaches www without a promote; that is the same thing the hourly
+  // schedule already does, so this needs no confirmation step either.
+  if (text === 'calendar' || text === 'sync-calendar') {
+    ctx.waitUntil(triggerWorkflow('calendar', env.GITHUB_TOKEN, env.SLACK_BOT_TOKEN, userId, params.get('user_name')));
+    return new Response(
+      JSON.stringify({ response_type: 'ephemeral', text: '📅 Important Dates sync triggered. Check <https://github.com/ayso-region-13/ayso-website/actions|GitHub Actions> for status.' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   }
@@ -296,54 +309,69 @@ async function dispatchWorkflow(githubToken, workflowFile, ref, inputs) {
   );
 }
 
-async function triggerStagingDeploy(githubToken, slackToken, userId, userName) {
-  const res = await dispatchWorkflow(githubToken, 'deploy-pages-staging.yml', 'staging');
-  const user = userName || userId;
+// Each workflow the bot can start: where it dispatches, and what it posts to
+// #notify-website-status once GitHub accepts (or rejects) the dispatch.
+const WORKFLOW_TRIGGERS = {
+  staging: {
+    file: 'deploy-pages-staging.yml',
+    ref: 'staging',
+    started: '🔧 *Staging rebuild*\nDeploy workflow started. staging.ayso13.org will be rebuilt from the `staging` branch in ~2 minutes.',
+    startedFallback: 'Staging rebuild started',
+    failed: 'Staging rebuild failed to start'
+  },
+  promote: {
+    file: 'promote-to-production.yml',
+    ref: 'main',
+    inputs: { confirm: 'promote' },
+    started: '🚀 *Staging → Production*\nPromotion workflow started. Changes will be live on www.ayso13.org in ~2 minutes.',
+    startedFallback: 'Staging promoted to production',
+    failed: 'Promotion failed'
+  },
+  // `schedule` and the workflow file live on `staging` (the default branch),
+  // so dispatch that copy. The sync itself writes both branches and posts its
+  // own card when the dates actually change.
+  calendar: {
+    file: 'sync-important-dates.yml',
+    ref: 'staging',
+    started: '📅 *Important Dates sync*\nSync started. If the calendar changed, a second card follows in a few minutes, and so does a failure card if the sync fails. No second card means nothing changed. www updates a few minutes later, or at the next hourly sync if a promote is running.',
+    startedFallback: 'Important Dates sync started',
+    failed: 'Important Dates sync failed to start'
+  }
+};
 
-  if (res.status === 204) {
+async function triggerWorkflow(kind, githubToken, slackToken, userId, userName) {
+  const t = WORKFLOW_TRIGGERS[kind];
+  if (!t) throw new Error(`Unknown workflow trigger: ${kind}`);
+  const user = userName || userId;
+  let failure;
+  try {
+    const res = await dispatchWorkflow(githubToken, t.file, t.ref, t.inputs);
+    if (res.status !== 204) failure = `GitHub API returned ${res.status}`;
+  } catch (err) {
+    failure = `the GitHub request failed (${slackEscape(err.message)})`;
+  }
+
+  if (!failure) {
     await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
-      {
-        type: 'section',
-        text: { type: 'mrkdwn', text: '🔧 *Staging rebuild*\nDeploy workflow started. staging.ayso13.org will be rebuilt from the `staging` branch in ~2 minutes.' }
-      },
+      { type: 'section', text: { type: 'mrkdwn', text: t.started } },
       {
         type: 'context',
         elements: [{ type: 'mrkdwn', text: `_Triggered by @${user} — ${pacificTimestamp()}_ · <https://github.com/${GITHUB_REPO}/actions|View Actions>` }]
       }
-    ], `Staging rebuild started by @${user}`);
+    ], `${t.startedFallback} by @${user}`);
   } else {
     await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
       {
         type: 'section',
-        text: { type: 'mrkdwn', text: `⚠️ *Staging rebuild failed to start* — GitHub API returned ${res.status}. <https://github.com/${GITHUB_REPO}/actions|Check Actions>.` }
+        text: { type: 'mrkdwn', text: `⚠️ *${t.failed}* — ${failure}. <https://github.com/${GITHUB_REPO}/actions|Check Actions>.` }
       }
-    ], 'Staging rebuild failed to start');
+    ], t.failed);
   }
 }
 
-async function triggerPromotion(githubToken, slackToken, userId, userName) {
-  const res = await dispatchWorkflow(githubToken, 'promote-to-production.yml', 'main', { confirm: 'promote' });
-
-  const user = userName || userId;
-  if (res.status === 204) {
-    await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
-      {
-        type: 'section',
-        text: { type: 'mrkdwn', text: '🚀 *Staging → Production*\nPromotion workflow started. Changes will be live on www.ayso13.org in ~2 minutes.' }
-      },
-      {
-        type: 'context',
-        elements: [{ type: 'mrkdwn', text: `_Triggered by @${user} — ${pacificTimestamp()}_ · <https://github.com/${GITHUB_REPO}/actions|View Actions>` }]
-      }
-    ], `Staging promoted to production by @${user}`);
-  } else {
-    await postMessage(slackToken, NOTIFY_CHANNEL_ID, [
-      {
-        type: 'section',
-        text: { type: 'mrkdwn', text: `⚠️ *Promotion failed* — GitHub API returned ${res.status}. <https://github.com/${GITHUB_REPO}/actions|Check Actions>.` }
-      }
-    ], 'Promotion failed');
-  }
+// Slack mrkdwn treats &, < and > as control characters.
+function slackEscape(text) {
+  return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function githubHeaders(token) {
