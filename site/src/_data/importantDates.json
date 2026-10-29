@@ -2,31 +2,48 @@
   "enabled": true,
   "dates": [
     {
-      "date": "2026-11-01",
-      "name": "Sunday Soccer Lab",
-      "link": "https://www.ayso13.org/programs/sunday-soccer/"
-    },
-    {
-      "date": "2026-10-18",
-      "name": "NEXT Scrimmages 10U, 12U, 14U",
-      "link": "https://staging.ayso13.org/programs/next"
+      "date": "2026-10-31",
+      "name": "Fall Season Game Week 8"
     },
     {
       "date": "2026-10-31",
-      "name": "Weekend #8 soccer games and Picture Day!"
-    },
-    {
-      "date": "2026-11-02",
-      "name": "Beyond the Ball Coach Workshop - dinner provided!"
+      "name": "Region 13 Picture Day #2"
     },
     {
       "date": "2026-11-01",
-      "name": "All Star Tryouts at Area H",
+      "name": "All-Star Tryouts",
       "link": "/programs/all-stars/"
     },
     {
+      "date": "2026-11-01",
+      "name": "Sunday Soccer Lab",
+      "link": "/programs/sunday-soccer/"
+    },
+    {
+      "date": "2026-11-02",
+      "name": "Beyond the Ball Coach Workshop"
+    },
+    {
+      "date": "2026-11-07",
+      "name": "Fall Season Game Week 9"
+    },
+    {
+      "date": "2026-11-07",
+      "name": "Region 13 Picture Day #3"
+    },
+    {
       "date": "2026-11-08",
-      "name": "ACFC Clinic for 8U and 10U at Octavia Butler School 9:30am-11:00am"
+      "name": "WCA/ACFC Clinic for 8U and 10U Players"
+    },
+    {
+      "date": "2026-11-14",
+      "name": "Fall Season Game Week 10"
+    },
+    {
+      "date": "2026-11-27",
+      "endDate": "2026-11-29",
+      "name": "Region 13 Thanksgiving Tournament",
+      "link": "/programs/tournaments/thanksgiving/"
     }
   ]
 }
