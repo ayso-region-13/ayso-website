@@ -102,18 +102,23 @@ module.exports = function (eleventyConfig) {
     return SHORT_DATE_FMT.format(d);
   });
 
-  // Filter: drop past events, sort ascending, take first n. Used by the home
-  // page Important Dates widget. Server-side build matches the on-page JS that
-  // re-runs the same comparison so the widget never shows stale past events
-  // between publishes.
+  // Filter: drop finished events, sort ascending by start date, take first n.
+  // Used by the home page Important Dates widget. An event stays until its last
+  // day is over (endDate for multi-day events, else date), judged against
+  // today's date in Pacific time (America/Los_Angeles), not the build host's
+  // zone. Dates are YYYY-MM-DD strings, so string comparison is date order.
+  // The on-page JS re-runs the same comparison so the widget never shows stale
+  // past events between publishes.
+  const PACIFIC_DAY_FMT = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Los_Angeles", year: "numeric", month: "2-digit", day: "2-digit",
+  });
   eleventyConfig.addFilter("upcomingEvents", (events, n) => {
     const limit = typeof n === "number" ? n : 3;
     if (!Array.isArray(events)) return [];
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = PACIFIC_DAY_FMT.format(new Date());
     return events
       .filter(e => e && e.date && e.name)
-      .filter(e => new Date(e.date + "T00:00:00") >= today)
+      .filter(e => String(e.endDate || e.date) >= today)
       .sort((a, b) => String(a.date).localeCompare(String(b.date)))
       .slice(0, limit);
   });

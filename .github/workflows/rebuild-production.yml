@@ -55,13 +55,15 @@ on:
   #      main, and the first Slack field update after it lands on staging still
   #      needs a manual `/ayso promote`. Same bootstrap wrinkle as the promote
   #      workflow's own `ref: main`.
-  # The newsletter sync (sync-newsletters.yml) writes site/newsletters/ to main the same way.
+  # The newsletter sync (sync-newsletters.yml) writes site/newsletters/ to main the same way,
+  # and the hourly calendar sync (sync-important-dates.yml) writes importantDates.json.
   push:
     branches: [main]
     paths:
       - 'site/src/_data/fieldstatus.json'
       - 'site/src/_data/announcements.json'
       - 'site/newsletters/**'
+      - 'site/src/_data/importantDates.json'
 
 permissions:
   contents: read
