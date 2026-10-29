@@ -22,7 +22,7 @@
     {% for ev in upcoming %}
     <li class="date-card" data-date="{{ ev.date }}" data-end-date="{{ ev.endDate or ev.date }}">
       {% if ev.link %}
-      <a href="{{ ev.link }}" class="block bg-brand-cream border-l-4 border-brand-red-dark px-4 py-3 hover:bg-brand-cream/70 transition-colors">
+      <a href="{{ ev.link }}"{% if ev.link.startsWith("http") %} target="_blank" rel="noopener"{% endif %} class="block bg-brand-cream border-l-4 border-brand-red-dark px-4 py-3 hover:bg-brand-cream/70 transition-colors">
         <div class="text-xs font-bold uppercase tracking-wider text-brand-red-dark">{{ ev.date | shortDate }}</div>
         <div class="text-sm font-semibold text-brand-dark mt-1 leading-snug">{{ ev.name }}</div>
       </a>

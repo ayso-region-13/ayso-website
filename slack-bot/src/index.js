@@ -333,7 +333,7 @@ const WORKFLOW_TRIGGERS = {
   calendar: {
     file: 'sync-important-dates.yml',
     ref: 'staging',
-    started: '📅 *Important Dates sync*\nSync started. Any calendar change will reach staging and www.ayso13.org in a few minutes. If nothing changed on the calendar, nothing is posted after this.',
+    started: '📅 *Important Dates sync*\nSync started. If the calendar changed, a second card follows in a few minutes, and so does a failure card if the sync fails. No second card means nothing changed. www updates a few minutes later, or at the next hourly sync if a promote is running.',
     startedFallback: 'Important Dates sync started',
     failed: 'Important Dates sync failed to start'
   }
@@ -341,13 +341,14 @@ const WORKFLOW_TRIGGERS = {
 
 async function triggerWorkflow(kind, githubToken, slackToken, userId, userName) {
   const t = WORKFLOW_TRIGGERS[kind];
+  if (!t) throw new Error(`Unknown workflow trigger: ${kind}`);
   const user = userName || userId;
   let failure;
   try {
     const res = await dispatchWorkflow(githubToken, t.file, t.ref, t.inputs);
     if (res.status !== 204) failure = `GitHub API returned ${res.status}`;
   } catch (err) {
-    failure = `the GitHub request failed (${err.message})`;
+    failure = `the GitHub request failed (${slackEscape(err.message)})`;
   }
 
   if (!failure) {
@@ -366,6 +367,11 @@ async function triggerWorkflow(kind, githubToken, slackToken, userId, userName) 
       }
     ], t.failed);
   }
+}
+
+// Slack mrkdwn treats &, < and > as control characters.
+function slackEscape(text) {
+  return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function githubHeaders(token) {

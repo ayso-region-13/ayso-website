@@ -154,6 +154,13 @@ test("calendarEventLink builds Google's public event URL", () => {
     `_abc_R20260403T021500 ${CAL}`);
 });
 
+test("calendarEventLink matches a link Google serves publicly", () => {
+  // Opened without a sign-in on 2026-10-29: the Beyond the Ball Coach Workshop.
+  assert.equal(
+    calendarEventLink("4vgtio1qt7ua9n0hsfpto53dej@google.com", "g60lvbvlhbucts84e1ft40mlpk@group.calendar.google.com"),
+    "https://www.google.com/calendar/event?eid=NHZndGlvMXF0N3VhOW4waHNmcHRvNTNkZWogZzYwbHZidmxoYnVjdHM4NGUxZnQ0MG1scGtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ");
+});
+
 test("calendarEventLink skips UIDs Google did not issue", () => {
   assert.equal(calendarEventLink("B712E22B-6F14-4AD4", CAL), undefined);
   assert.equal(calendarEventLink("abc@google.com", undefined), undefined);

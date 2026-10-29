@@ -15,8 +15,6 @@ import { parseFeed } from "./lib/calendar-feed.mjs";
 import { pacificToday, toEntries, diffEntries, serialize } from "./lib/important-dates.mjs";
 
 const FEED_URL = "https://calendar.google.com/calendar/ical/g60lvbvlhbucts84e1ft40mlpk%40group.calendar.google.com/public/basic.ics";
-// The calendar's id, for event links: the feed URL's encoded path segment.
-const CALENDAR_ID = decodeURIComponent(new URL(FEED_URL).pathname.split("/")[3]);
 const DEFAULT_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../src/_data/importantDates.json");
 
 export async function fetchFeed({ url, fetchImpl = fetch }) {
@@ -39,10 +37,16 @@ function readExisting(existingJson) {
   }
 }
 
-export function syncImportantDates({ icsText, existingJson, now = new Date() }) {
+// The calendar's id, for event links: the feed URL's encoded path segment
+// (/calendar/ical/<id>/public/basic.ics).
+export function calendarIdOf(feedUrl) {
+  return decodeURIComponent(new URL(feedUrl).pathname.split("/")[3] ?? "") || undefined;
+}
+
+export function syncImportantDates({ icsText, existingJson, now = new Date(), calendarId }) {
   const today = pacificToday(now);
   const { enabled, dates: previous } = readExisting(existingJson);
-  const entries = toEntries(parseFeed(icsText, { from: today }), today, { calendarId: CALENDAR_ID });
+  const entries = toEntries(parseFeed(icsText, { from: today }), today, { calendarId });
   const output = serialize(enabled, entries);
   return { output, changed: output !== existingJson, summary: diffEntries(previous, entries, today) };
 }
@@ -63,7 +67,7 @@ async function main() {
   // file exactly as it was.
   const icsText = await fetchFeed({ url });
   const { output, changed, summary } = syncImportantDates({
-    icsText, existingJson: await readIfPresent(file),
+    icsText, existingJson: await readIfPresent(file), calendarId: calendarIdOf(url),
   });
   if (changed) await fs.writeFile(file, output);
   console.log(`important dates: ${changed ? "updated" : "unchanged"}; +${summary.added.length} -${summary.removed.length}`);
