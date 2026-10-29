@@ -24,7 +24,8 @@
     }
   },
   "buttonLinks": [
-    "https://stats.ayso13.org/submit"
+    "https://stats.ayso13.org/submit",
+    "https://docs.google.com/forms/d/e/1FAIpQLSe2v6Br5keO7CUcGZSEqvpUx3cL64eSRHsKWDI2v80ON1Eaag/viewform"
   ],
   "gaId": "G-9YM9ZDW1J9",
   "posthogKey": "phc_zpnqGMHbdxBkGwh2JesM6sHZhLKpvBacDhV7ygQAgKfQ",
