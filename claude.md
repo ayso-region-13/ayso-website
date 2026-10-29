@@ -274,7 +274,7 @@ Pages CMS is configured for non-technical editors at https://app.pagescms.org.
   - **Deep-linkable map images**: `/field-images/<slug>-<variant>.png` on the platform is slug-keyed and survives map edits, unlike a content-hashed `/img/` filename. The Jefferson legacy redirects point there for that reason.
 
 ---
-*Last updated: 2026-10-29 — Important Dates widget now syncs hourly from the Google Calendar (`#website` tag); its Pages CMS editor is retired. Previously 2026-10-25 — local secrets moved to 1Password (`.ayso.op.env` via `op run`; `.envrc` now only keeps the claude-seo symlink); home hero back to photo rotation.*
+*Last updated: 2026-10-29 — Important Dates widget now syncs hourly from the Google Calendar (`#website` tag), with `/ayso calendar` to force a run; entries without a link point to their Google Calendar event; its Pages CMS editor is retired. Previously 2026-10-25 — local secrets moved to 1Password (`.ayso.op.env` via `op run`; `.envrc` now only keeps the claude-seo symlink); home hero back to photo rotation.*
 
 **The session-by-session changelog lives in `claude-history.md`** — sessions 36-49 plus dated milestones back to 2026-04. It is deliberately NOT auto-loaded; read it when historical detail matters. Load-bearing gotchas are kept inline in the sections above rather than in the changelog, so this file stays a description of current state and not a history of how it got here.
 
