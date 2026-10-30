@@ -14,9 +14,9 @@
 {% set areaText = "text-white" if status | lower == "closed" else "text-brand-dark" %}
 <span class="{{ areaBg }} {{ areaText }} px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-center">{{ name }}: {{ status }}</span>
 {% endmacro %}
-{# The areas are set only when they differ (slack-bot/src/fieldStatus.js), and
-   each carries its own color, so a parent can find theirs at a glance. #}
-{% set fsSplit = fieldstatus.laCanadaStatus and fieldstatus.pasadenaStatus and (fieldstatus.laCanadaStatus | lower != fieldstatus.pasadenaStatus | lower) %}
+{# Only "Varies by area" splits the bar, so changing the status to anything else
+   ends a split even with area values left in the file. #}
+{% set fsSplit = (fieldstatus.status | lower == "varies by area") and fieldstatus.laCanadaStatus and fieldstatus.pasadenaStatus %}
 {% if fieldstatus.enabled and fsSplit %}
 {% set fsHref = "/resources/weather/" %}
 <div role="status" class="bg-brand-dark">
@@ -35,7 +35,8 @@
 </div>
 {% elif fieldstatus.enabled %}
 {% set fsHref = "/resources/weather/" %}
-{% set fsBg = "bg-brand-red-dark" if fieldstatus.status | lower == "closed" else ("bg-brand-gold" if fieldstatus.status | lower == "monitoring" else "bg-brand-green") %}
+{# Only an explicit Open is green: an all-clear color must never be the fallback. #}
+{% set fsBg = "bg-brand-red-dark" if fieldstatus.status | lower == "closed" else ("bg-brand-green" if fieldstatus.status | lower == "open" else "bg-brand-gold") %}
 {% set fsText = "text-white" if fieldstatus.status | lower == "closed" else "text-brand-dark" %}
 {% set fsInner = "max-w-screen-xl mx-auto px-4 py-2.5 flex items-center justify-center gap-3" %}
 <div class="{{ fsBg }}" role="status">

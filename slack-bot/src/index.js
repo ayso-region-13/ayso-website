@@ -208,8 +208,11 @@ async function handleInteraction(rawBody, env, ctx) {
 // ── Background processors ─────────────────────────────────────────────────
 
 async function processFieldStatus(values, user, env) {
-  const laCanada = values.la_canada_block?.la_canada?.selected_option?.value || 'Open';
-  const pasadena = values.pasadena_block?.pasadena?.selected_option?.value || 'Open';
+  // A modal opened before a deploy still carries the old single status. Never
+  // fall back to Open: that would announce an all-clear during a closure.
+  const single = values.status_block?.status?.selected_option?.value || 'Monitoring';
+  const laCanada = values.la_canada_block?.la_canada?.selected_option?.value || single;
+  const pasadena = values.pasadena_block?.pasadena?.selected_option?.value || single;
   const headline = fieldStatusHeadline(laCanada, pasadena);
   const message = values.message_block?.message?.value || '';
   const checked = values.enabled_block?.enabled?.selected_options;
@@ -232,7 +235,7 @@ async function processFieldStatus(values, user, env) {
       type: 'context',
       elements: [{ type: 'mrkdwn', text: `_Updated by @${user} — ${pacificTimestamp()}_` }]
     }
-  ], `AYSO Field Status: ${headline} — ${message}`);
+  ], `AYSO Field Status: ${headline}${message ? ` — ${message}` : ''}`);
 }
 
 async function processAnnouncement(values, user, env) {

@@ -2,12 +2,11 @@
 
 const AREA_NAMES = { laCanada: 'La Cañada', pasadena: 'Pasadena/Altadena' };
 
-/** What fieldstatus.json stores. The per-area values are set only when the areas
- *  differ, so a stale one can never split the bar on a normal day. */
+/** What fieldstatus.json stores. The bar splits only on this status, so a later
+ *  plain status always wins over area values left in the file. */
 export function fieldStatusFrom(laCanada, pasadena) {
   if (laCanada === pasadena) return { status: laCanada, laCanadaStatus: '', pasadenaStatus: '' };
-  const anyClosed = laCanada === 'Closed' || pasadena === 'Closed';
-  return { status: anyClosed ? 'Partly closed' : 'Monitoring', laCanadaStatus: laCanada, pasadenaStatus: pasadena };
+  return { status: 'Varies by area', laCanadaStatus: laCanada, pasadenaStatus: pasadena };
 }
 
 /** The status as one line, for the Slack post and the commit message. */
