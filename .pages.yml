@@ -36,6 +36,14 @@ content:
         label: "Status"
         type: string
         description: "Enter exactly: Open, Closed, or Monitoring"
+      - name: laCanadaStatus
+        label: "La Cañada status (only when areas differ)"
+        type: string
+        description: "Leave blank when all fields match. Enter exactly: Open, Closed, or Monitoring"
+      - name: pasadenaStatus
+        label: "Pasadena/Altadena status (only when areas differ)"
+        type: string
+        description: "Leave blank when all fields match. Enter exactly: Open, Closed, or Monitoring"
       - name: message
         label: "Message"
         type: string

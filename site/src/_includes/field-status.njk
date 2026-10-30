@@ -9,7 +9,31 @@
    and the live conditions behind it live. The one exception is that page
    itself: a bar that links to the page you are already on is noise, so
    there it renders as a plain div. #}
-{% if fieldstatus.enabled %}
+{% macro areaStatus(name, status) %}
+{% set areaBg = "bg-brand-red-dark" if status | lower == "closed" else ("bg-brand-gold" if status | lower == "monitoring" else "bg-brand-green") %}
+{% set areaText = "text-white" if status | lower == "closed" else "text-brand-dark" %}
+<span class="{{ areaBg }} {{ areaText }} px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-center">{{ name }}: {{ status }}</span>
+{% endmacro %}
+{# The areas are set only when they differ (slack-bot/src/fieldStatus.js), and
+   each carries its own color, so a parent can find theirs at a glance. #}
+{% set fsSplit = fieldstatus.laCanadaStatus and fieldstatus.pasadenaStatus and (fieldstatus.laCanadaStatus | lower != fieldstatus.pasadenaStatus | lower) %}
+{% if fieldstatus.enabled and fsSplit %}
+{% set fsHref = "/resources/weather/" %}
+<div role="status" class="bg-brand-dark">
+  {% if page.url != fsHref %}<a href="{{ fsHref }}" class="block hover:opacity-90 transition-opacity">{% endif %}
+    <span class="grid grid-cols-1 sm:grid-cols-2">
+      {{ areaStatus("La Cañada", fieldstatus.laCanadaStatus) }}
+      {{ areaStatus("Pasadena/Altadena", fieldstatus.pasadenaStatus) }}
+    </span>
+    {% if fieldstatus.message or fieldStatusDate %}
+    <span class="block px-4 py-1.5 text-center text-xs text-white">
+      {{ fieldstatus.message }}{% if fieldstatus.message and fieldStatusDate %} · {% endif %}{% if fieldStatusDate %}Last Updated at {{ fieldStatusDate }}{% endif %}
+    </span>
+    {% endif %}
+    {% if page.url != fsHref %}<span class="sr-only">See weather and field conditions.</span>{% endif %}
+  {% if page.url != fsHref %}</a>{% endif %}
+</div>
+{% elif fieldstatus.enabled %}
 {% set fsHref = "/resources/weather/" %}
 {% set fsBg = "bg-brand-red-dark" if fieldstatus.status | lower == "closed" else ("bg-brand-gold" if fieldstatus.status | lower == "monitoring" else "bg-brand-green") %}
 {% set fsText = "text-white" if fieldstatus.status | lower == "closed" else "text-brand-dark" %}
