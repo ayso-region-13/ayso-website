@@ -23,6 +23,8 @@
  *                            gates the /api/weather self-test endpoint
  */
 
+import { fieldStatusFrom, fieldStatusHeadline } from './fieldStatus.js';
+
 const GITHUB_REPO        = 'ayso-region-13/ayso-website';
 const BRANCHES           = ['staging', 'main'];
 const FIELDSTATUS_PATH   = 'site/src/_data/fieldstatus.json';
@@ -206,7 +208,12 @@ async function handleInteraction(rawBody, env, ctx) {
 // ── Background processors ─────────────────────────────────────────────────
 
 async function processFieldStatus(values, user, env) {
-  const status  = values.status_block?.status?.selected_option?.value || 'Open';
+  // A modal opened before a deploy still carries the old single status. Never
+  // fall back to Open: that would announce an all-clear during a closure.
+  const single = values.status_block?.status?.selected_option?.value || 'Monitoring';
+  const laCanada = values.la_canada_block?.la_canada?.selected_option?.value || single;
+  const pasadena = values.pasadena_block?.pasadena?.selected_option?.value || single;
+  const headline = fieldStatusHeadline(laCanada, pasadena);
   const message = values.message_block?.message?.value || '';
   const checked = values.enabled_block?.enabled?.selected_options;
   const enabled = Array.isArray(checked) && checked.length > 0;
@@ -214,21 +221,21 @@ async function processFieldStatus(values, user, env) {
   await commitToBothBranches(
     env.GITHUB_TOKEN,
     FIELDSTATUS_PATH,
-    { enabled, status, message },
-    `Field status: ${status} (via Slack — @${user})`
+    { enabled, ...fieldStatusFrom(laCanada, pasadena), message },
+    `Field status: ${headline} (via Slack — @${user})`
   );
 
-  const emoji = STATUS_EMOJI[status] || '🟡';
+  const emoji = laCanada === pasadena ? STATUS_EMOJI[laCanada] || '🟡' : '🟠';
   await postMessage(env.SLACK_BOT_TOKEN, env.SLACK_CHANNEL_ID, [
     {
       type: 'section',
-      text: { type: 'mrkdwn', text: `${emoji} *AYSO Field Status: ${status}*\n${message}` }
+      text: { type: 'mrkdwn', text: `${emoji} *AYSO Field Status: ${headline}*\n${message}` }
     },
     {
       type: 'context',
       elements: [{ type: 'mrkdwn', text: `_Updated by @${user} — ${pacificTimestamp()}_` }]
     }
-  ], `AYSO Field Status: ${status} — ${message}`);
+  ], `AYSO Field Status: ${headline}${message ? ` — ${message}` : ''}`);
 }
 
 async function processAnnouncement(values, user, env) {
@@ -532,6 +539,24 @@ function buildSelectTypeModal() {
   };
 }
 
+function areaStatusBlock(id, label) {
+  return {
+    type: 'input',
+    block_id: `${id}_block`,
+    element: {
+      type: 'static_select',
+      action_id: id,
+      placeholder: { type: 'plain_text', text: 'Select status' },
+      options: [
+        { text: { type: 'plain_text', text: '🟢  Open' },       value: 'Open' },
+        { text: { type: 'plain_text', text: '🔴  Closed' },     value: 'Closed' },
+        { text: { type: 'plain_text', text: '🟡  Monitoring' }, value: 'Monitoring' }
+      ]
+    },
+    label: { type: 'plain_text', text: label }
+  };
+}
+
 function buildFieldStatusModal() {
   return {
     type: 'modal',
@@ -540,24 +565,12 @@ function buildFieldStatusModal() {
     submit: { type: 'plain_text', text: 'Update' },
     close: { type: 'plain_text', text: 'Cancel' },
     blocks: [
-      {
-        type: 'input',
-        block_id: 'status_block',
-        element: {
-          type: 'static_select',
-          action_id: 'status',
-          placeholder: { type: 'plain_text', text: 'Select status' },
-          options: [
-            { text: { type: 'plain_text', text: '🟢  Open' },       value: 'Open' },
-            { text: { type: 'plain_text', text: '🔴  Closed' },     value: 'Closed' },
-            { text: { type: 'plain_text', text: '🟡  Monitoring' }, value: 'Monitoring' }
-          ]
-        },
-        label: { type: 'plain_text', text: 'Status' }
-      },
+      areaStatusBlock('la_canada', 'La Cañada fields'),
+      areaStatusBlock('pasadena', 'Pasadena/Altadena fields'),
       {
         type: 'input',
         block_id: 'message_block',
+        optional: true,
         element: {
           type: 'plain_text_input',
           action_id: 'message',
