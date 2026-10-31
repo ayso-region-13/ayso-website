@@ -1,5 +1,7 @@
 {
   "enabled": true,
-  "status": "Monitoring",
-  "message": "Pasadena fields are OPEN; La Canada fields are CLOSED."
+  "status": "Varies by area",
+  "laCanadaStatus": "Closed",
+  "pasadenaStatus": "Open",
+  "message": ""
 }
