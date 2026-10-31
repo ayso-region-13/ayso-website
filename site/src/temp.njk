@@ -204,7 +204,11 @@ eleventyExcludeFromCollections: true
 
 {% if fieldstatus.enabled %}
 <div class="field-status {{ fieldstatus.status | lower }}" role="status">
+  {% if fieldstatus.status | lower == "varies by area" and fieldstatus.laCanadaStatus and fieldstatus.pasadenaStatus %}
+  ⚽ La Cañada: {{ fieldstatus.laCanadaStatus }} · Pasadena/Altadena: {{ fieldstatus.pasadenaStatus }} ⚽
+  {% else %}
   ⚽ Fields are {{ fieldstatus.status }} ⚽
+  {% endif %}
   {% if fieldstatus.message %}<span class="msg">{{ fieldstatus.message }}</span>{% endif %}
   {# Mirrors the line in _includes/field-status.njk. This page has its own
      copy of the bar, so the two have to be edited together. #}
