@@ -16,7 +16,6 @@ Defined in `site/tailwind.config.js`. Used as Tailwind utility classes (`bg-{nam
 | `brand-green-dark`  | `#007a32` | `0, 122, 50`     | Reserved (not currently used on home) |
 | `brand-green-light` | `#00d050` | `0, 208, 80`     | Reserved (not currently used on home) |
 | `brand-gold`        | `#f4bd4d` | `244, 189, 77`   | Announcement bar background, field status "Monitoring" bar |
-| `brand-orange-dark` | `#b45309` | `180, 83, 9`     | "Field Status:" label bar, when the areas differ |
 | `brand-dark`        | `#221f1f` | `34, 31, 31`     | Body text, nav text on light backgrounds, About heading, footer background |
 
 ## Usage
@@ -48,7 +47,6 @@ Defined in `site/tailwind.config.js`. Used as Tailwind utility classes (`bg-{nam
 | `brand-red-dark`    | `brand-cream` (#ede8e2) | ~6.9:1  | ✅ |
 | `brand-maroon`      | `brand-cream`           | ~6.4:1  | ✅ |
 | `brand-dark`        | `brand-cream`           | ~13:1   | ✅ AAA |
-| white               | `brand-orange-dark` (#b45309) | ~5.0:1 | ✅ |
 | `brand-dark`        | `brand-green` (#a6ce57) | ~9.5:1  | ✅ AAA |
 | `brand-dark`        | `brand-gold` (#f4bd4d)  | ~9.7:1  | ✅ AAA |
 
