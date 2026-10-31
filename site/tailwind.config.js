@@ -14,6 +14,7 @@ module.exports = {
         'brand-green-dark':  '#007a32',
         'brand-green-light': '#00d050',
         'brand-gold':        '#f4bd4d',
+        'brand-orange-dark': '#b45309',
         'brand-dark':        '#221f1f',
       },
       fontFamily: {
