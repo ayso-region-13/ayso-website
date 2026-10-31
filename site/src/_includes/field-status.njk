@@ -21,6 +21,7 @@
 {% set fsHref = "/resources/weather/" %}
 <div role="status" class="bg-brand-dark">
   {% if page.url != fsHref %}<a href="{{ fsHref }}" class="block hover:opacity-90 transition-opacity">{% endif %}
+    <span class="block bg-brand-gold px-4 py-1.5 text-center text-sm font-bold uppercase tracking-wider text-brand-dark">Field Status:</span>
     <span class="grid grid-cols-1 sm:grid-cols-2">
       {{ areaStatus("La Cañada", fieldstatus.laCanadaStatus) }}
       {{ areaStatus("Pasadena/Altadena", fieldstatus.pasadenaStatus) }}
